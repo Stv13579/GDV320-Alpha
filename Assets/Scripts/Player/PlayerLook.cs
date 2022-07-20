@@ -37,9 +37,9 @@ public class PlayerLook : MonoBehaviour
     public void LockCursor()
     {
         cursorLocked = !cursorLocked;
-        // locks cursor in the middle of screen
+        // locks cursor in the middle of screen or unlocks cursor
         Cursor.lockState = cursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
-        // cursor is not visable
+        // cursor is not visable or cursor is visable
         Cursor.visible = !cursorLocked;
     }
     private void MoveCamera()
@@ -81,6 +81,7 @@ public class PlayerLook : MonoBehaviour
         {
             MoveCamera();
         }
+        HandleEditorInputs();
     }
     private void RollInput()
     {
@@ -97,7 +98,7 @@ public class PlayerLook : MonoBehaviour
             SetRoll(0);
         }
     }
-#if UNITY_EDITOR
+
     private void HandleEditorInputs()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -106,6 +107,5 @@ public class PlayerLook : MonoBehaviour
             LockCursor();
         }
     }
-#endif
 }
 

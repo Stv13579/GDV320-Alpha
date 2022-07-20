@@ -9,23 +9,31 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("General Movement Values")]
     [SerializeField]
-    private float gravity = 30.0f;
+    private float gravity;
     [SerializeField]
-    private float jumpSpeed = 15.0f;
+    private float jumpSpeed;
     [SerializeField]
-    private float acceleration = 10.0f;
+    private float acceleration;
     [SerializeField]
     private AnimationCurve frictionCurve = AnimationCurve.Linear(0, 0.1f, 1, 1);
     [SerializeField]
-    private float coyoteTime = 0.75f;
+    private float coyoteTime;
     private float currentCoyoteTime;
 
     [SerializeField]
-    private float movementMulti = 1;
+    private float fallTimer;
+    private float currentFallTimer;
+
+    public float movementMulti = 1.0f;
+    [SerializeField]
+    private float movementSpeed = 10.0f;
 
     [Header("Character velocity")]
     private Vector3 velocity;
     private Vector3 storedJumpVelo;
+
+    [SerializeField]
+    private float airStraffMod;
 
     [Header("Checks")]
     private bool isGrounded = false;
@@ -35,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     private float headBobFrequency = 1.0f;
     private float headBobAmplitude = 0.1f;
     // the default position of the head
-    private float headBobNeutral = 0.4f;
+    private float headBobNeutral = 0.80f;
     private float headBobMinSpeed = 0.1f;
     private float headBobBlendSpeed = 4.0f;
     [SerializeField] private AnimationCurve headBobBlendCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
@@ -55,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private float initialFOV = 90.0f;
+
     [SerializeField]
     private float increasedFOVMoving = 100.0f;
 
@@ -67,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentFallTimer = fallTimer;
         cameraTransform = this.gameObject.GetComponentInChildren<Camera>().transform;
         audioManager = FindObjectOfType<AudioManager>();
         lookScript = this.gameObject.GetComponent<PlayerLook>();
@@ -81,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
             PlayerMoving();
         }
     }
-
+    
     private void PlayerMoving()
     {
         // reads players input 
@@ -89,18 +99,17 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxisRaw("Vertical");
 
         Jumping();
-        if (this.gameObject.GetComponent<LaserBeamElement>().usingLaserBeam == true)
-        {
-            movementMulti = 0.25f;
-        }
-        else
-        {
-            movementMulti = 1;
-        }
         // converting the players input into a vector 3 and timings it by the players look direction
         Vector3 inputMove = new Vector3(x, 0.0f, z);
         Vector3 realMove = Quaternion.Euler(0.0f, lookScript.GetSpin(), 0.0f) * inputMove;
         realMove.Normalize();
+
+        float tempAirStraffMod = 1.0f;
+        // when jumping and moving to that direction
+        if (!isGrounded)
+        {
+            tempAirStraffMod = airStraffMod;
+        }
 
         // friction
         // we store the y velocity
@@ -108,23 +117,19 @@ public class PlayerMovement : MonoBehaviour
         // set the y velocity to be 0
         velocity.y = 0;
         // movement for the player
-        velocity += realMove * acceleration * Time.deltaTime;
+        velocity += realMove * tempAirStraffMod * acceleration * Time.deltaTime;
         // friction for the players x and z axis
-        velocity -= velocity.normalized * acceleration * frictionCurve.Evaluate(velocity.magnitude) * Time.deltaTime;
+        velocity -= velocity.normalized * tempAirStraffMod * acceleration * frictionCurve.Evaluate(velocity.magnitude) * Time.deltaTime;
         // we give back the y velocity
         velocity.y = cacheY;
 
-        // multiplies velocity by desired movespeed
-        float planarSpeed = acceleration;
-        velocity.x = realMove.x * planarSpeed;
-        velocity.z = realMove.z * planarSpeed;
 
         // gravity on the player
         velocity.y -= gravity * Time.deltaTime;
         // getting the position before the player moves (headbobbing)
         oldPos = transform.position;
         // moving the player on screen
-        cController.Move(velocity * Time.deltaTime * movementMulti);
+        cController.Move(velocity * movementSpeed * movementMulti * Time.deltaTime);
         // getting the position after the player moves (headbobbing)
         newPos = transform.position;
 
@@ -178,19 +183,27 @@ public class PlayerMovement : MonoBehaviour
         }
         HeadBobbing();
         MovingCurve();
+        FallingFunctions();
+    }
+
+    private void FallingFunctions()
+    {
+        // if players y velo reaches a certain height then increase the fov
         if (velocity.y < -25.0f)
         {
             lookScript.GetCamera().fieldOfView += increasedFOVMoving * Time.deltaTime;
         }
     }
 
+    // the is the players movement based on a curve
+    // if the player moves for a certain amount of time then their acceleration increase
     private void MovingCurve()
     {
         if (((cController.collisionFlags & CollisionFlags.Below) != 0) && Mathf.Abs(velocity.x) > 0.1f || Mathf.Abs(velocity.z) > 0.1f)
         {
             moveTime += Time.deltaTime;
             moveTime = Mathf.Clamp(moveTime, 0, 3);
-            if (acceleration >= 12.0f)
+            if (movementSpeed >= 12.0f)
             {
                 lookScript.GetCamera().fieldOfView += increasedFOVMoving * Time.deltaTime;
             }
@@ -200,7 +213,7 @@ public class PlayerMovement : MonoBehaviour
             lookScript.GetCamera().fieldOfView -= initialFOV * Time.deltaTime;
             moveTime = 0.0f;
         }
-        acceleration = moveAnimaCurve.Evaluate(moveTime);
+        movementSpeed = moveAnimaCurve.Evaluate(moveTime);
         if (lookScript.GetCamera().fieldOfView >= increasedFOVMoving)
         {
             lookScript.GetCamera().fieldOfView = increasedFOVMoving;
@@ -217,8 +230,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             velocity.y = jumpSpeed;
-            isGrounded = false;
             isHeadShaking = true;
+            isGrounded = false;
         }
     }
 
@@ -227,6 +240,7 @@ public class PlayerMovement : MonoBehaviour
         // collision detection for player
         if ((cController.collisionFlags & CollisionFlags.Below) != 0)
         {
+            currentFallTimer = fallTimer;
             isGrounded = true;
             storedJumpVelo = velocity;
             velocity.y = -1.0f;
@@ -308,6 +322,5 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-
 }
 

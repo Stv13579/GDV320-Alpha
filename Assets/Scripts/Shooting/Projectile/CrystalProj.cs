@@ -19,9 +19,13 @@ public class CrystalProj : MonoBehaviour
     private Vector3 originalPosition;
     [SerializeField]
     private GameObject particleEffect;
+
+    [SerializeField]
+    private GameObject hitMarker;
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
+        hitMarker = GameObject.Find("GameplayUI");
         ismoving = true;
     }
     // Update is called once per frame
@@ -96,7 +100,14 @@ public class CrystalProj : MonoBehaviour
             taggedEnemy = other;
             audioManager.Stop("Slime Damage");
             audioManager.Play("Slime Damage");
+            //hitMarker.transform.GetChild(7).gameObject.SetActive(true);
+            //Invoke("HitMarkerDsable", 0.2f);
             Destroy(gameObject);
         }
+    }
+
+    private void HitMarkerDsable()
+    {
+        hitMarker.transform.GetChild(7).gameObject.SetActive(false);
     }
 }
