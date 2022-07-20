@@ -11,9 +11,9 @@ public class LevelGeneration : MonoBehaviour
 
     GameObject startRoom;
 
-    List<GameObject> placedRooms;
+    List<GameObject> placedRooms = new List<GameObject>();
 
-    List<GameObject> genericRooms;
+    List<GameObject> genericRooms = new List<GameObject>();
 
     [SerializeField]
     GameObject roomTemplate;
@@ -60,7 +60,7 @@ public class LevelGeneration : MonoBehaviour
 
         foreach (GameObject placedRoom in placedRooms)
         {
-            totalWeighting += room.GetComponent<Room>().weighting;
+            totalWeighting += placedRoom.GetComponent<Room>().weighting;
         }
 
         int chosenWeighting = Random.Range(1, totalWeighting + 1);
@@ -73,13 +73,13 @@ public class LevelGeneration : MonoBehaviour
         {
             
 
-            if (room.GetComponent<Room>().weighting + runningTotal > chosenWeighting)
+            if (placedRoom.GetComponent<Room>().weighting + runningTotal > chosenWeighting)
             {
                 room = placedRoom;
             }
 
 
-            runningTotal += room.GetComponent<Room>().weighting;
+            runningTotal += placedRoom.GetComponent<Room>().weighting;
 
         }
 
