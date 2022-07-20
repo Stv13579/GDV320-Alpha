@@ -48,6 +48,13 @@ public class LevelGeneration : MonoBehaviour
 
         RecalculateWeighting(room);
 
+        if(!CheckLegalRoom(room))
+        {
+            room.GetComponent<Room>().illegal = true;
+        }
+
+        room.GetComponent<Room>().gridPos = new Vector2Int((int)(room.transform.position.x / roomSize), (int)(room.transform.position.z / roomSize));
+
         return room;
     }
 
@@ -73,7 +80,7 @@ public class LevelGeneration : MonoBehaviour
         {
             
 
-            if (placedRoom.GetComponent<Room>().weighting + runningTotal > chosenWeighting)
+            if (placedRoom.GetComponent<Room>().weighting + runningTotal > chosenWeighting && !placedRoom.GetComponent<Room>().illegal)
             {
                 room = placedRoom;
             }
@@ -84,7 +91,10 @@ public class LevelGeneration : MonoBehaviour
         }
 
 
-        if (room == null) { Debug.Log("Room not chosen!"); };
+        if (room == null) { 
+            Debug.Log("Room not chosen!");
+            return ChooseRoom();
+        };
         return room;
     }
 
@@ -102,23 +112,67 @@ public class LevelGeneration : MonoBehaviour
             return ChoosePosition(ChooseRoom());
         }
 
-        int randDir = Random.Range(-1, 2);
-        if (randDir == 0) { randDir = 1; };
-        int isX = Random.Range(0, 2);
-        int isZ = isX == 0 ? 1 : 0;
+        //int randDir = Random.Range(-1, 2);
+        //if (randDir == 0) { randDir = 1; };
+        //int isX = Random.Range(0, 2);
+        //int isZ = isX == 0 ? 1 : 0;
 
-        pos = chosenPos + new Vector3(roomSize * randDir * isX, 0, roomSize * randDir * isZ);
-        
+        //pos = chosenPos + new Vector3(roomSize * randDir * isX, 0, roomSize * randDir * isZ);
+
+        int dir = Random.Range(0, 4);
+
+        switch (dir)
+        {
+            case 0:
+                pos = chosenPos + new Vector3(roomSize * -1, 0, 0);
+                break;
+            case 1:
+                pos = chosenPos + new Vector3(roomSize * 1, 0, 0);
+                break;
+            case 2:
+                pos = chosenPos + new Vector3( 0, 0, roomSize * 1);
+                break;
+            case 3:
+                pos = chosenPos + new Vector3(0, 0, roomSize * -1);
+                break;
+            default:
+                break;
+        }
+
         //While the chosen position is overlapped, choose a new position
+        int count = 0;
         while (CheckOverlap(pos))
         {
-            randDir = Random.Range(-1, 2);
-            if (randDir == 0) { randDir = 1; };
-            isX = Random.Range(0, 2);
-            isZ = isX == 0 ? 1 : 0;
+            dir = Random.Range(0, 4);
 
-            pos = chosenPos + new Vector3(roomSize * randDir * isX, 0, roomSize * randDir * isZ);
+            switch (dir)
+            {
+                case 0:
+                    pos = chosenPos + new Vector3(roomSize * -1, 0, 0);
+                    break;
+                case 1:
+                    pos = chosenPos + new Vector3(roomSize * 1, 0, 0);
+                    break;
+                case 2:
+                    pos = chosenPos + new Vector3(0, 0, roomSize * 1);
+                    break;
+                case 3:
+                    pos = chosenPos + new Vector3(0, 0, roomSize * -1);
+                    break;
+                default:
+                    break;
+            }
+
+            count++;
+            if (count > 1000)
+            {
+                Debug.Log("Room overlap");
+                break;
+            }
         }
+
+        
+           
 
         return pos;
     }
@@ -135,17 +189,14 @@ public class LevelGeneration : MonoBehaviour
             for (int k = -1; k < 1; k++)
             {
                 if (j == 0 && k == 0)
-                {}
-                else if(j != 0 && k != 0)
-                {}
-                else
+                { }
+                else if (j == 0 || k == 0)
                 {
                     //if there is an overlap, increase the counter. 4 counters = 4 overlaps and all sides are blocked
-                    if(CheckOverlap(room.transform.position + new Vector3(roomSize * j, 0 , roomSize * k)))
+                    if (CheckOverlap(room.transform.position + new Vector3(roomSize * j, 0, roomSize * k)))
                     {
                         counter++;
                     }
-
                 }
             }
         }
@@ -162,7 +213,8 @@ public class LevelGeneration : MonoBehaviour
     {
         foreach (GameObject room in placedRooms)
         {
-            if (pos == room.transform.position)
+            Vector2Int newPos = new Vector2Int((int)pos.x, (int)pos.z);
+            if (newPos == room.GetComponent<Room>().gridPos * new Vector2Int((int)(room.transform.position.x / roomSize), (int)(room.transform.position.z / roomSize)))
             {
                 return true;
             }
