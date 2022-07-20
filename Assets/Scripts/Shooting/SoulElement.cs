@@ -46,7 +46,7 @@ public class SoulElement : BaseElementClass
     {
         base.ElementEffect();
         //Subtract the mana cost and restore health
-        playerClass.ChangeMana(-manaCost);
+        playerClass.ChangeMana(-manaCost, manaTypes);
         playerClass.ChangeHealth(healthRestore);
         playerHand.SetTrigger("SoulStopCast");
         audioManager.Stop("Soul Element");
@@ -72,7 +72,7 @@ public class SoulElement : BaseElementClass
     protected override bool PayCosts(float modifier = 1)
     {
         //Override of paycosts so that mana is only subtracted at then end, in case the cast is cancelled
-        if (playerClass.currentMana >= manaCost)
+        if (playerClass.ManaCheck(manaCost * modifier, manaTypes))
         {
             return true;
         }

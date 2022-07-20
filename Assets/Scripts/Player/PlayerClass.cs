@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System;
 public class PlayerClass : MonoBehaviour
 {
     public float currentHealth;
@@ -11,6 +11,26 @@ public class PlayerClass : MonoBehaviour
     public float maxHealth;
     public float maxMana;
 
+    [Serializable]
+    public enum ManaName
+    { 
+        Fire,
+        Crystal,
+        Water,
+        Necrotic,
+        Energy,
+        Void
+    }
+
+    [Serializable]
+    public struct ManaType
+    {
+        public ManaName manaName;
+        public float currentMana;
+        public float maxMana;
+    }
+    [SerializeField]
+    public ManaType[] manaTypes;
     public float money;
 
     //A list of items which are collectible objects which add extra effects to the player
@@ -39,9 +59,12 @@ public class PlayerClass : MonoBehaviour
     {
         currentHealth = maxHealth;
         currentMana = maxMana;
+        for(int i = 0; i < manaTypes.Length; i++)
+        {
+            manaTypes[i].currentMana = manaTypes[i].maxMana;
+        }
         money = 0.0f;
         itemUI = GameObject.Find("ItemArray");
-
         //TEST IMPLEMENTATION
 
         //Item newItem = new Item(Instantiate(testItemUIWidget));
@@ -128,10 +151,33 @@ public class PlayerClass : MonoBehaviour
         }
     }
 
-    public void ChangeMana(float manaAmount)
+    public bool ManaCheck(float manaAmount, List<ManaName> manaNames)
+    {
+        bool check = true;
+
+        foreach(ManaName mana in manaNames)
+        {
+            ManaType m = Array.Find(manaTypes, item => item.manaName == mana);
+            if(m.currentMana < manaAmount)
+            {
+                check = false;
+            }
+        }
+
+        return check;
+    }
+
+    public void ChangeMana(float manaAmount, List<ManaName> manaNames)
     {
         currentMana = Mathf.Min(currentMana + manaAmount, maxMana);
         currentMana = Mathf.Max(currentMana, 0);
+        foreach(ManaName mana in manaNames)
+        {
+            ManaType m = Array.Find(manaTypes, item => item.manaName == mana);
+            m.currentMana = Mathf.Min(m.currentMana + manaAmount, m.maxMana);
+            m.currentMana = Mathf.Max(m.currentMana, 0);
+        }
+
     }
 
     public void ChangeMoney(float moneyAmount)

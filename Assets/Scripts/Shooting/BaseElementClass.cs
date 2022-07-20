@@ -50,6 +50,9 @@ public class BaseElementClass : MonoBehaviour
 
     [SerializeField]
     protected List<BaseEnemyClass.Types> attackTypes;
+
+    [SerializeField]
+    protected List<PlayerClass.ManaName> manaTypes;
     GameObject player;
     [SerializeField]
 
@@ -93,9 +96,9 @@ public class BaseElementClass : MonoBehaviour
     //deduct mana from the mana pool. If unable too, return false, otherwise true
     protected virtual bool PayCosts(float modifier = 1)
     {
-        if (playerClass.currentMana >= manaCost)
+        if (playerClass.ManaCheck(manaCost * modifier, manaTypes))
         {
-            playerClass.currentMana -= manaCost * modifier;
+            playerClass.ChangeMana(-manaCost * modifier, manaTypes);
             return true;
         }
         else
