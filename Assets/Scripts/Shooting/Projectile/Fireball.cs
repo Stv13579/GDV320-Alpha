@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    
+
     float speed;
 
     float damage;
@@ -14,17 +14,21 @@ public class Fireball : MonoBehaviour
 
     AnimationCurve gravCurve;
 
-    float gravityLifetime; 
+    float gravityLifetime;
     float startLifetime;
 
     float explosionRadii;
 
     List<BaseEnemyClass.Types> attackTypes;
 
+    [SerializeField]
+    private GameObject hitMarker;
+
     AudioManager audioManager;
     void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
+        hitMarker = GameObject.Find("GameplayUI");
     }
 
     void Update()
@@ -94,6 +98,8 @@ public class Fireball : MonoBehaviour
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             audioManager.Stop("Slime Damage");
             audioManager.Play("Slime Damage");
+            hitMarker.transform.GetChild(7).gameObject.SetActive(true);
+            Invoke("HitMarkerDsable", 0.2f);
             taggedEnemy = other;
         }
         if(other.gameObject.tag != "Player" && other.gameObject.tag != "Node")
@@ -122,4 +128,8 @@ public class Fireball : MonoBehaviour
 
     }
 
+    private void HitMarkerDsable()
+    {
+        hitMarker.transform.GetChild(7).gameObject.SetActive(false);
+    }
 }

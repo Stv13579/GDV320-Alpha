@@ -2617,8 +2617,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5625023910628228238}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalRotation: {x: 0, y: -0.35853088, z: 0, w: 0.9335179}
+  m_LocalPosition: {x: 0, y: 0.272, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8689280685199263535}
@@ -2627,7 +2627,7 @@ Transform:
   - {fileID: 417584081}
   m_Father: {fileID: 5625023911835613078}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -42.02, z: 0}
 --- !u!20 &5625023910628228236
 Camera:
   m_ObjectHideFlags: 0
@@ -2790,7 +2790,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5625023911016436714
 Transform:
   m_ObjectHideFlags: 0
@@ -2941,8 +2941,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa7853506573a143b3c9c6f789e0444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 80
-  jumpSpeed: 20
+  gravity: 4.5
+  jumpSpeed: 1.5
   acceleration: 10
   frictionCurve:
     serializedVersion: 2
@@ -2968,8 +2968,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  coyoteTime: 1
+  coyoteTime: 0.2
+  fallTimer: 0.45
   movementMulti: 1
+  movementSpeed: 10
+  airStraffMod: 0.1
   headBobBlendCurve:
     serializedVersion: 2
     m_Curve:
@@ -3003,7 +3006,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 10
+      value: 7
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3012,7 +3015,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 3
-      value: 13
+      value: 10
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3036,10 +3039,10 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.5
+  m_Radius: 0.25
   m_SlopeLimit: 50
-  m_StepOffset: 1
+  m_StepOffset: 0.5
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -3398,6 +3401,7 @@ MonoBehaviour:
   damage: 1
   damageMultiplier: 1
   usingLaserBeam: 0
+  playerMovement: {fileID: 5625023911835613076}
 --- !u!114 &7904701518895008356
 MonoBehaviour:
   m_ObjectHideFlags: 0

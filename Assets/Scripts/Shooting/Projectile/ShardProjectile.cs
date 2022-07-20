@@ -17,9 +17,12 @@ public class ShardProjectile : MonoBehaviour
     [SerializeField]
     GameObject impactSpawn;
 
+    [SerializeField]
+    private GameObject hitMarker;
     void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
+        hitMarker = GameObject.Find("GameplayUI");
     }
 
     void Update()
@@ -52,6 +55,8 @@ public class ShardProjectile : MonoBehaviour
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             audioManager.Stop("Slime Damage");
             audioManager.Play("Slime Damage");
+            //hitMarker.transform.GetChild(7).gameObject.SetActive(true);
+            //Invoke("HitMarkerDsable", 0.2f);
         }
 
         if (other.gameObject.tag != "Player")
@@ -69,5 +74,9 @@ public class ShardProjectile : MonoBehaviour
         }
 
 
+    }
+    private void HitMarkerDsable()
+    {
+        hitMarker.transform.GetChild(7).gameObject.SetActive(false);
     }
 }

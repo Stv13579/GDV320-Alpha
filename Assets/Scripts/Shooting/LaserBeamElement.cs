@@ -12,6 +12,9 @@ public class LaserBeamElement : BaseElementClass
     public float damageMultiplier = 1;
 
     public bool usingLaserBeam;
+
+    [SerializeField]
+    private PlayerMovement playerMovement;
     protected override void Start()
     {
         base.Start();
@@ -20,8 +23,6 @@ public class LaserBeamElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-
-        
 
         if (!Input.GetKey(KeyCode.Mouse0))
         {
@@ -36,6 +37,7 @@ public class LaserBeamElement : BaseElementClass
         {
             DeactivateLaser();
         }
+        LaserBeamEffect();
     }
 
     public void DeactivateLaser()
@@ -71,5 +73,17 @@ public class LaserBeamElement : BaseElementClass
         playerHandL.ResetTrigger("LaserStopCast");
         playerHand.SetTrigger(animationName);
         playerHandL.SetTrigger(animationName);
+    }
+
+    private void LaserBeamEffect()
+    {
+        if (usingLaserBeam == true)
+        {
+            playerMovement.movementMulti = 0.25f;
+        }
+        else
+        {
+            playerMovement.movementMulti = 1.0f;
+        }
     }
 }
