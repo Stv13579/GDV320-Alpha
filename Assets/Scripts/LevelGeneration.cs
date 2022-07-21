@@ -53,6 +53,11 @@ public class LevelGeneration : MonoBehaviour
         NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleRespiteRooms);
         NPC.GetComponent<Room>().illegal = true;
 
+        foreach(GameObject room in placedRooms)
+        {
+            room.GetComponent<Room>().CloseDoors();
+        }
+
         return true;
     }
 
@@ -265,7 +270,7 @@ public class LevelGeneration : MonoBehaviour
     }
 
     //See if a given position has a room in it already
-    bool CheckRoomPosition(Vector2 posToCheck)
+    public bool CheckRoomPosition(Vector2 posToCheck)
     {
         //Iterate through all taken room positions and return false if the room is found to be taken
         foreach (Vector2 pos in roomPositions)
