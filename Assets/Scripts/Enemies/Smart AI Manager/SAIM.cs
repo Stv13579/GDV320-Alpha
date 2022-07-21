@@ -14,6 +14,7 @@ public class SAIM : MonoBehaviour
     [SerializeField, HideInInspector]
     List<Node> deadNodes;
 
+    [HideInInspector]
     public List<Node> aliveNodes;
 
     [SerializeField, HideInInspector]

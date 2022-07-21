@@ -34,6 +34,7 @@ public class PlayerLook : MonoBehaviour
 
     public void SetRoll(float normalizedRoll) {targetRoll = -normalizedRoll * maxRoll; }
 
+    public float bumpTilt = 0.0f;
     public void LockCursor()
     {
         cursorLocked = !cursorLocked;
@@ -63,7 +64,7 @@ public class PlayerLook : MonoBehaviour
             RollInput();
             // rotation on the x axis for the mouse (rotating head to look from side to side)
             // rotation on the y axis for the mouse (rotating head so looking up and down)
-            camera.transform.localEulerAngles = new Vector3(tilt, spin, roll);
+            camera.transform.localEulerAngles = new Vector3(tilt + bumpTilt, spin, roll);
             camera.transform.localPosition += Quaternion.Euler(0.0f, spin, 0.0f) * new Vector3(0, 0, 0);
         }
     }
@@ -103,7 +104,6 @@ public class PlayerLook : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            cursorLocked = !cursorLocked;
             LockCursor();
         }
     }
