@@ -17,20 +17,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private AnimationCurve frictionCurve = AnimationCurve.Linear(0, 0.1f, 1, 1);
     [SerializeField]
+    private float movementSpeed;
+    [SerializeField]
+    private float maxMovementSpeed = 15.0f;
+    [SerializeField]
     private float coyoteTime;
     private float currentCoyoteTime;
 
-    [SerializeField]
-    private float fallTimer;
-    private float currentFallTimer;
+    private Vector3 storedCameraPos;
 
     public float movementMulti = 1.0f;
-    [SerializeField]
-    private float movementSpeed = 10.0f;
 
     [Header("Character velocity")]
     private Vector3 velocity;
-    private Vector3 storedJumpVelo;
 
     [SerializeField]
     private float airStraffMod;
@@ -41,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Head Bobbing")]
     private float headBobTimer = 0.0f;
     private float headBobFrequency = 1.0f;
-    private float headBobAmplitude = 0.1f;
+    private float headBobAmplitude = 0.02f;
     // the default position of the head
     private float headBobNeutral = 0.80f;
     private float headBobMinSpeed = 0.1f;
@@ -53,31 +52,70 @@ public class PlayerMovement : MonoBehaviour
 
     public bool ableToMove = true;
 
+    // sound
     float randIndexTimer = 0.0f;
-
     private AudioManager audioManager;
 
-    private Transform cameraTransform;
-
+    // head shaking
     private bool isHeadShaking;
 
+    // FOV change
     [SerializeField]
     private float initialFOV = 90.0f;
-
     [SerializeField]
-    private float increasedFOVMoving = 100.0f;
+    private float increasedFOVMoving = 95.0f;
 
+    // increase movement speed over time
     [SerializeField]
     private float moveTime = 0.0f;
     [SerializeField]
     private AnimationCurve moveAnimaCurve;
 
     public LayerMask environmentLayer;
+
+    //sliding parameters
+    [Header("Slope")]
+    private bool willSlideOnSlopes = true;
+    [SerializeField]
+    private float slopeSpeed;
+    private Vector3 hitPointNormal;
+    private float slopeSpeedTimer;
+    private bool isSlidng
+    {
+        get
+        {
+            // if player is grounded and the raycast is hitting the ground
+            if (cController.isGrounded && Physics.Raycast(transform.position, Vector3.down, out RaycastHit slopeHit, 2.5f))
+            {
+                //store the normal
+                hitPointNormal = slopeHit.normal;
+                // returns if the slope is greater then slopelimit
+                return Vector3.Angle(hitPointNormal, Vector3.up) > cController.slopeLimit;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+    [Header("camera shake")]
+    public Transform cameraHolder;
+    public Vector3 cameraHolderTargetPos;
+    public float cameraHolderTargetAngle;
+    public float currentCameraHolderAngle;
+    public float cameraShakePosPunchLerp = 8.0f;
+    public float cameraShakePosLerp = 16.0f;
+    public float cameraShakeAnglePunchLerp = 20.0f;
+    public float cameraShakeAngleLerp = 40.0f;
+    // how deep the drop is
+    public float cameraShakeDrop = 0.1f;
+    //
+    public float cameraShakeDip = 25.0f;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        currentFallTimer = fallTimer;
-        cameraTransform = this.gameObject.GetComponentInChildren<Camera>().transform;
         audioManager = FindObjectOfType<AudioManager>();
         lookScript = this.gameObject.GetComponent<PlayerLook>();
         cController = this.gameObject.GetComponent<CharacterController>();
@@ -90,15 +128,28 @@ public class PlayerMovement : MonoBehaviour
         {
             PlayerMoving();
         }
+        UpdateCameraShake();
     }
-    
+    void UpdateCameraShake()
+    {
+        // how fast green moves (parabolar shape)
+        cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, cameraHolderTargetPos, cameraShakePosLerp * Time.deltaTime);
+        currentCameraHolderAngle = Mathf.Lerp(currentCameraHolderAngle, cameraHolderTargetAngle, cameraShakeAngleLerp * Time.deltaTime);
+
+        // how fast red moves 
+        cameraHolderTargetPos = Vector3.Lerp(cameraHolderTargetPos, Vector3.zero, cameraShakePosPunchLerp * Time.deltaTime);
+        cameraHolderTargetAngle = Mathf.Lerp(cameraHolderTargetAngle, 0.0f, cameraShakeAnglePunchLerp * Time.deltaTime);
+
+        // red faster green follows red
+
+        lookScript.bumpTilt = currentCameraHolderAngle;
+    }
     private void PlayerMoving()
     {
         // reads players input 
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        Jumping();
         // converting the players input into a vector 3 and timings it by the players look direction
         Vector3 inputMove = new Vector3(x, 0.0f, z);
         Vector3 realMove = Quaternion.Euler(0.0f, lookScript.GetSpin(), 0.0f) * inputMove;
@@ -123,6 +174,15 @@ public class PlayerMovement : MonoBehaviour
         // we give back the y velocity
         velocity.y = cacheY;
 
+        // if on a slope bigger then the slope limit
+        // push play off the slope
+        if (willSlideOnSlopes && isSlidng)
+        {
+            velocity += new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z) * slopeSpeed;
+            isGrounded = false;
+        }
+
+        Jumping();
 
         // gravity on the player
         velocity.y -= gravity * Time.deltaTime;
@@ -138,11 +198,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isHeadShaking == true)
             {
-                StartCoroutine(Shake(0.1f, 1.0f));
+                //StartCoroutine(Shake(0.1f, 0.5f));
                 isHeadShaking = false;
             }
             velocity.y = -1.0f;
         }
+
         CoyoteTime();
 
         RaycastHit hit;
@@ -150,6 +211,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
+
         randIndexTimer -= Time.deltaTime;
         int randomSoundIndex = Random.Range(0, 4);
         if (isGrounded == true && (Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.S)) ||
@@ -203,7 +265,7 @@ public class PlayerMovement : MonoBehaviour
         {
             moveTime += Time.deltaTime;
             moveTime = Mathf.Clamp(moveTime, 0, 3);
-            if (movementSpeed >= 12.0f)
+            if (movementSpeed >= maxMovementSpeed)
             {
                 lookScript.GetCamera().fieldOfView += increasedFOVMoving * Time.deltaTime;
             }
@@ -240,14 +302,13 @@ public class PlayerMovement : MonoBehaviour
         // collision detection for player
         if ((cController.collisionFlags & CollisionFlags.Below) != 0)
         {
-            currentFallTimer = fallTimer;
             isGrounded = true;
-            storedJumpVelo = velocity;
             velocity.y = -1.0f;
             currentCoyoteTime = coyoteTime;
             if (isHeadShaking == true)
             {
-                StartCoroutine(Shake(0.1f, 1.0f));
+                //StartCoroutine(Shake(0.1f, 0.5f));
+                CameraShake();
                 audioManager.Stop("Player Landing");
                 audioManager.Play("Player Landing");
                 isHeadShaking = false;
@@ -272,7 +333,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 planarFrameMove = new Vector2(frameMove.x, frameMove.z);
         headBobTimer += planarFrameMove.magnitude;
 
-        // to get how much the head moves per frame
+        // how fast the player is moving
         Vector2 planarFrameVelocity = planarFrameMove;
         planarFrameVelocity.x /= Time.deltaTime;
         planarFrameVelocity.y /= Time.deltaTime;
@@ -280,15 +341,8 @@ public class PlayerMovement : MonoBehaviour
         // for blending back to the neutral position of the head
         if (isGrounded && planarFrameVelocity.magnitude > headBobMinSpeed)
         {
-            if (headBobMultiplier <= 0.0f)
-            {
-                headBobMultiplier = 1.0f;
-            }
-            else
-            {
-                headBobMultiplier += headBobBlendSpeed * Time.deltaTime;
-                headBobMultiplier = Mathf.Min(1.0f, headBobMultiplier);
-            }
+            headBobMultiplier += headBobBlendSpeed * Time.deltaTime;
+            headBobMultiplier = Mathf.Min(1.0f, headBobMultiplier);
         }
         else
         {
@@ -314,13 +368,19 @@ public class PlayerMovement : MonoBehaviour
         {
             float x = Random.Range(-1.0f, 1.0f) * magnitude;
 
-            cameraTransform.localEulerAngles += new Vector3(x, 0, 0);
+            lookScript.GetCamera().transform.localEulerAngles += new Vector3(x, 0, 0);
 
             duration -= Time.deltaTime;
 
             yield return null;
         }
 
+    }
+
+    private void CameraShake()
+    {
+        cameraHolderTargetPos = new Vector3(0, -cameraShakeDrop, 0);
+        cameraHolderTargetAngle = cameraShakeDip;
     }
 }
 
