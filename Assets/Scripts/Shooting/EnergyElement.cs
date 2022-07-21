@@ -43,7 +43,7 @@ public class EnergyElement : BaseElementClass
     public override void ElementEffect()
     {
         base.ElementEffect();
-        playerClass.ChangeMana(fullRestoreAmount);
+        playerClass.ChangeMana(fullRestoreAmount, manaTypes);
         playerHand.SetTrigger("StopEnergy");
         audioManager.Stop("Energy Element");
         Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);

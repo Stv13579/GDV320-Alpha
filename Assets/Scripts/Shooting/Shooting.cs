@@ -255,4 +255,19 @@ public class Shooting : MonoBehaviour
     {
         return rightOrbPos;
     }
+
+    public Vector2 GetLeftMana()
+    {
+        PlayerClass player = this.gameObject.GetComponent<PlayerClass>();
+        int i = Array.FindIndex(player.manaTypes, item => item.manaName == primaryElements[leftElementIndex].GetManaName());
+
+        return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+    }
+    public Vector2 GetRightMana()
+    {
+        PlayerClass player = this.gameObject.GetComponent<PlayerClass>();
+        int i = Array.FindIndex(player.manaTypes, item => item.manaName == catalystElements[rightElementIndex].GetManaName());
+
+        return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+    }
 }

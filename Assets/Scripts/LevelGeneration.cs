@@ -10,13 +10,18 @@ public class LevelGeneration : MonoBehaviour
     int maxWeighting, minWeighting, weightingChange, minRooms, maxRooms;
 
     GameObject startRoom;
+    GameObject bossRoom;
+    GameObject shop;
+    GameObject NPC;
 
     List<GameObject> placedRooms = new List<GameObject>();
 
     List<GameObject> genericRooms = new List<GameObject>();
 
+    List<Vector2> roomPositions = new List<Vector2>();
+
     [SerializeField]
-    GameObject roomTemplate;
+    List<GameObject> possibleGenericRooms, possibleBossRooms, possibleRespiteRooms;
     
     void Start()
     {
@@ -26,34 +31,47 @@ public class LevelGeneration : MonoBehaviour
     //Encapsulates the generation process, and returns false if there is a fail for whatever reason
     bool GenerateLevel()
     {
-        startRoom = PlaceRoom(new Vector3(0, 0, 0), genericRooms);
+        startRoom = PlaceRoom(new Vector3(0, 0, 0), genericRooms, possibleGenericRooms);
 
         int noRooms = Random.Range(minRooms, maxRooms + 1);
 
         for (int i = 0; i < noRooms; i++)
         {
-            PlaceRoom(ChoosePosition(ChooseRoom()), genericRooms);
+            PlaceRoom(ChoosePosition(ChooseRoom()), genericRooms, possibleGenericRooms);
         }
+
+        //Place the boss room
+        bossRoom = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleBossRooms);
+        bossRoom.GetComponent<Room>().illegal = true;
+
+        ResetWeighting();
+
+        //Place shop and NPC rooms
+        shop = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleRespiteRooms);
+        shop.GetComponent<Room>().illegal = true;
+
+        NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleRespiteRooms);
+        NPC.GetComponent<Room>().illegal = true;
 
         return true;
     }
 
     //Instantiates a new room at a given position and add it to the appropriate list, returning it for further use
-    GameObject PlaceRoom(Vector3 roomPos, List<GameObject> typedList)
+    GameObject PlaceRoom(Vector3 roomPos, List<GameObject> typedList, List<GameObject> roomPrefabs)
     {
-        GameObject room = Instantiate(roomTemplate, roomPos, Quaternion.identity);
+        GameObject roomToSpawn = roomPrefabs[Random.Range(0, roomPrefabs.Count)];
+
+        GameObject room = Instantiate(roomToSpawn, roomPos, Quaternion.identity);
 
         placedRooms.Add(room);
         typedList.Add(room);
 
         RecalculateWeighting(room);
 
-        if(!CheckLegalRoom(room))
-        {
-            room.GetComponent<Room>().illegal = true;
-        }
-
         room.GetComponent<Room>().gridPos = new Vector2Int((int)(room.transform.position.x / roomSize), (int)(room.transform.position.z / roomSize));
+        roomPositions.Add(room.GetComponent<Room>().gridPos);
+
+
 
         return room;
     }
@@ -83,6 +101,7 @@ public class LevelGeneration : MonoBehaviour
             if (placedRoom.GetComponent<Room>().weighting + runningTotal > chosenWeighting && !placedRoom.GetComponent<Room>().illegal)
             {
                 room = placedRoom;
+                return room;
             }
 
 
@@ -103,125 +122,164 @@ public class LevelGeneration : MonoBehaviour
     {
         Vector3 pos = Vector3.zero;
         Vector3 chosenPos = chosenRoom.transform.position;
+        Room chRoom = chosenRoom.GetComponent<Room>();
 
-        //Check all directions are legal
-        if(!CheckLegalRoom(chosenRoom))
+        //Find the legal positions of the room, if non, make it illegal and choose a new room
+        List<Vector2> legalPositions = new List<Vector2>();
+
+        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x + 1, chRoom.gridPos.y)))
         {
-            //If not, set it to illegal and choose another room
-            chosenRoom.GetComponent<Room>().illegal = true;
+            legalPositions.Add(new Vector2(chRoom.gridPos.x + 1, chRoom.gridPos.y));
+        }
+        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x - 1, chRoom.gridPos.y)))
+        {
+            legalPositions.Add(new Vector2(chRoom.gridPos.x - 1, chRoom.gridPos.y));
+        }
+        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y + 1)))
+        {
+            legalPositions.Add(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y + 1));
+        }
+        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y - 1)))
+        {
+            legalPositions.Add(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y - 1));
+        }
+        if(legalPositions.Count <= 0)
+        {
+            chRoom.illegal = true;
             return ChoosePosition(ChooseRoom());
         }
 
-        //int randDir = Random.Range(-1, 2);
-        //if (randDir == 0) { randDir = 1; };
-        //int isX = Random.Range(0, 2);
-        //int isZ = isX == 0 ? 1 : 0;
+        Vector2 position = legalPositions[Random.Range(0, legalPositions.Count)];
 
-        //pos = chosenPos + new Vector3(roomSize * randDir * isX, 0, roomSize * randDir * isZ);
-
-        int dir = Random.Range(0, 4);
-
-        switch (dir)
-        {
-            case 0:
-                pos = chosenPos + new Vector3(roomSize * -1, 0, 0);
-                break;
-            case 1:
-                pos = chosenPos + new Vector3(roomSize * 1, 0, 0);
-                break;
-            case 2:
-                pos = chosenPos + new Vector3( 0, 0, roomSize * 1);
-                break;
-            case 3:
-                pos = chosenPos + new Vector3(0, 0, roomSize * -1);
-                break;
-            default:
-                break;
-        }
-
-        //While the chosen position is overlapped, choose a new position
-        int count = 0;
-        while (CheckOverlap(pos))
-        {
-            dir = Random.Range(0, 4);
-
-            switch (dir)
-            {
-                case 0:
-                    pos = chosenPos + new Vector3(roomSize * -1, 0, 0);
-                    break;
-                case 1:
-                    pos = chosenPos + new Vector3(roomSize * 1, 0, 0);
-                    break;
-                case 2:
-                    pos = chosenPos + new Vector3(0, 0, roomSize * 1);
-                    break;
-                case 3:
-                    pos = chosenPos + new Vector3(0, 0, roomSize * -1);
-                    break;
-                default:
-                    break;
-            }
-
-            count++;
-            if (count > 1000)
-            {
-                Debug.Log("Room overlap");
-                break;
-            }
-        }
-
-        
-           
+        pos = new Vector3(position.x * roomSize, 0, position.y * roomSize);
 
         return pos;
     }
 
-    //Checks to make sure that a room is legal and not already surrounded.
-    bool CheckLegalRoom(GameObject room)
+    //Randomly choose a position at each direction of the given room to generate at, making sure that is legal under the restriction that the new room can only have one connection
+    Vector3 ChoosePositionWithOneConnection(GameObject chosenRoom)
     {
-        bool legal = true;
+        Vector3 pos = Vector3.zero;
+        Vector3 chosenPos = chosenRoom.transform.position;
+        Room chRoom = chosenRoom.GetComponent<Room>();
 
-        int counter = 0;
+        //Find the legal positions of the room, if non, make it illegal and choose a new room
+        List<Vector2> legalPositions = new List<Vector2>();
 
-        for (int j = -1; j < 1; j++)
+        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x + 1, chRoom.gridPos.y)))
         {
-            for (int k = -1; k < 1; k++)
+            legalPositions.Add(new Vector2(chRoom.gridPos.x + 1, chRoom.gridPos.y));
+        }
+        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x - 1, chRoom.gridPos.y)))
+        {
+            legalPositions.Add(new Vector2(chRoom.gridPos.x - 1, chRoom.gridPos.y));
+        }
+        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y + 1)))
+        {
+            legalPositions.Add(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y + 1));
+        }
+        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y - 1)))
+        {
+            legalPositions.Add(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y - 1));
+        }
+        if (legalPositions.Count <= 0)
+        {
+            chRoom.illegal = true;
+            return ChoosePositionWithOneConnection(ChooseRoom());
+        }
+
+        Vector2 position = legalPositions[Random.Range(0, legalPositions.Count)];
+
+        int breakCount = 0;
+
+        while (!CheckAllRoomDirections(position))
+        {
+            legalPositions = new List<Vector2>();
+
+            if (CheckRoomPosition(new Vector2(chRoom.gridPos.x + 1, chRoom.gridPos.y)))
             {
-                if (j == 0 && k == 0)
-                { }
-                else if (j == 0 || k == 0)
-                {
-                    //if there is an overlap, increase the counter. 4 counters = 4 overlaps and all sides are blocked
-                    if (CheckOverlap(room.transform.position + new Vector3(roomSize * j, 0, roomSize * k)))
-                    {
-                        counter++;
-                    }
-                }
+                legalPositions.Add(new Vector2(chRoom.gridPos.x + 1, chRoom.gridPos.y));
+            }
+            if (CheckRoomPosition(new Vector2(chRoom.gridPos.x - 1, chRoom.gridPos.y)))
+            {
+                legalPositions.Add(new Vector2(chRoom.gridPos.x - 1, chRoom.gridPos.y));
+            }
+            if (CheckRoomPosition(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y + 1)))
+            {
+                legalPositions.Add(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y + 1));
+            }
+            if (CheckRoomPosition(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y - 1)))
+            {
+                legalPositions.Add(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y - 1));
+            }
+            if (legalPositions.Count <= 0)
+            {
+                chRoom.illegal = true;
+                return ChoosePositionWithOneConnection(ChooseRoom());
+            }
+
+            position = legalPositions[Random.Range(0, legalPositions.Count)];
+
+            breakCount++;
+            if(breakCount > 9999)
+            {
+                Debug.Log("Breaking Free of Loop");
+                return ChoosePositionWithOneConnection(ChooseRoom());
+                break;
             }
         }
 
-        if(counter == 4)
-        {
-            legal = false;
-        }
-        return legal;
-    }
+        pos = new Vector3(position.x * roomSize, 0, position.y * roomSize);
 
-    //Makes sure that the room is not overlapping another if positioned there, return if overlapping or not (true = overlapped)
-    bool CheckOverlap(Vector3 pos)
+        return pos;
+    }
+    
+    //if all but one room directions are empty, return true. Otherwise false
+    bool CheckAllRoomDirections(Vector2 position)
     {
-        foreach (GameObject room in placedRooms)
+        int count = 0;
+
+        if (!CheckRoomPosition(new Vector2(position.x + 1, position.y)))
         {
-            Vector2Int newPos = new Vector2Int((int)pos.x, (int)pos.z);
-            if (newPos == room.GetComponent<Room>().gridPos * new Vector2Int((int)(room.transform.position.x / roomSize), (int)(room.transform.position.z / roomSize)))
-            {
-                return true;
-            }
+            count++;
+        }
+        if (!CheckRoomPosition(new Vector2(position.x - 1, position.y)))
+        {
+            count++;
+        }
+        if (!CheckRoomPosition(new Vector2(position.x, position.y + 1)))
+        {
+            count++;
+        }
+        if (!CheckRoomPosition(new Vector2(position.x, position.y - 1)))
+        {
+            count++;
         }
 
-        return false;
+        if(count > 1)
+        {
+            return false;
+        }
+
+        return true;
     }
+
+    //See if a given position has a room in it already
+    bool CheckRoomPosition(Vector2 posToCheck)
+    {
+        //Iterate through all taken room positions and return false if the room is found to be taken
+        foreach (Vector2 pos in roomPositions)
+        {
+            if(pos == posToCheck)
+            {
+                return false;
+            }
+        }    
+
+        return true;
+    }
+
+    
 
 
     //Recalculates weighting, setting the new spawn to highest, and reducing the rest
@@ -236,6 +294,20 @@ public class LevelGeneration : MonoBehaviour
             {
                 room.GetComponent<Room>().weighting = minWeighting;
             }
+            if (room.GetComponent<Room>().illegal)
+            {
+                room.GetComponent<Room>().weighting = 0;
+            }
+        }
+    }
+
+    //Resets all weighting to an equalised value. Be careful, this loses the order of placed rooms
+    void ResetWeighting()
+    {
+        
+        foreach (GameObject room in placedRooms)
+        {
+            room.GetComponent<Room>().weighting = maxWeighting;
             if (room.GetComponent<Room>().illegal)
             {
                 room.GetComponent<Room>().weighting = 0;
