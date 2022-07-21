@@ -217,11 +217,11 @@ GameObject:
   - component: {fileID: 7510551828275542973}
   - component: {fileID: 6887425005291385880}
   - component: {fileID: 8678994780238758098}
-  - component: {fileID: 8048053914739367019}
   - component: {fileID: 8048053914739367018}
   - component: {fileID: 5167392731316396107}
   - component: {fileID: 8940881081434796308}
   - component: {fileID: 8256094803587314692}
+  - component: {fileID: 8048053914739367019}
   m_Layer: 8
   m_Name: NormalSlime_Small
   m_TagString: Enemy
@@ -293,22 +293,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!54 &8048053914739367019
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7165516955107352839}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
 --- !u!64 &8048053914739367018
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -398,6 +382,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 30.6
   m_Center: {x: 0, y: 28.6, z: 0}
+--- !u!54 &8048053914739367019
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7165516955107352839}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1001 &750315651
 PrefabInstance:
   m_ObjectHideFlags: 0
