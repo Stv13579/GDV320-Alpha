@@ -25,6 +25,9 @@ public class BaseEnemyClass : MonoBehaviour
     [SerializeField]
     GameObject currencyDrop;
 
+    [SerializeField]
+    List<GameObject> ammoDrops;
+
     float startY;
 
     [HideInInspector]
@@ -177,6 +180,12 @@ public class BaseEnemyClass : MonoBehaviour
             for(int i = 0; i < Random.Range(1, 4); i++)
             {
                 Instantiate(currencyDrop, this.transform.position, Quaternion.identity);
+            }
+
+            //Spawn ammo
+            for (int i = 0; i < Random.Range(1, 4); i++)
+            {
+                GameObject ammo = Instantiate(ammoDrops[Random.Range(0, ammoDrops.Count)], this.transform.position, Quaternion.identity);
             }
 
             //Death triggers
