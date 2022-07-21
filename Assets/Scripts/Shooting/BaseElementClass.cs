@@ -137,4 +137,9 @@ public class BaseElementClass : MonoBehaviour
             currentUseDelay -= Time.deltaTime;
         }
     }
+
+    public PlayerClass.ManaName GetManaName()
+    {
+        return manaTypes[0];
+    }
 }

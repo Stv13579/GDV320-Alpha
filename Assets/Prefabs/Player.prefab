@@ -3059,10 +3059,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  currentMana: 0
   maxHealth: 100
-  maxMana: 100
-  manaTypes: []
+  manaTypes:
+  - manaName: 0
+    currentMana: 0
+    maxMana: 100
+  - manaName: 1
+    currentMana: 0
+    maxMana: 100
+  - manaName: 2
+    currentMana: 0
+    maxMana: 100
+  - manaName: 3
+    currentMana: 0
+    maxMana: 100
+  - manaName: 4
+    currentMana: 0
+    maxMana: 100
+  - manaName: 5
+    currentMana: 0
+    maxMana: 100
   money: 0
   heldItems: []
   itemUI: {fileID: 0}
@@ -3288,7 +3304,7 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 0}
   attackTypes: 
-  manaTypes: 04000000
+  manaTypes: 040000000100000002000000030000000000000005000000
   playerClass: {fileID: 0}
   shootingTranform: {fileID: 0}
   shootingIgnore:

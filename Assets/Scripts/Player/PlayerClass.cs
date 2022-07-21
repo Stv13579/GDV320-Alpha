@@ -6,10 +6,10 @@ using System;
 public class PlayerClass : MonoBehaviour
 {
     public float currentHealth;
-    public float currentMana;
+    //public float currentMana;
 
     public float maxHealth;
-    public float maxMana;
+    //public float maxMana;
 
     [Serializable]
     public enum ManaName
@@ -58,7 +58,7 @@ public class PlayerClass : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        currentMana = maxMana;
+        //currentMana = maxMana;
         for(int i = 0; i < manaTypes.Length; i++)
         {
             manaTypes[i].currentMana = manaTypes[i].maxMana;
@@ -86,6 +86,11 @@ public class PlayerClass : MonoBehaviour
             transform.position = fallSpawner.position;
             //ChangeHealth(-fallDamage);
             Debug.Log("Reset Position");
+        }
+
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            manaTypes[0].currentMana = 10;
         }
 
         Push();
@@ -169,15 +174,12 @@ public class PlayerClass : MonoBehaviour
 
     public void ChangeMana(float manaAmount, List<ManaName> manaNames)
     {
-        currentMana = Mathf.Min(currentMana + manaAmount, maxMana);
-        currentMana = Mathf.Max(currentMana, 0);
-        foreach(ManaName mana in manaNames)
+        foreach (ManaName mana in manaNames)
         {
-            ManaType m = Array.Find(manaTypes, item => item.manaName == mana);
-            m.currentMana = Mathf.Min(m.currentMana + manaAmount, m.maxMana);
-            m.currentMana = Mathf.Max(m.currentMana, 0);
+            int i = Array.FindIndex(manaTypes, item => item.manaName == mana);
+            manaTypes[i].currentMana = Mathf.Min(manaTypes[i].currentMana + manaAmount, manaTypes[i].maxMana);
+            manaTypes[i].currentMana = Mathf.Max(manaTypes[i].currentMana, 0);
         }
-
     }
 
     public void ChangeMoney(float moneyAmount)
