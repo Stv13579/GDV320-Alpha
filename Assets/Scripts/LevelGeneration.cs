@@ -21,7 +21,7 @@ public class LevelGeneration : MonoBehaviour
     List<Vector2> roomPositions = new List<Vector2>();
 
     [SerializeField]
-    List<GameObject> possibleGenericRooms, possibleBossRooms, possibleRespiteRooms;
+    List<GameObject> possibleGenericRooms, possibleBossRooms, possibleRespiteRooms, possibleEdgeRooms;
     
     void Start()
     {
@@ -58,17 +58,21 @@ public class LevelGeneration : MonoBehaviour
             room.GetComponent<Room>().CloseDoors();
         }
 
+        AddWorldEdge();
+
         return true;
     }
 
     //Instantiates a new room at a given position and add it to the appropriate list, returning it for further use
-    GameObject PlaceRoom(Vector3 roomPos, List<GameObject> typedList, List<GameObject> roomPrefabs)
+    GameObject PlaceRoom(Vector3 roomPos, List<GameObject> typedList, List<GameObject> roomPrefabs, bool addToPlacedRooms = true)
     {
         GameObject roomToSpawn = roomPrefabs[Random.Range(0, roomPrefabs.Count)];
 
         GameObject room = Instantiate(roomToSpawn, roomPos, Quaternion.identity);
-
-        placedRooms.Add(room);
+        if(addToPlacedRooms)
+        {
+            placedRooms.Add(room);
+        }
         typedList.Add(room);
 
         RecalculateWeighting(room);
@@ -130,24 +134,8 @@ public class LevelGeneration : MonoBehaviour
         Room chRoom = chosenRoom.GetComponent<Room>();
 
         //Find the legal positions of the room, if non, make it illegal and choose a new room
-        List<Vector2> legalPositions = new List<Vector2>();
+        List<Vector2> legalPositions = FindLegalPositions(chRoom);
 
-        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x + 1, chRoom.gridPos.y)))
-        {
-            legalPositions.Add(new Vector2(chRoom.gridPos.x + 1, chRoom.gridPos.y));
-        }
-        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x - 1, chRoom.gridPos.y)))
-        {
-            legalPositions.Add(new Vector2(chRoom.gridPos.x - 1, chRoom.gridPos.y));
-        }
-        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y + 1)))
-        {
-            legalPositions.Add(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y + 1));
-        }
-        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y - 1)))
-        {
-            legalPositions.Add(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y - 1));
-        }
         if(legalPositions.Count <= 0)
         {
             chRoom.illegal = true;
@@ -169,24 +157,8 @@ public class LevelGeneration : MonoBehaviour
         Room chRoom = chosenRoom.GetComponent<Room>();
 
         //Find the legal positions of the room, if non, make it illegal and choose a new room
-        List<Vector2> legalPositions = new List<Vector2>();
+        List<Vector2> legalPositions = FindLegalPositions(chRoom);
 
-        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x + 1, chRoom.gridPos.y)))
-        {
-            legalPositions.Add(new Vector2(chRoom.gridPos.x + 1, chRoom.gridPos.y));
-        }
-        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x - 1, chRoom.gridPos.y)))
-        {
-            legalPositions.Add(new Vector2(chRoom.gridPos.x - 1, chRoom.gridPos.y));
-        }
-        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y + 1)))
-        {
-            legalPositions.Add(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y + 1));
-        }
-        if (CheckRoomPosition(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y - 1)))
-        {
-            legalPositions.Add(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y - 1));
-        }
         if (legalPositions.Count <= 0)
         {
             chRoom.illegal = true;
@@ -199,24 +171,8 @@ public class LevelGeneration : MonoBehaviour
 
         while (!CheckAllRoomDirections(position))
         {
-            legalPositions = new List<Vector2>();
+            legalPositions = FindLegalPositions(chRoom);
 
-            if (CheckRoomPosition(new Vector2(chRoom.gridPos.x + 1, chRoom.gridPos.y)))
-            {
-                legalPositions.Add(new Vector2(chRoom.gridPos.x + 1, chRoom.gridPos.y));
-            }
-            if (CheckRoomPosition(new Vector2(chRoom.gridPos.x - 1, chRoom.gridPos.y)))
-            {
-                legalPositions.Add(new Vector2(chRoom.gridPos.x - 1, chRoom.gridPos.y));
-            }
-            if (CheckRoomPosition(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y + 1)))
-            {
-                legalPositions.Add(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y + 1));
-            }
-            if (CheckRoomPosition(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y - 1)))
-            {
-                legalPositions.Add(new Vector2(chRoom.gridPos.x, chRoom.gridPos.y - 1));
-            }
             if (legalPositions.Count <= 0)
             {
                 chRoom.illegal = true;
@@ -239,6 +195,31 @@ public class LevelGeneration : MonoBehaviour
         return pos;
     }
     
+
+    List<Vector2> FindLegalPositions(Room chosenRoom)
+    {
+        List<Vector2> legalPositions = new List<Vector2>();
+
+        if (CheckRoomPosition(new Vector2(chosenRoom.gridPos.x + 1, chosenRoom.gridPos.y)))
+        {
+            legalPositions.Add(new Vector2(chosenRoom.gridPos.x + 1, chosenRoom.gridPos.y));
+        }
+        if (CheckRoomPosition(new Vector2(chosenRoom.gridPos.x - 1, chosenRoom.gridPos.y)))
+        {
+            legalPositions.Add(new Vector2(chosenRoom.gridPos.x - 1, chosenRoom.gridPos.y));
+        }
+        if (CheckRoomPosition(new Vector2(chosenRoom.gridPos.x, chosenRoom.gridPos.y + 1)))
+        {
+            legalPositions.Add(new Vector2(chosenRoom.gridPos.x, chosenRoom.gridPos.y + 1));
+        }
+        if (CheckRoomPosition(new Vector2(chosenRoom.gridPos.x, chosenRoom.gridPos.y - 1)))
+        {
+            legalPositions.Add(new Vector2(chosenRoom.gridPos.x, chosenRoom.gridPos.y - 1));
+        }
+
+        return legalPositions;
+    }
+
     //if all but one room directions are empty, return true. Otherwise false
     bool CheckAllRoomDirections(Vector2 position)
     {
@@ -319,5 +300,24 @@ public class LevelGeneration : MonoBehaviour
             }
         }
     }
+
+    //Add the edge to the world in the form of additional rooms which fill up each empty spot on existing rooms (and corners?)
+    void AddWorldEdge()
+    {
+
+        //Iterate through each placed room, checking if it has empty edges, then placing an edge piece
+        foreach (GameObject room in placedRooms)
+        {
+            List<Vector2> legalPositions = FindLegalPositions(room.GetComponent<Room>());
+
+            foreach (Vector2 pos in legalPositions)
+            {
+                PlaceRoom(new Vector3(pos.x * roomSize, 0, pos.y * roomSize), genericRooms, possibleEdgeRooms, false);
+            }
+            
+        }
+
+    }
+
 
 }
