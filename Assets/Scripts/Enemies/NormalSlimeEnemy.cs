@@ -27,6 +27,7 @@ public class NormalSlimeEnemy : BaseEnemyClass
         base.Attacking();
         playerClass.ChangeHealth(-damageAmount, transform.position, pushForce);
     }
+
     public override void Movement(Vector3 positionToMoveTo)
     {
         base.Movement(moveDirection);
@@ -127,36 +128,36 @@ public class NormalSlimeEnemy : BaseEnemyClass
     // and add force to the slime so that it jumps
     public virtual void OnCollisionEnter(Collision collision)
     {
-        //if (GetComponent<Rigidbody>().velocity.y < 10 && collision.gameObject.layer == 10)
-        //{
-        //    audioManager.Stop("Slime Bounce");
-        //    audioManager.Play("Slime Bounce", player.transform, this.transform);
-        //    GetComponent<Rigidbody>().AddForce(0, jumpForce, 0);
-        //}
-        //// if colliding with player attack enemy reset damage ticker
-        //// we reset it so that the player doesn't take double damage
-        //if (collision.gameObject.tag == "Player")
-        //{
-        //    Attacking();
-        //    damageTicker = 1.0f;
-        //}
+        if (GetComponent<Rigidbody>().velocity.y < 10 && collision.gameObject.layer == 10)
+        {
+            audioManager.Stop("Slime Bounce");
+            audioManager.Play("Slime Bounce", player.transform, this.transform);
+            GetComponent<Rigidbody>().AddForce(0, jumpForce, 0);
+        }
+        // if colliding with player attack enemy reset damage ticker
+        // we reset it so that the player doesn't take double damage
+        if (collision.gameObject.tag == "Player")
+        {
+            Attacking();
+            damageTicker = 1.0f;
+        }
     }
     public virtual void OnCollisionStay(Collision collision)
     {
-        //if (GetComponent<Rigidbody>().velocity.y < 10 && collision.gameObject.layer == 10)
-        //{
-        //    audioManager.Stop("Slime Bounce");
-        //    audioManager.Play("Slime Bounce", player.transform, this.transform);
-        //    GetComponent<Rigidbody>().AddForce(0, jumpForce, 0);
-        //}
+        if (GetComponent<Rigidbody>().velocity.y < 10 && collision.gameObject.layer == 10)
+        {
+            audioManager.Stop("Slime Bounce");
+            audioManager.Play("Slime Bounce", player.transform, this.transform);
+            GetComponent<Rigidbody>().AddForce(0, jumpForce, 0);
+        }
 
-        //// checks if colliding with player and damage ticker is less then 0
-        //// player should take damage every one second after if they are still colliding with enemy normal slime
-        //if (collision.gameObject.tag == "Player" && damageTicker <= 0.0f)
-        //{
-        //    Attacking();
-        //    damageTicker = 1.0f;
-        //}
+        // checks if colliding with player and damage ticker is less then 0
+        // player should take damage every one second after if they are still colliding with enemy normal slime
+        if (collision.gameObject.tag == "Player" && damageTicker <= 0.0f)
+        {
+            Attacking();
+            damageTicker = 1.0f;
+        }
     }
 
     public virtual void OnTriggerEnter(Collider other)

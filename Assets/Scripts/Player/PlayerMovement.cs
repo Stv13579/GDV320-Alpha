@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool ableToMove = true;
 
+    private float previousYPos;
     // sound
     float randIndexTimer = 0.0f;
     private AudioManager audioManager;
@@ -63,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float initialFOV = 90.0f;
     [SerializeField]
-    private float increasedFOVMoving = 95.0f;
+    private float increasedFOVMoving = 92.0f;
 
     // increase movement speed over time
     [SerializeField]
@@ -98,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    private float maxVeloMagnitude = 1.5f;
     [Header("camera shake")]
     public Transform cameraHolder;
     public Vector3 cameraHolderTargetPos;
@@ -107,9 +109,9 @@ public class PlayerMovement : MonoBehaviour
     public float cameraShakePosLerp = 16.0f;
     public float cameraShakeAnglePunchLerp = 20.0f;
     public float cameraShakeAngleLerp = 40.0f;
-    // how deep the drop is
+    // how deep the drop is (camera pos)
     public float cameraShakeDrop = 0.1f;
-    //
+    // how deep the dip is (camera angle)
     public float cameraShakeDip = 25.0f;
 
 
@@ -127,8 +129,9 @@ public class PlayerMovement : MonoBehaviour
         if (ableToMove)
         {
             PlayerMoving();
+            UpdateCameraShake();
         }
-        UpdateCameraShake();
+        Debug.Log(velocity.y);
     }
     void UpdateCameraShake()
     {
@@ -162,6 +165,23 @@ public class PlayerMovement : MonoBehaviour
             tempAirStraffMod = airStraffMod;
         }
 
+        // if on a slope bigger then the slope limit
+        // push play off the slope
+        if (willSlideOnSlopes && isSlidng)
+        {
+            velocity += new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z).normalized * slopeSpeed;
+            isGrounded = false;
+        }
+
+        // as the player gains velo when coming off the ramp
+        // i want to cap the velocity so that the player doesnt go flying
+        // so i apply friction to the player
+        if(velocity.magnitude > maxVeloMagnitude)
+        {
+            velocity -= velocity.normalized * tempAirStraffMod * acceleration * frictionCurve.Evaluate(velocity.magnitude) * Time.deltaTime;
+        }
+
+
         // friction
         // we store the y velocity
         float cacheY = velocity.y;
@@ -173,14 +193,6 @@ public class PlayerMovement : MonoBehaviour
         velocity -= velocity.normalized * tempAirStraffMod * acceleration * frictionCurve.Evaluate(velocity.magnitude) * Time.deltaTime;
         // we give back the y velocity
         velocity.y = cacheY;
-
-        // if on a slope bigger then the slope limit
-        // push play off the slope
-        if (willSlideOnSlopes && isSlidng)
-        {
-            velocity += new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z) * slopeSpeed;
-            isGrounded = false;
-        }
 
         Jumping();
 
@@ -196,12 +208,7 @@ public class PlayerMovement : MonoBehaviour
         // collision when touching the roof
         if ((cController.collisionFlags & CollisionFlags.Above) != 0)
         {
-            if (isHeadShaking == true)
-            {
-                //StartCoroutine(Shake(0.1f, 0.5f));
-                isHeadShaking = false;
-            }
-            velocity.y = -1.0f;
+            velocity.y = -0.75f;
         }
 
         CoyoteTime();
@@ -245,18 +252,7 @@ public class PlayerMovement : MonoBehaviour
         }
         HeadBobbing();
         MovingCurve();
-        FallingFunctions();
     }
-
-    private void FallingFunctions()
-    {
-        // if players y velo reaches a certain height then increase the fov
-        if (velocity.y < -25.0f)
-        {
-            lookScript.GetCamera().fieldOfView += increasedFOVMoving * Time.deltaTime;
-        }
-    }
-
     // the is the players movement based on a curve
     // if the player moves for a certain amount of time then their acceleration increase
     private void MovingCurve()
@@ -265,7 +261,7 @@ public class PlayerMovement : MonoBehaviour
         {
             moveTime += Time.deltaTime;
             moveTime = Mathf.Clamp(moveTime, 0, 3);
-            if (movementSpeed >= maxMovementSpeed)
+            if (movementSpeed >= maxMovementSpeed && Input.GetKey(KeyCode.W))
             {
                 lookScript.GetCamera().fieldOfView += increasedFOVMoving * Time.deltaTime;
             }
@@ -276,6 +272,7 @@ public class PlayerMovement : MonoBehaviour
             moveTime = 0.0f;
         }
         movementSpeed = moveAnimaCurve.Evaluate(moveTime);
+
         if (lookScript.GetCamera().fieldOfView >= increasedFOVMoving)
         {
             lookScript.GetCamera().fieldOfView = increasedFOVMoving;
@@ -284,6 +281,12 @@ public class PlayerMovement : MonoBehaviour
         {
             lookScript.GetCamera().fieldOfView = initialFOV;
         }
+
+        // if players y velo reaches a certain height then increase the fov
+        if (velocity.y < -25.0f && lookScript.GetCamera().transform.rotation.x > 20)
+        {
+            lookScript.GetCamera().fieldOfView += increasedFOVMoving * Time.deltaTime;
+        }
     }
 
     private void Jumping()
@@ -291,6 +294,7 @@ public class PlayerMovement : MonoBehaviour
         // checks if player is on the ground and if player has press space
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
+            previousYPos = cController.transform.position.y;
             velocity.y = jumpSpeed;
             isHeadShaking = true;
             isGrounded = false;
@@ -307,10 +311,13 @@ public class PlayerMovement : MonoBehaviour
             currentCoyoteTime = coyoteTime;
             if (isHeadShaking == true)
             {
-                //StartCoroutine(Shake(0.1f, 0.5f));
-                CameraShake();
                 audioManager.Stop("Player Landing");
                 audioManager.Play("Player Landing");
+                // if players y positions is less then previous y pos then camera shake
+                if (cController.transform.position.y < previousYPos)
+                {
+                    CameraShake();
+                }
                 isHeadShaking = false;
             }
         }
@@ -322,6 +329,7 @@ public class PlayerMovement : MonoBehaviour
         else if (currentCoyoteTime < 0)
         {
             isGrounded = false;
+            isHeadShaking = true;
             currentCoyoteTime = coyoteTime;
         }
     }
@@ -360,21 +368,6 @@ public class PlayerMovement : MonoBehaviour
         float headBobMove = (Mathf.Cos(headBobTimer * headBobFrequency) - 1.0f) * headBobAmplitude;
         localPos.y = headBobNeutral + (headBobMove * headBobBlendCurve.Evaluate(headBobMultiplier));
         lookScript.GetCamera().transform.localPosition = localPos;
-    }
-
-    private IEnumerator Shake(float duration, float magnitude)
-    {
-        while (duration > 0)
-        {
-            float x = Random.Range(-1.0f, 1.0f) * magnitude;
-
-            lookScript.GetCamera().transform.localEulerAngles += new Vector3(x, 0, 0);
-
-            duration -= Time.deltaTime;
-
-            yield return null;
-        }
-
     }
 
     private void CameraShake()
