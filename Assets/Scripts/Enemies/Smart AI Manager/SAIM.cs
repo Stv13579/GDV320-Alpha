@@ -17,6 +17,9 @@ public class SAIM : MonoBehaviour
     [HideInInspector]
     public List<Node> aliveNodes;
 
+    [SerializeField]
+    List<Node> spawnNodes = new List<Node>();
+
     [SerializeField, HideInInspector]
     List<List<List<Node>>> instantiateNodeGrid;
 
@@ -553,7 +556,7 @@ public class SAIM : MonoBehaviour
     {
         for (int i = 0; i < amountToSpawn; i++)
         {
-            Vector3 spawnPosition = aliveNodes[Random.Range(0, aliveNodes.Count)].transform.position;
+            Vector3 spawnPosition = spawnNodes[Random.Range(0, aliveNodes.Count)].transform.position;
 
             spawnPosition.x += Random.Range(-1.0f, 2.0f);
             spawnPosition.z += Random.Range(-1.0f, 2.0f);
