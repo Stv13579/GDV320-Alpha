@@ -24,8 +24,6 @@ public class PlayerMovement : MonoBehaviour
     private float coyoteTime;
     private float currentCoyoteTime;
 
-    private Vector3 storedCameraPos;
-
     public float movementMulti = 1.0f;
 
     [Header("Character velocity")]
@@ -52,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
 
     public bool ableToMove = true;
 
-    private float previousYPos;
     // sound
     float randIndexTimer = 0.0f;
     private AudioManager audioManager;
@@ -131,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
             PlayerMoving();
             UpdateCameraShake();
         }
-        Debug.Log(velocity.y);
+        Debug.Log(currentCoyoteTime);
     }
     void UpdateCameraShake()
     {
@@ -163,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isGrounded)
         {
             tempAirStraffMod = airStraffMod;
+            isHeadShaking = true;
         }
 
         // if on a slope bigger then the slope limit
@@ -294,7 +292,6 @@ public class PlayerMovement : MonoBehaviour
         // checks if player is on the ground and if player has press space
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            previousYPos = cController.transform.position.y;
             velocity.y = jumpSpeed;
             isHeadShaking = true;
             isGrounded = false;
@@ -313,23 +310,18 @@ public class PlayerMovement : MonoBehaviour
             {
                 audioManager.Stop("Player Landing");
                 audioManager.Play("Player Landing");
-                // if players y positions is less then previous y pos then camera shake
-                if (cController.transform.position.y < previousYPos)
-                {
-                    CameraShake();
-                }
+                CameraShake();
                 isHeadShaking = false;
             }
         }
         // coyoteTime
-        if (currentCoyoteTime > 0)
+        if (currentCoyoteTime > 0.0f)
         {
             currentCoyoteTime -= Time.deltaTime;
         }
-        else if (currentCoyoteTime < 0)
+        else if (currentCoyoteTime < 0.0f)
         {
             isGrounded = false;
-            isHeadShaking = true;
             currentCoyoteTime = coyoteTime;
         }
     }

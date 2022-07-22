@@ -2978,7 +2978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5625023911016436714
 Transform:
   m_ObjectHideFlags: 0
@@ -3050,8 +3050,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.56
-  m_Height: 2.06
+  m_Radius: 0.25
+  m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5625023911835613081
@@ -3134,7 +3134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 5
-  jumpSpeed: 1.35
+  jumpSpeed: 1.3
   acceleration: 10
   frictionCurve:
     serializedVersion: 2
@@ -3225,10 +3225,10 @@ MonoBehaviour:
   cameraHolderTargetPos: {x: 0, y: 0, z: 0}
   cameraHolderTargetAngle: 0
   currentCameraHolderAngle: 0
-  cameraShakePosPunchLerp: 8
-  cameraShakePosLerp: 16
-  cameraShakeAnglePunchLerp: 8
-  cameraShakeAngleLerp: 16
+  cameraShakePosPunchLerp: 4
+  cameraShakePosLerp: 8
+  cameraShakeAnglePunchLerp: 4
+  cameraShakeAngleLerp: 8
   cameraShakeDrop: 0.1
   cameraShakeDip: 3
 --- !u!143 &5625023911835613077
