@@ -5,13 +5,12 @@ using UnityEngine;
 public class EnergyElement : BaseElementClass
 {
     [SerializeField]
-    float fullRestoreAmount;
-    float perTickRestore;
+    private GameObject chargeVFX;
 
-    private float previousHealth = 0.0f;
+    public GameObject test;
 
     [SerializeField]
-    private GameObject chargeVFX;
+    private PlayerLook lookScript;
     private void Start()
     {
         base.Start();
@@ -20,42 +19,32 @@ public class EnergyElement : BaseElementClass
 
     protected override void Update()
     {
-
-        if (previousHealth > playerClass.currentHealth && (playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold") || playerHand.GetCurrentAnimatorStateInfo(0).IsName("Start Hold")))
-        {
-            playerHand.SetTrigger("StopEnergy");
-            audioManager.Stop("Energy Element");
-            Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.Mouse1) & (playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold") || playerHand.GetCurrentAnimatorStateInfo(0).IsName("Start Hold")))
-        {
-            playerHand.SetTrigger("StopEnergy");
-            audioManager.Stop("Energy Element");
-            Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
-
-        }
-
-        previousHealth = playerClass.currentHealth;
+        base.Update();
     }
 
     public override void ElementEffect()
     {
         base.ElementEffect();
-        playerClass.ChangeMana(fullRestoreAmount, manaTypes);
+        Vector3 camLook = lookScript.GetCamera().transform.forward;
+        camLook = new Vector3(camLook.x, 0.0f, camLook.z).normalized;
+        GameObject temptest = Instantiate(test, shootingTranform.position + (camLook * 3), Quaternion.identity);
+
         playerHand.SetTrigger("StopEnergy");
         audioManager.Stop("Energy Element");
         Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
 
     }
 
+    public override void ActivateVFX()
+    {
+        base.ActivateVFX();
+    }
+
     protected override void StartAnims(string animationName)
     {
         base.StartAnims(animationName);
-
         playerHand.SetTrigger(animationName);
-        playerHand.ResetTrigger("StopEnergy");
+
         audioManager.Play("Energy Element");
         Instantiate(chargeVFX, playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos());
 
