@@ -128,7 +128,6 @@ public class PlayerMovement : MonoBehaviour
             PlayerMoving();
             UpdateCameraShake();
         }
-        Debug.Log(currentCoyoteTime);
     }
     void UpdateCameraShake()
     {

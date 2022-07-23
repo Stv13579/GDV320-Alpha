@@ -12,51 +12,11 @@ public class SoulElement : BaseElementClass
 
     [SerializeField]
     private GameObject chargeVFX;
-    // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
 
-        //Checking if the player has taken damage, which cancels the spell
-        if(previousHealth > playerClass.currentHealth && ((playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold") || playerHand.GetCurrentAnimatorStateInfo(0).IsName("Start Hold"))))
-        {
-            playerHand.SetTrigger("SoulStopCast");
-            audioManager.Stop("Soul Element");
-            Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
+    public GameObject test;
 
-        }
-        else
-        {
-            previousHealth = playerClass.currentHealth;
-        }
-
-        //Checking if the mouse button has been released, which cancels the spell
-        if(Input.GetKeyUp(KeyCode.Mouse1) && (playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold") || playerHand.GetCurrentAnimatorStateInfo(0).IsName("Start Hold")))
-        {
-            playerHand.SetTrigger("SoulStopCast");
-            audioManager.Stop("Soul Element");
-            Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
-
-        }
-        previousHealth = playerClass.currentHealth;
-
-    }
-
-    public override void ElementEffect()
-    {
-        base.ElementEffect();
-        //Subtract the mana cost and restore health
-        playerClass.ChangeMana(-manaCost, manaTypes);
-        playerClass.ChangeHealth(healthRestore);
-        playerHand.SetTrigger("SoulStopCast");
-        audioManager.Stop("Soul Element");
-        Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
-    }
-
-    public override void ActivateVFX()
-    {
-        base.ActivateVFX();
-    }
+    [SerializeField]
+    private PlayerLook lookScript;
 
     protected override void StartAnims(string animationName)
     {
@@ -69,16 +29,60 @@ public class SoulElement : BaseElementClass
 
     }
 
-    protected override bool PayCosts(float modifier = 1)
+    public override void ElementEffect()
     {
-        //Override of paycosts so that mana is only subtracted at then end, in case the cast is cancelled
-        if (playerClass.ManaCheck(manaCost * modifier, manaTypes))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        base.ElementEffect();
+        playerHand.SetTrigger("SoulStopCast");
+        audioManager.Stop("Soul Element");
+        Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
     }
+
+    // Update is called once per frame
+    protected override void Update()
+    {
+        base.Update();
+
+        ////Checking if the player has taken damage, which cancels the spell
+        //if(previousHealth > playerClass.currentHealth && ((playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold") || playerHand.GetCurrentAnimatorStateInfo(0).IsName("Start Hold"))))
+        //{
+        //    playerHand.SetTrigger("SoulStopCast");
+        //    audioManager.Stop("Soul Element");
+        //    Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
+
+        //}
+        //else
+        //{
+        //    previousHealth = playerClass.currentHealth;
+        //}
+
+        ////Checking if the mouse button has been released, which cancels the spell
+        //if(Input.GetKeyUp(KeyCode.Mouse1) && (playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold") || playerHand.GetCurrentAnimatorStateInfo(0).IsName("Start Hold")))
+        //{
+        //    playerHand.SetTrigger("SoulStopCast");
+        //    audioManager.Stop("Soul Element");
+        //    Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
+
+        //}
+        //previousHealth = playerClass.currentHealth;
+
+    }
+
+    public override void ActivateVFX()
+    {
+        base.ActivateVFX();
+    }
+
+
+    //protected override bool PayCosts(float modifier = 1)
+    //{
+    //    //Override of paycosts so that mana is only subtracted at then end, in case the cast is cancelled
+    //    if (playerClass.ManaCheck(manaCost * modifier, manaTypes))
+    //    {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
 }
