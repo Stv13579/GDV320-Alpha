@@ -17,9 +17,6 @@ public class SAIM : MonoBehaviour
     [HideInInspector]
     public List<Node> aliveNodes;
 
-    [SerializeField]
-    List<Node> spawnNodes = new List<Node>();
-
     [SerializeField, HideInInspector]
     List<List<List<Node>>> instantiateNodeGrid;
 
@@ -50,7 +47,7 @@ public class SAIM : MonoBehaviour
 
     //number in nodes of the sides of the grid.
     [SerializeField]
-    int gridSize;
+    int gridSize, gridHeight;
 
     [SerializeField]
     float nodeSpacing;
@@ -130,8 +127,8 @@ public class SAIM : MonoBehaviour
 
         player = GameObject.Find("Player");
 
-        //CreateIntegrationFlowField(nodeGrid[15].nodeCol[17]);
-        //GenerateFlowField();
+        
+        
     }
 
     void Update()
@@ -313,7 +310,7 @@ public class SAIM : MonoBehaviour
         //Create a field of nodes
         for (int i = 0; i < gridSize; i++)
         {
-            for (int j = 0; j < gridSize; j++)
+            for (int j = 0; j < gridHeight; j++)
             {
                 for (int k = 0; k < gridSize; k++)
                 {
@@ -331,7 +328,7 @@ public class SAIM : MonoBehaviour
 
         Vector3 nodeMasterPosition = nodeMaster.transform.position;
         nodeMasterPosition.x -= (gridSize * nodeSpacing) / 2;
-        nodeMasterPosition.y -= (gridSize * nodeSpacing) / 2;
+        nodeMasterPosition.y -= (gridHeight * nodeSpacing) / 2;
         nodeMasterPosition.z -= (gridSize * nodeSpacing) / 2;
 
         nodeMaster.transform.position = nodeMasterPosition;
@@ -412,7 +409,7 @@ public class SAIM : MonoBehaviour
 
                 bool isAliveNode = false;
                 Node aliveNode = null;
-                for (int k = 0; k < gridSize; k++)
+                for (int k = 0; k < gridHeight; k++)
                 {
                     //The logic here is to create a 2D node grid not taking into account the Y element which does exist in practice.
                     //This is done by making a new grid removing the third dimension of the reference in the list.
@@ -453,22 +450,7 @@ public class SAIM : MonoBehaviour
         }
 
 
-        
-        //for (int i = 0; i < gridSize; i++)
-        //{
-        //    for (int j = 0; j < gridSize; j++)
-        //    {
-        //        instantiateNodeGrid[i].Clear();
-        //        for (int k = 0; k < gridSize; k++)
-        //        {
-        //            instantiateNodeGrid[i][j].Clear();
-        //        }
-      
-        //    }
-        //}
         instantiateNodeGrid.Clear();
-        //nodeGrid.Clear();
-        //nodes.Clear();
     } 
 
     void KillNode(int index)
@@ -554,6 +536,13 @@ public class SAIM : MonoBehaviour
     //if there is a spawn event, use this to spawn the enemies.
     public void Spawn(int amountToSpawn)
     {
+        List<Node> spawnNodes = new List<Node>();
+
+        foreach (Transform spawnNode in transform.Find("SpawnPositions"))
+        {
+            spawnNodes.Add(spawnNode.GetComponent<Node>());
+        }
+
         for (int i = 0; i < amountToSpawn; i++)
         {
             Vector3 spawnPosition = spawnNodes[Random.Range(0, aliveNodes.Count)].transform.position;

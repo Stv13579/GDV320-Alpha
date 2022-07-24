@@ -46,4 +46,10 @@ public class Node : MonoBehaviour
         
         //GetComponentInChildren<TextMeshPro>().text = bestCost.ToString();
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(this.transform.position, new Vector3(1, 1, 1));
+    }
 }

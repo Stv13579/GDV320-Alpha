@@ -7,7 +7,7 @@ using UnityEditor;
 [CanEditMultipleObjects]
 public class SAIMEditorScript : Editor
 {
-    
+
 
     public override void OnInspectorGUI()
     {
