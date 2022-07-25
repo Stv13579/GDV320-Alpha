@@ -55,6 +55,12 @@ public class PlayerClass : MonoBehaviour
     [SerializeField]
     float fallDamage;
 
+    float fireTimer = 0.0f;
+    [SerializeField]
+    float fireDOT;
+    [SerializeField]
+    GameObject fireEffect;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -91,6 +97,16 @@ public class PlayerClass : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.O))
         {
             manaTypes[0].currentMana = 10;
+        }
+
+        if(fireTimer > 0)
+        {
+            ChangeHealth(-fireDOT);
+            fireTimer -= Time.deltaTime;
+        }
+        else
+        {
+            fireEffect.SetActive(false);
         }
 
         Push();
@@ -186,4 +202,14 @@ public class PlayerClass : MonoBehaviour
     {
         money = Mathf.Max(money + moneyAmount, 0);
     }
+
+    public void OnFire(float time)
+    {
+        fireTimer = time;
+        if(fireTimer > 0)
+        {
+            fireEffect.SetActive(true);
+        }
+    }
+
 }
