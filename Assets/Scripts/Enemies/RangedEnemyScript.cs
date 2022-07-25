@@ -19,6 +19,10 @@ public class RangedEnemyScript : BaseEnemyClass
     {
         base.Start();
         timer = attackTime;
+        RaycastHit hit;
+        Physics.Raycast(this.gameObject.transform.position, -this.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
+        Vector3 emergePos = hit.point - this.transform.GetChild(0).GetChild(1).localPosition * 2;
+        this.transform.position = emergePos;
     }
 
     // Update is called once per frame
