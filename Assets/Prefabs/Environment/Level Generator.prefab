@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7373350057435146730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7373350057435146731}
+  - component: {fileID: 7373350057435146732}
+  m_Layer: 0
+  m_Name: Level Generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7373350057435146731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7373350057435146730}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7373350057435146732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7373350057435146730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f775dcbf42773478d0d00a7870e8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomSize: 120
+  maxWeighting: 100
+  minWeighting: 1
+  weightingChange: 99
+  minRooms: 9
+  maxRooms: 11
+  possibleGenericRooms:
+  - {fileID: 8722929292429955614, guid: 935d079548a9376448c447369a0e77c2, type: 3}
+  - {fileID: 3426216204013751669, guid: 22d5ee11b797ab141a370de7f6f82240, type: 3}
+  - {fileID: 5220667890841261118, guid: 79163fb312d4f924c8ec4ab7e08a25c6, type: 3}
+  - {fileID: 9222570053461146635, guid: 83496a136b265d141814996f239b3337, type: 3}
+  - {fileID: 7997218341362689720, guid: a0a2919c4a7eeff4a82824ad353175d0, type: 3}
+  - {fileID: 4559933726993110341, guid: c361a344c6dccd646a2beab7489bd1b2, type: 3}
+  possibleBossRooms:
+  - {fileID: 7971564393761877235, guid: 17dbc95fea8a01944918d94171169fd5, type: 3}
+  possibleRespiteRooms:
+  - {fileID: 7727130600033575008, guid: e6b450dc85622ef47ba983477494f730, type: 3}
+  - {fileID: 7658769687067439067, guid: dd6e8e841745aff44816aa89fc796730, type: 3}
+  - {fileID: 6355538323241201935, guid: 8b27a800c80ecc044aa11ef7d1141a33, type: 3}
+  possibleEdgeRooms:
+  - {fileID: 1483777927411662025, guid: ddb78a84316879d42acb234c8d204664, type: 3}
