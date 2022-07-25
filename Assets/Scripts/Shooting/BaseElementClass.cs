@@ -26,9 +26,6 @@ public class BaseElementClass : MonoBehaviour
     [SerializeField]
     string animationToPlay;
 
-    //Whether the button needs to be held down during the cast (such as the laser)
-    protected bool heldCast;
-
     //Cooldown/Firerate 
     //The amount of time before the element can be used again (usually brief)
     [SerializeField]

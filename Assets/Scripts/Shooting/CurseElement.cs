@@ -43,14 +43,11 @@ public class CurseElement : BaseElementClass
         targeting = true;
 
     }
-
     public override void ElementEffect()
     {
         base.ElementEffect();
         targeting = false;
         //curse the target
-
-        
 
         //Give it a death trigger
         if(targetToCurse && !targetToCurse.GetComponent<BaseEnemyClass>().deathTriggers.Contains(DeathEffect))
@@ -59,8 +56,6 @@ public class CurseElement : BaseElementClass
             Instantiate(curseVFX, targetToCurse.transform);
             targetToCurse.GetComponent<BaseEnemyClass>().deathTriggers.Add(DeathEffect);
         }
-
-
     }
     
     public void DeathEffect()
@@ -109,11 +104,6 @@ public class CurseElement : BaseElementClass
 
         if(targeting)
         {
-            if(targetToCurse)
-            {
-                //targetToCurse.GetComponent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
-            }
-            
             RaycastHit rayHit;
 
             if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out rayHit, range, curseTargets))
