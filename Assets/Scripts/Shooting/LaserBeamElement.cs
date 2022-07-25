@@ -76,11 +76,11 @@ public class LaserBeamElement : BaseElementClass
     {
         if (usingLaserBeam == true)
         {
-            playerMovement.movementMulti = 0.25f;
+            playerMovement.AddMovementMultiplier(0.25f);
         }
         else
         {
-            playerMovement.movementMulti = 1.0f;
+            playerMovement.RemoveMovementMultiplier(0.25f);
         }
     }
 }
