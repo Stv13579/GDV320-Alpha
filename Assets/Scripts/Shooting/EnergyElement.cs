@@ -7,8 +7,17 @@ public class EnergyElement : BaseElementClass
     [SerializeField]
     private GameObject chargeVFX;
 
-    [SerializeField]
-    GameObject energyShield;
+    public GameObject energyShield;
+
+    // might change to this method depending if current way works
+    private enum shieldState
+    {
+        shieldUp,
+        parrying,
+        shieldDown
+    }
+    private shieldState shieldStateChange;
+    private float parryTimer;
 
     [SerializeField]
     private bool usingEnergyShield;
@@ -17,7 +26,7 @@ public class EnergyElement : BaseElementClass
     protected override void Start()
     {
         base.Start();
-        //heldCast = true;
+        
     }
 
     protected override void Update()

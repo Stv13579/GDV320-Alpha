@@ -31,7 +31,7 @@ public class VoidElement : BaseElementClass
             }
 
         }
-        if (Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold"))
+        if (Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(0).IsName("VoidHold"))
         {
             timer += Time.deltaTime * (1 / Time.timeScale);
         }
