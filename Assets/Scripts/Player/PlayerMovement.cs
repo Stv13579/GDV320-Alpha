@@ -24,7 +24,8 @@ public class PlayerMovement : MonoBehaviour
     private float coyoteTime;
     private float currentCoyoteTime;
 
-    public float movementMulti = 1.0f;
+    float movementMulti = 1.0f;
+    List<float> movementMultipliers = new List<float>();
 
     [Header("Character velocity")]
     private Vector3 velocity;
@@ -365,6 +366,26 @@ public class PlayerMovement : MonoBehaviour
     {
         cameraHolderTargetPos = new Vector3(0, -cameraShakeDrop, 0);
         cameraHolderTargetAngle = cameraShakeDip;
+    }
+
+    public void AddMovementMultiplier(float multi)
+    {
+        movementMultipliers.Add(multi);
+        movementMulti = 1.0f;
+        foreach(float multiplier in movementMultipliers)
+        {
+            movementMulti *= multiplier;
+        }
+    }
+
+    public void RemoveMovementMultiplier(float multi)
+    {
+        movementMultipliers.Remove(multi);
+        movementMulti = 1.0f;
+        foreach (float multiplier in movementMultipliers)
+        {
+            movementMulti *= multiplier;
+        }
     }
 }
 
