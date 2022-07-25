@@ -89,6 +89,7 @@ public class EnergyElement : BaseElementClass
         else
         {
             playerHand.SetTrigger("NoMana");
+            // this section needs fixing will fix later
             Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
             return false;
         }

@@ -26,6 +26,13 @@ public class NecroticElement : BaseElementClass
 
     [SerializeField]
     Color outlineColour;
+
+    [SerializeField]
+    private float maxSlowTimer;
+
+    [SerializeField]
+    private float currentSlowTimer;
+
     protected override void StartAnims(string animationName)
     {
         base.StartAnims(animationName);
@@ -42,8 +49,13 @@ public class NecroticElement : BaseElementClass
     {
         base.ElementEffect();
         isTargeting = false;
-    }
 
+        if(targetToSlow)
+        {
+            Instantiate(test, targetToSlow.transform);
+            targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti = 0.5f;
+        }
+    }
     // Update is called once per frame
     protected override void Update()
     {
@@ -51,7 +63,7 @@ public class NecroticElement : BaseElementClass
         // if istargeting = true
         // player can target and enemy
         // this turns on when helded
-        if(isTargeting == true)
+        if(isTargeting)
         {
             RaycastHit targetRayCast;
             
