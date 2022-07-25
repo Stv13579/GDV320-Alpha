@@ -40,7 +40,8 @@ public class BaseEnemyClass : MonoBehaviour
     public enum Types
     {
         Fire,
-        Crystal
+        Crystal,
+        Water
     }
 
     [SerializeField]
