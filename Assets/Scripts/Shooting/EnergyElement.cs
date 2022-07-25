@@ -52,7 +52,6 @@ public class EnergyElement : BaseElementClass
 
             playerHand.SetTrigger("StopEnergy");
             audioManager.Stop("Energy Element");
-            Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
     }
 
     public override void ElementEffect()
@@ -77,5 +76,21 @@ public class EnergyElement : BaseElementClass
         audioManager.Play("Energy Element");
         Instantiate(chargeVFX, playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos());
 
+    }
+
+    protected override bool PayCosts(float modifier = 1)
+    {
+        //Override of paycosts so that mana is only subtracted at then end, in case the cast is cancelled
+        if (playerClass.ManaCheck(manaCost * modifier, manaTypes))
+        {
+            playerClass.ChangeMana(-manaCost * modifier, manaTypes);
+            return true;
+        }
+        else
+        {
+            playerHand.SetTrigger("NoMana");
+            Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
+            return false;
+        }
     }
 }
