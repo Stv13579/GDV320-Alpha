@@ -58,7 +58,8 @@ public class RangedEnemyScript : BaseEnemyClass
 
         if(timer >= attackTime)
         {
-            Attacking();
+            timer = 0;
+            enemyAnims.SetTrigger("Attacking");
         }
 
 
@@ -69,12 +70,11 @@ public class RangedEnemyScript : BaseEnemyClass
         //Go into ground, find SAIM node, rise out of ground
     }
 
-    public override void Attacking()
+    public void Attack()
     {
-        timer = 0;
         projectileSpawnPos.transform.LookAt(player.transform);
         GameObject newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
-        if(newProjectile.GetComponent<CrystalRangedProjectile>())
+        if (newProjectile.GetComponent<CrystalRangedProjectile>())
         {
             for (int i = 1; i < 3; i++)
             {
