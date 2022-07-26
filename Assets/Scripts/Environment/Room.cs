@@ -10,10 +10,12 @@ public class Room : MonoBehaviour
     List<GameObject> activeDoors = new List<GameObject>();
     LevelGeneration levelGenerator;
     bool locked = false;
-
+    protected GameObject roomTrigger;
+    
     private void Start()
     {
         levelGenerator = GameObject.Find("Level Generator").GetComponent<LevelGeneration>();
+        roomTrigger = transform.Find("RoomTriggerBox").gameObject;
     }
 
     //Closes off all the illegal/irrelevant exits and collates the remaining ones
