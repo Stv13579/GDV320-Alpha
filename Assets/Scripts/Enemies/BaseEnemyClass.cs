@@ -7,7 +7,7 @@ public class BaseEnemyClass : MonoBehaviour
     public float maxHealth;
     public float damageAmount;
     public float moveSpeed;
-
+    public float moveSpeedMulti;
     //The amount of flat damage any instance of incoming damage is reduced by
     public float damageThreshold;
 
@@ -58,6 +58,7 @@ public class BaseEnemyClass : MonoBehaviour
 
     [HideInInspector]
     public List<DeathTrigger> deathTriggers = new List<DeathTrigger>();
+
 
     public Vector3 moveDirection;
     protected AudioManager audioManager;

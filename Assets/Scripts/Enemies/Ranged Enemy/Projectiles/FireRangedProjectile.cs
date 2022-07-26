@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireRangedProjectile : MonoBehaviour
+public class FireRangedProjectile : BaseRangedProjectileScript
 {
-    // Start is called before the first frame update
-    void Start()
+    public float fireDuration;
+    protected override void HitEffect()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        player.GetComponent<PlayerClass>().ChangeHealth(-damage);
+        player.GetComponent<PlayerClass>().OnFire(fireDuration);
+        Destroy(this.gameObject);
     }
 }

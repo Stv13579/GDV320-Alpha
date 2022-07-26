@@ -45,6 +45,9 @@ public class SAIM : MonoBehaviour
     [SerializeField]
     List<GameObject> bridges;
 
+    //The room in which the SAIM is placed
+    Room containingRoom;
+
     //number in nodes of the sides of the grid.
     [SerializeField]
     int gridSize, gridHeight;
@@ -127,7 +130,7 @@ public class SAIM : MonoBehaviour
 
         player = GameObject.Find("Player");
 
-        
+        containingRoom = transform.parent.GetComponent<Room>();
         
     }
 
@@ -177,30 +180,14 @@ public class SAIM : MonoBehaviour
         }
         if (triggered && !roomComplete)
         {
-            
-
-            if(bridges.Count > 0)
-            {
-                foreach (GameObject bridge in bridges)
-                {
-                    bridge.SetActive(false);
-                }
-                
-            }
+            containingRoom.LockDoors();
 
         }
         else
         {
+            containingRoom.UnlockDoors();
+
             
-
-            if (bridges.Count > 0)
-            {
-                foreach (GameObject bridge in bridges)
-                {
-                    bridge.SetActive(true);
-                }
-
-            }
         }
 
         AdjustDifficulty();
@@ -545,7 +532,7 @@ public class SAIM : MonoBehaviour
 
         for (int i = 0; i < amountToSpawn; i++)
         {
-            Vector3 spawnPosition = spawnNodes[Random.Range(0, aliveNodes.Count)].transform.position;
+            Vector3 spawnPosition = spawnNodes[Random.Range(0, spawnNodes.Count - 1 )].transform.position;
 
             spawnPosition.x += Random.Range(-1.0f, 2.0f);
             spawnPosition.z += Random.Range(-1.0f, 2.0f);
