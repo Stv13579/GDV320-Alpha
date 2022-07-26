@@ -19,7 +19,8 @@ public class PlayerClass : MonoBehaviour
         Water,
         Necrotic,
         Energy,
-        Void
+        Void,
+        None
     }
 
     [Serializable]

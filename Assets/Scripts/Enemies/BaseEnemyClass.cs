@@ -23,10 +23,7 @@ public class BaseEnemyClass : MonoBehaviour
     protected PlayerClass playerClass;
 
     [SerializeField]
-    GameObject currencyDrop;
-
-    [SerializeField]
-    List<GameObject> ammoDrops;
+    DropsList drops;
 
     float startY;
 
@@ -182,16 +179,10 @@ public class BaseEnemyClass : MonoBehaviour
             }
 
 
-            //Spawn currency
-            for(int i = 0; i < Random.Range(1, 4); i++)
+            //Spawn drops
+            for(int i = 0; i < Random.Range(1, 6); i++)
             {
-                Instantiate(currencyDrop, this.transform.position, Quaternion.identity);
-            }
-
-            //Spawn ammo
-            for (int i = 0; i < Random.Range(1, 4); i++)
-            {
-                GameObject ammo = Instantiate(ammoDrops[Random.Range(0, ammoDrops.Count)], this.transform.position, Quaternion.identity);
+                Instantiate(drops.GetDrop(), this.transform.position, Quaternion.identity);
             }
 
             //Death triggers
