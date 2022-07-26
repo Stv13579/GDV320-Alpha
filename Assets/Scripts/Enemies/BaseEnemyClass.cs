@@ -40,7 +40,8 @@ public class BaseEnemyClass : MonoBehaviour
     public enum Types
     {
         Fire,
-        Crystal
+        Crystal,
+        Water
     }
 
     [SerializeField]
@@ -125,6 +126,7 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
     {
+        Debug.Log("Hit");
         GameObject hitSpn = Instantiate(hitSpawn, transform.position, Quaternion.identity);
         Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
         hitSpn.transform.localScale = scale;
@@ -146,10 +148,13 @@ public class BaseEnemyClass : MonoBehaviour
                 }
             }
         }
-
-        enemyAnims.SetTrigger("TakeDamage");
-
         currentHealth -= (damageToTake * multiplier) * damageResistance - damageThreshold;
+
+        if(enemyAnims)
+        {
+            enemyAnims.SetTrigger("TakeDamage");
+        }
+
         audioManager.Stop(takeDamageAudio);
         audioManager.Play(takeDamageAudio, player.transform, this.transform);
         Death();

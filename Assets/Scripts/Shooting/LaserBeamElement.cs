@@ -23,19 +23,16 @@ public class LaserBeamElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-
         if (!Input.GetKey(KeyCode.Mouse0))
         {
-            usingLaserBeam = false;
-            laserBeam.SetActive(false);
-            playerHand.SetTrigger("LaserStopCast");
-            playerHandL.SetTrigger("LaserStopCast");
-            audioManager.Stop("Laser Beam");
-            laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
+            DeactivateLaser();
         }
         if (playerHand.GetCurrentAnimatorStateInfo(0).IsName("HoldLaser"))
         {
-            DeactivateLaser();
+            if (Input.GetKeyUp(KeyCode.Mouse0) || !PayCosts(Time.deltaTime))
+            {
+                DeactivateLaser();
+            }
         }
         LaserBeamEffect();
     }
@@ -44,15 +41,13 @@ public class LaserBeamElement : BaseElementClass
     {
         //if left click is up or if player has no mana
         // stop the laser beam
-        if (Input.GetKeyUp(KeyCode.Mouse0) || !PayCosts(Time.deltaTime))
-        {
-            usingLaserBeam = false;
-            laserBeam.SetActive(false);
-            playerHand.SetTrigger("LaserStopCast");
-            playerHandL.SetTrigger("LaserStopCast");
-            audioManager.Stop("Laser Beam");
-            laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
-        }
+        usingLaserBeam = false;
+        laserBeam.SetActive(false);
+
+        playerHand.SetTrigger("LaserStopCast");
+        playerHandL.SetTrigger("LaserStopCast");
+        audioManager.Stop("Laser Beam");
+        laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
     }
     public override void ElementEffect()
     {
@@ -69,8 +64,10 @@ public class LaserBeamElement : BaseElementClass
     protected override void StartAnims(string animationName)
     {
         base.StartAnims(animationName);
+
         playerHand.ResetTrigger("LaserStopCast");
         playerHandL.ResetTrigger("LaserStopCast");
+
         playerHand.SetTrigger(animationName);
         playerHandL.SetTrigger(animationName);
     }
@@ -79,11 +76,11 @@ public class LaserBeamElement : BaseElementClass
     {
         if (usingLaserBeam == true)
         {
-            playerMovement.movementMulti = 0.25f;
+            playerMovement.AddMovementMultiplier(0.25f);
         }
         else
         {
-            playerMovement.movementMulti = 1.0f;
+            playerMovement.RemoveMovementMultiplier(0.25f);
         }
     }
 }

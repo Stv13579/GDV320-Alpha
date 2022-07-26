@@ -34,6 +34,7 @@ public class WaterElement : BaseElementClass
         base.ElementEffect();
         //
         GameObject newWaterProj = Instantiate(waterProj, shootingTranform.position, Camera.main.transform.rotation);
+        playerClass.OnFire(0);
         Physics.IgnoreCollision(newWaterProj.GetComponent<Collider>(), this.gameObject.GetComponent<Collider>());
         RaycastHit hit;
         Physics.Raycast(this.gameObject.transform.position, Camera.main.transform.forward, out hit, 100, shootingIgnore);

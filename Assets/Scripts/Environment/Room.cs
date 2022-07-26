@@ -9,6 +9,7 @@ public class Room : MonoBehaviour
     public Vector2Int gridPos = Vector2Int.zero;
     List<GameObject> activeDoors = new List<GameObject>();
     LevelGeneration levelGenerator;
+    bool locked = false;
 
     private void Start()
     {
@@ -74,9 +75,36 @@ public class Room : MonoBehaviour
         transform.Find(doorToBlock).transform.Find("ClosedGateway").gameObject.SetActive(true);
     }
 
+    //Use to lock all of the doors
+    public void LockDoors()
+    {
+        if(locked)
+        {
+            return;
+        }
+
+        foreach (GameObject door in activeDoors)
+        {
+            door.transform.Find("LockedGateway").gameObject.SetActive(true);
+        }
+
+        locked = true;
+    }
+
+    //Call to unlock all of the doors
     public void UnlockDoors()
     {
+        if(!locked)
+        {
+            return;
+        }
 
+        foreach (GameObject door in activeDoors)
+        {
+            door.transform.Find("LockedGateway").gameObject.SetActive(false);
+        }
+
+        locked = false;
     }
 
 }
