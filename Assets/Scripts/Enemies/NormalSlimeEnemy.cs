@@ -39,14 +39,14 @@ public class NormalSlimeEnemy : BaseEnemyClass
         {
             if (hit.collider.gameObject.tag == "Player")
             {
-                Vector3 moveVec = (player.transform.position - transform.position).normalized * moveSpeed * moveSpeedMulti * Time.deltaTime;
+                Vector3 moveVec = (player.transform.position - transform.position).normalized * moveSpeed * Time.deltaTime;
                 moveVec.y = 0;
                 moveVec.y -= 1 * Time.deltaTime;
                 transform.position += moveVec;
             }
             else
             {
-                Vector3 moveVec = (moveDirection - transform.position).normalized * moveSpeed * moveSpeedMulti * Time.deltaTime;
+                Vector3 moveVec = (moveDirection - transform.position).normalized * moveSpeed  * Time.deltaTime;
                 moveVec.y = 0;
                 moveVec.y -= 1 * Time.deltaTime;
                 transform.position += moveVec;
@@ -56,7 +56,7 @@ public class NormalSlimeEnemy : BaseEnemyClass
         }
         else
         {
-            Vector3 moveVec = (moveDirection - transform.position).normalized * moveSpeed * moveSpeedMulti * Time.deltaTime;
+            Vector3 moveVec = (moveDirection - transform.position).normalized * moveSpeed * Time.deltaTime;
             moveVec.y = 0;
             moveVec.y -= 1 * Time.deltaTime;
             transform.position += moveVec;
