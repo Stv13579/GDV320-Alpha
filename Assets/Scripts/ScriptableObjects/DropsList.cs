@@ -17,11 +17,12 @@ public class DropsList : ScriptableObject
             totalWeight += drop.weighting;
         }
         int rand = Random.Range(0, totalWeight);
-        int i = 0;
-        while(totalWeight > 0)
+        int i = -1;
+        while(rand > 0)
         {
-            totalWeight -= dropsList[i].weighting;
             i++;
+            rand -= dropsList[i].weighting;
+            
         }
         return (dropsList[i].drop);
     }
