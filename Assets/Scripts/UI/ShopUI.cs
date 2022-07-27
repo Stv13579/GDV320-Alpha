@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ShopUI : MonoBehaviour
+public class ShopUI : NPCUI
 {
     List<Item> shopItems = new List<Item>();
     public List<GameObject> buttons;
@@ -15,8 +15,6 @@ public class ShopUI : MonoBehaviour
 
     public TextMeshProUGUI moneyText;
 
-    [HideInInspector]
-    public ShopkeeperScript shopkeeper;
 
     private AudioManager audioManager;
     private void Start()
@@ -94,17 +92,17 @@ public class ShopUI : MonoBehaviour
         }
     }
 
-    public void CloseShop()
+    public override void Close()
     {
         for (int i = 0; i < 3; i++)
         {
-            if(buttons[i].activeInHierarchy)
+            if (buttons[i].activeInHierarchy)
             {
                 //If an item isn't bought when leaving the shop, mark it available to be obtained again
                 items.itemList[ids[i]].alreadyAdded = false;
             }
         }
-        shopkeeper.LeaveShop();
+        base.Close();
     }
 
 }
