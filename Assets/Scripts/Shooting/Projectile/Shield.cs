@@ -13,6 +13,8 @@ public class Shield : MonoBehaviour
     private GameObject Player;
 
     AudioManager audioManager;
+
+    float force = 1.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,7 @@ public class Shield : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), Player.GetComponent<Collider>());
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -30,7 +32,11 @@ public class Shield : MonoBehaviour
         // collision with the enemy
         if(collision.gameObject.layer == 8)
         {
-            
+            Vector3 dir = collision.contacts[0].point - transform.position;
+
+            dir = -dir.normalized;
+
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(dir * force, ForceMode.Impulse);
         }
     }
 

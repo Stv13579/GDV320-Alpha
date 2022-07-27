@@ -1,7 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+#if UNITY_EDITOR
+[ExecuteAlways]
+#endif
 public class SmoothTransformFollow : MonoBehaviour
 {
     [Header("Attached Components")]
@@ -15,14 +20,26 @@ public class SmoothTransformFollow : MonoBehaviour
     {
         if (targetTransform)
         {
-            transform.position = targetTransform.position;
+            SetToTarget();
         }
     }
 
     //the hands will follow the camera as the player moves the mouse
     private void Update()
     {
+#if UNITY_EDITOR
+        if(!Application.isPlaying)
+        {
+            SetToTarget();
+        }
+#endif
         transform.position = Vector3.Lerp(transform.position, targetTransform.position, moveSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetTransform.rotation, rotateSpeed * Time.deltaTime);
+    }
+
+    private void SetToTarget()
+    {
+        transform.position = targetTransform.position;
+        transform.rotation = targetTransform.rotation;
     }
 }
