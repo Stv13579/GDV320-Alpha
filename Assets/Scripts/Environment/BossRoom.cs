@@ -4,15 +4,50 @@ using UnityEngine;
 
 public class BossRoom : Room
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    GameObject boss;
+
+    [SerializeField]
+    Transform spawnPosition;
+
+
+    bool bossSpawned = false;
+    bool bossDead = false;
+
+    GameObject currentBoss;
+
+    [SerializeField]
+    GameObject portalObject;
+
+    [SerializeField]
+    Transform portalSpawnPosition;
+
+    private void Update()
     {
-        
+        if(bossDead)
+        {
+            return;
+        }
+
+        if(!currentBoss && !bossDead)
+        {
+            //Spawn the portal
+            Instantiate(portalObject, portalSpawnPosition.position, Quaternion.identity);
+            UnlockDoors();
+            bossDead = true;
+        }
+
+        if (roomTrigger.GetComponent<RoomTrigger>().triggered && !bossSpawned)
+        {
+            bossSpawned = true;
+            //Spawn the boss once
+            currentBoss = Instantiate(boss, spawnPosition.position, Quaternion.identity);
+            //Lock the doors
+            LockDoors();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
+
 }

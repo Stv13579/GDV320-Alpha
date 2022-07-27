@@ -29,9 +29,15 @@ public class AmmoDrop : MonoBehaviour
         //If the player moves in range, disable he rigidbody and switch the collider to a trigger
         if ((player.position - transform.position).magnitude < 5 && !moving)
         {
-            Destroy(this.gameObject.GetComponent<Rigidbody>());
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             this.gameObject.GetComponent<Collider>().isTrigger = true;
             moving = true;
+        }
+        else if ((player.position - transform.position).magnitude > 10 && moving)
+        {
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            this.gameObject.GetComponent<Collider>().isTrigger = false;
+            moving = false;
         }
 
         if (moving)

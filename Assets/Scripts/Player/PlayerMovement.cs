@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private float coyoteTime;
     private float currentCoyoteTime;
 
-    float movementMulti = 1.0f;
+    public float movementMulti = 1.0f;
     List<float> movementMultipliers = new List<float>();
 
     [Header("Character velocity")]

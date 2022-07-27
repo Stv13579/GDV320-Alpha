@@ -8,6 +8,7 @@ public class CurrencyDrop : MonoBehaviour
     Transform player;
     bool moving = false;
     AudioManager audioManager;
+    public static float currencyAmount = 1;
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
@@ -44,7 +45,7 @@ public class CurrencyDrop : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            player.gameObject.GetComponent<PlayerClass>().money += 1;
+            player.gameObject.GetComponent<PlayerClass>().ChangeMoney(currencyAmount);
             Destroy(this.gameObject);
             audioManager.Stop("Currency Pickup");
             audioManager.Play("Currency Pickup");

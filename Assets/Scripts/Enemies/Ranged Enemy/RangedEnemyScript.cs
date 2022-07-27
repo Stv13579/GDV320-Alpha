@@ -6,11 +6,19 @@ public class RangedEnemyScript : BaseEnemyClass
 {
     float timer = 0;
     public float attackTime;
+    [HideInInspector]
+    public float attackTimeMulti;
     public LayerMask viewToPlayer;
     public float burrowTime;
     bool burrowing = false;
 
     public GameObject projectile;
+    public float projectileDamage;
+    public float projectileSpeed;
+    [HideInInspector]
+    public float projectileSpeedMulti;
+
+
 
     public Transform projectileSpawnPos;
     public LayerMask groundDetect;
@@ -44,6 +52,7 @@ public class RangedEnemyScript : BaseEnemyClass
                     transform.rotation = rot;
                     if (Vector3.Distance(player.transform.position, this.gameObject.transform.position) < 10 || Vector3.Distance(player.transform.position, this.gameObject.transform.position) > 100)
                     {
+                        enemyAnims.SetTrigger("Burrow");
                         StartCoroutine(Burrow());
                     }
                 }
@@ -56,35 +65,35 @@ public class RangedEnemyScript : BaseEnemyClass
         }
 
 
-        if(timer >= attackTime)
+        if(timer >= attackTime * attackTimeMulti)
         {
-            Attacking();
+            timer = 0;
+            enemyAnims.SetTrigger("Attacking");
         }
 
 
     }
 
-    public void Movement()
+    public void Attack()
     {
-        //Go into ground, find SAIM node, rise out of ground
-    }
-
-    public override void Attacking()
-    {
-        timer = 0;
         projectileSpawnPos.transform.LookAt(player.transform);
         GameObject newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
-        if(newProjectile.GetComponent<CrystalRangedProjectile>())
+        newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * projectileSpeedMulti, projectileDamage);
+        if (newProjectile.GetComponent<CrystalRangedProjectile>())
         {
             for (int i = 1; i < 3; i++)
             {
                 newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
                 newProjectile.transform.RotateAround(projectileSpawnPos.position, projectileSpawnPos.up, -5.0f * i);
+                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * projectileSpeedMulti, projectileDamage);
+
             }
             for (int i = 1; i < 3; i++)
             {
                 newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
                 newProjectile.transform.RotateAround(projectileSpawnPos.position, projectileSpawnPos.up, 5.0f * i);
+                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * projectileSpeedMulti, projectileDamage);
+
             }
         }
     }

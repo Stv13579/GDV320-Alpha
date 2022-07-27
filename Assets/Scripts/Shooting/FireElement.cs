@@ -44,7 +44,6 @@ public class FireElement : BaseElementClass
     //Fires the fireball, passing damage, speed, aoe etc
     public override void ElementEffect()
     {
-        Debug.Log("Test");
         base.ElementEffect();
         //
         GameObject newFireball = Instantiate(fireBall, shootingTranform.position, Camera.main.transform.rotation);
@@ -53,7 +52,6 @@ public class FireElement : BaseElementClass
         if(hit.collider)
         {
             newFireball.transform.LookAt(hit.point);
-            Debug.Log(hit.collider.gameObject.name);
         }
         newFireball.GetComponent<Fireball>().SetVars(projectileSpeed, damage * damageMultiplier, gravity, gravCurve, gravityLifetime, explosionArea, explosionDamage, attackTypes);
     }

@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class BaseRangedProjectileScript : MonoBehaviour
 {
-    [SerializeField]
     protected float speed;
-    [SerializeField]
     protected float damage;
     protected GameObject player;
     // Start is called before the first frame update
@@ -38,5 +36,11 @@ public class BaseRangedProjectileScript : MonoBehaviour
         }
 
 
+    }
+
+    public void SetVars(float projectileSpeed, float projectileDamage)
+    {
+        speed = projectileSpeed;
+        damage = projectileDamage;
     }
 }
