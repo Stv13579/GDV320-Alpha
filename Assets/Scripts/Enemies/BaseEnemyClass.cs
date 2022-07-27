@@ -6,8 +6,10 @@ public class BaseEnemyClass : MonoBehaviour
 {
     public float maxHealth;
     public float damageAmount;
+    [HideInInspector]
+    public float damageMultiplier = 1.0f;
     public float moveSpeed;
-    public float moveSpeedMulti;
+    public float moveSpeedMulti = 1.0f;
     //The amount of flat damage any instance of incoming damage is reduced by
     public float damageThreshold;
 
@@ -216,5 +218,16 @@ public class BaseEnemyClass : MonoBehaviour
         this.transform.GetChild(1).GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Outline_Colour", colour);
     }
 
+    public IEnumerator AttackBuff()
+    {
+        damageMultiplier += 0.5f;
+        yield return new WaitForSeconds(10);
+        damageMultiplier -= 0.5f;
+        StopCoroutine(AttackBuff());
+    }
 
+    public void RestoreHealth(float amount)
+    {
+        currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
+    }
 }
