@@ -42,10 +42,10 @@ public class ShopkeeperScript : MonoBehaviour
 
 
         }
-        if (playerMove != null)
-        {
-            this.gameObject.transform.GetChild(0).LookAt(new Vector3(playerMove.gameObject.transform.position.x, this.gameObject.transform.GetChild(0).position.y, playerMove.gameObject.transform.position.z));
-        }
+        //if (playerMove != null)
+        //{
+        //    this.gameObject.transform.GetChild(0).LookAt(new Vector3(playerMove.gameObject.transform.position.x, this.gameObject.transform.GetChild(0).position.y, playerMove.gameObject.transform.position.z));
+        //}
 
 
         if (Input.GetKeyDown(KeyCode.Escape) && inRange && inShop)
@@ -64,7 +64,7 @@ public class ShopkeeperScript : MonoBehaviour
             playerMove = other.gameObject.GetComponent<PlayerMovement>();
             playerLook = other.gameObject.GetComponent<PlayerLook>();
             shooting = other.gameObject.GetComponent<Shooting>();
-            this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            //this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }
     }
 
@@ -73,7 +73,7 @@ public class ShopkeeperScript : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             inRange = false;
-            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            //this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
 
         }
     }
