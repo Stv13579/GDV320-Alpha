@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     private float headBobTimer = 0.0f;
     private float headBobFrequency = 1.0f;
     private float headBobAmplitude = 0.02f;
+
     // the default position of the head
     private float headBobNeutral = 0.80f;
     private float headBobMinSpeed = 0.1f;
@@ -84,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         get
         {
             // if player is grounded and the raycast is hitting the ground
-            if (cController.isGrounded && Physics.Raycast(transform.position, Vector3.down, out RaycastHit slopeHit, 2.5f))
+            if (cController.isGrounded && Physics.Raycast(transform.position, Vector3.down, out RaycastHit slopeHit, 2.5f, environmentLayer))
             {
                 //store the normal
                 hitPointNormal = slopeHit.normal;
@@ -112,7 +113,8 @@ public class PlayerMovement : MonoBehaviour
     // how deep the dip is (camera angle)
     public float cameraShakeDip = 25.0f;
 
-
+    [SerializeField]
+    private float collisionForce = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -385,6 +387,19 @@ public class PlayerMovement : MonoBehaviour
         foreach (float multiplier in movementMultipliers)
         {
             movementMulti *= multiplier;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        // collision with the enemy
+        if (other.gameObject.layer == 8)
+        {
+            Vector3 dir = other.transform.position - this.transform.position;
+            dir.y = 0;
+            dir = dir.normalized;
+
+            other.gameObject.GetComponent<Rigidbody>().AddForce(dir * collisionForce, ForceMode.Impulse);
         }
     }
 }

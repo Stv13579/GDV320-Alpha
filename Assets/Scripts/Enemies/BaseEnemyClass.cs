@@ -6,10 +6,10 @@ public class BaseEnemyClass : MonoBehaviour
 {
     public float maxHealth;
     public float damageAmount;
-    [HideInInspector]
     public float damageMultiplier = 1.0f;
     public float moveSpeed;
     public float moveSpeedMulti = 1.0f;
+    List<float> movementMultipliers = new List<float>();
     //The amount of flat damage any instance of incoming damage is reduced by
     public float damageThreshold;
 
@@ -229,5 +229,25 @@ public class BaseEnemyClass : MonoBehaviour
     public void RestoreHealth(float amount)
     {
         currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
+    }
+
+    public void AddMovementMultiplier(float multi)
+    {
+        movementMultipliers.Add(multi);
+        moveSpeedMulti = 1.0f;
+        foreach (float multiplier in movementMultipliers)
+        {
+            moveSpeedMulti *= multiplier;
+        }
+    }
+
+    public void RemoveMovementMultiplier(float multi)
+    {
+        movementMultipliers.Remove(multi);
+        moveSpeedMulti = 1.0f;
+        foreach (float multiplier in movementMultipliers)
+        {
+            moveSpeedMulti *= multiplier;
+        }
     }
 }

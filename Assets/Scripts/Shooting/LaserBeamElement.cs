@@ -5,7 +5,7 @@ using UnityEngine;
 public class LaserBeamElement : BaseElementClass
 {
     [SerializeField]
-    GameObject laserBeam;
+    private GameObject laserBeam;
 
     [SerializeField]
     float damage;

@@ -25,7 +25,7 @@ public class NormalSlimeEnemy : BaseEnemyClass
     public override void Attacking()
     {
         base.Attacking();
-        playerClass.ChangeHealth(-damageAmount, transform.position, pushForce);
+        playerClass.ChangeHealth(-damageAmount * damageMultiplier, transform.position, pushForce);
     }
 
     public override void Movement(Vector3 positionToMoveTo)
