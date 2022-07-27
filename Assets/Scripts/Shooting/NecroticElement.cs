@@ -27,6 +27,7 @@ public class NecroticElement : BaseElementClass
     [SerializeField]
     Color outlineColour;
 
+    // maybe
     [SerializeField]
     private float maxSlowTimer;
 
@@ -50,10 +51,10 @@ public class NecroticElement : BaseElementClass
         base.ElementEffect();
         isTargeting = false;
 
-        if(targetToSlow)
+        if(targetToSlow && targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti != 0.5f)
         {
             Instantiate(test, targetToSlow.transform);
-            targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti = 0.5f;
+            targetToSlow.GetComponent<BaseEnemyClass>().AddMovementMultiplier(0.5f);
         }
     }
     // Update is called once per frame

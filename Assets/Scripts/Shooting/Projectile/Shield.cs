@@ -4,42 +4,32 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-    private float shieldHealthTicker;
-
     [SerializeField]
     private EnergyElement energyElement;
 
     [SerializeField]
     private GameObject Player;
 
-    AudioManager audioManager;
+    private AudioManager audioManager;
+
+    [SerializeField]
+    private float force = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), Player.GetComponent<Collider>());
-    }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
         // collision with the enemy
-        if(collision.gameObject.layer == 8)
+        if(other.gameObject.layer == 8)
         {
-            
-        }
-    }
+            Vector3 dir = other.transform.position - this.transform.position;
+            dir.y = 0;
+            dir = dir.normalized;
 
-    private void OnCollisionStay(Collision collision)
-    {
-        // collision with the enemy
-        if (collision.gameObject.layer == 8)
-        {
-
+            other.gameObject.GetComponent<Rigidbody>().AddForce(dir * force, ForceMode.Impulse);
         }
     }
 }

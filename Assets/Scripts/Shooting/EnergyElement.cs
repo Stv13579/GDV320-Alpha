@@ -5,10 +5,14 @@ using UnityEngine;
 public class EnergyElement : BaseElementClass
 {
     [SerializeField]
+    List<GameObject> containedEnemies = new List<GameObject>();
+
+    [SerializeField]
     private GameObject chargeVFX;
 
     public GameObject energyShield;
 
+    [SerializeField]
     // might change to this method depending if current way works
     private enum shieldState
     {
@@ -16,49 +20,113 @@ public class EnergyElement : BaseElementClass
         parrying,
         shieldDown
     }
-    private shieldState shieldStateChange;
-    private float parryTimer;
+    [SerializeField]
+    private shieldState shieldStateChange = shieldState.shieldDown;
 
     [SerializeField]
-    private bool usingEnergyShield;
-
-
+    private float timeToParry;
+    private bool useShield = false;
+    private bool upgraded = false;
     protected override void Start()
     {
         base.Start();
-        
     }
 
     protected override void Update()
     {
         base.Update();
-        if (!Input.GetKey(KeyCode.Mouse1))
+        if (upgraded == true)
         {
-            DeactivateEnergyShield();
+            switch (shieldStateChange)
+            {
+                case shieldState.shieldDown:
+                    {
+                        if (!Input.GetKey(KeyCode.Mouse1))
+                        {
+                            DeactivateEnergyShield();
+                        }
+                        if (playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold"))
+                        {
+                            if (Input.GetKeyUp(KeyCode.Mouse1) || !PayCosts(Time.deltaTime))
+                            {
+                                DeactivateEnergyShield();
+                            }
+                        }
+                        if (Input.GetKey(KeyCode.Mouse1) && useShield == true)
+                        {
+                            shieldStateChange = shieldState.parrying;
+                        }
+                    }
+                    break;
+                case shieldState.parrying:
+                    {
+                        timeToParry += Time.deltaTime;
+                        if (timeToParry >= 0.25f)
+                        {
+                            shieldStateChange = shieldState.shieldUp;
+                            timeToParry = 0.0f;
+                            //parrycode;
+                        }
+                    }
+                    break;
+                case shieldState.shieldUp:
+                    {
+                        if (!Input.GetKey(KeyCode.Mouse1))
+                        {
+                            shieldStateChange = shieldState.shieldDown;
+                        }
+                        if (playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold"))
+                        {
+                            if (Input.GetKeyUp(KeyCode.Mouse1) || !PayCosts(Time.deltaTime))
+                            {
+                                shieldStateChange = shieldState.shieldDown;
+                            }
+                        }
+
+                        break;
+                    }
+            }
         }
-        if (playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold"))
+        else
         {
-            if (Input.GetKeyUp(KeyCode.Mouse1) || !PayCosts(Time.deltaTime))
+            if (!Input.GetKey(KeyCode.Mouse1))
             {
                 DeactivateEnergyShield();
+            }
+            if (playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold"))
+            {
+                if (Input.GetKeyUp(KeyCode.Mouse1) || !PayCosts(Time.deltaTime))
+                {
+                    DeactivateEnergyShield();
+                }
             }
         }
     }
 
     public void DeactivateEnergyShield()
     {
-            usingEnergyShield = false;
-            energyShield.SetActive(false);
-
-            playerHand.SetTrigger("StopEnergy");
-            audioManager.Stop("Energy Element");
+        energyShield.SetActive(false);
+        useShield = false;
+        playerHand.SetTrigger("StopEnergy");
+        audioManager.Stop("Energy Element");
+        // go through the list of enemies
+        // remove them from the list and 
+        // 
+        foreach (GameObject enemy in containedEnemies)
+        {
+            if (enemy)
+            {
+                containedEnemies.Remove(enemy);
+                enemy.GetComponent<BaseEnemyClass>().damageMultiplier = 1.0f;
+            }
+        }
     }
 
     public override void ElementEffect()
     {
         base.ElementEffect();
-        usingEnergyShield = true;
         energyShield.SetActive(true);
+        useShield = true;
     }
 
     public override void ActivateVFX()
@@ -93,5 +161,25 @@ public class EnergyElement : BaseElementClass
             Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
             return false;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (useShield)
+        {
+            if (other.gameObject.layer == 8 /*need to have a projectile layer*/)
+            {
+                //other.gameObject.GetComponent<BaseEnemyClass>().damageAmount = 0;
+                if (other.gameObject && !containedEnemies.Contains(other.gameObject))
+                {
+                    containedEnemies.Add(other.gameObject);
+                    for (int i = 0; i < containedEnemies.Count; i++)
+                    {
+                        containedEnemies[i].gameObject.GetComponent<BaseEnemyClass>().damageMultiplier = 0;
+                    }
+                }
+            }
+        }
+
     }
 }

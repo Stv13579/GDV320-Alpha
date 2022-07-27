@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
-    [SerializeField] new private Camera camera;
+    [SerializeField] private Camera currentCamera;
     // current rotation of camera
+    [SerializeField]
     private float spin = 0.0f;
+    [SerializeField]
     private float tilt = 0.0f;
     private float roll = 0.0f;
 
@@ -22,7 +24,7 @@ public class PlayerLook : MonoBehaviour
     public bool ableToMove = true;
 
     // getter to get the camera
-    public Camera GetCamera() { return camera; }
+    public Camera GetCamera() { return currentCamera; }
     // getter to get the spin value
     public float GetSpin() { return spin; }
     // setter to set the spin value
@@ -84,14 +86,18 @@ public class PlayerLook : MonoBehaviour
             RollInput();
             // rotation on the x axis for the mouse (rotating head to look from side to side)
             // rotation on the y axis for the mouse (rotating head so looking up and down)
-            camera.transform.localEulerAngles = new Vector3(tilt + bumpTilt, spin, roll);
-            camera.transform.localPosition += Quaternion.Euler(0.0f, spin, 0.0f) * new Vector3(0, 0, 0);
+            currentCamera.transform.localEulerAngles = new Vector3(tilt + bumpTilt, spin, roll);
+            currentCamera.transform.localPosition += Quaternion.Euler(0.0f, spin, 0.0f) * new Vector3(0, 0, 0);
         }
+    }
+
+    void OnValidate()
+    {
+        currentCamera.transform.localEulerAngles = new Vector3(tilt, spin, 0);
     }
     // Start is called before the first frame update
     void Start()
     {
-        camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         LockCursor();
     }
 

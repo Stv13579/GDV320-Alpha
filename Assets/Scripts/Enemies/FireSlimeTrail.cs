@@ -32,6 +32,8 @@ public class FireSlimeTrail : MonoBehaviour
 
     [SerializeField]
     private GameObject fireParticles;
+
+
     private void Start()
     {
         player = GameObject.Find("Player");

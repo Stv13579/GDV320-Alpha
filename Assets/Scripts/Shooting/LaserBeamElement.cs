@@ -5,13 +5,11 @@ using UnityEngine;
 public class LaserBeamElement : BaseElementClass
 {
     [SerializeField]
-    GameObject laserBeam;
+    private GameObject laserBeam;
 
     [SerializeField]
     float damage;
     public float damageMultiplier = 1;
-
-    public bool usingLaserBeam;
 
     [SerializeField]
     private PlayerMovement playerMovement;
@@ -34,27 +32,27 @@ public class LaserBeamElement : BaseElementClass
                 DeactivateLaser();
             }
         }
-        LaserBeamEffect();
     }
 
     public void DeactivateLaser()
     {
         //if left click is up or if player has no mana
         // stop the laser beam
-        usingLaserBeam = false;
         laserBeam.SetActive(false);
 
         playerHand.SetTrigger("LaserStopCast");
         playerHandL.SetTrigger("LaserStopCast");
         audioManager.Stop("Laser Beam");
         laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
+        playerMovement.RemoveMovementMultiplier(0.25f);
+
     }
     public override void ElementEffect()
     {
         base.ElementEffect();
-        usingLaserBeam = true;
         laserBeam.SetActive(true);
         laserBeam.GetComponentInChildren<LaserBeam>().SetVars(damage * damageMultiplier, attackTypes);
+        playerMovement.AddMovementMultiplier(0.25f);
     }
     public override void ActivateVFX()
     {
@@ -70,17 +68,5 @@ public class LaserBeamElement : BaseElementClass
 
         playerHand.SetTrigger(animationName);
         playerHandL.SetTrigger(animationName);
-    }
-
-    private void LaserBeamEffect()
-    {
-        if (usingLaserBeam == true)
-        {
-            playerMovement.AddMovementMultiplier(0.25f);
-        }
-        else
-        {
-            playerMovement.RemoveMovementMultiplier(0.25f);
-        }
     }
 }
