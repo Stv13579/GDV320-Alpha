@@ -23,8 +23,6 @@ public class ShardCannonElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-
-
     }
 
     //Fires the shard, passing damage, speed etc
@@ -44,8 +42,6 @@ public class ShardCannonElement : BaseElementClass
     public override void ActivateVFX()
     {
         base.ActivateVFX();
-
-
     }
 
     protected override void StartAnims(string animationName)
