@@ -9,22 +9,19 @@ public class ShopUI : NPCUI
     List<Item> shopItems = new List<Item>();
     public List<GameObject> buttons;
     public ItemList items;
-    PlayerClass player;
-    GameObject inventory;
+
     List<int> ids = new List<int>();
 
     public TextMeshProUGUI moneyText;
 
 
-    private AudioManager audioManager;
     private void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
-        player = GameObject.Find("Player").GetComponent<PlayerClass>();
-        inventory = GameObject.Find("Player").transform.GetChild(2).gameObject;
+        base.Start();
+
 
         //For vertical slice purposes, remove for full game
-        foreach(ItemEntry item in items.itemList)
+        foreach (ItemEntry item in items.itemList)
         {
             item.alreadyAdded = false;
         }

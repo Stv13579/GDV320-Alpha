@@ -13,12 +13,27 @@ public class Interact : MonoBehaviour
     Shooting shooting;
     GameObject gameUI;
 
+    public bool canInteract = true;
+
     void Start()
     {
         gameUI = GameObject.Find("GameplayUI");
     }
     void Update()
     {
+
+     
+
+        if(!canInteract)
+        {
+
+            LeaveUI();
+            inRange = false;
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            Destroy(this);
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.T) && inRange && !inUI)
         {
             //If the shop hasn't yet been opened, create it so that it generates appropriate items, otherwise reopen it
