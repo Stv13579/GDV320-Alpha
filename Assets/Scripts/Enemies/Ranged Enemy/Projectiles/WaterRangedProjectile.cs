@@ -6,21 +6,11 @@ public class WaterRangedProjectile : BaseRangedProjectileScript
 {
     protected override void HitEffect()
     {
-        player.GetComponent<PlayerMovement>().AddMovementMultiplier(0.5f);
         player.GetComponent<PlayerClass>().ChangeHealth(-damage);
-        Destroy(this.gameObject.GetComponent<MeshRenderer>());
-        Destroy(this.gameObject.GetComponent<SphereCollider>());
-        speed = 0;
-        StartCoroutine(UndoSlow());
-
-    }
-
-    IEnumerator UndoSlow()
-    {
-
-        yield return new WaitForSeconds(10);
-
-        player.GetComponent<PlayerMovement>().RemoveMovementMultiplier(0.5f);
+        player.GetComponent<PlayerMovement>().StopCoroutine(player.GetComponent<PlayerMovement>().Slowness(new PlayerMovement.movementMultiSource()));
+        player.GetComponent<PlayerMovement>().StartCoroutine(player.GetComponent<PlayerMovement>().Slowness(new PlayerMovement.movementMultiSource(0.5f, "Water Ranged")));
         Destroy(this.gameObject);
+
+
     }
 }

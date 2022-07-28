@@ -25,7 +25,17 @@ public class PlayerMovement : MonoBehaviour
     private float currentCoyoteTime;
 
     public float movementMulti = 1.0f;
-    List<float> movementMultipliers = new List<float>();
+    public struct movementMultiSource
+    {
+        public float multiplier;
+        public string source;
+        public movementMultiSource(float multi, string s)
+        {
+            multiplier = multi;
+            source = s;
+        }
+    }
+    List<movementMultiSource> movementMultipliers = new List<movementMultiSource>();
 
     [Header("Character velocity")]
     private Vector3 velocity;
@@ -370,26 +380,44 @@ public class PlayerMovement : MonoBehaviour
         cameraHolderTargetAngle = cameraShakeDip;
     }
 
-    public void AddMovementMultiplier(float multi)
+    public void AddMovementMultiplier(movementMultiSource multi)
     {
-        movementMultipliers.Add(multi);
-        movementMulti = 1.0f;
-        foreach(float multiplier in movementMultipliers)
+        if(!movementMultipliers.Contains(multi))
         {
-            movementMulti *= multiplier;
+            movementMultipliers.Add(multi);
+        }
+        movementMulti = 1.0f;
+        foreach(movementMultiSource multiplier in movementMultipliers)
+        {
+            movementMulti *= multiplier.multiplier;
         }
     }
 
-    public void RemoveMovementMultiplier(float multi)
+    public void RemoveMovementMultiplier(movementMultiSource multi)
     {
-        movementMultipliers.Remove(multi);
-        movementMulti = 1.0f;
-        foreach (float multiplier in movementMultipliers)
+        if(movementMultipliers.Contains(multi))
         {
-            movementMulti *= multiplier;
+            movementMultipliers.Remove(multi);
+
+        }
+        movementMulti = 1.0f;
+        foreach (movementMultiSource multiplier in movementMultipliers)
+        {
+            movementMulti *= multiplier.multiplier;
         }
     }
 
+    public IEnumerator Slowness(movementMultiSource multiplier)
+    {
+        Debug.Log("StartRoutine");
+
+        AddMovementMultiplier(multiplier);
+
+        yield return new WaitForSeconds(10f);
+        Debug.Log("StopRoutine");
+        RemoveMovementMultiplier(multiplier);
+
+    }
     private void OnTriggerStay(Collider other)
     {
         // collision with the enemy
