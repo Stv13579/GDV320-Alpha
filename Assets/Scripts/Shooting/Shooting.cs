@@ -7,9 +7,9 @@ public class Shooting : MonoBehaviour
 {
 
     [SerializeField] 
-    List<BaseElementClass> primaryElements;
+    public List<BaseElementClass> primaryElements;
     [SerializeField] 
-    List<BaseElementClass> catalystElements;
+    public List<BaseElementClass> catalystElements;
 
     [Serializable]
     public struct ComboElementList
@@ -18,7 +18,7 @@ public class Shooting : MonoBehaviour
     }
 
     [SerializeField] 
-    List<ComboElementList> comboElements;
+    public List<ComboElementList> comboElements;
     int leftElementIndex = 0;
     int rightElementIndex = 0;
 

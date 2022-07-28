@@ -45,6 +45,9 @@ public class BaseElementClass : MonoBehaviour
     public Sprite uiSprite;
     public Sprite crosshair;
 
+    //Additional variables for the blacksmith
+    public int upgradeCost = 5;
+
     [SerializeField]
     protected List<BaseEnemyClass.Types> attackTypes;
 
@@ -139,4 +142,11 @@ public class BaseElementClass : MonoBehaviour
     {
         return manaTypes[0];
     }
+
+    //Changes the functionality or in some way improves the element
+    public virtual void Upgrade()
+    {
+
+    }
+
 }
