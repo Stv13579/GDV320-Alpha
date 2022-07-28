@@ -3228,6 +3228,7 @@ GameObject:
   - component: {fileID: 5625023911835613079}
   - component: {fileID: 5625023911835613076}
   - component: {fileID: 5625023911835613077}
+  - component: {fileID: 450497678}
   - component: {fileID: 5625023910511142016}
   - component: {fileID: 1363181307}
   - component: {fileID: 1363181306}
@@ -3240,7 +3241,6 @@ GameObject:
   - component: {fileID: 7904701518895008356}
   - component: {fileID: 5197923882654677022}
   - component: {fileID: 2068485375}
-  - component: {fileID: 450497678}
   m_Layer: 19
   m_Name: Player
   m_TagString: Player
@@ -3414,6 +3414,19 @@ CharacterController:
   m_StepOffset: 0.5
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &450497678
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5625023911835613081}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5625023910511142016
 MonoBehaviour:
@@ -3934,19 +3947,6 @@ MonoBehaviour:
   dashDistance: 20
   dashTime: 0.5
   capsule: {fileID: 0}
---- !u!65 &450497678
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5625023911835613081}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5, z: 1.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5898286419646802724
 GameObject:
   m_ObjectHideFlags: 0

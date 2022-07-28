@@ -111,14 +111,10 @@ public class EnergyElement : BaseElementClass
         audioManager.Stop("Energy Element");
         // go through the list of enemies
         // remove them from the list and 
-        // 
-        foreach (GameObject enemy in containedEnemies)
+        for(int i = 0; i < containedEnemies.Count; i++)
         {
-            if (enemy)
-            {
-                containedEnemies.Remove(enemy);
-                enemy.GetComponent<BaseEnemyClass>().damageMultiplier = 1.0f;
-            }
+            containedEnemies[i].GetComponent<BaseEnemyClass>().damageMultiplier = 1.0f;
+            containedEnemies.Remove(containedEnemies[i]);
         }
     }
 

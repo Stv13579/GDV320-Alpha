@@ -14,6 +14,8 @@ public class IceSlashElement : BaseElementClass
     [SerializeField]
     private float projectileSpeed;
 
+    [SerializeField]
+    private float lifeTimer;
 
     // Update is called once per frame
     protected override void Update()
@@ -23,9 +25,9 @@ public class IceSlashElement : BaseElementClass
 
     public override void ElementEffect()
     {
-        base.ElementEffect();
         GameObject iceSlashTemp = Instantiate(iceSlash, shootingTranform.position, Camera.main.transform.rotation);
-
+        iceSlashTemp.GetComponent<IceSlashProj>().SetVars(projectileSpeed, damage * damageMultiplier, lifeTimer, attackTypes);
+        base.ElementEffect();
     }
 
     public override void ActivateVFX()

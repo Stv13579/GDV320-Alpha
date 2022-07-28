@@ -36,8 +36,6 @@ public class AcidCloudElement : BaseElementClass
     public override void ActivateVFX()
     {
         base.ActivateVFX();
-
-
     }
 
     protected override void StartAnims(string animationName)
