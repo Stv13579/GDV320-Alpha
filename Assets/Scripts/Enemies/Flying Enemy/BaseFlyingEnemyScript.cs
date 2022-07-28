@@ -28,6 +28,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
     {
         if(!effect)
         {
+            //Only start moving every few seconds, that way it's not constantly moving to try and approach its target
             if (moveTimer > 5)
             {
                 if (Vector3.Distance(this.transform.position, targetPos) > 5)
@@ -45,13 +46,19 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
             }
             moveTimer += Time.deltaTime;
 
+            //Activate the effect every few seconds, with multiplier if we want it
             timer += Time.deltaTime;
             if(timer > effectTimer * effectTimerMulti)
             {
                 effect = true;
                 enemyAnims.SetTrigger("Effect");
             }
+
+            targetPos = target.transform.position + new Vector3(0, 10, 0);
+            this.transform.LookAt(targetPos);
+            this.transform.eulerAngles += new Vector3(0, 90, 0);
         }
+
 
 
 
@@ -60,6 +67,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
 
     void Movement()
     {
+        //Check if the path to its destination is clear, if not pick a new destination
         enemyAnims.SetTrigger("Move");
         RaycastHit hit;
         if(Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
@@ -79,17 +87,38 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
         while (!foundTarget)
         {
             int i = Random.Range(0, enemies.Length);
-            target = enemies[i].gameObject;
-            targetPos = target.transform.position + new Vector3(0, 10, 0);
-
-            if (!target.GetComponent<BaseFlyingEnemyScript>())
+            bool onlyFlying = true;
+            //Check that there aren't only flying enemies left
+            foreach(BaseEnemyClass enemy in enemies)
             {
-                RaycastHit hit;
-                if (!Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
+                if (!enemy.gameObject.GetComponent<BaseFlyingEnemyScript>())
                 {
-                    foundTarget = true;
+                    onlyFlying = false;
                 }
             }
+            //If there aren't only flying enemies left, get all the enemies in the scene and pick a new one
+            if(!onlyFlying)
+            {
+                if (enemies[i].gameObject != target)
+                {
+                    target = enemies[i].gameObject;
+                }
+                targetPos = target.transform.position + new Vector3(0, 10, 0);
+                //Make sure the chosen enemy isn't a flying enemy, and that the path to them is clear
+                if (!target.GetComponent<BaseFlyingEnemyScript>())
+                {
+                    RaycastHit hit;
+                    if (!Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
+                    {
+                        foundTarget = true;
+                    }
+                }
+            }
+            else
+            {
+                //Stay in idle I guess
+            }
+
         }
     }
 
