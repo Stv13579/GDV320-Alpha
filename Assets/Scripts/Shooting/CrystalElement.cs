@@ -58,7 +58,5 @@ public class CrystalElement : BaseElementClass
     {
         base.StartAnims(animationName);
         playerHand.SetTrigger(animationName);
-
-
     }
 }
