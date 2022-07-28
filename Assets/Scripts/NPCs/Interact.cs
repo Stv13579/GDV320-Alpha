@@ -12,12 +12,14 @@ public class Interact : MonoBehaviour
     PlayerLook playerLook;
     Shooting shooting;
     GameObject gameUI;
-
+    [HideInInspector]
+    public NPC npc;
     public bool canInteract = true;
 
     void Start()
     {
         gameUI = GameObject.Find("GameplayUI");
+        npc = GetComponent<NPC>();
     }
     void Update()
     {
