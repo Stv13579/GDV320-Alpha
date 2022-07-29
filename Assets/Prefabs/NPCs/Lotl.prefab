@@ -1703,6 +1703,37 @@ Transform:
   m_Father: {fileID: 1231631264}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1969669102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954862262491965696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2fc815c09c0614697fc52654ee87c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDialogue:
+    lines: []
+  noMoreDialogue:
+    lines:
+    - All gone!
+  place: 0
+  interactPositon: 0
+  data: {fileID: 11400000, guid: 01793933688d7234b9fced00be16afd4, type: 2}
+  baseRandoms:
+  - lines:
+    - Hi!
+    - Have a gift
+  - lines:
+    - 'Oh! '
+    - Here's a present
+  - lines:
+    - Hello!
+    - Take one!
+  offeringType: Gifts
 --- !u!1001 &6887051336030598555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1741,6 +1772,16 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
         type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
       propertyPath: m_LocalPosition.z
       value: 78.67
       objectReference: {fileID: 0}
@@ -1763,6 +1804,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lotl
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171701818778494, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.16
       objectReference: {fileID: 0}
     - target: {fileID: 2898795574535279952, guid: 01b84641070c05a468128367ec429509,
         type: 3}
@@ -1827,6 +1873,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3947044421949730439, guid: 01b84641070c05a468128367ec429509, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 01b84641070c05a468128367ec429509, type: 3}
+--- !u!1 &8954862262491965696 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2582171700705221787, guid: 01b84641070c05a468128367ec429509,
+    type: 3}
+  m_PrefabInstance: {fileID: 6887051336030598555}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8954862262491965697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,

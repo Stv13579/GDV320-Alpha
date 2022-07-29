@@ -106,7 +106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ad155016060e34d8fe941a54e3b4e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDialogue: []
+  currentDialogue:
+    lines: []
+  noMoreDialogue:
+    lines:
+    - Wow! Sold out!
   place: 0
   interactPositon: 0
   data: {fileID: 11400000, guid: f03f170cfaeb5344fbcf8e7ea5bfde28, type: 2}
@@ -117,6 +121,7 @@ MonoBehaviour:
   - lines:
     - '"Silvain has wares if you have coin"'
     - I do other impressions as well!
+  offeringType: Shop
 --- !u!1001 &9203503587326077029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,6 +129,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2582171700705221785, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: npcOfferingUI
+      value: 
+      objectReference: {fileID: 2042192858260725985, guid: b825781df9d5838409e3db87e103e516,
+        type: 3}
     - target: {fileID: 2582171700705221785, guid: 01b84641070c05a468128367ec429509,
         type: 3}
       propertyPath: npcUIs.Array.size
@@ -149,8 +160,18 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
         type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
         type: 3}

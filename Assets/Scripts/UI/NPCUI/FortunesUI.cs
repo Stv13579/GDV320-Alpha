@@ -45,7 +45,7 @@ public class FortunesUI : NPCUI
         audioManager.Stop("Shop Buy");
         audioManager.Play("Shop Buy");
         Close();
-        NPC.canInteract = false;
+        NPC.canSeeOfferings = false;
     }
 
 

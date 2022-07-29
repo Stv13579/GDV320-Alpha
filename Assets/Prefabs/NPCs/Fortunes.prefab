@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &481930236017693459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448134756215137388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b68b1a05d6cedc5428f5bea95ec61bd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDialogue:
+    lines: []
+  noMoreDialogue:
+    lines:
+    - You're future is clear...
+  place: 0
+  interactPositon: 0
+  data: {fileID: 11400000, guid: 975178e0f7498db4bbd40ff1b071b01b, type: 2}
+  baseRandoms:
+  - lines:
+    - Is there something behind me?!
+    - No? Okay... phew...
+  - lines:
+    - I see nothing but problems in your future...
+    - Jeez that's a lot slime...
+  offeringType: Fortunes
 --- !u!1001 &2733033326916696311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13,6 +41,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4203959002905755236, guid: 79d3f99594006544990a69870532de82,
         type: 3}
+    - target: {fileID: 2582171700705221785, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: npcOfferingUI
+      value: 
+      objectReference: {fileID: 4203959002905755236, guid: 79d3f99594006544990a69870532de82,
+        type: 3}
     - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
         type: 3}
       propertyPath: m_RootOrder
@@ -21,17 +55,17 @@ PrefabInstance:
     - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.26
       objectReference: {fileID: 0}
     - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
         type: 3}
@@ -73,5 +107,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fortunes
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3947044421949730439, guid: 01b84641070c05a468128367ec429509, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 01b84641070c05a468128367ec429509, type: 3}
+--- !u!1 &448134756215137388 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2582171700705221787, guid: 01b84641070c05a468128367ec429509,
+    type: 3}
+  m_PrefabInstance: {fileID: 2733033326916696311}
+  m_PrefabAsset: {fileID: 0}
