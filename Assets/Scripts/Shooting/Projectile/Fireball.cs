@@ -66,7 +66,6 @@ public class Fireball : MonoBehaviour
         explosionRadii = explosionRadius;
         explosionDamage = expDamage;
         attackTypes = types;
-
     }
 
 
@@ -83,7 +82,6 @@ public class Fireball : MonoBehaviour
 
         if (other.tag == "Environment")
         {
-            //Destroy(gameObject);
             gravity = 0;
             speed = 0;
             Destroy(this.gameObject.GetComponent<Collider>());
