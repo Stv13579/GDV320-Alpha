@@ -6,10 +6,21 @@ using System;
 public class PlayerClass : MonoBehaviour
 {
     public float currentHealth;
-    //public float currentMana;
 
     public float maxHealth;
-    //public float maxMana;
+
+    float defenseMultiplier = 1.0f;
+    public struct defenseMultiSource
+    {
+        public float multiplier;
+        public string source;
+        public defenseMultiSource(float multi, string s)
+        {
+            multiplier = multi;
+            source = s;
+        }
+    }
+    List<defenseMultiSource> defenseMultipliers = new List<defenseMultiSource>();
 
     [Serializable]
     public enum ManaName
@@ -211,6 +222,39 @@ public class PlayerClass : MonoBehaviour
         {
             fireEffect.SetActive(true);
         }
+    }
+
+    public void AddDefenseMultiplier(defenseMultiSource multiplier)
+    {
+        if(!defenseMultipliers.Contains(multiplier))
+        {
+            defenseMultipliers.Add(multiplier);
+        }
+        defenseMultiplier = 1.0f;
+        foreach(defenseMultiSource multi in defenseMultipliers)
+        {
+            defenseMultiplier *= multi.multiplier;
+        }
+    }
+
+    public void RemoveDefenseMultiplier(defenseMultiSource multiplier)
+    {
+        if (defenseMultipliers.Contains(multiplier))
+        {
+            defenseMultipliers.Remove(multiplier);
+        }
+        defenseMultiplier = 1.0f;
+        foreach (defenseMultiSource multi in defenseMultipliers)
+        {
+            defenseMultiplier *= multi.multiplier;
+        }
+    }
+
+    public IEnumerator Vulnerable(defenseMultiSource multiplier)
+    {
+        AddDefenseMultiplier(multiplier);
+        yield return new WaitForSeconds(10);
+        RemoveDefenseMultiplier(multiplier);
     }
 
 }

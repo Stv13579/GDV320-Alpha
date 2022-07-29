@@ -13,10 +13,7 @@ public class RangedEnemyScript : BaseEnemyClass
     bool burrowing = false;
 
     public GameObject projectile;
-    public float projectileDamage;
     public float projectileSpeed;
-    [HideInInspector]
-    public float projectileSpeedMulti;
 
 
 
@@ -78,21 +75,21 @@ public class RangedEnemyScript : BaseEnemyClass
     {
         projectileSpawnPos.transform.LookAt(player.transform);
         GameObject newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
-        newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * projectileSpeedMulti, projectileDamage);
+        newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * moveSpeedMulti, damageAmount * damageMultiplier);
         if (newProjectile.GetComponent<CrystalRangedProjectile>())
         {
             for (int i = 1; i < 3; i++)
             {
                 newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
                 newProjectile.transform.RotateAround(projectileSpawnPos.position, projectileSpawnPos.up, -5.0f * i);
-                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * projectileSpeedMulti, projectileDamage);
+                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * moveSpeedMulti, damageAmount * damageMultiplier);
 
             }
             for (int i = 1; i < 3; i++)
             {
                 newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
                 newProjectile.transform.RotateAround(projectileSpawnPos.position, projectileSpawnPos.up, 5.0f * i);
-                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * projectileSpeedMulti, projectileDamage);
+                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * moveSpeedMulti, damageAmount * damageMultiplier);
 
             }
         }

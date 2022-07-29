@@ -5,7 +5,7 @@ using UnityEngine;
 public class LaserBeamElement : BaseElementClass
 {
     [SerializeField]
-    GameObject laserBeam;
+    private GameObject laserBeam;
 
     [SerializeField]
     float damage;
@@ -44,7 +44,7 @@ public class LaserBeamElement : BaseElementClass
         playerHandL.SetTrigger("LaserStopCast");
         audioManager.Stop("Laser Beam");
         laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
-        playerMovement.RemoveMovementMultiplier(0.25f);
+        playerMovement.RemoveMovementMultiplier(new PlayerMovement.movementMultiSource(0.25f, "Laser"));
 
     }
     public override void ElementEffect()
@@ -52,7 +52,7 @@ public class LaserBeamElement : BaseElementClass
         base.ElementEffect();
         laserBeam.SetActive(true);
         laserBeam.GetComponentInChildren<LaserBeam>().SetVars(damage * damageMultiplier, attackTypes);
-        playerMovement.AddMovementMultiplier(0.25f);
+        playerMovement.AddMovementMultiplier(new PlayerMovement.movementMultiSource(0.25f, "Laser"));
     }
     public override void ActivateVFX()
     {

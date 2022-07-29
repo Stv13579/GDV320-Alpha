@@ -37,8 +37,6 @@ public class FireElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-
-
     }
 
     //Fires the fireball, passing damage, speed, aoe etc
@@ -59,8 +57,6 @@ public class FireElement : BaseElementClass
     public override void ActivateVFX()
     {
         base.ActivateVFX();
-
-
     }
 
     protected override void StartAnims(string animationName)

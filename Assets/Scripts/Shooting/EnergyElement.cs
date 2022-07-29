@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnergyElement : BaseElementClass
 {
     [SerializeField]
+    List<GameObject> containedEnemies = new List<GameObject>();
+
+    [SerializeField]
     private GameObject chargeVFX;
 
     public GameObject energyShield;
@@ -21,54 +24,53 @@ public class EnergyElement : BaseElementClass
     private shieldState shieldStateChange = shieldState.shieldDown;
 
     [SerializeField]
-    private BoxCollider shieldCollider;
-
-    [SerializeField]
     private float timeToParry;
     private bool useShield = false;
+    private bool upgraded = false;
     protected override void Start()
     {
         base.Start();
-        
     }
 
     protected override void Update()
     {
         base.Update();
-        switch (shieldStateChange)
+        if (upgraded == true)
         {
-            case shieldState.shieldDown:
-                {
-                    if (!Input.GetKey(KeyCode.Mouse1))
+            switch (shieldStateChange)
+            {
+                case shieldState.shieldDown:
                     {
-                        DeactivateEnergyShield();
-                    }
-                    if (playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold"))
-                    {
-                        if (Input.GetKeyUp(KeyCode.Mouse1) || !PayCosts(Time.deltaTime))
+                        if (!Input.GetKey(KeyCode.Mouse1))
                         {
                             DeactivateEnergyShield();
                         }
+                        if (playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold"))
+                        {
+                            if (Input.GetKeyUp(KeyCode.Mouse1) || !PayCosts(Time.deltaTime))
+                            {
+                                DeactivateEnergyShield();
+                            }
+                        }
+                        if (Input.GetKey(KeyCode.Mouse1) && useShield == true)
+                        {
+                            shieldStateChange = shieldState.parrying;
+                        }
                     }
-                    if(Input.GetKey(KeyCode.Mouse1) && useShield == true)
+                    break;
+                case shieldState.parrying:
                     {
-                        shieldStateChange = shieldState.parrying;
+                        timeToParry += Time.deltaTime;
+                        if (timeToParry >= 0.25f)
+                        {
+                            shieldStateChange = shieldState.shieldUp;
+                            timeToParry = 0.0f;
+                            //parrycode;
+                        }
                     }
-                }
-                break;
-            case shieldState.parrying:
-                {
-                    timeToParry += Time.deltaTime;
-                    if (timeToParry >= 0.25f)
+                    break;
+                case shieldState.shieldUp:
                     {
-                        shieldStateChange = shieldState.shieldUp;
-                        timeToParry = 0.0f;
-                        //parrycode;
-                    }
-                }
-                break;
-            case shieldState.shieldUp:
-                {
                         if (!Input.GetKey(KeyCode.Mouse1))
                         {
                             shieldStateChange = shieldState.shieldDown;
@@ -80,26 +82,46 @@ public class EnergyElement : BaseElementClass
                                 shieldStateChange = shieldState.shieldDown;
                             }
                         }
-                    
-                    break;
+
+                        break;
+                    }
+            }
+        }
+        else
+        {
+            if (!Input.GetKey(KeyCode.Mouse1))
+            {
+                DeactivateEnergyShield();
+            }
+            if (playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold"))
+            {
+                if (Input.GetKeyUp(KeyCode.Mouse1) || !PayCosts(Time.deltaTime))
+                {
+                    DeactivateEnergyShield();
                 }
+            }
         }
     }
 
     public void DeactivateEnergyShield()
     {
         energyShield.SetActive(false);
-        shieldCollider.enabled = false;
         useShield = false;
         playerHand.SetTrigger("StopEnergy");
         audioManager.Stop("Energy Element");
+        // go through the list of enemies
+        // remove them from the list and 
+        for(int i = 0; i < containedEnemies.Count; i++)
+        {
+            containedEnemies[i].GetComponent<BaseEnemyClass>().damageMultiplier = 1.0f;
+            containedEnemies.Remove(containedEnemies[i]);
+        }
     }
 
     public override void ElementEffect()
     {
         base.ElementEffect();
         energyShield.SetActive(true);
-        shieldCollider.enabled = true;
         useShield = true;
     }
 
@@ -137,11 +159,23 @@ public class EnergyElement : BaseElementClass
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 8)
+        if (useShield)
         {
-            other.gameObject.GetComponent<BaseEnemyClass>().damageAmount = 0;
+            if (other.gameObject.layer == 8 /*need to have a projectile layer*/)
+            {
+                //other.gameObject.GetComponent<BaseEnemyClass>().damageAmount = 0;
+                if (other.gameObject && !containedEnemies.Contains(other.gameObject))
+                {
+                    containedEnemies.Add(other.gameObject);
+                    for (int i = 0; i < containedEnemies.Count; i++)
+                    {
+                        containedEnemies[i].gameObject.GetComponent<BaseEnemyClass>().damageMultiplier = 0;
+                    }
+                }
+            }
         }
+
     }
 }

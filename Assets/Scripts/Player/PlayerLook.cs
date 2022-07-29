@@ -37,6 +37,7 @@ public class PlayerLook : MonoBehaviour
     public void SetRoll(float normalizedRoll) {targetRoll = -normalizedRoll * maxRoll; }
 
     public float bumpTilt = 0.0f;
+
     public void LockCursor()
     {
         cursorLocked = !cursorLocked;
@@ -45,6 +46,25 @@ public class PlayerLook : MonoBehaviour
         // cursor is not visable or cursor is visable
         Cursor.visible = !cursorLocked;
     }
+
+    public void ForceLockCursor()
+    {
+        cursorLocked = true;
+        // locks cursor in the middle of screen or unlocks cursor
+        Cursor.lockState = cursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
+        // cursor is not visable or cursor is visable
+        Cursor.visible = !cursorLocked;
+    }
+
+    public void ForceUnlockCursor()
+    {
+        cursorLocked = false;
+        // locks cursor in the middle of screen or unlocks cursor
+        Cursor.lockState = cursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
+        // cursor is not visable or cursor is visable
+        Cursor.visible = !cursorLocked;
+    }
+
     private void MoveCamera()
     {
         // if cursor is locked

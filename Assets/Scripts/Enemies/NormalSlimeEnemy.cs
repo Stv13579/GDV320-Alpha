@@ -25,7 +25,7 @@ public class NormalSlimeEnemy : BaseEnemyClass
     public override void Attacking()
     {
         base.Attacking();
-        playerClass.ChangeHealth(-damageAmount, transform.position, pushForce);
+        playerClass.ChangeHealth(-damageAmount * damageMultiplier, transform.position, pushForce);
     }
 
     public override void Movement(Vector3 positionToMoveTo)
@@ -83,14 +83,14 @@ public class NormalSlimeEnemy : BaseEnemyClass
         {
             if(hit.collider.gameObject.tag == "Player")
             {
-                Vector3 moveVec = (player.transform.position - transform.position).normalized * speed * Time.deltaTime;
+                Vector3 moveVec = (player.transform.position - transform.position).normalized * speed * moveSpeedMulti * Time.deltaTime;
                 moveVec.y = 0;
                 moveVec.y -= 1 * Time.deltaTime;
                 transform.position += moveVec;
             }
             else
             {
-                Vector3 moveVec = (moveDirection - transform.position).normalized * speed * Time.deltaTime;
+                Vector3 moveVec = (moveDirection - transform.position).normalized * speed * moveSpeedMulti * Time.deltaTime;
                 moveVec.y = 0;
                 moveVec.y -= 1 * Time.deltaTime;
                 transform.position += moveVec;
@@ -100,7 +100,7 @@ public class NormalSlimeEnemy : BaseEnemyClass
         }
         else
         {
-            Vector3 moveVec = (moveDirection - transform.position).normalized * speed * Time.deltaTime;
+            Vector3 moveVec = (moveDirection - transform.position).normalized * speed * moveSpeedMulti * Time.deltaTime;
             moveVec.y = 0;
             moveVec.y -= 1 * Time.deltaTime;
             transform.position += moveVec;

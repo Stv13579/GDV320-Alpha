@@ -25,7 +25,7 @@ public class ShopkeeperScript : MonoBehaviour
             if(instantiatedShopUI == null)
             {
                 instantiatedShopUI = Instantiate(shopUI);
-                instantiatedShopUI.GetComponent<ShopUI>().shopkeeper = this;
+                //instantiatedShopUI.GetComponent<ShopUI>().shopkeeper = this;
             }
             else
             {
@@ -50,7 +50,7 @@ public class ShopkeeperScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape) && inRange && inShop)
         {
-            instantiatedShopUI.GetComponent<ShopUI>().CloseShop();
+            instantiatedShopUI.GetComponent<ShopUI>().Close();
         }
     }
 
