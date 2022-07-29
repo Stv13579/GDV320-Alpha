@@ -10,13 +10,23 @@ public class DialogueUI : NPCUI
     [SerializeField]
     NPC.Dialogue dialogueLines;
     GameObject dialogueBox;
+    public bool noOffering = false;
 
     int place = 0;
     //Show dialogue lines as specified, activate the action once exhausted, then delete itself
 
     private void Start()
     {
-        dialogueLines = NPC.npc.currentDialogue[NPC.npc.place];
+        base.Start();
+        NPC.npc.AssessDialogue();
+        dialogueLines = NPC.npc.currentDialogue;
+        dialogueBox = transform.GetChild(0).gameObject;
+
+        if(noOffering)
+        {
+            dialogueLines = NPC.npc.noMoreDialogue;
+        }
+
     }
 
     private void Update()
@@ -25,7 +35,7 @@ public class DialogueUI : NPCUI
         {
             //Exit, delete the UI and move up
             dialogueLines.Action();
-            NPC.npc.place++;
+            NPC.npc.interactPositon++;
             Close();
             Destroy(this.gameObject);
             return;

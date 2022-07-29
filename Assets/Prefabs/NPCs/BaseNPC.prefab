@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 2582171700705221786}
   - component: {fileID: 2582171700705221785}
   - component: {fileID: 2582171700705221784}
+  - component: {fileID: 3947044421949730439}
   m_Layer: 0
   m_Name: BaseNPC
   m_TagString: Untagged
@@ -140,7 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6060bc7903927264c8f34953ea881c0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcUI: {fileID: 2042192858260725985, guid: b825781df9d5838409e3db87e103e516, type: 3}
+  npcUIs: []
+  npc: {fileID: 0}
   canInteract: 1
 --- !u!136 &2582171700705221784
 CapsuleCollider:
@@ -156,6 +158,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3947044421949730439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2582171700705221787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 048e90a93d727dc45be6d60f026809b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDialogue: []
+  place: 0
+  interactPositon: 0
+  data: {fileID: 0}
 --- !u!1 &2582171701400227317
 GameObject:
   m_ObjectHideFlags: 0

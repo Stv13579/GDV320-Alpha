@@ -5,8 +5,14 @@ using UnityEngine;
 public class Interact : MonoBehaviour
 {
     bool inRange = false;
-    public GameObject npcUI;
-    GameObject instantiatedUI = null;
+    public GameObject npcTalkUI;
+    public GameObject npcOfferingUI;
+    public GameObject menu;
+    GameObject instantiatedMenu;
+    [HideInInspector]
+    public GameObject instantiatedTalkUI;
+    [HideInInspector]
+    public GameObject instantiatedOfferingUI;
     bool inUI = false;
     PlayerMovement playerMove;
     PlayerLook playerLook;
@@ -15,6 +21,7 @@ public class Interact : MonoBehaviour
     [HideInInspector]
     public NPC npc;
     public bool canInteract = true;
+    public bool canSeeOfferings = true;
 
     void Start()
     {
@@ -23,7 +30,13 @@ public class Interact : MonoBehaviour
     }
     void Update()
     {
+        npc.AssessInteract();
 
+
+        //if(npc.interactPositon >= npcTalkUIs.Count)
+        //{
+        //    canInteract = false;
+        //}
      
 
         if(!canInteract)
@@ -39,15 +52,26 @@ public class Interact : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T) && inRange && !inUI)
         {
             //If the shop hasn't yet been opened, create it so that it generates appropriate items, otherwise reopen it
-            if (instantiatedUI == null)
+            //if (instantiatedUIs[npc.interactPositon] == null)
+            //{
+            //    instantiatedUIs[npc.interactPositon] = Instantiate(npcUIs[npc.interactPositon]);
+            //    instantiatedUIs[npc.interactPositon].GetComponent<NPCUI>().NPC = this;
+            //}
+            //else
+            //{
+            //    instantiatedUIs[npc.interactPositon].SetActive(true);
+            //}
+
+            if (instantiatedMenu == null)
             {
-                instantiatedUI = Instantiate(npcUI);
-                instantiatedUI.GetComponent<NPCUI>().NPC = this;
+                instantiatedMenu = Instantiate(menu);
+                instantiatedMenu.GetComponent<NPCUI>().NPC = this;
             }
             else
             {
-                instantiatedUI.SetActive(true);
+                instantiatedMenu.SetActive(true);
             }
+
             inUI = true;
             //Lock the players actions, enable the shop
             playerLook.LockCursor();
@@ -67,7 +91,22 @@ public class Interact : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape) && inRange && inUI)
         {
-            instantiatedUI.GetComponent<ShopUI>().Close();
+
+            if (instantiatedTalkUI != null)
+            {
+                instantiatedTalkUI.GetComponent<NPCUI>().Close();
+            }
+
+            if (instantiatedOfferingUI != null)
+            {
+                instantiatedOfferingUI.GetComponent<NPCUI>().Close();
+            }
+
+            if (instantiatedMenu != null)
+            {
+                instantiatedMenu.GetComponent<NPCUI>().Close();
+            }
+
         }
     }
 
@@ -99,11 +138,22 @@ public class Interact : MonoBehaviour
 
     public void LeaveUI()
     {
+        npc.AssessInteract();
         //Unlock the players actions, disable the shop
         inUI = false;
-        if(instantiatedUI != null)
+        if(instantiatedTalkUI != null)
         {
-            instantiatedUI.SetActive(false);
+            instantiatedTalkUI.SetActive(false);
+        }
+
+        if (instantiatedOfferingUI != null)
+        {
+            instantiatedOfferingUI.SetActive(false);
+        }
+
+        if(instantiatedMenu != null)
+        {
+            instantiatedMenu.SetActive(false);
         }
 
         playerLook.ForceLockCursor();

@@ -18,8 +18,6 @@ public class Axlotl : NPC
         }
     }
 
-    private void Start()
-    {
-        
-    }
+   
+
 }

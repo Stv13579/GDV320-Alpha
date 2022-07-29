@@ -31,18 +31,51 @@ public class NPC : MonoBehaviour
     }
 
     
-    List<Dialogue> storyDialogues, randomDialogues;
+    protected List<Dialogue> storyDialogues = new List<Dialogue>(), randomDialogues = new List<Dialogue>();
     [HideInInspector]
-    public List<Dialogue> currentDialogue;
+    public Dialogue currentDialogue;
+    public Dialogue noMoreDialogue;
 
-    public int place = 0; 
+    public int place = 0;
+    public int interactPositon = 0;
+
+    [SerializeField]
+    protected NPCData data;
+
+    [SerializeField]
+    List<Dialogue> baseRandoms;
+
+
+    [SerializeField]
+    public string offeringType;
+
     //Defines an NPC in the broad sense
     //Holds dialogue and functionality for questlines.
+    public void Start()
+    {
+        randomDialogues.AddRange(baseRandoms);
+    }
 
     //Choose which dialogues to add to the current dialogue list
     public virtual void AssessDialogue()
     {
+        if (data.storyPosition < 1)
+        {
 
+            currentDialogue = randomDialogues[UnityEngine.Random.Range(0, randomDialogues.Count)];
+        }
+
+        
+    }
+
+    //A function to allow changes during the interact process.
+    //Called at the start of interact update
+    public virtual void AssessInteract()
+    {
+        if (interactPositon >= 3)
+        {
+            interactPositon = 2;
+        }
     }
 
 }
