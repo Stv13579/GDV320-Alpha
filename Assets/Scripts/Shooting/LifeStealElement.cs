@@ -27,9 +27,6 @@ public class LifeStealElement : BaseElementClass
     [SerializeField]
     private LayerMask hitLayer;
 
-    [SerializeField]
-    private LayerMask environmentLayer;
-
     private GameObject enemy;
     protected override void Start()
     {
@@ -62,16 +59,12 @@ public class LifeStealElement : BaseElementClass
                     objectHit[i].distance = hit.distance;
 
                 }
-                if(objectHit[i].transform.gameObject.layer == environmentLayer && isShooting == true)
-                {
-                    isTargeting = false;
-                    enemy = null;
-                }
                 if (objectHit[i].transform.gameObject.layer == 8 && isShooting == true)
                 {
                     enemy = objectHit[i].transform.gameObject;
                     isTargeting = true;
                 }
+                Debug.Log(objectHit[i].transform.gameObject.name);
             }
         }
         else
@@ -83,7 +76,7 @@ public class LifeStealElement : BaseElementClass
         if (isTargeting == true && enemy != null)
         {
             enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            playerClass.ChangeHealth(Time.deltaTime);
+            playerClass.ChangeHealth(healValue);
         }
     }
     private void DeactivateLifeSteal()
