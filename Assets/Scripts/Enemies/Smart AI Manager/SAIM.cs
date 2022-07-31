@@ -88,6 +88,9 @@ public class SAIM : MonoBehaviour
 
     GameObject player;
 
+    [SerializeField]
+    float allowableHeightDifference;
+
     //Nodes to pathfind to
     Node playerNode;
 
@@ -630,11 +633,18 @@ public class SAIM : MonoBehaviour
             foreach (Node node in currentNeighbours)
             {
                 //If the neighbour is a wall or other impassable terrain, straight up ignore it and move on
-                if(node.cost == int.MaxValue)
+
+                //Adjust for height here
+                if (node.cost == int.MaxValue )
                 {
                     continue;
                 }
                 
+
+                if(CheckHeightDifference(currentNode, node))
+                {
+                    continue;
+                }
 
                 //If the neigbour node being checked has a higher best cost than the current node's best cost plus this neigbour node's best cost,
                 //change it's best cost to that value and enque it to become the next node to be checked. 
@@ -648,6 +658,18 @@ public class SAIM : MonoBehaviour
             }
         }
 
+    }
+
+    //If there is a height difference (going up), return true, otherwise false
+    bool CheckHeightDifference(Node mainNode, Node neighbourNode)
+    {
+        if (mainNode.transform.position.y > neighbourNode.transform.position.y + allowableHeightDifference
+            || mainNode.transform.position.y < neighbourNode.transform.position.y - allowableHeightDifference)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     //Using the integrated field, generate the flow field by pointing each node at the next node
@@ -665,7 +687,7 @@ public class SAIM : MonoBehaviour
             //This will be the node with the lowest bestCost.
             foreach (Node currentNeigbourNode in currentNodeNeigbours)
             {
-                if(currentNeigbourNode.bestCost < bestCost)
+                if(currentNeigbourNode.bestCost < bestCost && !CheckHeightDifference(currentNode, currentNeigbourNode))
                 {
                     bestCost = currentNeigbourNode.bestCost;
                     currentNode.bestNextNodePos = currentNeigbourNode.transform.position;

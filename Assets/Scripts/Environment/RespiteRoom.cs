@@ -8,14 +8,19 @@ public class RespiteRoom : Room
     /// <summary>
     /// The first one should always by the shop
     /// </summary>
-    [SerializeField]
-    List<GameObject> NPCs;
+    List<GameObject> NPCs = new List<GameObject>();
 
-    [SerializeField]
-    bool isShoppe = false;
+    [HideInInspector]
+    public bool isShoppe = false;
 
     private void Start()
     {
+        
+        foreach(Transform enhpeecee in transform.Find("NPCS"))
+        {
+            NPCs.Add(enhpeecee.gameObject);
+        }
+
         foreach (GameObject NPC in NPCs)
         {
             NPC.SetActive(false);

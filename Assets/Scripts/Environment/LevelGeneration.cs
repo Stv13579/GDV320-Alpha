@@ -49,6 +49,7 @@ public class LevelGeneration : MonoBehaviour
         //Place shop and NPC rooms
         shop = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleRespiteRooms);
         shop.GetComponent<Room>().illegal = true;
+        shop.GetComponent<RespiteRoom>().isShoppe =  true;
 
         NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleRespiteRooms);
         NPC.GetComponent<Room>().illegal = true;
