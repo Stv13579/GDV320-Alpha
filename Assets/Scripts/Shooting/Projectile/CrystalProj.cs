@@ -55,7 +55,7 @@ public class CrystalProj : MonoBehaviour
             Vector3 projMovement = transform.forward * speed * Time.deltaTime;
             transform.position += projMovement;
         }
-        if(ismoving == false)
+        else
         {
             transform.position = originalPosition;
             particleEffect.SetActive(false);
