@@ -11,8 +11,8 @@ public class RespiteRoom : Room
     [SerializeField]
     List<GameObject> NPCs;
 
-    [SerializeField]
-    bool isShoppe = false;
+    [HideInInspector]
+    public bool isShoppe = false;
 
     private void Start()
     {
