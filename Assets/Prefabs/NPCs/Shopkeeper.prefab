@@ -94,6 +94,34 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3497132977208377971, guid: 1944c5f8fe3e80e4c8c0f9acf73fa805, type: 3}
+--- !u!114 &865419897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6659942843748152574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60ad155016060e34d8fe941a54e3b4e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDialogue:
+    lines: []
+  noMoreDialogue:
+    lines:
+    - Wow! Sold out!
+  place: 0
+  interactPositon: 0
+  data: {fileID: 11400000, guid: f03f170cfaeb5344fbcf8e7ea5bfde28, type: 2}
+  baseRandoms:
+  - lines:
+    - I saw a bird earlier!
+    - Probably shouldn't leave the shop though...
+  - lines:
+    - '"Silvain has wares if you have coin"'
+    - I do other impressions as well!
+  offeringType: Shop
 --- !u!1001 &9203503587326077029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101,6 +129,65 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2582171700705221785, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: npcOfferingUI
+      value: 
+      objectReference: {fileID: 2042192858260725985, guid: b825781df9d5838409e3db87e103e516,
+        type: 3}
+    - target: {fileID: 2582171700705221785, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: npcUIs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221785, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: npcUIs.Array.data[0]
+      value: 
+      objectReference: {fileID: 3925962378959240323, guid: 5bf0ee0908ffff04896a7d4a5593bc16,
+        type: 3}
+    - target: {fileID: 2582171700705221785, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: npcUIs.Array.data[1]
+      value: 
+      objectReference: {fileID: 2042192858260725985, guid: b825781df9d5838409e3db87e103e516,
+        type: 3}
+    - target: {fileID: 2582171700705221785, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: npcUIs.Array.data[2]
+      value: 
+      objectReference: {fileID: 3925962378959240323, guid: 5bf0ee0908ffff04896a7d4a5593bc16,
+        type: 3}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 2582171700705221787, guid: 01b84641070c05a468128367ec429509,
         type: 3}
       propertyPath: m_Name
@@ -172,8 +259,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2042192858260725985, guid: b825781df9d5838409e3db87e103e516,
         type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3947044421949730439, guid: 01b84641070c05a468128367ec429509, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 01b84641070c05a468128367ec429509, type: 3}
+--- !u!1 &6659942843748152574 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2582171700705221787, guid: 01b84641070c05a468128367ec429509,
+    type: 3}
+  m_PrefabInstance: {fileID: 9203503587326077029}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6659942843748152575 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,

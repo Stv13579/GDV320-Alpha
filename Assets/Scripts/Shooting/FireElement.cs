@@ -43,7 +43,6 @@ public class FireElement : BaseElementClass
     public override void ElementEffect()
     {
         base.ElementEffect();
-        //
         GameObject newFireball = Instantiate(fireBall, shootingTranform.position, Camera.main.transform.rotation);
         RaycastHit hit;
         Physics.Raycast(this.gameObject.transform.position, Camera.main.transform.forward, out hit, 100, shootingIgnore);
@@ -64,6 +63,5 @@ public class FireElement : BaseElementClass
         base.StartAnims(animationName);
 
         playerHand.SetTrigger(animationName);
-
     }
 }

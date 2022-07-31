@@ -29,7 +29,7 @@ public class BossRoom : Room
             return;
         }
 
-        if(!currentBoss && !bossDead)
+        if(!currentBoss && !bossDead && bossSpawned)
         {
             //Spawn the portal
             Instantiate(portalObject, portalSpawnPosition.position, Quaternion.identity);
