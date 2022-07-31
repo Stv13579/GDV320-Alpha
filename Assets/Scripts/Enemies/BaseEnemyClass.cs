@@ -9,6 +9,10 @@ public class BaseEnemyClass : MonoBehaviour
     public float damageMultiplier = 1.0f;
     public float moveSpeed;
     public float moveSpeedMulti = 1.0f;
+    #region
+    public float prophecyDamageMulti = 1.0f;
+    public float prophecyEffectMulti = 1.0f;
+    #endregion
     List<float> movementMultipliers = new List<float>();
     //The amount of flat damage any instance of incoming damage is reduced by
     public float damageThreshold;
