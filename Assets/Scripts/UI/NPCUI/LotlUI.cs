@@ -81,7 +81,8 @@ public class LotlUI : NPCUI
         audioManager.Stop("Shop Buy");
         audioManager.Play("Shop Buy");
         Close();
-        NPC.canInteract = false;
+        NPC.npc.interactPositon++;
+        NPC.canSeeOfferings = false;
     }
 
     public override void Close()

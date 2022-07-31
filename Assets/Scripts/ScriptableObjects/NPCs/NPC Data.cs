@@ -8,4 +8,7 @@ public class NPCData : ScriptableObject
 
     public int storyPosition;
 
+
+
+
 }

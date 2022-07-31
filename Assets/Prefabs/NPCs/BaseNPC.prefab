@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 2582171700705221786}
   - component: {fileID: 2582171700705221785}
   - component: {fileID: 2582171700705221784}
+  - component: {fileID: 3947044421949730439}
   m_Layer: 0
   m_Name: BaseNPC
   m_TagString: Untagged
@@ -120,7 +121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2582171700705221787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 65, y: 2, z: 65}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2582171701818778494}
@@ -140,8 +141,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6060bc7903927264c8f34953ea881c0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcUI: {fileID: 2042192858260725985, guid: b825781df9d5838409e3db87e103e516, type: 3}
+  npcTalkUI: {fileID: 3925962378959240323, guid: 5bf0ee0908ffff04896a7d4a5593bc16,
+    type: 3}
+  npcOfferingUI: {fileID: 0}
+  menu: {fileID: 5860255874701111507, guid: 1911f535198f71348bf7fcfaad6990a8, type: 3}
+  instantiatedTalkUI: {fileID: 0}
+  instantiatedOfferingUI: {fileID: 0}
+  npc: {fileID: 0}
   canInteract: 1
+  canSeeOfferings: 1
 --- !u!136 &2582171700705221784
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -156,6 +164,27 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3947044421949730439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2582171700705221787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 048e90a93d727dc45be6d60f026809b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDialogue:
+    lines: []
+  noMoreDialogue:
+    lines: []
+  place: 0
+  interactPositon: 0
+  data: {fileID: 0}
+  baseRandoms: []
+  offeringType: 
 --- !u!1 &2582171701400227317
 GameObject:
   m_ObjectHideFlags: 0
