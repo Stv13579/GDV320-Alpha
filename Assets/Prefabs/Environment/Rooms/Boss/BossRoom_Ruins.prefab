@@ -409,6 +409,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &1656920333629922614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7971564393761877235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e2c7a9ec4d5753458288a4db01a3a6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weighting: 0
+  illegal: 0
+  gridPos: {x: 0, y: 0}
+  boss: {fileID: 4878662708443654493, guid: 726a78b5187dfac49b2b6db7edec71fe, type: 3}
+  spawnPosition: {fileID: 2956793518125795251}
+  portalObject: {fileID: 339857286421543826, guid: ef9dfb9fbfb2db94893051b3335a0a5a,
+    type: 3}
+  portalSpawnPosition: {fileID: 8455909334520959226}
 --- !u!1 &155040414212439877
 GameObject:
   m_ObjectHideFlags: 0
@@ -8057,7 +8077,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2301542530595310000}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 80.893135, y: 14.038509, z: 73.85088}
+  m_LocalPosition: {x: 80.893135, y: 6.71, z: 73.85088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7971564393761877230}
@@ -33529,7 +33549,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6971489850413132667}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 80.893135, y: 14.038509, z: 73.85088}
+  m_LocalPosition: {x: 80.893135, y: 3.35, z: 73.85088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7971564393761877230}
@@ -39343,25 +39363,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &1656920333629922614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7971564393761877235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e2c7a9ec4d5753458288a4db01a3a6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weighting: 0
-  illegal: 0
-  gridPos: {x: 0, y: 0}
-  boss: {fileID: 0}
-  spawnPosition: {fileID: 2956793518125795251}
-  portalObject: {fileID: 0}
-  portalSpawnPosition: {fileID: 8455909334520959226}
 --- !u!1 &8090523201469258096
 GameObject:
   m_ObjectHideFlags: 0
@@ -42052,7 +42053,7 @@ PrefabInstance:
     - target: {fileID: 177030300292316646, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2315818420668267954, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
@@ -42082,7 +42083,7 @@ PrefabInstance:
     - target: {fileID: 6767836439206277197, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7488509814216088037, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
