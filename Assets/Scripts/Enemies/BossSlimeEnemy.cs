@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossSlimeEnemy : NormalSlimeEnemy
+public class BossSlimeEnemy : WaterSlimeEnemy
 {
     public enum Type
     {
