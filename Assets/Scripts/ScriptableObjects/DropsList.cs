@@ -35,6 +35,10 @@ public class DropsList : ScriptableObject
             rand -= dropsList[i].weighting;
             
         }
+        if(i >= 8)
+        {
+            Debug.Log("8");
+        }
         return (dropsList[i].drop);
     }
 

@@ -14,13 +14,20 @@ public class WaterSlimeEnemy : BaseEnemyClass
 
     public LayerMask viewToPlayer;
 
+    public LayerMask nodeMask;
+
     [HideInInspector]
     public int generation = 0;
+
+    float jumpTimer = 0.0f;
+
+    Vector3 pos = Vector3.zero;
 
     public override void Start()
     {
         base.Start();
         deathTriggers.Add(Split);
+        jumpTimer = Random.Range(1.5f, 3.0f);
     }
 
     // damages the player
@@ -35,42 +42,84 @@ public class WaterSlimeEnemy : BaseEnemyClass
     {
         base.Movement(moveDirection);
 
-        RaycastHit hit;
+        //RaycastHit hit;
 
-        Debug.DrawRay(transform.position + (Vector3.up * 10), Vector3.up /*player.transform.position - transform.position*/, Color.blue);
-        if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, Mathf.Infinity, viewToPlayer))
+        //Debug.DrawRay(transform.position + (Vector3.up * 10), Vector3.up /*player.transform.position - transform.position*/, Color.blue);
+        //if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, Mathf.Infinity, viewToPlayer))
+        //{
+        //    if (hit.collider.gameObject.tag == "Player")
+        //    {
+        //        Vector3 moveVec = (player.transform.position - transform.position).normalized * moveSpeed * moveSpeedMulti * Time.deltaTime;
+        //        moveVec.y = 0;
+        //        moveVec.y -= 1 * Time.deltaTime;
+        //        transform.position += moveVec;
+        //    }
+        //    else
+        //    {
+        //        Vector3 moveVec = (moveDirection - transform.position).normalized * moveSpeed * moveSpeedMulti * Time.deltaTime;
+        //        moveVec.y = 0;
+        //        moveVec.y -= 1 * Time.deltaTime;
+        //        transform.position += moveVec;
+        //    }
+
+
+        //}
+        //else
+        //{
+        //    Vector3 moveVec = (moveDirection - transform.position).normalized * moveSpeed * moveSpeedMulti * Time.deltaTime;
+        //    moveVec.y = 0;
+        //    moveVec.y -= 1 * Time.deltaTime;
+        //    transform.position += moveVec;
+        //}
+
+
+        jumpTimer -= Time.deltaTime;
+        if(jumpTimer <= 0)
         {
-            if (hit.collider.gameObject.tag == "Player")
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, 10, viewToPlayer))
             {
-                Vector3 moveVec = (player.transform.position - transform.position).normalized * moveSpeed * moveSpeedMulti * Time.deltaTime;
-                moveVec.y = 0;
-                moveVec.y -= 1 * Time.deltaTime;
-                transform.position += moveVec;
+                float distance = float.MaxValue;
+                Vector3 nearestNode = Vector3.zero;
+                foreach(Node node in spawner.GetComponent<SAIM>().aliveNodes)
+                {
+                    float newDistance = Vector3.SqrMagnitude(node.gameObject.transform.position - this.transform.position);
+                    if(newDistance < distance)
+                    {
+                        distance = newDistance;
+                        nearestNode = node.bestNextNodePos;
+                    }
+                }
+                transform.LookAt(nearestNode);
+                Quaternion rot = transform.rotation;
+                rot.eulerAngles = new Vector3(0, rot.eulerAngles.y + 135, 0);
+                transform.rotation = rot;
+                pos = nearestNode;
             }
             else
             {
-                Vector3 moveVec = (moveDirection - transform.position).normalized * moveSpeed * moveSpeedMulti * Time.deltaTime;
-                moveVec.y = 0;
-                moveVec.y -= 1 * Time.deltaTime;
-                transform.position += moveVec;
+                transform.LookAt(player.transform.position);
+                Quaternion rot = transform.rotation;
+                rot.eulerAngles = new Vector3(0, rot.eulerAngles.y + 135, 0);
+                transform.rotation = rot;
+
+                pos = player.transform.position;
             }
-
-
+            Vector3 moveForce = (pos - this.transform.position).normalized * moveSpeed * moveSpeedMulti;
+            moveForce += new Vector3(0, jumpForce, 0);
+            GetComponent<Rigidbody>().AddForce(moveForce);
+            jumpTimer = Random.Range(1.5f, 3.0f);
         }
         else
         {
-            Vector3 moveVec = (moveDirection - transform.position).normalized * moveSpeed * moveSpeedMulti * Time.deltaTime;
-            moveVec.y = 0;
-            moveVec.y -= 1 * Time.deltaTime;
-            transform.position += moveVec;
+            if(Vector3.SqrMagnitude(this.transform.position - pos) > 10)
+            {
+                Vector3 dir = (pos - this.transform.position).normalized;
+                Vector3 move = dir * ((moveSpeed * moveSpeedMulti) / 50) * Time.deltaTime;
+                this.transform.position += move;
+            }
+
         }
-
-
-
-        transform.LookAt(player.transform.position);
-        Quaternion rot = transform.rotation;
-        rot.eulerAngles = new Vector3(0, rot.eulerAngles.y + 135, 0);
-        transform.rotation = rot;
         
     }
 
@@ -131,12 +180,12 @@ public class WaterSlimeEnemy : BaseEnemyClass
     // and add force to the slime so that it jumps
     public virtual void OnCollisionEnter(Collision collision)
     {
-        if (GetComponent<Rigidbody>().velocity.y < 10 && collision.gameObject.layer == 10)
-        {
-            audioManager.Stop("Slime Bounce");
-            audioManager.Play("Slime Bounce", player.transform, this.transform);
-            GetComponent<Rigidbody>().AddForce(0, jumpForce, 0);
-        }
+        //if (GetComponent<Rigidbody>().velocity.y < 10 && collision.gameObject.layer == 10)
+        //{
+        //    audioManager.Stop("Slime Bounce");
+        //    audioManager.Play("Slime Bounce", player.transform, this.transform);
+        //    GetComponent<Rigidbody>().AddForce(0, jumpForce, 0);
+        //}
         // if colliding with player attack enemy reset damage ticker
         // we reset it so that the player doesn't take double damage
         if (collision.gameObject.tag == "Player")
@@ -147,12 +196,12 @@ public class WaterSlimeEnemy : BaseEnemyClass
     }
     public virtual void OnCollisionStay(Collision collision)
     {
-        if (GetComponent<Rigidbody>().velocity.y < 10 && collision.gameObject.layer == 10)
-        {
-            audioManager.Stop("Slime Bounce");
-            audioManager.Play("Slime Bounce", player.transform, this.transform);
-            GetComponent<Rigidbody>().AddForce(0, jumpForce, 0);
-        }
+        //if (GetComponent<Rigidbody>().velocity.y < 10 && collision.gameObject.layer == 10)
+        //{
+        //    audioManager.Stop("Slime Bounce");
+        //    audioManager.Play("Slime Bounce", player.transform, this.transform);
+        //    GetComponent<Rigidbody>().AddForce(0, jumpForce, 0);
+        //}
 
         // checks if colliding with player and damage ticker is less then 0
         // player should take damage every one second after if they are still colliding with enemy normal slime
@@ -198,6 +247,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
                 newSlime.moveSpeed = moveSpeed / 2;
                 newSlime.generation = generation + 1;
                 newSlime.spawner = spawner;
+                spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime);
             }
         }
 
