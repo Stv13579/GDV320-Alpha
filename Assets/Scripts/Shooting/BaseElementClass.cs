@@ -68,6 +68,7 @@ public class BaseElementClass : MonoBehaviour
     [SerializeField]
     string shootingSoundFX;
 
+    protected bool upgraded = false;
     protected virtual void Start()
     {
         player = GameObject.Find("Player");

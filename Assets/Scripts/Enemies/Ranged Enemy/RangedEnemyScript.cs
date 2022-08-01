@@ -118,7 +118,7 @@ public class RangedEnemyScript : BaseEnemyClass
             nodeChosen = spawner.GetComponent<SAIM>().aliveNodes[rand];
             RaycastHit hit;
             Physics.Raycast(nodeChosen.gameObject.transform.position, -nodeChosen.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
-            Vector3 emergePos = hit.point - this.transform.GetChild(0).GetChild(1).localPosition * 2;
+            Vector3 emergePos = hit.point - this.transform.GetChild(1).localPosition * 2;
             if (Vector3.Distance(player.transform.position, emergePos) > 10 && Vector3.Distance(player.transform.position, emergePos) < 100)
             {
 
