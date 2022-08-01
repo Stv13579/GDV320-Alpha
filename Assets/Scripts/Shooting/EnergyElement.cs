@@ -7,9 +7,6 @@ public class EnergyElement : BaseElementClass
     [SerializeField]
     List<GameObject> containedEnemies = new List<GameObject>();
 
-    [SerializeField]
-    private GameObject chargeVFX;
-
     public GameObject energyShield;
 
     [SerializeField]
@@ -137,8 +134,6 @@ public class EnergyElement : BaseElementClass
         playerHand.SetTrigger(animationName);
 
         audioManager.Play("Energy Element");
-        Instantiate(chargeVFX, playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos());
-
     }
 
     protected override bool PayCosts(float modifier = 1)
@@ -152,8 +147,6 @@ public class EnergyElement : BaseElementClass
         else
         {
             playerHand.SetTrigger("NoMana");
-            // this section needs fixing will fix later
-            Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
             return false;
         }
     }
