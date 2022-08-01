@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_VFX_DeathCurseExplode
-  m_Shader: {fileID: 4800000, guid: d0e6181150dbcf946a5184ba6a8ea160, type: 3}
+  m_Name: MAT_VFX_WaterBolt
+  m_Shader: {fileID: 4800000, guid: f2685b481e19e3644a7f167776c5c0f2, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,6 +39,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NormalWater:
+        m_Texture: {fileID: 2800000, guid: a68ab006ae056394b95c888eb701690d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -47,45 +51,48 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Texture0:
-        m_Texture: {fileID: 2800000, guid: cc8619fba6e3bd64397162fc7be6c5ed, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AlphaClip: 1
-    - _AlphaClipThreshold: 1
+    - _AlphaClip: 0
     - _AlphaCutoff: 0.5
     - _Blend: 0
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DisolveNoiseScale: 13.8
+    - _DistortionAmount: 0.1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _Noise_Scale: 4
+    - _NoiseScale: 6.44
+    - _Noise_Displacement_Scale: 100
+    - _NormalStrenght: 4
     - _OcclusionStrength: 1
-    - _PowerExp: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 2.42
     - _SmoothnessTextureChannel: 0
+    - _Specular: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _VertOffset_Intensity: 0.004
+    - _Voronoi_Power_Exp: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColour: {r: 15.290866, g: 22.627415, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DisolveNoisePanner: {r: 0.1, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Noise_1_PannerSpeed: {r: 1, g: -1, b: 0, a: 0}
-    - _Noise_2_PannerSpeed: {r: -1, g: -1, b: 0, a: 0}
+    - _Noise_Displacement_Speed: {r: -0.02, g: -0.001, b: 0, a: 0}
+    - _Normal_1_Panner: {r: 0.4, g: 0.2, b: 0, a: 0}
+    - _Normal_2_Panner: {r: -0.1, g: -0.5, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
---- !u!114 &4008616586932331475
+    - _WaterColour: {r: 0, g: 1.7767106, b: 19.698313, a: 0}
+--- !u!114 &5090488410712092401
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
