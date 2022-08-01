@@ -21,6 +21,8 @@ public class Prophecy : MonoBehaviour
     public virtual void InitialEffect()
     {
         active = true;
+
+
     }
 
     public virtual void TriggerAction()
