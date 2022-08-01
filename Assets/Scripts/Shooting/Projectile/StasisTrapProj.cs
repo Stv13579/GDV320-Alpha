@@ -32,8 +32,11 @@ public class StasisTrapProj : MonoBehaviour
         {
             for(int i = 0; i < containedEnemies.Count; i++)
             {
-                  containedEnemies[i].GetComponent<BaseEnemyClass>().RemoveMovementMultiplier(0);
-                  containedEnemies.Remove(containedEnemies[i]);
+                if(containedEnemies[i])
+                {
+                    containedEnemies[i].GetComponent<BaseEnemyClass>().RemoveMovementMultiplier(0);
+                    containedEnemies.Remove(containedEnemies[i]);
+                }
             }
             Destroy(gameObject);
         }

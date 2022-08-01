@@ -13,7 +13,7 @@ public class BaseEnemyClass : MonoBehaviour
 
     #region
 
-    ProphecyManager prophecyManager;
+    protected ProphecyManager prophecyManager;
 
     #endregion
     List<float> movementMultipliers = new List<float>();
@@ -84,14 +84,15 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Start()
     {
+        prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
         startY = transform.position.y;
         player = GameObject.Find("Player");
         playerClass = player.GetComponent<PlayerClass>();
-        currentHealth = maxHealth;
+        currentHealth = maxHealth * prophecyManager.prophecyHealthMulti;
         audioManager = FindObjectOfType<AudioManager>();
         oldPosition = new Vector3(-1000, -1000, -1000);
         enemyAnims = GetComponentInChildren<Animator>();
-        prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
+        
     }
 
     public virtual void Update()
@@ -144,14 +145,14 @@ public class BaseEnemyClass : MonoBehaviour
             {
                 if (weak == type)
                 {
-                    multiplier *= 2;
+                    multiplier *= 2 * prophecyManager.prophecyWeaknessMulti;
                 }
             }
             foreach (Types resist in resistances)
             {
                 if (resist == type)
                 {
-                    multiplier *= 0.5f;
+                    multiplier *= 0.5f * prophecyManager.prophecyResistMulti;
                 }
             }
         }
@@ -188,16 +189,27 @@ public class BaseEnemyClass : MonoBehaviour
             }
 
 
-            //Spawn drops
-            for(int i = 0; i < Random.Range(drops.minSpawn, drops.maxSpawn); i++)
+            int dropType = Random.Range(0, 3);
+
+            switch (dropType)
             {
-                GameObject drop = Instantiate(drops.GetDrop(), this.transform.position, Quaternion.identity);
-                //If the wealth prophecy is active and the enemy drops money, drop more money.
-                if(prophecyManager.wealth && drop.name == "Currency")
-                {
-                    Instantiate(drops.dropsList[0].drop, this.transform.position, Quaternion.identity);
-                }
+                case 0:
+                    Drop(drops.currencyList, drops.minCurrencySpawn, drops.maxCurrencySpawn);
+                    break;
+                case 1:
+                    Drop(drops.ammoList, drops.minAmmoSpawn, drops.maxAmmoSpawn);
+                    break;
+                case 2:
+                    Drop(drops.healthList, drops.minHealthSpawn, drops.maxHealthSpawn);
+                    break;
+                default:
+                    break;
             }
+
+            
+            
+            
+
 
             //Death triggers
             foreach (DeathTrigger dTrigs in deathTriggers)
@@ -212,6 +224,16 @@ public class BaseEnemyClass : MonoBehaviour
             audioManager.Play(deathAudio, player.transform, this.transform);
 
             Destroy(gameObject);
+        }
+    }
+
+    void Drop(List<DropListEntry> dropType, int minSpawn, int maxSpawn)
+    {
+        //Spawn drops
+        for (int i = 0; i < Random.Range(minSpawn, maxSpawn); i++)
+        {
+            GameObject drop = Instantiate(drops.GetDrop(dropType), this.transform.position, Quaternion.identity);
+            
         }
     }
 

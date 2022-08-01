@@ -28,7 +28,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
     public override void Attacking()
     {
         base.Attacking();
-        playerClass.ChangeHealth(-damageAmount * damageMultiplier, transform.position, pushForce);
+        playerClass.ChangeHealth(-damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti), transform.position, pushForce);
     }
 
     public override void Movement(Vector3 positionToMoveTo)

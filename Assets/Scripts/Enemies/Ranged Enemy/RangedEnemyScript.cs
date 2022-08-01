@@ -75,21 +75,21 @@ public class RangedEnemyScript : BaseEnemyClass
     {
         projectileSpawnPos.transform.LookAt(player.transform);
         GameObject newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
-        newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * moveSpeedMulti, damageAmount * damageMultiplier);
+        newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * moveSpeedMulti, damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti));
         if (newProjectile.GetComponent<CrystalRangedProjectile>())
         {
             for (int i = 1; i < 3; i++)
             {
                 newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
                 newProjectile.transform.RotateAround(projectileSpawnPos.position, projectileSpawnPos.up, -5.0f * i);
-                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * moveSpeedMulti, damageAmount * damageMultiplier);
+                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * moveSpeedMulti, damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti));
 
             }
             for (int i = 1; i < 3; i++)
             {
                 newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
                 newProjectile.transform.RotateAround(projectileSpawnPos.position, projectileSpawnPos.up, 5.0f * i);
-                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * moveSpeedMulti, damageAmount * damageMultiplier);
+                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * moveSpeedMulti, damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti));
 
             }
         }

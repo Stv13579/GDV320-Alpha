@@ -39,7 +39,7 @@ public class FireSlimeEnemy : WaterSlimeEnemy
             // creates a plane which is the trail of the fire slime
             GameObject tempEnemyTrail = Instantiate(enemyTrail, transform.position, Quaternion.LookRotation(Vector3.down, forward));
             tempEnemyTrail.transform.localScale = enemyFireTrailScale;
-            tempEnemyTrail.GetComponent<FireSlimeTrail>().SetVars(damageAmount);
+            tempEnemyTrail.GetComponent<FireSlimeTrail>().SetVars(damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti));
             audioManager.Stop("Fire Slime Trail Initial");
             audioManager.Play("Fire Slime Trail Initial", player.transform, this.transform);
             spawnTimer = spawnTimerLength;

@@ -7,19 +7,27 @@ using UnityEngine;
 
 public class DropsList : ScriptableObject
 {
-    public List<DropListEntry> dropsList;
+    public List<DropListEntry> currencyList;
+    public List<DropListEntry> ammoList;
+    public List<DropListEntry> healthList;
 
-    public int minSpawn = 1;
-    public int maxSpawn = 6;
+    public int minCurrencySpawn = 1;
+    public int maxCurrencySpawn = 2;
 
-    public GameObject GetDrop()
+    public int minAmmoSpawn = 2;
+    public int maxAmmoSpawn = 4;
+
+    public int minHealthSpawn = 1;
+    public int maxHealthSpawn = 1;
+
+    public GameObject GetDrop(List<DropListEntry> dropsList)
     {
         int totalWeight = 0;
         foreach(DropListEntry drop in dropsList)
         {
             totalWeight += drop.weighting;
         }
-        int rand = Random.Range(0, totalWeight);
+        int rand = Random.Range(1, totalWeight);
         int i = -1;
         while(rand > 0)
         {
@@ -29,4 +37,6 @@ public class DropsList : ScriptableObject
         }
         return (dropsList[i].drop);
     }
+
+
 }

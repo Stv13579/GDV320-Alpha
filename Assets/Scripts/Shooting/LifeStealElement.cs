@@ -57,8 +57,11 @@ public class LifeStealElement : BaseElementClass
         if (isShooting == true)
         {
             RaycastHit[] objectHit = Physics.SphereCastAll(Camera.main.transform.position, sphereRadius, Camera.main.transform.forward, sphereRange, hitLayer);
+            if(objectHit.Length <= 0)
+            {
 
-            if (objectHit[0].transform.gameObject.layer == environmentLayer)
+            }
+            else if (objectHit[0].transform.gameObject.layer == environmentLayer)
             {
                 // do nothing
             }
@@ -69,6 +72,7 @@ public class LifeStealElement : BaseElementClass
                 enemy = objectHit[0].transform.gameObject;
                 isTargeting = true;
             }
+
             if (isTargeting == true && enemy != null)
             {
                 enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
