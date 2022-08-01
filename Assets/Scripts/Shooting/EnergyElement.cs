@@ -26,7 +26,6 @@ public class EnergyElement : BaseElementClass
     [SerializeField]
     private float timeToParry;
     private bool useShield = false;
-    private bool upgraded = false;
     protected override void Start()
     {
         base.Start();
@@ -163,9 +162,9 @@ public class EnergyElement : BaseElementClass
     {
         if (useShield)
         {
-            if (other.gameObject.layer == 8 /*need to have a projectile layer*/)
+            if (other.gameObject.layer == 8 || other.gameObject.layer == 22)
             {
-                //other.gameObject.GetComponent<BaseEnemyClass>().damageAmount = 0;
+
                 if (other.gameObject && !containedEnemies.Contains(other.gameObject))
                 {
                     containedEnemies.Add(other.gameObject);
