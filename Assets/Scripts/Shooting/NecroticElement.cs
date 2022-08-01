@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class NecroticElement : BaseElementClass
 {
-    [SerializeField]
-    private GameObject chargeVFX;
+    //[SerializeField]
+    //private GameObject chargeVFX;
 
     [SerializeField]
     private GameObject test;
@@ -42,7 +42,7 @@ public class NecroticElement : BaseElementClass
         playerHand.SetTrigger(animationName);
 
         audioManager.Play("Soul Element");
-        Instantiate(chargeVFX, playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos());
+        //Instantiate(chargeVFX, playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos());
 
         isTargeting = true;
     }
