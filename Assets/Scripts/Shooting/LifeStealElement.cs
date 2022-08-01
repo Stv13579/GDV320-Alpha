@@ -27,6 +27,9 @@ public class LifeStealElement : BaseElementClass
     [SerializeField]
     private LayerMask hitLayer;
 
+    [SerializeField]
+    private LayerMask environmentLayer;
+
     private GameObject enemy;
     protected override void Start()
     {
@@ -47,36 +50,30 @@ public class LifeStealElement : BaseElementClass
                 DeactivateLifeSteal();
             }
         }
-
-        RaycastHit hit;
-        RaycastHit[] objectHit = Physics.SphereCastAll(Camera.main.transform.position, sphereRadius, Camera.main.transform.forward, sphereRange, hitLayer);
-        if (Physics.SphereCast(Camera.main.transform.position, sphereRadius, Camera.main.transform.forward, out hit, sphereRange, hitLayer))
+        ActivateLifeSteal();
+    }
+    private void ActivateLifeSteal()
+    {
+        if (isShooting == true)
         {
-            for (int i = 0; i < objectHit.Length; i++)
+            RaycastHit[] objectHit = Physics.SphereCastAll(Camera.main.transform.position, sphereRadius, Camera.main.transform.forward, sphereRange, hitLayer);
+
+            if (objectHit[0].transform.gameObject.layer == environmentLayer)
             {
-                if (hit.distance < objectHit[i].distance)
-                {
-                    objectHit[i].distance = hit.distance;
-
-                }
-                if (objectHit[i].transform.gameObject.layer == 8 && isShooting == true)
-                {
-                    enemy = objectHit[i].transform.gameObject;
-                    isTargeting = true;
-                }
-                Debug.Log(objectHit[i].transform.gameObject.name);
+                // do nothing
             }
-        }
-        else
-        {
-            DeactivateLifeSteal();
-            enemy = null;
-            return;
-        }
-        if (isTargeting == true && enemy != null)
-        {
-            enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            playerClass.ChangeHealth(healValue);
+            else
+            {
+                // turn targeting on
+                // damage enemy
+                enemy = objectHit[0].transform.gameObject;
+                isTargeting = true;
+            }
+            if (isTargeting == true && enemy != null)
+            {
+                enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+                playerClass.ChangeHealth(healValue);
+            }
         }
     }
     private void DeactivateLifeSteal()
@@ -113,5 +110,7 @@ public class LifeStealElement : BaseElementClass
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(Camera.main.transform.position + Camera.main.transform.forward * sphereRange, sphereRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(Camera.main.transform.position + Camera.main.transform.forward * sphereRange, Camera.main.transform.position - Camera.main.transform.forward * sphereRange);
     }
 }
