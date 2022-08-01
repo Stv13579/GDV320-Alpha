@@ -9,6 +9,9 @@ public class DropsList : ScriptableObject
 {
     public List<DropListEntry> dropsList;
 
+    public int minSpawn = 1;
+    public int maxSpawn = 6;
+
     public GameObject GetDrop()
     {
         int totalWeight = 0;
