@@ -9,6 +9,9 @@ public class DropsList : ScriptableObject
 {
     public List<DropListEntry> dropsList;
 
+    public int minSpawn = 1;
+    public int maxSpawn = 6;
+
     public GameObject GetDrop()
     {
         int totalWeight = 0;
@@ -16,13 +19,17 @@ public class DropsList : ScriptableObject
         {
             totalWeight += drop.weighting;
         }
-        int rand = Random.Range(0, totalWeight);
+        int rand = Random.Range(1, totalWeight);
         int i = -1;
         while(rand > 0)
         {
             i++;
             rand -= dropsList[i].weighting;
             
+        }
+        if(i >= 8)
+        {
+            Debug.Log("8");
         }
         return (dropsList[i].drop);
     }

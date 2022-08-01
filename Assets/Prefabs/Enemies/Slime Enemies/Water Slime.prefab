@@ -5200,7 +5200,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &229309374881802909
 MonoBehaviour:
@@ -5217,7 +5217,7 @@ MonoBehaviour:
   maxHealth: 70
   damageAmount: 3
   damageMultiplier: 1
-  moveSpeed: 5
+  moveSpeed: 200
   moveSpeedMulti: 1
   damageThreshold: 0
   damageResistance: 1
@@ -5235,11 +5235,15 @@ MonoBehaviour:
   takeDamageAudio: Slime Damage
   targettingIndicator: {fileID: 4551955659223167837}
   oldPosition: {x: 0, y: 0, z: 0}
-  jumpForce: 50
+  jumpForce: 200
   pushForce: 10
   viewToPlayer:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 1024
+  nodeMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  generation: 0
 --- !u!1 &4551955659223167837
 GameObject:
   m_ObjectHideFlags: 0

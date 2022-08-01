@@ -15,7 +15,7 @@ MonoBehaviour:
   maxHealth: 70
   damageAmount: 3
   damageMultiplier: 1
-  moveSpeed: 1
+  moveSpeed: 200
   moveSpeedMulti: 1
   damageThreshold: 0
   damageResistance: 1
@@ -34,11 +34,15 @@ MonoBehaviour:
   takeDamageAudio: Slime Damage
   targettingIndicator: {fileID: 5820064549849268897}
   oldPosition: {x: 0, y: 0, z: 0}
-  jumpForce: 50
+  jumpForce: 200
   pushForce: 10
   viewToPlayer:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 1024
+  nodeMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  generation: 0
   enemyTrail: {fileID: 6819038300084677813, guid: 79afc09f247abe84da4e93575174e4d8,
     type: 3}
   trailLayerMask:

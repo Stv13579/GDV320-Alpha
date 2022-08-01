@@ -10,6 +10,19 @@ public class ProphecyManager : MonoBehaviour
     /// </summary>
     [SerializeField]
     public List<Prophecy> allProphecies;
+    public float prophecyDamageMulti = 1.0f;
+    public float prophecyEffectMulti = 1.0f;
+    public bool wealth = false;
+    
+   
+    public List<Multiplier> damageMultipliers = new List<Multiplier>();
+    public List<Multiplier> effectMultipliers = new List<Multiplier>();
+
+    private void Start()
+    {
+
+    }
+
 
 
 }
