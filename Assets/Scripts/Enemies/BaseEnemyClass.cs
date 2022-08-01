@@ -9,6 +9,13 @@ public class BaseEnemyClass : MonoBehaviour
     public float damageMultiplier = 1.0f;
     public float moveSpeed;
     public float moveSpeedMulti = 1.0f;
+    
+
+    #region
+
+    ProphecyManager prophecyManager;
+
+    #endregion
     List<float> movementMultipliers = new List<float>();
     //The amount of flat damage any instance of incoming damage is reduced by
     public float damageThreshold;
@@ -84,7 +91,7 @@ public class BaseEnemyClass : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         oldPosition = new Vector3(-1000, -1000, -1000);
         enemyAnims = GetComponentInChildren<Animator>();
-
+        prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
     }
 
     public virtual void Update()
@@ -182,9 +189,14 @@ public class BaseEnemyClass : MonoBehaviour
 
 
             //Spawn drops
-            for(int i = 0; i < Random.Range(1, 6); i++)
+            for(int i = 0; i < Random.Range(drops.minSpawn, drops.maxSpawn); i++)
             {
-                Instantiate(drops.GetDrop(), this.transform.position, Quaternion.identity);
+                GameObject drop = Instantiate(drops.GetDrop(), this.transform.position, Quaternion.identity);
+                //If the wealth prophecy is active and the enemy drops money, drop more money.
+                if(prophecyManager.wealth && drop.name == "Currency")
+                {
+                    Instantiate(drops.dropsList[0].drop, this.transform.position, Quaternion.identity);
+                }
             }
 
             //Death triggers

@@ -85,6 +85,7 @@ public class FireSlimeEnemy : WaterSlimeEnemy
                 newSlime.transform.localScale = this.transform.localScale / 2;
                 newSlime.moveSpeed = moveSpeed / 2;
                 newSlime.generation = generation + 1;
+                newSlime.spawner = spawner;
                 newSlime.enemyFireTrailScale = enemyFireTrailScale / 2;
             }
         }
