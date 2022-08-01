@@ -84,8 +84,9 @@ public class CrystalGrenadeProj : MonoBehaviour
         }
         if(other.gameObject.layer == 10)
         {
-            originalPosition = transform.position;
             isMoving = false;
+            this.GetComponent<Rigidbody>().useGravity = false;
+            originalPosition = transform.position;
         }
     }
 }
