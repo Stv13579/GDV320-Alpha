@@ -8,10 +8,6 @@ public class LaserBeamElement : BaseElementClass
     private GameObject laserBeam;
 
     [SerializeField]
-    float damage;
-    public float damageMultiplier = 1;
-
-    [SerializeField]
     private PlayerMovement playerMovement;
     protected override void Start()
     {

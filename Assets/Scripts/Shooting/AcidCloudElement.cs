@@ -9,9 +9,6 @@ public class AcidCloudElement : BaseElementClass
     [SerializeField]
     GameObject cloudProj;
 
-    [SerializeField]
-    float damage;
-    public float damageMultiplier = 1;
 
     [SerializeField]
     float cloudSize;

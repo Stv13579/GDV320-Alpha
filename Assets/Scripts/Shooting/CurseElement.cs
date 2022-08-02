@@ -21,10 +21,6 @@ public class CurseElement : BaseElementClass
     float explosionRange;
 
     [SerializeField]
-    float damage;
-    public float damageMultiplier = 1;
-
-    [SerializeField]
     List<BaseEnemyClass.Types> types;
 
     [SerializeField]

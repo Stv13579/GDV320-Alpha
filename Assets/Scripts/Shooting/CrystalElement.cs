@@ -8,10 +8,6 @@ public class CrystalElement : BaseElementClass
     private GameObject crystalProjectile;
 
     [SerializeField]
-    private float damage;
-    public float damageMultiplier = 1;
-
-    [SerializeField]
     private float projectileSpeed;
 
     [SerializeField]

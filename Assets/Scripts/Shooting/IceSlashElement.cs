@@ -8,10 +8,6 @@ public class IceSlashElement : BaseElementClass
     private GameObject iceSlash;
 
     [SerializeField]
-    private float damage;
-    public float damageMultiplier = 1;
-
-    [SerializeField]
     private float projectileSpeed;
 
     [SerializeField]

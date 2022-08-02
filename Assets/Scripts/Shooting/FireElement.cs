@@ -13,10 +13,6 @@ public class FireElement : BaseElementClass
     GameObject fireBall;
 
     [SerializeField]
-    float damage;
-    public float damageMultiplier = 1;
-
-    [SerializeField]
     float projectileSpeed;
 
     [SerializeField]

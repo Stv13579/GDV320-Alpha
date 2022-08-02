@@ -69,12 +69,23 @@ public class BaseElementClass : MonoBehaviour
     string shootingSoundFX;
 
     protected bool upgraded = false;
+
+    [SerializeField]
+    protected float damage;
+
+    [HideInInspector]
+    public float damageMultiplier = 1;
+    public List<Multiplier> damageMulti = new List<Multiplier>();
+
+    protected ElementStats elementData;
+
     protected virtual void Start()
     {
         player = GameObject.Find("Player");
         playerClass = player.GetComponent<PlayerClass>();
         //shootingTranform = GameObject.Find("Elements").transform;
         audioManager = FindObjectOfType<AudioManager>();
+        elementData = Resources.Load<ElementStats>("Element/ElementData");
     }
     protected virtual void StartAnims(string animationName)
     {
@@ -147,7 +158,14 @@ public class BaseElementClass : MonoBehaviour
     //Changes the functionality or in some way improves the element
     public virtual void Upgrade()
     {
+        if(!upgraded)
+        {
+            upgraded = true;
 
+            Multiplier dam = new Multiplier(0.25f, "Upgrade");
+            Multiplier.AddMultiplier(damageMulti, dam, damageMultiplier);
+
+        }
     }
 
 }

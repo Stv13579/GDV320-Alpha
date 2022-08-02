@@ -12,10 +12,6 @@ public class WaterElement : BaseElementClass
     GameObject waterProj;
 
     [SerializeField]
-    float damage = 1;
-    public float damageMultiplier = 1;
-
-    [SerializeField]
     float projectileSpeed = 5;
 
     [SerializeField]

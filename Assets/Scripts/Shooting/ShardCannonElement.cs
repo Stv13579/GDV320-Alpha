@@ -14,10 +14,6 @@ public class ShardCannonElement : BaseElementClass
     GameObject shardProj;
 
     [SerializeField]
-    float damage;
-    public float damageMultiplier = 1;
-
-    [SerializeField]
     float projectileSpeed;
 
     protected override void Update()

@@ -8,10 +8,6 @@ public class LifeStealElement : BaseElementClass
     private GameObject lifeSteal;
 
     [SerializeField]
-    private float damage;
-    public float damageMultiplier = 1;
-
-    [SerializeField]
     private float sphereRadius;
 
     [SerializeField]

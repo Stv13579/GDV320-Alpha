@@ -8,9 +8,6 @@ public class CrystalGrenadeElement : BaseElementClass
     private GameObject CrystalGrenade;
 
     [SerializeField]
-    private float damage;
-
-    [SerializeField]
     private float projectileSpeed;
 
     [SerializeField]
@@ -24,8 +21,6 @@ public class CrystalGrenadeElement : BaseElementClass
 
     [SerializeField]
     private float explosionDamage;
-
-    public float damageMultiplier = 1;
     // Update is called once per frame
     protected override void Update()
     {
