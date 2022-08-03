@@ -272,4 +272,8 @@ public class Shooting : MonoBehaviour
 
         return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
     }
+
+    public int GetLeftElementIndex() {return leftElementIndex;}
+    public int GetRightElementIndex() {return rightElementIndex;}
+    public bool GetInComboMode() {return inComboMode;}
 }

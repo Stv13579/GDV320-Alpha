@@ -89,10 +89,11 @@ public class BaseElementClass : MonoBehaviour
     private string switchAnimationName;
 
     [SerializeField]
-    private int leftIndex;
+    protected int leftIndex;
 
     [SerializeField]
-    private int rightIndex;
+    protected int rightIndex;
+    
     protected virtual void Start()
     {
         player = GameObject.Find("Player");

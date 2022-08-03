@@ -29,10 +29,16 @@ public class LandMineElement : BaseElementClass
     {
         base.Update();
         //if this element on turn on indicator
-        //if()
-        //{
-
-        //}
+        if (shootingScript.GetLeftElementIndex() == leftIndex &&
+            shootingScript.GetRightElementIndex() == rightIndex &&
+            shootingScript.GetInComboMode() == true)
+        {
+            indicator.SetActive(true);
+        }
+        else
+        {
+            indicator.SetActive(false);
+        }
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rayCastRange, layerMask))
         {
             indicator.transform.position = hit.point;
