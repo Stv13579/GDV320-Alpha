@@ -8,10 +8,6 @@ public class IceSlashElement : BaseElementClass
     private GameObject iceSlash;
 
     [SerializeField]
-    private float damage;
-    public float damageMultiplier = 1;
-
-    [SerializeField]
     private float projectileSpeed;
 
     [SerializeField]
@@ -26,7 +22,7 @@ public class IceSlashElement : BaseElementClass
     public override void ElementEffect()
     {
         GameObject iceSlashTemp = Instantiate(iceSlash, shootingTranform.position, Camera.main.transform.rotation);
-        iceSlashTemp.GetComponent<IceSlashProj>().SetVars(projectileSpeed, damage * damageMultiplier, lifeTimer, attackTypes);
+        iceSlashTemp.GetComponent<IceSlashProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.waterDamageMultiplier), lifeTimer, attackTypes);
         base.ElementEffect();
     }
 

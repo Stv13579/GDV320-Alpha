@@ -39,7 +39,7 @@ public class FireSlimeEnemy : WaterSlimeEnemy
             // creates a plane which is the trail of the fire slime
             GameObject tempEnemyTrail = Instantiate(enemyTrail, transform.position, Quaternion.LookRotation(Vector3.down, forward));
             tempEnemyTrail.transform.localScale = enemyFireTrailScale;
-            tempEnemyTrail.GetComponent<FireSlimeTrail>().SetVars(damageAmount);
+            tempEnemyTrail.GetComponent<FireSlimeTrail>().SetVars(damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti));
             audioManager.Stop("Fire Slime Trail Initial");
             audioManager.Play("Fire Slime Trail Initial", player.transform, this.transform);
             spawnTimer = spawnTimerLength;
@@ -47,6 +47,8 @@ public class FireSlimeEnemy : WaterSlimeEnemy
     }
     public override void Movement(Vector3 positionToMoveTo)
     {
+        float off = Random.Range(0.0f, 6.0f);
+        posOffset = new Vector3(Mathf.Cos(off), 0, Mathf.Sin(off)) * 8;
         base.Movement(positionToMoveTo);
     }
 

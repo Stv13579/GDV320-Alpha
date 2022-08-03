@@ -12,6 +12,14 @@ public class Prophecy : MonoBehaviour
 
     bool active = false;
 
+    [SerializeField]
+    protected DropsList drops;
+
+    private void Start()
+    {
+        
+    }
+
     public void SetCard(Transform button)
     {
         button.GetChild(0).GetComponent<TextMeshProUGUI>().text = pName;

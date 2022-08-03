@@ -8,9 +8,6 @@ public class CrystalGrenadeElement : BaseElementClass
     private GameObject CrystalGrenade;
 
     [SerializeField]
-    private float damage;
-
-    [SerializeField]
     private float projectileSpeed;
 
     [SerializeField]
@@ -24,8 +21,6 @@ public class CrystalGrenadeElement : BaseElementClass
 
     [SerializeField]
     private float explosionDamage;
-
-    public float damageMultiplier = 1;
     // Update is called once per frame
     protected override void Update()
     {
@@ -36,7 +31,7 @@ public class CrystalGrenadeElement : BaseElementClass
     {
         base.ElementEffect();
         GameObject newCrystalGrenade = Instantiate(CrystalGrenade, shootingTranform.position, Camera.main.transform.rotation);
-        newCrystalGrenade.GetComponent<CrystalGrenadeProj>().SetVars(projectileSpeed, damage * damageMultiplier, timeToExplode, gravity, explosionRange, explosionDamage, attackTypes);
+        newCrystalGrenade.GetComponent<CrystalGrenadeProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.crystalDamageMultiplier), timeToExplode, gravity, explosionRange, explosionDamage, attackTypes);
     }
 
     public override void ActivateVFX()

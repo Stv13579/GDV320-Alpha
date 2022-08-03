@@ -10,19 +10,15 @@ public class ProphecyManager : MonoBehaviour
     /// </summary>
     [SerializeField]
     public List<Prophecy> allProphecies;
-    public float prophecyDamageMulti = 1.0f;
-    public float prophecyEffectMulti = 1.0f;
-    public bool wealth = false;
-    
+    [HideInInspector]
+    public float prophecyDamageMulti = 1.0f, prophecyEffectMulti = 1.0f, prophecyResistMulti = 1.0f, prophecyWeaknessMulti = 1.0f, prophecyHealthMulti = 1.0f;
+
+    public bool wealth = false, famine = false;
    
     public List<Multiplier> damageMultipliers = new List<Multiplier>();
     public List<Multiplier> effectMultipliers = new List<Multiplier>();
-
-    private void Start()
-    {
-
-    }
-
-
+    public List<Multiplier> resistMultipliers = new List<Multiplier>();
+    public List<Multiplier> weaknessMultipliers = new List<Multiplier>();
+    public List<Multiplier> healthMultipliers = new List<Multiplier>();
 
 }

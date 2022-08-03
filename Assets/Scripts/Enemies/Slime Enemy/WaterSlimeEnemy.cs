@@ -7,7 +7,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
     float damageTicker = 0.0f;
 
     [SerializeField]
-    float jumpForce;
+    protected float jumpForce;
 
     [SerializeField]
     protected float pushForce;
@@ -19,9 +19,10 @@ public class WaterSlimeEnemy : BaseEnemyClass
     [HideInInspector]
     public int generation = 0;
 
-    float jumpTimer = 0.0f;
+    protected float jumpTimer = 0.0f;
 
     Vector3 pos = Vector3.zero;
+    protected Vector3 posOffset = Vector3.zero;
 
     public override void Start()
     {
@@ -35,7 +36,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
     public override void Attacking()
     {
         base.Attacking();
-        playerClass.ChangeHealth(-damageAmount * damageMultiplier, transform.position, pushForce);
+        playerClass.ChangeHealth(-damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti), transform.position, pushForce);
     }
 
     public override void Movement(Vector3 positionToMoveTo)
@@ -103,7 +104,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
                 rot.eulerAngles = new Vector3(0, rot.eulerAngles.y + 135, 0);
                 transform.rotation = rot;
 
-                pos = player.transform.position;
+                pos = player.transform.position + posOffset;
             }
             Vector3 moveForce = (pos - this.transform.position).normalized * moveSpeed * moveSpeedMulti;
             moveForce += new Vector3(0, jumpForce, 0);

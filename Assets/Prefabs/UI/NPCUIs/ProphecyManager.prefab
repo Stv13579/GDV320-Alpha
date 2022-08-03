@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4286615856182466101}
   - component: {fileID: 2066060746286887741}
+  - component: {fileID: 8414824065125251048}
+  - component: {fileID: 5187520269776117262}
+  - component: {fileID: 5057102656930001468}
   m_Layer: 0
   m_Name: ProphecyManager
   m_TagString: Untagged
@@ -44,3 +47,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allProphecies: []
+  prophecyDamageMulti: 1
+  prophecyEffectMulti: 1
+  prophecyResistMulti: 1
+  prophecyWeaknessMulti: 1
+  prophecyHealthMulti: 1
+  wealth: 0
+  famine: 0
+--- !u!114 &8414824065125251048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2326964504573002518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cd30b6cb7c6c24fab269121ae6fe33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pName: Wealth
+  effect: Brave great danger for greater wealth
+  drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
+--- !u!114 &5187520269776117262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2326964504573002518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bc518472511ee4ebf15b613a6a3643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pName: Wrath
+  effect: Your enemies strengths become greater, as do their weaknesses
+  drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
+--- !u!114 &5057102656930001468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2326964504573002518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11077b7c48557f47ab4780b285f26fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pName: Famine
+  effect: Your enemies will wither, as will their harvest
+  drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}

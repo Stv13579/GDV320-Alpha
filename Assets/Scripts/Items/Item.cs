@@ -12,15 +12,16 @@ public class Item : MonoBehaviour
     public Sprite[] sprites;
     public string itemName = "";
     public string description = "";
+    protected ElementStats elementData;
 
+    private void Start()
+    {
+        elementData = Resources.Load<ElementStats>("Element/ElementData");
+    }
 
     //Any effects from obtaining an item go here e.g. if the item increases max health, add it here.
     public virtual void AddEffect(PlayerClass player)
     {
-        //UIWidget = new GameObject("ItemWidget", typeof(RectTransform), typeof(Image));
-        //UIWidget.GetComponent<Image>().sprite = sprite;
-        //UIWidget.transform.SetParent(player.itemUI.transform);
-        //UIWidget.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);
         player.itemUI.transform.parent.gameObject.GetComponent<GameplayUI>().AddItem(sprites);
         player.heldItems.Add(this);
 

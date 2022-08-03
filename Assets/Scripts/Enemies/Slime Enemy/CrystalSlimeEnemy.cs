@@ -38,7 +38,7 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
                 // setting scale of enemy projectile based on enemy size
                 tempEnemyProjectile.transform.localScale = enemyProjectileScale;
                 // setter to set variables from CrystalSlimeProject
-                tempEnemyProjectile.GetComponent<CrystalSlimeProjectile>().SetVars(damageAmount);
+                tempEnemyProjectile.GetComponent<CrystalSlimeProjectile>().SetVars(damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti));
                 //setting the rotations of the projectiles so that it spawns in like a circle
                 tempEnemyProjectile.transform.eulerAngles = new Vector3(tempEnemyProjectile.transform.eulerAngles.x, tempEnemyProjectile.transform.eulerAngles.y + (360.0f / 5.0f * i), tempEnemyProjectile.transform.eulerAngles.z);
                 audioManager.Stop("Crystal Slime Projectile");
@@ -52,8 +52,9 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
     }
     public override void Movement(Vector3 positionToMoveTo)
     {
+        posOffset = (this.transform.position - player.transform.position).normalized * 10;
+        posOffset.y = 0;
         base.Movement(positionToMoveTo);
-
     }
     public override void OnCollisionEnter(Collision collision)
     {

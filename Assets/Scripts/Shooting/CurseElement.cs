@@ -21,10 +21,6 @@ public class CurseElement : BaseElementClass
     float explosionRange;
 
     [SerializeField]
-    float damage;
-    public float damageMultiplier = 1;
-
-    [SerializeField]
     List<BaseEnemyClass.Types> types;
 
     [SerializeField]
@@ -78,7 +74,7 @@ public class CurseElement : BaseElementClass
 
                 if (hit.tag == "Enemy")
                 {
-                    hit.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage * damageMultiplier, types);
+                    hit.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.crystalDamageMultiplier), types);
                 }
             }
         }

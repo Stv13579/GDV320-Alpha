@@ -8,10 +8,6 @@ public class LifeStealElement : BaseElementClass
     private GameObject lifeSteal;
 
     [SerializeField]
-    private float damage;
-    public float damageMultiplier = 1;
-
-    [SerializeField]
     private float sphereRadius;
 
     [SerializeField]
@@ -57,8 +53,11 @@ public class LifeStealElement : BaseElementClass
         if (isShooting == true)
         {
             RaycastHit[] objectHit = Physics.SphereCastAll(Camera.main.transform.position, sphereRadius, Camera.main.transform.forward, sphereRange, hitLayer);
+            if(objectHit.Length <= 0)
+            {
 
-            if (objectHit[0].transform.gameObject.layer == environmentLayer)
+            }
+            else if (objectHit[0].transform.gameObject.layer == environmentLayer)
             {
                 // do nothing
             }
@@ -69,9 +68,10 @@ public class LifeStealElement : BaseElementClass
                 enemy = objectHit[0].transform.gameObject;
                 isTargeting = true;
             }
+
             if (isTargeting == true && enemy != null)
             {
-                enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+                enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier * elementData.waterDamageMultiplier), attackTypes);
                 playerClass.ChangeHealth(healValue);
             }
         }
