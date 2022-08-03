@@ -12,28 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ba7cb87ed3c254d99be3b9ad554138, type: 3}
   m_Name: Drops List
   m_EditorClassIdentifier: 
-  dropsList:
+  currencyList:
   - drop: {fileID: 4669563560585946338, guid: 9c37637694ea5aa428eaff35ecc53468, type: 3}
     element: 6
     weighting: 50
-  - drop: {fileID: 8071247131061588266, guid: 8f94b03241982944fbae1808fb809e3a, type: 3}
-    element: 0
-    weighting: 25
+  ammoList:
   - drop: {fileID: 3864101875092096164, guid: f969643c34a39e240b57e3092be70a63, type: 3}
     element: 1
-    weighting: 25
+    weighting: 12
+  - drop: {fileID: 8071247131061588266, guid: 8f94b03241982944fbae1808fb809e3a, type: 3}
+    element: 0
+    weighting: 12
   - drop: {fileID: 4794434168739516987, guid: 225418416638de24180f6ed694daaf11, type: 3}
     element: 2
-    weighting: 25
+    weighting: 12
   - drop: {fileID: 8437078721778819225, guid: 20b80ed2d6c0f18418348f5096ec8e88, type: 3}
     element: 3
-    weighting: 25
+    weighting: 12
   - drop: {fileID: 6075573528708036109, guid: 9547f0419ea8a9042a86395a7e6760ec, type: 3}
     element: 4
-    weighting: 25
+    weighting: 12
   - drop: {fileID: 5744009271917893558, guid: 136d59c98f339164281065b50fe51e48, type: 3}
     element: 5
-    weighting: 25
+    weighting: 12
+  healthList:
   - drop: {fileID: 2042037572289340057, guid: 346d4e829867a5346b501dca44105117, type: 3}
     element: 6
-    weighting: 15
+    weighting: 10
+  minCurrencySpawn: 1
+  maxCurrencySpawn: 2
+  minAmmoSpawn: 2
+  maxAmmoSpawn: 4
+  minHealthSpawn: 1
+  maxHealthSpawn: 1

@@ -13,10 +13,6 @@ public class FireElement : BaseElementClass
     GameObject fireBall;
 
     [SerializeField]
-    float damage;
-    public float damageMultiplier = 1;
-
-    [SerializeField]
     float projectileSpeed;
 
     [SerializeField]
@@ -50,7 +46,7 @@ public class FireElement : BaseElementClass
         {
             newFireball.transform.LookAt(hit.point);
         }
-        newFireball.GetComponent<Fireball>().SetVars(projectileSpeed, damage * damageMultiplier, gravity, gravCurve, gravityLifetime, explosionArea, explosionDamage, attackTypes);
+        newFireball.GetComponent<Fireball>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.fireDamageMultiplier), gravity, gravCurve, gravityLifetime, explosionArea, explosionDamage, attackTypes);
     }
 
     public override void ActivateVFX()

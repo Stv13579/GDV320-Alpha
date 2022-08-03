@@ -8,11 +8,6 @@ public class LandMineElement : BaseElementClass
     private GameObject landMineProjectile;
 
     [SerializeField]
-    private float damage;
-
-    public float damageMultiplier = 1;
-
-    [SerializeField]
     private float explosiveRadius;
 
     [SerializeField]
@@ -29,7 +24,7 @@ public class LandMineElement : BaseElementClass
         Vector3 camLook = Camera.main.transform.forward;
         camLook = new Vector3(camLook.x, 0.0f, camLook.z).normalized;
         GameObject newLandMine = Instantiate(landMineProjectile, shootingTranform.position + camLook, Quaternion.identity);
-        newLandMine.GetComponent<LandMineProj>().SetVars(damage * damageMultiplier, lifeTimer, explosiveRadius, attackTypes);
+        newLandMine.GetComponent<LandMineProj>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), lifeTimer, explosiveRadius, attackTypes);
     }
     public override void ActivateVFX()
     {

@@ -82,7 +82,7 @@ public class CrystalGrenadeProj : MonoBehaviour
             other.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             other = enemy;
         }
-        if(other.gameObject.layer == 10)
+        else if(other.gameObject.layer == 10)
         {
             isMoving = false;
             this.GetComponent<Rigidbody>().useGravity = false;
