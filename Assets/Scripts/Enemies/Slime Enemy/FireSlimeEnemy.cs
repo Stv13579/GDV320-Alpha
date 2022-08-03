@@ -47,6 +47,8 @@ public class FireSlimeEnemy : WaterSlimeEnemy
     }
     public override void Movement(Vector3 positionToMoveTo)
     {
+        float off = Random.Range(0.0f, 6.0f);
+        posOffset = new Vector3(Mathf.Cos(off), 0, Mathf.Sin(off)) * 8;
         base.Movement(positionToMoveTo);
     }
 
