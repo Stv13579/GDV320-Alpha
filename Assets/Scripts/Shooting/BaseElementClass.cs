@@ -184,7 +184,7 @@ public class BaseElementClass : MonoBehaviour
         {
             upgraded = true;
 
-            Multiplier dam = new Multiplier(0.25f, "Upgrade");
+            Multiplier dam = new Multiplier(1.25f, "Upgrade");
             Multiplier.AddMultiplier(damageMulti, dam, damageMultiplier);
 
         }

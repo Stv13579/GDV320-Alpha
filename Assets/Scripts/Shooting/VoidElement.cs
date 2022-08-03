@@ -145,4 +145,13 @@ public class VoidElement : BaseElementClass
         this.gameObject.GetComponent<PlayerMovement>().ableToMove = true;
         StopCoroutine(Dash());
     }
+
+
+    public override void Upgrade()
+    {
+        base.Upgrade();
+
+        useDelay *= 0.5f;
+    }
+
 }
