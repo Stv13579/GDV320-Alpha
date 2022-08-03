@@ -39,7 +39,7 @@ public class WaterElement : BaseElementClass
             newWaterProj.transform.LookAt(hit.point);
             Debug.Log(hit.collider.gameObject.name);
         }
-        newWaterProj.GetComponent<WaterProjectile>().SetVars(projectileSpeed, damage * damageMultiplier, projectileLifetime, attackTypes);
+        newWaterProj.GetComponent<WaterProjectile>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.waterDamageMultiplier), projectileLifetime, attackTypes);
     }
 
     public override void ActivateVFX()

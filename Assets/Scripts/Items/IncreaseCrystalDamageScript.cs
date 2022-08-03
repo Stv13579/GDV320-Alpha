@@ -15,7 +15,6 @@ public class IncreaseCrystalDamageScript : Item
     public override void AddEffect(PlayerClass player)
     {
         base.AddEffect(player);
-        player.gameObject.GetComponent<CrystalElement>().damageMultiplier += 0.1f;
 
         Multiplier increaseCrystalMulti = new Multiplier(0.1f, "crystalItem");
 

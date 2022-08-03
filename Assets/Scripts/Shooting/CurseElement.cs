@@ -74,7 +74,7 @@ public class CurseElement : BaseElementClass
 
                 if (hit.tag == "Enemy")
                 {
-                    hit.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage * damageMultiplier, types);
+                    hit.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.crystalDamageMultiplier), types);
                 }
             }
         }

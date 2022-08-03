@@ -40,7 +40,7 @@ public class CrystalElement : BaseElementClass
                 newCrystalPro.transform.RotateAround(shootingTranform.position, Camera.main.transform.right, 3.0f * j - 5.0f);
 
                 // setting the varibles from CrystalProj script
-                newCrystalPro.GetComponent<CrystalProj>().SetVars(projectileSpeed, damage * damageMultiplier, damageCurve, lifeTimer, attackTypes, damageLimit);
+                newCrystalPro.GetComponent<CrystalProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.crystalDamageMultiplier), damageCurve, lifeTimer, attackTypes, damageLimit);
             }
         }
     }

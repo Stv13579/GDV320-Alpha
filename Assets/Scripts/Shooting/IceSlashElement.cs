@@ -22,7 +22,7 @@ public class IceSlashElement : BaseElementClass
     public override void ElementEffect()
     {
         GameObject iceSlashTemp = Instantiate(iceSlash, shootingTranform.position, Camera.main.transform.rotation);
-        iceSlashTemp.GetComponent<IceSlashProj>().SetVars(projectileSpeed, damage * damageMultiplier, lifeTimer, attackTypes);
+        iceSlashTemp.GetComponent<IceSlashProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.waterDamageMultiplier), lifeTimer, attackTypes);
         base.ElementEffect();
     }
 

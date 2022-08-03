@@ -47,7 +47,7 @@ public class LaserBeamElement : BaseElementClass
     {
         base.ElementEffect();
         laserBeam.SetActive(true);
-        laserBeam.GetComponentInChildren<LaserBeam>().SetVars(damage * damageMultiplier, attackTypes);
+        laserBeam.GetComponentInChildren<LaserBeam>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), attackTypes);
         playerMovement.AddMovementMultiplier(new PlayerMovement.movementMultiSource(0.25f, "Laser"));
     }
     public override void ActivateVFX()

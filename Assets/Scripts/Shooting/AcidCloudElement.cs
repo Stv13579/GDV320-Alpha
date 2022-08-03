@@ -27,7 +27,7 @@ public class AcidCloudElement : BaseElementClass
         Vector3 camLook = Camera.main.transform.forward;
         camLook = new Vector3(camLook.x, 0.0f, camLook.z).normalized;
         GameObject cloud = Instantiate(cloudProj, shootingTranform.position + (camLook * 3), Quaternion.identity);
-        cloud.transform.GetChild(1).gameObject.GetComponent<AcidCloud>().SetVars(damage * damageMultiplier, cloudSize, cloudDuration, attackTypes);
+        cloud.transform.GetChild(1).gameObject.GetComponent<AcidCloud>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier) , cloudSize, cloudDuration, attackTypes);
     }
 
     public override void ActivateVFX()

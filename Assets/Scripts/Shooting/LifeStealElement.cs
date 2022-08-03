@@ -71,7 +71,7 @@ public class LifeStealElement : BaseElementClass
 
             if (isTargeting == true && enemy != null)
             {
-                enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+                enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier * elementData.waterDamageMultiplier), attackTypes);
                 playerClass.ChangeHealth(healValue);
             }
         }
