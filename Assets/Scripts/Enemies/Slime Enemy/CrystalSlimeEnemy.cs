@@ -52,14 +52,9 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
     }
     public override void Movement(Vector3 positionToMoveTo)
     {
-        //if(Vector3.SqrMagnitude(player.transform.position - this.transform.position) > 50)
-        {
-            posOffset = (this.transform.position - player.transform.position).normalized * 10;
-            posOffset.y = 0;
-            base.Movement(positionToMoveTo);
-        }
-
-
+        posOffset = (this.transform.position - player.transform.position).normalized * 10;
+        posOffset.y = 0;
+        base.Movement(positionToMoveTo);
     }
     public override void OnCollisionEnter(Collision collision)
     {
