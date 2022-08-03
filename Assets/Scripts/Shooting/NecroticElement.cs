@@ -51,10 +51,10 @@ public class NecroticElement : BaseElementClass
         base.ElementEffect();
         isTargeting = false;
 
-        if(targetToSlow && targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti != 0.5f)
+        if(targetToSlow && (targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti != 0.5f || targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti != 0.3f))
         {
             Instantiate(test, targetToSlow.transform);
-            targetToSlow.GetComponent<BaseEnemyClass>().AddMovementMultiplier(0.5f);
+            targetToSlow.GetComponent<BaseEnemyClass>().AddMovementMultiplier(upgraded ? 0.5f : 0.3f);
         }
     }
     // Update is called once per frame

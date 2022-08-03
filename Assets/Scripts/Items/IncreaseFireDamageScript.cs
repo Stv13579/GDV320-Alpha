@@ -7,7 +7,7 @@ public class IncreaseFireDamageScript : Item
     public override void AddEffect(PlayerClass player)
     {
         base.AddEffect(player);
-        Multiplier increaseFireMulti = new Multiplier(0.1f, "fireItem");
+        Multiplier increaseFireMulti = new Multiplier(1.1f, "fireItem");
 
         Multiplier.AddMultiplier(elementData.fireDamageMultis, increaseFireMulti, elementData.fireDamageMultiplier);
 

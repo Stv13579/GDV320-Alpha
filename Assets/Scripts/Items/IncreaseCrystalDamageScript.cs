@@ -16,7 +16,7 @@ public class IncreaseCrystalDamageScript : Item
     {
         base.AddEffect(player);
 
-        Multiplier increaseCrystalMulti = new Multiplier(0.1f, "crystalItem");
+        Multiplier increaseCrystalMulti = new Multiplier(1.1f, "crystalItem");
 
         Multiplier.AddMultiplier(elementData.crystaldamageMultis, increaseCrystalMulti, elementData.crystalDamageMultiplier);
         
