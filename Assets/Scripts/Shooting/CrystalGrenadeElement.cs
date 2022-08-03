@@ -44,6 +44,5 @@ public class CrystalGrenadeElement : BaseElementClass
         base.StartAnims(animationName);
 
         playerHand.SetTrigger(animationName);
-        playerHandL.SetTrigger(animationName);
     }
 }

@@ -56,24 +56,27 @@ public class Shooting : MonoBehaviour
                 ComboShooting();
             }
         }
-
-
-        if(Input.GetKeyUp(KeyCode.Q))
+        SwitchingElements();
+    }
+    void SwitchingElements()
+    {
+        if (Input.GetKeyUp(KeyCode.Q))
         {
             leftElementIndex++;
             // play audio of switching weapons
             audioManager.Stop("Change Element");
             audioManager.Play("Change Element");
-            if(leftElementIndex >= primaryElements.Count)
+            if (leftElementIndex >= primaryElements.Count)
             {
                 leftElementIndex = 0;
             }
+            primaryElements[leftElementIndex].AnimationSwitch();
             Destroy(leftOrbPos.GetChild(0).gameObject);
-            if(leftOrbPos.parent.parent.childCount == 2)
+            if (leftOrbPos.parent.parent.childCount == 2)
             {
                 Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
             }
-            if(!inComboMode)
+            if (!inComboMode)
             {
                 Instantiate(primaryElements[leftElementIndex].handVFX, leftOrbPos);
                 if (primaryElements[leftElementIndex].wristVFX)
@@ -99,7 +102,7 @@ public class Shooting : MonoBehaviour
             }
 
         }
-        if(Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.E))
         {
             rightElementIndex++;
             // play audio of switching weapons
@@ -109,12 +112,13 @@ public class Shooting : MonoBehaviour
             {
                 rightElementIndex = 0;
             }
+            catalystElements[rightElementIndex].AnimationSwitch();
             Destroy(rightOrbPos.GetChild(0).gameObject);
             if (rightOrbPos.parent.parent.childCount == 2)
             {
                 Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
             }
-            if(!inComboMode)
+            if (!inComboMode)
             {
                 Instantiate(catalystElements[rightElementIndex].handVFX, rightOrbPos);
                 if (catalystElements[rightElementIndex].wristVFX)
@@ -140,11 +144,10 @@ public class Shooting : MonoBehaviour
 
         }
 
-        if(Input.GetKeyUp(KeyCode.F))
+        if (Input.GetKeyUp(KeyCode.F))
         {
             inComboMode = !inComboMode;
             //Activate an animation trigger?
-
             Destroy(leftOrbPos.GetChild(0).gameObject);
             if (leftOrbPos.parent.parent.childCount == 2)
             {
@@ -155,7 +158,8 @@ public class Shooting : MonoBehaviour
             {
                 Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
             }
-            if(!inComboMode)
+            comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch();
+            if (!inComboMode)
             {
                 Instantiate(primaryElements[leftElementIndex].handVFX, leftOrbPos);
                 if (primaryElements[leftElementIndex].wristVFX)
@@ -180,9 +184,7 @@ public class Shooting : MonoBehaviour
             }
 
         }
-
     }
-
     void NonComboShooting()
     {
         //Starts the process of activating the element held in the left hand

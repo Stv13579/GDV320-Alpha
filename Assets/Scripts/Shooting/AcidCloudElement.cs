@@ -40,7 +40,5 @@ public class AcidCloudElement : BaseElementClass
         base.StartAnims(animationName);
 
         playerHand.SetTrigger(animationName);
-        playerHandL.SetTrigger(animationName);
-
     }
 }

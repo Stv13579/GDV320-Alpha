@@ -45,7 +45,5 @@ public class ShardCannonElement : BaseElementClass
         base.StartAnims(animationName);
 
         playerHand.SetTrigger(animationName);
-        playerHandL.SetTrigger(animationName);
-
     }
 }

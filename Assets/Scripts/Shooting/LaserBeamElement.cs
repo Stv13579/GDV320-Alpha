@@ -37,7 +37,6 @@ public class LaserBeamElement : BaseElementClass
         laserBeam.SetActive(false);
 
         playerHand.SetTrigger("LaserStopCast");
-        playerHandL.SetTrigger("LaserStopCast");
         audioManager.Stop("Laser Beam");
         laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
         playerMovement.RemoveMovementMultiplier(new PlayerMovement.movementMultiSource(0.25f, "Laser"));
@@ -60,9 +59,7 @@ public class LaserBeamElement : BaseElementClass
         base.StartAnims(animationName);
 
         playerHand.ResetTrigger("LaserStopCast");
-        playerHandL.ResetTrigger("LaserStopCast");
 
         playerHand.SetTrigger(animationName);
-        playerHandL.SetTrigger(animationName);
     }
 }

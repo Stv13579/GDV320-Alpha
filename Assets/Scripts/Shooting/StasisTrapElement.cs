@@ -5,9 +5,10 @@ using UnityEngine;
 public class StasisTrapElement : BaseElementClass
 {
     [SerializeField]
-    private GameObject StasisTrap;
+    private GameObject stasisTrap;
 
-    
+    [SerializeField]
+    private GameObject indicator;
 
     [SerializeField]
     private float duration;
@@ -21,30 +22,45 @@ public class StasisTrapElement : BaseElementClass
     [SerializeField]
     private float rayCastRange;
 
+    private RaycastHit hit;
+
     [SerializeField]
     private LayerMask layerMask;
+
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward, Color.blue);
+        //if this element on turn on indicator
+        //if()
+        //{
+
+        //}
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rayCastRange, layerMask))
+        {
+            indicator.transform.position = hit.point;
+        }
+        else
+        {
+            Vector3 pos = Camera.main.transform.position + Camera.main.transform.forward.normalized * rayCastRange;
+            indicator.transform.position = pos;
+        }
     }
 
     public override void ElementEffect()
     {
-        RaycastHit hit;
         base.ElementEffect();
         // if the raycast hits then place the trap where the raycast hit
         // else place trap at the end of the raycast range
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rayCastRange, layerMask))
         {
-            GameObject newStasisTrap = Instantiate(StasisTrap, hit.point, Camera.main.transform.rotation);
+            GameObject newStasisTrap = Instantiate(stasisTrap, hit.point + new Vector3(0,0.75f,0), Camera.main.transform.rotation);
             newStasisTrap.GetComponent<StasisTrapProj>().SetVars(damage * (damageMultiplier + elementData.waterDamageMultiplier), duration, currentDamageTicker, maxDamageTicker, attackTypes);
         }
         else
         {
             Vector3 pos = Camera.main.transform.position + Camera.main.transform.forward.normalized * rayCastRange;
-            GameObject newStasisTrap = Instantiate(StasisTrap, pos, Camera.main.transform.rotation);
+            GameObject newStasisTrap = Instantiate(stasisTrap, pos + new Vector3(0, 0.75f, 0), Camera.main.transform.rotation);
             newStasisTrap.GetComponent<StasisTrapProj>().SetVars(damage * (damageMultiplier + elementData.waterDamageMultiplier), duration, currentDamageTicker, maxDamageTicker, attackTypes);
         }
     }
@@ -59,6 +75,10 @@ public class StasisTrapElement : BaseElementClass
         base.StartAnims(animationName);
 
         playerHand.SetTrigger(animationName);
-        playerHandL.SetTrigger(animationName);
+    }
+
+    protected override void SwitchAnims(string switchAnimationName, string boolTrigger)
+    {
+        base.SwitchAnims(switchAnimationName, boolTrigger);
     }
 }

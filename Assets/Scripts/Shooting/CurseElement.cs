@@ -34,8 +34,6 @@ public class CurseElement : BaseElementClass
         base.StartAnims(animationName);
 
         playerHand.SetTrigger(animationName);
-        playerHandL.SetTrigger(animationName);
-
         targeting = true;
 
     }
@@ -91,7 +89,6 @@ public class CurseElement : BaseElementClass
         base.LiftEffect();
 
         playerHand.SetTrigger("CurseRelease");
-        playerHandL.SetTrigger("CurseRelease");
     }
 
     protected override void Update()

@@ -35,8 +35,6 @@ public class BaseElementClass : MonoBehaviour
     //The animator which the element calls animations on
     [SerializeField]
     protected Animator playerHand;
-    [SerializeField]
-    protected Animator playerHandL;
 
     float currentUseDelay = 0;
 
@@ -79,6 +77,22 @@ public class BaseElementClass : MonoBehaviour
 
     protected ElementStats elementData;
 
+
+    protected Shooting shootingScript;
+
+    // these 2 strings are the bool conditions for changing elements
+    // and getting to equip state and idle state
+    [SerializeField]
+    private string boolTrigger;
+
+    [SerializeField]
+    private string switchAnimationName;
+
+    [SerializeField]
+    private int leftIndex;
+
+    [SerializeField]
+    private int rightIndex;
     protected virtual void Start()
     {
         player = GameObject.Find("Player");
@@ -86,18 +100,26 @@ public class BaseElementClass : MonoBehaviour
         //shootingTranform = GameObject.Find("Elements").transform;
         audioManager = FindObjectOfType<AudioManager>();
         elementData = Resources.Load<ElementStats>("Element/ElementData");
+        shootingScript = player.GetComponent<Shooting>();
     }
     protected virtual void StartAnims(string animationName)
     {
         playerHand.SetTrigger("CancelBack");
     }
-
+    protected virtual void SwitchAnims(string switchAnimationName, string boolTrigger)
+    {
+        playerHand.SetBool(boolTrigger, false);
+        playerHand.SetBool(switchAnimationName, true);
+    }
     //Called from the hand objects when the appropriate event triggers to turn on the vfx
     public virtual void ActivateVFX()
     {
 
     }
-
+    public virtual void AnimationSwitch()
+    {
+        SwitchAnims(boolTrigger, switchAnimationName);
+    }
     //The actual mechanical effect (eg fire object etc)
     public virtual void ElementEffect()
     {
@@ -117,7 +139,6 @@ public class BaseElementClass : MonoBehaviour
         {
             //Set out of mana anim
             playerHand.SetTrigger("NoMana");
-            playerHandL.SetTrigger("NoMana");
             return false;
         }
     }

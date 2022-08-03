@@ -81,7 +81,6 @@ public class LifeStealElement : BaseElementClass
         isShooting = false;
         lifeSteal.SetActive(false);
         playerHand.SetTrigger("LifeStealStopCast");
-        playerHandL.SetTrigger("LifeStealStopCast");
     }
     public override void ElementEffect()
     {
@@ -100,10 +99,8 @@ public class LifeStealElement : BaseElementClass
         base.StartAnims(animationName);
 
         playerHand.ResetTrigger("LifeStealStopCast");
-        playerHandL.ResetTrigger("LifeStealStopCast");
 
         playerHand.SetTrigger(animationName);
-        playerHandL.SetTrigger(animationName);
     }
 
     private void OnDrawGizmosSelected()
