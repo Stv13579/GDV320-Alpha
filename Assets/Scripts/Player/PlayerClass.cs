@@ -81,7 +81,6 @@ public class PlayerClass : MonoBehaviour
         {
             manaTypes[i].currentMana = manaTypes[i].maxMana;
         }
-        money = 0.0f;
         itemUI = GameObject.Find("ItemArray");
         //TEST IMPLEMENTATION
 

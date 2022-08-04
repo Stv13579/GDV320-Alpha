@@ -6,7 +6,7 @@ public class Multiplier
 {
     public float multiplier;
     public string source;
-    public Multiplier(float multi, string s)
+    public Multiplier(float multi = 1.0f, string s = "")
     {
         multiplier = multi;
         source = s;
