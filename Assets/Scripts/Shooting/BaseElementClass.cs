@@ -24,8 +24,9 @@ public class BaseElementClass : MonoBehaviour
 
     //A string to pass to the animator to activate appropriate triggers when 
     [SerializeField]
-    string animationToPlay;
-
+    protected string animationToPlay;
+    [SerializeField]
+    protected string animationToPlayAlt;
     //Cooldown/Firerate 
     //The amount of time before the element can be used again (usually brief)
     [SerializeField]
@@ -124,7 +125,7 @@ public class BaseElementClass : MonoBehaviour
         elementData = Resources.Load<ElementStats>("Element/ElementData");
         shootingScript = player.GetComponent<Shooting>();
     }
-    protected virtual void StartAnims(string animationName)
+    protected virtual void StartAnims(string animationName, string animationNameAlt = null)
     {
         playerHand.SetTrigger("CancelBack");
     }
@@ -198,7 +199,7 @@ public class BaseElementClass : MonoBehaviour
         {
             if(PayCosts())
             {
-                StartAnims(animationToPlay);
+                StartAnims(animationToPlay, animationToPlayAlt);
                 currentUseDelay = useDelay;
             }
         }
