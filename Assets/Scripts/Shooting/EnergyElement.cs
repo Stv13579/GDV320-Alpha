@@ -103,7 +103,7 @@ public class EnergyElement : BaseElementClass
     {
         energyShield.SetActive(false);
         useShield = false;
-        playerHand.SetTrigger("StopEnergy");
+        playerHand.SetTrigger("EnergyStopCast");
         audioManager.Stop("Energy Element");
         // go through the list of enemies
         // remove them from the list and 

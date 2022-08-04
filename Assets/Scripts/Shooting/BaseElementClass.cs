@@ -80,20 +80,41 @@ public class BaseElementClass : MonoBehaviour
 
     protected Shooting shootingScript;
 
-    // these 2 strings are the bool conditions for changing elements
-    // and getting to equip state and idle state
-    [SerializeField]
-    private string boolTrigger;
 
-    [SerializeField]
-    private string switchAnimationName;
+    public string switchAnimationName;
 
     [SerializeField]
     protected int leftIndex;
 
     [SerializeField]
     protected int rightIndex;
-    
+
+    [SerializeField]
+    protected string CurrentTransition;
+    public enum ElementType
+    {
+        None = 0,
+        
+        Fire = 1,
+        Crystal = 2,
+        Water = 3,
+
+        Necrotic = 101,
+        Energy = 102,
+        Void = 103,
+
+        LaserBeam = 201,
+        ShardCannon = 202,
+        AcidCloud = 203,
+        LandMine = 204,
+        Curse = 205,
+        IceSlash = 206,
+        LifeSteal = 207,
+        CrystalGrenade = 208,
+        StasisTrap = 209
+    }
+    [SerializeField]
+    protected ElementType currentElementType = ElementType.Fire;
     protected virtual void Start()
     {
         player = GameObject.Find("Player");
@@ -107,19 +128,45 @@ public class BaseElementClass : MonoBehaviour
     {
         playerHand.SetTrigger("CancelBack");
     }
-    protected virtual void SwitchAnims(string switchAnimationName, string boolTrigger)
-    {
-        playerHand.SetBool(boolTrigger, false);
-        playerHand.SetBool(switchAnimationName, true);
-    }
     //Called from the hand objects when the appropriate event triggers to turn on the vfx
     public virtual void ActivateVFX()
     {
 
     }
-    public virtual void AnimationSwitch()
+    public virtual void AnimationSwitch(bool isleft)
     {
-        SwitchAnims(boolTrigger, switchAnimationName);
+
+        switch (currentElementType)
+        {
+            case ElementType.Fire:
+            case ElementType.Crystal:
+            case ElementType.Water:
+            case ElementType.Necrotic:
+            case ElementType.Energy:
+            case ElementType.Void:
+                // if its these cases
+                // make elementc = none
+                // checks if its left hand or right hand then returns the appropriate index
+                playerHand.SetInteger("ElementC", 0);
+                playerHand.SetInteger(isleft ? "ElementL" : "ElementR", (int)currentElementType);
+                break;
+            case ElementType.LaserBeam:
+            case ElementType.ShardCannon:
+            case ElementType.AcidCloud:
+            case ElementType.LandMine:
+            case ElementType.Curse:
+            case ElementType.IceSlash:
+            case ElementType.LifeSteal:
+            case ElementType.CrystalGrenade:
+                // if its these cases
+                // make elementL = none
+                // make elementR = none
+                // Gives elementC the appropriate index
+                playerHand.SetInteger("ElementL", 0);
+                playerHand.SetInteger("ElementR", 0);
+                playerHand.SetInteger("ElementC", (int)currentElementType);
+                break;
+        }
     }
     //The actual mechanical effect (eg fire object etc)
     public virtual void ElementEffect()
@@ -190,4 +237,5 @@ public class BaseElementClass : MonoBehaviour
         }
     }
 
+    public Animator GetPlayerHand() {return playerHand;}
 }

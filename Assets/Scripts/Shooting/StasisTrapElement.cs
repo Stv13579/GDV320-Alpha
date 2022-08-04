@@ -82,9 +82,4 @@ public class StasisTrapElement : BaseElementClass
 
         playerHand.SetTrigger(animationName);
     }
-
-    protected override void SwitchAnims(string switchAnimationName, string boolTrigger)
-    {
-        base.SwitchAnims(switchAnimationName, boolTrigger);
-    }
 }
