@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2440540507527387987}
   - component: {fileID: 2440540507527387984}
   - component: {fileID: 2440540507527387985}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: VFX_Stasis_StasisOrbLiquid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 2440540508158556365}
   - component: {fileID: 2440540508158556367}
   - component: {fileID: 2440540508158556364}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: VFX_Stasis_OrbRays
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -4858,7 +4858,7 @@ GameObject:
   - component: {fileID: 2440540508582077953}
   - component: {fileID: 2440540508582077958}
   - component: {fileID: 2440540508582077959}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: VFX_Stasis_StasisOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4872,9 +4872,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2440540508582077956}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children:
   - {fileID: 2440540507527387990}
   - {fileID: 8655585894250803024}
@@ -4884,7 +4884,7 @@ Transform:
   - {fileID: 2440540508158556365}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!33 &2440540508582077953
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4957,7 +4957,7 @@ GameObject:
   - component: {fileID: 8655585892300122342}
   - component: {fileID: 8655585892300122341}
   - component: {fileID: 8655585892300122340}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: VFX_Stasis_OrbCentreCosmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5049,7 +5049,7 @@ GameObject:
   - component: {fileID: 8655585892662800434}
   - component: {fileID: 8655585892662800436}
   - component: {fileID: 8655585892662800435}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: VFX_Stasis_OrbCentreGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5145,7 +5145,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -9812,7 +9812,7 @@ GameObject:
   - component: {fileID: 8655585893031048128}
   - component: {fileID: 8655585893031048143}
   - component: {fileID: 8655585893031048142}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: VFX_Stasis_OrbCentre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9904,7 +9904,7 @@ GameObject:
   - component: {fileID: 8655585894250803024}
   - component: {fileID: 8655585894250803026}
   - component: {fileID: 8655585894250803025}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: VFX_Stasis_OrbStars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10000,7 +10000,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3

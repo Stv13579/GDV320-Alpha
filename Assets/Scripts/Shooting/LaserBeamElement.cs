@@ -9,6 +9,8 @@ public class LaserBeamElement : BaseElementClass
 
     [SerializeField]
     private PlayerMovement playerMovement;
+
+    private bool useLaserBeam = false;
     protected override void Start()
     {
         base.Start();
@@ -17,16 +19,13 @@ public class LaserBeamElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-        if (!Input.GetKey(KeyCode.Mouse0))
+        if(useLaserBeam)
         {
-            DeactivateLaser();
+            PayCosts(Time.deltaTime);
         }
-        if (playerHand.GetCurrentAnimatorStateInfo(0).IsName("HoldLaser"))
+        else
         {
-            if (Input.GetKeyUp(KeyCode.Mouse0) || !PayCosts(Time.deltaTime))
-            {
-                DeactivateLaser();
-            }
+            
         }
     }
 
@@ -35,8 +34,8 @@ public class LaserBeamElement : BaseElementClass
         //if left click is up or if player has no mana
         // stop the laser beam
         laserBeam.SetActive(false);
-
-        playerHand.SetTrigger("LaserStopCast");
+        useLaserBeam = false;       
+        playerHand.SetTrigger("LaserBeamStopCast");
         audioManager.Stop("Laser Beam");
         laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
         Multiplier.RemoveMultiplier(playerMovement.movementMultipliers , new Multiplier(0.25f, "Laser"), playerMovement.movementMulti);
@@ -48,6 +47,13 @@ public class LaserBeamElement : BaseElementClass
         laserBeam.SetActive(true);
         laserBeam.GetComponentInChildren<LaserBeam>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), attackTypes);
         Multiplier.AddMultiplier(playerMovement.movementMultipliers, new Multiplier(0.25f, "Laser"), playerMovement.movementMulti);
+        useLaserBeam = true;
+    }
+    public override void LiftEffect()
+    {
+        base.LiftEffect();
+        DeactivateLaser();
+        
     }
     public override void ActivateVFX()
     {
@@ -58,7 +64,7 @@ public class LaserBeamElement : BaseElementClass
     {
         base.StartAnims(animationName);
 
-        playerHand.ResetTrigger("LaserStopCast");
+        playerHand.ResetTrigger("LaserBeamStopCast");
 
         playerHand.SetTrigger(animationName);
     }

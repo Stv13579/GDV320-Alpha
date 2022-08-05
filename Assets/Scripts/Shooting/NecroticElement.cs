@@ -38,12 +38,10 @@ public class NecroticElement : BaseElementClass
     {
         base.StartAnims(animationName);
 
-        playerHand.ResetTrigger("SoulStopCast");
+        playerHand.ResetTrigger("NecroticStopCast");
         playerHand.SetTrigger(animationName);
 
         audioManager.Play("Soul Element");
-        //Instantiate(chargeVFX, playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos());
-
         isTargeting = true;
     }
     public override void ElementEffect()
@@ -101,10 +99,9 @@ public class NecroticElement : BaseElementClass
     {
         base.LiftEffect();
 
-        playerHand.SetTrigger("SoulStopCast");
+        playerHand.SetTrigger("NecroticStopCast");
 
         audioManager.Stop("Soul Element");
-        Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
     }
 
     public override void ActivateVFX()

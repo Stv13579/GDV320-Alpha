@@ -256,15 +256,8 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    public Transform GetLeftOrbPos()
-    {
-        return leftOrbPos;
-    }
-
-    public Transform GetRightOrbPos()
-    {
-        return rightOrbPos;
-    }
+    public Transform GetLeftOrbPos() { return leftOrbPos; }
+    public Transform GetRightOrbPos() { return rightOrbPos; }
 
     public Vector2 GetLeftMana()
     {

@@ -88,7 +88,7 @@ public class CurseElement : BaseElementClass
     {
         base.LiftEffect();
 
-        playerHand.SetTrigger("CurseRelease");
+        playerHand.SetTrigger("CurseStopCast");
     }
 
     protected override void Update()
