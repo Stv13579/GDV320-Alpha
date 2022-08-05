@@ -12,7 +12,12 @@ public class IncreaseMaxManaScript : Item
 
     public void IncreaseMaxMana(PlayerClass player)
     {
-        //player.maxMana += 25.0f;
-        //player.ChangeMana(25.0f);
+        int index = 0;
+        foreach (PlayerClass.ManaType mana in player.manaTypes)
+        {
+            
+            player.manaTypes[index].maxMana += 25.0f;
+            index++;
+        }
     }
 }

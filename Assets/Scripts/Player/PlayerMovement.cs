@@ -25,17 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private float currentCoyoteTime;
 
     public float movementMulti = 1.0f;
-    public struct movementMultiSource
-    {
-        public float multiplier;
-        public string source;
-        public movementMultiSource(float multi, string s)
-        {
-            multiplier = multi;
-            source = s;
-        }
-    }
-    List<movementMultiSource> movementMultipliers = new List<movementMultiSource>();
+    public List<Multiplier> movementMultipliers = new List<Multiplier>();
 
     [Header("Character velocity")]
     private Vector3 velocity;
@@ -380,42 +370,17 @@ public class PlayerMovement : MonoBehaviour
         cameraHolderTargetAngle = cameraShakeDip;
     }
 
-    public void AddMovementMultiplier(movementMultiSource multi)
-    {
-        if(!movementMultipliers.Contains(multi))
-        {
-            movementMultipliers.Add(multi);
-        }
-        movementMulti = 1.0f;
-        foreach(movementMultiSource multiplier in movementMultipliers)
-        {
-            movementMulti *= multiplier.multiplier;
-        }
-    }
 
-    public void RemoveMovementMultiplier(movementMultiSource multi)
-    {
-        if(movementMultipliers.Contains(multi))
-        {
-            movementMultipliers.Remove(multi);
 
-        }
-        movementMulti = 1.0f;
-        foreach (movementMultiSource multiplier in movementMultipliers)
-        {
-            movementMulti *= multiplier.multiplier;
-        }
-    }
-
-    public IEnumerator Slowness(movementMultiSource multiplier)
+    public IEnumerator Slowness(Multiplier multiplier)
     {
         Debug.Log("StartRoutine");
 
-        AddMovementMultiplier(multiplier);
+        Multiplier.AddMultiplier(movementMultipliers, multiplier, movementMulti);
 
         yield return new WaitForSeconds(10f);
         Debug.Log("StopRoutine");
-        RemoveMovementMultiplier(multiplier);
+        Multiplier.RemoveMultiplier(movementMultipliers, multiplier, movementMulti);
 
     }
     private void OnTriggerStay(Collider other)
