@@ -56,8 +56,15 @@ public class FireElement : BaseElementClass
 
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
-        base.StartAnims(animationName);
-
-        playerHand.SetTrigger(animationName);
+        base.StartAnims(animationName, animationNameAlt);
+        randomAnimationToPlay = Random.Range(0, 2);
+        if (randomAnimationToPlay == 0)
+        {
+            playerHand.SetTrigger(animationName);
+        }
+        else
+        {
+            playerHand.SetTrigger(animationNameAlt);
+        }
     }
 }

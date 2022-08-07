@@ -44,9 +44,9 @@ public class GameplayUI : MonoBehaviour
         healthBar.fillAmount = playerClass.currentHealth / playerClass.maxHealth;
         manaBar.fillAmount = 1;// playerClass.currentMana / playerClass.maxMana;
         moneyText.text = playerClass.money.ToString();
-        activePrimaryElement.sprite = player.GetPrimaryElement();
-        activeCatalystElement.sprite = player.GetCatalystElement();
-        activeComboElement.sprite = player.GetComboElement();
+        activePrimaryElement.sprite = player.GetPrimaryElementSprite();
+        activeCatalystElement.sprite = player.GetCatalystElementSprite();
+        activeComboElement.sprite = player.GetComboElementSprite();
         crosshair.sprite = player.GetCrosshair();
 
         Vector2 leftMana = player.GetLeftMana();

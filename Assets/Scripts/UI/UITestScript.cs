@@ -24,9 +24,9 @@ public class UITestScript : MonoBehaviour
     {
         //manaText.text = "Mana: " + playerClass.currentMana.ToString("F0") + "/" + playerClass.maxMana;
         healthText.text = "Health: " + playerClass.currentHealth + "/" + playerClass.maxHealth;
-        leftSpellText.text = "Left Spell: " +  player.GetPrimaryElement();
-        rightSpellText.text = "Right Spell: " + player.GetCatalystElement();
-        comboSpellText.text = "Combo Spell: " + player.GetComboElement();
+        leftSpellText.text = "Left Spell: " +  player.GetPrimaryElementSprite();
+        rightSpellText.text = "Right Spell: " + player.GetCatalystElementSprite();
+        comboSpellText.text = "Combo Spell: " + player.GetComboElementSprite();
         if(Input.GetKeyDown(KeyCode.F))
         {
             leftSpellText.enabled = !leftSpellText.enabled;

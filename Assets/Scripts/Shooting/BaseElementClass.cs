@@ -78,9 +78,7 @@ public class BaseElementClass : MonoBehaviour
 
     protected ElementStats elementData;
 
-
     protected Shooting shootingScript;
-
 
     public string switchAnimationName;
 
@@ -90,6 +88,7 @@ public class BaseElementClass : MonoBehaviour
     [SerializeField]
     protected int rightIndex;
 
+    protected int randomAnimationToPlay;
     public enum ElementType
     {
         None = 0,
@@ -157,6 +156,7 @@ public class BaseElementClass : MonoBehaviour
             case ElementType.IceSlash:
             case ElementType.LifeSteal:
             case ElementType.CrystalGrenade:
+            case ElementType.StasisTrap:
                 // if its these cases
                 // make elementL = none
                 // make elementR = none

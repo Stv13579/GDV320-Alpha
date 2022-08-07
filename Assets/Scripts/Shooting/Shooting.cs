@@ -34,13 +34,48 @@ public class Shooting : MonoBehaviour
 
     [SerializeField]
     Transform rightOrbPos;
+    
+    public Sprite GetPrimaryElementSprite() { return primaryElements[leftElementIndex].uiSprite; }
 
+    public Sprite GetCatalystElementSprite() { return catalystElements[rightElementIndex].uiSprite; }
+
+    public Sprite GetComboElementSprite() { return (comboElements[leftElementIndex].comboElements[rightElementIndex].uiSprite); }
+    public Transform GetLeftOrbPos() { return leftOrbPos; }
+    public Transform GetRightOrbPos() { return rightOrbPos; }
+    public int GetLeftElementIndex() { return leftElementIndex; }
+    public int GetRightElementIndex() { return rightElementIndex; }
+    public bool GetInComboMode() { return inComboMode; }
+    public Sprite GetCrosshair()
+    {
+        if (inComboMode)
+        {
+            return (comboElements[leftElementIndex].comboElements[rightElementIndex].crosshair);
+        }
+        else
+        {
+            return (primaryElements[leftElementIndex].crosshair);
+        }
+    }
+    public Vector2 GetLeftMana()
+    {
+        PlayerClass player = this.gameObject.GetComponent<PlayerClass>();
+        int i = Array.FindIndex(player.manaTypes, item => item.manaName == primaryElements[leftElementIndex].GetManaName());
+
+        return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+    }
+    public Vector2 GetRightMana()
+    {
+        PlayerClass player = this.gameObject.GetComponent<PlayerClass>();
+        int i = Array.FindIndex(player.manaTypes, item => item.manaName == catalystElements[rightElementIndex].GetManaName());
+
+        return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+    }
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         // hard coded for now
-        primaryElements[leftElementIndex].GetPlayerHand().SetInteger("ElementL", (int)BaseElementClass.ElementType.Fire);
-        catalystElements[rightElementIndex].GetPlayerHand().SetInteger("ElementR", (int)BaseElementClass.ElementType.Necrotic);
+        primaryElements[leftElementIndex].GetPlayerHand().SetInteger("ElementL", leftElementIndex + 1);
+        catalystElements[rightElementIndex].GetPlayerHand().SetInteger("ElementR", rightElementIndex + 101);
         canChangeElements = true;
     }
     private void Update()
@@ -61,6 +96,7 @@ public class Shooting : MonoBehaviour
                 ComboShooting();
             }
         }
+        
         SwitchingElements();
     }
     void SwitchingElements()
@@ -214,7 +250,6 @@ public class Shooting : MonoBehaviour
             catalystElements[rightElementIndex].LiftEffect();
         }
     }
-
     void ComboShooting()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -227,54 +262,4 @@ public class Shooting : MonoBehaviour
             comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
         }
     }
-
-    public Sprite GetPrimaryElement()
-    {
-        return primaryElements[leftElementIndex].uiSprite;
-    }
-
-    public Sprite GetCatalystElement()
-    {
-        return catalystElements[rightElementIndex].uiSprite;
-    }
-
-
-    public Sprite GetComboElement()
-    {
-        return (comboElements[leftElementIndex].comboElements[rightElementIndex].uiSprite);
-    }
-
-    public Sprite GetCrosshair()
-    {
-        if(inComboMode)
-        {
-            return (comboElements[leftElementIndex].comboElements[rightElementIndex].crosshair);
-        }
-        else
-        {
-            return (primaryElements[leftElementIndex].crosshair);
-        }
-    }
-
-    public Transform GetLeftOrbPos() { return leftOrbPos; }
-    public Transform GetRightOrbPos() { return rightOrbPos; }
-
-    public Vector2 GetLeftMana()
-    {
-        PlayerClass player = this.gameObject.GetComponent<PlayerClass>();
-        int i = Array.FindIndex(player.manaTypes, item => item.manaName == primaryElements[leftElementIndex].GetManaName());
-
-        return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
-    }
-    public Vector2 GetRightMana()
-    {
-        PlayerClass player = this.gameObject.GetComponent<PlayerClass>();
-        int i = Array.FindIndex(player.manaTypes, item => item.manaName == catalystElements[rightElementIndex].GetManaName());
-
-        return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
-    }
-
-    public int GetLeftElementIndex() {return leftElementIndex;}
-    public int GetRightElementIndex() {return rightElementIndex;}
-    public bool GetInComboMode() {return inComboMode;}
 }

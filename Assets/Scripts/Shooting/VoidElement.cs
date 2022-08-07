@@ -11,14 +11,15 @@ public class VoidElement : BaseElementClass
     Vector3 targetPos = Vector3.zero;
     bool dashing = false;
     public GameObject capsule;
+    public GameObject Indicator;
+    
     protected override void Update()
     {
         base.Update();
-
         ////Checking if the mouse button has been released, which cancels the spell if it hasn't been held long enough or casts it if it has
         //if (Input.GetKeyUp(KeyCode.Mouse1) && (playerHand.GetCurrentAnimatorStateInfo(0).IsName("VoidHold") || playerHand.GetCurrentAnimatorStateInfo(0).IsName("Void Start Hold")))
         //{
-        //    if(timer < chargeTime)
+        //    if (timer < chargeTime)
         //    {
         //        playerHand.SetTrigger("VoidStopCast");
         //        audioManager.Stop("Soul Element");
@@ -41,10 +42,6 @@ public class VoidElement : BaseElementClass
         //}
         //timer = Mathf.Clamp(timer, 0, chargeTime);
         //Time.timeScale = Mathf.Max(1 - timer / chargeTime, 0.1f);
-
-
-        
-
     }
 
     public override void ElementEffect()
