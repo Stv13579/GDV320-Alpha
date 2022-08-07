@@ -8,7 +8,6 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
     protected Vector3 targetPos;
     protected float timer = 0.0f;
     public float effectTimer;
-    [HideInInspector]
     public float effectTimerMulti;
     protected bool effect = false;
     bool moving = false;
@@ -57,6 +56,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
             targetPos = target.transform.position + new Vector3(0, 10, 0);
             this.transform.LookAt(targetPos);
             this.transform.eulerAngles += new Vector3(0, 90, 0);
+            this.transform.eulerAngles = new Vector3(0, this.transform.eulerAngles.y, 0);
         }
 
 
@@ -83,42 +83,38 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
     protected virtual void FindTarget()
     {
         BaseEnemyClass[] enemies = FindObjectsOfType<BaseEnemyClass>();
-        bool foundTarget = false;
-        while (!foundTarget)
+
+
+
+        List<BaseEnemyClass> validEnemies = new List<BaseEnemyClass>();
+        foreach (BaseEnemyClass enemy in enemies)
         {
-            int i = Random.Range(0, enemies.Length);
-            bool onlyFlying = true;
-            //Check that there aren't only flying enemies left
-            foreach(BaseEnemyClass enemy in enemies)
+            //Get a list of all non-flying enemies that the enemy can reach
+
+            if (!enemy.gameObject.GetComponent<BaseFlyingEnemyScript>())
             {
-                if (!enemy.gameObject.GetComponent<BaseFlyingEnemyScript>())
+                if (enemy.gameObject != target)
                 {
-                    onlyFlying = false;
-                }
-            }
-            //If there aren't only flying enemies left, get all the enemies in the scene and pick a new one
-            if(!onlyFlying)
-            {
-                if (enemies[i].gameObject != target)
-                {
-                    target = enemies[i].gameObject;
+                    target = enemy.gameObject;
                 }
                 targetPos = target.transform.position + new Vector3(0, 10, 0);
-                //Make sure the chosen enemy isn't a flying enemy, and that the path to them is clear
-                if (!target.GetComponent<BaseFlyingEnemyScript>())
+                RaycastHit hit;
+                if (!Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
                 {
-                    RaycastHit hit;
-                    if (!Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
-                    {
-                        foundTarget = true;
-                    }
+                    validEnemies.Add(enemy);
                 }
             }
-            else
-            {
-                //Stay in idle I guess
-            }
-
+        }
+        if(validEnemies.Count > 0)
+        {
+            int i = Random.Range(0, validEnemies.Count);
+            target = validEnemies[i].gameObject;
+            targetPos = target.transform.position + new Vector3(0, 10, 0);
+        }
+        else
+        {
+            target = this.gameObject;
+            targetPos = player.transform.position + new Vector3(0, 10, 0);
         }
     }
 

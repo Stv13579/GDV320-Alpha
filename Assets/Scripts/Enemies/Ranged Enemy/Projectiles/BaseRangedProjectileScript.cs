@@ -7,6 +7,7 @@ public class BaseRangedProjectileScript : MonoBehaviour
     protected float speed;
     protected float damage;
     protected GameObject player;
+    protected float timer = 0;
     // Start is called before the first frame update
     protected void Start()
     {
@@ -17,6 +18,11 @@ public class BaseRangedProjectileScript : MonoBehaviour
     void Update()
     {
         this.transform.position += this.transform.forward * speed * Time.deltaTime;
+        timer += Time.deltaTime;
+        if(timer > 10)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     protected virtual void HitEffect()
