@@ -16,32 +16,32 @@ public class VoidElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-        ////Checking if the mouse button has been released, which cancels the spell if it hasn't been held long enough or casts it if it has
-        //if (Input.GetKeyUp(KeyCode.Mouse1) && (playerHand.GetCurrentAnimatorStateInfo(0).IsName("VoidHold") || playerHand.GetCurrentAnimatorStateInfo(0).IsName("Void Start Hold")))
-        //{
-        //    if (timer < chargeTime)
-        //    {
-        //        playerHand.SetTrigger("VoidStopCast");
-        //        audioManager.Stop("Soul Element");
-        //        //Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
-        //    }
-        //    else
-        //    {
-        //        playerHand.SetTrigger("VoidCastSuccess");
+        //Checking if the mouse button has been released, which cancels the spell if it hasn't been held long enough or casts it if it has
+        if (Input.GetKeyUp(KeyCode.Mouse1) && (playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") || playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold")))
+        {
+            if (timer < chargeTime)
+            {
+                playerHand.SetTrigger("VoidStopCast");
+                audioManager.Stop("Soul Element");
+                //Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
+            }
+            else
+            {
+                playerHand.SetTrigger("VoidCastSuccess");
 
-        //    }
+            }
 
-        //}
-        //if (Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(0).IsName("VoidHold"))
-        //{
-        //    timer += Time.deltaTime * (1 / Time.timeScale);
-        //}
-        //else
-        //{
-        //    timer -= Time.deltaTime * 10;
-        //}
-        //timer = Mathf.Clamp(timer, 0, chargeTime);
-        //Time.timeScale = Mathf.Max(1 - timer / chargeTime, 0.1f);
+        }
+        if (Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold"))
+        {
+            timer += Time.deltaTime * (1 / Time.timeScale);
+        }
+        else
+        {
+            timer -= Time.deltaTime * 10;
+        }
+        timer = Mathf.Clamp(timer, 0, chargeTime);
+        Time.timeScale = Mathf.Max(1 - timer / chargeTime, 0.1f);
     }
 
     public override void ElementEffect()
