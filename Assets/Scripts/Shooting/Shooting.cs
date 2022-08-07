@@ -205,6 +205,8 @@ public class Shooting : MonoBehaviour
             comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch(true);
             if (!inComboMode)
             {
+                primaryElements[leftElementIndex].AnimationSwitch(true);
+                catalystElements[rightElementIndex].AnimationSwitch(false);
                 Instantiate(primaryElements[leftElementIndex].handVFX, leftOrbPos);
                 if (primaryElements[leftElementIndex].wristVFX)
                 {
