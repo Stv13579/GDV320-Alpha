@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShardProjectile : MonoBehaviour
+public class ShardProjectile : BaseElementSpawnClass
 {
     float speed;
 
     float damage;
 
     int pierceAmount;
-
-    List<BaseEnemyClass.Types> attackTypes;
 
     AudioManager audioManager;
 
@@ -57,6 +55,11 @@ public class ShardProjectile : MonoBehaviour
             audioManager.Play("Slime Damage");
             //hitMarker.transform.GetChild(7).gameObject.SetActive(true);
             //Invoke("HitMarkerDsable", 0.2f);
+        }
+        if(other.tag == "Shield")
+        {
+            other.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
+
         }
 
         if (other.gameObject.tag != "Player")

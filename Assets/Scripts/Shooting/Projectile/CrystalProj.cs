@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrystalProj : MonoBehaviour
+public class CrystalProj : BaseElementSpawnClass
 {
     private float speed;
     private float damage;
@@ -11,7 +11,6 @@ public class CrystalProj : MonoBehaviour
 
     private float startLifeTimer;
 
-    List<BaseEnemyClass.Types> attackTypes;
     private AudioManager audioManager;
 
     private bool ismoving;
@@ -91,6 +90,13 @@ public class CrystalProj : MonoBehaviour
             originalPosition = transform.position;
             ismoving = false;
         }
+        if (other.tag == "Shield")
+        {
+            other.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
+            Debug.Log("Shield");
+            Destroy(gameObject);
+            
+        }
         Collider taggedEnemy = null;
         //if enemy, hit them for the damage
         // destroy projectile after
@@ -102,6 +108,7 @@ public class CrystalProj : MonoBehaviour
             audioManager.Play("Slime Damage");
             //hitMarker.transform.GetChild(7).gameObject.SetActive(true);
             //Invoke("HitMarkerDsable", 0.2f);
+            Debug.Log("Enemy");
             Destroy(gameObject);
         }
     }

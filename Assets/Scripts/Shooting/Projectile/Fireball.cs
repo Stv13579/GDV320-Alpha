@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fireball : MonoBehaviour
+public class Fireball : BaseElementSpawnClass
 {
 
     float speed;
@@ -19,7 +19,6 @@ public class Fireball : MonoBehaviour
 
     float explosionRadii;
 
-    List<BaseEnemyClass.Types> attackTypes;
 
     [SerializeField]
     private GameObject hitMarker;
@@ -72,14 +71,26 @@ public class Fireball : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         //if enemy, hit them for the damage
         Collider taggedEnemy = null;
-
-        if(other.isTrigger)
+        if(other.isTrigger && other.gameObject.layer != 10)
         {
             return;
         }
-
+        if (other.tag == "Shield")
+        {
+            other.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
+            gravity = 0;
+            speed = 0;
+            Destroy(this.gameObject.GetComponent<Collider>());
+            this.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            this.gameObject.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            Debug.Log("Shield");
+            Debug.Log(Time.frameCount);
+        }
         if (other.tag == "Environment")
         {
             gravity = 0;
@@ -90,8 +101,9 @@ public class Fireball : MonoBehaviour
             this.gameObject.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
 
+
         }
-        if (other.tag  == "Enemy")
+        if (other.gameObject.layer  == 8 && active)
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             audioManager.Stop("Slime Damage");
@@ -99,8 +111,12 @@ public class Fireball : MonoBehaviour
             hitMarker.transform.GetChild(7).gameObject.SetActive(true);
             Invoke("HitMarkerDsable", 0.2f);
             taggedEnemy = other;
+            Debug.Log("Enemy");
+            Debug.Log(Time.frameCount);
+
+
         }
-        if(other.gameObject.tag != "Player" && other.gameObject.tag != "Node")
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Node" && other.gameObject.tag != "Shield" && active)
         {
             Collider[] objectsHit = Physics.OverlapSphere(transform.position, explosionRadii);
 

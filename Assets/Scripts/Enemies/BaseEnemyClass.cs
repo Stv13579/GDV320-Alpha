@@ -134,7 +134,6 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
     {
-        Debug.Log("Hit");
         GameObject hitSpn = Instantiate(hitSpawn, transform.position, Quaternion.identity);
         Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
         hitSpn.transform.localScale = scale;

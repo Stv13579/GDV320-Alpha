@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AcidCloud : MonoBehaviour
+public class AcidCloud : BaseElementSpawnClass
 {
     float damage;
 
@@ -11,8 +11,6 @@ public class AcidCloud : MonoBehaviour
     float cloudDuration;
 
     [SerializeField] GameObject acidBurnVFX;
-
-    [SerializeField] List<BaseEnemyClass.Types> attackTypes;
 
     AudioManager audioManager;
 

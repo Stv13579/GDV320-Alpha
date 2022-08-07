@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterProjectile : MonoBehaviour
+public class WaterProjectile : BaseElementSpawnClass
 {
     float speed;
 
     float damage;
 
     float projectileLifetime = 100;
-
-    List<BaseEnemyClass.Types> attackTypes;
 
     [SerializeField]
     private GameObject hitMarker;
@@ -72,6 +70,10 @@ public class WaterProjectile : MonoBehaviour
         if(collision.collider.tag == "Enemy")
         {
             collision.collider.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+        }
+        else if (collision.collider.tag == "Shield")
+        {
+            collision.collider.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
         }
     }
 

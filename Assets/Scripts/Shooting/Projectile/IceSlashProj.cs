@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceSlashProj : MonoBehaviour
+public class IceSlashProj : BaseElementSpawnClass
 {
     private float speed;
     private float damage;
 
     private float startLifeTimer;
-    List<BaseEnemyClass.Types> attackTypes;
     private AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
@@ -54,6 +53,10 @@ public class IceSlashProj : MonoBehaviour
         if (other.gameObject.layer == 8)
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+        }
+        if (other.tag == "Shield")
+        {
+            other.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
         }
         // hits environment and destroys itself
         if (other.gameObject.layer == 10)

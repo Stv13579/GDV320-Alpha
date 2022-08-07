@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrystalGrenadeProj : MonoBehaviour
+public class CrystalGrenadeProj : BaseElementSpawnClass
 {
     private float speed;
     private float damage;
@@ -11,7 +11,6 @@ public class CrystalGrenadeProj : MonoBehaviour
     private float gravity;
     private float explosionRange;
     private float explosionDamage;
-    List<BaseEnemyClass.Types> attackTypes;
     AudioManager audioManager;
     private Vector3 originalPosition;
     private bool isMoving;
@@ -41,6 +40,10 @@ public class CrystalGrenadeProj : MonoBehaviour
                 if (objectsHit[i].gameObject.layer == 8)
                 {
                     objectsHit[i].GetComponent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
+                }
+                else if (objectsHit[i].gameObject.tag == "Shield")
+                {
+                    objectsHit[i].gameObject.GetComponent<EnemyShield>().DamageShield(explosionDamage, attackTypes);
                 }
             }
             Destroy(gameObject);
@@ -81,6 +84,15 @@ public class CrystalGrenadeProj : MonoBehaviour
             gravity = 0;
             other.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             other = enemy;
+        }
+        else if (other.gameObject.tag == "Shield")
+        {
+            this.GetComponent<Rigidbody>().useGravity = false;
+            isAttached = true;
+            this.gameObject.transform.SetParent(other.transform);
+            this.GetComponent<Rigidbody>().isKinematic = true;
+            speed = 0;
+            gravity = 0;
         }
         else if(other.gameObject.layer == 10)
         {
