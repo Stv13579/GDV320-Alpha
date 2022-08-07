@@ -69,7 +69,7 @@ public class LifeStealElement : BaseElementClass
                 isTargeting = true;
             }
 
-            if (isTargeting == true && enemy != null)
+            if (isTargeting == true && enemy.GetComponent<BaseEnemyClass>())
             {
                 enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier * elementData.waterDamageMultiplier), attackTypes);
                 playerClass.ChangeHealth(healValue);
@@ -81,7 +81,6 @@ public class LifeStealElement : BaseElementClass
         isShooting = false;
         lifeSteal.SetActive(false);
         playerHand.SetTrigger("LifeStealStopCast");
-        playerHandL.SetTrigger("LifeStealStopCast");
     }
     public override void ElementEffect()
     {
@@ -95,15 +94,13 @@ public class LifeStealElement : BaseElementClass
         base.ActivateVFX();
     }
 
-    protected override void StartAnims(string animationName)
+    protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);
 
         playerHand.ResetTrigger("LifeStealStopCast");
-        playerHandL.ResetTrigger("LifeStealStopCast");
 
         playerHand.SetTrigger(animationName);
-        playerHandL.SetTrigger(animationName);
     }
 
     private void OnDrawGizmosSelected()

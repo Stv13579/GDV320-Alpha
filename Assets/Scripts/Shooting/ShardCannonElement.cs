@@ -40,12 +40,10 @@ public class ShardCannonElement : BaseElementClass
         base.ActivateVFX();
     }
 
-    protected override void StartAnims(string animationName)
+    protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);
 
         playerHand.SetTrigger(animationName);
-        playerHandL.SetTrigger(animationName);
-
     }
 }

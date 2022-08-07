@@ -21,7 +21,7 @@ public class IceSlashProj : BaseElementSpawnClass
         if(startLifeTimer > 0)
         {
             startLifeTimer -= Time.deltaTime;
-            this.gameObject.GetComponent<Transform>().localScale += new Vector3(0.1f, 0, 0.1f);
+            //this.gameObject.GetComponent<Transform>().localScale += new Vector3(0.1f, 0, 0.1f);
         }
         MoveIceSlash();
         KillProjectile();

@@ -85,16 +85,13 @@ public class EnergyElement : BaseElementClass
         }
         else
         {
-            if (!Input.GetKey(KeyCode.Mouse1))
+            if(useShield)
             {
-                DeactivateEnergyShield();
+                PayCosts(Time.deltaTime);
             }
-            if (playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold"))
+            else
             {
-                if (Input.GetKeyUp(KeyCode.Mouse1) || !PayCosts(Time.deltaTime))
-                {
-                    DeactivateEnergyShield();
-                }
+                
             }
         }
     }
@@ -103,7 +100,7 @@ public class EnergyElement : BaseElementClass
     {
         energyShield.SetActive(false);
         useShield = false;
-        playerHand.SetTrigger("StopEnergy");
+        playerHand.SetTrigger("EnergyStopCast");
         audioManager.Stop("Energy Element");
         // go through the list of enemies
         // remove them from the list and 
@@ -112,6 +109,7 @@ public class EnergyElement : BaseElementClass
             containedEnemies[i].GetComponent<BaseEnemyClass>().damageMultiplier = 1.0f;
             containedEnemies.Remove(containedEnemies[i]);
         }
+        activatedVFX.SetActive(false);
     }
 
     public override void ElementEffect()
@@ -119,18 +117,24 @@ public class EnergyElement : BaseElementClass
         base.ElementEffect();
         energyShield.SetActive(true);
         useShield = true;
+        activatedVFX.SetActive(true);
     }
-
+    
     public override void ActivateVFX()
     {
         base.ActivateVFX();
     }
 
-    protected override void StartAnims(string animationName)
+    public override void LiftEffect()
+    {
+        base.LiftEffect();
+        DeactivateEnergyShield();
+    }
+    protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);
 
-        playerHand.ResetTrigger("StopEnergy");
+        playerHand.ResetTrigger("EnergyStopCast");
         playerHand.SetTrigger(animationName);
 
         audioManager.Play("Energy Element");

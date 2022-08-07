@@ -29,13 +29,11 @@ public class CurseElement : BaseElementClass
     [SerializeField]
     Color outlineColour;
 
-    protected override void StartAnims(string animationName)
+    protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);
 
         playerHand.SetTrigger(animationName);
-        playerHandL.SetTrigger(animationName);
-
         targeting = true;
 
     }
@@ -90,8 +88,7 @@ public class CurseElement : BaseElementClass
     {
         base.LiftEffect();
 
-        playerHand.SetTrigger("CurseRelease");
-        playerHandL.SetTrigger("CurseRelease");
+        playerHand.SetTrigger("CurseStopCast");
     }
 
     protected override void Update()
