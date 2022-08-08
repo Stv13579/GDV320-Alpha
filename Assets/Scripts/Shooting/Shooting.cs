@@ -35,7 +35,9 @@ public class Shooting : MonoBehaviour
 
     [SerializeField]
     Transform rightOrbPos;
-    
+
+    [SerializeField]
+    GameplayUI uiScript;
     public Sprite GetPrimaryElementSprite() { return primaryElements[leftElementIndex].uiSprite; }
 
     public Sprite GetCatalystElementSprite() { return catalystElements[rightElementIndex].uiSprite; }
@@ -196,6 +198,7 @@ public class Shooting : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.F))
             {
+                uiScript.SetCombo(!inComboMode);
                 canChangeElements = !canChangeElements;
                 inComboMode = !inComboMode;
                 //Activate an animation trigger?
