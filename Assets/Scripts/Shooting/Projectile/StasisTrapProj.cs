@@ -35,7 +35,7 @@ public class StasisTrapProj : MonoBehaviour
         }
         duration += Time.deltaTime;
         currentDamageTicker += Time.deltaTime;
-        if(duration >= maxDuration - 1.0f)
+        if(duration >= maxDuration - 0.75f)
         {
             visualBubble.SetActive(false);
             aftermathVFX.SetActive(true);
