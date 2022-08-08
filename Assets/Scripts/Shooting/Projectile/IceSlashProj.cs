@@ -61,7 +61,10 @@ public class IceSlashProj : BaseElementSpawnClass
         // hits environment and destroys itself
         if (other.gameObject.layer == 10)
         {
-            Destroy(gameObject);
+            if (startLifeTimer < 4.97f)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
