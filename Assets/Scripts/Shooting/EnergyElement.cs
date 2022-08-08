@@ -71,7 +71,7 @@ public class EnergyElement : BaseElementClass
                         {
                             shieldStateChange = shieldState.shieldDown;
                         }
-                        if (playerHand.GetCurrentAnimatorStateInfo(0).IsName("Hold"))
+                        if (playerHand.GetCurrentAnimatorStateInfo(1).IsName("EnergyHold"))
                         {
                             if (Input.GetKeyUp(KeyCode.Mouse1) || !PayCosts(Time.deltaTime))
                             {
@@ -89,10 +89,11 @@ public class EnergyElement : BaseElementClass
             {
                 PayCosts(Time.deltaTime);
             }
-            else
-            {
-                
-            }
+        }
+        // this check if the player press mouse 1 once (presses it fast and it goes through animator and does disable the shield)
+        if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("EnergyStart"))
+        {
+            DeactivateEnergyShield();
         }
     }
 
