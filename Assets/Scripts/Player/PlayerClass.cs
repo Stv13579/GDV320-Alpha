@@ -91,6 +91,16 @@ public class PlayerClass : MonoBehaviour
 
     void Update()
     {
+        //Don't forget to remove this
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            BaseEnemyClass[] enemies = FindObjectsOfType<BaseEnemyClass>();
+            foreach(BaseEnemyClass enemy in enemies)
+            {
+                enemy.TakeDamage(1000, new List<BaseEnemyClass.Types>());
+            }
+        }
+
         if (transform.position.y <= -30)
         {
             transform.position = fallSpawner.position;

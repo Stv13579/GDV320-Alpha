@@ -6,8 +6,7 @@ public class RangedEnemyScript : BaseEnemyClass
 {
     float timer = 0;
     public float attackTime;
-    [HideInInspector]
-    public float attackTimeMulti;
+    public float attackTimeMulti = 1.0f;
     public LayerMask viewToPlayer;
     public float burrowTime;
     bool burrowing = false;
@@ -26,7 +25,7 @@ public class RangedEnemyScript : BaseEnemyClass
         timer = attackTime;
         RaycastHit hit;
         Physics.Raycast(this.gameObject.transform.position, -this.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
-        Vector3 emergePos = hit.point - this.transform.GetChild(0).GetChild(1).localPosition * 2;
+        Vector3 emergePos = hit.point - this.transform.GetChild(1).localPosition * 2;
         this.transform.position = emergePos;
     }
 
@@ -36,13 +35,20 @@ public class RangedEnemyScript : BaseEnemyClass
 
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, Mathf.Infinity, viewToPlayer))
+        if (Physics.Raycast(projectileSpawnPos.position, player.transform.position - projectileSpawnPos.position, out hit, Mathf.Infinity, viewToPlayer))
         {
+            Debug.Log(hit.collider.gameObject.name);
+            Debug.DrawRay(projectileSpawnPos.position, player.transform.position - transform.position);
             if (hit.collider.gameObject.tag == "Player")
             {
                 if(!burrowing)
                 {
                     timer += Time.deltaTime;
+                    if (timer >= attackTime * attackTimeMulti)
+                    {
+                        timer = 0;
+                        enemyAnims.SetTrigger("Attacking");
+                    }
                     transform.LookAt(player.transform.position);
                     Quaternion rot = transform.rotation;
                     rot.eulerAngles = new Vector3(0, rot.eulerAngles.y, 0);
@@ -62,11 +68,7 @@ public class RangedEnemyScript : BaseEnemyClass
         }
 
 
-        if(timer >= attackTime * attackTimeMulti)
-        {
-            timer = 0;
-            enemyAnims.SetTrigger("Attacking");
-        }
+
 
 
     }

@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 2045452580190906750}
   - component: {fileID: 2045452580190906736}
   - component: {fileID: 2045452580190906737}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fire Flying Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 1da2ed79282378742a349ae4a05e4dab, type: 3}
+  - {fileID: 2100000, guid: 441d27e044e83ed4997f70969077ff11, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   targettingIndicator: {fileID: 0}
   oldPosition: {x: 0, y: 0, z: 0}
   effectTimer: 10
-  effectTimerMulti: 0
+  effectTimerMulti: 1
   moveDetect:
     serializedVersion: 2
     m_Bits: 1024
@@ -166,7 +166,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
