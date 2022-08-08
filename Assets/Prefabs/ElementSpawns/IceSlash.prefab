@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5372446088479200937}
   - component: {fileID: 6701949603259464317}
-  - component: {fileID: 5829293097374332431}
   - component: {fileID: 2439358773171983117}
   - component: {fileID: 891719871}
   m_Layer: 0
@@ -47,19 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2f5d919a1be5f4fa54c8e5f296d04a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &5829293097374332431
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5956346581750816906}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  attackTypes: 
+  active: 1
 --- !u!54 &2439358773171983117
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -87,8 +75,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.179127, y: 0.3, z: 1.3125048}
-  m_Center: {x: 0.002909422, y: 0, z: 0.26195168}
+  m_Size: {x: 3.1058478, y: 0.3, z: 0.8792151}
+  m_Center: {x: -0.09596753, y: 0, z: 0.4785965}
 --- !u!1001 &4518232894895320588
 PrefabInstance:
   m_ObjectHideFlags: 0
