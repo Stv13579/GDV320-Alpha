@@ -11,7 +11,7 @@ public class StasisTrapElement : BaseElementClass
     private GameObject indicator;
 
     [SerializeField]
-    private float duration;
+    private float maxDuration;
 
     [SerializeField]
     private float currentDamageTicker;
@@ -61,13 +61,13 @@ public class StasisTrapElement : BaseElementClass
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rayCastRange, layerMask))
         {
             GameObject newStasisTrap = Instantiate(stasisTrap, hit.point + new Vector3(0,0.75f,0), Camera.main.transform.rotation);
-            newStasisTrap.GetComponent<StasisTrapProj>().SetVars(damage * (damageMultiplier + elementData.waterDamageMultiplier), duration, currentDamageTicker, maxDamageTicker, attackTypes);
+            newStasisTrap.GetComponent<StasisTrapProj>().SetVars(damage * (damageMultiplier + elementData.waterDamageMultiplier), maxDuration, currentDamageTicker, maxDamageTicker, attackTypes);
         }
         else
         {
             Vector3 pos = Camera.main.transform.position + Camera.main.transform.forward.normalized * rayCastRange;
             GameObject newStasisTrap = Instantiate(stasisTrap, pos + new Vector3(0, 0.75f, 0), Camera.main.transform.rotation);
-            newStasisTrap.GetComponent<StasisTrapProj>().SetVars(damage * (damageMultiplier + elementData.waterDamageMultiplier), duration, currentDamageTicker, maxDamageTicker, attackTypes);
+            newStasisTrap.GetComponent<StasisTrapProj>().SetVars(damage * (damageMultiplier + elementData.waterDamageMultiplier), maxDuration, currentDamageTicker, maxDamageTicker, attackTypes);
         }
     }
 
