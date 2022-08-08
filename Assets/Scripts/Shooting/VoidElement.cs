@@ -17,7 +17,8 @@ public class VoidElement : BaseElementClass
     {
         base.Update();
         //Checking if the mouse button has been released, which cancels the spell if it hasn't been held long enough or casts it if it has
-        if (Input.GetKeyUp(KeyCode.Mouse1) && (playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") || playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold")))
+        if (!Input.GetKey(KeyCode.Mouse1) && (playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") || 
+            playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold")))
         {
             if (timer < chargeTime)
             {
@@ -41,7 +42,7 @@ public class VoidElement : BaseElementClass
             timer -= Time.deltaTime * 10;
         }
         timer = Mathf.Clamp(timer, 0, chargeTime);
-        Time.timeScale = Mathf.Max(1 - timer / chargeTime, 0.1f);
+        //Time.timeScale = Mathf.Max(1 - timer / chargeTime, 0.1f);
     }
 
     public override void ElementEffect()
