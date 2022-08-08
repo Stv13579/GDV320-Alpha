@@ -400,8 +400,8 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         fireLerpValue = Mathf.Clamp(fireLerpValue, -1, 1);
 
 
-        rend.sharedMaterial.SetFloat("_FireTextureLerp", fireLerpValue);
-        rend.sharedMaterial.SetFloat("_CrystalTextureLerp", crystalLerpValue);
+        rend.material.SetFloat("_FireTextureLerp", fireLerpValue);
+        rend.material.SetFloat("_CrystalTextureLerp", crystalLerpValue);
         
         
     }
