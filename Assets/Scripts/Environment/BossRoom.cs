@@ -29,12 +29,13 @@ public class BossRoom : Room
             return;
         }
 
-        if(!currentBoss && !bossDead && bossSpawned)
+        if(FindObjectsOfType<BaseEnemyClass>().Length == 0 && !bossDead && bossSpawned)
         {
             //Spawn the portal
             Instantiate(portalObject, portalSpawnPosition.position, Quaternion.identity);
             UnlockDoors();
             bossDead = true;
+            Destroy(GameObject.Find("Boss Healthbar(Clone)"));
         }
 
         if (roomTrigger.GetComponent<RoomTrigger>().triggered && !bossSpawned)

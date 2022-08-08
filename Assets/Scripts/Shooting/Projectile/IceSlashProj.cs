@@ -50,7 +50,7 @@ public class IceSlashProj : BaseElementSpawnClass
     private void OnTriggerEnter(Collider other)
     {
         // goes through enemies and damages them aswell
-        if (other.gameObject.layer == 8)
+        if (other.gameObject.layer == 8 && other.gameObject.GetComponent<BaseEnemyClass>())
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
         }
