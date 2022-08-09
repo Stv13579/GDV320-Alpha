@@ -29,7 +29,8 @@ public class GameplayUI : MonoBehaviour
 
     float comboTimer = 1.0f;
 
-
+    public bool GetCombo() { return combo; }
+    public void SetCombo(bool tempCombo) { combo = tempCombo; }
 
     void Start()
     {
@@ -54,10 +55,6 @@ public class GameplayUI : MonoBehaviour
         Vector2 rightMana = player.GetRightMana();
         rightManaText.text = rightMana[0] + "/" + rightMana[1];
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            combo = !combo;
-        }
         if (combo)
         {
             comboTimer -= Time.deltaTime;

@@ -6,29 +6,50 @@ public class StasisTrapProj : MonoBehaviour
 {
     private float damage;
     private float duration;
+    private float maxDuration;
     private float maxDamageTicker;
     private float currentDamageTicker;
-    List<BaseEnemyClass.Types> attackTypes;
-    List<GameObject> containedEnemies = new List<GameObject>();
-    AudioManager audioManager;
+    private List<BaseEnemyClass.Types> attackTypes;
+    private List<GameObject> containedEnemies = new List<GameObject>();
+    private AudioManager audioManager;
+
+    [SerializeField]
+    private GameObject visualBubble;
+
+    [SerializeField]
+    private GameObject aftermathVFX;
 
     // Start is called before the first frame update
     void Start()
     {
+        duration = 0.0f;
         audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        duration -= Time.deltaTime;
+        if(duration >= 0.5f)
+        {
+            visualBubble.SetActive(true);
+        }
+        duration += Time.deltaTime;
         currentDamageTicker += Time.deltaTime;
+        if(duration >= maxDuration - 0.75f)
+        {
+            visualBubble.SetActive(false);
+            aftermathVFX.SetActive(true);
+            if (!aftermathVFX.GetComponent<ParticleSystem>().isPlaying)
+            {
+                aftermathVFX.GetComponent<ParticleSystem>().Play();
+            }
+        }
         KillProjectile();
     }
 
     void KillProjectile()
     {
-        if(duration <= 0)
+        if(duration >= maxDuration)
         {
             for(int i = 0; i < containedEnemies.Count; i++)
             {
@@ -44,7 +65,7 @@ public class StasisTrapProj : MonoBehaviour
     public void SetVars(float dmg, float dur, float ct, float mdt, List<BaseEnemyClass.Types> types)
     {
         damage = dmg;
-        duration = dur;
+        maxDuration = dur;
         attackTypes = types;
         currentDamageTicker = ct;
         maxDamageTicker = mdt;

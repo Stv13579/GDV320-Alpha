@@ -4,49 +4,47 @@ using UnityEngine;
 
 public class VoidElement : BaseElementClass
 {
-    float timer = 0.0f;
-    public float chargeTime = 1.5f;
     public float dashDistance = 10.0f;
+    public float dashDistanceIndicator = 5.0f;
     public float dashTime = 0.5f;
     Vector3 targetPos = Vector3.zero;
     bool dashing = false;
-    public GameObject capsule;
     public GameObject Indicator;
-    
+    bool isHolding;
+    public LayerMask environmentMask;
+    public GameObject channelingOrb;
     protected override void Update()
     {
         base.Update();
         //Checking if the mouse button has been released, which cancels the spell if it hasn't been held long enough or casts it if it has
-        if (Input.GetKeyUp(KeyCode.Mouse1) && (playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") || playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold")))
+        if (!Input.GetKey(KeyCode.Mouse1) && (playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") || 
+            playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold")))
         {
-            if (timer < chargeTime)
+            isHolding = false;
+            playerHand.SetTrigger("VoidCastSuccess");
+            audioManager.Stop("Soul Element");
+            channelingOrb.SetActive(false);
+        }
+        if (isHolding)
+        {
+            channelingOrb.SetActive(true);
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, dashDistanceIndicator, environmentMask))
             {
-                playerHand.SetTrigger("VoidStopCast");
-                audioManager.Stop("Soul Element");
-                //Destroy(playerClass.gameObject.GetComponent<Shooting>().GetRightOrbPos().GetChild(1).gameObject);
+                Indicator.transform.position = hit.point;
             }
             else
             {
-                playerHand.SetTrigger("VoidCastSuccess");
-
+                Vector3 pos = Camera.main.transform.position + Camera.main.transform.forward.normalized * dashDistanceIndicator;
+                Indicator.transform.position = pos;
             }
-
         }
-        if (Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold"))
-        {
-            timer += Time.deltaTime * (1 / Time.timeScale);
-        }
-        else
-        {
-            timer -= Time.deltaTime * 10;
-        }
-        timer = Mathf.Clamp(timer, 0, chargeTime);
-        Time.timeScale = Mathf.Max(1 - timer / chargeTime, 0.1f);
     }
 
     public override void ElementEffect()
     {
         base.ElementEffect();
+        Indicator.SetActive(false);
         Debug.Log("Effect");
         //Subtract the mana cost
         playerClass.ChangeMana(-manaCost, manaTypes);
@@ -100,7 +98,8 @@ public class VoidElement : BaseElementClass
         playerHand.SetTrigger(animationName);
         playerHand.ResetTrigger("VoidStopCast");
         audioManager.Play("Soul Element");
-
+        Indicator.SetActive(true);
+        isHolding = true;
     }
 
     protected override bool PayCosts(float modifier = 1)

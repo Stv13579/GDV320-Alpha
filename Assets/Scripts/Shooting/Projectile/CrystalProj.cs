@@ -100,7 +100,7 @@ public class CrystalProj : BaseElementSpawnClass
         Collider taggedEnemy = null;
         //if enemy, hit them for the damage
         // destroy projectile after
-        if (other.gameObject.layer == 8)
+        if (other.gameObject.layer == 8 && other.gameObject.GetComponent<BaseEnemyClass>())
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             taggedEnemy = other;

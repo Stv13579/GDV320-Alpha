@@ -78,7 +78,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
         if(jumpTimer <= 0)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, 10, viewToPlayer))
+            if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, 10, viewToPlayer) && spawner)
             {
                 float distance = float.MaxValue;
                 Vector3 nearestNode = Vector3.zero;

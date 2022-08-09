@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -603,6 +603,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7373350057435146732, guid: 261c1b80ac3865f46a740cb823cf87d0,
+        type: 3}
+      propertyPath: maxRooms
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373350057435146732, guid: 261c1b80ac3865f46a740cb823cf87d0,
+        type: 3}
+      propertyPath: minRooms
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 261c1b80ac3865f46a740cb823cf87d0, type: 3}
 --- !u!1001 &1505947845
@@ -655,6 +665,11 @@ PrefabInstance:
         type: 3}
       propertyPath: manaTypes.Array.data[5].maxMana
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5625023910511142018, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5625023911835613078, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
         type: 3}

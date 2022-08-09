@@ -100,6 +100,11 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     [SerializeField]
     GameObject crystalHit, crystalDeath, fireHit, fireDeath, normalHit, normalDeath;
 
+    public GameObject healthBar;
+    [HideInInspector]
+    protected BossHealthbarScript bossHealthBar;
+    bool split = false;
+
     public override void Start()
     {
         base.Start();
@@ -109,8 +114,17 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         currentChargeDuration = fireChargeDuration;
         decalManager = FindObjectOfType<DecalRendererManager>();
         currentMatLerp = 0;
-        spawner = GameObject.Find("BossSpawner").GetComponent<BossSpawn>();
-        
+        //spawner = GameObject.Find("BossSpawner").GetComponent<BossSpawn>();
+        if(!GameObject.Find("Boss Healthbar(Clone)"))
+        {
+            bossHealthBar = Instantiate(healthBar).GetComponent<BossHealthbarScript>();
+            bossHealthBar.enemies.Add(this);
+            bossHealthBar.bossName.text = "King Slime";
+            bossHealthBar.maxHealth = maxHealth;
+
+        }
+        deathTriggers.Remove(Split);
+
     }
 
     protected override void Update()
@@ -300,7 +314,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     {
         if (currentChargeDuration > 0)
         {
-            Vector3 moveVec = chargeVec * moveSpeed * fireChargeSpeed * Time.deltaTime;
+            Vector3 moveVec = chargeVec.normalized * moveSpeed * fireChargeSpeed * Time.deltaTime;
             moveVec.y = 0;
             moveVec.y -= 1 * Time.deltaTime;
             transform.position += moveVec;
@@ -386,8 +400,8 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         fireLerpValue = Mathf.Clamp(fireLerpValue, -1, 1);
 
 
-        rend.sharedMaterial.SetFloat("_FireTextureLerp", fireLerpValue);
-        rend.sharedMaterial.SetFloat("_CrystalTextureLerp", crystalLerpValue);
+        rend.material.SetFloat("_FireTextureLerp", fireLerpValue);
+        rend.material.SetFloat("_CrystalTextureLerp", crystalLerpValue);
         
         
     }
@@ -436,10 +450,10 @@ public class BossSlimeEnemy : WaterSlimeEnemy
 
     public override void Death()
     {
-        if(currentHealth <= 0)
-        {
-            spawner.bossDead = true;
-        }
+        //if(currentHealth <= 0)
+        //{
+        //    spawner.bossDead = true;
+        //}
         base.Death();
 
         
@@ -448,6 +462,10 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
     {
         base.TakeDamage(damageToTake, attackTypes, 2);
+        if(currentHealth <= maxHealth / 2 && !split)
+        {
+            Split();
+        }
     }
 
     public void PushAway()
@@ -455,5 +473,27 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         //GetComponent<Rigidbody>().AddForce( -(player.transform.position - transform.position).normalized * pushForce);
         GetComponent<Rigidbody>().AddForce((player.transform.position - transform.position).normalized.x * pushForce, 5 * pushForce, (player.transform.position - transform.position).normalized.z * pushForce);
     }
+
+    protected override void Split()
+    {
+        if (generation < 3)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                BossSlimeEnemy newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2), Quaternion.identity).GetComponent<BossSlimeEnemy>();
+                newSlime.maxHealth = maxHealth / 4;
+                newSlime.damageAmount = damageAmount / 2;
+                newSlime.transform.localScale = this.transform.localScale / 2;
+                newSlime.moveSpeed = moveSpeed / 2;
+                newSlime.generation = generation + 1;
+                bossHealthBar.enemies.Add(newSlime);
+                newSlime.bossHealthBar = bossHealthBar;
+            }
+            bossHealthBar.enemies.Remove(this);
+            split = true;
+            Destroy(this.gameObject);
+        }
+    }
+
 
 }
