@@ -23,9 +23,10 @@ public class LaserBeamElement : BaseElementClass
         {
             PayCosts(Time.deltaTime);
         }
-        else
+        // same check as the energy shield need to make this nicer.
+        if(!Input.GetKey(KeyCode.Mouse0) && playerHand.GetCurrentAnimatorStateInfo(2).IsName("StartLaser"))
         {
-            
+            DeactivateLaser();
         }
     }
 

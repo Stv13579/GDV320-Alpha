@@ -103,7 +103,7 @@ public class Fireball : BaseElementSpawnClass
 
 
         }
-        if (other.gameObject.layer  == 8 && active)
+        if (other.gameObject.layer == 8 && active)
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             audioManager.Stop("Slime Damage");
@@ -116,7 +116,7 @@ public class Fireball : BaseElementSpawnClass
 
 
         }
-        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Node" && other.gameObject.tag != "Shield" && active)
+        if (other.gameObject.layer != 11 && other.gameObject.layer != 20 && other.gameObject.tag != "Node" && other.gameObject.tag != "Shield" && active)
         {
             Collider[] objectsHit = Physics.OverlapSphere(transform.position, explosionRadii);
 
