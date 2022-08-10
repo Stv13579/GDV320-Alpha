@@ -97,13 +97,11 @@ public class CrystalProj : BaseElementSpawnClass
             Destroy(gameObject);
             
         }
-        Collider taggedEnemy = null;
         //if enemy, hit them for the damage
         // destroy projectile after
         if (other.gameObject.layer == 8 && other.gameObject.GetComponent<BaseEnemyClass>())
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            taggedEnemy = other;
             audioManager.Stop("Slime Damage");
             audioManager.Play("Slime Damage");
             //hitMarker.transform.GetChild(7).gameObject.SetActive(true);

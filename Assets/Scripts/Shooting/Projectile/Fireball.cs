@@ -103,7 +103,7 @@ public class Fireball : BaseElementSpawnClass
 
 
         }
-        if (other.gameObject.layer == 8 && active)
+        if (other.gameObject.layer == 8 && active && other.GetComponent<BaseEnemyClass>())
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             audioManager.Stop("Slime Damage");
