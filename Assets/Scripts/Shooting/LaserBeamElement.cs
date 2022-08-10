@@ -17,7 +17,7 @@ public class LaserBeamElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-        // same check as the energy shield need to make this nicer.
+        // same check as the energy shield need to check if player are in theses states
         if(playerHand.GetCurrentAnimatorStateInfo(2).IsName("StartLaser") ||
            playerHand.GetCurrentAnimatorStateInfo(2).IsName("HoldLaser"))
         {
