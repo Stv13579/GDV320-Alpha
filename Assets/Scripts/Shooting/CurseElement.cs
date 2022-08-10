@@ -42,13 +42,13 @@ public class CurseElement : BaseElementClass
         base.ElementEffect();
         targeting = false;
         //curse the target
-
         //Give it a death trigger
-        if(targetToCurse && !targetToCurse.GetComponent<BaseEnemyClass>().deathTriggers.Contains(DeathEffect))
+        if (targetToCurse && !targetToCurse.GetComponent<BaseEnemyClass>().deathTriggers.Contains(DeathEffect))
         {
             //Attach an effect to it
             Instantiate(curseVFX, targetToCurse.transform);
             targetToCurse.GetComponent<BaseEnemyClass>().deathTriggers.Add(DeathEffect);
+            playerClass.ChangeMana(-manaCost, manaTypes);
         }
     }
     
@@ -59,17 +59,10 @@ public class CurseElement : BaseElementClass
         {
             hitColls = Physics.OverlapSphere(targetToCurse.transform.position, explosionRange);
         }
-        
-
-        int i = 0;
         if(hitColls != null)
         {
             foreach (Collider hit in hitColls)
             {
-                //if(hitColls[i] == )
-
-                //i++;
-
                 if (hit.tag == "Enemy")
                 {
                     hit.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.crystalDamageMultiplier), types);
@@ -127,6 +120,18 @@ public class CurseElement : BaseElementClass
             {
                 targetToCurse.GetComponent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
             }
+        }
+    }
+    protected override bool PayCosts(float modifier = 1)
+    {
+        //Override of paycosts so that mana is only subtracted at then end, in case the cast is cancelled
+        if (playerClass.ManaCheck(manaCost * modifier, manaTypes))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
