@@ -83,15 +83,9 @@ public class EnergyElement : BaseElementClass
                     }
             }
         }
-        else
-        {
-            if(useShield)
-            {
-                PayCosts(Time.deltaTime);
-            }
-        }
         // this check if the player press mouse 1 once (presses it fast and it goes through animator and does disable the shield)
-        if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("EnergyStart"))
+        if (playerHand.GetCurrentAnimatorStateInfo(1).IsName("EnergyStart") ||
+            playerHand.GetCurrentAnimatorStateInfo(1).IsName("EnergyHold"))
         {
             DeactivateEnergyShield();
         }
@@ -99,18 +93,20 @@ public class EnergyElement : BaseElementClass
 
     public void DeactivateEnergyShield()
     {
-        energyShield.SetActive(false);
-        useShield = false;
-        playerHand.SetTrigger("EnergyStopCast");
-        audioManager.Stop("Energy Element");
-        // go through the list of enemies
-        // remove them from the list and 
-        for(int i = 0; i < containedEnemies.Count; i++)
+        if (!Input.GetKey(KeyCode.Mouse1) || !PayCosts(Time.deltaTime))
         {
-            containedEnemies[i].GetComponent<BaseEnemyClass>().damageMultiplier = 1.0f;
-            containedEnemies.Remove(containedEnemies[i]);
+            energyShield.SetActive(false);
+            useShield = false;
+            playerHand.SetTrigger("EnergyStopCast");
+            audioManager.Stop("Energy Element");
+            // go through the list of enemies
+            // remove them from the list and 
+            for (int i = 0; i < containedEnemies.Count; i++)
+            {
+                containedEnemies[i].GetComponent<BaseEnemyClass>().damageMultiplier = 1.0f;
+                containedEnemies.Remove(containedEnemies[i]);
+            }
         }
-        activatedVFX.SetActive(false);
     }
 
     public override void ElementEffect()
@@ -118,9 +114,9 @@ public class EnergyElement : BaseElementClass
         base.ElementEffect();
         energyShield.SetActive(true);
         useShield = true;
-        activatedVFX.SetActive(true);
     }
     
+    // for the channelling orb
     public override void ActivateVFX()
     {
         base.ActivateVFX();
@@ -130,30 +126,18 @@ public class EnergyElement : BaseElementClass
     {
         base.LiftEffect();
         DeactivateEnergyShield();
+        if(shootingScript.GetRightOrbPos().childCount > 1)
+        {
+            Destroy(shootingScript.GetRightOrbPos().GetChild(1).gameObject);
+        }
     }
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);
-
         playerHand.ResetTrigger("EnergyStopCast");
         playerHand.SetTrigger(animationName);
-
         audioManager.Play("Energy Element");
-    }
-
-    protected override bool PayCosts(float modifier = 1)
-    {
-        //Override of paycosts so that mana is only subtracted at then end, in case the cast is cancelled
-        if (playerClass.ManaCheck(manaCost * modifier, manaTypes))
-        {
-            playerClass.ChangeMana(-manaCost * modifier, manaTypes);
-            return true;
-        }
-        else
-        {
-            playerHand.SetTrigger("NoMana");
-            return false;
-        }
+        Instantiate(activatedVFX, shootingScript.GetRightOrbPos());
     }
 
     private void OnTriggerEnter(Collider other)

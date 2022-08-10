@@ -33,7 +33,6 @@ public class NecroticElement : BaseElementClass
 
     [SerializeField]
     private float currentSlowTimer;
-
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);
@@ -48,9 +47,9 @@ public class NecroticElement : BaseElementClass
     {
         base.ElementEffect();
         isTargeting = false;
-
-        if(targetToSlow && (targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti != 0.5f || targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti != 0.3f))
+        if (targetToSlow && (targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti != 0.5f || targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti != 0.3f))
         {
+            playerClass.ChangeMana(-manaCost, manaTypes);
             Instantiate(test, targetToSlow.transform);
             targetToSlow.GetComponent<BaseEnemyClass>().AddMovementMultiplier(upgraded ? 0.5f : 0.3f);
         }
@@ -107,5 +106,17 @@ public class NecroticElement : BaseElementClass
     public override void ActivateVFX()
     {
         base.ActivateVFX();
+    }
+    protected override bool PayCosts(float modifier = 1)
+    {
+        //Override of paycosts so that mana is only subtracted at then end, in case the cast is cancelled
+        if (playerClass.ManaCheck(manaCost * modifier, manaTypes))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
