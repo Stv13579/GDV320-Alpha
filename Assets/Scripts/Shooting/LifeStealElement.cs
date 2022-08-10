@@ -50,7 +50,9 @@ public class LifeStealElement : BaseElementClass
             RaycastHit[] objectHit = Physics.SphereCastAll(Camera.main.transform.position, sphereRadius, Camera.main.transform.forward, sphereRange, hitLayer);
             if(objectHit.Length <= 0)
             {
-
+                isTargeting = false;
+                lifeSteal.SetActive(false);
+                return;
             }
             else if (objectHit[0].transform.gameObject.layer == environmentLayer)
             {
