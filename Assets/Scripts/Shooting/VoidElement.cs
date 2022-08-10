@@ -12,7 +12,6 @@ public class VoidElement : BaseElementClass
     public GameObject Indicator;
     bool isHolding;
     public LayerMask environmentMask;
-    public GameObject channelingOrb;
     protected override void Update()
     {
         base.Update();
@@ -23,11 +22,9 @@ public class VoidElement : BaseElementClass
             isHolding = false;
             playerHand.SetTrigger("VoidCastSuccess");
             audioManager.Stop("Soul Element");
-            channelingOrb.SetActive(false);
         }
         if (isHolding)
         {
-            channelingOrb.SetActive(true);
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, dashDistanceIndicator, environmentMask))
             {
@@ -100,6 +97,7 @@ public class VoidElement : BaseElementClass
         audioManager.Play("Soul Element");
         Indicator.SetActive(true);
         isHolding = true;
+        Instantiate(activatedVFX, shootingScript.GetRightOrbPos());
     }
 
     protected override bool PayCosts(float modifier = 1)
@@ -142,7 +140,14 @@ public class VoidElement : BaseElementClass
         StopCoroutine(Dash());
     }
 
-
+    public override void LiftEffect()
+    {
+        base.LiftEffect();
+        if (shootingScript.GetRightOrbPos().childCount > 1)
+        {
+            Destroy(shootingScript.GetRightOrbPos().GetChild(1).gameObject);
+        }
+    }
     public override void Upgrade()
     {
         base.Upgrade();

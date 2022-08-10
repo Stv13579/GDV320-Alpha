@@ -9,8 +9,6 @@ public class LaserBeamElement : BaseElementClass
 
     [SerializeField]
     private PlayerMovement playerMovement;
-
-    private bool useLaserBeam = false;
     protected override void Start()
     {
         base.Start();
@@ -19,12 +17,9 @@ public class LaserBeamElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-        if(useLaserBeam)
-        {
-            PayCosts(Time.deltaTime);
-        }
         // same check as the energy shield need to make this nicer.
-        if(!Input.GetKey(KeyCode.Mouse0) && playerHand.GetCurrentAnimatorStateInfo(2).IsName("StartLaser"))
+        if(playerHand.GetCurrentAnimatorStateInfo(2).IsName("StartLaser") ||
+           playerHand.GetCurrentAnimatorStateInfo(2).IsName("HoldLaser"))
         {
             DeactivateLaser();
         }
@@ -32,15 +27,16 @@ public class LaserBeamElement : BaseElementClass
 
     public void DeactivateLaser()
     {
-        //if left click is up or if player has no mana
-        // stop the laser beam
-        laserBeam.SetActive(false);
-        useLaserBeam = false;       
-        playerHand.SetTrigger("LaserBeamStopCast");
-        audioManager.Stop("Laser Beam");
-        laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
-        Multiplier.RemoveMultiplier(playerMovement.movementMultipliers , new Multiplier(0.25f, "Laser"), playerMovement.movementMulti);
-
+        if (!Input.GetKey(KeyCode.Mouse0) || !PayCosts(10 * Time.deltaTime))
+        {
+            //if left click is up or if player has no mana
+            // stop the laser beam
+            laserBeam.SetActive(false);
+            playerHand.SetTrigger("LaserBeamStopCast");
+            audioManager.Stop("Laser Beam");
+            laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
+            Multiplier.RemoveMultiplier(playerMovement.movementMultipliers, new Multiplier(0.25f, "Laser"), playerMovement.movementMulti);
+        }            
     }
     public override void ElementEffect()
     {
@@ -48,7 +44,6 @@ public class LaserBeamElement : BaseElementClass
         laserBeam.SetActive(true);
         laserBeam.GetComponentInChildren<LaserBeam>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), attackTypes);
         Multiplier.AddMultiplier(playerMovement.movementMultipliers, new Multiplier(0.25f, "Laser"), playerMovement.movementMulti);
-        useLaserBeam = true;
     }
     public override void LiftEffect()
     {
@@ -68,5 +63,17 @@ public class LaserBeamElement : BaseElementClass
         playerHand.ResetTrigger("LaserBeamStopCast");
 
         playerHand.SetTrigger(animationName);
+    }
+    protected override bool PayCosts(float modifier = 1)
+    {
+        //Override of paycosts so that mana is only subtracted at then end, in case the cast is cancelled
+        if (playerClass.ManaCheck(manaCost * modifier, manaTypes))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
