@@ -35,16 +35,11 @@ public class LifeStealElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-        if(!Input.GetKey(KeyCode.Mouse0))
+
+        if(playerHand.GetCurrentAnimatorStateInfo(2).IsName("StartLifeStealCast") ||
+           playerHand.GetCurrentAnimatorStateInfo(2).IsName("LifeStealCastHold"))
         {
             DeactivateLifeSteal();
-        }
-        if(playerHand.GetCurrentAnimatorStateInfo(0).IsName("LifeStealCastHold"))
-        {
-            if(Input.GetKeyUp(KeyCode.Mouse0) || !PayCosts(Time.deltaTime))
-            {
-                DeactivateLifeSteal();
-            }
         }
         ActivateLifeSteal();
     }
@@ -60,17 +55,20 @@ public class LifeStealElement : BaseElementClass
             else if (objectHit[0].transform.gameObject.layer == environmentLayer)
             {
                 // do nothing
+                isTargeting = false;
+                lifeSteal.SetActive(false);
             }
-            else
+            else if (objectHit[0].transform.gameObject.layer == 8)
             {
                 // turn targeting on
                 // damage enemy
                 enemy = objectHit[0].transform.gameObject;
                 isTargeting = true;
             }
-
-            if (isTargeting == true && enemy.GetComponent<BaseEnemyClass>())
+            if (isTargeting == true && enemy.GetComponent<BaseEnemyClass>() && enemy != null)
             {
+                playerClass.ChangeMana(-Time.deltaTime, manaTypes);
+                lifeSteal.SetActive(true);
                 enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier * elementData.waterDamageMultiplier), attackTypes);
                 playerClass.ChangeHealth(healValue);
             }
@@ -78,14 +76,17 @@ public class LifeStealElement : BaseElementClass
     }
     private void DeactivateLifeSteal()
     {
-        isShooting = false;
-        lifeSteal.SetActive(false);
-        playerHand.SetTrigger("LifeStealStopCast");
+        if (!Input.GetKey(KeyCode.Mouse0) /*|| !PayCosts(Time.deltaTime)*/)
+        {
+            isTargeting = false;
+            isShooting = false;
+            lifeSteal.SetActive(false);
+            playerHand.SetTrigger("LifeStealStopCast");
+        }
     }
     public override void ElementEffect()
     {
         base.ElementEffect();
-        lifeSteal.SetActive(true);
         isShooting = true;
     }
 
@@ -93,7 +94,11 @@ public class LifeStealElement : BaseElementClass
     {
         base.ActivateVFX();
     }
-
+    public override void LiftEffect()
+    {
+        base.LiftEffect();
+        DeactivateLifeSteal();
+    }
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);
@@ -102,12 +107,16 @@ public class LifeStealElement : BaseElementClass
 
         playerHand.SetTrigger(animationName);
     }
-
-    private void OnDrawGizmosSelected()
+    protected override bool PayCosts(float modifier = 1)
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(Camera.main.transform.position + Camera.main.transform.forward * sphereRange, sphereRadius);
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(Camera.main.transform.position + Camera.main.transform.forward * sphereRange, Camera.main.transform.position - Camera.main.transform.forward * sphereRange);
+        //Override of paycosts so that mana is only subtracted at then end, in case the cast is cancelled
+        if (playerClass.ManaCheck(manaCost * modifier, manaTypes))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
