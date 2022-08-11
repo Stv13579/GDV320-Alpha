@@ -37,7 +37,8 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
             Collider[] objectsHit = Physics.OverlapSphere(transform.position, explosionRange);
             for (int i = 0; i < objectsHit.Length; i++)
             {
-                if (objectsHit[i].gameObject.layer == 8)
+                if (objectsHit[i].gameObject.layer == 8 && 
+                    objectsHit[i].GetComponent<BaseEnemyClass>())
                 {
                     objectsHit[i].GetComponent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
                 }
@@ -74,7 +75,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 8)
+        if(other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())
         {
             this.GetComponent<Rigidbody>().useGravity = false;
             isAttached = true;

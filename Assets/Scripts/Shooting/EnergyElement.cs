@@ -144,7 +144,7 @@ public class EnergyElement : BaseElementClass
     {
         if (useShield)
         {
-            if (other.gameObject.layer == 8 || other.gameObject.layer == 22)
+            if (other.gameObject.layer == 8  && other.GetComponent<BaseEnemyClass>() || other.gameObject.layer == 22 && other.GetComponent<BaseEnemyClass>())
             {
 
                 if (other.gameObject && !containedEnemies.Contains(other.gameObject))

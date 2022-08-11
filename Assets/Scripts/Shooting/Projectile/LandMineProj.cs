@@ -41,12 +41,13 @@ public class LandMineProj : MonoBehaviour
         // other is an enemy
         // there is a ground, player and the enemy in explosion range
 
-        if(other.gameObject.layer == 8)
+        if(other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())
         {
             Collider[] objectsHitByExplosion = Physics.OverlapSphere(this.transform.position, explosiveRadius);
             for(int i = 0; i < objectsHitByExplosion.Length; i++)
             {
-                if (objectsHitByExplosion[i].gameObject.layer == 8)
+                if (objectsHitByExplosion[i].gameObject.layer == 8 && 
+                    objectsHitByExplosion[i].GetComponent<BaseEnemyClass>())
                 {
                     objectsHitByExplosion[i].GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
                 }

@@ -73,7 +73,7 @@ public class StasisTrapProj : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 8 && !containedEnemies.Contains(other.gameObject))
+        if(other.gameObject.layer == 8 && !containedEnemies.Contains(other.gameObject) && other.GetComponent<BaseEnemyClass>())
         {
             containedEnemies.Add(other.gameObject);
             for (int i = 0; i < containedEnemies.Count; i++)
@@ -84,7 +84,7 @@ public class StasisTrapProj : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == 8)
+        if (other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())
         {
             if (currentDamageTicker > maxDamageTicker)
             {

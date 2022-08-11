@@ -35,6 +35,15 @@ public class AudioManager : MonoBehaviour
     public string initalMusic;
     [SerializeField]
     float audioDistance;
+    
+    enum fadeInandOut
+    {
+        None = 0,
+        fadeOut = 1,
+        fadeIn = 2
+    }
+    fadeInandOut currentState = fadeInandOut.None;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -87,20 +96,37 @@ public class AudioManager : MonoBehaviour
         s.audioSource.Stop();
 
     }
-    // will be working on this in alpha was a late implementation 
-    // this is for Beta needs fixing to do
-    public void FadeInAndOut(string fadeIn, string fadeOut, int audioIn, int audioOut, bool condition)
+    
+    // takes in the string of the audio that you want to fade in
+    // takes in the string of the audio that you want to fade out
+    // takes in ints for the audios in the sounds list
+    // takes in an int which changes state
+    public void FadeInAndOutMusic(string fadeIn, string fadeOut, int audioIn, int audioOut, int State)
     {
-        if (condition == true)
+        if (State == 1)
         {
-            sounds[audioOut].volume -= Time.deltaTime;
+            sounds[audioOut].audioSource.volume -= Time.deltaTime;
         }
-        if (sounds[audioOut].volume <= 0)
+        if (sounds[audioOut].audioSource.volume <= 0)
         {
             Stop(fadeOut);
+            State = 2;
+            sounds[audioOut].audioSource.volume = 0.1f;
+            sounds[audioIn].audioSource.volume = 0.0f;
+        }
+        if (State == 2)
+        {
             Play(fadeIn);
-            condition = false;
-            sounds[audioOut].volume = 0.1f;
+            sounds[audioIn].audioSource.volume += Time.deltaTime;
+            if (sounds[audioIn].audioSource.volume >= 0.1f)
+            {
+                sounds[audioIn].audioSource.volume = 0.1f;
+                State = 0;
+            }
+        }
+        if(State == 0)
+        {
+            return;
         }
     }
 }

@@ -26,7 +26,7 @@ public class VoidElement : BaseElementClass
         if (isHolding)
         {
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, dashDistanceIndicator, environmentMask))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, dashDistanceIndicator, shootingIgnore))
             {
                 Indicator.transform.position = hit.point;
             }
