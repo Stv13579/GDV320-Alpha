@@ -85,7 +85,7 @@ public class Shooting : MonoBehaviour
             Application.Quit();
         }
 
-        if(ableToShoot /* check if the animator is not in idle */ /*&& GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(2).IsName("Idle")*/)
+        if(ableToShoot)
         {
             if (!inComboMode)
             {
@@ -96,7 +96,8 @@ public class Shooting : MonoBehaviour
                 ComboShooting();
             }
         }
-        
+        StopComboShooting();
+        StopNonComboShooting();
         SwitchingElements();
     }
     void SwitchingElements()
@@ -144,58 +145,55 @@ public class Shooting : MonoBehaviour
                 }
 
             }
-            if (canChangeHoldElements)
+            if (Input.GetKeyUp(KeyCode.E))
             {
-                if (Input.GetKeyUp(KeyCode.E))
+                rightElementIndex++;
+                // play audio of switching weapons
+                audioManager.Stop("Change Element");
+                audioManager.Play("Change Element");
+                if (rightElementIndex >= catalystElements.Count)
                 {
-                    rightElementIndex++;
-                    // play audio of switching weapons
-                    audioManager.Stop("Change Element");
-                    audioManager.Play("Change Element");
-                    if (rightElementIndex >= catalystElements.Count)
-                    {
-                        rightElementIndex = 0;
-                    }
-                    Destroy(rightOrbPos.GetChild(0).gameObject);
-                    if (rightOrbPos.parent.parent.childCount == 2)
-                    {
-                        Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
-                    }
-                    if (!inComboMode)
-                    {
-                        catalystElements[rightElementIndex].AnimationSwitch(false);
-                        Instantiate(catalystElements[rightElementIndex].handVFX, rightOrbPos);
-                        if (catalystElements[rightElementIndex].wristVFX)
-                        {
-                            Instantiate(catalystElements[rightElementIndex].wristVFX, rightOrbPos.parent.parent);
-                        }
-                    }
-                    else
-                    {
-                        comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch(true);
-                        Destroy(leftOrbPos.GetChild(0).gameObject);
-                        if (leftOrbPos.parent.parent.childCount == 2)
-                        {
-                            Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
-                        }
-                        Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, leftOrbPos);
-                        Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, rightOrbPos);
-                        if (comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX)
-                        {
-                            Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX, leftOrbPos.parent.parent);
-                            Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX, rightOrbPos.parent.parent);
-                        }
-                    }
-
+                    rightElementIndex = 0;
                 }
+                Destroy(rightOrbPos.GetChild(0).gameObject);
+                if (rightOrbPos.parent.parent.childCount == 2)
+                {
+                    Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
+                }
+                if (!inComboMode)
+                {
+                    catalystElements[rightElementIndex].AnimationSwitch(false);
+                    Instantiate(catalystElements[rightElementIndex].handVFX, rightOrbPos);
+                    if (catalystElements[rightElementIndex].wristVFX)
+                    {
+                        Instantiate(catalystElements[rightElementIndex].wristVFX, rightOrbPos.parent.parent);
+                    }
+                }
+                else
+                {
+                    comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch(true);
+                    Destroy(leftOrbPos.GetChild(0).gameObject);
+                    if (leftOrbPos.parent.parent.childCount == 2)
+                    {
+                        Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
+                    }
+                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, leftOrbPos);
+                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, rightOrbPos);
+                    if (comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX)
+                    {
+                        Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX, leftOrbPos.parent.parent);
+                        Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX, rightOrbPos.parent.parent);
+                    }
+                }
+
             }
         
-        if (canChangeHoldElements)
-        {
             if (Input.GetKeyUp(KeyCode.F))
             {
                 uiScript.SetCombo(!inComboMode);
                 inComboMode = !inComboMode;
+                audioManager.Stop("Change Element");
+                audioManager.Play("Change Element");
                 //Activate an animation trigger?
                 Destroy(leftOrbPos.GetChild(0).gameObject);
                 if (leftOrbPos.parent.parent.childCount == 2)
@@ -235,8 +233,6 @@ public class Shooting : MonoBehaviour
                 }
 
             }
-        }
-        
     }
     void NonComboShooting()
     {
@@ -250,7 +246,10 @@ public class Shooting : MonoBehaviour
             catalystElements[rightElementIndex].ActivateElement();
             canChangeHoldElements = false;
         }
-
+    }
+    void StopNonComboShooting()
+    {
+        //Stops the process of activating the element held in the left hand
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             primaryElements[leftElementIndex].LiftEffect();
@@ -258,7 +257,15 @@ public class Shooting : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             catalystElements[rightElementIndex].LiftEffect();
-            canChangeHoldElements = true;
+        }
+        if (rightElementIndex != 0)
+        {
+            catalystElements[rightElementIndex - 1].LiftEffect();
+        }
+        // hard coded need to change
+        if (rightElementIndex == 0)
+        {
+            primaryElements[rightElementIndex + 2].LiftEffect();
         }
     }
     void ComboShooting()
@@ -266,13 +273,30 @@ public class Shooting : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
-            canChangeHoldElements = false;
         }
-
+    }
+    void StopComboShooting()
+    {
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
-            canChangeHoldElements = true;
         }
+        if (rightElementIndex != 0)
+        {
+            comboElements[leftElementIndex].comboElements[rightElementIndex - 1].LiftEffect();
+        }
+        // hard coded need to change
+        if (rightElementIndex == 0)
+        {
+            comboElements[leftElementIndex].comboElements[rightElementIndex + 2].LiftEffect();
+        }
+    }
+    void SwapElementOn()
+    {
+        
+    }
+    void SwapElementOff()
+    {
+        
     }
 }
