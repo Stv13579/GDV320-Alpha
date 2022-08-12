@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 131726689}
   m_Layer: 20
-  m_Name: SpellSpawn
+  m_Name: SpellSpawnR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1511683287}
   m_Layer: 20
-  m_Name: SpellSpawn
+  m_Name: SpellSpawnL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 1668261772}
   m_Layer: 20
   m_Name: Elements
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1731,7 +1731,7 @@ MonoBehaviour:
   isHittingObj: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 2163968
 --- !u!1 &3997194955424251685
 GameObject:
   m_ObjectHideFlags: 0
@@ -3357,7 +3357,7 @@ MonoBehaviour:
   manaCost: 1
   animationToPlay: WaterProj
   animationToPlayAlt: WaterProjAlt
-  useDelay: 0
+  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Water
   uiSprite: {fileID: 21300000, guid: 55980c051e129aa4685e936a8e1dad47, type: 3}
@@ -3371,7 +3371,7 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 198449
-  shootingSoundFX: Fireball Initial
+  shootingSoundFX: Water Element Shoot
   damage: 1
   damageMultiplier: 1
   switchAnimationName: WaterTransition
@@ -3400,7 +3400,7 @@ MonoBehaviour:
   manaCost: 5
   animationToPlay: NecroticCast
   animationToPlayAlt: 
-  useDelay: 1
+  useDelay: 0
   playerHand: {fileID: 2017859571}
   elementName: Soul
   uiSprite: {fileID: -7654870270679289077, guid: d39b8bc076de18747869f25ce241874b,
@@ -3414,7 +3414,7 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
-  shootingSoundFX: Soul Element
+  shootingSoundFX: Necrotic Shoot
   damage: 0
   damageMultiplier: 1
   switchAnimationName: NecroticTransition
@@ -3450,7 +3450,7 @@ MonoBehaviour:
   manaCost: 1
   animationToPlay: EnergyCast
   animationToPlayAlt: 
-  useDelay: 0
+  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Energy
   uiSprite: {fileID: 6129296847577865886, guid: d39b8bc076de18747869f25ce241874b,
@@ -3464,7 +3464,7 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
-  shootingSoundFX: Energy Element
+  shootingSoundFX: Energy Shoot
   damage: 0
   damageMultiplier: 1
   switchAnimationName: EnergyTransition
@@ -3494,7 +3494,7 @@ MonoBehaviour:
   manaCost: 10
   animationToPlay: VoidCast
   animationToPlayAlt: 
-  useDelay: 3
+  useDelay: 2
   playerHand: {fileID: 2017859571}
   elementName: Void
   uiSprite: {fileID: 21300000, guid: ae6d38d4504c6614db48e4a2c1f29bc4, type: 3}
@@ -3506,8 +3506,8 @@ MonoBehaviour:
   shootingTranform: {fileID: 131726689}
   shootingIgnore:
     serializedVersion: 2
-    m_Bits: 198449
-  shootingSoundFX: Energy Element
+    m_Bits: 2163968
+  shootingSoundFX: Void Shoot
   damage: 0
   damageMultiplier: 1
   switchAnimationName: VoidTransition
@@ -3665,7 +3665,7 @@ MonoBehaviour:
   manaCost: 5
   animationToPlay: LandMineCast
   animationToPlayAlt: LandMineCastAlt
-  useDelay: 0
+  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Land Mine
   uiSprite: {fileID: 0}
@@ -3678,7 +3678,7 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
-  shootingSoundFX: Crystal Shotgun
+  shootingSoundFX: LandMine Shoot
   damage: 10
   damageMultiplier: 1
   switchAnimationName: LandMineTransition
@@ -3688,8 +3688,8 @@ MonoBehaviour:
   landMineProjectile: {fileID: 5230698329136778979, guid: d3d1480b2678d1f4d87879615a4cc650,
     type: 3}
   indicator: {fileID: 739160400}
-  explosiveRadius: 10
-  lifeTimer: 10
+  explosiveRadius: 5
+  lifeTimer: 5
   rayCastRange: 10
   layerMask:
     serializedVersion: 2
@@ -3762,7 +3762,7 @@ MonoBehaviour:
   manaCost: 5
   animationToPlay: IceSlashCast
   animationToPlayAlt: IceSlashCastAlt
-  useDelay: 0
+  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Ice Slash
   uiSprite: {fileID: 0}
@@ -3775,7 +3775,7 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 198449
-  shootingSoundFX: Fireball Initial
+  shootingSoundFX: Ice Slash Shoot
   damage: 10
   damageMultiplier: 1
   switchAnimationName: IceSlashTransition
@@ -3817,7 +3817,7 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
-  shootingSoundFX: Soul Element
+  shootingSoundFX: Life Steal Initial
   damage: 0.1
   damageMultiplier: 1
   switchAnimationName: LifeStealTransition
@@ -3853,7 +3853,7 @@ MonoBehaviour:
   manaCost: 5
   animationToPlay: CrystalGrenadeCast
   animationToPlayAlt: CrystalGrenadeCastAlt
-  useDelay: 0
+  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Crystal Grenade
   uiSprite: {fileID: 0}
@@ -3866,7 +3866,7 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 198449
-  shootingSoundFX: Fireball Initial
+  shootingSoundFX: Crystal Grenade Shoot
   damage: 3
   damageMultiplier: 1
   switchAnimationName: CrystalGrenadeTransition
@@ -3877,8 +3877,8 @@ MonoBehaviour:
     type: 3}
   projectileSpeed: 10
   gravity: 1
-  timeToExplode: 10
-  explosionRange: 10
+  timeToExplode: 5
+  explosionRange: 5
   explosionDamage: 10
 --- !u!114 &450497679
 MonoBehaviour:
@@ -3898,7 +3898,7 @@ MonoBehaviour:
   manaCost: 5
   animationToPlay: StasisTrapCast
   animationToPlayAlt: StasisTrapCastAlt
-  useDelay: 0
+  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Stasis Trap
   uiSprite: {fileID: 0}
@@ -3911,7 +3911,7 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
-  shootingSoundFX: Curse Element Initial
+  shootingSoundFX: Stasis Trap Shoot
   damage: 3
   damageMultiplier: 1
   switchAnimationName: StasisTrapTransition

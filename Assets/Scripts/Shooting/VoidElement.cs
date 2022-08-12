@@ -45,7 +45,6 @@ public class VoidElement : BaseElementClass
         Debug.Log("Effect");
         //Subtract the mana cost
         playerClass.ChangeMana(-manaCost, manaTypes);
-        audioManager.Stop("Soul Element");
         //Spherecast to detect all things that can be interacted with along dash route
         RaycastHit[] hits = Physics.SphereCastAll(this.gameObject.transform.position, 0.2f, Camera.main.transform.forward, dashDistance, shootingIgnore);
         if (hits.Length > 0)
