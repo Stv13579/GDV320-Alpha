@@ -262,7 +262,8 @@ public class Shooting : MonoBehaviour
         {
             catalystElements[rightElementIndex - 1].LiftEffect();
         }
-        if(rightElementIndex == 0)
+        // hard coded need to change
+        if (rightElementIndex == 0)
         {
             primaryElements[rightElementIndex + 2].LiftEffect();
         }
@@ -284,6 +285,7 @@ public class Shooting : MonoBehaviour
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex - 1].LiftEffect();
         }
+        // hard coded need to change
         if (rightElementIndex == 0)
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex + 2].LiftEffect();

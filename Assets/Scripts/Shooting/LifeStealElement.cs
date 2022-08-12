@@ -35,11 +35,6 @@ public class LifeStealElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-
-        if(playerHand.GetCurrentAnimatorStateInfo(2).IsName("StartLifeStealCast") && !Input.GetKey(KeyCode.Mouse0))
-        {
-            DeactivateLifeSteal();
-        }
         ActivateLifeSteal();
     }
     private void ActivateLifeSteal()

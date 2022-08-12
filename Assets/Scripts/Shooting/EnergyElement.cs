@@ -35,12 +35,7 @@ public class EnergyElement : BaseElementClass
             {
                 case shieldState.shieldDown:
                     {
-                        if(!playerHand.GetCurrentAnimatorStateInfo(1).IsName("EnergyHold") ||
-                           !playerHand.GetCurrentAnimatorStateInfo(1).IsName("EnergyStart"))
-                        {
-                            shieldStateChange = shieldState.shieldDown;
-                        }
-                        if (Input.GetKey(KeyCode.Mouse1) && useShield == true)
+                        if (useShield == true)
                         {
                             if (upgraded == true)
                             {
@@ -51,8 +46,8 @@ public class EnergyElement : BaseElementClass
                                 shieldStateChange = shieldState.shieldUp;
                             }
                         }
-                    }
                     break;
+                }
                 case shieldState.parrying:
                     {
                         timeToParry += Time.deltaTime;
@@ -62,22 +57,15 @@ public class EnergyElement : BaseElementClass
                             timeToParry = 0.0f;
                             //parrycode;
                         }
-                    }
                     break;
+                    }
                 case shieldState.shieldUp:
                     {
-                        if (!Input.GetKey(KeyCode.Mouse1))
+                        if(!PayCosts(Time.deltaTime) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyUp(KeyCode.Mouse1))
                         {
+                            DeactivateEnergyShield();
                             shieldStateChange = shieldState.shieldDown;
                         }
-                        if (playerHand.GetCurrentAnimatorStateInfo(1).IsName("EnergyHold"))
-                        {
-                            if (!Input.GetKey(KeyCode.Mouse1) || !PayCosts(Time.deltaTime))
-                            {
-                                shieldStateChange = shieldState.shieldDown;
-                            }
-                        }
-
                         break;
                     }
             }
@@ -85,20 +73,21 @@ public class EnergyElement : BaseElementClass
 
     public void DeactivateEnergyShield()
     {
-        if (!Input.GetKey(KeyCode.Mouse1) || !PayCosts(Time.deltaTime))
-        {
-            energyShield.SetActive(false);
-            useShield = false;
-            playerHand.SetTrigger("EnergyStopCast");
-            audioManager.Stop("Energy Element");
-            // go through the list of enemies
-            // remove them from the list and 
-            for (int i = 0; i < containedEnemies.Count; i++)
-            {
-                containedEnemies[i].GetComponent<BaseEnemyClass>().damageMultiplier = 1.0f;
-                containedEnemies.Remove(containedEnemies[i]);
-            }
-        }
+       energyShield.SetActive(false);
+       useShield = false;
+       playerHand.SetTrigger("EnergyStopCast");
+       audioManager.Stop("Energy Element");
+       // go through the list of enemies
+       // remove them from the list and 
+       for (int i = 0; i < containedEnemies.Count; i++)
+       {
+           containedEnemies[i].GetComponent<BaseEnemyClass>().damageMultiplier = 1.0f;
+           containedEnemies.Remove(containedEnemies[i]);
+       }
+       if (shootingScript.GetRightOrbPos().childCount > 1)
+       {
+           Destroy(shootingScript.GetRightOrbPos().GetChild(1).gameObject);
+       }
     }
 
     public override void ElementEffect()
@@ -108,7 +97,6 @@ public class EnergyElement : BaseElementClass
         useShield = true;
     }
     
-    // for the channelling orb
     public override void ActivateVFX()
     {
         base.ActivateVFX();
@@ -118,10 +106,6 @@ public class EnergyElement : BaseElementClass
     {
         base.LiftEffect();
         DeactivateEnergyShield();
-        if(shootingScript.GetRightOrbPos().childCount > 1)
-        {
-            Destroy(shootingScript.GetRightOrbPos().GetChild(1).gameObject);
-        }
     }
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
