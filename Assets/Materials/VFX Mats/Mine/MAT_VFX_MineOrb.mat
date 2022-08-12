@@ -28,11 +28,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CatalystTexture_Slot_1:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: bcf9928001deb8c4485e99ef210908a9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CatalystTexture_Slot_2:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: bf00e325700b0714d8090cb909018828, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CatalystTexture_Slot_3:
@@ -44,19 +44,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ElementTexture_Slot_1:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: bcf9928001deb8c4485e99ef210908a9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ElementTexture_Slot_2:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: bf00e325700b0714d8090cb909018828, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ElementTexture_Slot_3:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 379e2786f4192444e985ab5314608bdc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ElementTexture_Slot_4:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: fb1989d88b7781643a7a881847abc030, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -100,9 +100,9 @@ Material:
     - _Element_Spec_StepValue: 0.1
     - _Element_Specs_Intensity: 1
     - _EnvironmentReflections: 1
-    - _Fres_Power_MaxNew: 5
-    - _Fres_Power_MinNew: 1
-    - _Fres_Scale_MaxNew: 5
+    - _Fres_Power_MaxNew: 10
+    - _Fres_Power_MinNew: 5
+    - _Fres_Scale_MaxNew: 8
     - _Fres_Scale_MinNew: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -118,14 +118,14 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _ToggleCatalystCull: 1
-    - _ToggleCatalystFade: 0
-    - _ToggleCatalystFresColours_Base0_Secondary1: 0
+    - _ToggleCatalystFade: 0.7
+    - _ToggleCatalystFresColours_Base0_Secondary1: 1
     - _ToggleCatalystTexColours_Base0_Secondary1: 0
     - _ToggleElementCull: 0.1294118
     - _ToggleElementFade: -0.5
-    - _ToggleElementFresColours_Base0_Secondary1: 0
+    - _ToggleElementFresColours_Base0_Secondary1: 1
     - _ToggleElementTexColours_Base0_Secondary1: 0
-    - _ToggleOverallCull: 0
+    - _ToggleOverallCull: 0.2
     - _ToggleOverallFade: 0
     - _Toggle_Catalyst_Noise_Mask: 0
     - _Toggle_Cataylst_Spec_On0_Off1: 1
@@ -133,42 +133,42 @@ Material:
     - _Toggle_Element_Spec_On0_Off1: 1
     - _Toggle_Flashing: 0
     - _Toggle_UseCatalystTex_3__4: 0
-    - _Toggle_UseCatalystTexture_1_With_Noise_1: 0
-    - _Toggle_UseCatalystTexture_2_With_Noise_2: 0
-    - _Toggle_UseElementTex_3__4: 0
-    - _Toggle_UseElementTexture_1_With_Noise_1: 0
-    - _Toggle_UseElementTexture_2_With_Noise_2: 0
+    - _Toggle_UseCatalystTexture_1_With_Noise_1: 1
+    - _Toggle_UseCatalystTexture_2_With_Noise_2: 1
+    - _Toggle_UseElementTex_3__4: 0.072
+    - _Toggle_UseElementTexture_1_With_Noise_1: 1
+    - _Toggle_UseElementTexture_2_With_Noise_2: 1
     - _Toggle_UseVertexNoise_Catalyst0_Element1: 1
     - _VertOffset_Intensity: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColour_Catalyst: {r: 0, g: 0.7648358, b: 1, a: 0}
-    - _BaseColour_Element: {r: 1, g: 0, b: 0, a: 0}
+    - _BaseColour_Catalyst: {r: 10.423522, g: 5.447131, b: 17.148375, a: 0}
+    - _BaseColour_Element: {r: 5.7833734, g: 0, b: 17.148375, a: 0}
     - _CatalystNoise_Pan_Speed_Noise1XY_Noise2ZW: {r: 0, g: 0, b: 0, a: 0}
     - _CatalystVoronoi_Speed1X_Speed2Y_Scale1Z_Scale2W: {r: 0, g: 0, b: 0, a: 0}
     - _Catalyst_Base_Noise_1_Remap: {r: 0, g: 1, b: 0, a: 1}
     - _Catalyst_Base_Noise_2_Remap: {r: 0, g: 1, b: 0, a: 1}
     - _Catalyst_Base_Remap: {r: 0, g: 1, b: 0, a: 1}
-    - _Catalyst_Flash_Slot1X_Slot2Y_Slot3Z_Slot4W: {r: 0, g: 0, b: 0, a: 0}
+    - _Catalyst_Flash_Slot1X_Slot2Y_Slot3Z_Slot4W: {r: 1, g: 1, b: 0, a: 0}
     - _Catalyst_Specs_Remap_MinOldX_MaxOldY_MinNewZ_MaxNewW: {r: 0, g: 1, b: 0, a: 1}
-    - _Cataylst_Tex_Pan_Slot1XY_Slot2ZW: {r: 0, g: 0, b: 0, a: 0}
+    - _Cataylst_Tex_Pan_Slot1XY_Slot2ZW: {r: 1, g: -1, b: -1, a: 0}
     - _Cataylst_Tex_Pan_Slot3XY_Slot4ZW: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ElementNoise_Pan_Speed_Noise1XY_Noise2ZW: {r: 0, g: 0, b: 0, a: 0}
     - _ElementVoronoi_Speed1X_Speed2Y_Scale1Z_Scale2W: {r: 0, g: 0, b: 0, a: 0}
     - _Element_Base_Noise_1_Remap: {r: 0, g: 1, b: 0, a: 1}
     - _Element_Base_Noise_2_Remap: {r: 0, g: 1, b: 0, a: 1}
-    - _Element_Base_Remap: {r: 0, g: 1, b: 0, a: 1}
+    - _Element_Base_Remap: {r: 0, g: 1, b: 0.01, a: 5}
     - _Element_Specs_Remap_MinOldX_MaxOldY_MinNewZ_MaxNewW: {r: 0, g: 1, b: 0, a: 1}
-    - _Element_Tex_Pan_Slot1_Slot2: {r: 0, g: 0, b: 0, a: 0}
-    - _Element_Tex_Pan_Slot3_Slot4: {r: 0, g: 0, b: 0, a: 0}
+    - _Element_Tex_Pan_Slot1_Slot2: {r: 0.4, g: 0.1, b: 0, a: 0}
+    - _Element_Tex_Pan_Slot3_Slot4: {r: 0.1, g: -0.3, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Fres_ScaleX_PowerY_Speeds: {r: 1, g: 1, b: 0, a: 0}
     - _NoiseScales_E1X_E2Y_C1Z_C2W: {r: 1, g: 1, b: 1, a: 1}
-    - _SecondaryColour_Catalyst: {r: 1, g: 0, b: 0.7082286, a: 0}
-    - _SecondaryColour_Element: {r: 1, g: 0.8760238, b: 0, a: 0}
+    - _SecondaryColour_Catalyst: {r: 3.482202, g: 1.1061113, b: 2.7994175, a: 0}
+    - _SecondaryColour_Element: {r: 11.313708, g: 1.0204521, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
 --- !u!114 &5129659534124229059
 MonoBehaviour:
