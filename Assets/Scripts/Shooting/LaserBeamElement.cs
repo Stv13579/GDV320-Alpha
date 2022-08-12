@@ -23,6 +23,10 @@ public class LaserBeamElement : BaseElementClass
         {
             DeactivateLaser();
         }
+        else
+        {
+            
+        }
     }
 
     public void DeactivateLaser()
@@ -49,7 +53,6 @@ public class LaserBeamElement : BaseElementClass
     {
         base.LiftEffect();
         DeactivateLaser();
-        
     }
     public override void ActivateVFX()
     {

@@ -145,8 +145,6 @@ public class Shooting : MonoBehaviour
                 }
 
             }
-        if (canChangeHoldElements)
-        {
             if (Input.GetKeyUp(KeyCode.E))
             {
                 rightElementIndex++;
@@ -189,7 +187,7 @@ public class Shooting : MonoBehaviour
                 }
 
             }
-        }
+        
             if (Input.GetKeyUp(KeyCode.F))
             {
                 uiScript.SetCombo(!inComboMode);
@@ -259,7 +257,14 @@ public class Shooting : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             catalystElements[rightElementIndex].LiftEffect();
-            canChangeHoldElements = true;
+        }
+        if (rightElementIndex != 0)
+        {
+            catalystElements[rightElementIndex - 1].LiftEffect();
+        }
+        if(rightElementIndex == 0)
+        {
+            primaryElements[rightElementIndex + 2].LiftEffect();
         }
     }
     void ComboShooting()
@@ -274,6 +279,14 @@ public class Shooting : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
+        }
+        if (rightElementIndex != 0)
+        {
+            comboElements[leftElementIndex].comboElements[rightElementIndex - 1].LiftEffect();
+        }
+        if (rightElementIndex == 0)
+        {
+            comboElements[leftElementIndex].comboElements[rightElementIndex + 2].LiftEffect();
         }
     }
     void SwapElementOn()
