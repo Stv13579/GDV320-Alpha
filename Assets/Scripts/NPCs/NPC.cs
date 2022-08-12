@@ -54,16 +54,17 @@ public class NPC : MonoBehaviour
     public void Start()
     {
         randomDialogues.AddRange(baseRandoms);
+        currentDialogue = randomDialogues[UnityEngine.Random.Range(0, randomDialogues.Count)];
     }
 
     //Choose which dialogues to add to the current dialogue list
     public virtual void AssessDialogue()
     {
-        if (data.storyPosition < 1)
-        {
+        //if (data.storyPosition < 1)
+        //{
 
-            currentDialogue = randomDialogues[UnityEngine.Random.Range(0, randomDialogues.Count)];
-        }
+        //    currentDialogue = randomDialogues[UnityEngine.Random.Range(0, randomDialogues.Count)];
+        //}
 
         
     }

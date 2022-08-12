@@ -16,6 +16,7 @@ public class Room : MonoBehaviour
     {
         levelGenerator = GameObject.Find("Level Generator").GetComponent<LevelGeneration>();
         roomTrigger = transform.Find("RoomTriggerBox").gameObject;
+        GameObject.Find("Run Manager").GetComponent<RunManager>().StartNewLevel();
     }
 
     //Closes off all the illegal/irrelevant exits and collates the remaining ones
