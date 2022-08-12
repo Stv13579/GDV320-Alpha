@@ -85,7 +85,7 @@ public class Shooting : MonoBehaviour
             Application.Quit();
         }
 
-        if(ableToShoot /* check if the animator is not in idle */ && GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(2).IsName("Idle"))
+        if(ableToShoot /* check if the animator is not in idle */ /*&& GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(2).IsName("Idle")*/)
         {
             if (!inComboMode)
             {

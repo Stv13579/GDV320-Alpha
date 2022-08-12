@@ -30,6 +30,14 @@ public class NPC : MonoBehaviour
 
     }
 
+    public class StoryDialogue : Dialogue
+    {
+        public StoryDialogue(NPCData npcData) : base(npcData)
+
+        {
+            heldData = npcData;
+        }
+    }
     
     protected List<Dialogue> storyDialogues = new List<Dialogue>(), randomDialogues = new List<Dialogue>();
     [HideInInspector]
