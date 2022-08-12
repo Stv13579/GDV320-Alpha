@@ -10,23 +10,35 @@ public class EndLevel : MonoBehaviour
     [SerializeField]
     GameObject loadingScreen;
 
+    GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.Find("Player");
+
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
-        GameObject screen = Instantiate(loadingScreen);
+        //GameObject screen = Instantiate(loadingScreen);
+        int index = 0;
 
         //Temporary scene system; consider upgrading to dynamically building scenes and refering to scenes by name with a dedicated scene manager/ level manager
- 
-        int index = SceneManager.GetActiveScene().buildIndex;
+        index = SceneManager.GetActiveScene().buildIndex;
 
         index++;
 
         if (index > SceneManager.sceneCountInBuildSettings)
         {
             index = 0;
+            Destroy(player);
         }
 
         sceneToLoad = index;
 
-        StartCoroutine(screen.GetComponent<LoadingScreen>().LoadScene(sceneToLoad));
+        SceneManager.LoadScene(sceneToLoad);
+
+        //StartCoroutine(screen.GetComponent<LoadingScreen>().LoadScene(sceneToLoad));
     }
 }

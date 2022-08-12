@@ -76,6 +76,7 @@ public class Shooting : MonoBehaviour
         primaryElements[leftElementIndex].GetPlayerHand().SetInteger("ElementL", leftElementIndex + 1);
         catalystElements[rightElementIndex].GetPlayerHand().SetInteger("ElementR", rightElementIndex + 101);
         canChangeHoldElements = true;
+        uiScript = GameObject.Find("GameplayUI").GetComponent<GameplayUI>();
     }
     private void Update()
     {
@@ -84,7 +85,7 @@ public class Shooting : MonoBehaviour
             Application.Quit();
         }
 
-        if(ableToShoot)
+        if(ableToShoot /* check if the animator is not in idle */ && GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(2).IsName("Idle"))
         {
             if (!inComboMode)
             {
