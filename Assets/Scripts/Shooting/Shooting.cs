@@ -265,7 +265,7 @@ public class Shooting : MonoBehaviour
         // hard coded need to change
         if (rightElementIndex == 0)
         {
-            primaryElements[rightElementIndex + 2].LiftEffect();
+            catalystElements[rightElementIndex + catalystElements.Count - 1].LiftEffect();
         }
     }
     void ComboShooting()
@@ -288,7 +288,7 @@ public class Shooting : MonoBehaviour
         // hard coded need to change
         if (rightElementIndex == 0)
         {
-            comboElements[leftElementIndex].comboElements[rightElementIndex + 2].LiftEffect();
+            comboElements[leftElementIndex].comboElements[rightElementIndex + catalystElements.Count - 1].LiftEffect();
         }
     }
     void SwapElementOn()
