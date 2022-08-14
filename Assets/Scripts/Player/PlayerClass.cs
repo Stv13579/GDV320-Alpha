@@ -200,7 +200,7 @@ public class PlayerClass : MonoBehaviour
         foreach(ManaName mana in manaNames)
         {
             ManaType m = Array.Find(manaTypes, item => item.manaName == mana);
-            if(m.currentMana < manaAmount)
+            if(m.currentMana < manaAmount && currentHealth < manaAmount - m.currentMana)
             {
                 check = false;
             }
@@ -215,7 +215,12 @@ public class PlayerClass : MonoBehaviour
         {
             int i = Array.FindIndex(manaTypes, item => item.manaName == mana);
             manaTypes[i].currentMana = Mathf.Min(manaTypes[i].currentMana + manaAmount, manaTypes[i].maxMana);
-            manaTypes[i].currentMana = Mathf.Max(manaTypes[i].currentMana, 0);
+            if (manaTypes[i].currentMana < 0)
+            {
+                ChangeHealth(manaTypes[i].currentMana);
+                manaTypes[i].currentMana = 0;
+            }
+            //manaTypes[i].currentMana = Mathf.Max(manaTypes[i].currentMana, 0);
         }
     }
 
