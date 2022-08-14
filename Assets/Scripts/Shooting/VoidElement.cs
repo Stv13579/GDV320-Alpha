@@ -73,7 +73,6 @@ public class VoidElement : BaseElementClass
     {
         base.ElementEffect();
         Indicator.SetActive(false);
-        Debug.Log("Effect");
         //Subtract the mana cost
         playerClass.ChangeMana(-manaCost, manaTypes);
         //RaycastHit hit1;
@@ -164,12 +163,9 @@ public class VoidElement : BaseElementClass
     IEnumerator Dash()
     {
         playerClass.gameObject.GetComponent<PlayerMovement>().ableToMove = false;
-        Debug.Log(targetPos);
-        Instantiate(Indicator, targetPos, Quaternion.identity).SetActive(true);
         dashing = true;
         float timer = 0.0f;
         Vector3 startPos = this.transform.position;
-        Debug.Log("Routine");
         while(timer < dashTime)
         {
             this.transform.position = Vector3.Lerp(startPos, targetPos, timer / dashTime);
@@ -177,7 +173,6 @@ public class VoidElement : BaseElementClass
             yield return null;
         }
         this.gameObject.GetComponent<PlayerMovement>().ableToMove = true;
-        Debug.Log(this.transform.position);
         StopCoroutine(Dash());
     }
 
