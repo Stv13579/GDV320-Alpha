@@ -120,7 +120,7 @@ public class EnergyElement : BaseElementClass
     {
         if (useShield)
         {
-            if (other.gameObject.layer == 8  && other.GetComponent<BaseEnemyClass>() || other.gameObject.layer == 22 && other.GetComponent<BaseEnemyClass>())
+            if (other.gameObject.layer == 8  && other.GetComponent<BaseEnemyClass>())
             {
 
                 if (other.gameObject && !containedEnemies.Contains(other.gameObject))
@@ -131,6 +131,10 @@ public class EnergyElement : BaseElementClass
                         containedEnemies[i].gameObject.GetComponent<BaseEnemyClass>().damageMultiplier = 0;
                     }
                 }
+            }
+            if (other.gameObject.layer == 22 && other.GetComponent<BaseRangedProjectileScript>())
+            {
+                Destroy(other.gameObject);
             }
         }
 
