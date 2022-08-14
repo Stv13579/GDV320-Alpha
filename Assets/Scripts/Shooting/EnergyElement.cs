@@ -61,7 +61,7 @@ public class EnergyElement : BaseElementClass
                     }
                 case shieldState.shieldUp:
                     {
-                        if(!PayCosts(Time.deltaTime) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyUp(KeyCode.Mouse1))
+                        if(!PayCosts(Time.deltaTime) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyUp(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.F))
                         {
                             DeactivateEnergyShield();
                             shieldStateChange = shieldState.shieldDown;

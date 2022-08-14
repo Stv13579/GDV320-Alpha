@@ -30,11 +30,15 @@ public class LandMineProj : MonoBehaviour
             this.GetComponent<Collider>().enabled = false;
             mine.SetActive(false);
             explosion.SetActive(true);
-            timerToDestroy += Time.deltaTime;
             if (!explosion.GetComponent<ParticleSystem>().isPlaying)
             {
                 explosion.GetComponent<ParticleSystem>().Play();
             }
+            willExplode = false;
+        }
+        if(!willExplode)
+        {
+            timerToDestroy += Time.deltaTime;
         }
         KillProjectile();
     }
