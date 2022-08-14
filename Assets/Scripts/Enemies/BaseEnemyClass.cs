@@ -231,7 +231,7 @@ public class BaseEnemyClass : MonoBehaviour
         //Spawn drops
         for (int i = 0; i < Random.Range(minSpawn, maxSpawn); i++)
         {
-            GameObject drop = Instantiate(drops.GetDrop(dropType), this.transform.position, Quaternion.identity);
+            GameObject drop = Instantiate(drops.GetDrop(dropType), this.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             
         }
     }

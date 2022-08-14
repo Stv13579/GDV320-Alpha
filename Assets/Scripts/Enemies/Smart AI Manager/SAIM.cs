@@ -189,7 +189,11 @@ public class SAIM : MonoBehaviour
         else
         {
             containingRoom.UnlockDoors();
-
+            BaseDropScript[] drops = GameObject.FindObjectsOfType<BaseDropScript>();
+            foreach(BaseDropScript drop in drops)
+            {
+                drop.roomEnd = true;
+            }
             
         }
 
