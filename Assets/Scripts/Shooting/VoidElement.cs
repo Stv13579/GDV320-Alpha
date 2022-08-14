@@ -5,13 +5,12 @@ using UnityEngine;
 public class VoidElement : BaseElementClass
 {
     public float dashDistance = 10.0f;
-    public float dashDistanceIndicator = 5.0f;
+    float trueDashDistance = 0.0f;
     public float dashTime = 0.5f;
     Vector3 targetPos = Vector3.zero;
     bool dashing = false;
     public GameObject Indicator;
     bool isHolding;
-    public LayerMask environmentMask;
     protected override void Update()
     {
         base.Update();
@@ -25,16 +24,48 @@ public class VoidElement : BaseElementClass
         }
         if (isHolding)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, dashDistanceIndicator, shootingIgnore))
+            RaycastHit hit1;
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit1, dashDistance, shootingIgnore))
             {
-                Indicator.transform.position = hit.point;
+                trueDashDistance = Vector3.Distance(hit1.point, this.transform.position);
             }
             else
             {
-                Vector3 pos = Camera.main.transform.position + Camera.main.transform.forward.normalized * dashDistanceIndicator;
-                Indicator.transform.position = pos;
+                trueDashDistance = dashDistance;
             }
+            RaycastHit[] hits = Physics.SphereCastAll(this.gameObject.transform.position, 0.2f, Camera.main.transform.forward, trueDashDistance, shootingIgnore);
+            if (hits.Length > 0)
+            {
+                Vector3 averagePos = Vector3.zero;
+                Vector3 averageNorm = Vector3.zero;
+                int count = 0;
+                float distance = Mathf.Abs(hits[0].distance);
+                //Sum up the normals and positions of objects within a small range of the first object hit with the spherecast
+                foreach (RaycastHit hit in hits)
+                {
+                    if (Mathf.Abs(hit.distance) < distance + 2)
+                    {
+                        averagePos += hit.point;
+                        averageNorm += hit.normal;
+                        count += 1;
+                    }
+
+                }
+                //Average out the positions and normals
+                averagePos /= count;
+                averageNorm.Normalize();
+                //Set the target pos to the average position
+                Indicator.transform.position = averagePos;
+                Vector3 size = this.gameObject.GetComponent<CharacterController>().bounds.size;
+                //Move the target position out slightly by the average normal
+                Indicator.transform.position += new Vector3(averageNorm.x * size.x, averageNorm.y * size.y, averageNorm.z * size.z);
+            }
+            else
+            {
+                Indicator.transform.position = this.transform.position + Camera.main.transform.forward * trueDashDistance;
+            }
+            targetPos = Indicator.transform.position;
+
         }
     }
 
@@ -45,41 +76,49 @@ public class VoidElement : BaseElementClass
         Debug.Log("Effect");
         //Subtract the mana cost
         playerClass.ChangeMana(-manaCost, manaTypes);
-        //Spherecast to detect all things that can be interacted with along dash route
-        RaycastHit[] hits = Physics.SphereCastAll(this.gameObject.transform.position, 0.2f, Camera.main.transform.forward, dashDistance, shootingIgnore);
-        if (hits.Length > 0)
-        {
-            Vector3 averagePos = Vector3.zero;
-            Vector3 averageNorm = Vector3.zero;
-            int count = 0;
-            float distance = Mathf.Abs(hits[0].distance);
-            //Sum up the normals and positions of objects within a small range of the first object hit with the spherecast
-            foreach (RaycastHit hit in hits)
-            {
-                if (Mathf.Abs(hit.distance) < distance + 2)
-                {
-                    averagePos += hit.point;
-                    averageNorm += hit.normal;
-                    count += 1;
-                }
+        //RaycastHit hit1;
+        //if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit1, dashDistance, shootingIgnore))
+        //{
+        //    trueDashDistance = Vector3.Distance(hit1.point, this.transform.position);
+        //}
+        //else
+        //{
+        //    trueDashDistance = dashDistance;
+        //}
+        ////Spherecast to detect all things that can be interacted with along dash route
+        //RaycastHit[] hits = Physics.SphereCastAll(this.gameObject.transform.position, 0.2f, Camera.main.transform.forward, trueDashDistance, shootingIgnore);
+        //if (hits.Length > 0)
+        //{
+        //    Vector3 averagePos = Vector3.zero;
+        //    Vector3 averageNorm = Vector3.zero;
+        //    int count = 0;
+        //    float distance = Mathf.Abs(hits[0].distance);
+        //    //Sum up the normals and positions of objects within a small range of the first object hit with the spherecast
+        //    foreach (RaycastHit hit in hits)
+        //    {
+        //        if (Mathf.Abs(hit.distance) < distance + 2)
+        //        {
+        //            averagePos += hit.point;
+        //            averageNorm += hit.normal;
+        //            count += 1;
+        //        }
 
-            }
-            //Average out the positions and normals
-            averagePos /= count;
-            averageNorm.Normalize();
-            //Set the target pos to the average position
-            targetPos = averagePos;
-            Vector3 size = this.gameObject.GetComponent<CharacterController>().bounds.size;
-            //Move the target position out slightly by the average normal
-            targetPos += new Vector3(averageNorm.x * size.x, averageNorm.y * size.y, averageNorm.z * size.z);
-        }
-        else
-        {
-            targetPos = this.transform.position + Camera.main.transform.forward * dashDistance;
-        }
+        //    }
+        //    //Average out the positions and normals
+        //    averagePos /= count;
+        //    averageNorm.Normalize();
+        //    //Set the target pos to the average position
+        //    targetPos = averagePos;
+        //    Vector3 size = this.gameObject.GetComponent<CharacterController>().bounds.size;
+        //    //Move the target position out slightly by the average normal
+        //    targetPos += new Vector3(averageNorm.x * size.x, averageNorm.y * size.y, averageNorm.z * size.z);
+        //}
+        //else
+        //{
+        //    targetPos = this.transform.position + Camera.main.transform.forward * trueDashDistance;
+        //}
 
         StartCoroutine(Dash());
-
     }
 
     public override void ActivateVFX()
@@ -125,6 +164,8 @@ public class VoidElement : BaseElementClass
     IEnumerator Dash()
     {
         playerClass.gameObject.GetComponent<PlayerMovement>().ableToMove = false;
+        Debug.Log(targetPos);
+        Instantiate(Indicator, targetPos, Quaternion.identity).SetActive(true);
         dashing = true;
         float timer = 0.0f;
         Vector3 startPos = this.transform.position;
@@ -136,6 +177,7 @@ public class VoidElement : BaseElementClass
             yield return null;
         }
         this.gameObject.GetComponent<PlayerMovement>().ableToMove = true;
+        Debug.Log(this.transform.position);
         StopCoroutine(Dash());
     }
 
