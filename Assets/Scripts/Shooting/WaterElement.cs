@@ -20,8 +20,7 @@ public class WaterElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-
-
+        //playerHand
     }
 
     //Fires the projectile, passing damage, speed, etc

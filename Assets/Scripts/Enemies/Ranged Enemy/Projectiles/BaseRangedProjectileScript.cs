@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class BaseRangedProjectileScript : MonoBehaviour
 {
-    protected float speed;
-    protected float damage;
+    public float speed;
+    public float damage;
     protected GameObject player;
     protected float timer = 0;
     // Start is called before the first frame update
-    protected void Start()
+    protected virtual void Start()
     {
         player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         this.transform.position += this.transform.forward * speed * Time.deltaTime;
         timer += Time.deltaTime;
