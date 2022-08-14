@@ -15,6 +15,8 @@ public class RangedBossScript : BaseEnemyClass
     public Transform tempProjectileSpawnPos;
 
     public LayerMask groundDetect;
+    public GameObject bossHealthbar;
+
 
     public override void Start()
     {
@@ -23,6 +25,11 @@ public class RangedBossScript : BaseEnemyClass
         Physics.Raycast(this.gameObject.transform.position, -this.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
         Vector3 emergePos = hit.point - this.transform.GetChild(1).localPosition * 2;
         this.transform.position = emergePos;
+        GameObject healthbar = Instantiate(bossHealthbar);
+        BossHealthbarScript healthbarScript = healthbar.GetComponent<BossHealthbarScript>();
+        healthbarScript.enemies.Add(this);
+        healthbarScript.bossName.text = "Dragon Lily";
+        healthbarScript.maxHealth = maxHealth;
     }
     public override void Update()
     {

@@ -188,7 +188,7 @@ public class Shooting : MonoBehaviour
 
             }
         
-            if (Input.GetKeyUp(KeyCode.F))
+            if (Input.GetKeyUp(KeyCode.F) && GetLeftMana()[0] > comboElements[leftElementIndex].comboElements[rightElementIndex].manaCost && GetRightMana()[0] > comboElements[leftElementIndex].comboElements[rightElementIndex].manaCost)
             {
                 uiScript.SetCombo(!inComboMode);
                 inComboMode = !inComboMode;
