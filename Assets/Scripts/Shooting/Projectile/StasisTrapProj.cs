@@ -18,7 +18,14 @@ public class StasisTrapProj : MonoBehaviour
 
     [SerializeField]
     private GameObject aftermathVFX;
-
+    private enum StasisTrapProjState
+    {
+        idle,
+        active,
+        aftermath,
+        destroy
+    }
+    StasisTrapProjState currentstate = StasisTrapProjState.idle;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,37 +36,57 @@ public class StasisTrapProj : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(duration >= 0.5f)
-        {
-            visualBubble.SetActive(true);
-        }
         duration += Time.deltaTime;
         currentDamageTicker += Time.deltaTime;
-        if(duration >= maxDuration - 0.75f)
+        switch (currentstate)
         {
-            visualBubble.SetActive(false);
-            aftermathVFX.SetActive(true);
-            if (!aftermathVFX.GetComponent<ParticleSystem>().isPlaying)
-            {
-                aftermathVFX.GetComponent<ParticleSystem>().Play();
-            }
-        }
-        KillProjectile();
-    }
-
-    void KillProjectile()
-    {
-        if(duration >= maxDuration)
-        {
-            for(int i = 0; i < containedEnemies.Count; i++)
-            {
-                if(containedEnemies[i])
+            case StasisTrapProjState.idle:
                 {
-                    containedEnemies[i].GetComponent<BaseEnemyClass>().RemoveMovementMultiplier(0);
-                    containedEnemies.Remove(containedEnemies[i]);
+                    if (duration >= 0.45f)
+                    {
+                        currentstate = StasisTrapProjState.active;
+                    }
+                    break;
                 }
-            }
-            Destroy(gameObject);
+            case StasisTrapProjState.active:
+                {
+                    visualBubble.SetActive(true);
+                    if (duration >= maxDuration - 0.75f)
+                    {
+                        currentstate = StasisTrapProjState.aftermath;
+                    }
+                    break;
+                }
+            case StasisTrapProjState.aftermath:
+                {
+                    visualBubble.SetActive(false);
+                    aftermathVFX.SetActive(true);
+                    if (!aftermathVFX.GetComponent<ParticleSystem>().isPlaying)
+                    {
+                        aftermathVFX.GetComponent<ParticleSystem>().Play();
+                    }
+                    this.GetComponent<Collider>().enabled = false;
+                    audioManager.Stop("Stasis Trap Explosion");
+                    audioManager.Play("Stasis Trap Explosion");
+                    if (duration >= maxDuration)
+                    {
+                        for (int i = 0; i < containedEnemies.Count; i++)
+                        {
+                            if (containedEnemies[i])
+                            {
+                                Multiplier.RemoveMultiplier(containedEnemies[i].GetComponent<BaseEnemyClass>().movementMultipliers, new Multiplier(0, "Stasis"), containedEnemies[i].GetComponent<BaseEnemyClass>().moveSpeedMulti);
+                                containedEnemies.Remove(containedEnemies[i]);
+                            }
+                        }
+                        currentstate = StasisTrapProjState.destroy;
+                    }
+                    break;
+                }
+            case StasisTrapProjState.destroy:
+                {
+                    Destroy(gameObject);
+                    break;
+                }
         }
     }
     public void SetVars(float dmg, float dur, float ct, float mdt, List<BaseEnemyClass.Types> types)
@@ -78,7 +105,7 @@ public class StasisTrapProj : MonoBehaviour
             containedEnemies.Add(other.gameObject);
             for (int i = 0; i < containedEnemies.Count; i++)
             {
-                containedEnemies[i].gameObject.GetComponent<BaseEnemyClass>().AddMovementMultiplier(0);
+                Multiplier.AddMultiplier(containedEnemies[i].GetComponent<BaseEnemyClass>().movementMultipliers, new Multiplier(0, "Stasis"), containedEnemies[i].GetComponent<BaseEnemyClass>().moveSpeedMulti);
             }
         }
     }

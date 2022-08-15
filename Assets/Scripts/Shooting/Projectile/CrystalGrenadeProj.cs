@@ -8,7 +8,6 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
     private float damage;
     private float timerToExplode;
     private float currentTimer;
-    private float gravity;
     private float explosionRange;
     private float explosionDamage;
     AudioManager audioManager;
@@ -16,12 +15,28 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
     private bool isMoving;
     private bool isAttached;
     Collider enemy;
+    [SerializeField]
+    private GameObject inAir;
+    [SerializeField]
+    private GameObject attached;
+    [SerializeField]
+    private GameObject explosion;
+    private enum grenadestate
+    {
+        inAir,
+        attached,
+        explosion,
+        destroy
+    };
+    grenadestate currentState = grenadestate.inAir;
     // Start is called before the first frame update
     void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         isMoving = true;
         isAttached = false;
+        attached.SetActive(false);
+        explosion.SetActive(false);
     }
 
     // Update is called once per frame
@@ -32,23 +47,63 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
         {
             MoveProjectile();
         }
-        if (currentTimer >= timerToExplode)
+        switch(currentState)
         {
-            Collider[] objectsHit = Physics.OverlapSphere(transform.position, explosionRange);
-            for (int i = 0; i < objectsHit.Length; i++)
-            {
-                if (objectsHit[i].gameObject.layer == 8 && 
-                    objectsHit[i].GetComponent<BaseEnemyClass>())
+            case grenadestate.inAir:
                 {
-                    objectsHit[i].GetComponent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
+                    if(!isMoving || isAttached)
+                    {
+                        currentState = grenadestate.attached;
+                    }
+                    break;
                 }
-                else if (objectsHit[i].gameObject.tag == "Shield")
+            case grenadestate.attached:
                 {
-                    objectsHit[i].gameObject.GetComponent<EnemyShield>().DamageShield(explosionDamage, attackTypes);
+                    inAir.SetActive(false);
+                    attached.SetActive(true);
+                    if (currentTimer >= timerToExplode)
+                    {
+                        currentState = grenadestate.explosion;
+                    }
+                    break;
                 }
-            }
-            Destroy(gameObject);
+            case grenadestate.explosion:
+                {
+                    inAir.SetActive(false);
+                    attached.SetActive(false);
+                    explosion.SetActive(true);
+                    audioManager.Stop("Crystal Grenade Explosion");
+                    audioManager.Play("Crystal Grenade Explosion");
+                    Collider[] objectsHit = Physics.OverlapSphere(transform.position, explosionRange);
+                    for (int i = 0; i < objectsHit.Length; i++)
+                    {
+                        if (objectsHit[i].gameObject.layer == 8 &&
+                            objectsHit[i].GetComponent<BaseEnemyClass>())
+                        {
+                            objectsHit[i].GetComponent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
+                        }
+                        else if (objectsHit[i].gameObject.tag == "Shield")
+                        {
+                            objectsHit[i].gameObject.GetComponent<EnemyShield>().DamageShield(explosionDamage, attackTypes);
+                        }
+                    }
+                    if (!explosion.GetComponent<ParticleSystem>().isPlaying)
+                    {
+                        explosion.GetComponent<ParticleSystem>().Play();
+                    }
+                    currentState = grenadestate.destroy;
+                    break;
+                }
+            case grenadestate.destroy:
+                {
+                    if (currentTimer >= 10)
+                    {
+                        Destroy(gameObject);
+                    }
+                    break;
+                }
         }
+
     }
     void MoveProjectile()
     {
@@ -60,13 +115,13 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
         else
         {
             transform.position = originalPosition;
+
         }
     }
-    public void SetVars(float spd, float dmg, float timer, float grav, float explosionRadius, float expDamage, List<BaseEnemyClass.Types> types)
+    public void SetVars(float spd, float dmg, float timer, float explosionRadius, float expDamage, List<BaseEnemyClass.Types> types)
     {
         speed = spd;
         damage = dmg;
-        gravity = grav;
         timerToExplode = timer;
         explosionRange = explosionRadius;
         explosionDamage = expDamage;
@@ -82,7 +137,6 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
             this.gameObject.transform.SetParent(other.transform);
             this.GetComponent<Rigidbody>().isKinematic = true;
             speed = 0;
-            gravity = 0;
             other.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             other = enemy;
         }
@@ -93,7 +147,6 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
             this.gameObject.transform.SetParent(other.transform);
             this.GetComponent<Rigidbody>().isKinematic = true;
             speed = 0;
-            gravity = 0;
         }
         else if(other.gameObject.layer == 10)
         {

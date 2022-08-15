@@ -33,6 +33,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
 
     public string initalMusic;
+    
     [SerializeField]
     float audioDistance;
     

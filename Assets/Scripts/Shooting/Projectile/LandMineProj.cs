@@ -7,8 +7,14 @@ public class LandMineProj : MonoBehaviour
     private float damage;
     private float explosiveRadius;
     private float lifeTimer;
-    List<BaseEnemyClass.Types> attackTypes;
-    AudioManager audioManager;
+    private List<BaseEnemyClass.Types> attackTypes;
+    private AudioManager audioManager;
+    private bool willExplode;
+    private float timerToDestroy;
+    [SerializeField]
+    private GameObject mine;
+    [SerializeField]
+    private GameObject explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +25,30 @@ public class LandMineProj : MonoBehaviour
     void Update()
     {
         lifeTimer -= Time.deltaTime;
+        if(willExplode)
+        {
+            this.GetComponent<Collider>().enabled = false;
+            mine.SetActive(false);
+            explosion.SetActive(true);
+            if (!explosion.GetComponent<ParticleSystem>().isPlaying)
+            {
+                explosion.GetComponent<ParticleSystem>().Play();
+            }
+            willExplode = false;
+        }
+        if(!willExplode)
+        {
+            timerToDestroy += Time.deltaTime;
+        }
         KillProjectile();
     }
     private void KillProjectile()
     {
-        if(lifeTimer <= 0)
+        if(lifeTimer <= 0  && !willExplode)
+        {
+            Destroy(gameObject);
+        }
+        if(timerToDestroy >= 10)
         {
             Destroy(gameObject);
         }
@@ -52,7 +77,9 @@ public class LandMineProj : MonoBehaviour
                     objectsHitByExplosion[i].GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
                 }
             }
-            Destroy(gameObject);
+            audioManager.Stop("LandMine Explosion");
+            audioManager.Play("LandMine Explosion");
+            willExplode = true;
         }
     }
 }
