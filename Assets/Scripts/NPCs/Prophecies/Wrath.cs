@@ -17,7 +17,7 @@ public class Wrath : Prophecy
         newResistMulti = new Multiplier(1.25f, "Wrath");
         newWeakMulti = new Multiplier(1.25f, "Wrath");
 
-        Multiplier.AddMultiplier(pM.resistMultipliers, newResistMulti, pM.prophecyResistMulti);
-        Multiplier.AddMultiplier(pM.weaknessMultipliers, newWeakMulti, pM.prophecyWeaknessMulti);
+        pM.prophecyResistMulti = Multiplier.AddMultiplier(pM.resistMultipliers, newResistMulti);
+        pM.prophecyWeaknessMulti = Multiplier.AddMultiplier(pM.weaknessMultipliers, newWeakMulti);
     }
 }

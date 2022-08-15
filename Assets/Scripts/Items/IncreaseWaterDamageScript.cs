@@ -15,7 +15,7 @@ public class IncreaseWaterDamageScript : Item
 
         Multiplier increaseWaterMulti = new Multiplier(1.1f, "waterItem");
 
-        Multiplier.AddMultiplier(elementData.waterDamageMultis, increaseWaterMulti, elementData.waterDamageMultiplier);
+        elementData.waterDamageMultiplier = Multiplier.AddMultiplier(elementData.waterDamageMultis, increaseWaterMulti);
 
     }
 }
