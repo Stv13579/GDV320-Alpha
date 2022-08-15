@@ -8,7 +8,6 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
     private float damage;
     private float timerToExplode;
     private float currentTimer;
-    private float gravity;
     private float explosionRange;
     private float explosionDamage;
     AudioManager audioManager;
@@ -119,11 +118,10 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
 
         }
     }
-    public void SetVars(float spd, float dmg, float timer, float grav, float explosionRadius, float expDamage, List<BaseEnemyClass.Types> types)
+    public void SetVars(float spd, float dmg, float timer, float explosionRadius, float expDamage, List<BaseEnemyClass.Types> types)
     {
         speed = spd;
         damage = dmg;
-        gravity = grav;
         timerToExplode = timer;
         explosionRange = explosionRadius;
         explosionDamage = expDamage;
@@ -139,7 +137,6 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
             this.gameObject.transform.SetParent(other.transform);
             this.GetComponent<Rigidbody>().isKinematic = true;
             speed = 0;
-            gravity = 0;
             other.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             other = enemy;
         }
@@ -150,7 +147,6 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
             this.gameObject.transform.SetParent(other.transform);
             this.GetComponent<Rigidbody>().isKinematic = true;
             speed = 0;
-            gravity = 0;
         }
         else if(other.gameObject.layer == 10)
         {
