@@ -16,7 +16,7 @@ public class Wealth : Prophecy
         newWealthDamageMulti = new Multiplier(1.25f, "Wealth");
         drops.minCurrencySpawn *= 2;
         drops.maxCurrencySpawn *= 2;
-        Multiplier.AddMultiplier(pM.damageMultipliers, newWealthDamageMulti, pM.prophecyDamageMulti);
+        pM.prophecyDamageMulti = Multiplier.AddMultiplier(pM.damageMultipliers, newWealthDamageMulti);
         
     }
 }

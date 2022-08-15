@@ -376,11 +376,11 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("StartRoutine");
 
-        Multiplier.AddMultiplier(movementMultipliers, multiplier, movementMulti);
+        movementMulti = Multiplier.AddMultiplier(movementMultipliers, multiplier);
 
         yield return new WaitForSeconds(10f);
         Debug.Log("StopRoutine");
-        Multiplier.RemoveMultiplier(movementMultipliers, multiplier, movementMulti);
+        movementMulti = Multiplier.RemoveMultiplier(movementMultipliers, multiplier);
 
     }
     private void OnTriggerStay(Collider other)

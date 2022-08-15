@@ -16,7 +16,9 @@ public class BaseEnemyClass : MonoBehaviour
     protected ProphecyManager prophecyManager;
 
     #endregion
-    List<float> movementMultipliers = new List<float>();
+    public List<Multiplier> movementMultipliers = new List<Multiplier>();
+    public List<Multiplier> damageMultipliers = new List<Multiplier>();
+
     //The amount of flat damage any instance of incoming damage is reduced by
     public float damageThreshold;
 
@@ -247,8 +249,11 @@ public class BaseEnemyClass : MonoBehaviour
         {
             targettingIndicator.SetActive(targetted);
         }
+        if(this.transform.GetChild(1).GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>())
+        {
+            this.transform.GetChild(1).GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Outline_Colour", colour);
 
-        this.transform.GetChild(1).GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Outline_Colour", colour);
+        }
     }
 
     public IEnumerator AttackBuff()
@@ -262,26 +267,6 @@ public class BaseEnemyClass : MonoBehaviour
     public void RestoreHealth(float amount)
     {
         currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
-    }
-
-    public void AddMovementMultiplier(float multi)
-    {
-        movementMultipliers.Add(multi);
-        moveSpeedMulti = 1.0f;
-        foreach (float multiplier in movementMultipliers)
-        {
-            moveSpeedMulti *= multiplier;
-        }
-    }
-
-    public void RemoveMovementMultiplier(float multi)
-    {
-        movementMultipliers.Remove(multi);
-        moveSpeedMulti = 1.0f;
-        foreach (float multiplier in movementMultipliers)
-        {
-            moveSpeedMulti *= multiplier;
-        }
     }
 
 

@@ -52,7 +52,7 @@ public class NecroticElement : BaseElementClass
         {
             playerClass.ChangeMana(-manaCost, manaTypes);
             Instantiate(test, targetToSlow.transform);
-            targetToSlow.GetComponent<BaseEnemyClass>().AddMovementMultiplier(upgraded ? 0.5f : 0.3f);
+            targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti = Multiplier.AddMultiplier(targetToSlow.GetComponent<BaseEnemyClass>().movementMultipliers, new Multiplier(upgraded ? 0.5f : 0.3f, "Necrotic"));
         }
     }
     // Update is called once per frame

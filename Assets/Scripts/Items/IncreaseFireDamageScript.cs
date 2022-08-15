@@ -9,7 +9,7 @@ public class IncreaseFireDamageScript : Item
         base.AddEffect(player);
         Multiplier increaseFireMulti = new Multiplier(1.1f, "fireItem");
 
-        Multiplier.AddMultiplier(elementData.fireDamageMultis, increaseFireMulti, elementData.fireDamageMultiplier);
+        elementData.fireDamageMultiplier = Multiplier.AddMultiplier(elementData.fireDamageMultis, increaseFireMulti);
 
     }
 

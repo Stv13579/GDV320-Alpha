@@ -38,7 +38,7 @@ public class LaserBeamElement : BaseElementClass
        playerHand.SetTrigger("LaserBeamStopCast");
        audioManager.Stop("Laser Beam");
        laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
-       Multiplier.RemoveMultiplier(playerMovement.movementMultipliers, new Multiplier(0.25f, "Laser"), playerMovement.movementMulti);
+       playerMovement.movementMulti = Multiplier.RemoveMultiplier(playerMovement.movementMultipliers, new Multiplier(0.25f, "Laser"));
     }
     public override void ElementEffect()
     {
@@ -46,7 +46,7 @@ public class LaserBeamElement : BaseElementClass
         usingLaser = true;
         laserBeam.SetActive(true);
         laserBeam.GetComponentInChildren<LaserBeam>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), attackTypes);
-        Multiplier.AddMultiplier(playerMovement.movementMultipliers, new Multiplier(0.25f, "Laser"), playerMovement.movementMulti);
+        playerMovement.movementMulti = Multiplier.AddMultiplier(playerMovement.movementMultipliers, new Multiplier(0.25f, "Laser"));
     }
     public override void LiftEffect()
     {
