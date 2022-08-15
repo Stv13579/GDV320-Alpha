@@ -25,16 +25,16 @@ public class BaseRangedProjectileScript : MonoBehaviour
         }
     }
 
-    protected virtual void HitEffect()
+    protected virtual void HitEffect(Collider other)
     {
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == player)
+        if (other.gameObject == player && player.GetComponent<EnergyElement>().GetUseShield() == false)
         {
-            HitEffect();
+            HitEffect(other);
         }
         else if (other.gameObject.layer == 8 || other.gameObject.layer == 10 || other.gameObject.layer == 16)
         {
