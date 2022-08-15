@@ -29,13 +29,13 @@ public class BaseDropScript : MonoBehaviour
         //If the player moves in range, disable he rigidbody and switch the collider to a trigger
         if (((player.position - transform.position).magnitude < 5 && !moving) || roomEnd)
         {
-            this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            rb.isKinematic = true;
             this.gameObject.GetComponent<Collider>().isTrigger = true;
             moving = true;
         }
         else if ((player.position - transform.position).magnitude > 10 && moving && !roomEnd)
         {
-            this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            rb.isKinematic = false;
             this.gameObject.GetComponent<Collider>().isTrigger = false;
             moving = false;
         }

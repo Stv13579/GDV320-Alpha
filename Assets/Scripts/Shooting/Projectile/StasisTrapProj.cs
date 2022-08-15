@@ -74,7 +74,7 @@ public class StasisTrapProj : MonoBehaviour
                         {
                             if (containedEnemies[i])
                             {
-                                containedEnemies[i].GetComponent<BaseEnemyClass>().RemoveMovementMultiplier(0);
+                                Multiplier.RemoveMultiplier(containedEnemies[i].GetComponent<BaseEnemyClass>().movementMultipliers, new Multiplier(0, "Stasis"), containedEnemies[i].GetComponent<BaseEnemyClass>().moveSpeedMulti);
                                 containedEnemies.Remove(containedEnemies[i]);
                             }
                         }
@@ -105,7 +105,7 @@ public class StasisTrapProj : MonoBehaviour
             containedEnemies.Add(other.gameObject);
             for (int i = 0; i < containedEnemies.Count; i++)
             {
-                containedEnemies[i].gameObject.GetComponent<BaseEnemyClass>().AddMovementMultiplier(0);
+                Multiplier.AddMultiplier(containedEnemies[i].GetComponent<BaseEnemyClass>().movementMultipliers, new Multiplier(0, "Stasis"), containedEnemies[i].GetComponent<BaseEnemyClass>().moveSpeedMulti);
             }
         }
     }
