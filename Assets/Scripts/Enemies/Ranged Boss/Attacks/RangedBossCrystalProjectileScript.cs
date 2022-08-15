@@ -39,7 +39,7 @@ public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript
 
     protected override void HitEffect(Collider other)
     {
-       if(moving)
+       if(moving && other.GetComponent<PlayerClass>())
         {
             other.GetComponent<PlayerClass>().ChangeHealth(-bigDamage);
             Explode();
@@ -53,6 +53,11 @@ public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript
         {
             Explode();
         }
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        HitEffect(other);
     }
     //private void OnTriggerEnter(Collider other)
     //{
