@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaterRangedProjectile : BaseRangedProjectileScript
 {
-    protected override void HitEffect()
+    protected override void HitEffect(Collider other)
     {
         player.GetComponent<PlayerClass>().ChangeHealth(-damage);
         player.GetComponent<PlayerMovement>().StopCoroutine(player.GetComponent<PlayerMovement>().Slowness(new Multiplier(1, "WaterSlow")));
