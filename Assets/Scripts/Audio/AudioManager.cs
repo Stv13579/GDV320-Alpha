@@ -37,13 +37,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     float audioDistance;
     
-    enum fadeInandOut
-    {
-        None = 0,
-        fadeOut = 1,
-        fadeIn = 2
-    }
-    fadeInandOut currentState = fadeInandOut.None;
     
     // Start is called before the first frame update
     void Start()

@@ -65,7 +65,7 @@ public class LaserBeam : MonoBehaviour
         if(currentHitDelay > hitDelay)
         {
             currentHitDelay = 0;
-            foreach (GameObject enemy in containedEnemies)
+            foreach (GameObject enemy in containedEnemies.ToArray())
             {
                 if(enemy)
                 {

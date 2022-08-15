@@ -124,7 +124,7 @@ public class BaseElementClass : MonoBehaviour
     }
     protected virtual void StartAnims(string animationName, string animationNameAlt = null)
     {
-        playerHand.SetTrigger("CancelBack");
+
     }
     //Called from the hand objects when the appropriate event triggers to turn on the vfx
     public virtual void ActivateVFX()

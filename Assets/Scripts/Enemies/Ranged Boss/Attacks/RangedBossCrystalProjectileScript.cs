@@ -15,6 +15,7 @@ public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript
     // Start is called before the first frame update
     protected override void Start()
     {
+        base.Start();
         energyScript = FindObjectOfType<EnergyElement>();
         this.transform.LookAt(GameObject.Find("Player").transform);
         this.transform.up = this.transform.forward;
