@@ -42,7 +42,7 @@ public class StasisTrapProj : MonoBehaviour
         {
             case StasisTrapProjState.idle:
                 {
-                    if (duration >= 0.5f)
+                    if (duration >= 0.45f)
                     {
                         currentstate = StasisTrapProjState.active;
                     }
