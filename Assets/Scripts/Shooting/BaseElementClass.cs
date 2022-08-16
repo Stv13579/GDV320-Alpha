@@ -112,7 +112,7 @@ public class BaseElementClass : MonoBehaviour
         StasisTrap = 209
     }
     [SerializeField]
-    protected ElementType currentElementType = ElementType.Fire;
+    public ElementType currentElementType = ElementType.Fire;
     protected virtual void Start()
     {
         player = GameObject.Find("Player");

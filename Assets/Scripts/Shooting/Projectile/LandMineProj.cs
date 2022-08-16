@@ -25,6 +25,10 @@ public class LandMineProj : MonoBehaviour
     void Update()
     {
         lifeTimer -= Time.deltaTime;
+        // if true
+        // turn off collider
+        // show explosion effect
+        // turn off mine
         if(willExplode)
         {
             this.GetComponent<Collider>().enabled = false;
@@ -36,12 +40,16 @@ public class LandMineProj : MonoBehaviour
             }
             willExplode = false;
         }
+        // this is for the after effect of the animation
+        // it is 10 seconds long
         if(!willExplode)
         {
             timerToDestroy += Time.deltaTime;
         }
         KillProjectile();
     }
+    // kills the landmine if its been siting in the level for too long and nothing has happened to it or
+    // if the animation has finished
     private void KillProjectile()
     {
         if(lifeTimer <= 0  && !willExplode)
@@ -61,12 +69,11 @@ public class LandMineProj : MonoBehaviour
         attackTypes = types;
 
     }
+    
     private void OnTriggerEnter(Collider other)
     {
-        // other is an enemy
-        // there is a ground, player and the enemy in explosion range
-
-        if(other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())
+        // if the other object is an enemy
+        if (other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())
         {
             Collider[] objectsHitByExplosion = Physics.OverlapSphere(this.transform.position, explosiveRadius);
             for(int i = 0; i < objectsHitByExplosion.Length; i++)

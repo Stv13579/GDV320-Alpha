@@ -48,12 +48,14 @@ public class LifeStealElement : BaseElementClass
                 lifeSteal.SetActive(false);
                 return;
             }
+            // needs fixing
             else if (objectHit[0].transform.gameObject.layer == environmentLayer)
             {
-                // do nothing
                 isTargeting = false;
                 lifeSteal.SetActive(false);
             }
+            // if objectHit is in the enemy layer
+            // suck health from him
             else if (objectHit[0].transform.gameObject.layer == 8)
             {
                 // turn targeting on
@@ -72,10 +74,10 @@ public class LifeStealElement : BaseElementClass
     }
     private void DeactivateLifeSteal()
     {
-            isTargeting = false;
-            isShooting = false;
-            lifeSteal.SetActive(false);
-            playerHand.SetTrigger("LifeStealStopCast");
+        isTargeting = false;
+        isShooting = false;
+        lifeSteal.SetActive(false);
+        playerHand.SetTrigger("LifeStealStopCast");
     }
     public override void ElementEffect()
     {
@@ -95,9 +97,7 @@ public class LifeStealElement : BaseElementClass
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);
-
         playerHand.ResetTrigger("LifeStealStopCast");
-
         playerHand.SetTrigger(animationName);
     }
     protected override bool PayCosts(float modifier = 1)
