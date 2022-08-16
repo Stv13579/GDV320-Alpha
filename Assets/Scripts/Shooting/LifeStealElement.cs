@@ -35,12 +35,6 @@ public class LifeStealElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-
-        if(playerHand.GetCurrentAnimatorStateInfo(2).IsName("StartLifeStealCast") ||
-           playerHand.GetCurrentAnimatorStateInfo(2).IsName("LifeStealCastHold"))
-        {
-            DeactivateLifeSteal();
-        }
         ActivateLifeSteal();
     }
     private void ActivateLifeSteal()
@@ -78,13 +72,10 @@ public class LifeStealElement : BaseElementClass
     }
     private void DeactivateLifeSteal()
     {
-        if (!Input.GetKey(KeyCode.Mouse0) /*|| !PayCosts(Time.deltaTime)*/)
-        {
             isTargeting = false;
             isShooting = false;
             lifeSteal.SetActive(false);
             playerHand.SetTrigger("LifeStealStopCast");
-        }
     }
     public override void ElementEffect()
     {

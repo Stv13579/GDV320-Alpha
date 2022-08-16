@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossRoom : Room
 {
     [SerializeField]
-    GameObject boss;
+    BossList bosses;
 
     [SerializeField]
     Transform spawnPosition;
@@ -42,7 +42,7 @@ public class BossRoom : Room
         {
             bossSpawned = true;
             //Spawn the boss once
-            currentBoss = Instantiate(boss, spawnPosition.position, Quaternion.identity);
+            currentBoss = Instantiate(bosses.GetBoss(), spawnPosition.position, Quaternion.identity);
             //Lock the doors
             LockDoors();
         }
