@@ -30,16 +30,17 @@ public class NPC : MonoBehaviour
 
     }
 
-    public class StoryDialogue : Dialogue
+    [Serializable]
+    public class StoryDialogues
     {
-        public StoryDialogue(NPCData npcData) : base(npcData)
-
-        {
-            heldData = npcData;
-        }
+        public List<Dialogue> dialogues;
     }
-    
-    protected List<Dialogue> storyDialogues = new List<Dialogue>(), randomDialogues = new List<Dialogue>();
+
+    [SerializeField]
+    protected List<StoryDialogues> storyDialogues = new List<StoryDialogues>();
+
+    protected List<Dialogue> possibleDialogues = new List<Dialogue>();
+
     [HideInInspector]
     public Dialogue currentDialogue;
     public Dialogue noMoreDialogue;
@@ -61,8 +62,24 @@ public class NPC : MonoBehaviour
     //Holds dialogue and functionality for questlines.
     public void Start()
     {
-        randomDialogues.AddRange(baseRandoms);
-        currentDialogue = randomDialogues[UnityEngine.Random.Range(0, randomDialogues.Count)];
+        
+
+        //Create an array of possible dialogues and then choose one at random.
+        //Possible dialogues include the random ones and the story position, or a deterministic quest dialogue.
+        if(data.questReady)
+        {
+            //Give quest dialogue
+            currentDialogue = new Dialogue(data);
+            currentDialogue.lines.Add("Wow");
+            data.questReady = false;
+        }
+        else
+        {
+            possibleDialogues.AddRange(baseRandoms);
+            possibleDialogues.AddRange(storyDialogues[data.storyPosition].dialogues);
+        }
+
+        currentDialogue = possibleDialogues[UnityEngine.Random.Range(0, possibleDialogues.Count)];
     }
 
     //Choose which dialogues to add to the current dialogue list
