@@ -71,7 +71,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private AnimationCurve moveAnimaCurve;
 
-    public LayerMask environmentLayer;
+    [SerializeField]
+    private LayerMask environmentLayer;
 
     //sliding parameters
     [Header("Slope")]
@@ -100,18 +101,30 @@ public class PlayerMovement : MonoBehaviour
     }
     private float maxVeloMagnitude = 1.5f;
     [Header("camera shake")]
-    public Transform cameraHolder;
-    public Vector3 cameraHolderTargetPos;
-    public float cameraHolderTargetAngle;
-    public float currentCameraHolderAngle;
-    public float cameraShakePosPunchLerp = 8.0f;
-    public float cameraShakePosLerp = 16.0f;
-    public float cameraShakeAnglePunchLerp = 20.0f;
-    public float cameraShakeAngleLerp = 40.0f;
+
+    [SerializeField]
+    private Transform cameraHolder;
+
+    private Vector3 cameraHolderTargetPos;
+    private float cameraHolderTargetAngle;
+    private float currentCameraHolderAngle;
+
+    [SerializeField]
+    private float cameraShakePosPunchLerp = 8.0f;
+    [SerializeField]
+    private float cameraShakePosLerp = 16.0f;
+    [SerializeField]
+    private float cameraShakeAnglePunchLerp = 20.0f;
+    [SerializeField]
+    private float cameraShakeAngleLerp = 40.0f;
+
     // how deep the drop is (camera pos)
-    public float cameraShakeDrop = 0.1f;
+    [SerializeField]
+    private float cameraShakeDrop = 0.1f;
+
     // how deep the dip is (camera angle)
-    public float cameraShakeDip = 25.0f;
+    [SerializeField]
+    private float cameraShakeDip = 25.0f;
 
     [SerializeField]
     private float collisionForce = 0.5f;
@@ -132,20 +145,22 @@ public class PlayerMovement : MonoBehaviour
             UpdateCameraShake();
         }
     }
+
+    // function for the camera shake
+    // lerps the camera pos and camera angle to their targets
+    // then lerps from target to zero
     void UpdateCameraShake()
     {
-        // how fast green moves (parabolar shape)
         cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, cameraHolderTargetPos, cameraShakePosLerp * Time.deltaTime);
         currentCameraHolderAngle = Mathf.Lerp(currentCameraHolderAngle, cameraHolderTargetAngle, cameraShakeAngleLerp * Time.deltaTime);
 
-        // how fast red moves 
         cameraHolderTargetPos = Vector3.Lerp(cameraHolderTargetPos, Vector3.zero, cameraShakePosPunchLerp * Time.deltaTime);
         cameraHolderTargetAngle = Mathf.Lerp(cameraHolderTargetAngle, 0.0f, cameraShakeAnglePunchLerp * Time.deltaTime);
 
-        // red faster green follows red
-
         lookScript.bumpTilt = currentCameraHolderAngle;
     }
+
+
     private void PlayerMoving()
     {
         // reads players input 
@@ -376,11 +391,11 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("StartRoutine");
 
-        Multiplier.AddMultiplier(movementMultipliers, multiplier, movementMulti);
+        movementMulti = Multiplier.AddMultiplier(movementMultipliers, multiplier);
 
         yield return new WaitForSeconds(10f);
         Debug.Log("StopRoutine");
-        Multiplier.RemoveMultiplier(movementMultipliers, multiplier, movementMulti);
+        movementMulti = Multiplier.RemoveMultiplier(movementMultipliers, multiplier);
 
     }
     private void OnTriggerStay(Collider other)

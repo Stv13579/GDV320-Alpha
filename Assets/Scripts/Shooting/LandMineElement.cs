@@ -28,7 +28,7 @@ public class LandMineElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-        //if this element on turn on indicator
+        //if this element is turned on turn on indicator
         if (shootingScript.GetLeftElementIndex() == leftIndex &&
             shootingScript.GetRightElementIndex() == rightIndex &&
             shootingScript.GetInComboMode() == true)
@@ -39,6 +39,7 @@ public class LandMineElement : BaseElementClass
         {
             indicator.SetActive(false);
         }
+        // updating the indicator position
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rayCastRange, layerMask))
         {
             indicator.transform.position = hit.point;
@@ -52,6 +53,8 @@ public class LandMineElement : BaseElementClass
     public override void ElementEffect()
     {
         base.ElementEffect();
+        // if the raycast hits then place the trap where the raycast hit
+        // else place trap at the end of the raycast range
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rayCastRange, layerMask))
         {
             GameObject newLandMine = Instantiate(landMineProjectile, hit.point + new Vector3(0, 0.75f, 0), Quaternion.identity);

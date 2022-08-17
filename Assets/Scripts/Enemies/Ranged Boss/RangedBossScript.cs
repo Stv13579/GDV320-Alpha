@@ -77,7 +77,7 @@ public class RangedBossScript : BaseEnemyClass
             StartCoroutine(HomingAttack(5));
         }
     }
-
+    //Homing attack, randomly instantiates a homing attack variant toSpawn times
     public IEnumerator HomingAttack(int toSpawn)
     {
         int i = 0;
@@ -88,7 +88,7 @@ public class RangedBossScript : BaseEnemyClass
             yield return new WaitForSeconds(0.5f);
         }
     }
-
+    //Fire attack, instantiates toSpawn number of fake fireballs, shoots them in the air, which then spawn real fireballs over the player
     public IEnumerator FireAttack(int toSpawn)
     {
         int i = 0;
@@ -101,7 +101,7 @@ public class RangedBossScript : BaseEnemyClass
             yield return new WaitForSeconds(0.2f);
         }
     }
-
+    //Water attack, fire toSpawn number of water projectiles evenly in a circle around the boss
     public IEnumerator WaterAttack(int toSpawn)
     {
         //Will change when animations are in
@@ -118,7 +118,7 @@ public class RangedBossScript : BaseEnemyClass
             yield return new WaitForSeconds(0.1f);
         }
     }
-
+    //Crystal attack, fires a large crystal projectile towards the player, which can embed in the ground and explode
     public void CrystalAttack()
     {
         GameObject crystalProj = Instantiate(crystalProjectile, projectileSpawnPos.position, Quaternion.identity);
@@ -126,17 +126,17 @@ public class RangedBossScript : BaseEnemyClass
         crystalProj.GetComponent<RangedBossCrystalProjectileScript>().bigDamage = damageAmount * 2 * damageMultiplier;
 
     }
-
+    //Starts the homing attack, so it can be called by the animator
     public void StartHoming()
     {
         StartCoroutine(HomingAttack(5));
     }
-
+    //Starts the fire attack, so it can be called by the animator
     public void StartFire()
     {
         StartCoroutine(FireAttack(5));
     }
-
+    //Starts the water attack, so it can be called by the animator
     public void StartWater()
     {
         StartCoroutine(WaterAttack(60));

@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireRangedProjectile : BaseRangedProjectileScript
 {
     public float fireDuration;
-    protected override void HitEffect()
+    protected override void HitEffect(Collider other)
     {
         player.GetComponent<PlayerClass>().ChangeHealth(-damage);
         player.GetComponent<PlayerClass>().OnFire(fireDuration);

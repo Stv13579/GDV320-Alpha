@@ -164,8 +164,8 @@ public class BaseEnemyClass : MonoBehaviour
             enemyAnims.SetTrigger("TakeDamage");
         }
 
-        //audioManager.Stop(takeDamageAudio);
-        //audioManager.Play(takeDamageAudio, player.transform, this.transform);
+        audioManager.Stop(takeDamageAudio);
+        audioManager.Play(takeDamageAudio, player.transform, this.transform);
         Death();
     }
 
@@ -221,8 +221,8 @@ public class BaseEnemyClass : MonoBehaviour
             Instantiate(deathSpawn, transform.position, Quaternion.identity);
 
 
-            //audioManager.Stop(deathAudio);
-            //audioManager.Play(deathAudio, player.transform, this.transform);
+            audioManager.Stop(deathAudio);
+            audioManager.Play(deathAudio, player.transform, this.transform);
 
             Destroy(gameObject);
         }

@@ -38,6 +38,7 @@ public class PlayerLook : MonoBehaviour
 
     public float bumpTilt = 0.0f;
 
+    // toggle to lock the cursor
     public void LockCursor()
     {
         cursorLocked = !cursorLocked;
@@ -65,6 +66,7 @@ public class PlayerLook : MonoBehaviour
         Cursor.visible = !cursorLocked;
     }
 
+    // moves the players head around so that they can look around
     private void MoveCamera()
     {
         // if cursor is locked
@@ -95,6 +97,7 @@ public class PlayerLook : MonoBehaviour
     {
         currentCamera.transform.localEulerAngles = new Vector3(tilt, spin, 0);
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -110,6 +113,9 @@ public class PlayerLook : MonoBehaviour
         }
         HandleEditorInputs();
     }
+
+    // function for player tilting 
+    // checks for input and does tilting
     private void RollInput()
     {
         if(Input.GetKey(KeyCode.A))
@@ -126,6 +132,7 @@ public class PlayerLook : MonoBehaviour
         }
     }
 
+    //function that checks for input to toggle cursor on or off
     private void HandleEditorInputs()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
