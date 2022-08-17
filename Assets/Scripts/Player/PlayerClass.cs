@@ -52,7 +52,7 @@ public class PlayerClass : MonoBehaviour
     public GameObject itemUI;
 
     public GameObject gameOverScreen;
-    bool dead = false;
+    private bool dead = false;
 
     public Transform fallSpawner;
 
@@ -60,19 +60,21 @@ public class PlayerClass : MonoBehaviour
     /// Pushing Away When Hit
     /// </summary>
     public float pushDuration;
-    float pushStrength;
-    float currentPushDuration;
-    Vector3 pushDir;
+    private float pushStrength;
+    private float currentPushDuration;
+    private Vector3 pushDir;
 
     [SerializeField]
-    float fallDamage;
+    private float fallDamage;
 
-    float fireTimer = 0.0f;
+    private float fireTimer = 0.0f;
     [SerializeField]
-    float fireDOT;
+    private float fireDOT;
     [SerializeField]
-    GameObject fireEffect;
+    private GameObject fireEffect;
 
+    [SerializeField]
+    private Material fireMaterial;
     void Start()
     {
         currentHealth = maxHealth;
@@ -235,6 +237,12 @@ public class PlayerClass : MonoBehaviour
         if(fireTimer > 0)
         {
             fireEffect.SetActive(true);
+            fireMaterial.SetFloat("_Toggle_EffectIntensity", 0.1f);
+        }
+        else
+        {
+            fireEffect.SetActive(false);
+            fireMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
         }
     }
 
