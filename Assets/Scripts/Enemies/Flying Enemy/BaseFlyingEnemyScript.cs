@@ -77,6 +77,13 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
             FindTarget();
 
         }
+        if(target.GetComponent<RangedEnemyScript>())
+        {
+            if(target.GetComponent<RangedEnemyScript>().GetBurrowing())
+            {
+                FindTarget();
+            }
+        }
         this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, moveSpeed * moveSpeedMulti * Time.deltaTime);
     }
 

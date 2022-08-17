@@ -2,22 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedEnemyScript : BaseEnemyClass
+public class RangedEnemyScript : BaseEnemyClass //Sebastian
 {
     float timer = 0;
-    public float attackTime;
-    public float attackTimeMulti = 1.0f;
-    public LayerMask viewToPlayer;
-    public float burrowTime;
+    [SerializeField]
+    float attackTime;
+    float attackTimeMulti = 1.0f;
+    [SerializeField]
+    LayerMask viewToPlayer;
+    [SerializeField]
+    float burrowTime;
     bool burrowing = false;
+    [SerializeField]
+    GameObject projectile;
+    [SerializeField]
+    float projectileSpeed;
 
-    public GameObject projectile;
-    public float projectileSpeed;
+    float destroyTimer = 0.0f;
 
 
-
-    public Transform projectileSpawnPos;
-    public LayerMask groundDetect;
+    [SerializeField]
+    Transform projectileSpawnPos;
+    [SerializeField]
+    LayerMask groundDetect;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,12 +42,13 @@ public class RangedEnemyScript : BaseEnemyClass
 
 
         RaycastHit hit;
+        //Makes sure it can see the player
         if (Physics.Raycast(projectileSpawnPos.position, player.transform.position - projectileSpawnPos.position, out hit, Mathf.Infinity, viewToPlayer))
         {
-            Debug.Log(hit.collider.gameObject.name);
-            Debug.DrawRay(projectileSpawnPos.position, player.transform.position - transform.position);
+
             if (hit.collider.gameObject.tag == "Player")
             {
+                destroyTimer = 0.0f;
                 if(!burrowing)
                 {
                     timer += Time.deltaTime;
@@ -53,7 +61,8 @@ public class RangedEnemyScript : BaseEnemyClass
                     Quaternion rot = transform.rotation;
                     rot.eulerAngles = new Vector3(0, rot.eulerAngles.y, 0);
                     transform.rotation = rot;
-                    if (Vector3.Distance(player.transform.position, this.gameObject.transform.position) < 10 || Vector3.Distance(player.transform.position, this.gameObject.transform.position) > 50)
+                    //Make sure the player isn't too close or too far
+                    if (Vector3.Distance(player.transform.position, this.gameObject.transform.position) < 10 || Vector3.Distance(player.transform.position, this.gameObject.transform.position) > 40)
                     {
                         enemyAnims.SetTrigger("Burrow");
                         StartCoroutine(Burrow());
@@ -63,7 +72,11 @@ public class RangedEnemyScript : BaseEnemyClass
             }
             else
             {
-                //Idle anim
+                destroyTimer += Time.deltaTime;
+                if(destroyTimer > 20)
+                {
+                    Death();
+                }
             }
         }
 
@@ -72,7 +85,7 @@ public class RangedEnemyScript : BaseEnemyClass
 
 
     }
-
+    //Spawns the enemies given projectile, and in the case it's a crystal projectile spawns multiple
     public void Attack()
     {
         projectileSpawnPos.transform.LookAt(player.transform);
@@ -96,7 +109,7 @@ public class RangedEnemyScript : BaseEnemyClass
             }
         }
     }
-
+    //Starts the enemy burrowing
     IEnumerator Burrow()
     {
         Vector3 startPos = this.transform.position;
@@ -112,16 +125,15 @@ public class RangedEnemyScript : BaseEnemyClass
         }
 
         Node nodeChosen = null;
-
+        //Finds a SAIM node, checks if it's valid, if so moves the enemy to below it and starts emerging, otherwise finds another node
         while(nodeChosen == null)
         {
             int rand = Random.Range(0, spawner.GetComponent<SAIM>().aliveNodes.Count);
-            Debug.Log(rand);
             nodeChosen = spawner.GetComponent<SAIM>().aliveNodes[rand];
             RaycastHit hit;
             Physics.Raycast(nodeChosen.gameObject.transform.position, -nodeChosen.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
             Vector3 emergePos = hit.point - this.transform.GetChild(1).localPosition * 2;
-            if (Vector3.Distance(player.transform.position, emergePos) > 10 && Vector3.Distance(player.transform.position, emergePos) < 50)
+            if (Vector3.Distance(player.transform.position, emergePos) > 10 && Vector3.Distance(player.transform.position, emergePos) < 40)
             {
 
                 this.transform.position = emergePos + new Vector3(0, -50, 0);
@@ -138,7 +150,7 @@ public class RangedEnemyScript : BaseEnemyClass
         StopCoroutine(Burrow());
 
     }
-
+    //Starts the enemy emerging from the ground
     IEnumerator Emerge()
     {
         Vector3 startPos = this.transform.position;
@@ -155,5 +167,21 @@ public class RangedEnemyScript : BaseEnemyClass
         timer = 0.0f;
         StopCoroutine(Emerge());
     }
+
+    public bool GetBurrowing()
+    {
+        return burrowing;
+    }
+
+    public void SetAttackMulti(float multi)
+    {
+        attackTimeMulti = multi;
+    }
+
+    public float GetAttackMulti()
+    {
+        return attackTimeMulti;
+    }
+
 }
 
