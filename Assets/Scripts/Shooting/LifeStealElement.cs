@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class LifeStealElement : BaseElementClass
 {
@@ -27,20 +28,34 @@ public class LifeStealElement : BaseElementClass
     private LayerMask environmentLayer;
 
     private GameObject enemy;
+
+    [SerializeField]
+    private Material lifestealFullScreenEffect;
+
+    private float lifestealeffectvalue;
     protected override void Start()
     {
         base.Start();
+        lifestealeffectvalue = 0;
+        lifestealFullScreenEffect.SetFloat("_Toggle_EffectIntensity", lifestealeffectvalue);
     }
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
         ActivateLifeSteal();
+        if (Input.GetKeyDown(KeyCode.E) ||
+            Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Q) ||
+            Input.GetKeyDown(KeyCode.F))
+        {
+            DeactivateLifeSteal();
+        }
     }
     private void ActivateLifeSteal()
     {
         if (isShooting == true)
         {
+            LifeStealFullScreenEffect(0);
             RaycastHit[] objectHit = Physics.SphereCastAll(Camera.main.transform.position, sphereRadius, Camera.main.transform.forward, sphereRange, hitLayer);
             if(objectHit.Length <= 0)
             {
@@ -65,6 +80,7 @@ public class LifeStealElement : BaseElementClass
             }
             if (isTargeting == true && enemy.GetComponent<BaseEnemyClass>() && enemy != null)
             {
+                LifeStealFullScreenEffect(0.1f);
                 playerClass.ChangeMana(-Time.deltaTime, manaTypes);
                 lifeSteal.SetActive(true);
                 enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier * elementData.waterDamageMultiplier), attackTypes);
@@ -78,6 +94,12 @@ public class LifeStealElement : BaseElementClass
         isShooting = false;
         lifeSteal.SetActive(false);
         playerHand.SetTrigger("LifeStealStopCast");
+        LifeStealFullScreenEffect(0);
+    }
+    private void LifeStealFullScreenEffect(float value)
+    {
+        lifestealeffectvalue = value;
+        lifestealFullScreenEffect.SetFloat("_Toggle_EffectIntensity", lifestealeffectvalue);
     }
     public override void ElementEffect()
     {
