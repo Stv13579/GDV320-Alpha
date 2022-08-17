@@ -13,6 +13,8 @@ public class IceSlashElement : BaseElementClass
     [SerializeField]
     private float lifeTimer;
 
+    [SerializeField]
+    private GameObject iceSlashShootVFX;
     // Update is called once per frame
     protected override void Update()
     {
@@ -22,6 +24,7 @@ public class IceSlashElement : BaseElementClass
     public override void ElementEffect()
     {
         base.ElementEffect();
+        PlayVFX();
         GameObject iceSlashTemp = Instantiate(iceSlash, shootingTranform.position, Camera.main.transform.rotation);
         iceSlashTemp.GetComponent<IceSlashProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.waterDamageMultiplier), lifeTimer, attackTypes);
     }
@@ -29,6 +32,25 @@ public class IceSlashElement : BaseElementClass
     public override void ActivateVFX()
     {
         base.ActivateVFX();
+    }
+    private void PlayVFX()
+    {
+        if (randomAnimationToPlay == 0)
+        {
+            //right hand
+            if (!iceSlashShootVFX.transform.GetChild(1).GetComponent<ParticleSystem>().isPlaying)
+            {
+                iceSlashShootVFX.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+            }
+        }
+        else
+        {
+            //left hand
+            if (!iceSlashShootVFX.transform.GetChild(0).GetComponent<ParticleSystem>().isPlaying)
+            {
+                iceSlashShootVFX.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+            }
+        }
     }
 
     protected override void StartAnims(string animationName, string animationNameAlt = null)

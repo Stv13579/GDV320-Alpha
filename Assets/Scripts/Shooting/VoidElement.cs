@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class VoidElement : BaseElementClass
 {
-    public float dashDistance = 10.0f;
-    float trueDashDistance = 0.0f;
-    public float dashTime = 0.5f;
-    Vector3 targetPos = Vector3.zero;
-    bool dashing = false;
-    public GameObject Indicator;
-    bool isHolding;
+    [SerializeField]
+    private float dashDistance = 10.0f;
+    private float trueDashDistance = 0.0f;
+    [SerializeField]
+    private float dashTime = 0.5f;
+    private Vector3 targetPos = Vector3.zero;
+    private bool dashing = false;
+    [SerializeField]
+    private GameObject Indicator;
+    private bool isHolding;
+
+    [SerializeField]
+    private Material voidMaterial;
+
+    protected override void Start()
+    {
+        base.Start();
+        voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
+    }
     protected override void Update()
     {
         base.Update();
@@ -75,48 +87,6 @@ public class VoidElement : BaseElementClass
         Indicator.SetActive(false);
         //Subtract the mana cost
         playerClass.ChangeMana(-manaCost, manaTypes);
-        //RaycastHit hit1;
-        //if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit1, dashDistance, shootingIgnore))
-        //{
-        //    trueDashDistance = Vector3.Distance(hit1.point, this.transform.position);
-        //}
-        //else
-        //{
-        //    trueDashDistance = dashDistance;
-        //}
-        ////Spherecast to detect all things that can be interacted with along dash route
-        //RaycastHit[] hits = Physics.SphereCastAll(this.gameObject.transform.position, 0.2f, Camera.main.transform.forward, trueDashDistance, shootingIgnore);
-        //if (hits.Length > 0)
-        //{
-        //    Vector3 averagePos = Vector3.zero;
-        //    Vector3 averageNorm = Vector3.zero;
-        //    int count = 0;
-        //    float distance = Mathf.Abs(hits[0].distance);
-        //    //Sum up the normals and positions of objects within a small range of the first object hit with the spherecast
-        //    foreach (RaycastHit hit in hits)
-        //    {
-        //        if (Mathf.Abs(hit.distance) < distance + 2)
-        //        {
-        //            averagePos += hit.point;
-        //            averageNorm += hit.normal;
-        //            count += 1;
-        //        }
-
-        //    }
-        //    //Average out the positions and normals
-        //    averagePos /= count;
-        //    averageNorm.Normalize();
-        //    //Set the target pos to the average position
-        //    targetPos = averagePos;
-        //    Vector3 size = this.gameObject.GetComponent<CharacterController>().bounds.size;
-        //    //Move the target position out slightly by the average normal
-        //    targetPos += new Vector3(averageNorm.x * size.x, averageNorm.y * size.y, averageNorm.z * size.z);
-        //}
-        //else
-        //{
-        //    targetPos = this.transform.position + Camera.main.transform.forward * trueDashDistance;
-        //}
-
         StartCoroutine(Dash());
     }
 
@@ -163,6 +133,7 @@ public class VoidElement : BaseElementClass
     IEnumerator Dash()
     {
         playerClass.gameObject.GetComponent<PlayerMovement>().ableToMove = false;
+        voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.1f);
         dashing = true;
         float timer = 0.0f;
         Vector3 startPos = this.transform.position;
@@ -173,6 +144,7 @@ public class VoidElement : BaseElementClass
             yield return null;
         }
         this.gameObject.GetComponent<PlayerMovement>().ableToMove = true;
+        voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
         StopCoroutine(Dash());
     }
 
