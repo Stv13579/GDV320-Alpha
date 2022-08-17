@@ -38,7 +38,6 @@ public class CrystalElement : BaseElementClass
                 //changes the angle of where they are being fired to
                 newCrystalPro.transform.RotateAround(shootingTranform.position, Camera.main.transform.up, 3.0f * i - 5.0f);
                 newCrystalPro.transform.RotateAround(shootingTranform.position, Camera.main.transform.right, 3.0f * j - 5.0f);
-
                 // setting the varibles from CrystalProj script
                 newCrystalPro.GetComponent<CrystalProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.crystalDamageMultiplier), damageCurve, lifeTimer, attackTypes, damageLimit);
             }
