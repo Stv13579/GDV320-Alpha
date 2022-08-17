@@ -17,7 +17,7 @@ public class IncreaseMovementSpeedScript : Item
 
         Multiplier movementMulti = new Multiplier(1.1f, "moveItem");
 
-        Multiplier.AddMultiplier(pMove.movementMultipliers, movementMulti, pMove.movementMulti);
+        pMove.movementMulti = Multiplier.AddMultiplier(pMove.movementMultipliers, movementMulti);
 
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CrystalRangedProjectile : BaseRangedProjectileScript
 {
-    protected override void HitEffect()
+    protected override void HitEffect(Collider other)
     {
         player.GetComponent<PlayerClass>().ChangeHealth(-damage);
         Destroy(this.gameObject);

@@ -14,7 +14,7 @@ public class RangedBossHomingProjectileScript : BaseEnemyClass
     {
         if (other.gameObject.GetComponent<PlayerClass>())
         {
-            other.gameObject.GetComponent<PlayerClass>().ChangeHealth(-damageAmount);
+            other.gameObject.GetComponent<PlayerClass>().ChangeHealth(-damageAmount * damageMultiplier);
             Destroy(this.gameObject);
         }
         else if (other.gameObject.layer == 10)

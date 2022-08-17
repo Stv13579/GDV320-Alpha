@@ -5158,6 +5158,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &8560365285708861630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3683859240506766079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e2c7a9ec4d5753458288a4db01a3a6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weighting: 0
+  illegal: 0
+  gridPos: {x: 0, y: 0}
+  bosses: {fileID: 11400000, guid: 754ac8e1beab73047a3f53db1c5d0573, type: 2}
+  spawnPosition: {fileID: 6614199746061301383}
+  portalObject: {fileID: 0}
+  portalSpawnPosition: {fileID: 7264738263478293129}
 --- !u!1 &4090119069709264398
 GameObject:
   m_ObjectHideFlags: 0
@@ -13484,25 +13503,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &8560365285708861630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683859240506766079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e2c7a9ec4d5753458288a4db01a3a6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weighting: 0
-  illegal: 0
-  gridPos: {x: 0, y: 0}
-  boss: {fileID: 0}
-  spawnPosition: {fileID: 6614199746061301383}
-  portalObject: {fileID: 0}
-  portalSpawnPosition: {fileID: 7264738263478293129}
 --- !u!1 &7445887726217443078
 GameObject:
   m_ObjectHideFlags: 0
@@ -18876,7 +18876,7 @@ PrefabInstance:
     - target: {fileID: 6767836439206277197, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7488509814216088037, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
@@ -18973,7 +18973,7 @@ PrefabInstance:
     - target: {fileID: 8330871923743077299, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8868667652809365451, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}

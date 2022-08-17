@@ -32,7 +32,7 @@ MonoBehaviour:
   attackAudio: Flying Enemy Attack
   deathAudio: Flying Enemy Death
   takeDamageAudio: Flying Enemy Damaged
-  targettingIndicator: {fileID: 0}
+  targettingIndicator: {fileID: 974846540245362027}
   oldPosition: {x: 0, y: 0, z: 0}
   effectTimer: 10
   effectTimerMulti: 1
@@ -101,6 +101,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2045452580190906748, guid: 1fd1aea56a319fa409d011771046677e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4ba627b5c7a8da941aee05911e789d29, type: 2}
     - target: {fileID: 2045452580190906751, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_Name
@@ -112,6 +117,12 @@ PrefabInstance:
 --- !u!1 &1717411311825118318 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2045452580190906751, guid: 1fd1aea56a319fa409d011771046677e,
+    type: 3}
+  m_PrefabInstance: {fileID: 844302016384437521}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &974846540245362027 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 446078423730382970, guid: 1fd1aea56a319fa409d011771046677e,
     type: 3}
   m_PrefabInstance: {fileID: 844302016384437521}
   m_PrefabAsset: {fileID: 0}

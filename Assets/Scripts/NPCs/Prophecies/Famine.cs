@@ -19,7 +19,7 @@ public class Famine : Prophecy
         drops.minAmmoSpawn /= 2;
         drops.maxAmmoSpawn /= 2;
 
-        Multiplier.AddMultiplier(pM.healthMultipliers, newFamineHealthMulti, pM.prophecyHealthMulti);
+        pM.prophecyHealthMulti = Multiplier.AddMultiplier(pM.healthMultipliers, newFamineHealthMulti);
 
     }
 }

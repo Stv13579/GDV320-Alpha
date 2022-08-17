@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
 public class Multiplier
 {
     public float multiplier;
@@ -11,30 +13,49 @@ public class Multiplier
         multiplier = multi;
         source = s;
     }
-    static public void AddMultiplier(List<Multiplier> multisToCheck, Multiplier multiplierToAdd, float multiToChange)
+    static public float AddMultiplier(List<Multiplier> multisToCheck, Multiplier multiplierToAdd)
     {
-        if (!multisToCheck.Contains(multiplierToAdd))
+        bool contains = false;
+        foreach(Multiplier multi in multisToCheck)
+        {
+            if(multi.source == multiplierToAdd.source)
+            {
+                contains = true;
+            }
+        }
+        if (!contains)
         {
             multisToCheck.Add(multiplierToAdd);
         }
-        multiToChange = 1.0f;
+        float multiToChange = 1.0f;
         foreach (Multiplier multi in multisToCheck)
         {
             multiToChange *= multi.multiplier;
         }
+        return multiToChange;
     }
 
-    static public void RemoveMultiplier(List<Multiplier> multisToCheck, Multiplier multiplierToRemove, float multiToChange)
+    static public float RemoveMultiplier(List<Multiplier> multisToCheck, Multiplier multiplierToRemove)
     {
-        if (multisToCheck.Contains(multiplierToRemove))
+        bool contains = false;
+        foreach (Multiplier multi in multisToCheck)
         {
-            multisToCheck.Remove(multiplierToRemove);
+            if (multi.source == multiplierToRemove.source)
+            {
+                contains = true;
+            }
         }
-        multiToChange = 1.0f;
+        if(contains)
+        {
+            
+            multisToCheck.Remove(multisToCheck.Find(x => x.source == multiplierToRemove.source));
+        }
+        float multiToChange = 1.0f;
         foreach (Multiplier multi in multisToCheck)
         {
             multiToChange *= multi.multiplier;
         }
+        return multiToChange;
     }
 
 

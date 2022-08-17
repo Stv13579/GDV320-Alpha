@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedBossCrystalProjectileScript : MonoBehaviour
+public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript
 {
     bool moving = true;
     float timer = 0.0f;
@@ -11,15 +11,17 @@ public class RangedBossCrystalProjectileScript : MonoBehaviour
     [HideInInspector]
     public float bigDamage;
     public GameObject crystalSpawn;
+    private EnergyElement energyScript;
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        energyScript = FindObjectOfType<EnergyElement>();
         this.transform.LookAt(GameObject.Find("Player").transform);
         this.transform.up = this.transform.forward;
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         if(moving)
         {
@@ -35,9 +37,9 @@ public class RangedBossCrystalProjectileScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void HitEffect(Collider other)
     {
-        if(other.gameObject.tag == "Player" && moving)
+       if(moving && other.GetComponent<PlayerClass>())
         {
             other.GetComponent<PlayerClass>().ChangeHealth(-bigDamage);
             Explode();
@@ -47,7 +49,33 @@ public class RangedBossCrystalProjectileScript : MonoBehaviour
             Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), other);
             StartCoroutine(Wait());
         }
+        else if(moving && player.GetComponent<EnergyElement>().GetUseShield() == true)
+        {
+            Explode();
+        }
     }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        HitEffect(other);
+    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.gameObject.tag == "Player" && moving && energyScript.GetUseShield() == false)
+    //    {
+    //        other.GetComponent<PlayerClass>().ChangeHealth(-bigDamage);
+    //        Explode();
+    //    }
+    //    else if (other.gameObject.layer == 10)
+    //    {
+    //        Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), other);
+    //        StartCoroutine(Wait());
+    //    }
+    //    else if(other.gameObject.tag == "Player" && moving && energyScript.GetUseShield() == true)
+    //    {
+    //        Explode();
+    //    }
+    //}
 
     IEnumerator Wait()
     {

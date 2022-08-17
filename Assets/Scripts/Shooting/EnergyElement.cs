@@ -7,7 +7,8 @@ public class EnergyElement : BaseElementClass
     [SerializeField]
     List<GameObject> containedEnemies = new List<GameObject>();
 
-    public GameObject energyShield;
+    [SerializeField]
+    private GameObject energyShield;
 
     [SerializeField]
     // might change to this method depending if current way works
@@ -23,6 +24,11 @@ public class EnergyElement : BaseElementClass
     [SerializeField]
     private float timeToParry;
     private bool useShield = false;
+
+    [SerializeField]
+    private Collider shieldCollider;
+
+    public bool GetUseShield() { return useShield; }
     protected override void Start()
     {
         base.Start();
@@ -61,7 +67,7 @@ public class EnergyElement : BaseElementClass
                     }
                 case shieldState.shieldUp:
                     {
-                        if(!PayCosts(Time.deltaTime) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyUp(KeyCode.Mouse1))
+                        if(!PayCosts(Time.deltaTime) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyUp(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.F))
                         {
                             DeactivateEnergyShield();
                             shieldStateChange = shieldState.shieldDown;
@@ -81,8 +87,11 @@ public class EnergyElement : BaseElementClass
        // remove them from the list and 
        for (int i = 0; i < containedEnemies.Count; i++)
        {
-           containedEnemies[i].GetComponent<BaseEnemyClass>().damageMultiplier = 1.0f;
-           containedEnemies.Remove(containedEnemies[i]);
+            if(containedEnemies[i])
+            {
+                containedEnemies[i].gameObject.GetComponent<BaseEnemyClass>().damageMultiplier = Multiplier.RemoveMultiplier(containedEnemies[i].GetComponent<BaseEnemyClass>().damageMultipliers, new Multiplier(0.0f, "Shield"));
+            }
+            containedEnemies.Remove(containedEnemies[i]);
        }
        if (shootingScript.GetRightOrbPos().childCount > 1)
        {
@@ -120,17 +129,19 @@ public class EnergyElement : BaseElementClass
     {
         if (useShield)
         {
-            if (other.gameObject.layer == 8  && other.GetComponent<BaseEnemyClass>() || other.gameObject.layer == 22 && other.GetComponent<BaseEnemyClass>())
+            if (other.gameObject.layer == 8  && other.GetComponent<BaseEnemyClass>() || 
+                other.gameObject.tag == "Enemy" && other.GetComponent<BaseEnemyClass>())
             {
 
-                if (other.gameObject && !containedEnemies.Contains(other.gameObject))
+                if (!containedEnemies.Contains(other.gameObject))
                 {
                     containedEnemies.Add(other.gameObject);
-                    for (int i = 0; i < containedEnemies.Count; i++)
-                    {
-                        containedEnemies[i].gameObject.GetComponent<BaseEnemyClass>().damageMultiplier = 0;
-                    }
+                    other.gameObject.GetComponent<BaseEnemyClass>().damageMultiplier = Multiplier.AddMultiplier(other.gameObject.GetComponent<BaseEnemyClass>().damageMultipliers, new Multiplier(0, "Shield"));
                 }
+            }
+            if (other.gameObject.layer == 22 && other.GetComponent<BaseRangedProjectileScript>())
+            {
+                Destroy(other.gameObject);
             }
         }
 
