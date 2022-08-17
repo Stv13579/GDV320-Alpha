@@ -25,12 +25,12 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
 
     private void Update()
     {
-        if(!effect)
+        
         {
             //Only start moving every few seconds, that way it's not constantly moving to try and approach its target
             if (moveTimer > 5)
             {
-                if (Vector3.Distance(this.transform.position, targetPos) > 5)
+                if (Vector3.Distance(this.transform.position, targetPos) > 5 && !effect)
                 {
                     Movement();
                 }
@@ -47,13 +47,12 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
 
             //Activate the effect every few seconds, with multiplier if we want it
             timer += Time.deltaTime;
-            if(timer > effectTimer * effectTimerMulti)
+            if(timer > effectTimer * effectTimerMulti && !effect)
             {
                 effect = true;
                 enemyAnims.SetTrigger("Effect");
             }
 
-            targetPos = target.transform.position + new Vector3(0, 10, 0);
             this.transform.LookAt(targetPos);
             this.transform.eulerAngles += new Vector3(0, 90, 0);
             this.transform.eulerAngles = new Vector3(0, this.transform.eulerAngles.y, 0);
@@ -122,5 +121,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
     {
         effect = false;
         timer = 0.0f;
+        enemyAnims.ResetTrigger("Effect");
+
     }
 }
