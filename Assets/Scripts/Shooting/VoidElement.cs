@@ -84,7 +84,6 @@ public class VoidElement : BaseElementClass
     public override void ElementEffect()
     {
         base.ElementEffect();
-        Indicator.SetActive(false);
         //Subtract the mana cost
         playerClass.ChangeMana(-manaCost, manaTypes);
         StartCoroutine(Dash());
@@ -151,6 +150,7 @@ public class VoidElement : BaseElementClass
     public override void LiftEffect()
     {
         base.LiftEffect();
+        Indicator.SetActive(false);
         if (shootingScript.GetRightOrbPos().childCount > 1)
         {
             Destroy(shootingScript.GetRightOrbPos().GetChild(1).gameObject);
