@@ -44,8 +44,6 @@ public class WaterElement : BaseElementClass
     public override void ActivateVFX()
     {
         base.ActivateVFX();
-
-
     }
 
     protected override void StartAnims(string animationName, string animationNameAlt = null)
@@ -60,6 +58,5 @@ public class WaterElement : BaseElementClass
         {
             playerHand.SetTrigger(animationNameAlt);
         }
-
     }
 }
