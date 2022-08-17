@@ -21,8 +21,6 @@ public class Shooting : MonoBehaviour
     bool inComboMode = false;
 
     public bool ableToShoot = true;
-
-    bool canChangeHoldElements;
     
     AudioManager audioManager;
 
@@ -34,6 +32,8 @@ public class Shooting : MonoBehaviour
 
     [SerializeField]
     GameplayUI uiScript;
+
+    // Getters
     public Sprite GetPrimaryElementSprite() { return primaryElements[leftElementIndex].uiSprite; }
 
     public Sprite GetCatalystElementSprite() { return catalystElements[rightElementIndex].uiSprite; }
@@ -69,13 +69,13 @@ public class Shooting : MonoBehaviour
 
         return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
     }
+    
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         // hard coded for now
         primaryElements[leftElementIndex].GetPlayerHand().SetInteger("ElementL", leftElementIndex + 1);
         catalystElements[rightElementIndex].GetPlayerHand().SetInteger("ElementR", rightElementIndex + 101);
-        canChangeHoldElements = true;
         uiScript = GameObject.Find("GameplayUI").GetComponent<GameplayUI>();
     }
     private void Update()
@@ -117,6 +117,7 @@ public class Shooting : MonoBehaviour
                 {
                     Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
                 }
+
                 if (!inComboMode)
                 {
                     primaryElements[leftElementIndex].AnimationSwitch(true);
@@ -223,7 +224,7 @@ public class Shooting : MonoBehaviour
                 }
                 else
                 {
-                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, leftOrbPos);
+                Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, leftOrbPos);
                     Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, rightOrbPos);
                     if (comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX)
                     {
@@ -244,7 +245,6 @@ public class Shooting : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             catalystElements[rightElementIndex].ActivateElement();
-            canChangeHoldElements = false;
         }
     }
     void StopNonComboShooting()
@@ -281,22 +281,14 @@ public class Shooting : MonoBehaviour
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
         }
+        // lift previous element effect
         if (rightElementIndex != 0)
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex - 1].LiftEffect();
         }
-        // hard coded need to change
         if (rightElementIndex == 0)
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex + catalystElements.Count - 1].LiftEffect();
         }
-    }
-    void SwapElementOn()
-    {
-        
-    }
-    void SwapElementOff()
-    {
-        
     }
 }

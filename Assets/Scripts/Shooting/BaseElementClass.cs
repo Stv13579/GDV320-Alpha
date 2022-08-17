@@ -112,7 +112,7 @@ public class BaseElementClass : MonoBehaviour
         StasisTrap = 209
     }
     [SerializeField]
-    protected ElementType currentElementType = ElementType.Fire;
+    public ElementType currentElementType = ElementType.Fire;
     protected virtual void Start()
     {
         player = GameObject.Find("Player");
@@ -124,7 +124,7 @@ public class BaseElementClass : MonoBehaviour
     }
     protected virtual void StartAnims(string animationName, string animationNameAlt = null)
     {
-        playerHand.SetTrigger("CancelBack");
+
     }
     //Called from the hand objects when the appropriate event triggers to turn on the vfx
     public virtual void ActivateVFX()

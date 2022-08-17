@@ -38,8 +38,11 @@ public class StasisTrapProj : MonoBehaviour
     {
         duration += Time.deltaTime;
         currentDamageTicker += Time.deltaTime;
+        // switch case for the VFXs
         switch (currentstate)
         {
+            // after spawn animation
+            // turn on actual StasisTrap
             case StasisTrapProjState.idle:
                 {
                     if (duration >= 0.45f)
@@ -48,6 +51,8 @@ public class StasisTrapProj : MonoBehaviour
                     }
                     break;
                 }
+            // if duration of StasisTrap is greater then certain amount of time
+            // play aftermath
             case StasisTrapProjState.active:
                 {
                     visualBubble.SetActive(true);
@@ -57,6 +62,9 @@ public class StasisTrapProj : MonoBehaviour
                     }
                     break;
                 }
+            // play explosions effect
+            // turn off collider
+            // then destory if duration is greater then certain time
             case StasisTrapProjState.aftermath:
                 {
                     visualBubble.SetActive(false);
@@ -98,6 +106,8 @@ public class StasisTrapProj : MonoBehaviour
         maxDamageTicker = mdt;
     }
 
+    // if enemy enters trigger collider and is not in the list
+    // add to list and turn movement multi to 0
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == 8 && !containedEnemies.Contains(other.gameObject) && other.GetComponent<BaseEnemyClass>())
@@ -109,6 +119,8 @@ public class StasisTrapProj : MonoBehaviour
             }
         }
     }
+    // if enemy is still in trigger collider
+    // do damage to the enemy
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())

@@ -20,17 +20,18 @@ public class LaserBeamElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-        // same check as the energy shield need to check if player are in theses states
+        // same check as the energy shield need to check if player has interupted the laser beam
         if(usingLaser)
         {
             if (!PayCosts(10 * Time.deltaTime) || Input.GetKeyDown(KeyCode.E) ||
-               Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Q))
+               Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Q) ||
+               Input.GetKeyDown(KeyCode.F))
             {
                 DeactivateLaser();
             }
         }
     }
-
+    // deactivate laser function
     public void DeactivateLaser()
     {
        usingLaser = false;
@@ -40,6 +41,7 @@ public class LaserBeamElement : BaseElementClass
        laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
        playerMovement.movementMulti = Multiplier.RemoveMultiplier(playerMovement.movementMultipliers, new Multiplier(0.25f, "Laser"));
     }
+    // activates the laserBeam
     public override void ElementEffect()
     {
         base.ElementEffect();
