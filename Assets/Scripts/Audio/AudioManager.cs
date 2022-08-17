@@ -97,17 +97,22 @@ public class AudioManager : MonoBehaviour
     // takes in an int which changes state
     public void FadeInAndOutMusic(string fadeIn, string fadeOut, int audioIn, int audioOut, int State)
     {
+        //state 1 is fade out music
         if (State == 1)
         {
             sounds[audioOut].audioSource.volume -= Time.deltaTime;
+            // stops the music and then changes to state 2 and resets the audio volume
+            if (sounds[audioOut].audioSource.volume <= 0)
+            {
+                Stop(fadeOut);
+                State = 2;
+                sounds[audioOut].audioSource.volume = 0.1f;
+                sounds[audioIn].audioSource.volume = 0.0f;
+            }
         }
-        if (sounds[audioOut].audioSource.volume <= 0)
-        {
-            Stop(fadeOut);
-            State = 2;
-            sounds[audioOut].audioSource.volume = 0.1f;
-            sounds[audioIn].audioSource.volume = 0.0f;
-        }
+        // state 2 is fade in music
+        // plays the music thats at volume 0 and increase the volume to the max volume
+        // after it changes to a different state to stop the fade in and out
         if (State == 2)
         {
             Play(fadeIn);

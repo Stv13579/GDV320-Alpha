@@ -33,6 +33,7 @@ public class LaserBeam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // if hitting an object show the particle effect of laserbeam hitting
         if(isHittingObj == true)
         {
             laserBeamEndParticle.SetActive(true);
@@ -43,8 +44,8 @@ public class LaserBeam : MonoBehaviour
         }
 
         RaycastHit hit;
-        // 20 because thats how long the capsule and laser beam are
         // physics raycast to check if the laser is hitting the ground or enemies
+        // this check is to change the size of the laser beam
         if (Physics.Raycast(laserBeamEffectParticle.transform.position, laserBeamEffectParticle.transform.forward, out hit, initalLaserScale, layerMask))
         {
             laserBeamEndParticle.transform.position = hit.point;

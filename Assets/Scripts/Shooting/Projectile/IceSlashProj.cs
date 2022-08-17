@@ -18,14 +18,11 @@ public class IceSlashProj : BaseElementSpawnClass
     // Update is called once per frame
     void Update()
     {
-        if(startLifeTimer > 0)
-        {
-            startLifeTimer -= Time.deltaTime;
-            //this.gameObject.GetComponent<Transform>().localScale += new Vector3(0.1f, 0, 0.1f);
-        }
+        startLifeTimer -= Time.deltaTime;
         MoveIceSlash();
         KillProjectile();
     }
+    // moves the ice slash
     private void MoveIceSlash()
     {
         Vector3 movement = transform.forward * speed * Time.deltaTime;

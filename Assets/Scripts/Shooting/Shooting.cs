@@ -32,6 +32,8 @@ public class Shooting : MonoBehaviour
 
     [SerializeField]
     GameplayUI uiScript;
+
+    // Getters
     public Sprite GetPrimaryElementSprite() { return primaryElements[leftElementIndex].uiSprite; }
 
     public Sprite GetCatalystElementSprite() { return catalystElements[rightElementIndex].uiSprite; }
@@ -67,6 +69,7 @@ public class Shooting : MonoBehaviour
 
         return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
     }
+    
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
@@ -115,7 +118,7 @@ public class Shooting : MonoBehaviour
                     Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
                 }
 
-            if (!inComboMode)
+                if (!inComboMode)
                 {
                     primaryElements[leftElementIndex].AnimationSwitch(true);
                     Instantiate(primaryElements[leftElementIndex].handVFX, leftOrbPos);
@@ -158,7 +161,7 @@ public class Shooting : MonoBehaviour
                 {
                     Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
                 }
-            if (!inComboMode)
+                if (!inComboMode)
                 {
                     catalystElements[rightElementIndex].AnimationSwitch(false);
                     Instantiate(catalystElements[rightElementIndex].handVFX, rightOrbPos);
@@ -278,6 +281,7 @@ public class Shooting : MonoBehaviour
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
         }
+        // lift previous element effect
         if (rightElementIndex != 0)
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex - 1].LiftEffect();

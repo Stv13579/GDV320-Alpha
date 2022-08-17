@@ -37,12 +37,16 @@ public class EnergyElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
+        // states for the energy Shield
             switch (shieldStateChange)
             {
+            // if shield is not being used
                 case shieldState.shieldDown:
                     {
+                    // checks if the player has pressed left click
                         if (useShield == true)
                         {
+                        // checks in the shield is upgrade
                             if (upgraded == true)
                             {
                                 shieldStateChange = shieldState.parrying;
@@ -53,7 +57,9 @@ public class EnergyElement : BaseElementClass
                             }
                         }
                     break;
-                }
+                    }
+                // for beta
+                // basically player will be able to parry in a certain time
                 case shieldState.parrying:
                     {
                         timeToParry += Time.deltaTime;
@@ -65,9 +71,14 @@ public class EnergyElement : BaseElementClass
                         }
                     break;
                     }
+                // if shields is up
+                // does all the checks if to deactivate shield and go back to down state
                 case shieldState.shieldUp:
                     {
-                        if(!PayCosts(Time.deltaTime) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyUp(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.F))
+                        if(!PayCosts(Time.deltaTime) || 
+                        Input.GetKeyDown(KeyCode.E) || 
+                        Input.GetKeyUp(KeyCode.Mouse1) || 
+                        Input.GetKeyDown(KeyCode.F))
                         {
                             DeactivateEnergyShield();
                             shieldStateChange = shieldState.shieldDown;
@@ -77,6 +88,7 @@ public class EnergyElement : BaseElementClass
             }
     }
 
+    // function to deactivate shield
     public void DeactivateEnergyShield()
     {
        energyShield.SetActive(false);

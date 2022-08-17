@@ -31,7 +31,7 @@ public class StasisTrapElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-        //if this element on turn on indicator
+        //if this element is turned on turn on indicator
         if (shootingScript.GetLeftElementIndex() == leftIndex && 
             shootingScript.GetRightElementIndex() == rightIndex &&
             shootingScript.GetInComboMode() == true)
@@ -42,6 +42,7 @@ public class StasisTrapElement : BaseElementClass
         {
             indicator.SetActive(false);
         }
+        // updating the indicator position
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rayCastRange, layerMask))
         {
             indicator.transform.position = hit.point;
