@@ -18,6 +18,9 @@ public class Room : MonoBehaviour
         levelGenerator = GameObject.Find("Level Generator").GetComponent<LevelGeneration>();
         roomTrigger = transform.Find("RoomTriggerBox").gameObject;
         GameObject.Find("Run Manager").GetComponent<RunManager>().StartNewLevel();
+        this.GetComponent<TerrainCollider>().enabled = false;
+        this.GetComponent<TerrainCollider>().enabled = true;
+
     }
 
     //Closes off all the illegal/irrelevant exits and collates the remaining ones

@@ -25,15 +25,15 @@ public class EnergyElement : BaseElementClass
     private float timeToParry;
     private bool useShield = false;
 
+    private float materialChanger;
     [SerializeField]
-    private Collider shieldCollider;
-
+    private float materialTimer = 2.0f;
+    private bool beenHit;
     public bool GetUseShield() { return useShield; }
     protected override void Start()
     {
         base.Start();
     }
-
     protected override void Update()
     {
         base.Update();
@@ -75,7 +75,9 @@ public class EnergyElement : BaseElementClass
                 // does all the checks if to deactivate shield and go back to down state
                 case shieldState.shieldUp:
                     {
-                        if(!PayCosts(Time.deltaTime) || 
+                    HitShield();
+                    
+                        if (!PayCosts(Time.deltaTime) || 
                         Input.GetKeyDown(KeyCode.E) || 
                         Input.GetKeyUp(KeyCode.Mouse1) || 
                         Input.GetKeyDown(KeyCode.F))
@@ -88,6 +90,24 @@ public class EnergyElement : BaseElementClass
             }
     }
 
+    public void HitShield()
+    {
+        if(beenHit)
+        {
+            materialTimer += Time.deltaTime;
+        }
+        if(materialTimer >= 2.0f)
+        {
+            beenHit = false;
+            materialChanger -= Time.deltaTime;
+        }
+        if(materialChanger <= 0.0f)
+        {
+            materialChanger = 0.0f;
+            materialTimer = 0.0f;
+        }
+        energyShield.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetFloat("_ShieldDamage", materialChanger);
+    }
     // function to deactivate shield
     public void DeactivateEnergyShield()
     {
@@ -144,7 +164,6 @@ public class EnergyElement : BaseElementClass
             if (other.gameObject.layer == 8  && other.GetComponent<BaseEnemyClass>() || 
                 other.gameObject.tag == "Enemy" && other.GetComponent<BaseEnemyClass>())
             {
-
                 if (!containedEnemies.Contains(other.gameObject))
                 {
                     containedEnemies.Add(other.gameObject);
@@ -154,6 +173,13 @@ public class EnergyElement : BaseElementClass
             if (other.gameObject.layer == 22 && other.GetComponent<BaseRangedProjectileScript>())
             {
                 Destroy(other.gameObject);
+            }
+            if (other.gameObject.layer == 22 && other.GetComponent<BaseRangedProjectileScript>() ||
+                other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())
+            {
+                materialChanger = 1.0f;
+                energyShield.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetFloat("_ShieldDamage", materialChanger);
+                beenHit = true;
             }
         }
 
