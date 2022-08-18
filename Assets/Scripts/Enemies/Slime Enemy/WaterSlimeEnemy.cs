@@ -235,7 +235,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
         }
     }
 
-    protected virtual void Split()
+    protected virtual void Split(GameObject temp)
     {
         if(generation < 2)
         {

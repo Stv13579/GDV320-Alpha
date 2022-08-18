@@ -62,7 +62,7 @@ public class BaseEnemyClass : MonoBehaviour
     //Particle effect when the enemy is hit
     public GameObject hitSpawn;
 
-    public delegate void DeathTrigger();
+    public delegate void DeathTrigger(GameObject temp);
 
     [HideInInspector]
     public List<DeathTrigger> deathTriggers = new List<DeathTrigger>();
@@ -213,9 +213,10 @@ public class BaseEnemyClass : MonoBehaviour
 
 
             //Death triggers
+
             foreach (DeathTrigger dTrigs in deathTriggers)
             {
-                dTrigs();
+                dTrigs(gameObject);
             }
 
             Instantiate(deathSpawn, transform.position, Quaternion.identity);
