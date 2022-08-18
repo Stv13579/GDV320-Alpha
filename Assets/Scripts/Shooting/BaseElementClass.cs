@@ -10,7 +10,7 @@ public class BaseElementClass : MonoBehaviour
     //VFX instantiation
     //VFX that plays when the element is used (eg a fireball from fire)
     [SerializeField]
-    public GameObject activatedVFX = null;
+    public GameObject activatedVFX;
     //VFX that appears in the hand while this element is active (perhaps nothing for combos)
     [SerializeField]
     public GameObject handVFX;
