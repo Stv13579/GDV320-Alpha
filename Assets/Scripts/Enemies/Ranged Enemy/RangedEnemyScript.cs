@@ -62,7 +62,7 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
                     rot.eulerAngles = new Vector3(0, rot.eulerAngles.y, 0);
                     transform.rotation = rot;
                     //Make sure the player isn't too close or too far
-                    if (Vector3.Distance(player.transform.position, this.gameObject.transform.position) < 10 || Vector3.Distance(player.transform.position, this.gameObject.transform.position) > 40)
+                    if (Vector3.Distance(player.transform.position, this.gameObject.transform.position) < 10 || Vector3.Distance(player.transform.position, this.gameObject.transform.position) > 20)
                     {
                         enemyAnims.SetTrigger("Burrow");
                         StartCoroutine(Burrow());
@@ -134,7 +134,7 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
             RaycastHit hit;
             Physics.Raycast(nodeChosen.gameObject.transform.position, -nodeChosen.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
             Vector3 emergePos = hit.point - this.transform.GetChild(1).localPosition * 2;
-            if (Vector3.Distance(player.transform.position, emergePos) > 10 && Vector3.Distance(player.transform.position, emergePos) < 40)
+            if (Vector3.Distance(player.transform.position, emergePos) > 10 && Vector3.Distance(player.transform.position, emergePos) < 20)
             {
 
                 this.transform.position = emergePos + new Vector3(0, -50, 0);

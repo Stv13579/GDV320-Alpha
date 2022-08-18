@@ -36,7 +36,7 @@ public class BaseRangedProjectileScript : MonoBehaviour
         {
             HitEffect(other);
         }
-        else if (other.gameObject.layer == 8 || other.gameObject.layer == 10 || other.gameObject.layer == 16)
+        else if (other.gameObject.layer == 10 || other.gameObject.layer == 16)
         {
             Destroy(this.gameObject);
         }

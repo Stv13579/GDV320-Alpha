@@ -123,8 +123,10 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
         }
         else
         {
-            target = this.gameObject;
-            targetPos = player.transform.position + new Vector3(0, 10, 0);
+            //target = this.gameObject;
+            //targetPos = player.transform.position + new Vector3(0, 10, 0);
+            currentHealth = 0;
+            Death();
         }
     }
 

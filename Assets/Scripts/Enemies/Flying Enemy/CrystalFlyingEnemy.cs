@@ -10,11 +10,11 @@ public class CrystalFlyingEnemy : BaseFlyingEnemyScript
         target = player;
         targetPos = player.transform.position + new Vector3(0, 10, 0);
 
-        RaycastHit hit;
-        if (Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
-        {
-            targetPos = hit.point - (this.transform.position - targetPos).normalized * 2;
-        }
+        //RaycastHit hit;
+        //if (Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
+        //{
+        //    targetPos = hit.point - (this.transform.position - targetPos).normalized * 2;
+        //}
 
     }
 
