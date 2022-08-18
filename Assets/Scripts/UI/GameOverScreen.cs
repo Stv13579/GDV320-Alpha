@@ -52,6 +52,7 @@ public class GameOverScreen : MonoBehaviour
 
     public void ReturnToHub()
     {
+        Destroy(GameObject.Find("Player"));
         operation.allowSceneActivation = true;
     }
 
