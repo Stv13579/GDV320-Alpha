@@ -66,7 +66,7 @@ public class NPC : MonoBehaviour
 
         //Create an array of possible dialogues and then choose one at random.
         //Possible dialogues include the random ones and the story position, or a deterministic quest dialogue.
-        if(data.questReady)
+        if(data && data.questReady)
         {
             //Give quest dialogue
             currentDialogue = new Dialogue(data);
