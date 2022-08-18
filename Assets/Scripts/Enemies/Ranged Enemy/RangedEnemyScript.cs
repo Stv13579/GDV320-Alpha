@@ -75,6 +75,7 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
                 destroyTimer += Time.deltaTime;
                 if(destroyTimer > 20)
                 {
+                    currentHealth = 0;
                     Death();
                 }
             }
