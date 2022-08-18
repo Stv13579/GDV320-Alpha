@@ -10815,11 +10815,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c96219fa6d31774d9f5c27e745dc712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 30
   damageAmount: 3
   damageMultiplier: 1
   moveSpeed: 15
   moveSpeedMulti: 1
+  movementMultipliers: []
+  damageMultipliers: []
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
@@ -10837,7 +10839,6 @@ MonoBehaviour:
   targettingIndicator: {fileID: 7112952547350365205}
   oldPosition: {x: 0, y: 0, z: 0}
   attackTime: 5
-  attackTimeMulti: 1
   viewToPlayer:
     serializedVersion: 2
     m_Bits: 3072
