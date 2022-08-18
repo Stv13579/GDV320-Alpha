@@ -75,12 +75,10 @@ public class EnergyElement : BaseElementClass
                 // does all the checks if to deactivate shield and go back to down state
                 case shieldState.shieldUp:
                     {
-                    HitShield();
+                        HitShield();
                     
-                        if (!PayCosts(Time.deltaTime) || 
-                        Input.GetKeyDown(KeyCode.E) || 
-                        Input.GetKeyUp(KeyCode.Mouse1) || 
-                        Input.GetKeyDown(KeyCode.F))
+                        if (!PayCosts(Time.deltaTime) || Input.GetKeyDown(KeyCode.E) || 
+                        !Input.GetKey(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.F))
                         {
                             DeactivateEnergyShield();
                             shieldStateChange = shieldState.shieldDown;
@@ -89,7 +87,6 @@ public class EnergyElement : BaseElementClass
                     }
             }
     }
-
     public void HitShield()
     {
         if(beenHit)
@@ -136,6 +133,7 @@ public class EnergyElement : BaseElementClass
         base.ElementEffect();
         energyShield.SetActive(true);
         useShield = true;
+        Instantiate(activatedVFX, shootingScript.GetRightOrbPos());
     }
     
     public override void ActivateVFX()
@@ -154,7 +152,6 @@ public class EnergyElement : BaseElementClass
         playerHand.ResetTrigger("EnergyStopCast");
         playerHand.SetTrigger(animationName);
         audioManager.Play("Energy Element");
-        Instantiate(activatedVFX, shootingScript.GetRightOrbPos());
     }
 
     private void OnTriggerEnter(Collider other)
