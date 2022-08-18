@@ -76,7 +76,7 @@ public class NPC : MonoBehaviour
         else
         {
             possibleDialogues.AddRange(baseRandoms);
-            possibleDialogues.AddRange(storyDialogues[data.storyPosition].dialogues);
+            //possibleDialogues.AddRange(storyDialogues[data.storyPosition].dialogues);
         }
 
         currentDialogue = possibleDialogues[UnityEngine.Random.Range(0, possibleDialogues.Count)];

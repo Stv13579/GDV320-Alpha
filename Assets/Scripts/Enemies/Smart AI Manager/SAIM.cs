@@ -176,8 +176,8 @@ public class SAIM : MonoBehaviour
         // starts the battle music and sets back the volume of the ambient sound
         if (audioManager.sounds[0].audioSource.volume <= 0 && fadeOutBattleAudio == false)
         {
-            audioManager.Stop(initialMusic);
-            audioManager.Play(battleMusic);
+            audioManager.Stop(battleMusic);
+            audioManager.Play(initialMusic);
             fadeOutAmbientAudio = false;
             audioManager.sounds[0].audioSource.volume = 0.1f;
         }

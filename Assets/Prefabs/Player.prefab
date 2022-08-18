@@ -869,8 +869,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 5094916482123083108}
-  moveSpeed: 8
-  rotateSpeed: 8
+  moveSpeed: 15
+  rotateSpeed: 15
 --- !u!1 &1462037116612994464
 GameObject:
   m_ObjectHideFlags: 0
@@ -3537,13 +3537,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9db0c08d04e6aa4d9f985850dc115e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activatedVFX: {fileID: 0}
+  activatedVFX: {fileID: 7874661654423732351, guid: 4239aa185e95db04085aaba79c0b30f0,
+    type: 3}
   handVFX: {fileID: 3402536344946380668, guid: 8397178657a067d48bcc863d6790b078, type: 3}
   wristVFX: {fileID: 0}
   manaCost: 5
   animationToPlay: NecroticCast
   animationToPlayAlt: 
-  useDelay: 0
+  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Soul
   uiSprite: {fileID: -7654870270679289077, guid: d39b8bc076de18747869f25ce241874b,
@@ -3565,7 +3566,8 @@ MonoBehaviour:
   leftIndex: 0
   rightIndex: 0
   currentElementType: 101
-  test: {fileID: 9040072988987624986, guid: 6ad2501f765957d4fab25257d276645a, type: 3}
+  necroticVFX: {fileID: 5088495024868706662, guid: d85e68bf4b4f44c419f67b8ebb34bfba,
+    type: 3}
   isTargeting: 0
   lookScript: {fileID: 5625023911835613079}
   NecroticTarget:
@@ -3573,8 +3575,6 @@ MonoBehaviour:
     m_Bits: 256
   rayCastRange: 100
   outlineColour: {r: 1, g: 0, b: 0, a: 1}
-  maxSlowTimer: 0
-  currentSlowTimer: 0
 --- !u!114 &7929494458867233755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3594,7 +3594,7 @@ MonoBehaviour:
   manaCost: 1
   animationToPlay: EnergyCast
   animationToPlayAlt: 
-  useDelay: 1
+  useDelay: 2
   playerHand: {fileID: 2017859571}
   elementName: Energy
   uiSprite: {fileID: 6129296847577865886, guid: d39b8bc076de18747869f25ce241874b,
@@ -3683,7 +3683,7 @@ MonoBehaviour:
   manaCost: 1
   animationToPlay: LaserBeamCast
   animationToPlayAlt: 
-  useDelay: 0
+  useDelay: 2
   playerHand: {fileID: 2017859571}
   elementName: LaserBeam
   uiSprite: {fileID: -5782891034314955071, guid: d39b8bc076de18747869f25ce241874b,
@@ -3955,7 +3955,7 @@ MonoBehaviour:
   manaCost: 1
   animationToPlay: LifeStealCast
   animationToPlayAlt: 
-  useDelay: 0
+  useDelay: 2
   playerHand: {fileID: 2017859571}
   elementName: Life Steal
   uiSprite: {fileID: 0}
@@ -6407,17 +6407,17 @@ PrefabInstance:
     - target: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.03
+      value: -0.322
       objectReference: {fileID: 0}
     - target: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.56
+      value: -0.856
       objectReference: {fileID: 0}
     - target: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}

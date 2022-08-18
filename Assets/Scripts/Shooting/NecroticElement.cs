@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class NecroticElement : BaseElementClass
 {
-    //[SerializeField]
-    //private GameObject chargeVFX;
-
     [SerializeField]
-    private GameObject test;
+    private GameObject necroticVFX;
 
     [SerializeField]
     private bool isTargeting = false;
@@ -27,12 +24,6 @@ public class NecroticElement : BaseElementClass
     [SerializeField]
     Color outlineColour;
 
-    // maybe
-    [SerializeField]
-    private float maxSlowTimer;
-
-    [SerializeField]
-    private float currentSlowTimer;
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);
@@ -51,7 +42,7 @@ public class NecroticElement : BaseElementClass
             (targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti != 0.5f || targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti != 0.3f))
         {
             playerClass.ChangeMana(-manaCost, manaTypes);
-            Instantiate(test, targetToSlow.transform);
+            Instantiate(necroticVFX, targetToSlow.transform);
             targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti = Multiplier.AddMultiplier(targetToSlow.GetComponent<BaseEnemyClass>().movementMultipliers, new Multiplier(upgraded ? 0.5f : 0.3f, "Necrotic"));
         }
     }
@@ -64,9 +55,12 @@ public class NecroticElement : BaseElementClass
         // this turns on when helded
         if(isTargeting)
         {
+            if (shootingScript.GetRightOrbPos().childCount < 2)
+            {
+                Instantiate(activatedVFX, shootingScript.GetRightOrbPos());
+            }
             RaycastHit targetRayCast;
-            
-            if(Physics.Raycast(lookScript.GetCamera().transform.position, lookScript.GetCamera().transform.forward, out targetRayCast, rayCastRange, NecroticTarget))
+            if (Physics.Raycast(lookScript.GetCamera().transform.position, lookScript.GetCamera().transform.forward, out targetRayCast, rayCastRange, NecroticTarget))
             {
                 // if facing a target thats already targeted
                 if(targetToSlow == targetRayCast.collider.gameObject)
@@ -102,6 +96,11 @@ public class NecroticElement : BaseElementClass
         playerHand.SetTrigger("NecroticStopCast");
 
         audioManager.Stop("Soul Element");
+
+        if (shootingScript.GetRightOrbPos().childCount > 1)
+        {
+            Destroy(shootingScript.GetRightOrbPos().GetChild(1).gameObject);
+        }
     }
 
     public override void ActivateVFX()
