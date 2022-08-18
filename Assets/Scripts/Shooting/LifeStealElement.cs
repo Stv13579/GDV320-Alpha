@@ -70,16 +70,16 @@ public class LifeStealElement : BaseElementClass
             }
             // if objectHit is in the enemy layer
             // suck health from him
-            else if (objectHit[0].transform.gameObject.layer == 8)
+            else if (objectHit[0].transform.gameObject.layer == 8 && objectHit[0].transform.GetComponent<BaseEnemyClass>())
             {
                 // turn targeting on
                 // damage enemy
                 enemy = objectHit[0].transform.gameObject;
                 isTargeting = true;
             }
-            if (isTargeting == true && enemy.GetComponent<BaseEnemyClass>() && enemy != null)
+            if (isTargeting == true && enemy != null)
             {
-                LifeStealFullScreenEffect(0.1f);
+                //LifeStealFullScreenEffect(0.1f);
                 playerClass.ChangeMana(-Time.deltaTime, manaTypes);
                 lifeSteal.SetActive(true);
                 enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier * elementData.waterDamageMultiplier), attackTypes);
