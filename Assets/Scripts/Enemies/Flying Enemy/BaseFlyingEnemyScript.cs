@@ -16,9 +16,9 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
 
     float moveTimer = 0.0f;
 
-    private void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         FindTarget();
         effectTimerMulti = 1.0f;
     }

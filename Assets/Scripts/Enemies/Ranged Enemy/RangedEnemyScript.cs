@@ -26,9 +26,9 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
     [SerializeField]
     LayerMask groundDetect;
     // Start is called before the first frame update
-    void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         timer = attackTime;
         RaycastHit hit;
         Physics.Raycast(this.gameObject.transform.position, -this.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);

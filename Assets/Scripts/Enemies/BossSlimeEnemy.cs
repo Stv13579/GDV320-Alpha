@@ -105,9 +105,9 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     protected BossHealthbarScript bossHealthBar;
     bool split = false;
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         moveDirection = player.transform.position;
         currentChangeTime = changeTime;
         currentAttackTime = timeBetweenAttacks;

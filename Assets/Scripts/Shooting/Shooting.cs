@@ -103,6 +103,10 @@ public class Shooting : MonoBehaviour
     {
             if (Input.GetKeyUp(KeyCode.Q))
             {
+                if (inComboMode)
+                {
+                comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
+                }
                 leftElementIndex++;
                 // play audio of switching weapons
                 audioManager.Stop("Change Element");
@@ -145,51 +149,66 @@ public class Shooting : MonoBehaviour
                 }
 
             }
-            if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            if (inComboMode)
             {
-                rightElementIndex++;
-                // play audio of switching weapons
-                audioManager.Stop("Change Element");
-                audioManager.Play("Change Element");
-                if (rightElementIndex >= catalystElements.Count)
-                {
-                    rightElementIndex = 0;
-                }
-                Destroy(rightOrbPos.GetChild(0).gameObject);
-                if (rightOrbPos.parent.parent.childCount == 2)
-                {
-                    Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
-                }
-                if (!inComboMode)
-                {
-                    catalystElements[rightElementIndex].AnimationSwitch(false);
-                    Instantiate(catalystElements[rightElementIndex].handVFX, rightOrbPos);
-                    if (catalystElements[rightElementIndex].wristVFX)
-                    {
-                        Instantiate(catalystElements[rightElementIndex].wristVFX, rightOrbPos.parent.parent);
-                    }
-                }
-                else
-                {
-                    comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch(true);
-                    Destroy(leftOrbPos.GetChild(0).gameObject);
-                    if (leftOrbPos.parent.parent.childCount == 2)
-                    {
-                        Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
-                    }
-                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, leftOrbPos);
-                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, rightOrbPos);
-                    if (comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX)
-                    {
-                        Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX, leftOrbPos.parent.parent);
-                        Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX, rightOrbPos.parent.parent);
-                    }
-                }
-
+                comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
             }
+            else
+            {
+                catalystElements[rightElementIndex].LiftEffect();
+            }
+            rightElementIndex++;
+            // play audio of switching weapons
+            audioManager.Stop("Change Element");
+            audioManager.Play("Change Element");
+            if (rightElementIndex >= catalystElements.Count)
+            {
+                rightElementIndex = 0;
+            }
+            Destroy(rightOrbPos.GetChild(0).gameObject);
+            if (rightOrbPos.parent.parent.childCount == 2)
+            {
+                Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
+            }
+            if (!inComboMode)
+            {
+                catalystElements[rightElementIndex].AnimationSwitch(false);
+                Instantiate(catalystElements[rightElementIndex].handVFX, rightOrbPos);
+                if (catalystElements[rightElementIndex].wristVFX)
+                {
+                    Instantiate(catalystElements[rightElementIndex].wristVFX, rightOrbPos.parent.parent);
+                }
+            }
+            else
+            {
+                comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch(true);
+                Destroy(leftOrbPos.GetChild(0).gameObject);
+                if (leftOrbPos.parent.parent.childCount == 2)
+                {
+                    Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
+                }
+                Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, leftOrbPos);
+                Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, rightOrbPos);
+                if (comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX)
+                {
+                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX, leftOrbPos.parent.parent);
+                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX, rightOrbPos.parent.parent);
+                }
+            }
+        }
         
             if (Input.GetKeyUp(KeyCode.F) && GetLeftMana()[0] > comboElements[leftElementIndex].comboElements[rightElementIndex].manaCost && GetRightMana()[0] > comboElements[leftElementIndex].comboElements[rightElementIndex].manaCost)
             {
+                if (inComboMode)
+                {
+                comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
+                }
+                else
+                {
+                catalystElements[rightElementIndex].LiftEffect();
+                }
                 uiScript.SetCombo(!inComboMode);
                 inComboMode = !inComboMode;
                 audioManager.Stop("Change Element");
@@ -257,19 +276,6 @@ public class Shooting : MonoBehaviour
         {
             catalystElements[rightElementIndex].LiftEffect();
         }
-        if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.E))
-        {
-            // lifts the effect of previous elements when player press F or E
-            // used for the hold elements
-            if (rightElementIndex != 0)
-            {
-                catalystElements[rightElementIndex - 1].LiftEffect();
-            }
-            if (rightElementIndex == 0)
-            {
-                catalystElements[rightElementIndex + catalystElements.Count - 1].LiftEffect();
-            }
-        }
     }
     void ComboShooting()
     {
@@ -283,18 +289,6 @@ public class Shooting : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
-        }
-        if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q))
-        {
-            // lift previous element effect
-            if (rightElementIndex != 0)
-            {
-                comboElements[leftElementIndex].comboElements[rightElementIndex - 1].LiftEffect();
-            }
-            if (rightElementIndex == 0)
-            {
-                comboElements[leftElementIndex].comboElements[rightElementIndex + catalystElements.Count - 1].LiftEffect();
-            }
         }
     }
 }

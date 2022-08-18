@@ -77,8 +77,7 @@ public class EnergyElement : BaseElementClass
                     {
                         HitShield();
                     
-                        if (!PayCosts(Time.deltaTime) || Input.GetKeyDown(KeyCode.E) || 
-                        !Input.GetKey(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.F))
+                        if (!PayCosts(Time.deltaTime))
                         {
                             DeactivateEnergyShield();
                             shieldStateChange = shieldState.shieldDown;

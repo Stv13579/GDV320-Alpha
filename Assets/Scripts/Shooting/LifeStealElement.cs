@@ -44,8 +44,7 @@ public class LifeStealElement : BaseElementClass
     {
         base.Update();
         ActivateLifeSteal();
-        if (Input.GetKeyDown(KeyCode.E) || !Input.GetKey(KeyCode.Mouse0) 
-            || Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.F))
+        if (!isShooting)
         {
             DeactivateLifeSteal();
         }
@@ -103,7 +102,6 @@ public class LifeStealElement : BaseElementClass
     public override void ElementEffect()
     {
         base.ElementEffect();
-        isShooting = true;
     }
 
     public override void ActivateVFX()
@@ -120,6 +118,7 @@ public class LifeStealElement : BaseElementClass
         base.StartAnims(animationName);
         playerHand.ResetTrigger("LifeStealStopCast");
         playerHand.SetTrigger(animationName);
+        isShooting = true;
     }
     protected override bool PayCosts(float modifier = 1)
     {

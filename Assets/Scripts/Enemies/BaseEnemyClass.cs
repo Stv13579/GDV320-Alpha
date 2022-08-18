@@ -84,7 +84,7 @@ public class BaseEnemyClass : MonoBehaviour
 
     public Vector3 oldPosition;
 
-    public virtual void Start()
+    public virtual void Awake()
     {
         prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
         startY = transform.position.y;
@@ -163,7 +163,6 @@ public class BaseEnemyClass : MonoBehaviour
         {
             enemyAnims.SetTrigger("TakeDamage");
         }
-
         audioManager.Stop(takeDamageAudio);
         audioManager.Play(takeDamageAudio, player.transform, this.transform);
         Death();
@@ -224,7 +223,6 @@ public class BaseEnemyClass : MonoBehaviour
 
             audioManager.Stop(deathAudio);
             audioManager.Play(deathAudio, player.transform, this.transform);
-
             Destroy(gameObject);
         }
     }

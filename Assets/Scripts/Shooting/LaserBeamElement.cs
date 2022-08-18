@@ -21,14 +21,9 @@ public class LaserBeamElement : BaseElementClass
     {
         base.Update();
         // same check as the energy shield need to check if player has interupted the laser beam
-        if(usingLaser)
+        if(usingLaser && !PayCosts(10 * Time.deltaTime))
         {
-            if (!PayCosts(10 * Time.deltaTime) || Input.GetKeyDown(KeyCode.E) ||
-               !Input.GetKey(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Q) ||
-               Input.GetKeyDown(KeyCode.F))
-            {
-                DeactivateLaser();
-            }
+            DeactivateLaser();
         }
     }
     // deactivate laser function
