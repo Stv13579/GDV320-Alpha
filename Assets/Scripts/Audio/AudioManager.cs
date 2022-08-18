@@ -53,6 +53,7 @@ public class AudioManager : MonoBehaviour
         }
 
         Play(initalMusic);
+        DontDestroyOnLoad(gameObject);
     }
 
     public void Play(string soundName, Transform playerPos = null, Transform enemyPos = null) // play sound 
