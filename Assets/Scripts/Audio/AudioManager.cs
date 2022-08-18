@@ -53,6 +53,7 @@ public class AudioManager : MonoBehaviour
         }
 
         Play(initalMusic);
+        DontDestroyOnLoad(gameObject);
     }
 
     public void Play(string soundName, Transform playerPos = null, Transform enemyPos = null) // play sound 
@@ -109,9 +110,9 @@ public class AudioManager : MonoBehaviour
             if (sounds[audioOut].audioSource.volume <= 0)
             {
                 Stop(fadeOut);
+                State = 2;
                 sounds[audioOut].audioSource.volume = 0.1f;
                 sounds[audioIn].audioSource.volume = 0.0f;
-                State = 2;
             }
         }
         // state 2 is fade in music
@@ -123,8 +124,8 @@ public class AudioManager : MonoBehaviour
             sounds[audioIn].audioSource.volume += 0.01f * Time.deltaTime;
             if (sounds[audioIn].audioSource.volume >= 0.1f)
             {
-                sounds[audioIn].audioSource.volume = 0.1f;
                 State = 0;
+                sounds[audioIn].audioSource.volume = 0.1f;
             }
         }
     }

@@ -13,7 +13,7 @@ public class RunManager : MonoBehaviour
     {
         player = GameObject.Find("Player");
         DontDestroyOnLoad(player);
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
        
     }
 

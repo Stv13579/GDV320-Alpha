@@ -73,8 +73,8 @@ public class PlayerClass : MonoBehaviour
     [SerializeField]
     private GameObject fireEffect;
 
-    [SerializeField]
-    private Material fireMaterial;
+    //[SerializeField]
+    //private Material fireMaterial;
     void Start()
     {
         currentHealth = maxHealth;
@@ -237,12 +237,12 @@ public class PlayerClass : MonoBehaviour
         if(fireTimer > 0)
         {
             fireEffect.SetActive(true);
-            fireMaterial.SetFloat("_Toggle_EffectIntensity", 0.1f);
+            //fireMaterial.SetFloat("_Toggle_EffectIntensity", 0.1f);
         }
         else
         {
             fireEffect.SetActive(false);
-            fireMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
+            //fireMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
         }
     }
 

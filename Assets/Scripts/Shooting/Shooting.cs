@@ -84,8 +84,10 @@ public class Shooting : MonoBehaviour
         {
             Application.Quit();
         }
-
-        if(ableToShoot)
+        StopComboShooting();
+        StopNonComboShooting();
+        SwitchingElements();
+        if (ableToShoot)
         {
             if (!inComboMode)
             {
@@ -96,9 +98,6 @@ public class Shooting : MonoBehaviour
                 ComboShooting();
             }
         }
-        StopComboShooting();
-        StopNonComboShooting();
-        SwitchingElements();
     }
     void SwitchingElements()
     {
@@ -206,7 +205,6 @@ public class Shooting : MonoBehaviour
                 {
                     Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
                 }
-                comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch(true);
                 if (!inComboMode)
                 {
                     primaryElements[leftElementIndex].AnimationSwitch(true);
@@ -224,7 +222,8 @@ public class Shooting : MonoBehaviour
                 }
                 else
                 {
-                Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, leftOrbPos);
+                    comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch(true);
+                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, leftOrbPos);
                     Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].handVFX, rightOrbPos);
                     if (comboElements[leftElementIndex].comboElements[rightElementIndex].wristVFX)
                     {
@@ -258,14 +257,18 @@ public class Shooting : MonoBehaviour
         {
             catalystElements[rightElementIndex].LiftEffect();
         }
-        if (rightElementIndex != 0)
+        if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.E))
         {
-            catalystElements[rightElementIndex - 1].LiftEffect();
-        }
-        // hard coded need to change
-        if (rightElementIndex == 0)
-        {
-            catalystElements[rightElementIndex + catalystElements.Count - 1].LiftEffect();
+            // lifts the effect of previous elements when player press F or E
+            // used for the hold elements
+            if (rightElementIndex != 0)
+            {
+                catalystElements[rightElementIndex - 1].LiftEffect();
+            }
+            if (rightElementIndex == 0)
+            {
+                catalystElements[rightElementIndex + catalystElements.Count - 1].LiftEffect();
+            }
         }
     }
     void ComboShooting()
@@ -281,14 +284,17 @@ public class Shooting : MonoBehaviour
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
         }
-        // lift previous element effect
-        if (rightElementIndex != 0)
+        if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q))
         {
-            comboElements[leftElementIndex].comboElements[rightElementIndex - 1].LiftEffect();
-        }
-        if (rightElementIndex == 0)
-        {
-            comboElements[leftElementIndex].comboElements[rightElementIndex + catalystElements.Count - 1].LiftEffect();
+            // lift previous element effect
+            if (rightElementIndex != 0)
+            {
+                comboElements[leftElementIndex].comboElements[rightElementIndex - 1].LiftEffect();
+            }
+            if (rightElementIndex == 0)
+            {
+                comboElements[leftElementIndex].comboElements[rightElementIndex + catalystElements.Count - 1].LiftEffect();
+            }
         }
     }
 }

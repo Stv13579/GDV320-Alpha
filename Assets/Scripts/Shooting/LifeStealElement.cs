@@ -29,24 +29,23 @@ public class LifeStealElement : BaseElementClass
 
     private GameObject enemy;
 
-    [SerializeField]
-    private Material lifestealFullScreenEffect;
+    //[SerializeField]
+    //private Material lifestealFullScreenEffect;
 
     private float lifestealeffectvalue;
     protected override void Start()
     {
         base.Start();
         lifestealeffectvalue = 0;
-        lifestealFullScreenEffect.SetFloat("_Toggle_EffectIntensity", lifestealeffectvalue);
+        //lifestealFullScreenEffect.SetFloat("_Toggle_EffectIntensity", lifestealeffectvalue);
     }
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
         ActivateLifeSteal();
-        if (Input.GetKeyDown(KeyCode.E) ||
-            Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Q) ||
-            Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.E) || !Input.GetKey(KeyCode.Mouse0) 
+            || Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.F))
         {
             DeactivateLifeSteal();
         }
@@ -99,7 +98,7 @@ public class LifeStealElement : BaseElementClass
     private void LifeStealFullScreenEffect(float value)
     {
         lifestealeffectvalue = value;
-        lifestealFullScreenEffect.SetFloat("_Toggle_EffectIntensity", lifestealeffectvalue);
+        //lifestealFullScreenEffect.SetFloat("_Toggle_EffectIntensity", lifestealeffectvalue);
     }
     public override void ElementEffect()
     {
