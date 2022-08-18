@@ -76,9 +76,10 @@ public class EnergyElement : BaseElementClass
                 case shieldState.shieldUp:
                     {
                         HitShield();
-                    
-                        if (!PayCosts(Time.deltaTime))
-                        {
+
+                        if (!PayCosts(Time.deltaTime) || Input.GetKeyDown(KeyCode.E) ||
+                        !Input.GetKey(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.F))
+                        { 
                             DeactivateEnergyShield();
                             shieldStateChange = shieldState.shieldDown;
                         }
@@ -107,7 +108,8 @@ public class EnergyElement : BaseElementClass
     // function to deactivate shield
     public void DeactivateEnergyShield()
     {
-       energyShield.SetActive(false);
+        shieldStateChange = shieldState.shieldDown;
+        energyShield.SetActive(false);
        useShield = false;
        playerHand.SetTrigger("EnergyStopCast");
        audioManager.Stop("Energy Element");

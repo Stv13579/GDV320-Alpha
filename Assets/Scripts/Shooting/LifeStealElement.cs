@@ -44,7 +44,8 @@ public class LifeStealElement : BaseElementClass
     {
         base.Update();
         ActivateLifeSteal();
-        if (!isShooting)
+        if (!isShooting || (Input.GetKeyDown(KeyCode.E) || !Input.GetKey(KeyCode.Mouse0)
+            || Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.F)))
         {
             DeactivateLifeSteal();
         }
