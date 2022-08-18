@@ -15,13 +15,13 @@ public class VoidElement : BaseElementClass
     private GameObject Indicator;
     private bool isHolding;
 
-    [SerializeField]
-    private Material voidMaterial;
+    //[SerializeField]
+    //private Material voidMaterial;
 
     protected override void Start()
     {
         base.Start();
-        voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
+        //voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
     }
     protected override void Update()
     {
@@ -130,7 +130,7 @@ public class VoidElement : BaseElementClass
     IEnumerator Dash()
     {
         playerClass.gameObject.GetComponent<PlayerMovement>().ableToMove = false;
-        voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.1f);
+        //voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.1f);
         dashing = true;
         float timer = 0.0f;
         Vector3 startPos = this.transform.position;
@@ -141,7 +141,7 @@ public class VoidElement : BaseElementClass
             yield return null;
         }
         this.gameObject.GetComponent<PlayerMovement>().ableToMove = true;
-        voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
+        //voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
         StopCoroutine(Dash());
     }
 
