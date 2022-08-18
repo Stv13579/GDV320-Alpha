@@ -464,17 +464,17 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         base.TakeDamage(damageToTake, attackTypes, 2);
         if(currentHealth <= maxHealth / 2 && !split)
         {
-            Split();
+            Split(gameObject);
         }
     }
-
+    
     public void PushAway()
     {
         //GetComponent<Rigidbody>().AddForce( -(player.transform.position - transform.position).normalized * pushForce);
         GetComponent<Rigidbody>().AddForce((player.transform.position - transform.position).normalized.x * pushForce, 5 * pushForce, (player.transform.position - transform.position).normalized.z * pushForce);
     }
 
-    protected override void Split()
+    protected override void Split(GameObject temp)
     {
         if (generation < 3)
         {

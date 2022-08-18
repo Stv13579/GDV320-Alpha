@@ -75,7 +75,7 @@ public class FireSlimeEnemy : WaterSlimeEnemy
         base.OnTriggerStay(other);
     }
 
-    protected override void Split()
+    protected override void Split(GameObject temp)
     {
         if (generation < 2)
         {
