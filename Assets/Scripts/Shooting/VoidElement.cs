@@ -32,7 +32,6 @@ public class VoidElement : BaseElementClass
         {
             isHolding = false;
             playerHand.SetTrigger("VoidCastSuccess");
-            audioManager.Stop("Soul Element");
         }
         if (isHolding)
         {
@@ -100,7 +99,6 @@ public class VoidElement : BaseElementClass
 
         playerHand.SetTrigger(animationName);
         playerHand.ResetTrigger("VoidStopCast");
-        audioManager.Play("Soul Element");
         Indicator.SetActive(true);
         isHolding = true;
         Instantiate(activatedVFX, shootingScript.GetRightOrbPos());

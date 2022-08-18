@@ -28,22 +28,19 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
         
         {
             //Only start moving every few seconds, that way it's not constantly moving to try and approach its target
-            if (moveTimer > 5)
             {
-                if (Vector3.Distance(this.transform.position, targetPos) > 5 && !effect)
+                if (!effect)
                 {
                     Movement();
                 }
                 else
                 {
-                    moveTimer = 0;
                     enemyAnims.SetTrigger("Stop Move");
                     enemyAnims.ResetTrigger("Move");
 
 
                 }
             }
-            moveTimer += Time.deltaTime;
 
             //Activate the effect every few seconds, with multiplier if we want it
             timer += Time.deltaTime;
@@ -52,10 +49,12 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
                 effect = true;
                 enemyAnims.SetTrigger("Effect");
             }
-
+            Quaternion startRot = this.transform.rotation;
             this.transform.LookAt(targetPos);
             this.transform.eulerAngles += new Vector3(0, 90, 0);
             this.transform.eulerAngles = new Vector3(0, this.transform.eulerAngles.y, 0);
+            this.transform.rotation = Quaternion.RotateTowards(startRot, this.transform.rotation, 90.0f * Time.deltaTime);
+
         }
 
 
@@ -72,6 +71,18 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
         if(Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
         {
             FindTarget();
+        }
+        if(Vector3.Distance(this.transform.position, targetPos) < 5)
+        {
+            FindTarget();
+
+        }
+        if(target.GetComponent<RangedEnemyScript>())
+        {
+            if(target.GetComponent<RangedEnemyScript>().GetBurrowing())
+            {
+                FindTarget();
+            }
         }
         this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, moveSpeed * moveSpeedMulti * Time.deltaTime);
     }
