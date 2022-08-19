@@ -17,6 +17,7 @@ public class CrystalFlyingEnemy : BaseFlyingEnemyScript
         //}
 
 
+        BaseEnemyClass[] enemies = FindObjectsOfType<BaseEnemyClass>();
 
         List<BaseEnemyClass> validEnemies = new List<BaseEnemyClass>();
         foreach (BaseEnemyClass enemy in enemies)
