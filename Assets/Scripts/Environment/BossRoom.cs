@@ -24,7 +24,7 @@ public class BossRoom : Room
 
     private void Update()
     {
-        if(bossDead)
+        if(bossDead || !bossSpawned)
         {
             return;
         }
