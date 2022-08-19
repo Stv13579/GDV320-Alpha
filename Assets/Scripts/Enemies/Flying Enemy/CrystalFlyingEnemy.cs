@@ -15,7 +15,34 @@ public class CrystalFlyingEnemy : BaseFlyingEnemyScript
         {
             targetPos = hit.point - (this.transform.position - targetPos).normalized * 2;
         }
+        BaseEnemyClass[] enemies = FindObjectsOfType<BaseEnemyClass>();
 
+
+
+        List<BaseEnemyClass> validEnemies = new List<BaseEnemyClass>();
+        foreach (BaseEnemyClass enemy in enemies)
+        {
+            //Get a list of all non-flying enemies that the enemy can reach
+
+            if (!enemy.gameObject.GetComponent<BaseFlyingEnemyScript>())
+            {
+                if (enemy.gameObject != target)
+                {
+                    target = enemy.gameObject;
+                }
+                targetPos = target.transform.position + new Vector3(0, 10, 0);
+                RaycastHit hit1;
+                if (!Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit1, Vector3.Distance(this.transform.position, targetPos), moveDetect))
+                {
+                    validEnemies.Add(enemy);
+                }
+            }
+        }
+        if(validEnemies.Count <= 0)
+        {
+            currentHealth = 0;
+            Death();
+        }
     }
 
     protected override void Effect()

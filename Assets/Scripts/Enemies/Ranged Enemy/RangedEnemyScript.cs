@@ -132,7 +132,7 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
             int rand = Random.Range(0, spawner.GetComponent<SAIM>().aliveNodes.Count);
             nodeChosen = spawner.GetComponent<SAIM>().aliveNodes[rand];
             RaycastHit hit;
-            Physics.Raycast(nodeChosen.gameObject.transform.position, -nodeChosen.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
+            Physics.SphereCast(nodeChosen.gameObject.transform.position, 0.5f, -nodeChosen.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
             Vector3 emergePos = hit.point - this.transform.GetChild(1).localPosition * 2;
             if (Vector3.Distance(player.transform.position, emergePos) > 10 && Vector3.Distance(player.transform.position, emergePos) < 40)
             {
