@@ -18,9 +18,9 @@ public class RangedBossScript : BaseEnemyClass
     public GameObject bossHealthbar;
 
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         RaycastHit hit;
         Physics.Raycast(this.gameObject.transform.position, -this.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
         Vector3 emergePos = hit.point - this.transform.GetChild(1).localPosition * 2;

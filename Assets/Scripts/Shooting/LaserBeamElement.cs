@@ -24,8 +24,8 @@ public class LaserBeamElement : BaseElementClass
         if(usingLaser)
         {
             if (!PayCosts(10 * Time.deltaTime) || Input.GetKeyDown(KeyCode.E) ||
-               !Input.GetKey(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Q) ||
-               Input.GetKeyDown(KeyCode.F))
+                !Input.GetKey(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Q) ||
+                Input.GetKeyDown(KeyCode.F))
             {
                 DeactivateLaser();
             }

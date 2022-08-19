@@ -48,7 +48,7 @@ public class ShardProjectile : BaseElementSpawnClass
     {
 
 
-        if (other.tag == "Enemy")
+        if (other.gameObject.layer == 8)
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             audioManager.Stop("Slime Damage");

@@ -52,18 +52,18 @@ public class CurseElement : BaseElementClass
         }
     }
     
-    public void DeathEffect()
+    public void DeathEffect(GameObject temp)
     {
         Collider[] hitColls = null;
-        if (targetToCurse)
+        if (temp)
         {
-            hitColls = Physics.OverlapSphere(targetToCurse.transform.position, explosionRange);
+            hitColls = Physics.OverlapSphere(temp.transform.position, explosionRange);
         }
         if(hitColls != null)
         {
             foreach (Collider hit in hitColls)
             {
-                if (hit.tag == "Enemy")
+                if (hit.tag == "Enemy" && hit.GetComponent<BaseEnemyClass>())
                 {
                     hit.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.crystalDamageMultiplier), types);
                 }
@@ -71,7 +71,7 @@ public class CurseElement : BaseElementClass
         }
 
 
-        Instantiate(curseDeath, targetToCurse.transform.position, Quaternion.identity);
+        Instantiate(curseDeath, temp.transform.position, Quaternion.identity);
         audioManager.Stop("Curse Element Explosion");
         audioManager.Play("Curse Element Explosion");
         Debug.Log("Explodded");

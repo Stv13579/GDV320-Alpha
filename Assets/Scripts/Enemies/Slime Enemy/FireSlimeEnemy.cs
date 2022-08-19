@@ -15,9 +15,9 @@ public class FireSlimeEnemy : WaterSlimeEnemy
     private float spawnTimer;
     [SerializeField]
     private float spawnTimerLength = 1.0f;
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         decalManager = FindObjectOfType<DecalRendererManager>();
     }
     new private void Update()
@@ -75,7 +75,7 @@ public class FireSlimeEnemy : WaterSlimeEnemy
         base.OnTriggerStay(other);
     }
 
-    protected override void Split()
+    protected override void Split(GameObject temp)
     {
         if (generation < 2)
         {

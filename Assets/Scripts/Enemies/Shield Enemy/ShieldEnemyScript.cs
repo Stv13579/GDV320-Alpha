@@ -9,9 +9,9 @@ public class ShieldEnemyScript : BaseEnemyClass
     GameObject nearestNode;
     bool attacking = false;
 
-    private void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         StartCoroutine(FindNode());
         spawner = GameObject.Find("SAIMPosition");
     }

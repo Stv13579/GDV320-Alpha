@@ -24,9 +24,9 @@ public class WaterSlimeEnemy : BaseEnemyClass
     Vector3 pos = Vector3.zero;
     protected Vector3 posOffset = Vector3.zero;
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         deathTriggers.Add(Split);
         jumpTimer = Random.Range(1.5f, 3.0f);
     }
@@ -235,7 +235,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
         }
     }
 
-    protected virtual void Split()
+    protected virtual void Split(GameObject temp)
     {
         if(generation < 2)
         {

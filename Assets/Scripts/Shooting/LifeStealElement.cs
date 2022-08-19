@@ -44,8 +44,8 @@ public class LifeStealElement : BaseElementClass
     {
         base.Update();
         ActivateLifeSteal();
-        if (Input.GetKeyDown(KeyCode.E) || !Input.GetKey(KeyCode.Mouse0) 
-            || Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.F))
+        if (!isShooting || (Input.GetKeyDown(KeyCode.E) || !Input.GetKey(KeyCode.Mouse0)
+            || Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.F)))
         {
             DeactivateLifeSteal();
         }
@@ -70,16 +70,16 @@ public class LifeStealElement : BaseElementClass
             }
             // if objectHit is in the enemy layer
             // suck health from him
-            else if (objectHit[0].transform.gameObject.layer == 8)
+            else if (objectHit[0].transform.gameObject.layer == 8 && objectHit[0].transform.GetComponent<BaseEnemyClass>())
             {
                 // turn targeting on
                 // damage enemy
                 enemy = objectHit[0].transform.gameObject;
                 isTargeting = true;
             }
-            if (isTargeting == true && enemy.GetComponent<BaseEnemyClass>() && enemy != null)
+            if (isTargeting == true && enemy != null)
             {
-                LifeStealFullScreenEffect(0.1f);
+                //LifeStealFullScreenEffect(0.1f);
                 playerClass.ChangeMana(-Time.deltaTime, manaTypes);
                 lifeSteal.SetActive(true);
                 enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier * elementData.waterDamageMultiplier), attackTypes);
@@ -103,7 +103,6 @@ public class LifeStealElement : BaseElementClass
     public override void ElementEffect()
     {
         base.ElementEffect();
-        isShooting = true;
     }
 
     public override void ActivateVFX()
@@ -120,6 +119,7 @@ public class LifeStealElement : BaseElementClass
         base.StartAnims(animationName);
         playerHand.ResetTrigger("LifeStealStopCast");
         playerHand.SetTrigger(animationName);
+        isShooting = true;
     }
     protected override bool PayCosts(float modifier = 1)
     {
