@@ -19,8 +19,12 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
     public override void Awake()
     {
         base.Awake();
-        FindTarget();
         effectTimerMulti = 1.0f;
+    }
+
+    private void Start()
+    {
+        FindTarget();
     }
 
     private void Update()

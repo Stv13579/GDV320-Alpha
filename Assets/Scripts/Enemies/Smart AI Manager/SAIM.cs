@@ -221,7 +221,7 @@ public class SAIM : MonoBehaviour
         }
 
         Move();
-
+        
         Node pNode = null;
 
         foreach (BaseEnemyClass enemy in spawnedEnemies)
@@ -584,6 +584,13 @@ public class SAIM : MonoBehaviour
 
     public void Bounce(int elementIndex)
     {
+
+        if(!spawnedEnemies[elementIndex])
+        {
+
+            return;
+        }
+
         //Bouncing away from each other
         for (int j = 0; j < spawnedEnemies[elementIndex].GetComponent<BaseEnemyClass>().bounceList.Count; j++)
         {
