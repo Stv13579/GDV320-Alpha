@@ -39,11 +39,11 @@ public class NecroticElement : BaseElementClass
         base.ElementEffect();
         isTargeting = false;
         if (targetToSlow && targetToSlow.GetComponent<BaseEnemyClass>() &&
-            (targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti != 0.5f || targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti != 0.3f))
+            (targetToSlow.GetComponent<BaseEnemyClass>().GetMoveMulti() != 0.5f || targetToSlow.GetComponent<BaseEnemyClass>().GetMoveMulti() != 0.3f))
         {
             playerClass.ChangeMana(-manaCost, manaTypes);
             Instantiate(necroticVFX, targetToSlow.transform);
-            targetToSlow.GetComponent<BaseEnemyClass>().moveSpeedMulti = Multiplier.AddMultiplier(targetToSlow.GetComponent<BaseEnemyClass>().movementMultipliers, new Multiplier(upgraded ? 0.5f : 0.3f, "Necrotic"));
+            targetToSlow.GetComponent<BaseEnemyClass>().SetMoveMulti(Multiplier.AddMultiplier(targetToSlow.GetComponent<BaseEnemyClass>().GetMoveMultis(), new Multiplier(upgraded ? 0.5f : 0.3f, "Necrotic")));
         }
     }
     // Update is called once per frame

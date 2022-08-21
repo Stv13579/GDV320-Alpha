@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedBossSmallCrystalProjectile : BaseRangedProjectileScript
+public class RangedBossSmallCrystalProjectile : BaseRangedProjectileScript //Sebastian
 {
     protected override void Start()
     {
         base.Start();
     }
+    //Damage the player
     protected override void HitEffect(Collider other)
     {
         player.GetComponent<PlayerClass>().ChangeHealth(-damage);

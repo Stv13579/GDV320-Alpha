@@ -119,7 +119,7 @@ public class EnergyElement : BaseElementClass
        {
             if(containedEnemies[i])
             {
-                containedEnemies[i].gameObject.GetComponent<BaseEnemyClass>().damageMultiplier = Multiplier.RemoveMultiplier(containedEnemies[i].GetComponent<BaseEnemyClass>().damageMultipliers, new Multiplier(0.0f, "Shield"));
+                containedEnemies[i].gameObject.GetComponent<BaseEnemyClass>().SetDamamgeMulti(Multiplier.RemoveMultiplier(containedEnemies[i].GetComponent<BaseEnemyClass>().GetDamageMultis(), new Multiplier(0.0f, "Shield")));
             }
             containedEnemies.Remove(containedEnemies[i]);
        }
@@ -165,7 +165,7 @@ public class EnergyElement : BaseElementClass
                 if (!containedEnemies.Contains(other.gameObject))
                 {
                     containedEnemies.Add(other.gameObject);
-                    other.gameObject.GetComponent<BaseEnemyClass>().damageMultiplier = Multiplier.AddMultiplier(other.gameObject.GetComponent<BaseEnemyClass>().damageMultipliers, new Multiplier(0, "Shield"));
+                    other.gameObject.GetComponent<BaseEnemyClass>().SetDamamgeMulti(Multiplier.AddMultiplier(other.gameObject.GetComponent<BaseEnemyClass>().GetDamageMultis(), new Multiplier(0, "Shield")));
                 }
             }
             if (other.gameObject.layer == 22 && other.GetComponent<BaseRangedProjectileScript>())

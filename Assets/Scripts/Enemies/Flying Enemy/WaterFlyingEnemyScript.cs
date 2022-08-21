@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterFlyingEnemyScript : BaseFlyingEnemyScript
+public class WaterFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
 {
-    public float healthRestore = 2.0f;
+    [SerializeField]
+    float healthRestore = 2.0f;
+    //Find all the enemies around the target enemy, heal them, and find a new target
+
     protected override void Effect()
     {
-        //Find all the enemies around the target enemy, heal them, and find a new target
 
         base.Effect();
         Debug.Log("Effect");

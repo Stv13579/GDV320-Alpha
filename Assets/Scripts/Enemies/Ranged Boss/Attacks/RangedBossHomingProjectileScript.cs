@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedBossHomingProjectileScript : BaseEnemyClass
+public class RangedBossHomingProjectileScript : BaseEnemyClass //Sebastian
 {
     public override void Update()
     {
+        //Move towards the player
         this.transform.LookAt(player.transform);
         this.transform.position += this.transform.forward * moveSpeed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        //if it hits the player, damage them
         if (other.gameObject.GetComponent<PlayerClass>())
         {
             other.gameObject.GetComponent<PlayerClass>().ChangeHealth(-damageAmount * damageMultiplier);

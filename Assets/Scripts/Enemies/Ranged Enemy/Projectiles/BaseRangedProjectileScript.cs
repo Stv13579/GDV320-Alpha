@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseRangedProjectileScript : MonoBehaviour
+public class BaseRangedProjectileScript : MonoBehaviour //Sebastian
 {
-    public float speed;
-    public float damage;
+    protected float speed;
+    protected float damage;
     protected GameObject player;
     protected float timer = 0;
     // Start is called before the first frame update
@@ -24,7 +24,7 @@ public class BaseRangedProjectileScript : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
+    //What the projectile does when it hits  a player
     protected virtual void HitEffect(Collider other)
     {
 
@@ -43,7 +43,7 @@ public class BaseRangedProjectileScript : MonoBehaviour
 
 
     }
-
+    //Set the variables of the projectile
     public void SetVars(float projectileSpeed, float projectileDamage)
     {
         speed = projectileSpeed;
