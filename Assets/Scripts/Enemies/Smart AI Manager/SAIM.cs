@@ -181,6 +181,7 @@ public class SAIM : MonoBehaviour
             fadeOutAmbientAudio = false;
             audioManager.sounds[0].audioSource.volume = 0.1f;
         }
+        //The room has been explored and defeated 
         if (triggered && !roomComplete)
         {
             containingRoom.LockDoors();
@@ -194,7 +195,7 @@ public class SAIM : MonoBehaviour
             {
                 drop.SetRoomEnd(true);
             }
-            
+            GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRoomUpdate();
         }
 
         AdjustDifficulty();

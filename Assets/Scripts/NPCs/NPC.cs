@@ -11,7 +11,7 @@ public class NPC : MonoBehaviour
     {
         public List<string> lines;
         protected NPCData heldData;
-
+        protected bool actionTaken = false;
         public void SetHeldData(NPCData nData) { heldData = nData; }
         
         //
@@ -25,7 +25,7 @@ public class NPC : MonoBehaviour
         //Called once all the lines of this dialogue are exhausted, call this action
         public virtual void Action()
         {
-
+            actionTaken = true;
         }
 
         public virtual void OnSpeakAction(int placeToAct)
@@ -67,12 +67,16 @@ public class NPC : MonoBehaviour
         //Add the quest to the manager
         public override void Action()
         {
-            base.Action();
+            if(actionTaken)
+            {
+                return;
+            }
             Quest q = (Quest)GameObject.Find("Quest Manager").GetComponent(heldData.quests[heldData.storyPosition]);
             q.ActivateQuest();
 
             heldData.onQuest = true;
             heldData.questReady = false;
+            base.Action();
         }
     }
 
@@ -84,6 +88,10 @@ public class NPC : MonoBehaviour
         //Add the quest to the manager
         public override void Action()
         {
+            if(actionTaken)
+            {
+                return;
+            }
             base.Action();
             Quest q = (Quest)GameObject.Find("Quest Manager").GetComponent(heldData.quests[heldData.storyPosition]);
             q.FinishQuest();

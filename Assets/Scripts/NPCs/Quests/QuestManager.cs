@@ -6,10 +6,22 @@ public class QuestManager : MonoBehaviour
 {
     [SerializeField]
     List<Quest> activeQuests;
-    
+
+    public bool inHub;
+
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     void Update()
     {
-        foreach(Quest q in activeQuests)
+        if (inHub)
+        {
+            return;
+        }
+
+        foreach (Quest q in activeQuests)
         {
             q.UpdateQuestBehaviour();
         }
@@ -17,19 +29,36 @@ public class QuestManager : MonoBehaviour
 
     public void StartLevelUpdate()
     {
+        
+
         foreach (Quest q in activeQuests)
         {
             q.LevelStartQuestBehaviour();
         }
     }
 
-    public void AddToQuests(Quest qToAdd)
+    public void FinishRoomUpdate()
     {
-        activeQuests.Add(qToAdd);
+        foreach (Quest q in activeQuests)
+        {
+            q.RoomFinishQuestBehaviour();
+        }
     }
 
-    public void RemoveFromQuests(Quest qToRemove)
+
+    public void AddToQuests(Quest qToAdd)
     {
-        activeQuests.Remove(qToRemove);
+        if(!activeQuests.Contains(qToAdd))
+            activeQuests.Add(qToAdd);
+    }
+
+    public bool RemoveFromQuests(Quest qToRemove)
+    {
+        if (activeQuests.Contains(qToRemove))
+        {
+            activeQuests.Remove(qToRemove);
+            return true;
+        }
+        return false;
     }
 }

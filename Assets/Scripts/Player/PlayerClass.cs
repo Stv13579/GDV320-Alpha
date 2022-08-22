@@ -84,11 +84,12 @@ public class PlayerClass : MonoBehaviour
             manaTypes[i].currentMana = manaTypes[i].maxMana;
         }
         itemUI = GameObject.Find("ItemArray");
-        //TEST IMPLEMENTATION
+    }
 
-        //Item newItem = new Item(Instantiate(testItemUIWidget));
 
-        //AddItem(newItem);
+    public void StartLevel()
+    {
+        itemUI = GameObject.Find("ItemArray");
     }
 
     void Update()

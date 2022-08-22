@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class Quest : MonoBehaviour
 {
+
+    [SerializeField]
+    NPCData npc;
+
+    public void SetData(NPCData data) { npc = data; }
+
     public virtual void UpdateQuestBehaviour()
     {
 
     }
 
     public virtual void LevelStartQuestBehaviour()
+    {
+
+    }
+
+    public virtual void RoomFinishQuestBehaviour()
     {
 
     }
@@ -23,6 +34,7 @@ public class Quest : MonoBehaviour
     //Removes itself from the quest manager for future updates and implements derived behaviours
     public virtual void FinishQuest()
     {
-        GetComponent<QuestManager>().RemoveFromQuests(this);
+        if(GetComponent<QuestManager>().RemoveFromQuests(this))
+            npc.questComplete = true;
     }
 }
