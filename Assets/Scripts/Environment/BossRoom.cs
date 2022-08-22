@@ -22,20 +22,21 @@ public class BossRoom : Room
     [SerializeField]
     Transform portalSpawnPosition;
 
-    private void Update()
+    public void Update()
     {
-        if(bossDead || !bossSpawned)
+        base.Update();
+        
+        if(bossSpawned)
         {
-            return;
-        }
+            if (FindObjectsOfType<BaseEnemyClass>().Length == 0 && !bossDead && bossSpawned)
+            {
+                //Spawn the portal
+                Instantiate(portalObject, portalSpawnPosition.position, Quaternion.identity);
+                UnlockDoors();
+                bossDead = true;
 
-        if(FindObjectsOfType<BaseEnemyClass>().Length == 0 && !bossDead && bossSpawned)
-        {
-            //Spawn the portal
-            Instantiate(portalObject, portalSpawnPosition.position, Quaternion.identity);
-            UnlockDoors();
-            bossDead = true;
-            Destroy(GameObject.Find("Boss Healthbar(Clone)"));
+                Destroy(GameObject.Find("Boss Healthbar(Clone)"));
+            }
         }
 
         if (roomTrigger.GetComponent<RoomTrigger>().triggered && !bossSpawned)
@@ -46,6 +47,9 @@ public class BossRoom : Room
             //Lock the doors
             LockDoors();
         }
+
+
+
     }
 
 

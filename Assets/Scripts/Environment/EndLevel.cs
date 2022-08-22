@@ -23,11 +23,16 @@ public class EndLevel : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            //Update quests as the player has just finished the room
+            GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRoomUpdate();
+
+
             //GameObject screen = Instantiate(loadingScreen);
             int index = 0;
 
             //Temporary scene system; consider upgrading to dynamically building scenes and refering to scenes by name with a dedicated scene manager/ level manager
             index = SceneManager.GetActiveScene().buildIndex;
+            
 
             index++;
 
