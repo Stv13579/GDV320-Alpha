@@ -106,8 +106,12 @@ public class CurseElement : BaseElementClass
                     {
                         targetToCurse.GetComponent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
                     }
-                    targetToCurse = rayHit.collider.gameObject;
-                    targetToCurse.GetComponent<BaseEnemyClass>().Targetted(true, outlineColour);
+                    if(!rayHit.collider.gameObject.GetComponent<EnemyShield>())
+                    {
+                        targetToCurse = rayHit.collider.gameObject;
+                        targetToCurse.GetComponent<BaseEnemyClass>().Targetted(true, outlineColour);
+                    }
+
                 }
                 
 

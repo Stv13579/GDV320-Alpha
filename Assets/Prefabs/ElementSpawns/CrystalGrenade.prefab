@@ -82,6 +82,9 @@ MonoBehaviour:
   inAir: {fileID: 6757545492346316090}
   attached: {fileID: 5065837179002897232}
   explosion: {fileID: 8099946750427681235}
+  enemyDetect:
+    serializedVersion: 2
+    m_Bits: 1280
 --- !u!1001 &4383936909345791495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -345,6 +348,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618845693396559283, guid: 11d6d693d0452724b85b52acb73e9bf1,
+        type: 3}
+      propertyPath: stopAction
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3618845693396559283, guid: 11d6d693d0452724b85b52acb73e9bf1,
         type: 3}

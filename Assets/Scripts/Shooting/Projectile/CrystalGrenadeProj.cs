@@ -29,6 +29,8 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
         destroy
     };
     grenadestate currentState = grenadestate.inAir;
+    [SerializeField]
+    LayerMask enemyDetect;
     // Start is called before the first frame update
     void Start()
     {
@@ -81,7 +83,19 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                         if (objectsHit[i].gameObject.layer == 8 &&
                             objectsHit[i].GetComponent<BaseEnemyClass>())
                         {
-                            objectsHit[i].GetComponent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
+                            RaycastHit hit;
+                            if (Physics.Raycast(this.transform.position + (objectsHit[i].transform.position - this.transform.position).normalized * -2, (objectsHit[i].transform.position - this.transform.position).normalized, out hit, 5, enemyDetect))
+                            {
+                                if ((hit.collider.gameObject.GetComponent<EnemyShield>() && !objectsHit[i].GetComponent<EnemyShield>()) || hit.collider.gameObject.layer == 10)
+                                {
+
+                                }
+                                else
+                                {
+                                    objectsHit[i].GetComponent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
+                                }
+
+                            }
                         }
                     }
                     if (!explosion.GetComponent<ParticleSystem>().isPlaying)
@@ -136,14 +150,6 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
             speed = 0;
             other.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             other = enemy;
-        }
-        else if (other.gameObject.tag == "Shield")
-        {
-            this.GetComponent<Rigidbody>().useGravity = false;
-            isAttached = true;
-            this.gameObject.transform.SetParent(other.transform);
-            this.GetComponent<Rigidbody>().isKinematic = true;
-            speed = 0;
         }
         else if(other.gameObject.layer == 10)
         {

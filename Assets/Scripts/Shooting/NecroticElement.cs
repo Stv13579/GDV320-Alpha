@@ -38,7 +38,7 @@ public class NecroticElement : BaseElementClass
     {
         base.ElementEffect();
         isTargeting = false;
-        if (targetToSlow && targetToSlow.GetComponent<BaseEnemyClass>() &&
+        if (targetToSlow && targetToSlow.GetComponent<BaseEnemyClass>() && !targetToSlow.GetComponent<EnemyShield>() &&
             (targetToSlow.GetComponent<BaseEnemyClass>().GetMoveMulti() != 0.5f || targetToSlow.GetComponent<BaseEnemyClass>().GetMoveMulti() != 0.3f))
         {
             playerClass.ChangeMana(-manaCost, manaTypes);

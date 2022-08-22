@@ -99,7 +99,6 @@ public class CrystalProj : BaseElementSpawnClass
             audioManager.Play("Slime Damage");
             //hitMarker.transform.GetChild(7).gameObject.SetActive(true);
             //Invoke("HitMarkerDsable", 0.2f);
-            Debug.Log("Enemy");
             Destroy(gameObject);
         }
     }
