@@ -72,10 +72,6 @@ public class WaterProjectile : BaseElementSpawnClass
             collision.collider.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             Debug.Log(collision.collider.gameObject.name);
         }
-        else if (collision.collider.tag == "Shield")
-        {
-            collision.collider.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
-        }
     }
 
 

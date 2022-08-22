@@ -91,6 +91,8 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
                 newSlime.spawner = spawner;
                 spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime);
                 newSlime.enemyProjectileScale = enemyProjectileScale / 2;
+                newSlime.GetMoveMultis().Clear();
+
             }
         }
 

@@ -90,13 +90,6 @@ public class CrystalProj : BaseElementSpawnClass
             originalPosition = transform.position;
             ismoving = false;
         }
-        if (other.tag == "Shield")
-        {
-            other.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
-            Debug.Log("Shield");
-            Destroy(gameObject);
-            
-        }
         //if enemy, hit them for the damage
         // destroy projectile after
         if (other.gameObject.layer == 8 && other.gameObject.GetComponent<BaseEnemyClass>())

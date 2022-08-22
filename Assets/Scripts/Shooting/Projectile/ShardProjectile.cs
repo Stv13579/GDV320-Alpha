@@ -56,11 +56,6 @@ public class ShardProjectile : BaseElementSpawnClass
             //hitMarker.transform.GetChild(7).gameObject.SetActive(true);
             //Invoke("HitMarkerDsable", 0.2f);
         }
-        if(other.tag == "Shield")
-        {
-            other.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
-
-        }
 
         if (other.gameObject.tag != "Player")
         {

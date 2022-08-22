@@ -219,6 +219,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
                 newSlime.generation = generation + 1;
                 newSlime.spawner = spawner;
                 spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime);
+                newSlime.GetMoveMultis().Clear();
             }
         }
 

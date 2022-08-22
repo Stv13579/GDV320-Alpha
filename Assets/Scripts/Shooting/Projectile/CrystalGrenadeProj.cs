@@ -82,10 +82,6 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                         {
                             objectsHit[i].GetComponent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
                         }
-                        else if (objectsHit[i].gameObject.tag == "Shield")
-                        {
-                            objectsHit[i].gameObject.GetComponent<EnemyShield>().DamageShield(explosionDamage, attackTypes);
-                        }
                     }
                     if (!explosion.GetComponent<ParticleSystem>().isPlaying)
                     {
