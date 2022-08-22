@@ -27,11 +27,11 @@ public class BaseEnemyClass : MonoBehaviour
 
     //The amount of flat damage any instance of incoming damage is reduced by
     [SerializeField]
-    float damageThreshold;
+    protected float damageThreshold;
 
     //The amount of percentage damage any instance of incoming damage is reduced by
     [SerializeField]
-    float damageResistance = 1;
+    protected float damageResistance = 1;
 
 
     protected float currentHealth;
@@ -59,7 +59,7 @@ public class BaseEnemyClass : MonoBehaviour
     }
 
     [SerializeField]
-    List<Types> weaknesses, resistances;
+    protected List<Types> weaknesses, resistances;
 
     public List<GameObject> bounceList;
 
@@ -100,7 +100,7 @@ public class BaseEnemyClass : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         oldPosition = new Vector3(-1000, -1000, -1000);
         enemyAnims = GetComponentInChildren<Animator>();
-        
+        movementMultipliers.Clear();
     }
 
     public virtual void Update()

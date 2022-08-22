@@ -72,6 +72,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                     inAir.SetActive(false);
                     attached.SetActive(false);
                     explosion.SetActive(true);
+                    explosion.transform.SetParent(null);
                     audioManager.Stop("Crystal Grenade Explosion");
                     audioManager.Play("Crystal Grenade Explosion");
                     Collider[] objectsHit = Physics.OverlapSphere(transform.position, explosionRange);
@@ -81,10 +82,6 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                             objectsHit[i].GetComponent<BaseEnemyClass>())
                         {
                             objectsHit[i].GetComponent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
-                        }
-                        else if (objectsHit[i].gameObject.tag == "Shield")
-                        {
-                            objectsHit[i].gameObject.GetComponent<EnemyShield>().DamageShield(explosionDamage, attackTypes);
                         }
                     }
                     if (!explosion.GetComponent<ParticleSystem>().isPlaying)

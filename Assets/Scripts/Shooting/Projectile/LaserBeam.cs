@@ -99,11 +99,6 @@ public class LaserBeam : MonoBehaviour
             audioManager.Stop("Slime Damage");
             audioManager.Play("Slime Damage");
         }
-
-        if(other.tag == "Shield")
-        {
-            other.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
-        }
     }
     private void OnTriggerExit(Collider other)
     {

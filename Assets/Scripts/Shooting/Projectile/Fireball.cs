@@ -78,19 +78,6 @@ public class Fireball : BaseElementSpawnClass
         {
             return;
         }
-        if (other.tag == "Shield")
-        {
-            other.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
-            gravity = 0;
-            speed = 0;
-            Destroy(this.gameObject.GetComponent<Collider>());
-            this.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            this.gameObject.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
-            Debug.Log("Shield");
-            Debug.Log(Time.frameCount);
-        }
         if (other.tag == "Environment")
         {
             gravity = 0;

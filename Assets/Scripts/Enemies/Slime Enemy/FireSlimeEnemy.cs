@@ -93,6 +93,8 @@ public class FireSlimeEnemy : WaterSlimeEnemy
                 newSlime.spawner = spawner;
                 spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime);
                 newSlime.enemyFireTrailScale = enemyFireTrailScale / 2;
+                newSlime.GetMoveMultis().Clear();
+
             }
         }
 

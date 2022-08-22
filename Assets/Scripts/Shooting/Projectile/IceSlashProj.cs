@@ -51,10 +51,6 @@ public class IceSlashProj : BaseElementSpawnClass
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
         }
-        if (other.tag == "Shield")
-        {
-            other.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
-        }
         // hits environment and destroys itself
         if (other.gameObject.layer == 10)
         {
