@@ -492,6 +492,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
                 newSlime.generation = generation + 1;
                 bossHealthBar.enemies.Add(newSlime);
                 newSlime.bossHealthBar = bossHealthBar;
+                newSlime.GetMoveMultis().Clear();
             }
             bossHealthBar.enemies.Remove(this);
             split = true;
