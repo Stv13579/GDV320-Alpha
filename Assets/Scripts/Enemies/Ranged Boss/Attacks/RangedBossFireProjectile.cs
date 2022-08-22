@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedBossFireProjectile : BaseRangedProjectileScript
+public class RangedBossFireProjectile : BaseRangedProjectileScript //Sebastian
 {
-    [HideInInspector]
-    public GameObject telegraph;
-    [HideInInspector]
-    public float radius = 2.0f;
+    GameObject telegraph;
+    [SerializeField]
+    float radius = 2.0f;
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         this.transform.LookAt(telegraph.transform);
     }
-
+    //If the player is within radius of the hit point, damage them
     protected override void HitEffect(Collider other)
     {
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, radius);
@@ -34,5 +33,10 @@ public class RangedBossFireProjectile : BaseRangedProjectileScript
     protected override void OnTriggerEnter(Collider other)
     {
         HitEffect(other);
+    }
+
+    public void SetTelegraph(GameObject tele)
+    {
+        telegraph = tele;
     }
 }

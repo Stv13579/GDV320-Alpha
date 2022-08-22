@@ -15,6 +15,8 @@ public class LandMineProj : MonoBehaviour
     private GameObject mine;
     [SerializeField]
     private GameObject explosion;
+    [SerializeField]
+    LayerMask enemyDetect;
     // Start is called before the first frame update
     void Start()
     {
@@ -81,7 +83,18 @@ public class LandMineProj : MonoBehaviour
                 if (objectsHitByExplosion[i].gameObject.layer == 8 && 
                     objectsHitByExplosion[i].GetComponent<BaseEnemyClass>())
                 {
-                    objectsHitByExplosion[i].GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+                    RaycastHit hit;
+                    if (Physics.Raycast(this.transform.position + (objectsHitByExplosion[i].transform.position - this.transform.position).normalized * -2, (objectsHitByExplosion[i].transform.position - this.transform.position).normalized, out hit, 5, enemyDetect))
+                    {
+                        if ((hit.collider.gameObject.GetComponent<EnemyShield>() && !objectsHitByExplosion[i].GetComponent<EnemyShield>()) || hit.collider.gameObject.layer == 10)
+                        {
+
+                        }
+                        else
+                        {
+                            objectsHitByExplosion[i].GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+                        }
+                    }
                 }
             }
             audioManager.Stop("LandMine Explosion");

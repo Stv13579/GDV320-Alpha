@@ -90,13 +90,6 @@ public class CrystalProj : BaseElementSpawnClass
             originalPosition = transform.position;
             ismoving = false;
         }
-        if (other.tag == "Shield")
-        {
-            other.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
-            Debug.Log("Shield");
-            Destroy(gameObject);
-            
-        }
         //if enemy, hit them for the damage
         // destroy projectile after
         if (other.gameObject.layer == 8 && other.gameObject.GetComponent<BaseEnemyClass>())
@@ -106,7 +99,6 @@ public class CrystalProj : BaseElementSpawnClass
             audioManager.Play("Slime Damage");
             //hitMarker.transform.GetChild(7).gameObject.SetActive(true);
             //Invoke("HitMarkerDsable", 0.2f);
-            Debug.Log("Enemy");
             Destroy(gameObject);
         }
     }

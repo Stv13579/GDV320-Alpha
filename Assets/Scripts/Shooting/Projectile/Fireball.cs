@@ -24,6 +24,9 @@ public class Fireball : BaseElementSpawnClass
     private GameObject hitMarker;
 
     AudioManager audioManager;
+
+    [SerializeField]
+    LayerMask enemyDetect;
     void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
@@ -71,25 +74,13 @@ public class Fireball : BaseElementSpawnClass
 
     private void OnTriggerEnter(Collider other)
     {
+        //Debug.Log(other.gameObject.name);
 
         //if enemy, hit them for the damage
         Collider taggedEnemy = null;
         if(other.isTrigger && other.gameObject.layer != 10)
         {
             return;
-        }
-        if (other.tag == "Shield")
-        {
-            other.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
-            gravity = 0;
-            speed = 0;
-            Destroy(this.gameObject.GetComponent<Collider>());
-            this.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            this.gameObject.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
-            Debug.Log("Shield");
-            Debug.Log(Time.frameCount);
         }
         if (other.tag == "Environment")
         {
@@ -111,12 +102,10 @@ public class Fireball : BaseElementSpawnClass
             hitMarker.transform.GetChild(7).gameObject.SetActive(true);
             Invoke("HitMarkerDsable", 0.2f);
             taggedEnemy = other;
-            Debug.Log("Enemy");
-            Debug.Log(Time.frameCount);
 
 
         }
-        if (other.gameObject.layer != 11 && other.gameObject.layer != 20 && other.gameObject.tag != "Node" && other.gameObject.tag != "Shield" && active)
+        if (other.gameObject.layer != 11 && other.gameObject.layer != 20 && other.gameObject.tag != "Node" && active)
         {
             Collider[] objectsHit = Physics.OverlapSphere(transform.position, explosionRadii);
 
@@ -124,7 +113,19 @@ public class Fireball : BaseElementSpawnClass
             {
                 if(objectsHit[i].tag == "Enemy" && objectsHit[i] != taggedEnemy)
                 {
-                    objectsHit[i].GetComponent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
+                    RaycastHit hit;
+                    if(Physics.Raycast(this.transform.position + (objectsHit[i].transform.position - this.transform.position).normalized * -2, (objectsHit[i].transform.position - this.transform.position).normalized, out hit, 5, enemyDetect))
+                    {
+                        if((hit.collider.gameObject.GetComponent<EnemyShield>() && !objectsHit[i].GetComponent<EnemyShield>()) || hit.collider.gameObject.layer == 10)
+                        {
+                            
+                        }
+                        else
+                        {
+                            objectsHit[i].GetComponent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
+                        }
+
+                    }
                 }
             }
             gravity = 0;

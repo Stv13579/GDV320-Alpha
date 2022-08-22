@@ -30,6 +30,7 @@ public class LaserBeam : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         isHittingObj = false;
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -70,6 +71,7 @@ public class LaserBeam : MonoBehaviour
             {
                 if(enemy)
                 {
+
                     enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
                 }
                 else
@@ -84,6 +86,7 @@ public class LaserBeam : MonoBehaviour
     {
         damage = dmg;
         attackTypes = types;
+        containedEnemies.Clear();
     }
     private void OnTriggerStay(Collider other)
     {
@@ -98,11 +101,6 @@ public class LaserBeam : MonoBehaviour
             containedEnemies.Add(other.gameObject);
             audioManager.Stop("Slime Damage");
             audioManager.Play("Slime Damage");
-        }
-
-        if(other.tag == "Shield")
-        {
-            other.gameObject.GetComponent<EnemyShield>().DamageShield(damage, attackTypes);
         }
     }
     private void OnTriggerExit(Collider other)

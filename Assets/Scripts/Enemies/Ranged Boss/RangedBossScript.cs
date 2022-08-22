@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedBossScript : BaseEnemyClass
+public class RangedBossScript : BaseEnemyClass //Sebastian
 {
     [Header("Boss attacks")]
     float timer = 5.0f;
-    public Transform projectileSpawnPos;
-    public GameObject fireProjectile;
-    public GameObject fakeFireProjectile;
-    public GameObject waterProjectile;
-    public GameObject crystalProjectile;
-    public GameObject[] homingProjectiles;
-    public Transform tempProjectileSpawnPos;
-
-    public LayerMask groundDetect;
-    public GameObject bossHealthbar;
+    [SerializeField]
+    Transform projectileSpawnPos, tempProjectileSpawnPos;
+    [SerializeField]
+    GameObject fireProjectile, fakeFireProjectile, waterProjectile, crystalProjectile;
+    [SerializeField]
+    GameObject[] homingProjectiles;
+    [SerializeField]
+    LayerMask groundDetect;
+    [SerializeField]
+    GameObject bossHealthbar;
 
 
     public override void Awake()
@@ -37,6 +37,7 @@ public class RangedBossScript : BaseEnemyClass
         {
             timer -= Time.deltaTime;
         }
+        //Pick a random attack and send it to the animator
         if (timer <= 0.0f)
         {
             int attack = Random.Range(0, 4);
@@ -59,7 +60,7 @@ public class RangedBossScript : BaseEnemyClass
             timer = Random.Range(2.0f, 4.0f);
         }
 
-
+        //For debug, remove later
         if(Input.GetKeyDown(KeyCode.O))
         {
             StartCoroutine(FireAttack(5));
@@ -96,7 +97,7 @@ public class RangedBossScript : BaseEnemyClass
         {
             GameObject fireProj = Instantiate(fakeFireProjectile, projectileSpawnPos.position, Quaternion.identity);
             fireProj.transform.forward = transform.up;
-            fireProj.GetComponent<RangedBossFakeFireProjectileScript>().damage = damageAmount * damageMultiplier;
+            fireProj.GetComponent<RangedBossFakeFireProjectileScript>().SetDamage(damageAmount * damageMultiplier);
             i++;
             yield return new WaitForSeconds(0.2f);
         }
@@ -110,8 +111,7 @@ public class RangedBossScript : BaseEnemyClass
         while (i < toSpawn)
         {
             GameObject waterProj = Instantiate(waterProjectile, tempProjectileSpawnPos.position, Quaternion.identity);
-            waterProj.GetComponent<RangedBossWaterProjectileScript>().damage = damageAmount * damageMultiplier;
-            waterProj.GetComponent<RangedBossWaterProjectileScript>().speed = 15;
+            waterProj.GetComponent<RangedBossWaterProjectileScript>().SetVars(15, damageAmount * damageMultiplier);
             waterProj.transform.eulerAngles = new Vector3(0, angle * i, 0);
             Physics.IgnoreCollision(this.GetComponent<Collider>(), waterProj.GetComponent<Collider>());
             i++;
@@ -122,8 +122,7 @@ public class RangedBossScript : BaseEnemyClass
     public void CrystalAttack()
     {
         GameObject crystalProj = Instantiate(crystalProjectile, projectileSpawnPos.position, Quaternion.identity);
-        crystalProj.GetComponent<RangedBossCrystalProjectileScript>().smallDamage = damageAmount * damageMultiplier;
-        crystalProj.GetComponent<RangedBossCrystalProjectileScript>().bigDamage = damageAmount * 2 * damageMultiplier;
+        crystalProj.GetComponent<RangedBossCrystalProjectileScript>().SetVars(0, damageAmount * damageMultiplier);
 
     }
     //Starts the homing attack, so it can be called by the animator

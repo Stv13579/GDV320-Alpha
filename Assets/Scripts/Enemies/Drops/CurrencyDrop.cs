@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CurrencyDrop : BaseDropScript
+public class CurrencyDrop : BaseDropScript //Sebastian
 {
 
-    public static float currencyAmount = 1;
+    static float currencyAmount = 1;
     protected override void PickupEffect()
     {
         base.PickupEffect();
         player.gameObject.GetComponent<PlayerClass>().ChangeMoney(currencyAmount);
     }
+
+    public void SetCurrency(float currency)
+    {
+        currencyAmount = currency;
+    }
+
+
+
 
 }

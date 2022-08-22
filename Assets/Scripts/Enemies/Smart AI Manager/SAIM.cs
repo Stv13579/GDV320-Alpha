@@ -192,7 +192,7 @@ public class SAIM : MonoBehaviour
             BaseDropScript[] drops = GameObject.FindObjectsOfType<BaseDropScript>();
             foreach(BaseDropScript drop in drops)
             {
-                drop.roomEnd = true;
+                drop.SetRoomEnd(true);
             }
             
         }
@@ -548,7 +548,7 @@ public class SAIM : MonoBehaviour
             ChooseEnemy();
 
             GameObject spawnedEnemy = Instantiate(data.enemyTypes[Random.Range(0, data.enemyTypes.Count)], spawnPosition, Quaternion.identity);
-            spawnedEnemy.GetComponent<BaseEnemyClass>().spawner = this.gameObject;
+            spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
             spawnedEnemies.Add(spawnedEnemy.GetComponent<BaseEnemyClass>());
             spawnAmount++;
         }

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class BossSlimeEnemy : WaterSlimeEnemy
 {
-    public enum Type
+    enum Type
     {
         normal,
         fire,
         crystal
     }
-    public Type currentType = Type.normal;
+    Type currentType = Type.normal;
 
     //Properties for the material editig
 
@@ -64,7 +64,8 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     float trailOffset = 0.01f;
     [SerializeField]
     private Vector3 fireTrailScale;
-    public GameObject enemyTrail;
+    [SerializeField]
+    GameObject enemyTrail;
 
     /// <summary>
     /// Normal Type Properties
@@ -91,7 +92,8 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     /// <summary>
     /// Fire Trail Stuff
     /// </summary>
-    public DecalRendererManager decalManager;
+    [SerializeField]
+    DecalRendererManager decalManager;
     float spawnTimer;
 
     /// <summary>
@@ -99,8 +101,8 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     /// </summary>
     [SerializeField]
     GameObject crystalHit, crystalDeath, fireHit, fireDeath, normalHit, normalDeath;
-
-    public GameObject healthBar;
+    [SerializeField]
+    GameObject healthBar;
     [HideInInspector]
     protected BossHealthbarScript bossHealthBar;
     bool split = false;
@@ -250,7 +252,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         }
     }
 
-    //Attacks
+    //Jump in the air, then slam down on the player
     private void NormalAttack()
     {
         if(!startAttack)
@@ -309,7 +311,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
 
         currentAttackTime = timeBetweenAttacks;
     }
-
+    //Charge the player, leaving fire behind it
     private void FireAttack()
     {
         if (currentChargeDuration > 0)
@@ -328,7 +330,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     }
 
 
-    //Change mats
+    //Change slime type to crystal
     private void SwitchToCrystal()
     {
 
@@ -339,6 +341,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         hitSpawn = crystalHit;
         deathSpawn = crystalDeath;
     }
+    //Change slime type to fire
 
     private void SwitchToFire()
     {
@@ -350,6 +353,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         hitSpawn = fireHit;
         deathSpawn = fireDeath;
     }
+    //Change slime type to water
 
     private void SwitchToNormal()
     {
@@ -361,7 +365,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         hitSpawn = normalHit;
         deathSpawn = normalDeath;
     }
-
+    //Update the maerials to match the slimes current type
     private void UpdateMaterials()
     {
         if(currentMatLerp < matLerpMax)
@@ -458,7 +462,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
 
         
     }
-
+    //If the slime gets to hald health, spit into two new slimes
     public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
     {
         base.TakeDamage(damageToTake, attackTypes, 2);
@@ -473,7 +477,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         //GetComponent<Rigidbody>().AddForce( -(player.transform.position - transform.position).normalized * pushForce);
         GetComponent<Rigidbody>().AddForce((player.transform.position - transform.position).normalized.x * pushForce, 5 * pushForce, (player.transform.position - transform.position).normalized.z * pushForce);
     }
-
+    //Spawns two smaller and weaker slimes and kills the original
     protected override void Split(GameObject temp)
     {
         if (generation < 3)
@@ -488,6 +492,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
                 newSlime.generation = generation + 1;
                 bossHealthBar.enemies.Add(newSlime);
                 newSlime.bossHealthBar = bossHealthBar;
+                newSlime.GetMoveMultis().Clear();
             }
             bossHealthBar.enemies.Remove(this);
             split = true;

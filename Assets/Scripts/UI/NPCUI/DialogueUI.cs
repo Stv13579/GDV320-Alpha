@@ -44,6 +44,7 @@ public class DialogueUI : NPCUI
         {
             dialogueBox.GetComponentInChildren<TextMeshProUGUI>().text = dialogueLines.lines[place];
             dialogueLines.OnSpeakAction(place);
+            
         }
     }
 

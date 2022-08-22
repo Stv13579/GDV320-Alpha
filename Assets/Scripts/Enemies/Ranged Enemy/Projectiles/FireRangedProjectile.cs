@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireRangedProjectile : BaseRangedProjectileScript
+public class FireRangedProjectile : BaseRangedProjectileScript //Sebastian
 {
-    public float fireDuration;
+    [SerializeField]
+    float fireDuration;
+    //Deals damage, sets the player on fire
     protected override void HitEffect(Collider other)
     {
         player.GetComponent<PlayerClass>().ChangeHealth(-damage);

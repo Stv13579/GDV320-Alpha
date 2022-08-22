@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterRangedProjectile : BaseRangedProjectileScript
+public class WaterRangedProjectile : BaseRangedProjectileScript //Sebastian
 {
+    //Deals damage, slows the player down temporarily
     protected override void HitEffect(Collider other)
     {
         player.GetComponent<PlayerClass>().ChangeHealth(-damage);

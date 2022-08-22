@@ -12,12 +12,13 @@ public class WaterSlimeEnemy : BaseEnemyClass
     [SerializeField]
     protected float pushForce;
 
-    public LayerMask viewToPlayer;
+    [SerializeField]
+    LayerMask viewToPlayer;
 
-    public LayerMask nodeMask;
+    [SerializeField]
+    LayerMask nodeMask;
 
-    [HideInInspector]
-    public int generation = 0;
+    protected int generation = 0;
 
     protected float jumpTimer = 0.0f;
 
@@ -38,41 +39,10 @@ public class WaterSlimeEnemy : BaseEnemyClass
         base.Attacking();
         playerClass.ChangeHealth(-damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti), transform.position, pushForce);
     }
-
+    //Moves towards the player if the slime can see them, othewise follow the flowfield to them
     public override void Movement(Vector3 positionToMoveTo)
     {
         base.Movement(moveDirection);
-
-        //RaycastHit hit;
-
-        //Debug.DrawRay(transform.position + (Vector3.up * 10), Vector3.up /*player.transform.position - transform.position*/, Color.blue);
-        //if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, Mathf.Infinity, viewToPlayer))
-        //{
-        //    if (hit.collider.gameObject.tag == "Player")
-        //    {
-        //        Vector3 moveVec = (player.transform.position - transform.position).normalized * moveSpeed * moveSpeedMulti * Time.deltaTime;
-        //        moveVec.y = 0;
-        //        moveVec.y -= 1 * Time.deltaTime;
-        //        transform.position += moveVec;
-        //    }
-        //    else
-        //    {
-        //        Vector3 moveVec = (moveDirection - transform.position).normalized * moveSpeed * moveSpeedMulti * Time.deltaTime;
-        //        moveVec.y = 0;
-        //        moveVec.y -= 1 * Time.deltaTime;
-        //        transform.position += moveVec;
-        //    }
-
-
-        //}
-        //else
-        //{
-        //    Vector3 moveVec = (moveDirection - transform.position).normalized * moveSpeed * moveSpeedMulti * Time.deltaTime;
-        //    moveVec.y = 0;
-        //    moveVec.y -= 1 * Time.deltaTime;
-        //    transform.position += moveVec;
-        //}
-
 
         jumpTimer -= Time.deltaTime;
         if(jumpTimer <= 0)
@@ -123,7 +93,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
         }
         
     }
-
+    //Unused
     public override void Movement(Vector3 positionToMoveTo, float speed)
     {
         base.Movement(moveDirection);
@@ -234,7 +204,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
             damageTicker = 1.0f;
         }
     }
-
+    //When the slime dies, spawn two new smaller weaker ones
     protected virtual void Split(GameObject temp)
     {
         if(generation < 2)
@@ -249,6 +219,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
                 newSlime.generation = generation + 1;
                 newSlime.spawner = spawner;
                 spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime);
+                newSlime.GetMoveMultis().Clear();
             }
         }
 

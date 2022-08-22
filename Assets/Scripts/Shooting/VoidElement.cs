@@ -14,7 +14,6 @@ public class VoidElement : BaseElementClass
     [SerializeField]
     private GameObject Indicator;
     private bool isHolding;
-
     //[SerializeField]
     //private Material voidMaterial;
 
@@ -76,7 +75,6 @@ public class VoidElement : BaseElementClass
                 Indicator.transform.position = this.transform.position + Camera.main.transform.forward * trueDashDistance;
             }
             targetPos = Indicator.transform.position;
-
         }
     }
 
@@ -103,7 +101,6 @@ public class VoidElement : BaseElementClass
         isHolding = true;
         Instantiate(activatedVFX, shootingScript.GetRightOrbPos());
     }
-
     protected override bool PayCosts(float modifier = 1)
     {
         //Override of paycosts so that mana is only subtracted at then end, in case the cast is cancelled
@@ -153,12 +150,11 @@ public class VoidElement : BaseElementClass
         {
             Destroy(shootingScript.GetRightOrbPos().GetChild(1).gameObject);
         }
+        StopCoroutine(Dash());
     }
     public override void Upgrade()
     {
         base.Upgrade();
-
-        useDelay *= 0.5f;
     }
 
 }

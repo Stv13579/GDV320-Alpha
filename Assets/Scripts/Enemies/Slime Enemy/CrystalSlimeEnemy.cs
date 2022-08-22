@@ -24,7 +24,7 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
     {
         base.Attacking();
     }
-    // seperate function as they have their own unique attack
+    // Fire a circle of crystals at the player
     public void CrystalSlimeAttack()
     {
         if (shootTimer >= shootTimerLength)
@@ -50,6 +50,7 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
             shootTimer = 0.0f;
         }
     }
+    //Target a position slightly away from the player so it can shoot the player from a distance
     public override void Movement(Vector3 positionToMoveTo)
     {
         posOffset = (this.transform.position - player.transform.position).normalized * 10;
@@ -74,7 +75,7 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
     {
         base.OnTriggerStay(other);
     }
-
+    //When the slime dies, spawn two new smaller weaker ones
     protected override void Split(GameObject temp)
     {
         if (generation < 2)
@@ -90,6 +91,8 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
                 newSlime.spawner = spawner;
                 spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime);
                 newSlime.enemyProjectileScale = enemyProjectileScale / 2;
+                newSlime.GetMoveMultis().Clear();
+
             }
         }
 

@@ -11,6 +11,7 @@ public class LaserBeamElement : BaseElementClass
     private PlayerMovement playerMovement;
 
     private bool usingLaser;
+   
     protected override void Start()
     {
         base.Start();
@@ -23,9 +24,7 @@ public class LaserBeamElement : BaseElementClass
         // same check as the energy shield need to check if player has interupted the laser beam
         if(usingLaser)
         {
-            if (!PayCosts(1 * Time.deltaTime) || Input.GetKeyDown(KeyCode.E) ||
-                !Input.GetKey(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Q) ||
-                Input.GetKeyDown(KeyCode.F))
+            if (!PayCosts(manaCost * Time.deltaTime))
             {
                 DeactivateLaser();
             }
@@ -46,6 +45,7 @@ public class LaserBeamElement : BaseElementClass
     {
         base.ElementEffect();
         usingLaser = true;
+        laserBeam.transform.GetChild(0).localScale = new Vector3(0, 1, 0);
         laserBeam.SetActive(true);
         laserBeam.GetComponentInChildren<LaserBeam>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), attackTypes);
         playerMovement.movementMulti = Multiplier.AddMultiplier(playerMovement.movementMultipliers, new Multiplier(0.25f, "Laser"));
