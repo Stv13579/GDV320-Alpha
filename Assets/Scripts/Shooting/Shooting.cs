@@ -84,8 +84,6 @@ public class Shooting : MonoBehaviour
         {
             Application.Quit();
         }
-        StopComboShooting();
-        StopNonComboShooting();
         SwitchingElements();
         if (ableToShoot)
         {
@@ -98,6 +96,8 @@ public class Shooting : MonoBehaviour
                 ComboShooting();
             }
         }
+        StopComboShooting();
+        StopNonComboShooting();
     }
     void SwitchingElements()
     {

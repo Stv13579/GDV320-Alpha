@@ -42,11 +42,11 @@ public class CrystalElement : BaseElementClass
                 newCrystalPro.GetComponent<CrystalProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.crystalDamageMultiplier), damageCurve, lifeTimer, attackTypes, damageLimit);
             }
         }
-        RaycastHit hit;
+        //RaycastHit hit;
         //Physics.Raycast(this.gameObject.transform.position, Camera.main.transform.forward, out hit, 100, shootingIgnore);
         //if (hit.collider)
-        //{
-        //    newFireball.transform.LookAt(hit.point);
+        //    {
+        //    crystalProjectile.transform.LookAt(hit.point);
         //}
     }
 

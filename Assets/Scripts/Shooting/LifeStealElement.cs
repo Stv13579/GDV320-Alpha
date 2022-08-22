@@ -79,9 +79,9 @@ public class LifeStealElement : BaseElementClass
             if (isTargeting == true && enemy != null)
             {
                 //LifeStealFullScreenEffect(0.1f);
-                playerClass.ChangeMana(-10 * Time.deltaTime, manaTypes);
+                playerClass.ChangeMana(-manaCost * Time.deltaTime, manaTypes);
                 lifeSteal.SetActive(true);
-                enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier * elementData.waterDamageMultiplier), attackTypes);
+                enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.waterDamageMultiplier), attackTypes);
                 playerClass.ChangeHealth(healValue);
             }
         }

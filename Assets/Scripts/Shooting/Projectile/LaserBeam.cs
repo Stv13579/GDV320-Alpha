@@ -83,7 +83,7 @@ public class LaserBeam : MonoBehaviour
     public void SetVars(float dmg, List<BaseEnemyClass.Types> types)
     {
         damage = dmg;
-        attackTypes = types;
+        attackTypes = types;      
     }
     private void OnTriggerStay(Collider other)
     {
