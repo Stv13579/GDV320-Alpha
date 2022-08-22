@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript
+public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript //Sebastian
 {
     bool moving = true;
-    float timer = 0.0f;
-    [HideInInspector]
-    public float smallDamage;
-    [HideInInspector]
-    public float bigDamage;
-    public GameObject crystalSpawn;
+    [SerializeField]
+    GameObject crystalSpawn;
     private EnergyElement energyScript;
     // Start is called before the first frame update
     protected override void Start()
@@ -37,12 +33,12 @@ public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript
             }
         }
     }
-
+    //If it hits the player, do lots of damage and explode, otherwise sart waiting
     protected override void HitEffect(Collider other)
     {
        if(moving && other.GetComponent<PlayerClass>())
         {
-            other.GetComponent<PlayerClass>().ChangeHealth(-bigDamage);
+            other.GetComponent<PlayerClass>().ChangeHealth(-damage * 5);
             Explode();
         }
         else if (other.gameObject.layer == 10)
@@ -60,24 +56,8 @@ public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript
     {
         HitEffect(other);
     }
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if(other.gameObject.tag == "Player" && moving && energyScript.GetUseShield() == false)
-    //    {
-    //        other.GetComponent<PlayerClass>().ChangeHealth(-bigDamage);
-    //        Explode();
-    //    }
-    //    else if (other.gameObject.layer == 10)
-    //    {
-    //        Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), other);
-    //        StartCoroutine(Wait());
-    //    }
-    //    else if(other.gameObject.tag == "Player" && moving && energyScript.GetUseShield() == true)
-    //    {
-    //        Explode();
-    //    }
-    //}
 
+    //Embed in he ground slightly before stopping
     IEnumerator Wait()
     {
         while(moving)
@@ -87,7 +67,7 @@ public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript
             this.gameObject.GetComponent<Collider>().isTrigger = false;
         }
     }
-
+    //Laucnh a bunch of small crystals out from the big crystal
     void Explode()
     {
         for(int i = -4; i < 5; i++)
@@ -98,8 +78,7 @@ public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript
                 crystalProj.transform.position += this.transform.up * i / 2.0f;
                 crystalProj.transform.LookAt(this.transform);
                 crystalProj.transform.up = -crystalProj.transform.forward;
-                crystalProj.GetComponent<RangedBossSmallCrystalProjectile>().damage = smallDamage;
-                crystalProj.GetComponent<RangedBossSmallCrystalProjectile>().speed = 20;
+                crystalProj.GetComponent<RangedBossSmallCrystalProjectile>().SetVars(20, damage);
 
             }
         }

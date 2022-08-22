@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseFlyingEnemyScript : BaseEnemyClass
+public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
 {
     protected GameObject target;
     protected Vector3 targetPos;
     protected float timer = 0.0f;
-    public float effectTimer;
-    public float effectTimerMulti;
+    [SerializeField]
+    float effectTimer;
+    float effectTimerMulti = 1.0f;
     protected bool effect = false;
     bool moving = false;
-
-    public LayerMask moveDetect;
+    [SerializeField]
+    protected LayerMask moveDetect;
 
     float moveTimer = 0.0f;
 
@@ -66,7 +67,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
 
     }
 
-
+    //Makes sure the target position is valid, if so move towards it, if not find a new target
     void Movement()
     {
         //Check if the path to its destination is clear, if not pick a new destination
@@ -140,5 +141,15 @@ public class BaseFlyingEnemyScript : BaseEnemyClass
         timer = 0.0f;
         enemyAnims.ResetTrigger("Effect");
 
+    }
+
+    public float GetEffectMulti()
+    {
+        return effectTimerMulti;
+    }
+
+    public void SetEffectMulti(float multi)
+    {
+        effectTimerMulti = multi;
     }
 }

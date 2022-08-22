@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrystalFlyingEnemy : BaseFlyingEnemyScript
+public class CrystalFlyingEnemy : BaseFlyingEnemyScript //Sebastian
 {
-    //Overrid of find target to pick an area around the player instead of an enemy
+    //Override of find target to pick an area around the player instead of an enemy
     protected override void FindTarget()
     {
         target = player;
@@ -44,7 +44,7 @@ public class CrystalFlyingEnemy : BaseFlyingEnemyScript
             Death();
         }
     }
-
+    //Lowers the playes defense temporarily
     protected override void Effect()
     {
         base.Effect();

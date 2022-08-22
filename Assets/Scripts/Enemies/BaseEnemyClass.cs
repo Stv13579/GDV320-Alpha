@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//base class that all enemies derive from.
 public class BaseEnemyClass : MonoBehaviour
 {
-    public float maxHealth;
-    public float damageAmount;
-    public float damageMultiplier = 1.0f;
-    public float moveSpeed;
-    public float moveSpeedMulti = 1.0f;
+    [SerializeField]
+    protected float maxHealth;
+    [SerializeField]
+    protected float damageAmount;
+    [SerializeField]
+    protected float damageMultiplier = 1.0f;
+    [SerializeField]
+    protected float moveSpeed;
+    [SerializeField]
+    protected float moveSpeedMulti = 1.0f;
     
 
     #region
@@ -16,16 +22,17 @@ public class BaseEnemyClass : MonoBehaviour
     protected ProphecyManager prophecyManager;
 
     #endregion
-    public List<Multiplier> movementMultipliers = new List<Multiplier>();
-    public List<Multiplier> damageMultipliers = new List<Multiplier>();
+    [SerializeField]
+    protected List<Multiplier> movementMultipliers = new List<Multiplier>(), damageMultipliers = new List<Multiplier>();
 
     //The amount of flat damage any instance of incoming damage is reduced by
-    public float damageThreshold;
+    [SerializeField]
+    float damageThreshold;
 
     //The amount of percentage damage any instance of incoming damage is reduced by
-    public float damageResistance = 1;
+    [SerializeField]
+    float damageResistance = 1;
 
-    //base class that all enemies derive from.
 
     protected float currentHealth;
     bool isDead = false;
@@ -38,8 +45,7 @@ public class BaseEnemyClass : MonoBehaviour
 
     float startY;
 
-    [HideInInspector]
-    public GameObject spawner;
+    protected GameObject spawner;
 
     /// <summary>
     /// Element types for weaknesses and resists
@@ -272,5 +278,40 @@ public class BaseEnemyClass : MonoBehaviour
     public float GetHealth()
     {
         return currentHealth;
+    }
+
+    public float GetDamageMulti()
+    {
+        return damageMultiplier;
+    }
+
+    public List<Multiplier> GetDamageMultis()
+    {
+        return damageMultipliers;
+    }
+
+    public void SetDamamgeMulti(float damMulti)
+    {
+        damageMultiplier = damMulti;
+    }
+
+    public float GetMoveMulti()
+    {
+        return moveSpeedMulti;
+    }
+
+    public void SetMoveMulti(float moveMulti)
+    {
+        moveSpeedMulti = moveMulti;
+    }
+
+    public List<Multiplier> GetMoveMultis()
+    {
+        return movementMultipliers;
+    }
+
+    public void SetSpawner(GameObject spawn)
+    {
+        spawner = spawn;
     }
 }

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireFlyingEnemyScript : BaseFlyingEnemyScript
+public class FireFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
 {
+    //Find all the enemies around the target enemy, buff their attack, and find a new target
     protected override void Effect()
     {
-        //Find all the enemies around the target enemy, buff their attack, and find a new target
         base.Effect();
         Debug.Log("Effect");
         Collider[] objects = Physics.OverlapSphere(target.transform.position, 5.0f);

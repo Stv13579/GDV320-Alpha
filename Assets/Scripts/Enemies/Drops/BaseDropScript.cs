@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseDropScript : MonoBehaviour
+public class BaseDropScript : MonoBehaviour //Sebastian
 {
     Rigidbody rb;
     protected Transform player;
-    public List<PlayerClass.ManaName> manaTypes;
+
     protected AudioManager audioManager;
     bool moving;
-    public bool roomEnd = false;
+    bool roomEnd = false;
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
@@ -55,10 +55,15 @@ public class BaseDropScript : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
+    //Does whatever the drop should do 
     protected virtual void PickupEffect()
     {
         audioManager.Stop("Currency Pickup");
         audioManager.Play("Currency Pickup");
+    }
+
+    public void SetRoomEnd(bool end)
+    {
+        roomEnd = end;
     }
 }

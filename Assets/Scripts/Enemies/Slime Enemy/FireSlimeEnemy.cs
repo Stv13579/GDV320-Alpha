@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FireSlimeEnemy : WaterSlimeEnemy
 {
-    public GameObject enemyTrail;
+    [SerializeField]
+    GameObject enemyTrail;
     [SerializeField]
     private LayerMask trailLayerMask;
     [SerializeField]
@@ -29,7 +30,7 @@ public class FireSlimeEnemy : WaterSlimeEnemy
     {
         base.Attacking();
     }
-
+    //Spawn a patch of fire beneath the slime
     public void FireSlimeAttack()
     {
         if (spawnTimer <= 0.0f)
@@ -45,6 +46,7 @@ public class FireSlimeEnemy : WaterSlimeEnemy
             spawnTimer = spawnTimerLength;
         }
     }
+    //Move around the player to try and trap them in fire
     public override void Movement(Vector3 positionToMoveTo)
     {
         float off = Random.Range(0.0f, 6.0f);
@@ -74,6 +76,7 @@ public class FireSlimeEnemy : WaterSlimeEnemy
     {
         base.OnTriggerStay(other);
     }
+    //When the slime dies, spawn two new smaller weaker ones
 
     protected override void Split(GameObject temp)
     {
