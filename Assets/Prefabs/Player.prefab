@@ -2165,7 +2165,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 90
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -3131,7 +3131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa7853506573a143b3c9c6f789e0444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 5
+  gravity: 4.7
   jumpSpeed: 1.3
   acceleration: 10
   frictionCurve:
@@ -3357,7 +3357,6 @@ MonoBehaviour:
   manaCost: 1
   animationToPlay: FireProj
   animationToPlayAlt: FireProjAlt
-  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Fire
   uiSprite: {fileID: -1128774787792666313, guid: d39b8bc076de18747869f25ce241874b,
@@ -3378,6 +3377,8 @@ MonoBehaviour:
   switchAnimationName: FireTransition
   leftIndex: 0
   rightIndex: 0
+  startCoolDown: 0
+  cooldownTimer: 0
   currentElementType: 1
   fireBall: {fileID: 1674563964008408851, guid: 53c9a56f9a190e74680cf970480c8f2b,
     type: 3}
@@ -3429,7 +3430,6 @@ MonoBehaviour:
   manaCost: 1
   animationToPlay: CrystalProj
   animationToPlayAlt: CrystalProjAlt
-  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Crystal
   uiSprite: {fileID: 4541470821485710819, guid: d39b8bc076de18747869f25ce241874b,
@@ -3450,6 +3450,8 @@ MonoBehaviour:
   switchAnimationName: CrystalTransition
   leftIndex: 1
   rightIndex: 0
+  startCoolDown: 0
+  cooldownTimer: 0
   currentElementType: 2
   crystalProjectile: {fileID: 767471284418207900, guid: 6d74d8f7a4c049649922bd1346f7f9c6,
     type: 3}
@@ -3498,7 +3500,6 @@ MonoBehaviour:
   manaCost: 1
   animationToPlay: WaterProj
   animationToPlayAlt: WaterProjAlt
-  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Water
   uiSprite: {fileID: 21300000, guid: 55980c051e129aa4685e936a8e1dad47, type: 3}
@@ -3519,6 +3520,8 @@ MonoBehaviour:
   switchAnimationName: WaterTransition
   leftIndex: 2
   rightIndex: 0
+  startCoolDown: 0
+  cooldownTimer: 0
   currentElementType: 3
   waterProj: {fileID: 3855537623486122723, guid: 0516d3f053b12c74892040ccd270702d,
     type: 3}
@@ -3543,7 +3546,6 @@ MonoBehaviour:
   manaCost: 5
   animationToPlay: NecroticCast
   animationToPlayAlt: 
-  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Soul
   uiSprite: {fileID: -7654870270679289077, guid: d39b8bc076de18747869f25ce241874b,
@@ -3564,6 +3566,8 @@ MonoBehaviour:
   switchAnimationName: NecroticTransition
   leftIndex: 0
   rightIndex: 0
+  startCoolDown: 0
+  cooldownTimer: 1
   currentElementType: 101
   necroticVFX: {fileID: 5088495024868706662, guid: d85e68bf4b4f44c419f67b8ebb34bfba,
     type: 3}
@@ -3593,7 +3597,6 @@ MonoBehaviour:
   manaCost: 1
   animationToPlay: EnergyCast
   animationToPlayAlt: 
-  useDelay: 2
   playerHand: {fileID: 2017859571}
   elementName: Energy
   uiSprite: {fileID: 6129296847577865886, guid: d39b8bc076de18747869f25ce241874b,
@@ -3614,6 +3617,8 @@ MonoBehaviour:
   switchAnimationName: EnergyTransition
   leftIndex: 0
   rightIndex: 1
+  startCoolDown: 0
+  cooldownTimer: 1
   currentElementType: 102
   containedEnemies: []
   energyShield: {fileID: 989988567375556168}
@@ -3639,7 +3644,6 @@ MonoBehaviour:
   manaCost: 5
   animationToPlay: VoidCast
   animationToPlayAlt: 
-  useDelay: 2
   playerHand: {fileID: 2017859571}
   elementName: Void
   uiSprite: {fileID: 21300000, guid: ae6d38d4504c6614db48e4a2c1f29bc4, type: 3}
@@ -3659,6 +3663,8 @@ MonoBehaviour:
   switchAnimationName: VoidTransition
   leftIndex: 0
   rightIndex: 2
+  startCoolDown: 0
+  cooldownTimer: 1.5
   currentElementType: 103
   dashDistance: 10
   dashTime: 0.5
@@ -3678,10 +3684,9 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 7085110900658056965, guid: d8b6c40de411ad8478e6bba3774af010, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 1
+  manaCost: 7
   animationToPlay: LaserBeamCast
   animationToPlayAlt: 
-  useDelay: 2
   playerHand: {fileID: 2017859571}
   elementName: LaserBeam
   uiSprite: {fileID: -5782891034314955071, guid: d39b8bc076de18747869f25ce241874b,
@@ -3702,6 +3707,8 @@ MonoBehaviour:
   switchAnimationName: LaserTransition
   leftIndex: 0
   rightIndex: 1
+  startCoolDown: 0
+  cooldownTimer: 0
   currentElementType: 201
   laserBeam: {fileID: 3981687641008780923}
   playerMovement: {fileID: 5625023911835613076}
@@ -3723,7 +3730,6 @@ MonoBehaviour:
   manaCost: 10
   animationToPlay: ShardCannonCast
   animationToPlayAlt: ShardCannonCastAlt
-  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Shard Cannon
   uiSprite: {fileID: -1561463394628770788, guid: d39b8bc076de18747869f25ce241874b,
@@ -3744,6 +3750,8 @@ MonoBehaviour:
   switchAnimationName: ShardCannonTransition
   leftIndex: 1
   rightIndex: 1
+  startCoolDown: 0
+  cooldownTimer: 0
   currentElementType: 202
   shardProj: {fileID: 2115769081119537338, guid: 316042c01d1629e499fece67a8fd0bed,
     type: 3}
@@ -3766,7 +3774,6 @@ MonoBehaviour:
   manaCost: 5
   animationToPlay: AcidCloudCast
   animationToPlayAlt: AcidCloudCastAlt
-  useDelay: 2
   playerHand: {fileID: 2017859571}
   elementName: Acid Cloud
   uiSprite: {fileID: -424643889610224408, guid: d39b8bc076de18747869f25ce241874b,
@@ -3781,12 +3788,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   shootingSoundFX: Acid Cloud (Long)
-  damage: 0.1
+  damage: 0.5
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: AcidCloudTransition
   leftIndex: 0
   rightIndex: 0
+  startCoolDown: 0
+  cooldownTimer: 0
   currentElementType: 203
   cloudProj: {fileID: 8417138957682568096, guid: 10b41ea33a4534e4bb8656dcf5ea9cae,
     type: 3}
@@ -3810,7 +3819,6 @@ MonoBehaviour:
   manaCost: 5
   animationToPlay: LandMineCast
   animationToPlayAlt: LandMineCastAlt
-  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Land Mine
   uiSprite: {fileID: 0}
@@ -3830,6 +3838,8 @@ MonoBehaviour:
   switchAnimationName: LandMineTransition
   leftIndex: 0
   rightIndex: 2
+  startCoolDown: 0
+  cooldownTimer: 0
   currentElementType: 204
   landMineProjectile: {fileID: 5230698329136778979, guid: d3d1480b2678d1f4d87879615a4cc650,
     type: 3}
@@ -3858,7 +3868,6 @@ MonoBehaviour:
   manaCost: 20
   animationToPlay: CurseCast
   animationToPlayAlt: 
-  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Curse
   uiSprite: {fileID: 1937476291286521762, guid: d39b8bc076de18747869f25ce241874b,
@@ -3879,6 +3888,8 @@ MonoBehaviour:
   switchAnimationName: CurseTransition
   leftIndex: 1
   rightIndex: 0
+  startCoolDown: 0
+  cooldownTimer: 0
   currentElementType: 205
   curseTargets:
     serializedVersion: 2
@@ -3909,7 +3920,6 @@ MonoBehaviour:
   manaCost: 5
   animationToPlay: IceSlashCast
   animationToPlayAlt: IceSlashCastAlt
-  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Ice Slash
   uiSprite: {fileID: 0}
@@ -3929,6 +3939,8 @@ MonoBehaviour:
   switchAnimationName: IceSlashTransition
   leftIndex: 2
   rightIndex: 1
+  startCoolDown: 0
+  cooldownTimer: 0
   currentElementType: 206
   iceSlash: {fileID: 5956346581750816906, guid: dce9c0dcd94895743b712641b0e995fa,
     type: 3}
@@ -3953,7 +3965,6 @@ MonoBehaviour:
   manaCost: 1
   animationToPlay: LifeStealCast
   animationToPlayAlt: 
-  useDelay: 2
   playerHand: {fileID: 2017859571}
   elementName: Life Steal
   uiSprite: {fileID: 0}
@@ -3967,17 +3978,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   shootingSoundFX: Life Steal Initial
-  damage: 0.1
+  damage: 1
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: LifeStealTransition
   leftIndex: 2
   rightIndex: 0
+  startCoolDown: 0
+  cooldownTimer: 0
   currentElementType: 207
   lifeSteal: {fileID: 2112612720}
   sphereRadius: 0.5
   sphereRange: 10
-  healValue: 0.1
+  healValue: 1
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -4002,7 +4015,6 @@ MonoBehaviour:
   manaCost: 5
   animationToPlay: CrystalGrenadeCast
   animationToPlayAlt: CrystalGrenadeCastAlt
-  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Crystal Grenade
   uiSprite: {fileID: 0}
@@ -4022,6 +4034,8 @@ MonoBehaviour:
   switchAnimationName: CrystalGrenadeTransition
   leftIndex: 1
   rightIndex: 2
+  startCoolDown: 0
+  cooldownTimer: 0
   currentElementType: 208
   CrystalGrenade: {fileID: 4280188033218165808, guid: cfd01d05905cd4a4fa7939edf2bca9a1,
     type: 3}
@@ -4048,7 +4062,6 @@ MonoBehaviour:
   manaCost: 5
   animationToPlay: StasisTrapCast
   animationToPlayAlt: StasisTrapCastAlt
-  useDelay: 1
   playerHand: {fileID: 2017859571}
   elementName: Stasis Trap
   uiSprite: {fileID: 0}
@@ -4068,6 +4081,8 @@ MonoBehaviour:
   switchAnimationName: StasisTrapTransition
   leftIndex: 2
   rightIndex: 2
+  startCoolDown: 0
+  cooldownTimer: 0
   currentElementType: 209
   stasisTrap: {fileID: 4998267436451453374, guid: 448cca4ea4a48ce47ab498ed3a7a872c,
     type: 3}
@@ -5306,7 +5321,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 99ddbcbf9ae0bee46908442e78cd457e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 99ddbcbf9ae0bee46908442e78cd457e,
         type: 3}
@@ -5316,7 +5331,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 99ddbcbf9ae0bee46908442e78cd457e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.061
+      value: 0.014
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 99ddbcbf9ae0bee46908442e78cd457e,
         type: 3}
@@ -6413,12 +6428,12 @@ PrefabInstance:
     - target: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.856
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99965733
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
@@ -6428,7 +6443,7 @@ PrefabInstance:
     - target: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.026176924
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
@@ -6443,7 +6458,7 @@ PrefabInstance:
     - target: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
