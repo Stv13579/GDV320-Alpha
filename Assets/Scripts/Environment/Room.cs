@@ -12,7 +12,10 @@ public class Room : MonoBehaviour
     LevelGeneration levelGenerator;
     bool locked = false;
     protected GameObject roomTrigger;
+    public bool visited = false;
     
+
+
     private void Start()
     {
         levelGenerator = GameObject.Find("Level Generator").GetComponent<LevelGeneration>();
@@ -22,6 +25,15 @@ public class Room : MonoBehaviour
         this.GetComponent<TerrainCollider>().enabled = true;
 
     }
+
+    public void Update()
+    {
+        if(GetComponentInChildren<RoomTrigger>().triggered)
+        {
+            visited = true;
+        }
+    }
+
 
     //Closes off all the illegal/irrelevant exits and collates the remaining ones
     public void CloseDoors()
@@ -96,6 +108,7 @@ public class Room : MonoBehaviour
         }
 
         locked = true;
+        visited = true;
     }
 
     //Call to unlock all of the doors
