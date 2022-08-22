@@ -6,6 +6,9 @@ public class EnemyShield : BaseEnemyClass
 {
     [SerializeField]
     protected List<Types> restoration;
+    [SerializeField]
+    Collider[] attackCollider, defenseCollider;
+    bool attacking = false;
     public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
     {
         GameObject hitSpn = Instantiate(hitSpawn, transform.position, Quaternion.identity);
@@ -38,5 +41,43 @@ public class EnemyShield : BaseEnemyClass
         }
         currentHealth -= (damageToTake * multiplier) * damageResistance - damageThreshold;
         Debug.Log("Shield damage");
+    }
+
+    public void StartAttack()
+    {
+        foreach(Collider col in attackCollider)
+        {
+            col.enabled = true;
+        }
+        foreach (Collider col in defenseCollider)
+        {
+            col.enabled = false;
+        }
+        attacking = true;
+    }
+
+    public void EndAttack()
+    {
+        foreach (Collider col in attackCollider)
+        {
+            col.enabled = false;
+        }
+        foreach (Collider col in defenseCollider)
+        {
+            col.enabled = true;
+        }
+        attacking = false;
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(attacking)
+        {
+            if(other.gameObject.GetComponent<PlayerClass>())
+            {
+                other.gameObject.GetComponent<PlayerClass>().ChangeHealth(-damageAmount);
+            }
+        }
     }
 }

@@ -5,9 +5,14 @@ using UnityEngine;
 public class ShieldEnemyScript : BaseEnemyClass
 {
     Vector3 movement;
-    public float gravity;
+    [SerializeField]
+    float gravity;
     GameObject nearestNode;
     bool attacking = false;
+    [SerializeField]
+    GameObject shield;
+    [SerializeField]
+    float attackTime = 0.8f;
 
     public override void Awake()
     {
@@ -19,12 +24,12 @@ public class ShieldEnemyScript : BaseEnemyClass
     {
         if (!attacking)
         {
-            if(Vector3.Distance(this.transform.position, player.transform.position) < 2)
+            if(Vector3.Distance(this.transform.position, player.transform.position) < 5)
             {
-                enemyAnims.SetTrigger("Attacking");
-                attacking = true;
+                //enemyAnims.SetTrigger("Attacking");
+                Attack();
             }
-            if (Vector3.Distance(this.transform.position, player.transform.position) < 5)
+            if (Vector3.Distance(this.transform.position, player.transform.position) < 8)
             {
 
                 Movement(player.transform.position, moveSpeed * moveSpeedMulti);
@@ -52,12 +57,15 @@ public class ShieldEnemyScript : BaseEnemyClass
     public void Attack()
     {
         //Enable and disable necessary hitboxes
+        if(!attacking)
+        {
+            StartCoroutine(ShieldBash());
+        }
     }
 
     public void EndAttack()
     {
         //Enable and disable necessary hitboxes
-        attacking = false;
     }
 
     IEnumerator FindNode()
@@ -76,5 +84,30 @@ public class ShieldEnemyScript : BaseEnemyClass
             }
             yield return new WaitForSeconds(1);
         }
+    }
+
+    IEnumerator ShieldBash()
+    {
+        Vector3 startPos = shield.transform.localPosition;
+        Vector3 endPos = startPos + new Vector3(0, 0, 5);
+        float timer = 0.0f;
+        attacking = true;
+        shield.GetComponent<EnemyShield>().StartAttack();
+        while(timer < attackTime)
+        {
+            shield.transform.localPosition = Vector3.Lerp(startPos, endPos, timer / attackTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        while (timer > 0)
+        {
+            shield.transform.localPosition = Vector3.Lerp(startPos, endPos, timer / attackTime);
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        shield.GetComponent<EnemyShield>().EndAttack();
+
+        attacking = false;
+
     }
 }
