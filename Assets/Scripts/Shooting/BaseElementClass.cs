@@ -176,6 +176,8 @@ public class BaseElementClass : MonoBehaviour
     {
         audioManager.Stop(shootingSoundFX);
         audioManager.Play(shootingSoundFX);
+        // once player has clicked to shoot start the cool cool down timer
+        startCoolDown = true;
     }
 
     //deduct mana from the mana pool. If unable too, return false, otherwise true
@@ -209,8 +211,7 @@ public class BaseElementClass : MonoBehaviour
     //For unique behaviour when the mb is lifted while using an element
     public virtual void LiftEffect()
     {
-        // once the element has been lifted start the cool down for it
-        startCoolDown = true;
+
     }
 
     protected virtual void Update()
@@ -227,6 +228,7 @@ public class BaseElementClass : MonoBehaviour
                 // cooldown is off and player can shoot again
                 currentCoolDownTimer = cooldownTimer;
                 startCoolDown = false;
+                playerHand.SetTrigger("StopShooting");
             }
         }
     }

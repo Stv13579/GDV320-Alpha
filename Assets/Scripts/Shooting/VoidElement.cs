@@ -14,6 +14,7 @@ public class VoidElement : BaseElementClass
     [SerializeField]
     private GameObject Indicator;
     private bool isHolding;
+    private bool switchElement;
     //[SerializeField]
     //private Material voidMaterial;
 
@@ -83,7 +84,11 @@ public class VoidElement : BaseElementClass
         base.ElementEffect();
         //Subtract the mana cost
         playerClass.ChangeMana(-manaCost, manaTypes);
-        StartCoroutine(Dash());
+        if (shootingScript.catalystElements[shootingScript.GetRightElementIndex()] == this &&
+            shootingScript.GetInComboMode() == false)
+        {
+            StartCoroutine(Dash());
+        }
     }
 
     public override void ActivateVFX()
@@ -94,7 +99,7 @@ public class VoidElement : BaseElementClass
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);
-
+        switchElement = false;
         playerHand.SetTrigger(animationName);
         playerHand.ResetTrigger("VoidStopCast");
         Indicator.SetActive(true);
@@ -150,7 +155,6 @@ public class VoidElement : BaseElementClass
         {
             Destroy(shootingScript.GetRightOrbPos().GetChild(1).gameObject);
         }
-        StopCoroutine(Dash());
     }
     public override void Upgrade()
     {
