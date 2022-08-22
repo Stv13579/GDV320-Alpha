@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyShield : BaseEnemyClass
 {
+    [SerializeField]
     protected List<Types> restoration;
     public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
     {
@@ -36,6 +37,6 @@ public class EnemyShield : BaseEnemyClass
             }
         }
         currentHealth -= (damageToTake * multiplier) * damageResistance - damageThreshold;
-
+        Debug.Log("Shield damage");
     }
 }

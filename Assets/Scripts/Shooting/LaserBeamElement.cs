@@ -45,6 +45,7 @@ public class LaserBeamElement : BaseElementClass
     {
         base.ElementEffect();
         usingLaser = true;
+        laserBeam.transform.GetChild(0).localScale = new Vector3(0, 1, 0);
         laserBeam.SetActive(true);
         laserBeam.GetComponentInChildren<LaserBeam>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), attackTypes);
         playerMovement.movementMulti = Multiplier.AddMultiplier(playerMovement.movementMultipliers, new Multiplier(0.25f, "Laser"));

@@ -30,6 +30,7 @@ public class LaserBeam : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         isHittingObj = false;
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -70,6 +71,7 @@ public class LaserBeam : MonoBehaviour
             {
                 if(enemy)
                 {
+
                     enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
                 }
                 else
@@ -84,6 +86,7 @@ public class LaserBeam : MonoBehaviour
     {
         damage = dmg;
         attackTypes = types;
+        containedEnemies.Clear();
     }
     private void OnTriggerStay(Collider other)
     {
