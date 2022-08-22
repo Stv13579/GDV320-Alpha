@@ -57,6 +57,42 @@ public class NPC : MonoBehaviour
             }
         }
     }
+    
+
+    [Serializable]
+    public class Assignment : Dialogue
+    {
+        public Assignment(NPCData npcData) : base(npcData) { }
+
+        //Add the quest to the manager
+        public override void Action()
+        {
+            base.Action();
+            Quest q = (Quest)GameObject.Find("Quest Manager").GetComponent(heldData.quests[heldData.storyPosition]);
+            q.ActivateQuest();
+
+            heldData.onQuest = true;
+            heldData.questReady = false;
+        }
+    }
+
+    [Serializable]
+    public class HandIn : Dialogue
+    {
+        public HandIn(NPCData npcData) : base(npcData) { }
+
+        //Add the quest to the manager
+        public override void Action()
+        {
+            base.Action();
+            Quest q = (Quest)GameObject.Find("Quest Manager").GetComponent(heldData.quests[heldData.storyPosition]);
+            q.FinishQuest();
+            heldData.storyPosition++;
+
+            heldData.onQuest = false;
+            heldData.questComplete = false;
+        }
+    }
 
     //A Serialzed way to store all story dialogue
     [Serializable]
@@ -69,6 +105,12 @@ public class NPC : MonoBehaviour
     protected List<StoryDialogues> storyDialogues = new List<StoryDialogues>();
 
     protected List<Dialogue> possibleDialogues = new List<Dialogue>();
+
+    [SerializeField]
+    protected List<Assignment> giveQuest = new List<Assignment>();
+    [SerializeField]
+    protected List<HandIn> recieveHandIn = new List<HandIn>();
+
 
     [HideInInspector]
     public Dialogue currentDialogue;
@@ -95,6 +137,8 @@ public class NPC : MonoBehaviour
         //Possible dialogues include the random ones, the current story position, or a deterministic quest dialogue.
         int storyTime = UnityEngine.Random.Range(0, 2);
 
+
+        //Initialise seralized dialogues
         foreach(StoryDialogues diag in storyDialogues)
         {
             foreach(Dialogue dg in diag.dialogues)
@@ -103,18 +147,27 @@ public class NPC : MonoBehaviour
             }
         }
 
-        if(data && data.questReady)
+        foreach (Dialogue dg in giveQuest)
         {
-            //Give quest dialogue
-            currentDialogue = new Dialogue(data);
-            currentDialogue.lines.Add("Wow");
-
-            data.onQuest = true;
-
-            //Reset and 
-            data.questReady = false;
+            dg.SetHeldData(data);
         }
-        else if(storyTime > 0 && storyDialogues[data.storyPosition].dialogues.Count > 0)
+
+        foreach (Dialogue dg in recieveHandIn)
+        {
+            dg.SetHeldData(data);
+        }
+
+        if (data.questComplete)
+        {
+            ResolveQuest();
+            return;
+        }
+        else if(data && data.questReady)
+        {
+            GiveQuest();
+            return;
+        }
+        else if(storyTime > 0 && storyDialogues[data.storyPosition].dialogues.Count > 0 && !data.onQuest)
         {
             possibleDialogues.AddRange(storyDialogues[data.storyPosition].dialogues);
 
@@ -150,6 +203,23 @@ public class NPC : MonoBehaviour
             interactPositon = 2;
         }
     }
+
+    public virtual void GiveQuest()
+    {
+        //Give quest dialogue
+        currentDialogue = giveQuest[data.storyPosition];
+
+        
+    }
+
+    public virtual void ResolveQuest()
+    {
+        //Give quest dialogue
+        currentDialogue = recieveHandIn[data.storyPosition];
+
+        
+    }
+
 
     bool DiagPred(Dialogue diag)
     {

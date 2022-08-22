@@ -15,6 +15,14 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    public void StartLevelUpdate()
+    {
+        foreach (Quest q in activeQuests)
+        {
+            q.LevelStartQuestBehaviour();
+        }
+    }
+
     public void AddToQuests(Quest qToAdd)
     {
         activeQuests.Add(qToAdd);

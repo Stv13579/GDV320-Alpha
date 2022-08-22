@@ -18,6 +18,8 @@ public class LevelGeneration : MonoBehaviour
 
     List<GameObject> genericRooms = new List<GameObject>();
 
+    public List<GameObject> GetRooms() { return placedRooms; }
+
     List<Vector2> roomPositions = new List<Vector2>();
 
     [SerializeField]

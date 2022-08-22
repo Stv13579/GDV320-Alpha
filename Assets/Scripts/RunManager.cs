@@ -26,5 +26,6 @@ public class RunManager : MonoBehaviour
     public void StartNewLevel()
     {
         player.transform.position = new Vector3(60, 5, 60);
+        GameObject.Find("Quest Manager").GetComponent<QuestManager>().StartLevelUpdate();
     }
 }
