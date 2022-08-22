@@ -27,17 +27,11 @@ public class BaseElementClass : MonoBehaviour
     protected string animationToPlay;
     [SerializeField]
     protected string animationToPlayAlt;
-    //Cooldown/Firerate 
-    //The amount of time before the element can be used again (usually brief)
-    [SerializeField]
-    public float useDelay;
 
     //Animation trigger
     //The animator which the element calls animations on
     [SerializeField]
     protected Animator playerHand;
-
-    float currentUseDelay = 0;
 
     //Variables for UI purposes
     public string elementName;
@@ -89,6 +83,15 @@ public class BaseElementClass : MonoBehaviour
     protected int rightIndex;
 
     protected int randomAnimationToPlay;
+
+    [SerializeField]
+    protected bool startCoolDown;
+
+    //Cooldown/Firerate 
+    //The amount of time before the element can be used again (usually brief)
+    [SerializeField]
+    protected float cooldownTimer;
+    protected float currentCoolDownTimer;
     public enum ElementType
     {
         None = 0,
@@ -121,6 +124,7 @@ public class BaseElementClass : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         elementData = Resources.Load<ElementStats>("Element/ElementData");
         shootingScript = player.GetComponent<Shooting>();
+        currentCoolDownTimer = cooldownTimer;
     }
     protected virtual void StartAnims(string animationName, string animationNameAlt = null)
     {
@@ -193,28 +197,37 @@ public class BaseElementClass : MonoBehaviour
     //Activates the element, essentially the very start of everything, only if the delay has expired
     public void ActivateElement()
     {
-        if (currentUseDelay <= 0)
+        if (!startCoolDown)
         {
             if(PayCosts())
             {
                 StartAnims(animationToPlay, animationToPlayAlt);
-                currentUseDelay = useDelay;
             }
         }
-        
     }
 
     //For unique behaviour when the mb is lifted while using an element
     public virtual void LiftEffect()
     {
-
+        // once the element has been lifted start the cool down for it
+        startCoolDown = true;
     }
 
     protected virtual void Update()
     {
-        if(currentUseDelay > 0)
+        // cool down starts
+        if (startCoolDown == true)
         {
-            currentUseDelay -= Time.deltaTime;
+            // cool down timer goes down
+            currentCoolDownTimer -= Time.deltaTime;
+            // if cooldown timer == 0
+            if (currentCoolDownTimer <= 0)
+            {
+                // reset timer
+                // cooldown is off and player can shoot again
+                currentCoolDownTimer = cooldownTimer;
+                startCoolDown = false;
+            }
         }
     }
 
