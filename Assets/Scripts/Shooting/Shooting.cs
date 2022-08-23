@@ -20,7 +20,7 @@ public class Shooting : MonoBehaviour
 
     bool inComboMode = false;
 
-    public bool ableToShoot = true;
+    private bool ableToShoot = true;
     
     AudioManager audioManager;
 
@@ -44,6 +44,7 @@ public class Shooting : MonoBehaviour
     public int GetLeftElementIndex() { return leftElementIndex; }
     public int GetRightElementIndex() { return rightElementIndex; }
     public bool GetInComboMode() { return inComboMode; }
+    public void SetAbleToShoot(bool tempAbleToShoot) { ableToShoot = tempAbleToShoot; }
     public Sprite GetCrosshair()
     {
         if (inComboMode)

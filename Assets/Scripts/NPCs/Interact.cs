@@ -74,10 +74,10 @@ public class Interact : MonoBehaviour
 
             inUI = true;
             //Lock the players actions, enable the shop
-            playerLook.LockCursor();
+            playerLook.ToggleCursor();
             //playerMove.ableToMove = true;
-            playerLook.ableToMove = false;
-            shooting.ableToShoot = false;
+            playerLook.SetAbleToMove(false);
+            shooting.SetAbleToShoot(false);
             this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
             gameUI.SetActive(false);
 
@@ -157,9 +157,9 @@ public class Interact : MonoBehaviour
         }
 
         playerLook.ForceLockCursor();
-        playerMove.ableToMove = true;
-        playerLook.ableToMove = true;
-        shooting.ableToShoot = true;
+        playerMove.SetAbleToMove(true);
+        playerLook.SetAbleToMove(true);
+        shooting.SetAbleToShoot(true);
         this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         gameUI.SetActive(true);
 

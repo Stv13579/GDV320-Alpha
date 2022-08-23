@@ -51,13 +51,5 @@ public class IceSlashProj : BaseElementSpawnClass
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
         }
-        // hits environment and destroys itself
-        if (other.gameObject.layer == 10)
-        {
-            if (startLifeTimer < 4.97f)
-            {
-                Destroy(gameObject);
-            }
-        }
     }
 }

@@ -54,6 +54,7 @@ public class StasisTrapElement : BaseElementClass
         }
     }
 
+    // gets called in the animation event triggers
     public override void ElementEffect()
     {
         base.ElementEffect();
@@ -72,11 +73,15 @@ public class StasisTrapElement : BaseElementClass
         }
     }
 
+    // gets called in the animation event triggers
     public override void ActivateVFX()
     {
         base.ActivateVFX();
     }
 
+    // gets called before the element effect and activate VFX
+    // gets called in the activate elements functions
+    // when player press the right mouse button
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);

@@ -21,19 +21,15 @@ public class CrystalGrenadeElement : BaseElementClass
 
     [SerializeField]
     private float explosionDamage;
-    // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-    }
 
+    // gets called in the animation event triggers
     public override void ElementEffect()
     {
         base.ElementEffect();
         GameObject newCrystalGrenade = Instantiate(CrystalGrenade, shootingTranform.position, Camera.main.transform.rotation);
         newCrystalGrenade.GetComponent<CrystalGrenadeProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.crystalDamageMultiplier), timeToExplode, explosionRange, explosionDamage, attackTypes);
     }
-
+    // gets called in the animation event triggers
     public override void ActivateVFX()
     {
         base.ActivateVFX();
