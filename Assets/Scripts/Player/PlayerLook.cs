@@ -2,44 +2,80 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// this is a class that is attached to the camera
+/// this class allows the player the look around like a player in the scene
+/// there are also features to this class such as tilting left and right
+/// </summary>
 public class PlayerLook : MonoBehaviour
 {
-    [SerializeField] private Camera currentCamera;
+    [SerializeField] 
+    private Camera currentCamera;
+
     // current rotation of camera
     [SerializeField]
     private float spin = 0.0f;
     [SerializeField]
     private float tilt = 0.0f;
+    [SerializeField]
     private float roll = 0.0f;
 
     private float targetRoll = 0.0f;
+    [SerializeField]
     private float rollSpeed = 4.0f;
+    [SerializeField]
     private float maxRoll = 2.5f;
 
-    [SerializeField] private Vector2 tiltExtents = new Vector2(-85.0f, 85.0f);
-    [SerializeField] private Vector2 spinExtents;
-    [SerializeField] private float sensitivity = 2.0f;
-    bool cursorLocked = false;
+    [SerializeField] 
+    private Vector2 tiltExtents = new Vector2(-85.0f, 85.0f);
+    private float bumpTilt = 0.0f;
 
-    public bool ableToMove = true;
+    [SerializeField] 
+    private Vector2 spinExtents = new Vector2(0.0f, 0.0f);
 
-    // getter to get the camera
+    [SerializeField] 
+    private float sensitivity = 2.0f;
+
+    private bool cursorLocked = false;
+
+    private bool ableToMove = true;
+
+    private float rollNumber = 0.5f;
+
+    // getter and setters
     public Camera GetCamera() { return currentCamera; }
-    // getter to get the spin value
     public float GetSpin() { return spin; }
-    // setter to set the spin value
-    public void SetSpin(float newSpin) { spin = newSpin; }
-    // getter to get the sensitivity value
+    public void SetSpin(float tempSpin) { spin = tempSpin; }
     public float GetSensitivity() { return sensitivity; }
-    // setter to set the sensitivity value
-    public void SetSensitivity(float _sensitivity) { sensitivity = _sensitivity; }
+    public void SetSensitivity(float tempSensitivity) { sensitivity = tempSensitivity; }
+    public void SetRoll(float normalizedRoll) { targetRoll = -normalizedRoll * maxRoll; }
+    public void SetBumpTilt(float tempBumpTilt) { bumpTilt = tempBumpTilt; }
+    public void SetAbleToMove(bool tempAbleToMove) { ableToMove = tempAbleToMove; }
 
-    public void SetRoll(float normalizedRoll) {targetRoll = -normalizedRoll * maxRoll; }
+    // function is called when script is loaded or values have change on inspector
+    private void OnValidate()
+    {
+        currentCamera.transform.localEulerAngles = new Vector3(tilt, spin, 0);
+    }
 
-    public float bumpTilt = 0.0f;
+    // Start is called before the first frame update
+    private void Start()
+    {
+        ToggleCursor();
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        if (ableToMove)
+        {
+            MoveCamera();
+        }
+        HandleEditorInputs();
+    }
 
     // toggle to lock the cursor
-    public void LockCursor()
+    public void ToggleCursor()
     {
         cursorLocked = !cursorLocked;
         // locks cursor in the middle of screen or unlocks cursor
@@ -72,8 +108,7 @@ public class PlayerLook : MonoBehaviour
         // if cursor is locked
         if (cursorLocked)
         {
-            //getting input for the x and y axis for the mouse
-            // using GetAxisRaw so that we are dealing with 0 and 1
+            // getting input for the x and y axis for the mouse
             float mouseX = Input.GetAxisRaw("Mouse X");
             float mouseY = Input.GetAxisRaw("Mouse Y");
 
@@ -84,61 +119,46 @@ public class PlayerLook : MonoBehaviour
             // stops the player from snapping their neck
             tilt = Mathf.Clamp(tilt, tiltExtents.x, tiltExtents.y);
 
+            // 
             roll = Mathf.Lerp(roll, targetRoll, rollSpeed * Time.deltaTime);
+
             RollInput();
+
             // rotation on the x axis for the mouse (rotating head to look from side to side)
             // rotation on the y axis for the mouse (rotating head so looking up and down)
             currentCamera.transform.localEulerAngles = new Vector3(tilt + bumpTilt, spin, roll);
-            currentCamera.transform.localPosition += Quaternion.Euler(0.0f, spin, 0.0f) * new Vector3(0, 0, 0);
         }
-    }
-
-    void OnValidate()
-    {
-        currentCamera.transform.localEulerAngles = new Vector3(tilt, spin, 0);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        LockCursor();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(ableToMove)
-        {
-            MoveCamera();
-        }
-        HandleEditorInputs();
     }
 
     // function for player tilting 
     // checks for input and does tilting
+    // TO DO:
     private void RollInput()
     {
-        if(Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
-            SetRoll(-0.5f);
+            SetRoll(-rollNumber);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            SetRoll(0.5f);
+            SetRoll(rollNumber);
         }
         else
         {
-            SetRoll(0);
+            SetRoll(0.0f);
         }
     }
 
-    //function that checks for input to toggle cursor on or off
+    // function that checks for input to toggle cursor on or off
+    // for debugging purposes
     private void HandleEditorInputs()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            LockCursor();
+            ToggleCursor();
         }
+#endif
     }
 }
 

@@ -15,12 +15,8 @@ public class IceSlashElement : BaseElementClass
 
     [SerializeField]
     private GameObject iceSlashShootVFX;
-    // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-    }
 
+    // gets called in the animation event triggers
     public override void ElementEffect()
     {
         base.ElementEffect();
@@ -29,6 +25,7 @@ public class IceSlashElement : BaseElementClass
         iceSlashTemp.GetComponent<IceSlashProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.waterDamageMultiplier), lifeTimer, attackTypes);
     }
 
+    // gets called in the animation event triggers
     public override void ActivateVFX()
     {
         base.ActivateVFX();
@@ -53,6 +50,9 @@ public class IceSlashElement : BaseElementClass
         }
     }
 
+    // gets called before the element effect and activate VFX
+    // gets called in the activate elements functions
+    // when player press the right mouse button
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName, animationNameAlt);

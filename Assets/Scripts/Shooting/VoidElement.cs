@@ -125,13 +125,13 @@ public class VoidElement : BaseElementClass
         {
             StopCoroutine(Dash());
             dashing = false;
-            this.gameObject.GetComponent<PlayerMovement>().ableToMove = true;
+            this.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(true);
         }
     }
 
     IEnumerator Dash()
     {
-        playerClass.gameObject.GetComponent<PlayerMovement>().ableToMove = false;
+        playerClass.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(false);
         //voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.1f);
         dashing = true;
         float timer = 0.0f;
@@ -142,7 +142,7 @@ public class VoidElement : BaseElementClass
             timer += Time.deltaTime * (1 / Time.timeScale);
             yield return null;
         }
-        this.gameObject.GetComponent<PlayerMovement>().ableToMove = true;
+        this.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(true);
         //voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
         StopCoroutine(Dash());
     }

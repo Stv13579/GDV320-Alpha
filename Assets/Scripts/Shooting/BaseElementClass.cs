@@ -92,6 +92,8 @@ public class BaseElementClass : MonoBehaviour
     [SerializeField]
     protected float cooldownTimer;
     protected float currentCoolDownTimer;
+
+
     public enum ElementType
     {
         None = 0,
@@ -126,11 +128,15 @@ public class BaseElementClass : MonoBehaviour
         shootingScript = player.GetComponent<Shooting>();
         currentCoolDownTimer = cooldownTimer;
     }
+
+    // calls the animation
+    // this gets call in activate elements
     protected virtual void StartAnims(string animationName, string animationNameAlt = null)
     {
 
     }
     //Called from the hand objects when the appropriate event triggers to turn on the vfx
+    // gets called same time as elementeffect
     public virtual void ActivateVFX()
     {
 
@@ -171,7 +177,9 @@ public class BaseElementClass : MonoBehaviour
                 break;
         }
     }
+
     //The actual mechanical effect (eg fire object etc)
+    // event on animation plays this if call the right trigger
     public virtual void ElementEffect()
     {
         audioManager.Stop(shootingSoundFX);
@@ -196,7 +204,8 @@ public class BaseElementClass : MonoBehaviour
         }
     }
 
-    //Activates the element, essentially the very start of everything, only if the delay has expired
+    // this gets called first
+    // start the animation of the elements if cool down hasnt started and if player has mana
     public void ActivateElement()
     {
         if (!startCoolDown)
@@ -209,6 +218,8 @@ public class BaseElementClass : MonoBehaviour
     }
 
     //For unique behaviour when the mb is lifted while using an element
+    // function to stop the effect of the element
+    // used for hold elements such as energy, necrotic, void, laser beam, life steal and curse
     public virtual void LiftEffect()
     {
 

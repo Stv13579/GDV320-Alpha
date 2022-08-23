@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This is a class that gets attached to the player
+/// it allows the player to move around with wasd or arrow keys
+/// there are also features to this character controller such as
+/// friction, gravity, sliding, jumping, coyote time, head bobbing, and camera shaking
+/// </summary>
 public class PlayerMovement : MonoBehaviour
 {
     private PlayerLook lookScript;
     private CharacterController cController;
 
-    [Header("General Movement Values")]
     [SerializeField]
     private float gravity;
     [SerializeField]
@@ -27,33 +32,28 @@ public class PlayerMovement : MonoBehaviour
     public float movementMulti = 1.0f;
     public List<Multiplier> movementMultipliers = new List<Multiplier>();
 
-    [Header("Character velocity")]
     private Vector3 velocity;
 
     [SerializeField]
     private float airStraffMod;
 
-    [Header("Checks")]
     private bool isGrounded = false;
 
-    [Header("Head Bobbing")]
     private float headBobTimer = 0.0f;
     private float headBobFrequency = 1.0f;
     private float headBobAmplitude = 0.02f;
-
     // the default position of the head
     private float headBobNeutral = 0.80f;
     private float headBobMinSpeed = 0.1f;
     private float headBobBlendSpeed = 4.0f;
-    [SerializeField] private AnimationCurve headBobBlendCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
+    [SerializeField] 
+    private AnimationCurve headBobBlendCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
     private float headBobMultiplier = 0.0f;
     private Vector3 oldPos;
     private Vector3 newPos;
 
-    public bool ableToMove = true;
-
     // sound
-    float randIndexTimer = 0.0f;
+    private float randIndexTimer = 0.0f;
     private AudioManager audioManager;
 
     // head shaking
@@ -75,12 +75,10 @@ public class PlayerMovement : MonoBehaviour
     private LayerMask environmentLayer;
 
     //sliding parameters
-    [Header("Slope")]
     private bool willSlideOnSlopes = true;
     [SerializeField]
     private float slopeSpeed;
     private Vector3 hitPointNormal;
-    private float slopeSpeedTimer;
     private bool isSlidng
     {
         get
@@ -100,15 +98,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     private float maxVeloMagnitude = 1.5f;
-    [Header("camera shake")]
 
     [SerializeField]
     private Transform cameraHolder;
-
     private Vector3 cameraHolderTargetPos;
     private float cameraHolderTargetAngle;
     private float currentCameraHolderAngle;
-
     [SerializeField]
     private float cameraShakePosPunchLerp = 8.0f;
     [SerializeField]
@@ -117,19 +112,21 @@ public class PlayerMovement : MonoBehaviour
     private float cameraShakeAnglePunchLerp = 20.0f;
     [SerializeField]
     private float cameraShakeAngleLerp = 40.0f;
-
     // how deep the drop is (camera pos)
     [SerializeField]
     private float cameraShakeDrop = 0.1f;
-
     // how deep the dip is (camera angle)
     [SerializeField]
     private float cameraShakeDip = 25.0f;
 
     [SerializeField]
     private float collisionForce = 0.5f;
+
+    private bool ableToMove = true;
+    public void SetAbleToMove(bool tempAbleToMove) { ableToMove = tempAbleToMove; }
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         lookScript = this.gameObject.GetComponent<PlayerLook>();
@@ -137,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (ableToMove)
         {
@@ -146,10 +143,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // function for the camera shake
+    // function for the camera shake when landing
     // lerps the camera pos and camera angle to their targets
     // then lerps from target to zero
-    void UpdateCameraShake()
+    // quick and dirty way of getting smooth bumping
+    private void UpdateCameraShake()
     {
         cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, cameraHolderTargetPos, cameraShakePosLerp * Time.deltaTime);
         currentCameraHolderAngle = Mathf.Lerp(currentCameraHolderAngle, cameraHolderTargetAngle, cameraShakeAngleLerp * Time.deltaTime);
@@ -157,10 +155,10 @@ public class PlayerMovement : MonoBehaviour
         cameraHolderTargetPos = Vector3.Lerp(cameraHolderTargetPos, Vector3.zero, cameraShakePosPunchLerp * Time.deltaTime);
         cameraHolderTargetAngle = Mathf.Lerp(cameraHolderTargetAngle, 0.0f, cameraShakeAnglePunchLerp * Time.deltaTime);
 
-        lookScript.bumpTilt = currentCameraHolderAngle;
+        lookScript.SetBumpTilt(currentCameraHolderAngle);
     }
 
-
+    // manages all of the player movement e.g. jumping, coyote time, sliding, friction, gravity
     private void PlayerMoving()
     {
         // reads players input 
@@ -227,13 +225,16 @@ public class PlayerMovement : MonoBehaviour
         }
 
         CoyoteTime();
-
+        
+        // this is to stop the players sound if the player is up close to the 
         RaycastHit hit;
         if (Physics.Raycast(cController.transform.position, transform.forward, out hit, 1.0f, environmentLayer))
         {
             return;
         }
 
+        // plays random foot step sound effects
+        // TO DO:
         randIndexTimer -= Time.deltaTime;
         int randomSoundIndex = Random.Range(0, 4);
         if (isGrounded == true && (Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.S)) ||
@@ -241,26 +242,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (randIndexTimer <= 0.0f)
             {
-                if (randomSoundIndex == 0)
-                {
-                    audioManager.Stop("Player Running 1");
-                    audioManager.Play("Player Running 1");
-                }
-                else if (randomSoundIndex == 1)
-                {
-                    audioManager.Stop("Player Running 2");
-                    audioManager.Play("Player Running 2");
-                }
-                else if (randomSoundIndex == 2)
-                {
-                    audioManager.Stop("Player Running 3");
-                    audioManager.Play("Player Running 3");
-                }
-                else
-                {
-                    audioManager.Stop("Player Running 4");
-                    audioManager.Play("Player Running 4");
-                }
+                audioManager.Stop($"Player Running {randomSoundIndex + 1}");
+                audioManager.Play($"Player Running {randomSoundIndex + 1}");
                 randIndexTimer = 0.37f;
             }
 
@@ -268,7 +251,8 @@ public class PlayerMovement : MonoBehaviour
         HeadBobbing();
         MovingCurve();
     }
-    // the is the players movement based on a curve
+
+    // there is the players movement based on a curve
     // if the player moves for a certain amount of time then their acceleration increase
     private void MovingCurve()
     {
@@ -304,6 +288,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // jump function
     private void Jumping()
     {
         // checks if player is on the ground and if player has press space
@@ -315,6 +300,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // CoyoteTime function
     private void CoyoteTime()
     {
         // collision detection for player
@@ -343,6 +329,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // HeadBobbing Function
+    // blends headbobbing on and off smoothly
     private void HeadBobbing()
     {
         // getting the difference between the oldpos and newpos
@@ -379,6 +367,8 @@ public class PlayerMovement : MonoBehaviour
         lookScript.GetCamera().transform.localPosition = localPos;
     }
 
+    // Camera Shake function
+    // this drops the camerea when play hits ground
     private void CameraShake()
     {
         cameraHolderTargetPos = new Vector3(0, -cameraShakeDrop, 0);

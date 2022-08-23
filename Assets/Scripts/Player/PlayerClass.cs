@@ -151,11 +151,11 @@ public class PlayerClass : MonoBehaviour
         itemUI.transform.parent.gameObject.SetActive(false);
         Instantiate(gameOverScreen);
         dead = true;
-        this.gameObject.GetComponent<PlayerLook>().ableToMove = false;
-        this.gameObject.GetComponent<PlayerLook>().LockCursor();
+        this.gameObject.GetComponent<PlayerLook>().SetAbleToMove(false);
+        this.gameObject.GetComponent<PlayerLook>().ToggleCursor();
 
-        this.gameObject.GetComponent<PlayerMovement>().ableToMove = false;
-        this.gameObject.GetComponent<Shooting>().ableToShoot = false;
+        this.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(false);
+        this.gameObject.GetComponent<Shooting>().SetAbleToShoot(false);
 
 
     }

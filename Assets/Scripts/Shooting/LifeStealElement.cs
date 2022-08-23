@@ -18,8 +18,8 @@ public class LifeStealElement : BaseElementClass
     [SerializeField]
     private float healValue;
 
-    bool isTargeting;
-    bool isShooting;
+    private bool isTargeting;
+    private bool isShooting;
 
     [SerializeField]
     private LayerMask hitLayer;
@@ -99,20 +99,29 @@ public class LifeStealElement : BaseElementClass
         lifestealeffectvalue = value;
         //lifestealFullScreenEffect.SetFloat("_Toggle_EffectIntensity", lifestealeffectvalue);
     }
+
+    // gets called in the animation event triggers
     public override void ElementEffect()
     {
         base.ElementEffect();
     }
 
+    // gets called in the animation event triggers
     public override void ActivateVFX()
     {
         base.ActivateVFX();
     }
+
+    // function to stop the effect of the element
     public override void LiftEffect()
     {
         base.LiftEffect();
         DeactivateLifeSteal();
     }
+
+    // gets called before the element effect and activate VFX
+    // gets called in the activate elements functions
+    // when player press the right mouse button
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);

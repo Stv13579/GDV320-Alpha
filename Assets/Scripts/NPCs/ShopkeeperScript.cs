@@ -33,10 +33,10 @@ public class ShopkeeperScript : MonoBehaviour
             }
             inShop = true;
             //Lock the players actions, enable the shop
-            playerLook.LockCursor();
-            playerMove.ableToMove = false;
-            playerLook.ableToMove = false;
-            shooting.ableToShoot = false;
+            playerLook.ToggleCursor();
+            playerMove.SetAbleToMove(false);
+            playerLook.SetAbleToMove(false);
+            shooting.SetAbleToShoot(false);
             this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
             gameUI.SetActive(false);
 
@@ -83,10 +83,10 @@ public class ShopkeeperScript : MonoBehaviour
         //Unlock the players actions, disable the shop
         inShop = false;
         instantiatedShopUI.SetActive(false);
-        playerLook.LockCursor();
-        playerMove.ableToMove = true;
-        playerLook.ableToMove = true;
-        shooting.ableToShoot = true;
+        playerLook.ToggleCursor();
+        playerMove.SetAbleToMove(true);
+        playerLook.SetAbleToMove(true);
+        shooting.SetAbleToShoot(true);
         this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         gameUI.SetActive(true);
 
