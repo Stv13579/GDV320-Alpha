@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu, System.Serializable]
 public class NPCData : ScriptableObject
 {
     //Where the player is in the overall story of the NPC
@@ -15,7 +15,6 @@ public class NPCData : ScriptableObject
     public bool questComplete = false; 
 
     public List<NPC.Dialogue> seenStoryPoints = new List<NPC.Dialogue>();
-
 
     public List<string> quests;
 }
