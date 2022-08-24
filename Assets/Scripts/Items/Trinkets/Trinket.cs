@@ -21,4 +21,9 @@ public class Trinket : Item
 
     }
 
+    public void Upgrade()
+    {
+        uState++;
+    }
+
 }
