@@ -8,6 +8,9 @@ public class Quest : MonoBehaviour
     [SerializeField]
     NPCData npc;
 
+    [SerializeField]
+    Trinket trinketToUpgrade;
+
     public void SetData(NPCData data) { npc = data; }
 
     public virtual void UpdateQuestBehaviour()
@@ -36,5 +39,7 @@ public class Quest : MonoBehaviour
     {
         if(GetComponent<QuestManager>().RemoveFromQuests(this))
             npc.questComplete = true;
+
+        trinketToUpgrade.Upgrade();
     }
 }

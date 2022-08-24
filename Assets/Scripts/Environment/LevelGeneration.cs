@@ -61,6 +61,14 @@ public class LevelGeneration : MonoBehaviour
         if (GameObject.Find("Player").GetComponent<PlayerClass>().heldItems.Contains(GameObject.Find("TrinketManager").GetComponent<BalancedCompass>()))
         {
             Debug.Log("Checking for extra room!");
+
+            int randomRoll = Random.Range(0, 100);
+
+            if(randomRoll < GameObject.Find("TrinketManager").GetComponent<BalancedCompass>().GetActivationChance())
+            {
+                NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleRespiteRooms);
+                NPC.GetComponent<Room>().illegal = true;
+            }
         }
 
         foreach(GameObject room in placedRooms)
