@@ -8,8 +8,7 @@ public class Bouncer : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy" && other.gameObject.transform != transform.parent)
         {
-            GetComponentInParent<BaseEnemyClass>().bounceList.Add(other.gameObject);
-
+            GetComponentInParent<BaseEnemyClass>().GetBounceList().Add(other.gameObject);
         }
 
     }
@@ -18,8 +17,7 @@ public class Bouncer : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy" && other.gameObject.transform != transform.parent)
         {
-            GetComponentInParent<BaseEnemyClass>().bounceList.Add(other.gameObject);
-
+            GetComponentInParent<BaseEnemyClass>().GetBounceList().Add(other.gameObject);
         }
     }
 
@@ -27,8 +25,7 @@ public class Bouncer : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy" && other.gameObject.transform != transform.parent)
         {
-            GetComponentInParent<BaseEnemyClass>().bounceList.Remove(other.gameObject);
-
+            GetComponentInParent<BaseEnemyClass>().GetBounceList().Remove(other.gameObject);
         }
 
     }

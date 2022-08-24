@@ -3114,11 +3114,12 @@ MonoBehaviour:
   currentCamera: {fileID: 5625023910628228236}
   spin: 90
   tilt: 0
+  roll: 0
+  rollSpeed: 4
+  maxRoll: 2.5
   tiltExtents: {x: -85, y: 85}
   spinExtents: {x: 0, y: 0}
   sensitivity: 2
-  ableToMove: 1
-  bumpTilt: 0
 --- !u!114 &5625023911835613076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3160,9 +3161,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   movementSpeed: 12
   maxMovementSpeed: 13
+  baseMaxMovementSpeed: 13
   coyoteTime: 0.2
-  movementMulti: 1
-  movementMultipliers: []
   airStraffMod: 0.15
   headBobBlendCurve:
     serializedVersion: 2
@@ -3188,7 +3188,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ableToMove: 1
   initialFOV: 90
   increasedFOVMoving: 92
   moveTime: 0
@@ -3273,25 +3272,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 250
+  baseMaxHealth: 250
+  defense: 0
+  baseDefense: 0
   manaTypes:
   - manaName: 0
     currentMana: 0
     maxMana: 500
+    baseMaxMana: 500
+    mana:
+      baseValue: 0
+      additiveModifiers: []
+      additiveMultiplicativeModifiers: []
+      multiplicativeModifiers: []
   - manaName: 1
     currentMana: 0
     maxMana: 500
+    baseMaxMana: 500
+    mana:
+      baseValue: 0
+      additiveModifiers: []
+      additiveMultiplicativeModifiers: []
+      multiplicativeModifiers: []
   - manaName: 2
     currentMana: 0
     maxMana: 500
+    baseMaxMana: 500
+    mana:
+      baseValue: 0
+      additiveModifiers: []
+      additiveMultiplicativeModifiers: []
+      multiplicativeModifiers: []
   - manaName: 3
     currentMana: 0
     maxMana: 500
+    baseMaxMana: 500
+    mana:
+      baseValue: 0
+      additiveModifiers: []
+      additiveMultiplicativeModifiers: []
+      multiplicativeModifiers: []
   - manaName: 4
     currentMana: 0
     maxMana: 500
+    baseMaxMana: 500
+    mana:
+      baseValue: 0
+      additiveModifiers: []
+      additiveMultiplicativeModifiers: []
+      multiplicativeModifiers: []
   - manaName: 5
     currentMana: 0
     maxMana: 500
+    baseMaxMana: 500
+    mana:
+      baseValue: 0
+      additiveModifiers: []
+      additiveMultiplicativeModifiers: []
+      multiplicativeModifiers: []
   money: 0
   heldItems: []
   itemUI: {fileID: 0}
@@ -3335,7 +3373,6 @@ MonoBehaviour:
     - {fileID: 450497680}
     - {fileID: 450497682}
     - {fileID: 450497679}
-  ableToShoot: 1
   leftOrbPos: {fileID: 438101385}
   rightOrbPos: {fileID: 1517890868}
   uiScript: {fileID: 0}

@@ -37,9 +37,10 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-
+        base.Update();
+ 
 
         RaycastHit hit;
         //Makes sure it can see the player
@@ -91,21 +92,21 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
     {
         projectileSpawnPos.transform.LookAt(player.transform);
         GameObject newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
-        newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * moveSpeedMulti, damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti));
+        newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed, damageAmount * (prophecyManager.prophecyDamageMulti));
         if (newProjectile.GetComponent<CrystalRangedProjectile>())
         {
             for (int i = 1; i < 3; i++)
             {
                 newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
                 newProjectile.transform.RotateAround(projectileSpawnPos.position, projectileSpawnPos.up, -5.0f * i);
-                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * moveSpeedMulti, damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti));
+                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed , damageAmount * (prophecyManager.prophecyDamageMulti));
 
             }
             for (int i = 1; i < 3; i++)
             {
                 newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
                 newProjectile.transform.RotateAround(projectileSpawnPos.position, projectileSpawnPos.up, 5.0f * i);
-                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed * moveSpeedMulti, damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti));
+                newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed, damageAmount * (prophecyManager.prophecyDamageMulti));
 
             }
         }

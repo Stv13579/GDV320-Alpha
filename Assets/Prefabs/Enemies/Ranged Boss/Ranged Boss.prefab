@@ -26547,31 +26547,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbd91094700d0d40ba20feed0946944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 0
   maxHealth: 20
+  baseMaxHealth: 20
   damageAmount: 2
-  damageMultiplier: 1
+  baseDamageAmount: 2
   moveSpeed: 0
-  moveSpeedMulti: 1
+  baseMoveSpeed: 0
   movementMultipliers: []
   damageMultipliers: []
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
-  spawner: {fileID: 0}
   weaknesses: 
   resistances: 
-  bounceList: []
   deathSpawn: {fileID: 1140089593594349035, guid: 58cc516cec47cd9448a27c3f1ed9a4a6,
     type: 3}
   hitSpawn: {fileID: 2154916016029885947, guid: 927b09bead51b864990a49b3960ddc7c,
     type: 3}
-  moveDirection: {x: 0, y: 0, z: 0}
   attackAudio: Ranged Boss Attack
   deathAudio: Ranged Boss Death
   takeDamageAudio: Ranged Boss Damaged
   targettingIndicator: {fileID: 4335289269587943172}
-  oldPosition: {x: 0, y: 0, z: 0}
   projectileSpawnPos: {fileID: 4423348437040946837}
+  tempProjectileSpawnPos: {fileID: 7314399184733861405}
   fireProjectile: {fileID: 5436927605413035607, guid: b3d71c9646cbe5841ae2add5b67626aa,
     type: 3}
   fakeFireProjectile: {fileID: 1998653810930345929, guid: 4ad2de2d1a7ec354aa06141c30d7a53f,
@@ -26584,7 +26583,6 @@ MonoBehaviour:
   - {fileID: 5914742675970328609, guid: c6c06579201f2bc40b0aaee215312f7a, type: 3}
   - {fileID: 5192398432006138505, guid: d5f0ac2d757742a48bbbc8fa131747cb, type: 3}
   - {fileID: 1271547467611741809, guid: d351f20f80adc7b4380d9ead22f15291, type: 3}
-  tempProjectileSpawnPos: {fileID: 7314399184733861405}
   groundDetect:
     serializedVersion: 2
     m_Bits: 1024

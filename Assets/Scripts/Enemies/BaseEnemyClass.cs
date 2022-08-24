@@ -5,16 +5,13 @@ using UnityEngine;
 //base class that all enemies derive from.
 public class BaseEnemyClass : MonoBehaviour
 {
+
+
     [SerializeField]
-    protected float maxHealth;
-    [SerializeField]
-    protected float damageAmount;
-    [SerializeField]
-    protected float damageMultiplier = 1.0f;
-    [SerializeField]
-    protected float moveSpeed;
-    [SerializeField]
-    protected float moveSpeedMulti = 1.0f;
+    protected float currentHealth, maxHealth, baseMaxHealth, damageAmount, baseDamageAmount, moveSpeed, baseMoveSpeed;
+
+    protected StatModifier.FullStat health = new StatModifier.FullStat(0), damage = new StatModifier.FullStat(0), speed = new StatModifier.FullStat(0);
+
     
 
     #region
@@ -22,8 +19,7 @@ public class BaseEnemyClass : MonoBehaviour
     protected ProphecyManager prophecyManager;
 
     #endregion
-    [SerializeField]
-    protected List<Multiplier> movementMultipliers = new List<Multiplier>(), damageMultipliers = new List<Multiplier>();
+
 
     //The amount of flat damage any instance of incoming damage is reduced by
     [SerializeField]
@@ -34,8 +30,7 @@ public class BaseEnemyClass : MonoBehaviour
     protected float damageResistance = 1;
 
 
-    protected float currentHealth;
-    bool isDead = false;
+    protected bool isDead = false;
     protected GameObject player;
 
     protected PlayerClass playerClass;
@@ -61,20 +56,22 @@ public class BaseEnemyClass : MonoBehaviour
     [SerializeField]
     protected List<Types> weaknesses, resistances;
 
-    public List<GameObject> bounceList;
+    protected List<GameObject> bounceList = new List<GameObject>();
 
     //Particle effect when the enemy is destroyed
-    public GameObject deathSpawn;
+    [SerializeField]
+    protected GameObject deathSpawn;
     //Particle effect when the enemy is hit
-    public GameObject hitSpawn;
+    [SerializeField]
+    protected GameObject hitSpawn;
 
     public delegate void DeathTrigger(GameObject temp);
 
     [HideInInspector]
-    public List<DeathTrigger> deathTriggers = new List<DeathTrigger>();
+    protected List<DeathTrigger> deathTriggers = new List<DeathTrigger>();
 
 
-    public Vector3 moveDirection;
+    protected Vector3 moveDirection;
     protected AudioManager audioManager;
     protected Animator enemyAnims;
 
@@ -88,7 +85,7 @@ public class BaseEnemyClass : MonoBehaviour
     [SerializeField]
     GameObject targettingIndicator;
 
-    public Vector3 oldPosition;
+    protected Vector3 oldPosition;
 
     public virtual void Awake()
     {
@@ -100,7 +97,11 @@ public class BaseEnemyClass : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         oldPosition = new Vector3(-1000, -1000, -1000);
         enemyAnims = GetComponentInChildren<Animator>();
-        movementMultipliers.Clear();
+
+        health.baseValue = baseMaxHealth;
+        damage.baseValue = baseDamageAmount;
+        speed.baseValue = baseMoveSpeed;
+
     }
 
     public virtual void Update()
@@ -115,6 +116,11 @@ public class BaseEnemyClass : MonoBehaviour
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
+
+        maxHealth = StatModifier.UpdateValue(health);
+        damageAmount = StatModifier.UpdateValue(damage);
+        moveSpeed = StatModifier.UpdateValue(speed);
+
     }
 
     //Movement
@@ -261,14 +267,6 @@ public class BaseEnemyClass : MonoBehaviour
         }
     }
 
-    public IEnumerator AttackBuff()
-    {
-        damageMultiplier += 0.5f;
-        yield return new WaitForSeconds(10);
-        damageMultiplier -= 0.5f;
-        StopCoroutine(AttackBuff());
-    }
-
     public void RestoreHealth(float amount)
     {
         currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
@@ -280,38 +278,48 @@ public class BaseEnemyClass : MonoBehaviour
         return currentHealth;
     }
 
-    public float GetDamageMulti()
-    {
-        return damageMultiplier;
-    }
-
-    public List<Multiplier> GetDamageMultis()
-    {
-        return damageMultipliers;
-    }
-
-    public void SetDamamgeMulti(float damMulti)
-    {
-        damageMultiplier = damMulti;
-    }
-
-    public float GetMoveMulti()
-    {
-        return moveSpeedMulti;
-    }
-
-    public void SetMoveMulti(float moveMulti)
-    {
-        moveSpeedMulti = moveMulti;
-    }
-
-    public List<Multiplier> GetMoveMultis()
-    {
-        return movementMultipliers;
-    }
-
     public void SetSpawner(GameObject spawn)
     {
         spawner = spawn;
+    }
+
+    public List<GameObject> GetBounceList()
+    {
+        return bounceList;
+    }
+
+    public Vector3 GetOldPosition()
+    {
+        return oldPosition;
+    }
+
+    public void SetOldPosition(Vector3 pos)
+    {
+        oldPosition = pos;
+    }
+
+    public void SetMoveDirection(Vector3 dir)
+    {
+        moveDirection = dir;
+    }
+
+    public List<DeathTrigger> GetDeathTriggers()
+    {
+        return deathTriggers;
+    }
+
+    public StatModifier.FullStat GetHealthStat()
+    {
+        return health;
+    }
+
+    public StatModifier.FullStat GetDamageStat()
+    {
+        return damage;
+    }
+
+    public StatModifier.FullStat GetSpeedStat()
+    {
+        return speed;
     }
 }

@@ -6,6 +6,7 @@ public class RangedBossHomingProjectileScript : BaseEnemyClass //Sebastian
 {
     public override void Update()
     {
+        base.Update();
         //Move towards the player
         this.transform.LookAt(player.transform);
         this.transform.position += this.transform.forward * moveSpeed * Time.deltaTime;
@@ -16,7 +17,7 @@ public class RangedBossHomingProjectileScript : BaseEnemyClass //Sebastian
         //if it hits the player, damage them
         if (other.gameObject.GetComponent<PlayerClass>())
         {
-            other.gameObject.GetComponent<PlayerClass>().ChangeHealth(-damageAmount * damageMultiplier);
+            other.gameObject.GetComponent<PlayerClass>().ChangeHealth(-damageAmount);
             Destroy(this.gameObject);
         }
         else if (other.gameObject.layer == 10)

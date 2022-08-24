@@ -230,19 +230,19 @@ public class SAIM : MonoBehaviour
             float distToNode = float.MaxValue;
 
             //If the distance moved is miniscule since the last frame, continue.
-            if ((enemy.oldPosition - enemy.transform.position).magnitude < 1)
+            if ((enemy.GetOldPosition() - enemy.transform.position).magnitude < 1)
             {
                 continue;
             }
 
-            enemy.oldPosition = enemy.transform.position;
+            enemy.SetOldPosition(enemy.transform.position);
 
             foreach (Node node in aliveNodes)
             {
                 if((node.transform.position - enemy.transform.position).magnitude < distToNode)
                 {
                     distToNode = (node.transform.position - enemy.transform.position).magnitude;
-                    enemy.moveDirection = node.bestNextNodePos;
+                    enemy.SetMoveDirection(node.bestNextNodePos);
                 }
 
             }
@@ -593,15 +593,15 @@ public class SAIM : MonoBehaviour
         }
 
         //Bouncing away from each other
-        for (int j = 0; j < spawnedEnemies[elementIndex].GetComponent<BaseEnemyClass>().bounceList.Count; j++)
+        for (int j = 0; j < spawnedEnemies[elementIndex].GetComponent<BaseEnemyClass>().GetBounceList().Count; j++)
         {
-            if (spawnedEnemies[elementIndex].GetComponent<BaseEnemyClass>().bounceList[j] == null)
+            if (spawnedEnemies[elementIndex].GetComponent<BaseEnemyClass>().GetBounceList()[j] == null)
             {
-                spawnedEnemies[elementIndex].GetComponent<BaseEnemyClass>().bounceList.RemoveAt(j);
+                spawnedEnemies[elementIndex].GetComponent<BaseEnemyClass>().GetBounceList().RemoveAt(j);
             }
             else 
             {
-                Vector3 newDir = spawnedEnemies[elementIndex].GetComponent<BaseEnemyClass>().bounceList[j].transform.position - spawnedEnemies[elementIndex].gameObject.transform.position;
+                Vector3 newDir = spawnedEnemies[elementIndex].GetComponent<BaseEnemyClass>().GetBounceList()[j].transform.position - spawnedEnemies[elementIndex].gameObject.transform.position;
                 newDir.y = 0;
                 if (newDir.magnitude == 0)
                 {
@@ -610,7 +610,7 @@ public class SAIM : MonoBehaviour
 
                 }
                 spawnedEnemies[elementIndex].gameObject.GetComponent<Rigidbody>().AddForce(-newDir * Time.deltaTime * 1000);
-                spawnedEnemies[elementIndex].GetComponent<BaseEnemyClass>().bounceList.RemoveAt(j);
+                spawnedEnemies[elementIndex].GetComponent<BaseEnemyClass>().GetBounceList().RemoveAt(j);
             }
 
             
@@ -752,11 +752,11 @@ public class SAIM : MonoBehaviour
     public void AdjustDifficulty()
     {
         //Check if the player has taken a significant amount of damage over a period of time
-        if(previousHealth > player.GetComponent<PlayerClass>().currentHealth)
+        if(previousHealth > player.GetComponent<PlayerClass>().GetCurrentHealth())
         {
-            currentDamageTaken += previousHealth - player.GetComponent<PlayerClass>().currentHealth;
+            currentDamageTaken += previousHealth - player.GetComponent<PlayerClass>().GetCurrentHealth();
         }
-        previousHealth = player.GetComponent<PlayerClass>().currentHealth;
+        previousHealth = player.GetComponent<PlayerClass>().GetCurrentHealth();
 
         //
         diffAdjTimerDAM -= Time.deltaTime;

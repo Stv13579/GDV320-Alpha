@@ -22,15 +22,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private AnimationCurve frictionCurve = AnimationCurve.Linear(0, 0.1f, 1, 1);
     [SerializeField]
-    private float movementSpeed;
-    [SerializeField]
-    private float maxMovementSpeed = 15.0f;
+    private float movementSpeed, maxMovementSpeed = 13.0f, baseMaxMovementSpeed = 13.0f;
+
+    StatModifier.FullStat speed = new StatModifier.FullStat(0);
+
     [SerializeField]
     private float coyoteTime;
     private float currentCoyoteTime;
-
-    public float movementMulti = 1.0f;
-    public List<Multiplier> movementMultipliers = new List<Multiplier>();
 
     private Vector3 velocity;
 
@@ -131,11 +129,13 @@ public class PlayerMovement : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         lookScript = this.gameObject.GetComponent<PlayerLook>();
         cController = this.gameObject.GetComponent<CharacterController>();
+        speed.baseValue = baseMaxMovementSpeed;
     }
 
     // Update is called once per frame
     private void Update()
     {
+        maxMovementSpeed = StatModifier.UpdateValue(speed);
         if (ableToMove)
         {
             PlayerMoving();
@@ -214,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
         // getting the position before the player moves (headbobbing)
         oldPos = transform.position;
         // moving the player on screen
-        cController.Move(velocity * movementSpeed * movementMulti * Time.deltaTime);
+        cController.Move(velocity * movementSpeed * Time.deltaTime);
         // getting the position after the player moves (headbobbing)
         newPos = transform.position;
 
@@ -270,6 +270,12 @@ public class PlayerMovement : MonoBehaviour
             lookScript.GetCamera().fieldOfView -= initialFOV * Time.deltaTime;
             moveTime = 0.0f;
         }
+        moveAnimaCurve.RemoveKey(1);
+        moveAnimaCurve.RemoveKey(0);
+
+        moveAnimaCurve.AddKey(new Keyframe(0, maxMovementSpeed - 1));
+
+        moveAnimaCurve.AddKey(new Keyframe(3, maxMovementSpeed));
         movementSpeed = moveAnimaCurve.Evaluate(moveTime);
 
         if (lookScript.GetCamera().fieldOfView >= increasedFOVMoving)
@@ -376,18 +382,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
-    public IEnumerator Slowness(Multiplier multiplier)
-    {
-        Debug.Log("StartRoutine");
-
-        movementMulti = Multiplier.AddMultiplier(movementMultipliers, multiplier);
-
-        yield return new WaitForSeconds(10f);
-        Debug.Log("StopRoutine");
-        movementMulti = Multiplier.RemoveMultiplier(movementMultipliers, multiplier);
-
-    }
     private void OnTriggerStay(Collider other)
     {
         // collision with the enemy
@@ -399,6 +393,11 @@ public class PlayerMovement : MonoBehaviour
 
             other.gameObject.GetComponent<Rigidbody>().AddForce(dir * collisionForce, ForceMode.Impulse);
         }
+    }
+
+    public StatModifier.FullStat GetSpeedStat()
+    {
+        return speed;
     }
 }
 

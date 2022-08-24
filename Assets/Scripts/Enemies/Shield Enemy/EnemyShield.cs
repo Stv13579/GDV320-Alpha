@@ -40,12 +40,13 @@ public class EnemyShield : BaseEnemyClass
             }
         }
         currentHealth -= (damageToTake * multiplier) * damageResistance - damageThreshold;
-        Debug.Log("Shield damage");
+        Death();
+
     }
 
     public void StartAttack()
     {
-        foreach(Collider col in attackCollider)
+        foreach (Collider col in attackCollider)
         {
             col.enabled = true;
         }
@@ -72,12 +73,30 @@ public class EnemyShield : BaseEnemyClass
 
     private void OnTriggerEnter(Collider other)
     {
-        if(attacking)
+        if (attacking)
         {
-            if(other.gameObject.GetComponent<PlayerClass>())
+            if (other.gameObject.GetComponent<PlayerClass>())
             {
                 other.gameObject.GetComponent<PlayerClass>().ChangeHealth(-damageAmount);
             }
+        }
+    }
+
+    public override void Death()
+    {
+        if (isDead)
+        {
+            return;
+        }
+        if (currentHealth <= 0)
+        {
+            isDead = true;
+            //Normally do death animation/vfx, might even fade alpha w/e before deleting.
+
+
+            Destroy(gameObject);
+
+
         }
     }
 }

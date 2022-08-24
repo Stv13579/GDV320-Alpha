@@ -37,7 +37,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
     public override void Attacking()
     {
         base.Attacking();
-        playerClass.ChangeHealth(-damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti), transform.position, pushForce);
+        playerClass.ChangeHealth(-damageAmount * (prophecyManager.prophecyDamageMulti), transform.position, pushForce);
     }
     //Moves towards the player if the slime can see them, othewise follow the flowfield to them
     public override void Movement(Vector3 positionToMoveTo)
@@ -76,7 +76,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
 
                 pos = player.transform.position + posOffset;
             }
-            Vector3 moveForce = (pos - this.transform.position).normalized * moveSpeed * moveSpeedMulti;
+            Vector3 moveForce = (pos - this.transform.position).normalized * moveSpeed;
             moveForce += new Vector3(0, jumpForce, 0);
             GetComponent<Rigidbody>().AddForce(moveForce);
             jumpTimer = Random.Range(1.5f, 3.0f);
@@ -86,7 +86,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
             if(Vector3.SqrMagnitude(this.transform.position - pos) > 10)
             {
                 Vector3 dir = (pos - this.transform.position).normalized;
-                Vector3 move = dir * ((moveSpeed * moveSpeedMulti) / 50) * Time.deltaTime;
+                Vector3 move = dir * ((moveSpeed) / 50) * Time.deltaTime;
                 this.transform.position += move;
             }
 
@@ -106,14 +106,14 @@ public class WaterSlimeEnemy : BaseEnemyClass
         {
             if(hit.collider.gameObject.tag == "Player")
             {
-                Vector3 moveVec = (player.transform.position - transform.position).normalized * speed * moveSpeedMulti * Time.deltaTime;
+                Vector3 moveVec = (player.transform.position - transform.position).normalized * speed * Time.deltaTime;
                 moveVec.y = 0;
                 moveVec.y -= 1 * Time.deltaTime;
                 transform.position += moveVec;
             }
             else
             {
-                Vector3 moveVec = (moveDirection - transform.position).normalized * speed * moveSpeedMulti * Time.deltaTime;
+                Vector3 moveVec = (moveDirection - transform.position).normalized * speed * Time.deltaTime;
                 moveVec.y = 0;
                 moveVec.y -= 1 * Time.deltaTime;
                 transform.position += moveVec;
@@ -123,7 +123,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
         }
         else
         {
-            Vector3 moveVec = (moveDirection - transform.position).normalized * speed * moveSpeedMulti * Time.deltaTime;
+            Vector3 moveVec = (moveDirection - transform.position).normalized * speed * Time.deltaTime;
             moveVec.y = 0;
             moveVec.y -= 1 * Time.deltaTime;
             transform.position += moveVec;
@@ -219,7 +219,6 @@ public class WaterSlimeEnemy : BaseEnemyClass
                 newSlime.generation = generation + 1;
                 newSlime.spawner = spawner;
                 spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime);
-                newSlime.GetMoveMultis().Clear();
             }
         }
 

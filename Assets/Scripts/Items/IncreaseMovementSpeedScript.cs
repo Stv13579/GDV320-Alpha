@@ -15,9 +15,11 @@ public class IncreaseMovementSpeedScript : Item
 
         PlayerMovement pMove = player.GetComponent<PlayerMovement>();
 
-        Multiplier movementMulti = new Multiplier(1.1f, "moveItem");
+        //Multiplier movementMulti = new Multiplier(1.1f, "moveItem");
 
-        pMove.movementMulti = Multiplier.AddMultiplier(pMove.movementMultipliers, movementMulti);
+        //pMove.movementMulti = Multiplier.AddMultiplier(pMove.movementMultipliers, movementMulti);
+
+        StatModifier.AddModifier(pMove.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(1.1f, "moveItem" + GetInstanceID()));
 
     }
 }

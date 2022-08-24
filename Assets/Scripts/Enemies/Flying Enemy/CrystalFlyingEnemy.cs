@@ -48,7 +48,7 @@ public class CrystalFlyingEnemy : BaseFlyingEnemyScript //Sebastian
     protected override void Effect()
     {
         base.Effect();
-        playerClass.StopCoroutine(playerClass.Vulnerable(new PlayerClass.defenseMultiSource()));
-        playerClass.StartCoroutine(playerClass.Vulnerable(new PlayerClass.defenseMultiSource(0.5f, "Flying Enemy")));
+        StatModifier.StartAddModifierTemporary(playerClass, playerClass.GetDefenseStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Flying Enemy"), 10.0f);
+
     }
 }

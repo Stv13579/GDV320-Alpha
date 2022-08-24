@@ -12,32 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55046088d3acb644bdb741eaf8b1552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 0
   maxHealth: 30
+  baseMaxHealth: 30
   damageAmount: 0
-  damageMultiplier: 1
+  baseDamageAmount: 0
   moveSpeed: 10
-  moveSpeedMulti: 1
+  baseMoveSpeed: 10
   movementMultipliers: []
   damageMultipliers: []
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
-  spawner: {fileID: 0}
   weaknesses: 01000000
   resistances: 00000000
-  bounceList: []
   deathSpawn: {fileID: 1140089593594349035, guid: 58cc516cec47cd9448a27c3f1ed9a4a6,
     type: 3}
   hitSpawn: {fileID: 2154916016029885947, guid: 927b09bead51b864990a49b3960ddc7c,
     type: 3}
-  moveDirection: {x: 0, y: 0, z: 0}
   attackAudio: Flying Enemy Attack
   deathAudio: Flying Enemy Death
   takeDamageAudio: Flying Enemy Damaged
   targettingIndicator: {fileID: 1404768966937678259}
-  oldPosition: {x: 0, y: 0, z: 0}
   effectTimer: 10
-  effectTimerMulti: 1
   moveDetect:
     serializedVersion: 2
     m_Bits: 1024

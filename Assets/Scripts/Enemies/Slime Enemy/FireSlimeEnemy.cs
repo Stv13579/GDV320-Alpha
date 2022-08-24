@@ -40,7 +40,7 @@ public class FireSlimeEnemy : WaterSlimeEnemy
             // creates a plane which is the trail of the fire slime
             GameObject tempEnemyTrail = Instantiate(enemyTrail, transform.position, Quaternion.LookRotation(Vector3.down, forward));
             tempEnemyTrail.transform.localScale = enemyFireTrailScale;
-            tempEnemyTrail.GetComponent<FireSlimeTrail>().SetVars(damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti));
+            tempEnemyTrail.GetComponent<FireSlimeTrail>().SetVars(damageAmount * (prophecyManager.prophecyDamageMulti));
             audioManager.Stop("Fire Slime Trail Initial");
             audioManager.Play("Fire Slime Trail Initial", player.transform, this.transform);
             spawnTimer = spawnTimerLength;
@@ -85,15 +85,14 @@ public class FireSlimeEnemy : WaterSlimeEnemy
             for (int i = 0; i < 2; i++)
             {
                 FireSlimeEnemy newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2), Quaternion.identity).GetComponent<FireSlimeEnemy>();
-                newSlime.maxHealth = maxHealth / 2;
-                newSlime.damageAmount = damageAmount / 2;
+                StatModifier.AddModifier(newSlime.GetHealthStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
+                StatModifier.AddModifier(newSlime.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
+                StatModifier.AddModifier(newSlime.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
                 newSlime.transform.localScale = this.transform.localScale / 2;
-                newSlime.moveSpeed = moveSpeed / 2;
                 newSlime.generation = generation + 1;
                 newSlime.spawner = spawner;
                 spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime);
                 newSlime.enemyFireTrailScale = enemyFireTrailScale / 2;
-                newSlime.GetMoveMultis().Clear();
 
             }
         }

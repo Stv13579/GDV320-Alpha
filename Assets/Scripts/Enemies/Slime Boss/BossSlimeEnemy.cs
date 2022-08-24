@@ -17,7 +17,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     [SerializeField]
     Renderer rend;
 
-    BossSpawn spawner;
+    BossSpawn bossSpawner;
 
     /// <summary>
     /// Weak point objects
@@ -485,14 +485,13 @@ public class BossSlimeEnemy : WaterSlimeEnemy
             for (int i = 0; i < 2; i++)
             {
                 BossSlimeEnemy newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2), Quaternion.identity).GetComponent<BossSlimeEnemy>();
-                newSlime.maxHealth = maxHealth / 4;
-                newSlime.damageAmount = damageAmount / 2;
+                StatModifier.AddModifier(newSlime.GetHealthStat().multiplicativeModifiers, new StatModifier.Modifier(0.25f, "Split " + generation));
+                StatModifier.AddModifier(newSlime.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
+                StatModifier.AddModifier(newSlime.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
                 newSlime.transform.localScale = this.transform.localScale / 2;
-                newSlime.moveSpeed = moveSpeed / 2;
                 newSlime.generation = generation + 1;
                 bossHealthBar.enemies.Add(newSlime);
                 newSlime.bossHealthBar = bossHealthBar;
-                newSlime.GetMoveMultis().Clear();
             }
             bossHealthBar.enemies.Remove(this);
             split = true;
