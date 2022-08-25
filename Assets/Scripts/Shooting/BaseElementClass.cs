@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using UnityEngine;
 
 
@@ -10,17 +11,17 @@ public class BaseElementClass : MonoBehaviour
     //VFX instantiation
     //VFX that plays when the element is used (eg a fireball from fire)
     [SerializeField]
-    public GameObject activatedVFX;
+    protected GameObject activatedVFX;
     //VFX that appears in the hand while this element is active (perhaps nothing for combos)
     [SerializeField]
-    public GameObject handVFX;
+    protected GameObject handVFX;
 
     //VFX that appears around the wrist while this element is active (Mostly unused)
     [SerializeField]
-    public GameObject wristVFX = null;
+    protected GameObject wristVFX = null;
 
     [SerializeField]
-    public float manaCost;
+    protected float manaCost;
 
     //A string to pass to the animator to activate appropriate triggers when 
     [SerializeField]
@@ -46,20 +47,28 @@ public class BaseElementClass : MonoBehaviour
 
     [SerializeField]
     protected List<PlayerClass.ManaName> manaTypes;
-    GameObject player;
-    [SerializeField]
 
+    protected GameObject player;
+
+    [SerializeField]
     protected PlayerClass playerClass;
 
     [SerializeField]
     protected Transform shootingTranform;
+
     [SerializeField]
     protected LayerMask shootingIgnore;
 
     protected AudioManager audioManager;
 
     [SerializeField]
-    string shootingSoundFX;
+    protected string shootingSoundFX;
+    [SerializeField]
+    protected string otherShootingSoundFX;
+    [SerializeField]
+    protected string switchElementSFX;
+    [SerializeField]
+    protected string idleSFX;
 
     protected bool upgraded = false;
 
@@ -74,13 +83,8 @@ public class BaseElementClass : MonoBehaviour
 
     protected Shooting shootingScript;
 
-    public string switchAnimationName;
-
     [SerializeField]
-    protected int leftIndex;
-
-    [SerializeField]
-    protected int rightIndex;
+    protected string switchAnimationName;
 
     protected int randomAnimationToPlay;
 
@@ -118,6 +122,16 @@ public class BaseElementClass : MonoBehaviour
     }
     [SerializeField]
     public ElementType currentElementType = ElementType.Fire;
+
+    public string GetSwitchElementSFX() { return switchElementSFX; }
+    public bool GetStartCoolDown() { return startCoolDown; }
+    public string GetIdleSFX() { return idleSFX; }
+    public GameObject GetHandVFX() { return handVFX; }
+    public GameObject GetWristVFX() { return wristVFX; }
+    public GameObject GetActivatedVFX() { return activatedVFX; }
+
+    public float GetManaCost() { return manaCost; }
+
     protected virtual void Start()
     {
         player = GameObject.Find("Player");
@@ -133,7 +147,9 @@ public class BaseElementClass : MonoBehaviour
     // this gets call in activate elements
     protected virtual void StartAnims(string animationName, string animationNameAlt = null)
     {
-
+        audioManager.StopSFX(idleSFX);
+        audioManager.StopSFX(shootingSoundFX);
+        audioManager.PlaySFX(shootingSoundFX);
     }
     //Called from the hand objects when the appropriate event triggers to turn on the vfx
     // gets called same time as elementeffect
@@ -182,8 +198,6 @@ public class BaseElementClass : MonoBehaviour
     // event on animation plays this if call the right trigger
     public virtual void ElementEffect()
     {
-        audioManager.Stop(shootingSoundFX);
-        audioManager.Play(shootingSoundFX);
         // once player has clicked to shoot start the cool cool down timer
         startCoolDown = true;
     }

@@ -31,12 +31,14 @@ public class NecroticElement : BaseElementClass
         playerHand.ResetTrigger("NecroticStopCast");
         playerHand.SetTrigger(animationName);
 
-        audioManager.Play("Soul Element");
         isTargeting = true;
     }
     public override void ElementEffect()
     {
         base.ElementEffect();
+        audioManager.StopSFX(shootingSoundFX);
+        audioManager.PlaySFX(otherShootingSoundFX);
+
         isTargeting = false;
         if (targetToSlow && targetToSlow.GetComponent<BaseEnemyClass>() && !targetToSlow.GetComponent<EnemyShield>())
         {
@@ -97,8 +99,6 @@ public class NecroticElement : BaseElementClass
         base.LiftEffect();
 
         playerHand.SetTrigger("NecroticStopCast");
-
-        audioManager.Stop("Soul Element");
 
         if (shootingScript.GetRightOrbPos().childCount > 1)
         {

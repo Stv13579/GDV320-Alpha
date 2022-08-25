@@ -59,6 +59,7 @@ public class PlayerLook : MonoBehaviour
     }
 
     // Start is called before the first frame update
+    // TO DO:
     private void Start()
     {
         ToggleCursor();
@@ -75,6 +76,7 @@ public class PlayerLook : MonoBehaviour
     }
 
     // toggle to lock the cursor
+    // TO DO:
     public void ToggleCursor()
     {
         cursorLocked = !cursorLocked;
@@ -119,7 +121,7 @@ public class PlayerLook : MonoBehaviour
             // stops the player from snapping their neck
             tilt = Mathf.Clamp(tilt, tiltExtents.x, tiltExtents.y);
 
-            // 
+            // tilts the player if the player moves with the roll input
             roll = Mathf.Lerp(roll, targetRoll, rollSpeed * Time.deltaTime);
 
             RollInput();

@@ -41,8 +41,8 @@ public class BossSpawn : MonoBehaviour
         // starts the boss music and sets back the volume of the ambient sound
         if (audioManager.sounds[0].audioSource.volume <= 0 && fadeOutBattleAudio == false)
         {
-            audioManager.Stop("Ambient Sound");
-            audioManager.Play("Boss Music");
+            audioManager.StopMusic("Ambient Sound");
+            audioManager.PlayMusic("Boss Music");
             fadeOutAmbientAudio = false;
             audioManager.sounds[0].audioSource.volume = 0.1f;
         }
@@ -54,8 +54,8 @@ public class BossSpawn : MonoBehaviour
         // starts the ambient sound again and sets the volume back for the boss music
         if (audioManager.sounds[34].audioSource.volume <= 0 && fadeOutAmbientAudio == false)
         {
-            audioManager.Stop("Boss Music");
-            audioManager.Play("Ambient Sound");
+            audioManager.StopMusic("Boss Music");
+            audioManager.PlayMusic("Ambient Sound");
             fadeOutBattleAudio = false;
             audioManager.sounds[34].audioSource.volume = 0.1f;
         }

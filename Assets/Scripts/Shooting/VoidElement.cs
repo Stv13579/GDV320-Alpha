@@ -14,7 +14,6 @@ public class VoidElement : BaseElementClass
     [SerializeField]
     private GameObject Indicator;
     private bool isHolding;
-    private bool switchElement;
     //[SerializeField]
     //private Material voidMaterial;
 
@@ -31,6 +30,7 @@ public class VoidElement : BaseElementClass
             playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold")))
         {
             isHolding = false;
+            audioManager.PlaySFX(otherShootingSoundFX);
             playerHand.SetTrigger("VoidCastSuccess");
         }
         if (isHolding)
@@ -99,7 +99,6 @@ public class VoidElement : BaseElementClass
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);
-        switchElement = false;
         playerHand.SetTrigger(animationName);
         playerHand.ResetTrigger("VoidStopCast");
         Indicator.SetActive(true);

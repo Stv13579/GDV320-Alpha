@@ -51,8 +51,8 @@ public class ShardProjectile : BaseElementSpawnClass
         if (other.gameObject.layer == 8)
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            audioManager.Stop("Slime Damage");
-            audioManager.Play("Slime Damage");
+            audioManager.StopSFX("Slime Damage");
+            audioManager.PlaySFX("Slime Damage");
             //hitMarker.transform.GetChild(7).gameObject.SetActive(true);
             //Invoke("HitMarkerDsable", 0.2f);
         }

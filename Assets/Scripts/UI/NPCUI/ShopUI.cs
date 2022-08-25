@@ -84,8 +84,8 @@ public class ShopUI : NPCUI
             player.AddItem(item);
             buttons[button].SetActive(false);
             player.ChangeMoney(-shopItems[button].currencyCost);
-            audioManager.Stop("Shop Buy");
-            audioManager.Play("Shop Buy");
+            audioManager.StopSFX("Shop Buy");
+            audioManager.PlaySFX("Shop Buy");
         }
     }
 

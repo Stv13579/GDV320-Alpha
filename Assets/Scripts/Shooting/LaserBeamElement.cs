@@ -36,7 +36,7 @@ public class LaserBeamElement : BaseElementClass
        usingLaser = false;
        laserBeam.SetActive(false);
        playerHand.SetTrigger("LaserBeamStopCast");
-       audioManager.Stop("Laser Beam");
+       audioManager.StopSFX(shootingSoundFX);
        laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
        StatModifier.RemoveModifier(playerMovement.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.25f, "Laser"));
     }

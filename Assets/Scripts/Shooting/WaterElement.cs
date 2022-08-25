@@ -53,10 +53,14 @@ public class WaterElement : BaseElementClass
         if (randomAnimationToPlay == 0)
         {
             playerHand.SetTrigger(animationName);
+            audioManager.StopSFX(shootingSoundFX);
+            audioManager.PlaySFX(shootingSoundFX);
         }
         else
         {
             playerHand.SetTrigger(animationNameAlt);
+            audioManager.StopSFX(otherShootingSoundFX);
+            audioManager.PlaySFX(otherShootingSoundFX);
         }
     }
 }

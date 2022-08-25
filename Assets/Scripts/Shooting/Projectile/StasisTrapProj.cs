@@ -74,8 +74,8 @@ public class StasisTrapProj : MonoBehaviour
                         aftermathVFX.GetComponent<ParticleSystem>().Play();
                     }
                     this.GetComponent<Collider>().enabled = false;
-                    audioManager.Stop("Stasis Trap Explosion");
-                    audioManager.Play("Stasis Trap Explosion");
+                    audioManager.StopSFX("Stasis Trap Explosion");
+                    audioManager.PlaySFX("Stasis Trap Explosion");
                     if (duration >= maxDuration)
                     {
                         for (int i = 0; i < containedEnemies.Count; i++)
