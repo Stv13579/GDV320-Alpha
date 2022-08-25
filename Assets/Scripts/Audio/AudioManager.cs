@@ -32,6 +32,7 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] sounds;
 
+    public Sound[] Musics;
     public string initalMusic;
     
     [SerializeField]
@@ -52,11 +53,22 @@ public class AudioManager : MonoBehaviour
             i.audioSource.loop = i.loop;
         }
 
-        Play(initalMusic);
+        foreach (Sound i in Musics) // loop through the sounds
+        {
+            i.audioSource = gameObject.AddComponent<AudioSource>();
+            i.audioSource.clip = i.clip;
+
+            i.audioSource.volume = i.volume;
+            i.audioSource.pitch = i.pitch;
+
+            i.audioSource.loop = i.loop;
+        }
+
+        PlayMusic(initalMusic);
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Play(string soundName, Transform playerPos = null, Transform enemyPos = null) // play sound 
+    public void PlaySFX(string soundName, Transform playerPos = null, Transform enemyPos = null) // play sound 
     {
         Sound s = Array.Find(sounds, item => item.name == soundName);
 
@@ -78,7 +90,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void Stop(string soundName) // play sound 
+    public void StopSFX(string soundName) // play sound 
     {
         Sound s = Array.Find(sounds, item => item.name == soundName);
 
@@ -91,13 +103,46 @@ public class AudioManager : MonoBehaviour
         s.audioSource.Stop();
 
     }
-    
+
+    public void PlayMusic(string soundName) // play sound 
+    {
+        Sound s = Array.Find(Musics, item => item.name == soundName);
+
+        if (s == null) // if no sound, dont try play one 
+        {
+            Debug.LogWarning("Sound: " + name + " was not found!"); // error message
+            return;
+        }
+        if (!s.audioSource.isPlaying)
+        {
+            s.audioSource.Play();
+        }
+
+    }
+
+
+    public void StopMusic(string soundName) // play sound 
+    {
+        Sound s = Array.Find(Musics, item => item.name == soundName);
+
+        if (s == null) // if no sound, dont try play one 
+        {
+            Debug.LogWarning("Sound: " + name + " was not found!"); // error message
+            return;
+        }
+
+        s.audioSource.Stop();
+
+    }
+
     // takes in the string of the audio that you want to fade in
     // takes in the string of the audio that you want to fade out
-    // takes in ints for the audios in the sounds list
     // takes in an int which changes state
-    public void FadeInAndOutMusic(string fadeIn, string fadeOut, int audioIn, int audioOut, int State)
+    public void FadeInAndOutMusic(string fadeIn, string fadeOut, int State)
     {
+        Sound soundFadeIn = Array.Find(Musics, item => item.name == fadeIn);
+        Sound soundFadeOut = Array.Find(Musics, item => item.name == fadeOut);
+
         if (State == 0)
         {
             return;
@@ -105,14 +150,15 @@ public class AudioManager : MonoBehaviour
         //state 1 is fade out music
         if (State == 1)
         {
-            sounds[audioOut].audioSource.volume -= 0.01f * Time.deltaTime;
+            soundFadeOut.audioSource.volume -= 0.01f * Time.deltaTime;
+            //sounds[audioOut].audioSource.volume -= 0.01f * Time.deltaTime;
             // stops the music and then changes to state 2 and resets the audio volume
-            if (sounds[audioOut].audioSource.volume <= 0)
+            if (soundFadeOut.audioSource.volume <= 0)
             {
-                Stop(fadeOut);
+                soundFadeOut.audioSource.Stop();
                 State = 2;
-                sounds[audioOut].audioSource.volume = 0.1f;
-                sounds[audioIn].audioSource.volume = 0.0f;
+                soundFadeOut.audioSource.volume = 0.1f;
+                soundFadeIn.audioSource.volume = 0.0f;
             }
         }
         // state 2 is fade in music
@@ -120,12 +166,12 @@ public class AudioManager : MonoBehaviour
         // after it changes to a different state to stop the fade in and out
         if (State == 2)
         {
-            Play(fadeIn);
-            sounds[audioIn].audioSource.volume += 0.01f * Time.deltaTime;
-            if (sounds[audioIn].audioSource.volume >= 0.1f)
+            soundFadeIn.audioSource.Play();
+            soundFadeIn.audioSource.volume += 0.01f * Time.deltaTime;
+            if (soundFadeIn.audioSource.volume >= 0.1f)
             {
                 State = 0;
-                sounds[audioIn].audioSource.volume = 0.1f;
+                soundFadeIn.audioSource.volume = 0.1f;
             }
         }
     }

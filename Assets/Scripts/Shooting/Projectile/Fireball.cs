@@ -97,8 +97,8 @@ public class Fireball : BaseElementSpawnClass
         if (other.gameObject.layer == 8 && active && other.GetComponent<BaseEnemyClass>())
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            audioManager.Stop("Slime Damage");
-            audioManager.Play("Slime Damage");
+            audioManager.StopSFX("Slime Damage");
+            audioManager.PlaySFX("Slime Damage");
             hitMarker.transform.GetChild(7).gameObject.SetActive(true);
             Invoke("HitMarkerDsable", 0.2f);
             taggedEnemy = other;
@@ -136,8 +136,8 @@ public class Fireball : BaseElementSpawnClass
             this.gameObject.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
             // Sound FX
-            audioManager.Stop("Fireball Impact");
-            audioManager.Play("Fireball Impact");
+            audioManager.StopSFX("Fire Element Impact");
+            audioManager.PlaySFX("Fire Element Impact");
         }
 
 

@@ -28,8 +28,8 @@ public class FortunesUI : NPCUI
             player.money -= cost;
 
             SetProphecies();
-            audioManager.Stop("Shop Buy");
-            audioManager.Play("Shop Buy");
+            audioManager.StopSFX("Shop Buy");
+            audioManager.PlaySFX("Shop Buy");
             transform.Find("Buy Fortunes").gameObject.SetActive(false);
         }
     }
@@ -39,8 +39,8 @@ public class FortunesUI : NPCUI
 
         prophecies[index].InitialEffect();
         buttons[index].SetActive(false);
-        audioManager.Stop("Shop Buy");
-        audioManager.Play("Shop Buy");
+        audioManager.StopSFX("Shop Buy");
+        audioManager.PlaySFX("Shop Buy");
         Close();
         NPC.canSeeOfferings = false;
     }

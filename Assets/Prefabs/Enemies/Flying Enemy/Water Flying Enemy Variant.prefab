@@ -19,8 +19,6 @@ MonoBehaviour:
   baseDamageAmount: 0
   moveSpeed: 10
   baseMoveSpeed: 10
-  movementMultipliers: []
-  damageMultipliers: []
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
@@ -32,7 +30,8 @@ MonoBehaviour:
     type: 3}
   attackAudio: Flying Enemy Attack
   deathAudio: Flying Enemy Death
-  takeDamageAudio: Flying Enemy Damaged
+  takeDamageAudio: Flying Enemy Damage
+  idleAudio: Flying Enemy Idle
   targettingIndicator: {fileID: 1404768966937678259}
   effectTimer: 10
   moveDetect:

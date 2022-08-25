@@ -55,15 +55,18 @@ public class IceSlashElement : BaseElementClass
     // when player press the right mouse button
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
-        base.StartAnims(animationName, animationNameAlt);
         randomAnimationToPlay = Random.Range(0, 2);
         if (randomAnimationToPlay == 0)
         {
             playerHand.SetTrigger(animationName);
+            audioManager.StopSFX(shootingSoundFX);
+            audioManager.PlaySFX(shootingSoundFX);
         }
         else
         {
             playerHand.SetTrigger(animationNameAlt);
+            audioManager.StopSFX(otherShootingSoundFX);
+            audioManager.PlaySFX(otherShootingSoundFX);
         }
     }
 }

@@ -58,8 +58,8 @@ public class BaseDropScript : MonoBehaviour //Sebastian
     //Does whatever the drop should do 
     protected virtual void PickupEffect()
     {
-        audioManager.Stop("Currency Pickup");
-        audioManager.Play("Currency Pickup");
+        audioManager.StopSFX("Currency Pickup");
+        audioManager.PlaySFX("Currency Pickup");
     }
 
     public void SetRoomEnd(bool end)

@@ -20,11 +20,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float acceleration;
     [SerializeField]
-    private AnimationCurve frictionCurve = AnimationCurve.Linear(0, 0.1f, 1, 1);
+    private AnimationCurve frictionCurve = AnimationCurve.Linear(0.0f, 0.1f, 1.0f, 1.0f);
     [SerializeField]
     private float movementSpeed, maxMovementSpeed = 13.0f, baseMaxMovementSpeed = 13.0f;
 
-    StatModifier.FullStat speed = new StatModifier.FullStat(0);
+    StatModifier.FullStat speed = new StatModifier.FullStat(0.0f);
 
     [SerializeField]
     private float coyoteTime;
@@ -234,7 +234,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // plays random foot step sound effects
-        // TO DO:
         randIndexTimer -= Time.deltaTime;
         int randomSoundIndex = Random.Range(0, 4);
         if (isGrounded == true && (Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.S)) ||
@@ -242,8 +241,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (randIndexTimer <= 0.0f)
             {
-                audioManager.Stop($"Player Running {randomSoundIndex + 1}");
-                audioManager.Play($"Player Running {randomSoundIndex + 1}");
+                audioManager.StopSFX($"Player Running {randomSoundIndex + 1}");
+                audioManager.PlaySFX($"Player Running {randomSoundIndex + 1}");
                 randIndexTimer = 0.37f;
             }
 
@@ -317,8 +316,8 @@ public class PlayerMovement : MonoBehaviour
             currentCoyoteTime = coyoteTime;
             if (isHeadShaking == true)
             {
-                audioManager.Stop("Player Landing");
-                audioManager.Play("Player Landing");
+                audioManager.StopSFX("Player Landing");
+                audioManager.PlaySFX("Player Landing");
                 CameraShake();
                 isHeadShaking = false;
             }

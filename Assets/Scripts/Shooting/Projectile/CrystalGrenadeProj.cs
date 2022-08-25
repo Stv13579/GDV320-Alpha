@@ -75,8 +75,8 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                     attached.SetActive(false);
                     explosion.SetActive(true);
                     explosion.transform.SetParent(null);
-                    audioManager.Stop("Crystal Grenade Explosion");
-                    audioManager.Play("Crystal Grenade Explosion");
+                    audioManager.StopSFX("Crystal Grenade Explosion");
+                    audioManager.PlaySFX("Crystal Grenade Explosion");
                     Collider[] objectsHit = Physics.OverlapSphere(transform.position, explosionRange);
                     for (int i = 0; i < objectsHit.Length; i++)
                     {

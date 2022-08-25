@@ -44,38 +44,374 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Ambient Sound
-    clip: {fileID: 8300000, guid: 5897f7744a68ef74eabf1147ee6f8eb9, type: 3}
-    volume: 0.1
+  - name: Fire Element Equip
+    clip: {fileID: 8300000, guid: 202027d459b67894896820d32fbbd63f, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Fire Element Idle
+    clip: {fileID: 8300000, guid: c74654def82bdfe44b1aa1e14d85e7c8, type: 3}
+    volume: 0.01
     pitch: 1
     loop: 1
     audioSource: {fileID: 0}
-  - name: Hub Room Music
-    clip: {fileID: 8300000, guid: 04601794dd9cd4f4597225023dd43a4a, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 1
-    audioSource: {fileID: 0}
-  - name: Inlevel Music
-    clip: {fileID: 8300000, guid: 7cbc720e479f11842bb0dd6590674538, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 1
-    audioSource: {fileID: 0}
-  - name: Menu and Pause
-    clip: {fileID: 8300000, guid: 57b9a4f4e43a62c4a9782e7da700a9e5, type: 3}
+  - name: Fire Element Shot
+    clip: {fileID: 8300000, guid: d983dc9d97d0d944a82a5149dddf03fa, type: 3}
     volume: 0.1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
-  - name: Shop Buy
-    clip: {fileID: 8300000, guid: 9e05a52546a53ca4ea00842cf2a6b293, type: 3}
+  - name: Fire Element Shot Alt
+    clip: {fileID: 8300000, guid: cbfac1adc8acb8049b0e3f675352352a, type: 3}
     volume: 0.1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
-  - name: Player Landing
-    clip: {fileID: 8300000, guid: 1ccdc4866bd9de642b7fba57f3480139, type: 3}
+  - name: Fire Element Impact
+    clip: {fileID: 8300000, guid: 235cb9f15ec4d754faf9c979a3bc564f, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Crystal Element Equip
+    clip: {fileID: 8300000, guid: 0c6876ece93504145aa524418a4b7264, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Crystal Element Idle (maybe)
+    clip: {fileID: 8300000, guid: 57d653923671a674d8f7bb19cadc2ee2, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Crystal Element Shot
+    clip: {fileID: 8300000, guid: b3995630e4b256e48a4f5753f0294d52, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Crystal Element Shot Alt
+    clip: {fileID: 8300000, guid: 84868e14be69d7e4ea00b1c1f07c15f1, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Water Element Equip
+    clip: {fileID: 8300000, guid: 6be00ccf2d3a24845927e48f090007fd, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Water Element Idle
+    clip: {fileID: 8300000, guid: 151887dfe7d4ecd4fbd9c730ff0c562c, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Water Element Shot
+    clip: {fileID: 8300000, guid: 3d8e853d2970b4747ab97d16225b6361, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Water Element Shot Alt
+    clip: {fileID: 8300000, guid: 4b9ee703e920262428a6dab0cff1f779, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Necrotic Element Equip
+    clip: {fileID: 8300000, guid: 1751c37f6f662a4438f8dce05c581813, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Necrotic Element Idle
+    clip: {fileID: 8300000, guid: b0c7aebe94758f6479fffd69f5f53d05, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Necrotic Element Hold
+    clip: {fileID: 8300000, guid: 29a51d033fb543d43b8ac80756ffd7b2, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Necrotic Element Release
+    clip: {fileID: 8300000, guid: 5387c5f7f0f0979489169dd9e4d3ceb3, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Energy Element Equip
+    clip: {fileID: 8300000, guid: 89294c8fd41d5954bb6e78020151189e, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Energy Element Idle
+    clip: {fileID: 8300000, guid: cafc45f8629979049bacdfc864cafb0e, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Energy Element Hold
+    clip: {fileID: 8300000, guid: 4bed495d018da2d4f9f3127d78ddeea3, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Energy Element Shot
+    clip: {fileID: 8300000, guid: 63d7a671d7f9b264d9bf9e60a828d330, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Void Element Equip
+    clip: {fileID: 8300000, guid: 52375f93e4e658940869c50f18aa729f, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Void Element Idle
+    clip: {fileID: 8300000, guid: 30590ba3038f26d4485b337ecdb6baa0, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Void Element Click
+    clip: {fileID: 8300000, guid: 87d5e6460d06e9a498716d1279dae63e, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Void Element Release
+    clip: {fileID: 8300000, guid: 655d259d992bbe64a8e0f71b5b7d9828, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Laser Beam Equip
+    clip: {fileID: 8300000, guid: 71e7296e99e0d634484b80e209d23fe5, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Laser Beam Idle
+    clip: {fileID: 8300000, guid: ba2664b22ae16d94c83022bdff752b3b, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Laser Beam Hold
+    clip: {fileID: 8300000, guid: 852852fb9775f264fbd68b998c2af30f, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Laser Beam Shot
+    clip: {fileID: 0}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Shard Cannon Equip
+    clip: {fileID: 8300000, guid: 88b01d691f967bd4ca47d33a82c12ade, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Shard Cannon Idle (maybe)
+    clip: {fileID: 8300000, guid: 24c8077b9ea70e946b4eb4016e76abf8, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Shard Cannon Shot
+    clip: {fileID: 8300000, guid: ce81c42d9d8191641a4b1ae7dedad444, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Acid Cloud Equip
+    clip: {fileID: 8300000, guid: 47ce332be2073e443a60b9ffc14f732d, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Acid Cloud Idle
+    clip: {fileID: 8300000, guid: ca1ba46487c289c41a4cc60f849a6e8c, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Acid Cloud Shot
+    clip: {fileID: 8300000, guid: 97a0f82ac2767cb459a49b7da4b441c7, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Land Mine Equip
+    clip: {fileID: 8300000, guid: 90a07a8113a409b4db1e5ee0cb8d2409, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Land Mine Idle
+    clip: {fileID: 8300000, guid: f5210cbc524dbf3498b841ceff4cfaff, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Land Mine Shot
+    clip: {fileID: 8300000, guid: f5210cbc524dbf3498b841ceff4cfaff, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Land Mine Explosion
+    clip: {fileID: 8300000, guid: c6c1ccbabbe3c744fb653b310a680074, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Curse Equip
+    clip: {fileID: 8300000, guid: 5ccce143b69c353428a0822b5dba4b35, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Curse Idle
+    clip: {fileID: 8300000, guid: aedf0bcc01ccef845b9e2e9a0d55a92d, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Curse Hold
+    clip: {fileID: 8300000, guid: d30d8064dc685824baf8121cc5f754fe, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Curse Release
+    clip: {fileID: 8300000, guid: f9708217a56fb7047bda9a0ecc85a33c, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Curse Explosion
+    clip: {fileID: 8300000, guid: 5d32df3b842f4ba4fb9e78ab4b8581b0, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Ice Slash Equip
+    clip: {fileID: 8300000, guid: 58f36c5726bcf81468133ffd8ae91e7f, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Ice Slash Idle
+    clip: {fileID: 8300000, guid: 6c70f12000d31af41ad5b47f52c95ed5, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Ice Slash Shot
+    clip: {fileID: 8300000, guid: 9e0396806b8c0b9448b8d5ddd0f147f3, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Ice Slash Shot Alt
+    clip: {fileID: 8300000, guid: 7847436a204505c4f93d0b376fb58f23, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Life Steal Equip
+    clip: {fileID: 8300000, guid: a632b8c175c578b4c9106864582cc428, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Life Steal Idle
+    clip: {fileID: 8300000, guid: d9973508f4d37704ebc54ea93cffb485, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Life Steal Hold
+    clip: {fileID: 8300000, guid: 6f4f4de0356ed32429807190714ef6da, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Life Steal Shot
+    clip: {fileID: 0}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Crystal Grenade Equip
+    clip: {fileID: 8300000, guid: 8e1eed1a618d04549af42fb608c5150b, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Crystal Grenade Idle (maybe)
+    clip: {fileID: 8300000, guid: 57d653923671a674d8f7bb19cadc2ee2, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Crystal Grenade Shot
+    clip: {fileID: 8300000, guid: 99a80a648106bce458a7faebed801a2c, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Crystal Grenade Explosion
+    clip: {fileID: 8300000, guid: 0adb349e5001b234ca1dc6beb9850b73, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Crystal Grenade Stick
+    clip: {fileID: 0}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Crystal Grenade Tick
+    clip: {fileID: 0}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Stasis Trap Equip
+    clip: {fileID: 8300000, guid: d806bc5140fa9854ca9a97618f158d39, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Stasis Trap Idle
+    clip: {fileID: 8300000, guid: cbe65e7b88a7a7a4aa8b93b7a00ebe4d, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Stasis Trap Shot
+    clip: {fileID: 8300000, guid: d3000a9e674558244a550e98da663c16, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Stasis Trap Explosion
+    clip: {fileID: 8300000, guid: 67c53f72009a4e041b38f603fdf8d4bc, type: 3}
     volume: 0.1
     pitch: 1
     loop: 0
@@ -104,9 +440,33 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
+  - name: Player Landing
+    clip: {fileID: 8300000, guid: 1ccdc4866bd9de642b7fba57f3480139, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
   - name: Player Damage
     clip: {fileID: 8300000, guid: f6ec4b903945e634e9bd0d1350d81a49, type: 3}
-    volume: 0.3
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Menu and Pause
+    clip: {fileID: 8300000, guid: 3e7a5b856238e7341a70e9b691e4396c, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Shop Buy
+    clip: {fileID: 8300000, guid: 9e05a52546a53ca4ea00842cf2a6b293, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Currency Pickup
+    clip: {fileID: 8300000, guid: 3e7a5b856238e7341a70e9b691e4396c, type: 3}
+    volume: 0.1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
@@ -146,84 +506,6 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
-  - name: Change Element
-    clip: {fileID: 8300000, guid: ffb08f902d9ea1d41872f9edb5a9910c, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Currency Pickup
-    clip: {fileID: 8300000, guid: 3e7a5b856238e7341a70e9b691e4396c, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Energy Element
-    clip: {fileID: 8300000, guid: 5eb79fc400fa7b74492561c6d2c2d3b7, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 1
-    audioSource: {fileID: 0}
-  - name: Soul Element
-    clip: {fileID: 8300000, guid: d4cbf1488a228cd448404f5ab0d04fff, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 1
-    audioSource: {fileID: 0}
-  - name: Crystal Shotgun
-    clip: {fileID: 8300000, guid: b3995630e4b256e48a4f5753f0294d52, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Fireball Initial
-    clip: {fileID: 8300000, guid: d983dc9d97d0d944a82a5149dddf03fa, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Fireball Impact
-    clip: {fileID: 8300000, guid: 235cb9f15ec4d754faf9c979a3bc564f, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Laser Beam
-    clip: {fileID: 8300000, guid: 852852fb9775f264fbd68b998c2af30f, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 1
-    audioSource: {fileID: 0}
-  - name: Shard Cannon
-    clip: {fileID: 8300000, guid: ce81c42d9d8191641a4b1ae7dedad444, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Curse Element Initial
-    clip: {fileID: 8300000, guid: f9708217a56fb7047bda9a0ecc85a33c, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Curse Element Explosion
-    clip: {fileID: 8300000, guid: 5d32df3b842f4ba4fb9e78ab4b8581b0, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Acid Cloud (Long)
-    clip: {fileID: 8300000, guid: 97a0f82ac2767cb459a49b7da4b441c7, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Acid Cloud (Short)
-    clip: {fileID: 8300000, guid: 21d0d549315044940a8c6e9c984345f0, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
   - name: Slime Boss Death
     clip: {fileID: 8300000, guid: 911d25d278ce8514fbc0cfe0b6711c62, type: 3}
     volume: 0.1
@@ -244,155 +526,11 @@ MonoBehaviour:
     audioSource: {fileID: 0}
   - name: Player Burn Damage
     clip: {fileID: 8300000, guid: 8674d9e87423ccd428375b7bbca70faf, type: 3}
-    volume: 0.3
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Boss Music
-    clip: {fileID: 8300000, guid: 5aaedbbfe8b769e43bdb8c830ea36a18, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 1
-    audioSource: {fileID: 0}
-  - name: Crystal Grenade Initial
-    clip: {fileID: 8300000, guid: 753bf05673a98f94a91696f79da1ce17, type: 3}
     volume: 0.1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
-  - name: Ice Slash Shoot
-    clip: {fileID: 8300000, guid: 9e0396806b8c0b9448b8d5ddd0f147f3, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Life Steal Initial
-    clip: {fileID: 8300000, guid: bf98a6621ef9fc947a4354f6ca657f23, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Life Steal Hold
-    clip: {fileID: 8300000, guid: 4d398e84238ee284c91f7843c0ad19e4, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 1
-    audioSource: {fileID: 0}
-  - name: Stasis Trap Initial
-    clip: {fileID: 8300000, guid: aae5120a91551254ca80219c98ccf591, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Stasis Trap Explosion
-    clip: {fileID: 8300000, guid: 15f05544dc2d60e48a16fd9382af0953, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: LandMine Explosion
-    clip: {fileID: 8300000, guid: 8020aa0274b27d44baf5e9b20aaf605e, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Crystal Grenade Explosion
-    clip: {fileID: 8300000, guid: 0adb349e5001b234ca1dc6beb9850b73, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: LandMine Shoot
-    clip: {fileID: 8300000, guid: db092ef11137a414997b7ccca92bbb78, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Water Element Shoot
-    clip: {fileID: 8300000, guid: 8cca9b9e898d2c54280009d60fa1a0bb, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Void Shoot
-    clip: {fileID: 8300000, guid: c817af89e31e4ce4ba0ce7fa2b86beab, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Necrotic Shoot
-    clip: {fileID: 8300000, guid: c817af89e31e4ce4ba0ce7fa2b86beab, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Energy Shoot
-    clip: {fileID: 8300000, guid: 63d7a671d7f9b264d9bf9e60a828d330, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Energy Hold
-    clip: {fileID: 8300000, guid: 4bed495d018da2d4f9f3127d78ddeea3, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 1
-    audioSource: {fileID: 0}
-  - name: Flying Enemy Attack
-    clip: {fileID: 8300000, guid: 49567b6d4a5e6e7408522bf826677db0, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Flying Enemy Damaged
-    clip: {fileID: 8300000, guid: 5bf3803ca50a10d47a959870a5f2a769, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Flying Enemy Death
-    clip: {fileID: 8300000, guid: 3629775cd29bd0c48bf4635021d195e7, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Flying Enemy Idle
-    clip: {fileID: 8300000, guid: 5241fc186c7f88a4b911ce9f30954247, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Flying Boss Attack
-    clip: {fileID: 8300000, guid: 877b8638ceb8f4647ac2c4a4c79fa2ee, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Flying Boss Damaged
-    clip: {fileID: 8300000, guid: 61f50f2d734205f4c8cd75fa3ac20ffd, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Flying Boss Death
-    clip: {fileID: 8300000, guid: d7a796782d42ebe4d9a5dd8cf87236dc, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Flying Boss Idle
-    clip: {fileID: 8300000, guid: af5be03a489ea1149b56db549ae2fc3c, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Ranged Enemy Attack
-    clip: {fileID: 8300000, guid: 5c332fd25b8078243b47fe5e844849a9, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Ranged enemy Damaged
+  - name: Ranged Enemy Damage
     clip: {fileID: 8300000, guid: ccd21d9e8540b354f8aa809d1eaa6e73, type: 3}
     volume: 0.1
     pitch: 1
@@ -404,19 +542,19 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
+  - name: Ranged Enemy Attack
+    clip: {fileID: 8300000, guid: 5c332fd25b8078243b47fe5e844849a9, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
   - name: Ranged Enemy Idle
     clip: {fileID: 8300000, guid: 4ad4d695e27e5424e92b3c465f9071c3, type: 3}
-    volume: 0.1
+    volume: 0.05
     pitch: 1
-    loop: 0
+    loop: 1
     audioSource: {fileID: 0}
-  - name: Ranged Boss Attack
-    clip: {fileID: 8300000, guid: 7d6b2612e4d10c346be672e7bcfa8139, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-  - name: Ranged Boss Damaged
+  - name: Ranged Boss Damage
     clip: {fileID: 8300000, guid: 2d7632b4296d5cc41bfeea12dc2f8100, type: 3}
     volume: 0.1
     pitch: 1
@@ -428,32 +566,105 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
-  - name: Ranged Boss Idle
-    clip: {fileID: 8300000, guid: 1928895b68a72ca4fb5f3ef36f90dfe2, type: 3}
+  - name: Ranged Boss Attack
+    clip: {fileID: 8300000, guid: 7d6b2612e4d10c346be672e7bcfa8139, type: 3}
     volume: 0.1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
-  - name: Boss Music 2
-    clip: {fileID: 8300000, guid: 97a1b59ba844c9f4badbbf7b385484ba, type: 3}
+  - name: Ranged Boss Idle
+    clip: {fileID: 8300000, guid: 1928895b68a72ca4fb5f3ef36f90dfe2, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Flying Enemy Damage
+    clip: {fileID: 8300000, guid: 5bf3803ca50a10d47a959870a5f2a769, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Flying Enemy Death
+    clip: {fileID: 8300000, guid: 3629775cd29bd0c48bf4635021d195e7, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Flying Enemy Attack
+    clip: {fileID: 8300000, guid: 49567b6d4a5e6e7408522bf826677db0, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Flying Enemy Idle
+    clip: {fileID: 8300000, guid: 5241fc186c7f88a4b911ce9f30954247, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  Musics:
+  - name: Ambient Sound
+    clip: {fileID: 8300000, guid: 5897f7744a68ef74eabf1147ee6f8eb9, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - name: Hub Room Music
+    clip: {fileID: 8300000, guid: 04601794dd9cd4f4597225023dd43a4a, type: 3}
     volume: 0.1
     pitch: 1
     loop: 1
     audioSource: {fileID: 0}
-  - name: Boss Music 3
+  - name: Level 1 Non Combat
+    clip: {fileID: 8300000, guid: 7cbc720e479f11842bb0dd6590674538, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Level 1 Combat
+    clip: {fileID: 0}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Level 1 Boss
+    clip: {fileID: 8300000, guid: 5aaedbbfe8b769e43bdb8c830ea36a18, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Level 2 Non Combat
+    clip: {fileID: 8300000, guid: 102953dd0b60a3a45b68a896d8bbac46, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Level 2 Combat
+    clip: {fileID: 0}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Level 2 Boss
     clip: {fileID: 8300000, guid: 543766792812b244b948f9d48714ce4c, type: 3}
     volume: 0.1
     pitch: 1
     loop: 1
     audioSource: {fileID: 0}
-  - name: Inlevel Music 2
-    clip: {fileID: 8300000, guid: 760b10eb31443de488bdec5925d18dd0, type: 3}
+  - name: Level 3 Non Combat
+    clip: {fileID: 8300000, guid: d1f449450b67d734fbf9e667d13631c5, type: 3}
     volume: 0.1
     pitch: 1
     loop: 1
     audioSource: {fileID: 0}
-  - name: Inlevel Music 3
-    clip: {fileID: 8300000, guid: 9422667473c5d5649b5b6981070994c2, type: 3}
+  - name: Level 3 Combat
+    clip: {fileID: 0}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Level 3 Boss
+    clip: {fileID: 0}
     volume: 0.1
     pitch: 1
     loop: 1

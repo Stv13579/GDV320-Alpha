@@ -16,6 +16,7 @@ public class SmoothTransformFollow : MonoBehaviour
     [SerializeField] private float moveSpeed = 8.0f;
     [SerializeField] private float rotateSpeed = 8.0f;
 
+    // function is called when script is loaded or values have change on inspector
     private void OnValidate()
     {
         if (targetTransform)
@@ -24,7 +25,7 @@ public class SmoothTransformFollow : MonoBehaviour
         }
     }
 
-    //the hands will follow the camera as the player moves the mouse
+    // the hands will follow the camera as the player moves the mouse
     private void Update()
     {
 #if UNITY_EDITOR

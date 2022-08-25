@@ -303,9 +303,9 @@ public class BossSlimeEnemy : WaterSlimeEnemy
             tempEnemyProjectile.GetComponent<CrystalSlimeProjectile>().SetVars(damageAmount);
             //setting the rotations of the projectiles so that it spawns in like a circle
             tempEnemyProjectile.transform.eulerAngles = new Vector3(tempEnemyProjectile.transform.eulerAngles.x, tempEnemyProjectile.transform.eulerAngles.y + (360.0f / 5.0f * i), tempEnemyProjectile.transform.eulerAngles.z);
-            audioManager.Stop("Crystal Slime Projectile");
+            audioManager.StopSFX("Crystal Slime Projectile");
             // play SFX
-            audioManager.Play("Crystal Slime Projectile", player.transform, this.transform);
+            audioManager.PlaySFX("Crystal Slime Projectile", player.transform, this.transform);
             enemyAnims.SetTrigger("Shoot");
         }
 
@@ -431,8 +431,8 @@ public class BossSlimeEnemy : WaterSlimeEnemy
                 GameObject tempEnemyTrail = Instantiate(enemyTrail, trailPos, Quaternion.LookRotation(Vector3.down, forward));
                 tempEnemyTrail.transform.localScale = fireTrailScale;
                 tempEnemyTrail.GetComponent<FireSlimeTrail>().SetVars(damageAmount);
-                audioManager.Stop("Fire Slime Trail Initial");
-                audioManager.Play("Fire Slime Trail Initial", player.transform, this.transform);
+                audioManager.StopSFX("Fire Slime Trail Initial");
+                audioManager.PlaySFX("Fire Slime Trail Initial", player.transform, this.transform);
                 spawnTimer = 1.0f;
             }
         }

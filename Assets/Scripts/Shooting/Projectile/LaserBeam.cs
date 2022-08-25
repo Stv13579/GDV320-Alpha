@@ -99,8 +99,8 @@ public class LaserBeam : MonoBehaviour
         if (other.tag == "Enemy" && !containedEnemies.Contains(other.gameObject))
         { 
             containedEnemies.Add(other.gameObject);
-            audioManager.Stop("Slime Damage");
-            audioManager.Play("Slime Damage");
+            audioManager.StopSFX("Slime Damage");
+            audioManager.PlaySFX("Slime Damage");
         }
     }
     private void OnTriggerExit(Collider other)

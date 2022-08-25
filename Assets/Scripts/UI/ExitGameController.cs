@@ -11,8 +11,8 @@ public class ExitGameController : MonoBehaviour
     }
     public void EndGame()
     {
-        audioManager.Stop("Menu and Pause");
-        audioManager.Play("Menu and Pause");
+        audioManager.StopSFX("Menu and Pause");
+        audioManager.PlaySFX("Menu and Pause");
         Application.Quit();
     }
 }

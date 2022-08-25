@@ -43,8 +43,8 @@ public class FireSlimeTrail : MonoBehaviour
         decalRenderer = decalManager.GenerateDecalRenderer(effectMaterial);
         decal.material = decalRenderer.decalMaterial;
 
-        audioManager.Stop("Fire Slime Trail Alive");
-        audioManager.Play("Fire Slime Trail Alive", player.transform, this.transform);
+        audioManager.StopSFX("Fire Slime Trail Alive");
+        audioManager.PlaySFX("Fire Slime Trail Alive", player.transform, this.transform);
     }
     // Update is called once per frame
     void Update()
@@ -55,7 +55,7 @@ public class FireSlimeTrail : MonoBehaviour
         // deletes the trail after trailDuration >= trailLength
         if (trailDuration >= trailLength)
         {
-            audioManager.Stop("Fire Slime Trail Alive");
+            audioManager.StopSFX("Fire Slime Trail Alive");
             decalManager.ReleaseDecalRenderer(decalRenderer);
             Destroy(gameObject);
         }
@@ -96,8 +96,8 @@ public class FireSlimeTrail : MonoBehaviour
             {
                 other.GetComponent<PlayerClass>().ChangeHealth(-trailDamage);
                 trailDamageTicker = 1.0f;
-                audioManager.Stop("Player Burn Damage");
-                audioManager.Play("Player Burn Damage");
+                audioManager.StopSFX("Player Burn Damage");
+                audioManager.PlaySFX("Player Burn Damage");
             }
         }
     }

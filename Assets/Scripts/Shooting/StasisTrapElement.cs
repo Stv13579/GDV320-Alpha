@@ -32,9 +32,8 @@ public class StasisTrapElement : BaseElementClass
     {
         base.Update();
         //if this element is turned on turn on indicator
-        if (shootingScript.GetLeftElementIndex() == leftIndex && 
-            shootingScript.GetRightElementIndex() == rightIndex &&
-            shootingScript.GetInComboMode() == true)
+        if (shootingScript.comboElements[shootingScript.GetLeftElementIndex()].comboElements[shootingScript.GetRightElementIndex()] == this
+            && shootingScript.GetInComboMode() == true)
         {
             indicator.SetActive(true);
         }

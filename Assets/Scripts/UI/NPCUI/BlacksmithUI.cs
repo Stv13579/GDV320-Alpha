@@ -42,8 +42,8 @@ public class BlacksmithUI : NPCUI
             elements[index].Upgrade();
             buttons[index].SetActive(false);
             player.ChangeMoney(-elements[index].upgradeCost);
-            audioManager.Stop("Shop Buy");
-            audioManager.Play("Shop Buy");
+            audioManager.StopSFX("Shop Buy");
+            audioManager.PlaySFX("Shop Buy");
         }
     }
 

@@ -17,8 +17,8 @@ public class AcidCloud : BaseElementSpawnClass
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
-        audioManager.Stop("Gas Cloud (Long)");
-        audioManager.Play("Gas Cloud (Long)");
+        audioManager.StopSFX("Acid Cloud Shot");
+        audioManager.PlaySFX("Acid Cloud Shot");
     }
     void Update()
     {
@@ -60,8 +60,8 @@ public class AcidCloud : BaseElementSpawnClass
         {
             //If an enemy is inside the cloud, deal damage to it
             other.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            audioManager.Stop("Slime Damage");
-            audioManager.Play("Slime Damage");
+            audioManager.StopSFX("Slime Damage");
+            audioManager.PlaySFX("Slime Damage");
             if(other.gameObject.GetComponentInChildren<AcidBurnScript>())
             {
                 other.gameObject.GetComponentInChildren<AcidBurnScript>().timer = 2.0f;

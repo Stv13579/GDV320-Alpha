@@ -3407,13 +3407,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 66816
-  shootingSoundFX: Fireball Initial
+  shootingSoundFX: Fire Element Shot
+  otherShootingSoundFX: Fire Element Shot Alt
+  switchElementSFX: Fire Element Equip
+  idleSFX: Fire Element Idle
   damage: 7
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: FireTransition
-  leftIndex: 0
-  rightIndex: 0
   startCoolDown: 0
   cooldownTimer: 1
   currentElementType: 1
@@ -3480,13 +3481,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 206641
-  shootingSoundFX: Crystal Shotgun
+  shootingSoundFX: Crystal Element Shot
+  otherShootingSoundFX: Crystal Element Shot Alt
+  switchElementSFX: Crystal Element Equip
+  idleSFX: Crystal Element Idle (maybe)
   damage: 1
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: CrystalTransition
-  leftIndex: 1
-  rightIndex: 0
   startCoolDown: 0
   cooldownTimer: 1
   currentElementType: 2
@@ -3550,13 +3552,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 2163984
-  shootingSoundFX: Water Element Shoot
+  shootingSoundFX: Water Element Shot
+  otherShootingSoundFX: Water Element Shot Alt
+  switchElementSFX: Water Element Equip
+  idleSFX: Water Element Idle
   damage: 5
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: WaterTransition
-  leftIndex: 2
-  rightIndex: 0
   startCoolDown: 0
   cooldownTimer: 1
   currentElementType: 3
@@ -3596,13 +3599,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
-  shootingSoundFX: Necrotic Shoot
+  shootingSoundFX: Necrotic Element Hold
+  otherShootingSoundFX: Necrotic Element Release
+  switchElementSFX: Necrotic Element Equip
+  idleSFX: Necrotic Element Idle
   damage: 0
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: NecroticTransition
-  leftIndex: 0
-  rightIndex: 0
   startCoolDown: 0
   cooldownTimer: 1
   currentElementType: 101
@@ -3647,13 +3651,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
-  shootingSoundFX: Energy Shoot
+  shootingSoundFX: Energy Element Hold
+  otherShootingSoundFX: Energy Element Shot
+  switchElementSFX: Energy Element Equip
+  idleSFX: Energy Element Idle
   damage: 0
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: EnergyTransition
-  leftIndex: 0
-  rightIndex: 1
   startCoolDown: 0
   cooldownTimer: 1
   currentElementType: 102
@@ -3693,13 +3698,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 2163968
-  shootingSoundFX: Void Shoot
+  shootingSoundFX: Void Element Click
+  otherShootingSoundFX: Void Element Release
+  switchElementSFX: Void Element Equip
+  idleSFX: Void Element Idle
   damage: 0
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: VoidTransition
-  leftIndex: 0
-  rightIndex: 2
   startCoolDown: 0
   cooldownTimer: 1.5
   currentElementType: 103
@@ -3737,15 +3743,16 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
-  shootingSoundFX: Laser Beam
+  shootingSoundFX: Laser Beam Hold
+  otherShootingSoundFX: Laser Beam Shot
+  switchElementSFX: Laser Beam Equip
+  idleSFX: Laser Beam Idle
   damage: 7
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: LaserTransition
-  leftIndex: 0
-  rightIndex: 1
   startCoolDown: 0
-  cooldownTimer: 1
+  cooldownTimer: 2
   currentElementType: 201
   laserBeam: {fileID: 3981687641008780923}
   playerMovement: {fileID: 5625023911835613076}
@@ -3780,13 +3787,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 206641
-  shootingSoundFX: Shard Cannon
+  shootingSoundFX: Shard Cannon Shot
+  otherShootingSoundFX: 
+  switchElementSFX: Shard Cannon Equip
+  idleSFX: Shard Cannon Idle (maybe)
   damage: 20
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: ShardCannonTransition
-  leftIndex: 1
-  rightIndex: 1
   startCoolDown: 0
   cooldownTimer: 1
   currentElementType: 202
@@ -3824,13 +3832,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
-  shootingSoundFX: Acid Cloud (Long)
+  shootingSoundFX: Acid Cloud Shot
+  otherShootingSoundFX: 
+  switchElementSFX: Acid Cloud Equip
+  idleSFX: Acid Cloud Idle
   damage: 0.5
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: AcidCloudTransition
-  leftIndex: 0
-  rightIndex: 0
   startCoolDown: 0
   cooldownTimer: 1
   currentElementType: 203
@@ -3868,13 +3877,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
-  shootingSoundFX: LandMine Shoot
+  shootingSoundFX: Land Mine Shot
+  otherShootingSoundFX: 
+  switchElementSFX: Land Mine Equip
+  idleSFX: Land Mine Idle
   damage: 10
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: LandMineTransition
-  leftIndex: 0
-  rightIndex: 2
   startCoolDown: 0
   cooldownTimer: 1
   currentElementType: 204
@@ -3918,13 +3928,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
-  shootingSoundFX: Curse Element Initial
+  shootingSoundFX: Curse Hold
+  otherShootingSoundFX: Curse Release
+  switchElementSFX: Curse Equip
+  idleSFX: Curse Idle
   damage: 50
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: CurseTransition
-  leftIndex: 1
-  rightIndex: 0
   startCoolDown: 0
   cooldownTimer: 1
   currentElementType: 205
@@ -3969,13 +3980,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 198449
-  shootingSoundFX: Ice Slash Shoot
+  shootingSoundFX: Ice Slash Shot
+  otherShootingSoundFX: Ice Slash Shot Alt
+  switchElementSFX: Ice Slash Equip
+  idleSFX: Ice Slash Idle
   damage: 10
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: IceSlashTransition
-  leftIndex: 2
-  rightIndex: 1
   startCoolDown: 0
   cooldownTimer: 1
   currentElementType: 206
@@ -4014,13 +4026,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
-  shootingSoundFX: Life Steal Initial
+  shootingSoundFX: Life Steal Hold
+  otherShootingSoundFX: Life Steal Shot
+  switchElementSFX: Life Steal Equip
+  idleSFX: Life Steal Idle
   damage: 3
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: LifeStealTransition
-  leftIndex: 2
-  rightIndex: 0
   startCoolDown: 0
   cooldownTimer: 1
   currentElementType: 207
@@ -4064,13 +4077,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 198449
-  shootingSoundFX: Crystal Grenade Shoot
+  shootingSoundFX: Crystal Grenade Shot
+  otherShootingSoundFX: 
+  switchElementSFX: Crystal Grenade Equip
+  idleSFX: Crystal Grenade Idle (maybe)
   damage: 2
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: CrystalGrenadeTransition
-  leftIndex: 1
-  rightIndex: 2
   startCoolDown: 0
   cooldownTimer: 1
   currentElementType: 208
@@ -4111,13 +4125,14 @@ MonoBehaviour:
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
-  shootingSoundFX: Stasis Trap Shoot
+  shootingSoundFX: Stasis Trap Shot
+  otherShootingSoundFX: 
+  switchElementSFX: Stasis Trap Equip
+  idleSFX: Stasis Trap Idle
   damage: 3
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: StasisTrapTransition
-  leftIndex: 2
-  rightIndex: 2
   startCoolDown: 0
   cooldownTimer: 1
   currentElementType: 209
