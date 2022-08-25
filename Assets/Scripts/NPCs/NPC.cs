@@ -94,7 +94,7 @@ public class NPC : MonoBehaviour
             }
             base.Action();
             Quest q = (Quest)GameObject.Find("Quest Manager").GetComponent(heldData.quests[heldData.storyPosition]);
-            q.FinishQuest();
+            q.HandInQuest();
             heldData.storyPosition++;
 
             heldData.onQuest = false;
@@ -227,8 +227,6 @@ public class NPC : MonoBehaviour
     {
         //Give quest dialogue
         currentDialogue = recieveHandIn[data.storyPosition];
-
-        
     }
 
 

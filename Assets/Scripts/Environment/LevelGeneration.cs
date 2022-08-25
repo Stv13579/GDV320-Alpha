@@ -122,8 +122,6 @@ public class LevelGeneration : MonoBehaviour
         //This is because the random number represents a position in a series of ranges for each room; the range being the weighting of the previous room (min) and the addition of the current room (max)
         foreach (GameObject placedRoom in placedRooms)
         {
-            
-
             if (placedRoom.GetComponent<Room>().weighting + runningTotal > chosenWeighting && !placedRoom.GetComponent<Room>().illegal)
             {
                 room = placedRoom;

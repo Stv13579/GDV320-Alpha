@@ -27,6 +27,11 @@ public class Quest : MonoBehaviour
 
     }
 
+    public virtual void StartRunBehaviour()
+    {
+
+    }
+
     //Adds itself to the quest manager for future updates and implements derived behaviours
     public virtual void ActivateQuest()
     {
@@ -38,6 +43,14 @@ public class Quest : MonoBehaviour
     {
         if(GetComponent<QuestManager>().RemoveFromQuests(this))
             npc.questComplete = true;
+
+    }
+
+    //Called when the player talks to the NPC again after finishing the quest
+    public virtual void HandInQuest()
+    {
+        
+        npc.questComplete = false;
 
         trinketToUpgrade.Upgrade();
     }

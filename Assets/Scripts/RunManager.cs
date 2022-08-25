@@ -12,6 +12,7 @@ public class RunManager : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        GameObject.Find("Quest Manager").GetComponent<QuestManager>().StartRunUpdate();
         DontDestroyOnLoad(player);
         //DontDestroyOnLoad(gameObject);
        

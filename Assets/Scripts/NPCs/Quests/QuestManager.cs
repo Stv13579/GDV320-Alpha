@@ -45,6 +45,13 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    public void StartRunUpdate()
+    {
+        foreach (Quest q in activeQuests)
+        {
+            q.StartRunBehaviour();
+        }
+    }
 
     public void AddToQuests(Quest qToAdd)
     {

@@ -33,6 +33,7 @@ public class Lotl1 : Quest
         }
     }
 
+
     public override void UpdateQuestBehaviour()
     {
         base.UpdateQuestBehaviour();
