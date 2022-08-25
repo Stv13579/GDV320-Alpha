@@ -17,8 +17,6 @@ public class Trinket : Item
     public override void AddEffect(PlayerClass player)
     {
         base.AddEffect(player);
-
-
     }
 
     public void Upgrade()

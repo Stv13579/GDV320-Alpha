@@ -25,7 +25,6 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField]
     List<GameObject> possibleGenericRooms, possibleBossRooms, possibleRespiteRooms, possibleEdgeRooms;
 
-    
     void Start()
     {
         GenerateLevel();
@@ -204,7 +203,6 @@ public class LevelGeneration : MonoBehaviour
             {
                 Debug.Log("Breaking Free of Loop");
                 return ChoosePositionWithOneConnection(ChooseRoom());
-                break;
             }
         }
 
@@ -283,8 +281,6 @@ public class LevelGeneration : MonoBehaviour
         return true;
     }
 
-    
-
 
     //Recalculates weighting, setting the new spawn to highest, and reducing the rest
     void RecalculateWeighting(GameObject lastPlacedRoom)
@@ -308,7 +304,6 @@ public class LevelGeneration : MonoBehaviour
     //Resets all weighting to an equalised value. Be careful, this loses the order of placed rooms
     void ResetWeighting()
     {
-        
         foreach (GameObject room in placedRooms)
         {
             room.GetComponent<Room>().weighting = maxWeighting;
@@ -322,7 +317,6 @@ public class LevelGeneration : MonoBehaviour
     //Add the edge to the world in the form of additional rooms which fill up each empty spot on existing rooms (and corners?)
     void AddWorldEdge()
     {
-
         //Iterate through each placed room, checking if it has empty edges, then placing an edge piece
         foreach (GameObject room in placedRooms)
         {

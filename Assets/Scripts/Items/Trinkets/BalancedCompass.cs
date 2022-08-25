@@ -29,7 +29,5 @@ public class BalancedCompass : Trinket
                 activationChance = tier3Chance;
                 break;
         }
-
-        
     }
 }
