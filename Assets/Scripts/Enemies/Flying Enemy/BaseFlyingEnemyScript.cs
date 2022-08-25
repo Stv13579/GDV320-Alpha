@@ -89,7 +89,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
                 FindTarget();
             }
         }
-        this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, moveSpeed * moveSpeedMulti * Time.deltaTime);
+        this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, moveSpeed * Time.deltaTime);
     }
 
 

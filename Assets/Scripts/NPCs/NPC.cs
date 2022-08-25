@@ -129,6 +129,7 @@ public class NPC : MonoBehaviour
 
     [SerializeField]
     string dataToApply;
+    [SerializeField]
     protected NPCData data;
 
     [SerializeField]
@@ -146,7 +147,7 @@ public class NPC : MonoBehaviour
         //Possible dialogues include the random ones, the current story position, or a deterministic quest dialogue.
         int storyTime = UnityEngine.Random.Range(0, 2);
 
-        data = (NPCData)Resources.Load("NPCs/" + dataToApply);
+        //data = (NPCData)Resources.Load("NPCs/" + dataToApply);
 
         //Initialise seralized dialogues
         foreach(StoryDialogues diag in storyDialogues)

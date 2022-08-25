@@ -910,28 +910,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c09bc7cec4bb4faaae87d6095e0f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 0
   maxHealth: 750
+  baseMaxHealth: 750
   damageAmount: 3
-  damageMultiplier: 1
+  baseDamageAmount: 3
   moveSpeed: 200
-  moveSpeedMulti: 1
+  baseMoveSpeed: 200
+  movementMultipliers: []
+  damageMultipliers: []
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
-  spawner: {fileID: 0}
   weaknesses: 
   resistances: 
-  bounceList: []
   deathSpawn: {fileID: 1140089593594349035, guid: 58cc516cec47cd9448a27c3f1ed9a4a6,
     type: 3}
   hitSpawn: {fileID: 2154916016029885947, guid: 927b09bead51b864990a49b3960ddc7c,
     type: 3}
-  moveDirection: {x: 0, y: 0, z: 0}
   attackAudio: Player Damage
   deathAudio: Slime Boss Death
   takeDamageAudio: Slime Boss Damage
   targettingIndicator: {fileID: 4194532269593929464}
-  oldPosition: {x: 0, y: 0, z: 0}
   jumpForce: 200
   pushForce: 20
   viewToPlayer:
@@ -940,8 +940,6 @@ MonoBehaviour:
   nodeMask:
     serializedVersion: 2
     m_Bits: 0
-  generation: 0
-  currentType: 0
   rend: {fileID: 6094789019902066308}
   firePoint: {fileID: 1949522794}
   normalPoint: {fileID: 880440684}

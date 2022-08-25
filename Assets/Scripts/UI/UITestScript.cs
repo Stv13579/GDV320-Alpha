@@ -23,7 +23,7 @@ public class UITestScript : MonoBehaviour
     void Update()
     {
         //manaText.text = "Mana: " + playerClass.currentMana.ToString("F0") + "/" + playerClass.maxMana;
-        healthText.text = "Health: " + playerClass.currentHealth + "/" + playerClass.maxHealth;
+        //healthText.text = "Health: " + playerClass.currentHealth + "/" + playerClass.maxHealth;
         leftSpellText.text = "Left Spell: " +  player.GetPrimaryElementSprite();
         rightSpellText.text = "Right Spell: " + player.GetCatalystElementSprite();
         comboSpellText.text = "Combo Spell: " + player.GetComboElementSprite();

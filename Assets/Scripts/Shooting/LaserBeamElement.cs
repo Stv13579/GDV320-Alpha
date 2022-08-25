@@ -24,7 +24,7 @@ public class LaserBeamElement : BaseElementClass
         // same check as the energy shield need to check if player has interupted the laser beam
         if(usingLaser)
         {
-            if (!PayCosts(manaCost * Time.deltaTime))
+            if (!PayCosts(manaCost * Time.deltaTime) || !Input.GetKey(KeyCode.Mouse0))
             {
                 DeactivateLaser();
             }
@@ -38,7 +38,7 @@ public class LaserBeamElement : BaseElementClass
        playerHand.SetTrigger("LaserBeamStopCast");
        audioManager.Stop("Laser Beam");
        laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
-       playerMovement.movementMulti = Multiplier.RemoveMultiplier(playerMovement.movementMultipliers, new Multiplier(0.25f, "Laser"));
+       StatModifier.RemoveModifier(playerMovement.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.25f, "Laser"));
     }
     // activates the laserBeam
     public override void ElementEffect()
@@ -48,7 +48,7 @@ public class LaserBeamElement : BaseElementClass
         laserBeam.transform.GetChild(0).localScale = new Vector3(0, 1, 0);
         laserBeam.SetActive(true);
         laserBeam.GetComponentInChildren<LaserBeam>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), attackTypes);
-        playerMovement.movementMulti = Multiplier.AddMultiplier(playerMovement.movementMultipliers, new Multiplier(0.25f, "Laser"));
+        StatModifier.AddModifier(playerMovement.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.25f, "Laser"));
     }
     public override void LiftEffect()
     {

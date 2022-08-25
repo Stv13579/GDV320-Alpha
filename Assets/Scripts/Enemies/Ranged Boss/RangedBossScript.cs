@@ -97,7 +97,7 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
         {
             GameObject fireProj = Instantiate(fakeFireProjectile, projectileSpawnPos.position, Quaternion.identity);
             fireProj.transform.forward = transform.up;
-            fireProj.GetComponent<RangedBossFakeFireProjectileScript>().SetDamage(damageAmount * damageMultiplier);
+            fireProj.GetComponent<RangedBossFakeFireProjectileScript>().SetDamage(damageAmount);
             i++;
             yield return new WaitForSeconds(0.2f);
         }
@@ -111,7 +111,7 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
         while (i < toSpawn)
         {
             GameObject waterProj = Instantiate(waterProjectile, tempProjectileSpawnPos.position, Quaternion.identity);
-            waterProj.GetComponent<RangedBossWaterProjectileScript>().SetVars(15, damageAmount * damageMultiplier);
+            waterProj.GetComponent<RangedBossWaterProjectileScript>().SetVars(15, damageAmount);
             waterProj.transform.eulerAngles = new Vector3(0, angle * i, 0);
             Physics.IgnoreCollision(this.GetComponent<Collider>(), waterProj.GetComponent<Collider>());
             i++;
@@ -122,7 +122,7 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
     public void CrystalAttack()
     {
         GameObject crystalProj = Instantiate(crystalProjectile, projectileSpawnPos.position, Quaternion.identity);
-        crystalProj.GetComponent<RangedBossCrystalProjectileScript>().SetVars(0, damageAmount * damageMultiplier);
+        crystalProj.GetComponent<RangedBossCrystalProjectileScript>().SetVars(0, damageAmount);
 
     }
     //Starts the homing attack, so it can be called by the animator

@@ -18,13 +18,13 @@ public class ShieldEnemyScript : BaseEnemyClass
     {
         base.Awake();
         StartCoroutine(FindNode());
-        spawner = GameObject.Find("SAIMPosition");
     }
-    private void Update()
+    public override void Update()
     {
+        base.Update();
         if (!attacking)
         {
-            if(Vector3.Distance(this.transform.position, player.transform.position) < 5)
+            if(Vector3.Distance(this.transform.position, player.transform.position) < 5 && shield)
             {
                 //enemyAnims.SetTrigger("Attacking");
                 Attack();
@@ -32,11 +32,11 @@ public class ShieldEnemyScript : BaseEnemyClass
             if (Vector3.Distance(this.transform.position, player.transform.position) < 8)
             {
 
-                Movement(player.transform.position, moveSpeed * moveSpeedMulti);
+                Movement(player.transform.position, moveSpeed);
             }
             else
             {
-                Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed * moveSpeedMulti);
+                Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
             }
         }
 
@@ -59,7 +59,10 @@ public class ShieldEnemyScript : BaseEnemyClass
         //Enable and disable necessary hitboxes
         if(!attacking)
         {
-            StartCoroutine(ShieldBash());
+            if(shield)
+            {
+                StartCoroutine(ShieldBash());
+            }
         }
     }
 
@@ -95,14 +98,28 @@ public class ShieldEnemyScript : BaseEnemyClass
         shield.GetComponent<EnemyShield>().StartAttack();
         while(timer < attackTime)
         {
-            shield.transform.localPosition = Vector3.Lerp(startPos, endPos, timer / attackTime);
-            timer += Time.deltaTime;
+            if(shield)
+            {
+                shield.transform.localPosition = Vector3.Lerp(startPos, endPos, timer / attackTime);
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                StopCoroutine(ShieldBash());
+            }
             yield return null;
         }
         while (timer > 0)
         {
-            shield.transform.localPosition = Vector3.Lerp(startPos, endPos, timer / attackTime);
-            timer -= Time.deltaTime;
+            if(shield)
+            {
+                shield.transform.localPosition = Vector3.Lerp(startPos, endPos, timer / attackTime);
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                StopCoroutine(ShieldBash());
+            }
             yield return null;
         }
         shield.GetComponent<EnemyShield>().EndAttack();

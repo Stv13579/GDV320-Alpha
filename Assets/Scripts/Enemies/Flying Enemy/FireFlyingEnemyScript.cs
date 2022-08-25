@@ -14,7 +14,9 @@ public class FireFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
         {
             if(col.gameObject.GetComponent<BaseEnemyClass>())
             {
-                col.gameObject.GetComponent<BaseEnemyClass>().StartCoroutine(AttackBuff());
+                BaseEnemyClass enemy = col.gameObject.GetComponent<BaseEnemyClass>();
+
+                StatModifier.StartAddModifierTemporary(enemy, enemy.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(1.5f, "FireFlyingAttackBuff"), 10.0f);
             }
         }
         FindTarget();

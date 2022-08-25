@@ -42,7 +42,7 @@ public class GameplayUI : MonoBehaviour
     void Update()
     {
         //Getting the current values from the player and updating the UI with them
-        healthBar.fillAmount = playerClass.currentHealth / playerClass.maxHealth;
+        healthBar.fillAmount = playerClass.GetCurrentHealth() / playerClass.GetMaxHealth();
         manaBar.fillAmount = 1;// playerClass.currentMana / playerClass.maxMana;
         moneyText.text = playerClass.money.ToString();
         activePrimaryElement.sprite = player.GetPrimaryElementSprite();

@@ -24,6 +24,7 @@ public class LevelGeneration : MonoBehaviour
 
     [SerializeField]
     List<GameObject> possibleGenericRooms, possibleBossRooms, possibleRespiteRooms, possibleEdgeRooms;
+
     
     void Start()
     {
@@ -55,6 +56,20 @@ public class LevelGeneration : MonoBehaviour
 
         NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleRespiteRooms);
         NPC.GetComponent<Room>().illegal = true;
+
+        //Check if the player is carrying the balanced compass and roll to see if it triggers if so.
+        if (GameObject.Find("Player").GetComponent<PlayerClass>().heldItems.Contains(GameObject.Find("TrinketManager").GetComponent<BalancedCompass>()))
+        {
+            Debug.Log("Checking for extra room!");
+
+            int randomRoll = Random.Range(0, 100);
+
+            if(randomRoll < GameObject.Find("TrinketManager").GetComponent<BalancedCompass>().GetActivationChance())
+            {
+                NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleRespiteRooms);
+                NPC.GetComponent<Room>().illegal = true;
+            }
+        }
 
         foreach(GameObject room in placedRooms)
         {

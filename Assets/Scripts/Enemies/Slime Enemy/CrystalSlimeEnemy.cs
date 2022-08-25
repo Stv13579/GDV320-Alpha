@@ -38,7 +38,7 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
                 // setting scale of enemy projectile based on enemy size
                 tempEnemyProjectile.transform.localScale = enemyProjectileScale;
                 // setter to set variables from CrystalSlimeProject
-                tempEnemyProjectile.GetComponent<CrystalSlimeProjectile>().SetVars(damageAmount * (damageMultiplier + prophecyManager.prophecyDamageMulti));
+                tempEnemyProjectile.GetComponent<CrystalSlimeProjectile>().SetVars(damageAmount * (prophecyManager.prophecyDamageMulti));
                 //setting the rotations of the projectiles so that it spawns in like a circle
                 tempEnemyProjectile.transform.eulerAngles = new Vector3(tempEnemyProjectile.transform.eulerAngles.x, tempEnemyProjectile.transform.eulerAngles.y + (360.0f / 5.0f * i), tempEnemyProjectile.transform.eulerAngles.z);
                 audioManager.Stop("Crystal Slime Projectile");
@@ -83,15 +83,14 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
             for (int i = 0; i < 2; i++)
             {
                 CrystalSlimeEnemy newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2), Quaternion.identity).GetComponent<CrystalSlimeEnemy>();
-                newSlime.maxHealth = maxHealth / 2;
-                newSlime.damageAmount = damageAmount / 2;
+                StatModifier.AddModifier(newSlime.GetHealthStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
+                StatModifier.AddModifier(newSlime.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
+                StatModifier.AddModifier(newSlime.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
                 newSlime.transform.localScale = this.transform.localScale / 2;
-                newSlime.moveSpeed = moveSpeed / 2;
                 newSlime.generation = generation + 1;
                 newSlime.spawner = spawner;
                 spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime);
                 newSlime.enemyProjectileScale = enemyProjectileScale / 2;
-                newSlime.GetMoveMultis().Clear();
 
             }
         }

@@ -5,22 +5,22 @@ using UnityEngine.SceneManagement;
 using System;
 public class PlayerClass : MonoBehaviour
 {
-    public float currentHealth;
+    [SerializeField]
+    float currentHealth, maxHealth, baseMaxHealth, defense, baseDefense;
 
-    public float maxHealth;
-
-    float defenseMultiplier = 1.0f;
-    public struct defenseMultiSource
-    {
-        public float multiplier;
-        public string source;
-        public defenseMultiSource(float multi, string s)
-        {
-            multiplier = multi;
-            source = s;
-        }
-    }
-    List<defenseMultiSource> defenseMultipliers = new List<defenseMultiSource>();
+    StatModifier.FullStat health = new StatModifier.FullStat(0), defenseStat = new StatModifier.FullStat(0);
+    //float defenseMultiplier = 1.0f;
+    //public struct defenseMultiSource
+    //{
+    //    public float multiplier;
+    //    public string source;
+    //    public defenseMultiSource(float multi, string s)
+    //    {
+    //        multiplier = multi;
+    //        source = s;
+    //    }
+    //}
+    //List<defenseMultiSource> defenseMultipliers = new List<defenseMultiSource>();
 
     [Serializable]
     public enum ManaName
@@ -40,6 +40,8 @@ public class PlayerClass : MonoBehaviour
         public ManaName manaName;
         public float currentMana;
         public float maxMana;
+        public float baseMaxMana;
+        public StatModifier.FullStat mana;
     }
     [SerializeField]
     public ManaType[] manaTypes;
@@ -77,11 +79,14 @@ public class PlayerClass : MonoBehaviour
     //private Material fireMaterial;
     void Start()
     {
-        currentHealth = maxHealth;
-        //currentMana = maxMana;
+        currentHealth = baseMaxHealth;
+        health.baseValue = baseMaxHealth;
+        defenseStat.baseValue = baseDefense;
         for(int i = 0; i < manaTypes.Length; i++)
         {
-            manaTypes[i].currentMana = manaTypes[i].maxMana;
+            manaTypes[i].mana = new StatModifier.FullStat(0);
+            manaTypes[i].mana.baseValue = manaTypes[i].baseMaxMana;
+            manaTypes[i].currentMana = manaTypes[i].baseMaxMana;
         }
         itemUI = GameObject.Find("ItemArray");
     }
@@ -103,6 +108,9 @@ public class PlayerClass : MonoBehaviour
                 enemy.TakeDamage(1000, new List<BaseEnemyClass.Types>());
             }
         }
+        maxHealth = StatModifier.UpdateValue(health);
+        defense = StatModifier.UpdateValue(defenseStat);
+
 
         if (transform.position.y <= -30)
         {
@@ -247,37 +255,23 @@ public class PlayerClass : MonoBehaviour
         }
     }
 
-    public void AddDefenseMultiplier(defenseMultiSource multiplier)
+    public StatModifier.FullStat GetHealthStat()
     {
-        if(!defenseMultipliers.Contains(multiplier))
-        {
-            defenseMultipliers.Add(multiplier);
-        }
-        defenseMultiplier = 1.0f;
-        foreach(defenseMultiSource multi in defenseMultipliers)
-        {
-            defenseMultiplier *= multi.multiplier;
-        }
+        return health;
     }
 
-    public void RemoveDefenseMultiplier(defenseMultiSource multiplier)
+    public StatModifier.FullStat GetDefenseStat()
     {
-        if (defenseMultipliers.Contains(multiplier))
-        {
-            defenseMultipliers.Remove(multiplier);
-        }
-        defenseMultiplier = 1.0f;
-        foreach (defenseMultiSource multi in defenseMultipliers)
-        {
-            defenseMultiplier *= multi.multiplier;
-        }
+        return defenseStat;
     }
 
-    public IEnumerator Vulnerable(defenseMultiSource multiplier)
+    public float GetCurrentHealth()
     {
-        AddDefenseMultiplier(multiplier);
-        yield return new WaitForSeconds(10);
-        RemoveDefenseMultiplier(multiplier);
+        return currentHealth;
     }
 
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
 }
