@@ -60,8 +60,6 @@ public class AcidCloud : BaseElementSpawnClass
         {
             //If an enemy is inside the cloud, deal damage to it
             other.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            audioManager.StopSFX("Slime Damage");
-            audioManager.PlaySFX("Slime Damage");
             if(other.gameObject.GetComponentInChildren<AcidBurnScript>())
             {
                 other.gameObject.GetComponentInChildren<AcidBurnScript>().timer = 2.0f;

@@ -97,8 +97,6 @@ public class Fireball : BaseElementSpawnClass
         if (other.gameObject.layer == 8 && active && other.GetComponent<BaseEnemyClass>())
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            audioManager.StopSFX("Slime Damage");
-            audioManager.PlaySFX("Slime Damage");
             hitMarker.transform.GetChild(7).gameObject.SetActive(true);
             Invoke("HitMarkerDsable", 0.2f);
             taggedEnemy = other;

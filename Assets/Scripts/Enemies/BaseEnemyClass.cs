@@ -76,13 +76,13 @@ public class BaseEnemyClass : MonoBehaviour
     protected Animator enemyAnims;
 
     [SerializeField]
-    string attackAudio;
+    protected string attackAudio;
     [SerializeField]
-    string deathAudio;
+    protected string deathAudio;
     [SerializeField]
-    string takeDamageAudio;
+    protected string takeDamageAudio;
     [SerializeField]
-    string idleAudio;
+    protected string idleAudio;
 
     [SerializeField]
     GameObject targettingIndicator;

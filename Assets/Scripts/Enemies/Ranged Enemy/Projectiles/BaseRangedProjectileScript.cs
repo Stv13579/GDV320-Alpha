@@ -8,10 +8,12 @@ public class BaseRangedProjectileScript : MonoBehaviour //Sebastian
     protected float damage;
     protected GameObject player;
     protected float timer = 0;
+    private AudioManager audioManager;
     // Start is called before the first frame update
     protected virtual void Start()
     {
         player = GameObject.Find("Player");
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -34,6 +36,8 @@ public class BaseRangedProjectileScript : MonoBehaviour //Sebastian
     {
         if (other.gameObject == player && player.GetComponent<EnergyElement>().GetUseShield() == false)
         {
+            audioManager.StopSFX("Player Damage");
+            audioManager.PlaySFX("Player Damage");
             HitEffect(other);
         }
         else if (other.gameObject.layer == 10 || other.gameObject.layer == 16)

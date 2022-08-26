@@ -6,18 +6,8 @@ public class DestroyIceSlash : MonoBehaviour
 {
     [SerializeField]
     private LayerMask environment;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // if this box collider hits the environment layermask the destroy iceslash
     private void OnTriggerEnter(Collider other)
     {
         if(((1<<other.gameObject.layer) & environment) != 0)

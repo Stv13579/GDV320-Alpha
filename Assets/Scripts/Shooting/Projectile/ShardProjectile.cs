@@ -10,8 +10,6 @@ public class ShardProjectile : BaseElementSpawnClass
 
     int pierceAmount;
 
-    AudioManager audioManager;
-
     [SerializeField]
     GameObject impactSpawn;
 
@@ -19,7 +17,6 @@ public class ShardProjectile : BaseElementSpawnClass
     private GameObject hitMarker;
     void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
         hitMarker = GameObject.Find("GameplayUI");
     }
 
@@ -51,8 +48,6 @@ public class ShardProjectile : BaseElementSpawnClass
         if (other.gameObject.layer == 8)
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            audioManager.StopSFX("Slime Damage");
-            audioManager.PlaySFX("Slime Damage");
             //hitMarker.transform.GetChild(7).gameObject.SetActive(true);
             //Invoke("HitMarkerDsable", 0.2f);
         }

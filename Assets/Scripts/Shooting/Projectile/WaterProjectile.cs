@@ -74,64 +74,6 @@ public class WaterProjectile : BaseElementSpawnClass
         }
     }
 
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    //if enemy, hit them for the damage
-    //    Collider taggedEnemy = null;
-
-    //    if (other.isTrigger)
-    //    {
-    //        return;
-    //    }
-
-    //    if (other.tag == "Environment")
-    //    {
-    //        //Destroy(gameObject);
-    //        gravity = 0;
-    //        speed = 0;
-    //        Destroy(this.gameObject.GetComponent<Collider>());
-    //        this.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
-    //        this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
-    //        this.gameObject.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
-    //        this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
-
-    //    }
-    //    if (other.tag == "Enemy")
-    //    {
-    //        other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-    //        audioManager.Stop("Slime Damage");
-    //        audioManager.Play("Slime Damage");
-    //        hitMarker.transform.GetChild(7).gameObject.SetActive(true);
-    //        Invoke("HitMarkerDsable", 0.2f);
-    //        taggedEnemy = other;
-    //    }
-    //    if (other.gameObject.tag != "Player" && other.gameObject.tag != "Node")
-    //    {
-    //        Collider[] objectsHit = Physics.OverlapSphere(transform.position, explosionRadii);
-
-    //        for (int i = 0; i < objectsHit.Length; i++)
-    //        {
-    //            if (objectsHit[i].tag == "Enemy" && objectsHit[i] != taggedEnemy)
-    //            {
-    //                objectsHit[i].GetComponent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
-    //            }
-    //        }
-    //        gravity = 0;
-    //        speed = 0;
-    //        Destroy(this.gameObject.GetComponent<Collider>());
-    //        this.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
-    //        this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
-    //        this.gameObject.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
-    //        this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
-    //        // Sound FX
-    //        audioManager.Stop("Fireball Impact");
-    //        audioManager.Play("Fireball Impact");
-    //    }
-
-
-    //}
-
     private void HitMarkerDsable()
     {
         hitMarker.transform.GetChild(7).gameObject.SetActive(false);
