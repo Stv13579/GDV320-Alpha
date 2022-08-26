@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Blacksmith1 : Quest
 {
-    List<GameObject> slainEnemies;
+    List<GameObject> slainEnemies = new List<GameObject>();
 
     //Added to death triggers
     public void DeathTypeCheck(GameObject enemy)
