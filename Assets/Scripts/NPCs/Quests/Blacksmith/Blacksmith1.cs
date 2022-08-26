@@ -9,9 +9,19 @@ public class Blacksmith1 : Quest
     //Added to death triggers
     public void DeathTypeCheck(GameObject enemy)
     {
-        BaseEnemyClass eType = enemy.GetComponent<BaseEnemyClass>();
 
-        if(!slainEnemies.Exists(enemyType => enemyType.GetComponent<BaseEnemyClass>() == eType))
+        bool slain = false;
+
+        foreach(GameObject collectedEnemy in slainEnemies)
+        {
+            if(collectedEnemy.name == enemy.name)
+            {
+                slain = true;
+                break;
+            }
+        }
+
+        if(slain == false)
         {
             slainEnemies.Add(enemy);
         }
