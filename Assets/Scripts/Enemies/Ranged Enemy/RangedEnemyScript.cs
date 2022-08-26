@@ -81,12 +81,8 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
                 }
             }
         }
-
-
-
-
-
     }
+
     //Spawns the enemies given projectile, and in the case it's a crystal projectile spawns multiple
     public void Attack()
     {
