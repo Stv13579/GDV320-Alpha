@@ -13,8 +13,11 @@ public class Room : MonoBehaviour
     bool locked = false;
     protected GameObject roomTrigger;
     public bool visited = false;
-    
 
+    public bool hasLilly;
+
+    [SerializeField]
+    GameObject hiddenLilly;
 
     private void Start()
     {
@@ -126,5 +129,18 @@ public class Room : MonoBehaviour
 
         locked = false;
     }
+
+    //For Lilly's final quest. If called and available, place an interactable lilly somewhere in the room.
+    public void HideLilly()
+    {
+        if(!hasLilly)
+        {
+            return;
+        }
+
+
+        hiddenLilly.SetActive(true);
+    }
+
 
 }
