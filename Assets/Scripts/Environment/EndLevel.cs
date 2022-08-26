@@ -18,7 +18,7 @@ public class EndLevel : MonoBehaviour
         player = GameObject.Find("Player");
         audioManager = FindObjectOfType<AudioManager>();
     }
-
+    public int GetSceneToLoad() { return sceneToLoad; }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -48,6 +48,24 @@ public class EndLevel : MonoBehaviour
             SceneManager.LoadScene(sceneToLoad);
 
             //StartCoroutine(screen.GetComponent<LoadingScreen>().LoadScene(sceneToLoad));
+
+            if(audioManager)
+            {
+                if(sceneToLoad == 1)
+                {
+                    for (int i = 0; i < audioManager.GetMusics().Length; i++)
+                    {
+                        audioManager.GetMusics()[i].audioSource.Stop();
+                    }
+                    audioManager.PlayMusic("Hub Room Music");
+                }
+                else
+                {
+                    audioManager.StopMusic("Hub Room Music");
+                    audioManager.PlayMusic($"Level {sceneToLoad - 1} Non Combat");
+                }
+
+            }
         }
     }
 }

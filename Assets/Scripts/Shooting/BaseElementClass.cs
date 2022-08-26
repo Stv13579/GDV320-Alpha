@@ -147,9 +147,12 @@ public class BaseElementClass : MonoBehaviour
     // this gets call in activate elements
     protected virtual void StartAnims(string animationName, string animationNameAlt = null)
     {
-        audioManager.StopSFX(idleSFX);
-        audioManager.StopSFX(shootingSoundFX);
-        audioManager.PlaySFX(shootingSoundFX);
+        if (audioManager)
+        {
+            audioManager.StopSFX(idleSFX);
+            audioManager.StopSFX(shootingSoundFX);
+            audioManager.PlaySFX(shootingSoundFX);
+        }
     }
     //Called from the hand objects when the appropriate event triggers to turn on the vfx
     // gets called same time as elementeffect

@@ -140,8 +140,11 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
         effect = false;
         timer = 0.0f;
         enemyAnims.ResetTrigger("Effect");
-        audioManager.StopSFX(attackAudio);
-        audioManager.PlaySFX(attackAudio);
+        if (audioManager)
+        {
+            audioManager.StopSFX(attackAudio);
+            audioManager.PlaySFX(attackAudio);
+        }
     }
 
     public float GetEffectMulti()

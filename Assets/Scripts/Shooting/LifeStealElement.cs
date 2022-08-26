@@ -79,7 +79,10 @@ public class LifeStealElement : BaseElementClass
             if (isTargeting == true && enemy != null)
             {
                 //LifeStealFullScreenEffect(0.1f);
-                audioManager.PlaySFX(shootingSoundFX);
+                if (audioManager)
+                {
+                    audioManager.PlaySFX(shootingSoundFX);
+                }
                 playerClass.ChangeMana(-manaCost * Time.deltaTime, manaTypes);
                 lifeSteal.SetActive(true);
                 enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.waterDamageMultiplier), attackTypes);
@@ -89,7 +92,10 @@ public class LifeStealElement : BaseElementClass
     }
     private void DeactivateLifeSteal()
     {
-        audioManager.StopSFX(shootingSoundFX);
+        if (audioManager)
+        {
+            audioManager.StopSFX(shootingSoundFX);
+        }
         isTargeting = false;
         isShooting = false;
         lifeSteal.SetActive(false);

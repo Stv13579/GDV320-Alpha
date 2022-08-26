@@ -60,14 +60,20 @@ public class FireElement : BaseElementClass
         if (randomAnimationToPlay == 0)
         {
             playerHand.SetTrigger(animationName);
-            audioManager.StopSFX(shootingSoundFX);
-            audioManager.PlaySFX(shootingSoundFX);
+            if (audioManager)
+            {
+                audioManager.StopSFX(shootingSoundFX);
+                audioManager.PlaySFX(shootingSoundFX);
+            }
         }
         else
         {
             playerHand.SetTrigger(animationNameAlt);
-            audioManager.StopSFX(otherShootingSoundFX);
-            audioManager.PlaySFX(otherShootingSoundFX);
+            if (audioManager)
+            {
+                audioManager.StopSFX(otherShootingSoundFX);
+                audioManager.PlaySFX(otherShootingSoundFX);
+            }
         }
     }
 }

@@ -40,8 +40,11 @@ public class CurseElement : BaseElementClass
     public override void ElementEffect()
     {
         base.ElementEffect();
-        audioManager.StopSFX(shootingSoundFX);
-        audioManager.PlaySFX(otherShootingSoundFX);
+        if (audioManager)
+        {
+            audioManager.StopSFX(shootingSoundFX);
+            audioManager.PlaySFX(otherShootingSoundFX);
+        }
         targeting = false;
         //curse the target
         //Give it a death trigger
@@ -74,8 +77,11 @@ public class CurseElement : BaseElementClass
 
 
         Instantiate(curseDeath, temp.transform.position, Quaternion.identity);
-        audioManager.StopSFX("Curse Explosion");
-        audioManager.PlaySFX("Curse Explosion");
+        if (audioManager)
+        {
+            audioManager.StopSFX("Curse Explosion");
+            audioManager.PlaySFX("Curse Explosion");
+        }
         Debug.Log("Explodded");
     }
 

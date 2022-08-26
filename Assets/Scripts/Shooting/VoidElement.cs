@@ -30,7 +30,10 @@ public class VoidElement : BaseElementClass
             playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold")))
         {
             isHolding = false;
-            audioManager.PlaySFX(otherShootingSoundFX);
+            if (audioManager)
+            {
+                audioManager.PlaySFX(otherShootingSoundFX);
+            }
             playerHand.SetTrigger("VoidCastSuccess");
         }
         if (isHolding)

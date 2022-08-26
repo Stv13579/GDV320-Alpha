@@ -41,9 +41,13 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
                 tempEnemyProjectile.GetComponent<CrystalSlimeProjectile>().SetVars(damageAmount * (prophecyManager.prophecyDamageMulti));
                 //setting the rotations of the projectiles so that it spawns in like a circle
                 tempEnemyProjectile.transform.eulerAngles = new Vector3(tempEnemyProjectile.transform.eulerAngles.x, tempEnemyProjectile.transform.eulerAngles.y + (360.0f / 5.0f * i), tempEnemyProjectile.transform.eulerAngles.z);
-                audioManager.StopSFX("Crystal Slime Projectile");
-                // play SFX
-                audioManager.PlaySFX("Crystal Slime Projectile", player.transform, this.transform);
+
+                if (audioManager)
+                {
+                    // play SFX
+                    audioManager.StopSFX("Crystal Slime Projectile");
+                    audioManager.PlaySFX("Crystal Slime Projectile", player.transform, this.transform);
+                }
                 //Play animation
                 enemyAnims.SetTrigger("Shoot");
             }

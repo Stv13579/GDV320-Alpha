@@ -241,8 +241,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (randIndexTimer <= 0.0f)
             {
-                audioManager.StopSFX($"Player Running {randomSoundIndex + 1}");
-                audioManager.PlaySFX($"Player Running {randomSoundIndex + 1}");
+                if (audioManager)
+                {
+                    audioManager.StopSFX($"Player Running {randomSoundIndex + 1}");
+                    audioManager.PlaySFX($"Player Running {randomSoundIndex + 1}");
+                }
                 randIndexTimer = 0.37f;
             }
 
@@ -316,8 +319,11 @@ public class PlayerMovement : MonoBehaviour
             currentCoyoteTime = coyoteTime;
             if (isHeadShaking == true)
             {
-                audioManager.StopSFX("Player Landing");
-                audioManager.PlaySFX("Player Landing");
+                if (audioManager)
+                {
+                    audioManager.StopSFX("Player Landing");
+                    audioManager.PlaySFX("Player Landing");
+                }
                 CameraShake();
                 isHeadShaking = false;
             }

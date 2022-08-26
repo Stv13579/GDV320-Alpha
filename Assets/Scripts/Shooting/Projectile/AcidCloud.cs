@@ -17,8 +17,11 @@ public class AcidCloud : BaseElementSpawnClass
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
-        audioManager.StopSFX("Acid Cloud Shot");
-        audioManager.PlaySFX("Acid Cloud Shot");
+        if (audioManager)
+        {
+            audioManager.StopSFX("Acid Cloud Shot");
+            audioManager.PlaySFX("Acid Cloud Shot");
+        }
     }
     void Update()
     {
