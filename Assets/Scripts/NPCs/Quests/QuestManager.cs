@@ -53,6 +53,14 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    public void SpawnUpdate(GameObject enemySpawning)
+    {
+        foreach (Quest q in activeQuests)
+        {
+            q.SpawnEventBehaviour(enemySpawning);
+        }
+    }
+
     public void AddToQuests(Quest qToAdd)
     {
         if(!activeQuests.Contains(qToAdd))
