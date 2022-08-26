@@ -29,15 +29,18 @@ public class AudioManager : MonoBehaviour
         [HideInInspector]
         public AudioSource audioSource;
     }
-
-    public Sound[] sounds;
-
-    public Sound[] Musics;
-    public string initalMusic;
-    
     [SerializeField]
+    private Sound[] sounds;
+    [SerializeField]
+    private Sound[] Musics;
+
+    [SerializeField]
+    private string initialMusic;
+
+    public string GetInitialMusic() { return initialMusic; }
+    [SerializeField]
+
     float audioDistance;
-    
     
     // Start is called before the first frame update
     void Start()
@@ -64,7 +67,7 @@ public class AudioManager : MonoBehaviour
             i.audioSource.loop = i.loop;
         }
 
-        PlayMusic(initalMusic);
+        PlayMusic(initialMusic);
         DontDestroyOnLoad(gameObject);
     }
 

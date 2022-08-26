@@ -76,13 +76,13 @@ public class BaseEnemyClass : MonoBehaviour
     protected Animator enemyAnims;
 
     [SerializeField]
-    string attackAudio;
+    protected string attackAudio;
     [SerializeField]
-    string deathAudio;
+    protected string deathAudio;
     [SerializeField]
-    string takeDamageAudio;
+    protected string takeDamageAudio;
     [SerializeField]
-    string idleAudio;
+    protected string idleAudio;
 
     [SerializeField]
     GameObject targettingIndicator;
@@ -91,10 +91,6 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Awake()
     {
-        if(idleAudio != null)
-        {
-            audioManager.PlaySFX(idleAudio);
-        }
         prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
         startY = transform.position.y;
         player = GameObject.Find("Player");
@@ -107,7 +103,10 @@ public class BaseEnemyClass : MonoBehaviour
         health.baseValue = baseMaxHealth;
         damage.baseValue = baseDamageAmount;
         speed.baseValue = baseMoveSpeed;
-
+        if (idleAudio != null)
+        {
+            audioManager.PlaySFX(idleAudio);
+        }
     }
 
     public virtual void Update()

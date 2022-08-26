@@ -5,17 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class EndLevel : MonoBehaviour
 {
-    
-    int sceneToLoad;
+
+    private int sceneToLoad;
     [SerializeField]
-    GameObject loadingScreen;
+    private GameObject loadingScreen;
 
-    GameObject player;
+    private GameObject player;
 
+    private AudioManager audioManager;
     private void Start()
     {
         player = GameObject.Find("Player");
-
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
 

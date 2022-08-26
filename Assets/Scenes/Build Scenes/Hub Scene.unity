@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2328,6 +2328,15 @@ GameObject:
   - component: {fileID: 234196288}
   - component: {fileID: 234196290}
   - component: {fileID: 234196289}
+  - component: {fileID: 234196299}
+  - component: {fileID: 234196298}
+  - component: {fileID: 234196297}
+  - component: {fileID: 234196296}
+  - component: {fileID: 234196295}
+  - component: {fileID: 234196294}
+  - component: {fileID: 234196293}
+  - component: {fileID: 234196292}
+  - component: {fileID: 234196291}
   m_Layer: 0
   m_Name: Quest Manager
   m_TagString: Untagged
@@ -2361,7 +2370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a2a58ae2bd87c4090e928b9771396f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeQuests: []
+  activeQuests:
+  - {fileID: 234196299}
   inHub: 1
 --- !u!114 &234196288
 MonoBehaviour:
@@ -2391,6 +2401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: 01793933688d7234b9fced00be16afd4, type: 2}
   trinketToUpgrade: {fileID: 1941301606}
+  chanceToSpawn: 0
 --- !u!114 &234196290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2405,6 +2416,132 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: 01793933688d7234b9fced00be16afd4, type: 2}
   trinketToUpgrade: {fileID: 1941301606}
+--- !u!114 &234196291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234196285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb15858cc1f152f418b9951035366c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc: {fileID: 11400000, guid: f03f170cfaeb5344fbcf8e7ea5bfde28, type: 2}
+  trinketToUpgrade: {fileID: 0}
+--- !u!114 &234196292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234196285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1460fccb712cd3f45a52c766d1484a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc: {fileID: 11400000, guid: f03f170cfaeb5344fbcf8e7ea5bfde28, type: 2}
+  trinketToUpgrade: {fileID: 0}
+--- !u!114 &234196293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234196285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b95f7eff967d31d4db9ee837e7bffd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc: {fileID: 11400000, guid: f03f170cfaeb5344fbcf8e7ea5bfde28, type: 2}
+  trinketToUpgrade: {fileID: 0}
+--- !u!114 &234196294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234196285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38bd29e563e06f848a56339709d49d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc: {fileID: 11400000, guid: 975178e0f7498db4bbd40ff1b071b01b, type: 2}
+  trinketToUpgrade: {fileID: 0}
+--- !u!114 &234196295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234196285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b1cdfd43ed7b948bb7c588c5ac86b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc: {fileID: 11400000, guid: 975178e0f7498db4bbd40ff1b071b01b, type: 2}
+  trinketToUpgrade: {fileID: 0}
+--- !u!114 &234196296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234196285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c305179627b2d0429a2b86dc9a77f50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc: {fileID: 11400000, guid: 975178e0f7498db4bbd40ff1b071b01b, type: 2}
+  trinketToUpgrade: {fileID: 0}
+--- !u!114 &234196297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234196285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69da3f9f487ac04a9118a957a2ff81a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc: {fileID: 11400000, guid: de91b2d632e4158499949ff41dfd72b3, type: 2}
+  trinketToUpgrade: {fileID: 0}
+--- !u!114 &234196298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234196285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5a2eaac3d2da846be39b65ff438865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc: {fileID: 11400000, guid: de91b2d632e4158499949ff41dfd72b3, type: 2}
+  trinketToUpgrade: {fileID: 0}
+--- !u!114 &234196299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234196285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afad5d032c6e83f46aa6775e1b630015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc: {fileID: 11400000, guid: de91b2d632e4158499949ff41dfd72b3, type: 2}
+  trinketToUpgrade: {fileID: 0}
 --- !u!43 &266110150
 Mesh:
   m_ObjectHideFlags: 0
@@ -66761,6 +66898,8 @@ MonoBehaviour:
   illegal: 0
   gridPos: {x: 0, y: 0}
   visited: 0
+  hasLilly: 0
+  hiddenLilly: {fileID: 0}
   isShoppe: 0
 --- !u!1 &5281368738478629203
 GameObject:

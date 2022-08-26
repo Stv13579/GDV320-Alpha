@@ -18,10 +18,10 @@ public class BlacksmithUI : NPCUI
         base.Start();
 
         //find the player's current elements in the arrays in shooting.
-        elements.AddRange(player.GetComponent<Shooting>().primaryElements);
-        elements.AddRange(player.GetComponent<Shooting>().catalystElements);
-        elements.AddRange(player.GetComponent<Shooting>().comboElements[0].comboElements);
-        elements.AddRange(player.GetComponent<Shooting>().comboElements[1].comboElements);
+        elements.AddRange(player.GetComponent<Shooting>().GetPrimaryElements());
+        elements.AddRange(player.GetComponent<Shooting>().GetCatalystElements());
+        elements.AddRange(player.GetComponent<Shooting>().GetComboElements()[0].comboElements);
+        elements.AddRange(player.GetComponent<Shooting>().GetComboElements()[1].comboElements);
 
         //Apply the buttons functionality to each element, allowing them to upgrade.
         int i = 0;

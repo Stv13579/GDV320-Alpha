@@ -29,7 +29,7 @@ public class LandMineElement : BaseElementClass
     {
         base.Update();
         //if this element is turned on turn on indicator
-        if (shootingScript.comboElements[shootingScript.GetLeftElementIndex()].comboElements[shootingScript.GetRightElementIndex()] == this 
+        if (shootingScript.GetComboElements()[shootingScript.GetLeftElementIndex()].comboElements[shootingScript.GetRightElementIndex()] == this 
             && shootingScript.GetInComboMode() == true)
         {
             indicator.SetActive(true);
