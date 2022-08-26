@@ -78,8 +78,11 @@ public class LotlUI : NPCUI
         Destroy(giftItems[button]);
         player.AddItem(item);
         buttons[button].SetActive(false);
-        audioManager.StopSFX("Shop Buy");
-        audioManager.PlaySFX("Shop Buy");
+        if (audioManager)
+        {
+            audioManager.StopSFX("Shop Buy");
+            audioManager.PlaySFX("Shop Buy");
+        }
         Close();
         NPC.npc.interactPositon++;
         NPC.canSeeOfferings = false;

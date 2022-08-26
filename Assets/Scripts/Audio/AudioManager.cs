@@ -39,11 +39,12 @@ public class AudioManager : MonoBehaviour
 
     public string GetInitialMusic() { return initialMusic; }
     [SerializeField]
+    public Sound[] GetMusics() { return Musics; }
 
     float audioDistance;
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         foreach (Sound i in sounds) // loop through the sounds
         {
@@ -56,21 +57,20 @@ public class AudioManager : MonoBehaviour
             i.audioSource.loop = i.loop;
         }
 
-        foreach (Sound i in Musics) // loop through the sounds
+        foreach (Sound j in Musics) // loop through the sounds
         {
-            i.audioSource = gameObject.AddComponent<AudioSource>();
-            i.audioSource.clip = i.clip;
+            j.audioSource = gameObject.AddComponent<AudioSource>();
+            j.audioSource.clip = j.clip;
 
-            i.audioSource.volume = i.volume;
-            i.audioSource.pitch = i.pitch;
+            j.audioSource.volume = j.volume;
+            j.audioSource.pitch = j.pitch;
 
-            i.audioSource.loop = i.loop;
+            j.audioSource.loop = j.loop;
         }
 
         PlayMusic(initialMusic);
         DontDestroyOnLoad(gameObject);
     }
-
     public void PlaySFX(string soundName, Transform playerPos = null, Transform enemyPos = null) // play sound 
     {
         Sound s = Array.Find(sounds, item => item.name == soundName);
@@ -141,41 +141,22 @@ public class AudioManager : MonoBehaviour
     // takes in the string of the audio that you want to fade in
     // takes in the string of the audio that you want to fade out
     // takes in an int which changes state
-    public void FadeInAndOutMusic(string fadeIn, string fadeOut, int State)
+    public void FadeOutAndPlayMusic(string fadeIn, string fadeOut, bool switchfadein, bool switchfadeout)
     {
         Sound soundFadeIn = Array.Find(Musics, item => item.name == fadeIn);
         Sound soundFadeOut = Array.Find(Musics, item => item.name == fadeOut);
 
-        if (State == 0)
+        if (switchfadeout == true)
         {
-            return;
+            soundFadeOut.audioSource.volume -= 0.001f * Time.deltaTime;
         }
-        //state 1 is fade out music
-        if (State == 1)
+        // stops the music and then changes
+        if (soundFadeOut.audioSource.volume <= 0 && switchfadein == false)
         {
-            soundFadeOut.audioSource.volume -= 0.01f * Time.deltaTime;
-            //sounds[audioOut].audioSource.volume -= 0.01f * Time.deltaTime;
-            // stops the music and then changes to state 2 and resets the audio volume
-            if (soundFadeOut.audioSource.volume <= 0)
-            {
-                soundFadeOut.audioSource.Stop();
-                State = 2;
-                soundFadeOut.audioSource.volume = 0.1f;
-                soundFadeIn.audioSource.volume = 0.0f;
-            }
-        }
-        // state 2 is fade in music
-        // plays the music thats at volume 0 and increase the volume to the max volume
-        // after it changes to a different state to stop the fade in and out
-        if (State == 2)
-        {
+            soundFadeOut.audioSource.Stop();
             soundFadeIn.audioSource.Play();
-            soundFadeIn.audioSource.volume += 0.01f * Time.deltaTime;
-            if (soundFadeIn.audioSource.volume >= 0.1f)
-            {
-                State = 0;
-                soundFadeIn.audioSource.volume = 0.1f;
-            }
-        }
+            switchfadeout = false;
+            soundFadeOut.audioSource.volume = 0.05f;
+        }      
     }
 }

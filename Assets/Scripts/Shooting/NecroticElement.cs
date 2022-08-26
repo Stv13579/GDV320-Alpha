@@ -36,8 +36,11 @@ public class NecroticElement : BaseElementClass
     public override void ElementEffect()
     {
         base.ElementEffect();
-        audioManager.StopSFX(shootingSoundFX);
-        audioManager.PlaySFX(otherShootingSoundFX);
+        if (audioManager)
+        {
+            audioManager.StopSFX(shootingSoundFX);
+            audioManager.PlaySFX(otherShootingSoundFX);
+        }
 
         isTargeting = false;
         if (targetToSlow && targetToSlow.GetComponent<BaseEnemyClass>() && !targetToSlow.GetComponent<EnemyShield>())

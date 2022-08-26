@@ -91,8 +91,11 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
     public void Attack()
     {
         projectileSpawnPos.transform.LookAt(player.transform);
-        audioManager.StopSFX(attackAudio);
-        audioManager.PlaySFX(attackAudio);
+        if (audioManager)
+        {
+            audioManager.StopSFX(attackAudio);
+            audioManager.PlaySFX(attackAudio);
+        }
         GameObject newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
         newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed, damageAmount * (prophecyManager.prophecyDamageMulti));
         if (newProjectile.GetComponent<CrystalRangedProjectile>())

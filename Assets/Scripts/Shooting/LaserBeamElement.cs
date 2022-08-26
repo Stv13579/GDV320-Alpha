@@ -33,12 +33,15 @@ public class LaserBeamElement : BaseElementClass
     // deactivate laser function
     public void DeactivateLaser()
     {
-       usingLaser = false;
-       laserBeam.SetActive(false);
-       playerHand.SetTrigger("LaserBeamStopCast");
-       audioManager.StopSFX(shootingSoundFX);
-       laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
-       StatModifier.RemoveModifier(playerMovement.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.25f, "Laser"));
+        usingLaser = false;
+        laserBeam.SetActive(false);
+        playerHand.SetTrigger("LaserBeamStopCast");
+        if (audioManager)
+        {
+            audioManager.StopSFX(shootingSoundFX);
+        }
+        laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
+        StatModifier.RemoveModifier(playerMovement.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.25f, "Laser"));
     }
     // activates the laserBeam
     public override void ElementEffect()

@@ -12,8 +12,13 @@ public class StartGameController : MonoBehaviour
     }
     public void StartGame()
     {
-        audioManager.StopSFX("Menu and Pause");
-        audioManager.PlaySFX("Menu and Pause");
+        if (audioManager)
+        {
+            audioManager.StopSFX("Menu and Pause");
+            audioManager.PlaySFX("Menu and Pause");
+            audioManager.StopMusic(audioManager.GetInitialMusic());
+            audioManager.PlayMusic("Hub Room Music");
+        }
         SceneManager.LoadScene(1);
     }
 }

@@ -103,7 +103,7 @@ public class BaseEnemyClass : MonoBehaviour
         health.baseValue = baseMaxHealth;
         damage.baseValue = baseDamageAmount;
         speed.baseValue = baseMoveSpeed;
-        if (idleAudio != null)
+        if (idleAudio != null && audioManager)
         {
             audioManager.PlaySFX(idleAudio);
         }
@@ -147,8 +147,11 @@ public class BaseEnemyClass : MonoBehaviour
     //Attacking
     public virtual void Attacking()
     {
-        audioManager.StopSFX(attackAudio);
-        audioManager.PlaySFX(attackAudio);
+        if (audioManager)
+        {
+            audioManager.StopSFX(attackAudio);
+            audioManager.PlaySFX(attackAudio);
+        }
     }
 
     public virtual void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
@@ -180,8 +183,11 @@ public class BaseEnemyClass : MonoBehaviour
         {
             enemyAnims.SetTrigger("TakeDamage");
         }
-        audioManager.StopSFX(takeDamageAudio);
-        audioManager.PlaySFX(takeDamageAudio, player.transform, this.transform);
+        if (audioManager)
+        {
+            audioManager.StopSFX(takeDamageAudio);
+            audioManager.PlaySFX(takeDamageAudio, player.transform, this.transform);
+        }
         Death();
     }
 
@@ -237,9 +243,11 @@ public class BaseEnemyClass : MonoBehaviour
 
             Instantiate(deathSpawn, transform.position, Quaternion.identity);
 
-
-            audioManager.StopSFX(deathAudio);
-            audioManager.PlaySFX(deathAudio, player.transform, this.transform);
+            if (audioManager)
+            {
+                audioManager.StopSFX(deathAudio);
+                audioManager.PlaySFX(deathAudio, player.transform, this.transform);
+            }
             Destroy(gameObject);
         }
     }

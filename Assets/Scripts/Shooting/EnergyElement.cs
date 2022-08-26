@@ -109,9 +109,13 @@ public class EnergyElement : BaseElementClass
     {
         shieldStateChange = shieldState.shieldDown;
         energyShield.SetActive(false);
-       useShield = false;
-       playerHand.SetTrigger("EnergyStopCast");
-       audioManager.StopSFX(shootingSoundFX);
+        useShield = false;
+        playerHand.SetTrigger("EnergyStopCast");
+
+        if (audioManager)
+        {
+            audioManager.StopSFX(shootingSoundFX);
+        }
        // go through the list of enemies
        // remove them from the list and 
        for (int i = 0; i < containedEnemies.Count; i++)
@@ -152,8 +156,11 @@ public class EnergyElement : BaseElementClass
         base.StartAnims(animationName);
         playerHand.ResetTrigger("EnergyStopCast");
         playerHand.SetTrigger(animationName);
-        audioManager.PlaySFX(shootingSoundFX);
-        audioManager.PlaySFX(otherShootingSoundFX);
+        if (audioManager)
+        {
+            audioManager.PlaySFX(shootingSoundFX);
+            audioManager.PlaySFX(otherShootingSoundFX);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

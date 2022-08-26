@@ -133,9 +133,13 @@ public class Fireball : BaseElementSpawnClass
             this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
             this.gameObject.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
-            // Sound FX
-            audioManager.StopSFX("Fire Element Impact");
-            audioManager.PlaySFX("Fire Element Impact");
+
+            if (audioManager)
+            {
+                // Sound FX
+                audioManager.StopSFX("Fire Element Impact");
+                audioManager.PlaySFX("Fire Element Impact");
+            }
         }
 
 

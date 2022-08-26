@@ -97,8 +97,12 @@ public class LandMineProj : MonoBehaviour
                     }
                 }
             }
-            audioManager.StopSFX("Land Mine Explosion");
-            audioManager.PlaySFX("Land Mine Explosion");
+
+            if (audioManager)
+            {
+                audioManager.StopSFX("Land Mine Explosion");
+                audioManager.PlaySFX("Land Mine Explosion");
+            }
             willExplode = true;
         }
     }

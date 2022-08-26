@@ -104,8 +104,11 @@ public class Shooting : MonoBehaviour
                 if(primaryElements[leftElementIndex].GetStartCoolDown() == false
                    || catalystElements[rightElementIndex].GetStartCoolDown() == false)
                 {
-                    audioManager.PlaySFX(primaryElements[leftElementIndex].GetIdleSFX());
-                    audioManager.PlaySFX(catalystElements[rightElementIndex].GetIdleSFX());
+                    if (audioManager)
+                    {
+                        audioManager.PlaySFX(primaryElements[leftElementIndex].GetIdleSFX());
+                        audioManager.PlaySFX(catalystElements[rightElementIndex].GetIdleSFX());
+                    }
                 }
             }
             else
@@ -115,7 +118,10 @@ public class Shooting : MonoBehaviour
                 // plays shooting idle sound
                 if (comboElements[leftElementIndex].comboElements[rightElementIndex].GetStartCoolDown() == false)
                 {
-                    audioManager.PlaySFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetIdleSFX());
+                    if (audioManager)
+                    {
+                        audioManager.PlaySFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetIdleSFX());
+                    }
                 }
             }
         }
@@ -143,7 +149,10 @@ public class Shooting : MonoBehaviour
             }
             else
             {
-                audioManager.StopSFX(primaryElements[leftElementIndex].GetIdleSFX());
+                if (audioManager)
+                {
+                    audioManager.StopSFX(primaryElements[leftElementIndex].GetIdleSFX());
+                }
             }
             
             // changes element
@@ -153,9 +162,12 @@ public class Shooting : MonoBehaviour
                 leftElementIndex = 0;
             }
 
-            // play audio of switching weapons
-            audioManager.StopSFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
-            audioManager.PlaySFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
+            if (audioManager)
+            {
+                // play audio of switching weapons
+                audioManager.StopSFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
+                audioManager.PlaySFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
+            }
 
             // destroys the current orb
             Destroy(leftOrbPos.GetChild(0).gameObject);
@@ -210,7 +222,10 @@ public class Shooting : MonoBehaviour
             }
             else
             {
-                audioManager.StopSFX(catalystElements[rightElementIndex].GetIdleSFX());
+                if (audioManager)
+                {
+                    audioManager.StopSFX(catalystElements[rightElementIndex].GetIdleSFX());
+                }
                 catalystElements[rightElementIndex].LiftEffect();
             }
 
@@ -221,9 +236,12 @@ public class Shooting : MonoBehaviour
                 rightElementIndex = 0;
             }
 
-            // play audio of switching weapons
-            audioManager.StopSFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
-            audioManager.PlaySFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
+            if (audioManager)
+            {
+                // play audio of switching weapons
+                audioManager.StopSFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
+                audioManager.PlaySFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
+            }
 
             // destroy orbs
             Destroy(rightOrbPos.GetChild(0).gameObject);
@@ -286,9 +304,12 @@ public class Shooting : MonoBehaviour
             // changes if in combo or no combo mode (switch)
             inComboMode = !inComboMode;
 
-            // stops the idle sound effect for the non combo elements
-            audioManager.StopSFX(primaryElements[leftElementIndex].GetIdleSFX());
-            audioManager.StopSFX(catalystElements[rightElementIndex].GetIdleSFX());
+            if (audioManager)
+            {
+                // stops the idle sound effect for the non combo elements
+                audioManager.StopSFX(primaryElements[leftElementIndex].GetIdleSFX());
+                audioManager.StopSFX(catalystElements[rightElementIndex].GetIdleSFX());
+            }
 
             // destroys orbs
             Destroy(leftOrbPos.GetChild(0).gameObject);
@@ -305,18 +326,24 @@ public class Shooting : MonoBehaviour
             // if not in combo after switch
             if (!inComboMode)
             {
-                // stop combo idle sound effect
-                audioManager.StopSFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetIdleSFX());
+                if (audioManager)
+                {
+                    // stop combo idle sound effect
+                    audioManager.StopSFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetIdleSFX());
+                }
 
                 // play non combo animations
                 primaryElements[leftElementIndex].AnimationSwitch(true);
                 catalystElements[rightElementIndex].AnimationSwitch(false);
 
-                // play switching element sound effects for non combo elements
-                audioManager.StopSFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
-                audioManager.PlaySFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
-                audioManager.StopSFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
-                audioManager.PlaySFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
+                if (audioManager)
+                {
+                    // play switching element sound effects for non combo elements
+                    audioManager.StopSFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
+                    audioManager.PlaySFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
+                    audioManager.StopSFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
+                    audioManager.PlaySFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
+                }
 
                 // change orbs for non combo elements
                 Instantiate(primaryElements[leftElementIndex].GetHandVFX(), leftOrbPos);
@@ -335,9 +362,12 @@ public class Shooting : MonoBehaviour
                 // play combo animation
                 comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch(true);
 
-                // play the switching element sound effect for combo elements
-                audioManager.StopSFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetSwitchElementSFX());
-                audioManager.PlaySFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetSwitchElementSFX());
+                if (audioManager)
+                {
+                    // play the switching element sound effect for combo elements
+                    audioManager.StopSFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetSwitchElementSFX());
+                    audioManager.PlaySFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetSwitchElementSFX());
+                }
 
                 // change orbs for combo elements
                 Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), leftOrbPos);
