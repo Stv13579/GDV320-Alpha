@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Fortune1 : Quest
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    Prophecy q1Proph;
 
-    // Update is called once per frame
-    void Update()
+    public void ActivateProphecy()
     {
-        
+        q1Proph.SetActive();
     }
 }

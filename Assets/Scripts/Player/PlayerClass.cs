@@ -152,6 +152,24 @@ public class PlayerClass : MonoBehaviour
 
     void Death()
     {
+        if(GameObject.Find("TrinketManager"))
+        {
+            if (heldItems.Contains(GameObject.Find("TrinketManager").GetComponent<LuckyKnuckleBones>()))
+            {
+                Item luckyBones = heldItems.Find(LKB => LKB == GameObject.Find("TrinketManager").GetComponent<LuckyKnuckleBones>());
+                if(luckyBones.GetComponent<LuckyKnuckleBones>().CanRevive())
+                {
+                    ChangeHealth(maxHealth);
+                    return;
+                }    
+            }
+        }
+
+        if(GameObject.Find("Quest Manager"))
+        {
+            GameObject.Find("Quest Manager").GetComponent<QuestManager>().DeathUpdate();
+        }
+
         for (int i = 0; i < heldItems.Count; i++)
         {
             heldItems[i].DeathTriggers();
@@ -168,9 +186,16 @@ public class PlayerClass : MonoBehaviour
 
     }
 
-    public void ChangeHealth(float healthAmount)
+    public void ChangeHealth(float healthAmount, bool reduceDamage = true)
     {
-        currentHealth = Mathf.Min(currentHealth + healthAmount, maxHealth);
+        //Create a one time defense modifier based on whether the player is recieving damage, or should not apply defense
+        float defenseMod = defense;
+        if(healthAmount > 0 || !reduceDamage)
+        {
+            defenseMod = 1;
+        }
+
+        currentHealth = Mathf.Min(currentHealth + (healthAmount * defenseMod), maxHealth);
         if (currentHealth <= 0 && !dead)
         {
             Death();
@@ -178,9 +203,16 @@ public class PlayerClass : MonoBehaviour
     }
 
     //Get hit and bounce
-    public void ChangeHealth(float healthAmount, Vector3 enemyPos, float pushForce)
+    public void ChangeHealth(float healthAmount, Vector3 enemyPos, float pushForce, bool reduceDamage = true)
     {
-        currentHealth = Mathf.Min(currentHealth + healthAmount, maxHealth);
+        //Create a one time defense modifier based on whether the player is recieving damage, or should not apply defense
+        float defenseMod = defense;
+        if (healthAmount > 0 || !reduceDamage)
+        {
+            defenseMod = 1;
+        }
+
+        currentHealth = Mathf.Min(currentHealth + (healthAmount * defenseMod), maxHealth);
 
         Vector3 bounceVec = transform.position - enemyPos;
 

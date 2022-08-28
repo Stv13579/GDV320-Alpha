@@ -26,6 +26,11 @@ public class Prophecy : MonoBehaviour
         button.GetChild(1).GetComponent<TextMeshProUGUI>().text = effect;
     }
 
+    public void SetActive()
+    {
+        active = true;
+    }
+
     public virtual void InitialEffect()
     {
         active = true;

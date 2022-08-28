@@ -23,6 +23,11 @@ public class Item : MonoBehaviour
 
     }
 
+    public virtual void RemoveEffect()
+    {
+
+    }
+
     //Called by certain actions which might trigger an item effect e.g. a particular attack.
     public virtual void TriggeredEffect()
     {
@@ -30,6 +35,11 @@ public class Item : MonoBehaviour
     }
 
     public virtual void DeathTriggers()
+    {
+
+    }
+
+    public virtual void SpawnTrigger(GameObject enemySpawning)
     {
 
     }

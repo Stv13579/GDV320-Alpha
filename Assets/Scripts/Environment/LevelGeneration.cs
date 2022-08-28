@@ -57,19 +57,22 @@ public class LevelGeneration : MonoBehaviour
         NPC.GetComponent<Room>().illegal = true;
 
         //Check if the player is carrying the balanced compass and roll to see if it triggers if so.
-        if (GameObject.Find("Player").GetComponent<PlayerClass>().heldItems.Contains(GameObject.Find("TrinketManager").GetComponent<BalancedCompass>()))
+        if(GameObject.Find("TrinketManager"))
         {
-            Debug.Log("Checking for extra room!");
-
-            int randomRoll = Random.Range(0, 100);
-
-            if(randomRoll < GameObject.Find("TrinketManager").GetComponent<BalancedCompass>().GetActivationChance())
+            if (GameObject.Find("Player").GetComponent<PlayerClass>().heldItems.Contains(GameObject.Find("TrinketManager").GetComponent<BalancedCompass>()))
             {
-                NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleRespiteRooms);
-                NPC.GetComponent<Room>().illegal = true;
+                Debug.Log("Checking for extra room!");
+
+                int randomRoll = Random.Range(0, 100);
+
+                if (randomRoll < GameObject.Find("TrinketManager").GetComponent<BalancedCompass>().GetActivationChance())
+                {
+                    NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleRespiteRooms);
+                    NPC.GetComponent<Room>().illegal = true;
+                }
             }
         }
-
+        
         foreach(GameObject room in placedRooms)
         {
             room.GetComponent<Room>().CloseDoors();

@@ -15,6 +15,7 @@ public class BossRoom : Room
     bool bossDead = false;
 
     GameObject currentBoss;
+    string bossName;
 
     [SerializeField]
     GameObject portalObject;
@@ -33,6 +34,7 @@ public class BossRoom : Room
                 //Spawn the portal
                 Instantiate(portalObject, portalSpawnPosition.position, Quaternion.identity);
                 UnlockDoors();
+                
                 bossDead = true;
 
                 Destroy(GameObject.Find("Boss Healthbar(Clone)"));
@@ -44,6 +46,7 @@ public class BossRoom : Room
             bossSpawned = true;
             //Spawn the boss once
             currentBoss = Instantiate(bosses.GetBoss(), spawnPosition.position, Quaternion.identity);
+            GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(currentBoss, "Boss");
             //Lock the doors
             LockDoors();
         }

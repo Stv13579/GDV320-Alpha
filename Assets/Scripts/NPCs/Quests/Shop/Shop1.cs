@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class Shop1 : Quest
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    int currencyCompletion;
+
+    public override void DeathBehaviour()
     {
-        
+        base.DeathBehaviour();
+
+        if(GameObject.Find("Player").GetComponent<PlayerClass>().money >= currencyCompletion)
+        {
+            FinishQuest();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void FinishRunBehaviour()
     {
-        
+        base.FinishRunBehaviour();
+
+        if (GameObject.Find("Player").GetComponent<PlayerClass>().money >= currencyCompletion)
+        {
+            FinishQuest();
+        }
     }
 }

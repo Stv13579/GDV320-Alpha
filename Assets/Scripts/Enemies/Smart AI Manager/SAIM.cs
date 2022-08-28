@@ -563,7 +563,15 @@ public class SAIM : MonoBehaviour
             GameObject spawnedEnemy = Instantiate(data.enemyTypes[Random.Range(0, data.enemyTypes.Count)], spawnPosition, Quaternion.identity);
             spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
 
-            GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy);
+            if(GameObject.Find("Quest Manager"))
+            {
+                GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy, "Regular");
+            }
+            
+            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().heldItems)
+            {
+                item.SpawnTrigger(this.gameObject);
+            }
 
             spawnedEnemies.Add(spawnedEnemy.GetComponent<BaseEnemyClass>());
             spawnAmount++;

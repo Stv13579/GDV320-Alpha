@@ -33,9 +33,14 @@ public class Blacksmith1 : Quest
         }
     }
 
-    public override void SpawnEventBehaviour(GameObject enemySpawning)
+    public override void SpawnEventBehaviour(GameObject enemySpawning, string spawnOrigin)
     {
-        base.SpawnEventBehaviour(enemySpawning);
+        base.SpawnEventBehaviour(enemySpawning, spawnOrigin);
+
+        if(spawnOrigin != "Regular")
+        {
+            return;
+        }
 
         enemySpawning.GetComponent<BaseEnemyClass>().GetDeathTriggers().Add(DeathTypeCheck);
     }
