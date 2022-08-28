@@ -113,8 +113,6 @@ public class SAIM : MonoBehaviour
     private string initialMusic;
     [SerializeField]
     private string battleMusic;
-    private bool fadeOutAmbientAudio = false;
-    private bool fadeOutBattleAudio = false;
 
     void Start()
     {
@@ -142,7 +140,7 @@ public class SAIM : MonoBehaviour
     {
         if (audioManager)
         {
-            audioManager.FadeOutAndPlayMusic(initialMusic, battleMusic, fadeOutBattleAudio, fadeOutAmbientAudio);
+            audioManager.FadeOutAndPlayMusic(initialMusic, battleMusic);
         }
         //// will be working on this in alpha was a late implementation 
         //// fades out the audio for the battle music
@@ -190,7 +188,7 @@ public class SAIM : MonoBehaviour
 
         if (audioManager)
         {
-            audioManager.FadeOutAndPlayMusic(battleMusic, initialMusic, fadeOutAmbientAudio, fadeOutBattleAudio);
+            audioManager.FadeOutAndPlayMusic(battleMusic, initialMusic);
         }
 
         //The room has been explored and defeated 
@@ -499,7 +497,7 @@ public class SAIM : MonoBehaviour
         {
             roomComplete = true;
             //Aydens Audio
-            fadeOutBattleAudio = true;
+            //fadeOutBattleAudio = true;
         }
     }
 
@@ -577,7 +575,7 @@ public class SAIM : MonoBehaviour
             spawnAmount++;
         }
         // Aydens Audio
-        fadeOutAmbientAudio = true;
+       // fadeOutAmbientAudio = true;
     }
 
     public int ChooseEnemy()
