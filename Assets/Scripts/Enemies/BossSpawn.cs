@@ -37,6 +37,7 @@ public class BossSpawn : MonoBehaviour
     {
         if (audioManager)
         {
+            // need to sort out
             audioManager.FadeOutAndPlayMusic(initialMusic, battleMusic);
             audioManager.FadeOutAndPlayMusic(battleMusic, initialMusic);
         }
@@ -76,9 +77,15 @@ public class BossSpawn : MonoBehaviour
             hubPortal.SetActive(true);
             bridge.SetActive(true);
             bossRing.SetActive(false);
-            // if the boss dies set this to true
-            //fadeOutBattleAudio = true;
 
+            // if the boss dies set this to true
+            if (audioManager.IsSoundPlaying(battleMusic))
+            {
+                if(audioManager)
+                {
+                    audioManager.SetCurrentStateToFadeIn();
+                }
+            }
         }
     }
 
@@ -94,8 +101,15 @@ public class BossSpawn : MonoBehaviour
         bossRing.SetActive(true);
 
         Instantiate(boss, spawnPosition.position, Quaternion.identity);
+
         // when the boss spawns set this to true
-        //fadeOutAmbientAudio = true;
+        if (audioManager.IsSoundPlaying(initialMusic))
+        {
+            if (audioManager)
+            {
+                audioManager.SetCurrentStateToFadeIn();
+            }
+        }
     }
 
 }

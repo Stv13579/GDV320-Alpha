@@ -45,7 +45,21 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     public Sound[] GetMusics() { return Musics; }
 
-    enum FadeState
+    public bool IsSoundPlaying(string audio) 
+    {
+        Sound tempAudioList = Array.Find(Musics, item => item.name == audio);
+
+        if(tempAudioList.audioSource.isPlaying)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+            
+    }
+enum FadeState
     {
         Idle,
         fadeIn,
