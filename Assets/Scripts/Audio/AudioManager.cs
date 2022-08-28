@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
+using JetBrains.Annotations;
 
 public class AudioManager : MonoBehaviour
 {
@@ -37,12 +38,23 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private string initialMusic;
 
+    [SerializeField]
+    private float audioDistance;
+
     public string GetInitialMusic() { return initialMusic; }
     [SerializeField]
     public Sound[] GetMusics() { return Musics; }
 
-    float audioDistance;
-    
+    enum FadeState
+    {
+        Idle,
+        fadeIn,
+        fadeOut,
+    }
+    private FadeState currentState = FadeState.Idle;
+    public void SetCurrentStateToIdle() { currentState = FadeState.fadeIn; }
+    public void SetCurrentStateToFadeIn() { currentState = FadeState.fadeIn; }
+    public void SetCurrentStateToFadeOut() { currentState = FadeState.fadeIn; }
     // Start is called before the first frame update
     private void Start()
     {
@@ -141,22 +153,40 @@ public class AudioManager : MonoBehaviour
     // takes in the string of the audio that you want to fade in
     // takes in the string of the audio that you want to fade out
     // takes in an int which changes state
-    public void FadeOutAndPlayMusic(string fadeIn, string fadeOut, bool switchfadein, bool switchfadeout)
+    public void FadeOutAndPlayMusic(string fadeIn, string fadeOut)
     {
         Sound soundFadeIn = Array.Find(Musics, item => item.name == fadeIn);
         Sound soundFadeOut = Array.Find(Musics, item => item.name == fadeOut);
 
-        if (switchfadeout == true)
+        if (!soundFadeOut.audioSource.isPlaying || soundFadeOut.audioSource.volume <= 0.00f)
         {
-            soundFadeOut.audioSource.volume -= 0.001f * Time.deltaTime;
+            return;
         }
-        // stops the music and then changes
-        if (soundFadeOut.audioSource.volume <= 0 && switchfadein == false)
+
+        switch (currentState)
         {
-            soundFadeOut.audioSource.Stop();
-            soundFadeIn.audioSource.Play();
-            switchfadeout = false;
-            soundFadeOut.audioSource.volume = 0.05f;
-        }      
+            case FadeState.Idle:
+                {
+
+                    break;
+                }
+            case FadeState.fadeOut:
+                {
+                    soundFadeOut.audioSource.volume -= Time.deltaTime;
+                    if (soundFadeOut.audioSource.volume <= 0.00f)
+                    {
+                        currentState = FadeState.fadeIn;
+                    }
+                    break;
+                }
+            case FadeState.fadeIn:
+                {
+                    soundFadeOut.audioSource.volume = 0.05f;
+                    soundFadeOut.audioSource.Stop();
+                    soundFadeIn.audioSource.Play();
+                    currentState = FadeState.Idle;
+                    break;
+                }
+        }
     }
 }
