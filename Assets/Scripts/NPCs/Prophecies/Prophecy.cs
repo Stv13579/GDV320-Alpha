@@ -31,6 +31,11 @@ public class Prophecy : MonoBehaviour
         active = true;
     }
 
+    public bool GetActive()
+    {
+        return active;
+    }
+
     public virtual void InitialEffect()
     {
         active = true;
