@@ -44,6 +44,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: cd401c0e52358994fad8d3262068a06f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DiffuseBlink:
+        m_Texture: {fileID: 2800000, guid: 6362b02ed2ab42a4ba0a0ac801d01f93, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 2800000, guid: 0f05b74d5c0acbc4084927f4eb200964, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -64,12 +68,20 @@ Material:
         m_Texture: {fileID: 2800000, guid: 6362b02ed2ab42a4ba0a0ac801d01f93, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SlimeEmmisiveBlink:
+        m_Texture: {fileID: 2800000, guid: cd401c0e52358994fad8d3262068a06f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SubSurfMulti:
         m_Texture: {fileID: 2800000, guid: cd401c0e52358994fad8d3262068a06f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SubSurfMultiBlink:
+        m_Texture: {fileID: 2800000, guid: 6362b02ed2ab42a4ba0a0ac801d01f93, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -80,6 +92,7 @@ Material:
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
     - _Blend: 0
+    - _BlinkSpeed: 1
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -91,6 +104,7 @@ Material:
     - _GlossyReflections: 0
     - _Highlight_Strenght: 1
     - _IDNum: 0
+    - _IsBeingDamaged: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Outline_Alpha: 0.085
