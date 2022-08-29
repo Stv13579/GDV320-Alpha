@@ -169,6 +169,10 @@ public class PlayerClass : MonoBehaviour
         {
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().DeathUpdate();
         }
+        else
+        {
+            Debug.Log("Player missing quest manager");
+        }
 
         for (int i = 0; i < heldItems.Count; i++)
         {
@@ -195,6 +199,11 @@ public class PlayerClass : MonoBehaviour
             defenseMod = 1;
         }
 
+        if(defenseMod > 1 || defenseMod == 0)
+        {
+            defenseMod = 1;
+        }
+
         currentHealth = Mathf.Min(currentHealth + (healthAmount * defenseMod), maxHealth);
         if (currentHealth <= 0 && !dead)
         {
@@ -208,6 +217,11 @@ public class PlayerClass : MonoBehaviour
         //Create a one time defense modifier based on whether the player is recieving damage, or should not apply defense
         float defenseMod = defense;
         if (healthAmount > 0 || !reduceDamage)
+        {
+            defenseMod = 1;
+        }
+
+        if (defenseMod > 1 || defenseMod == 0)
         {
             defenseMod = 1;
         }

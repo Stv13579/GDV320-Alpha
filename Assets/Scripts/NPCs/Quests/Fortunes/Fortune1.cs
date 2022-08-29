@@ -9,6 +9,25 @@ public class Fortune1 : Quest
 
     public void ActivateProphecy()
     {
-        q1Proph.SetActive();
+        q1Proph.InitialEffect();
+
+
+    }
+
+    public override void StartRunBehaviour()
+    {
+        base.StartRunBehaviour();
+
+        ActivateProphecy();
+    }
+
+    public override void FinishRunBehaviour()
+    {
+        base.FinishRunBehaviour();
+
+        if(q1Proph.GetActive())
+        {
+            FinishQuest();
+        }
     }
 }

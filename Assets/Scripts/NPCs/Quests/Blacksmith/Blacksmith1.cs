@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Blacksmith1 : Quest
 {
-    List<GameObject> slainEnemies = new List<GameObject>();
+    List<string> slainEnemies = new List<string>();
 
     //Added to death triggers
     public void DeathTypeCheck(GameObject enemy)
@@ -12,9 +12,9 @@ public class Blacksmith1 : Quest
 
         bool slain = false;
 
-        foreach(GameObject collectedEnemy in slainEnemies)
+        foreach(string collectedEnemy in slainEnemies)
         {
-            if(collectedEnemy.name == enemy.name)
+            if(collectedEnemy == enemy.name)
             {
                 slain = true;
                 break;
@@ -23,7 +23,7 @@ public class Blacksmith1 : Quest
 
         if(slain == false)
         {
-            slainEnemies.Add(enemy);
+            slainEnemies.Add(enemy.name);
         }
 
         //If there are 12 enemy types in slain enemy, finish the quest

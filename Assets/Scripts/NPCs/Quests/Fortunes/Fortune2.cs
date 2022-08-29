@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class Fortune2 : Quest
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    Prophecy q1Proph;
+
+    public void ActivateProphecy()
     {
-        
+        q1Proph.InitialEffect();
+
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void StartRunBehaviour()
     {
-        
+        base.StartRunBehaviour();
+
+        ActivateProphecy();
+    }
+
+    public override void FinishRunBehaviour()
+    {
+        base.FinishRunBehaviour();
+
+        if (q1Proph.GetActive())
+        {
+            FinishQuest();
+        }
     }
 }
