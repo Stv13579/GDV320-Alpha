@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UITestingMAT
-  m_Shader: {fileID: 4800000, guid: e12446a71b4069a478cf7fca9cc41ee8, type: 3}
+  m_Name: MAT_VFX_KingSlime_Charge
+  m_Shader: {fileID: 4800000, guid: a45391562afdc3e40a73153d03e39741, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -31,18 +31,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _FillColour:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _GlowColour:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainColour:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -55,8 +43,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SoftEgdeMask_Texture:
+        m_Texture: {fileID: 2800000, guid: 9a7be70759d48ff48a8ef359791bfa99, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture0:
+        m_Texture: {fileID: 2800000, guid: 379e2786f4192444e985ab5314608bdc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture1:
+        m_Texture: {fileID: 2800000, guid: 379e2786f4192444e985ab5314608bdc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -67,13 +67,15 @@ Material:
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
     - _Blend: 0
-    - _BlinkingFillSpeed: 0
-    - _BlinkingGlowSpeed: 0
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _Fres_Power_MaxNew: 5
+    - _Fres_Power_MinNew: 3
+    - _Fres_Scale_MaxNew: 2
+    - _Fres_Scale_MinNew: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -81,25 +83,37 @@ Material:
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _ShieldDamage: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
+    - _SoftEdgeFade: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _StopSplash: 0
     - _Surface: 0
+    - _ToggleSoftMask: 0
     - _VignettePowerExp: 8.29
-    - _VignetteSmoothness: 0.73
+    - _VignetteSmoothness: 1.43
+    - _Voronoi_2_Scale: 3
+    - _Voronoi_2_Speed: 2
+    - _Voronoi_Power_Exp: 0.016
+    - _Voronoi_Scale: 0
+    - _Voronoi_Speed: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseFillColour: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseGlowColour: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseMainColour: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Colour_1: {r: 2.9960785, g: 0.11612279, b: 0, a: 0}
+    - _Colour_2: {r: 11.313708, g: 2.0409043, b: 0, a: 0}
+    - _Colour_Impact_1: {r: 1, g: 0, b: 0, a: 0}
+    - _Colour_Impact_2: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SecondaryMainColour: {r: 0, g: 0, b: 0, a: 0}
+    - _Fres_ScaleX_PowerY_Speeds: {r: 1, g: 1, b: 0, a: 0}
+    - _Panner_1_Speed: {r: 1, g: 0, b: 0, a: 0}
+    - _Panner_2_Speed: {r: 1, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
---- !u!114 &2502298146652424574
+--- !u!114 &1713200113654367930
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
