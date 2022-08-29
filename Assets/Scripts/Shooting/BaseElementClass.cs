@@ -223,12 +223,9 @@ public class BaseElementClass : MonoBehaviour
     // start the animation of the elements if cool down hasnt started and if player has mana
     public void ActivateElement()
     {
-        if (!startCoolDown)
+        if (!startCoolDown && PayCosts())
         {
-            if(PayCosts())
-            {
-                StartAnims(animationToPlay, animationToPlayAlt);
-            }
+            StartAnims(animationToPlay, animationToPlayAlt);
         }
     }
 
@@ -254,7 +251,6 @@ public class BaseElementClass : MonoBehaviour
                 // cooldown is off and player can shoot again
                 currentCoolDownTimer = cooldownTimer;
                 startCoolDown = false;
-                playerHand.SetTrigger("StopShooting");
             }
         }
     }
