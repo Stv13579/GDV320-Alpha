@@ -398,7 +398,7 @@ public class Shooting : MonoBehaviour
     private void NonComboShooting()
     {
         //Starts the process of activating the element held in the left hand
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             primaryElements[leftElementIndex].ActivateElement();
         }
@@ -426,7 +426,7 @@ public class Shooting : MonoBehaviour
     // shooting function for combo elements
     private void ComboShooting()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
         }
