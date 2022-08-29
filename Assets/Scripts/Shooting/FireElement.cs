@@ -47,6 +47,8 @@ public class FireElement : BaseElementClass
             newFireball.transform.LookAt(hit.point);
         }
         newFireball.GetComponent<Fireball>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.fireDamageMultiplier), gravity, gravCurve, gravityLifetime, explosionArea, explosionDamage, attackTypes);
+
+        //playerClass.ChangeMana(-manaCost, manaTypes);
     }
 
     public override void ActivateVFX()
@@ -76,4 +78,16 @@ public class FireElement : BaseElementClass
             }
         }
     }
+    //protected override bool PayCosts(float modifier = 1)
+    //{
+    //    //Override of paycosts so that mana is only subtracted at then end, in case the cast is cancelled
+    //    if (playerClass.ManaCheck(manaCost * modifier, manaTypes))
+    //    {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
 }
