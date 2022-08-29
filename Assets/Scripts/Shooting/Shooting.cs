@@ -284,8 +284,20 @@ public class Shooting : MonoBehaviour
                 }
             }
         }
+        // if the player is in combo mode and has no mana
+        // takes player out of combo mode and puts them to primary and catalyst elements
+        // player also start to use health as mana
+        if (inComboMode && GetLeftMana()[0] <= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost() && GetRightMana()[0] <= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost())
+        {
+            comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
+            primaryElements[leftElementIndex].AnimationSwitch(true);
+            catalystElements[rightElementIndex].AnimationSwitch(false);
+            uiScript.SetCombo(!inComboMode);
+            inComboMode = false;
+        }
+
         // if player has pressed combo button
-        if (Input.GetKeyUp(KeyCode.F))
+        if (Input.GetKeyUp(KeyCode.F) && GetLeftMana()[0] >= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost() && GetRightMana()[0] >= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost())
         {
             // if in combo mode lift combo element effect
             // else lift catalyst effect
@@ -380,23 +392,16 @@ public class Shooting : MonoBehaviour
             }
 
         }
-        // if the player is in combo mode and has no mana
-        // takes player out of combo mode and puts them to primary and catalyst elements
-        // player also start to use health as mana
-        if(inComboMode && GetLeftMana()[0] <= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost() && GetRightMana()[0] <= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost())
-        {
-            comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
-            primaryElements[leftElementIndex].AnimationSwitch(true);
-            catalystElements[rightElementIndex].AnimationSwitch(false);
-            uiScript.SetCombo(!inComboMode);
-            inComboMode = false;
-        }
     }
 
     // shooting function for primary and catalyst
     // checks if player has press any input for mouse 0 and 1
     private void NonComboShooting()
     {
+        //if (!primaryElements[leftElementIndex].GetStartCoolDown() && Input.GetKey(KeyCode.Mouse0))
+        //{
+        //    primaryElements[leftElementIndex].ActivateElement();
+        //}
         //Starts the process of activating the element held in the left hand
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -430,6 +435,10 @@ public class Shooting : MonoBehaviour
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
         }
+        //if (Input.GetKey(KeyCode.Mouse0) && !comboElements[leftElementIndex].comboElements[rightElementIndex].GetStartCoolDown())
+        //{
+        //    comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
+        //}
     }
 
     // lift effect function for combo elements

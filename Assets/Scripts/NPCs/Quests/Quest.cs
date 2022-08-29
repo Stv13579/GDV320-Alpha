@@ -69,4 +69,9 @@ public class Quest : MonoBehaviour
 
         trinketToUpgrade.Upgrade();
     }
+
+    public virtual void FindHiddenObject()
+    {
+
+    }
 }
