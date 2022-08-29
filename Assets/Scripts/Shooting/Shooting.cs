@@ -398,15 +398,15 @@ public class Shooting : MonoBehaviour
     // checks if player has press any input for mouse 0 and 1
     private void NonComboShooting()
     {
-        //if (!primaryElements[leftElementIndex].GetStartCoolDown() && Input.GetKey(KeyCode.Mouse0))
-        //{
-        //    primaryElements[leftElementIndex].ActivateElement();
-        //}
-        //Starts the process of activating the element held in the left hand
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (!primaryElements[leftElementIndex].GetStartCoolDown() && Input.GetKey(KeyCode.Mouse0))
         {
             primaryElements[leftElementIndex].ActivateElement();
         }
+        ////Starts the process of activating the element held in the left hand
+        //if (Input.GetKeyDown(KeyCode.Mouse0))
+        //{
+        //    primaryElements[leftElementIndex].ActivateElement();
+        //}
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             catalystElements[rightElementIndex].ActivateElement();
@@ -431,14 +431,14 @@ public class Shooting : MonoBehaviour
     // shooting function for combo elements
     private void ComboShooting()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
-        }
-        //if (Input.GetKey(KeyCode.Mouse0) && !comboElements[leftElementIndex].comboElements[rightElementIndex].GetStartCoolDown())
+        //if (Input.GetKeyDown(KeyCode.Mouse0))
         //{
         //    comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
         //}
+        if (Input.GetKey(KeyCode.Mouse0) && !comboElements[leftElementIndex].comboElements[rightElementIndex].GetStartCoolDown())
+        {
+            comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
+        }
     }
 
     // lift effect function for combo elements
