@@ -1000,10 +1000,10 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.5
+  m_Height: 1.25
   m_Radius: 0.25
   m_SlopeLimit: 45
-  m_StepOffset: 0.5
+  m_StepOffset: 0.75
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
@@ -1173,12 +1173,12 @@ MonoBehaviour:
   otherShootingSoundFX: Fire Element Shot Alt
   switchElementSFX: Fire Element Equip
   idleSFX: Fire Element Idle
-  damage: 7
+  damage: 15
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: FireTransition
   startCoolDown: 0
-  cooldownTimer: 1.2
+  cooldownTimer: 1
   currentElementType: 1
   fireBall: {fileID: 1674563964008408851, guid: 53c9a56f9a190e74680cf970480c8f2b,
     type: 3}
@@ -1247,12 +1247,12 @@ MonoBehaviour:
   otherShootingSoundFX: Crystal Element Shot Alt
   switchElementSFX: Crystal Element Equip
   idleSFX: Crystal Element Idle (maybe)
-  damage: 1
+  damage: 3
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: CrystalTransition
   startCoolDown: 0
-  cooldownTimer: 1.5
+  cooldownTimer: 1.75
   currentElementType: 2
   crystalProjectile: {fileID: 767471284418207900, guid: 6d74d8f7a4c049649922bd1346f7f9c6,
     type: 3}
@@ -1282,7 +1282,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lifeTimer: 3
-  damageLimit: 0.1
+  damageLimit: 0.5
+  damageSpeedDecreaser: 10
 --- !u!114 &5197923882654677022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1318,7 +1319,7 @@ MonoBehaviour:
   otherShootingSoundFX: Water Element Shot Alt
   switchElementSFX: Water Element Equip
   idleSFX: Water Element Idle
-  damage: 5
+  damage: 20
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: WaterTransition
@@ -1553,12 +1554,12 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Shard Cannon Equip
   idleSFX: Shard Cannon Idle (maybe)
-  damage: 20
+  damage: 40
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: ShardCannonTransition
   startCoolDown: 0
-  cooldownTimer: 1
+  cooldownTimer: 1.5
   currentElementType: 202
   shardProj: {fileID: 2115769081119537338, guid: 316042c01d1629e499fece67a8fd0bed,
     type: 3}
@@ -1598,12 +1599,12 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Acid Cloud Equip
   idleSFX: Acid Cloud Idle
-  damage: 0.5
+  damage: 3
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: AcidCloudTransition
   startCoolDown: 0
-  cooldownTimer: 1
+  cooldownTimer: 1.5
   currentElementType: 203
   cloudProj: {fileID: 8417138957682568096, guid: 10b41ea33a4534e4bb8656dcf5ea9cae,
     type: 3}
@@ -1643,7 +1644,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Land Mine Equip
   idleSFX: Land Mine Idle
-  damage: 10
+  damage: 30
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: LandMineTransition
@@ -1746,7 +1747,7 @@ MonoBehaviour:
   otherShootingSoundFX: Ice Slash Shot Alt
   switchElementSFX: Ice Slash Equip
   idleSFX: Ice Slash Idle
-  damage: 10
+  damage: 25
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: IceSlashTransition
@@ -1843,7 +1844,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Crystal Grenade Equip
   idleSFX: Crystal Grenade Idle (maybe)
-  damage: 2
+  damage: 5
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: CrystalGrenadeTransition
@@ -1856,7 +1857,7 @@ MonoBehaviour:
   gravity: 1
   timeToExplode: 5
   explosionRange: 5
-  explosionDamage: 10
+  explosionDamage: 30
 --- !u!114 &450497679
 MonoBehaviour:
   m_ObjectHideFlags: 0

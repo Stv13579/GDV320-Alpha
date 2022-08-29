@@ -97,7 +97,6 @@ public class BaseElementClass : MonoBehaviour
     protected float cooldownTimer;
     protected float currentCoolDownTimer;
 
-
     public enum ElementType
     {
         None = 0,
