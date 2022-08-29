@@ -223,9 +223,12 @@ public class BaseElementClass : MonoBehaviour
     // start the animation of the elements if cool down hasnt started and if player has mana
     public void ActivateElement()
     {
-        if (!startCoolDown && PayCosts())
+        if (!startCoolDown)
         {
-            StartAnims(animationToPlay, animationToPlayAlt);
+            if (PayCosts())
+            {
+                StartAnims(animationToPlay, animationToPlayAlt);
+            }
         }
     }
 
