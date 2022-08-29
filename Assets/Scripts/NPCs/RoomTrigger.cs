@@ -11,6 +11,7 @@ public class RoomTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            GetComponentInParent<Room>().visited = true;
             triggered = true;
         }
     }

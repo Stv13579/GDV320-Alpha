@@ -138,10 +138,10 @@ public class SAIM : MonoBehaviour
 
     void Update()
     {
-        if (audioManager)
-        {
-            audioManager.FadeOutAndPlayMusic(initialMusic, battleMusic);
-        }
+       //if (audioManager)
+       //{
+       //    audioManager.FadeOutAndPlayMusic(initialMusic, battleMusic);
+       //}
         //// will be working on this in alpha was a late implementation 
         //// fades out the audio for the battle music
         //if (fadeOutBattleAudio == true)
@@ -186,10 +186,10 @@ public class SAIM : MonoBehaviour
         //    audioManager.sounds[0].audioSource.volume = 0.1f;
         //}
 
-        if (audioManager)
-        {
-            audioManager.FadeOutAndPlayMusic(battleMusic, initialMusic);
-        }
+        //if (audioManager)
+        //{
+        //    audioManager.FadeOutAndPlayMusic(battleMusic, initialMusic);
+        //}
 
         //The room has been explored and defeated 
         if (triggered && !roomComplete)

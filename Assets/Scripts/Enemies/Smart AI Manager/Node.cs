@@ -39,11 +39,12 @@ public class Node : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
         if(bestNextNodePos != Vector3.zero)
         {
             Debug.DrawRay(transform.position, bestNextNodePos - transform.position, Color.green);
         }
-        
+#endif
         //GetComponentInChildren<TextMeshPro>().text = bestCost.ToString();
     }
 
