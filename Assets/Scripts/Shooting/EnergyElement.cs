@@ -182,7 +182,8 @@ public class EnergyElement : BaseElementClass
                 Destroy(other.gameObject);
             }
             if (other.gameObject.layer == 22 && other.GetComponent<BaseRangedProjectileScript>() ||
-                other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())
+                other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>() ||
+                 other.gameObject.tag == "Enemy" && other.GetComponent<BaseEnemyClass>())
             {
                 materialChanger = 1.0f;
                 energyShield.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetFloat("_ShieldDamage", materialChanger);

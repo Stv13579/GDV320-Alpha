@@ -25,17 +25,6 @@ public class VoidElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-        //Checking if the mouse button has been released, which cancels the spell if it hasn't been held long enough or casts it if it has
-        if (!Input.GetKey(KeyCode.Mouse1) && (playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") || 
-            playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold")))
-        {
-            isHolding = false;
-            if (audioManager)
-            {
-                audioManager.PlaySFX(otherShootingSoundFX);
-            }
-            playerHand.SetTrigger("VoidCastSuccess");
-        }
         if (isHolding)
         {
             RaycastHit hit1;
@@ -80,6 +69,23 @@ public class VoidElement : BaseElementClass
             }
             targetPos = Indicator.transform.position;
         }
+        if(!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") && targetPos.magnitude < 10 ||
+            !Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold") && targetPos.magnitude < 10)
+        {
+            playerHand.SetTrigger("VoidCastFail");
+        }
+        //Checking if the mouse button has been released, which cancels the spell if it hasn't been held long enough or casts it if it has
+        if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") ||
+            !Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold"))
+        {
+            isHolding = false;
+            if (audioManager)
+            {
+                audioManager.PlaySFX(otherShootingSoundFX);
+            }
+            playerHand.SetTrigger("VoidCastSuccess");
+        }
+        Debug.Log(targetPos.magnitude);
     }
 
     public override void ElementEffect()
