@@ -41,8 +41,26 @@ public class Shooting : MonoBehaviour
     public List<BaseElementClass> GetPrimaryElements() { return primaryElements; }
     public List<ComboElementList> GetComboElements() { return comboElements; }
     public Sprite GetPrimaryElementSprite() { return primaryElements[leftElementIndex].uiSprite; }
+    public Sprite GetNextPrimaryElementSprite() 
+    { 
+        if((leftElementIndex + 1) >= primaryElements.Count)
+        {
+            return primaryElements[0].uiSprite;
+        }
+
+        return primaryElements[leftElementIndex + 1].uiSprite; 
+    }
 
     public Sprite GetCatalystElementSprite() { return catalystElements[rightElementIndex].uiSprite; }
+    public Sprite GetNextCatalystElementSprite() 
+    {
+        if ((rightElementIndex + 1) >= catalystElements.Count)
+        {
+            return catalystElements[0].uiSprite;
+        }
+
+        return catalystElements[rightElementIndex + 1].uiSprite; 
+    }
 
     public Sprite GetComboElementSprite() { return (comboElements[leftElementIndex].comboElements[rightElementIndex].uiSprite); }
     public Transform GetLeftOrbPos() { return leftOrbPos; }

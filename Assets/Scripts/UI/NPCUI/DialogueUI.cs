@@ -12,6 +12,9 @@ public class DialogueUI : NPCUI
     GameObject dialogueBox;
     public bool noOffering = false;
 
+    [SerializeField]
+    TextMeshProUGUI nameField;
+
     int place = 0;
     //Show dialogue lines as specified, activate the action once exhausted, then delete itself
 
@@ -21,6 +24,8 @@ public class DialogueUI : NPCUI
         NPC.npc.AssessDialogue();
         dialogueLines = NPC.npc.currentDialogue;
         dialogueBox = transform.GetChild(0).gameObject;
+
+        nameField.text = NPC.name;
 
         if(noOffering)
         {
@@ -51,6 +56,7 @@ public class DialogueUI : NPCUI
     public void MoveDialogueAlong()
     {
         place++;
+
     }
 
     public override void Close()
