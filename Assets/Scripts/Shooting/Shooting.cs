@@ -453,12 +453,12 @@ public class Shooting : MonoBehaviour
     // shooting function for combo elements
     private void ComboShooting()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
-        }
-        if (Input.GetKey(KeyCode.Mouse0) && 
-            !comboElements[leftElementIndex].comboElements[rightElementIndex].GetStartCoolDown() &&
+        //if (Input.GetKeyDown(KeyCode.Mouse0))
+        //{
+        //    comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
+        //}
+        if (!comboElements[leftElementIndex].comboElements[rightElementIndex].GetStartCoolDown() &&
+            Input.GetKey(KeyCode.Mouse0) &&
             comboElements[leftElementIndex].comboElements[rightElementIndex].GetPlayerHand().GetCurrentAnimatorStateInfo(2).IsName("Idle"))
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
