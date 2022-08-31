@@ -12,13 +12,9 @@ public class CrystalProj : BaseElementSpawnClass
 
     private float startLifeTimer;
 
-    private AudioManager audioManager;
-
     private bool ismoving;
 
     private float damageLimit;
-
-    private Vector3 originalPosition;
 
     [SerializeField]
     private GameObject particleEffect;
@@ -29,7 +25,6 @@ public class CrystalProj : BaseElementSpawnClass
     private float damageDecreaser;
     private void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
         hitMarker = GameObject.Find("GameplayUI");
         ismoving = true;
     }

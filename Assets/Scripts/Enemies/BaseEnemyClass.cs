@@ -290,6 +290,15 @@ public class BaseEnemyClass : MonoBehaviour
     {
         return currentHealth;
     }
+    public float GetDamageResistance()
+    {
+        return damageResistance;
+    }
+
+    public void SetDamageResistance(float tempDamageResistance)
+    {
+        damageResistance = tempDamageResistance;
+    }
 
     public void SetSpawner(GameObject spawn)
     {

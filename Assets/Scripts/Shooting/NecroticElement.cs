@@ -46,11 +46,11 @@ public class NecroticElement : BaseElementClass
         if (targetToSlow && targetToSlow.GetComponent<BaseEnemyClass>() && !targetToSlow.GetComponent<EnemyShield>())
         {
             BaseEnemyClass enemy = targetToSlow.GetComponent<BaseEnemyClass>();
-            if (StatModifier.CheckModifier(enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(upgraded ? 0.5f : 0.3f, "Necrotic")) != -1)
+            if (enemy.GetDamageResistance() != 2.0f || enemy.GetDamageResistance() != 3.0f)
             {
                 playerClass.ChangeMana(-manaCost, manaTypes);
                 Instantiate(necroticVFX, targetToSlow.transform);
-                StatModifier.AddModifier(enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(upgraded ? 0.5f : 0.3f, "Necrotic"));
+                enemy.SetDamageResistance(upgraded ? 3.0f : 2.0f);
             }
         }
     }

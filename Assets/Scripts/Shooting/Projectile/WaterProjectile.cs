@@ -68,6 +68,11 @@ public class WaterProjectile : BaseElementSpawnClass
         {
             collision.collider.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             Debug.Log(collision.collider.gameObject.name);
+            if (hitMarker)
+            {
+                hitMarker.transform.GetChild(7).gameObject.SetActive(true);
+                Invoke("HitMarkerDsable", 0.2f);
+            }
         }
     }
 
