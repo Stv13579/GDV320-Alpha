@@ -35,39 +35,11 @@ public class BossSpawn : MonoBehaviour
 
     void Update()
     {
-       //if (audioManager)
-       //{
-       //    // need to sort out
-       //    audioManager.FadeOutAndPlayMusic(initialMusic, battleMusic);
-       //    audioManager.FadeOutAndPlayMusic(battleMusic, initialMusic);
-       //}
-        //// will be working on this in alpha was a late implementation 
-        //// fades out the audio for the ambient sound
-        //if (fadeOutAmbientAudio == true)
-        //{
-        //    audioManager.sounds[0].audioSource.volume -= 0.01f * Time.deltaTime;
-        //}
-        //// starts the boss music and sets back the volume of the ambient sound
-        //if (audioManager.sounds[0].audioSource.volume <= 0 && fadeOutBattleAudio == false)
-        //{
-        //    audioManager.StopMusic("Ambient Sound");
-        //    audioManager.PlayMusic("Boss Music");
-        //    fadeOutAmbientAudio = false;
-        //    audioManager.sounds[0].audioSource.volume = 0.1f;
-        //}
-        //// fades out the audio for the boss music
-        //if (fadeOutBattleAudio == true)
-        //{
-        //    audioManager.sounds[34].audioSource.volume -= 0.01f * Time.deltaTime;
-        //}
-        //// starts the ambient sound again and sets the volume back for the boss music
-        //if (audioManager.sounds[34].audioSource.volume <= 0 && fadeOutAmbientAudio == false)
-        //{
-        //    audioManager.StopMusic("Boss Music");
-        //    audioManager.PlayMusic("Ambient Sound");
-        //    fadeOutBattleAudio = false;
-        //    audioManager.sounds[34].audioSource.volume = 0.1f;
-        //}
+        if (audioManager)
+        {
+            audioManager.FadeOutAndPlayMusic(initialMusic, battleMusic);
+        }
+
         if (!triggered)
         {
             return;
@@ -78,14 +50,11 @@ public class BossSpawn : MonoBehaviour
             bridge.SetActive(true);
             bossRing.SetActive(false);
 
-            // if the boss dies set this to true
-           //if (audioManager.IsSoundPlaying(battleMusic))
-           //{
-           //    if(audioManager)
-           //    {
-           //        audioManager.SetCurrentStateToFadeIn();
-           //    }
-           //}
+            //if the boss dies set this to true
+            if (audioManager)
+            {
+                audioManager.SetCurrentStateToFadeOutAudio2();
+            }
         }
     }
 
@@ -102,14 +71,11 @@ public class BossSpawn : MonoBehaviour
 
         Instantiate(boss, spawnPosition.position, Quaternion.identity);
 
-        // when the boss spawns set this to true
-       //if (audioManager.IsSoundPlaying(initialMusic))
-       //{
-       //    if (audioManager)
-       //    {
-       //        audioManager.SetCurrentStateToFadeIn();
-       //    }
-       //}
+       // when the boss spawns set this to true
+        if (audioManager)
+        {
+            audioManager.SetCurrentStateToFadeOutAudio1();
+        }
     }
 
 }
