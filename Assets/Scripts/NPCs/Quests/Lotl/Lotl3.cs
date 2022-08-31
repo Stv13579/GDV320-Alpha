@@ -9,41 +9,30 @@ public class Lotl3 : Quest
     [SerializeField]
     int chanceToSpawn;
 
-    List<GameObject> levelRooms = new List<GameObject>();
-
-    [SerializeField]
-    string hiddenObject;
+    List<Room> levelRooms = new List<Room>();
 
     public override void LevelStartQuestBehaviour()
     {
 
         levelRooms.Clear();
-        levelRooms = new List<GameObject>();
+        levelRooms = new List<Room>();
 
         //Check against a chance based thing whether to spawn a hidden Lotl on this floor
-        if (Random.Range(0, 100) <= chanceToSpawn)
+        if(Random.Range(0, 100) <= chanceToSpawn)
         {
-            foreach (GameObject room in GameObject.Find("Level Generator").GetComponent<LevelGeneration>().GetGenericRooms())
+            foreach (GameObject room in GameObject.Find("Level Generator").GetComponent<LevelGeneration>().GetRooms())
             {
-                levelRooms.Add(room);
+                levelRooms.Add(room.GetComponent<Room>());
             }
-
-            GameObject roomToHideIn = levelRooms[Random.Range(0, GameObject.Find("Level Generator").GetComponent<LevelGeneration>().GetGenericRooms().Count)];
-            GameObject hiddenGameObj = roomToHideIn.transform.Find(hiddenObject).gameObject;
-            hiddenGameObj.SetActive(true);
-
-            hiddenGameObj.GetComponent<HiddenObject>().SetQuest(this);
         }
-
         //If so, spawn it at a predetermined position on a randomly selected combat room
 
 
     }
 
     //Called when the player interacts with a hidden lilly
-    public override void FindHiddenObject()
+    public void LillyFound()
     {
-        base.FindHiddenObject();
         timesFound++;
     }
 
