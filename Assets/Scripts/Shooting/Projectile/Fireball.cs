@@ -19,10 +19,6 @@ public class Fireball : BaseElementSpawnClass
 
     float explosionRadii;
 
-
-    [SerializeField]
-    private GameObject hitMarker;
-
     AudioManager audioManager;
 
     [SerializeField]
@@ -30,7 +26,6 @@ public class Fireball : BaseElementSpawnClass
     void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
-        hitMarker = GameObject.Find("GameplayUI");
     }
 
     void Update()
@@ -97,8 +92,6 @@ public class Fireball : BaseElementSpawnClass
         if (other.gameObject.layer == 8 && active && other.GetComponent<BaseEnemyClass>())
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            hitMarker.transform.GetChild(7).gameObject.SetActive(true);
-            Invoke("HitMarkerDsable", 0.2f);
             taggedEnemy = other;
 
 
@@ -143,10 +136,5 @@ public class Fireball : BaseElementSpawnClass
         }
 
 
-    }
-
-    private void HitMarkerDsable()
-    {
-        hitMarker.transform.GetChild(7).gameObject.SetActive(false);
     }
 }

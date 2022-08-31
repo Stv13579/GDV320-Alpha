@@ -59,16 +59,23 @@ public class AudioManager : MonoBehaviour
         }
             
     }
-enum FadeState
+    //TO DO
+    private enum FadeState
     {
         Idle,
-        fadeIn,
-        fadeOut,
+        fadeOutAudio1,
+        fadeInAudio2,
+        fadeOutAudio2,
+        fadeInAudio1
     }
+
     private FadeState currentState = FadeState.Idle;
-    public void SetCurrentStateToIdle() { currentState = FadeState.fadeIn; }
-    public void SetCurrentStateToFadeIn() { currentState = FadeState.fadeIn; }
-    public void SetCurrentStateToFadeOut() { currentState = FadeState.fadeIn; }
+    public void SetCurrentStateToIdle() { currentState = FadeState.Idle; }
+    public void SetCurrentStateToFadeOutAudio1() { currentState = FadeState.fadeOutAudio1; }
+    public void SetCurrentStateToFadeInAudio2() { currentState = FadeState.fadeInAudio2; }
+    public void SetCurrentStateToFadeOutAudio2() { currentState = FadeState.fadeOutAudio2; }
+    public void SetCurrentStateToFadeInAudio1() { currentState = FadeState.fadeInAudio1; }
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -172,32 +179,58 @@ enum FadeState
         Sound soundFadeIn = Array.Find(Musics, item => item.name == fadeIn);
         Sound soundFadeOut = Array.Find(Musics, item => item.name == fadeOut);
 
-        if (!soundFadeOut.audioSource.isPlaying || soundFadeOut.audioSource.volume <= 0.00f)
-        {
-            return;
-        }
-
         switch (currentState)
         {
             case FadeState.Idle:
                 {
-
-                    break;
-                }
-            case FadeState.fadeOut:
-                {
-                    soundFadeOut.audioSource.volume -= Time.deltaTime;
-                    if (soundFadeOut.audioSource.volume <= 0.00f)
+                    foreach (Sound i in Musics)
                     {
-                        currentState = FadeState.fadeIn;
+                        soundFadeIn.audioSource.volume = i.volume;
+                        soundFadeOut.audioSource.volume = i.volume;
                     }
                     break;
                 }
-            case FadeState.fadeIn:
+            case FadeState.fadeOutAudio1:
                 {
-                    soundFadeOut.audioSource.volume = 0.05f;
-                    soundFadeOut.audioSource.Stop();
+                    if (!soundFadeOut.audioSource.isPlaying)
+                    {
+                        currentState = FadeState.Idle;
+                        break;
+                    }
+                    soundFadeOut.audioSource.volume -= 0.01f * Time.deltaTime;
+                    if (soundFadeOut.audioSource.volume <= 0.0f)
+                    {
+                        currentState = FadeState.fadeInAudio2;
+                    }
+                    break;
+                }
+            case FadeState.fadeInAudio2:
+                {
                     soundFadeIn.audioSource.Play();
+                    soundFadeOut.audioSource.Stop();
+
+                    currentState = FadeState.Idle;
+                    break;
+                }
+            case FadeState.fadeOutAudio2:
+                {
+                    if (!soundFadeIn.audioSource.isPlaying)
+                    {
+                        currentState = FadeState.Idle;
+                        break;
+                    }
+                    soundFadeIn.audioSource.volume -= 0.01f * Time.deltaTime;
+                    if (soundFadeIn.audioSource.volume <= 0.0f)
+                    {
+                        currentState = FadeState.fadeInAudio1;
+                    }
+                    break;
+                }
+            case FadeState.fadeInAudio1:
+                {
+                    soundFadeOut.audioSource.Play();
+                    soundFadeIn.audioSource.Stop();
+
                     currentState = FadeState.Idle;
                     break;
                 }

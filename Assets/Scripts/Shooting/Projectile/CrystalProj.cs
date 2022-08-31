@@ -12,25 +12,16 @@ public class CrystalProj : BaseElementSpawnClass
 
     private float startLifeTimer;
 
-    private AudioManager audioManager;
-
     private bool ismoving;
 
     private float damageLimit;
 
-    private Vector3 originalPosition;
-
     [SerializeField]
     private GameObject particleEffect;
-
-    [SerializeField]
-    private GameObject hitMarker;
 
     private float damageDecreaser;
     private void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
-        hitMarker = GameObject.Find("GameplayUI");
         ismoving = true;
     }
     // Update is called once per frame
@@ -96,14 +87,7 @@ public class CrystalProj : BaseElementSpawnClass
         if (other.gameObject.layer == 8 && other.gameObject.GetComponent<BaseEnemyClass>())
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            //hitMarker.transform.GetChild(7).gameObject.SetActive(true);
-            //Invoke("HitMarkerDsable", 0.2f);
             Destroy(gameObject);
         }
-    }
-
-    private void HitMarkerDsable()
-    {
-        hitMarker.transform.GetChild(7).gameObject.SetActive(false);
     }
 }

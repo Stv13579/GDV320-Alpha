@@ -40,7 +40,7 @@ public class WaterProjectile : BaseElementSpawnClass
     }
     private void growing()
     {
-        if(this.gameObject.transform.localScale.x <= 1.0f &&
+        if (this.gameObject.transform.localScale.x <= 1.0f &&
            this.gameObject.transform.localScale.y <= 1.0f &&
            this.gameObject.transform.localScale.z <= 1.0f)
         {
@@ -68,11 +68,16 @@ public class WaterProjectile : BaseElementSpawnClass
         {
             collision.collider.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             Debug.Log(collision.collider.gameObject.name);
+            if (hitMarker)
+            {
+                hitMarker.transform.GetChild(8).gameObject.SetActive(true);
+                Invoke("HitMarkerDsable", 0.2f);
+            }
         }
     }
 
     private void HitMarkerDsable()
     {
-        hitMarker.transform.GetChild(7).gameObject.SetActive(false);
+        hitMarker.transform.GetChild(8).gameObject.SetActive(false);
     }
 }
