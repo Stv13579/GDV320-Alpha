@@ -31,10 +31,10 @@ public class Room : MonoBehaviour
 
     public void Update()
     {
-        //if(GetComponentInChildren<RoomTrigger>().triggered)
-        //{
-        //    visited = true;
-        //}
+        if(GetComponentInChildren<RoomTrigger>().triggered)
+        {
+            visited = true;
+        }
     }
 
 
