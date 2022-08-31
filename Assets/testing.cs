@@ -32,7 +32,7 @@ public class testing : MonoBehaviour
         {
             if (audioManager)
             {
-                audioManager.SetCurrentStateToFadeOutAudio1();
+                audioManager.SetCurrentStateToFadeOut();
             }
         }
     }

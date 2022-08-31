@@ -69,13 +69,13 @@ public class VoidElement : BaseElementClass
             }
             targetPos = Indicator.transform.position;
         }
-        if(!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") && trueDashDistance < 10 ||
-            !Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold") && trueDashDistance < 10)
+        if(!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") && targetPos.magnitude < 10 ||
+            !Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold") && targetPos.magnitude < 10)
         {
-            isHolding = false;
             playerHand.SetTrigger("VoidCastFail");
         }
-        else if(!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") ||
+        //Checking if the mouse button has been released, which cancels the spell if it hasn't been held long enough or casts it if it has
+        if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") ||
             !Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold"))
         {
             isHolding = false;
@@ -85,17 +85,7 @@ public class VoidElement : BaseElementClass
             }
             playerHand.SetTrigger("VoidCastSuccess");
         }
-        //Checking if the mouse button has been released, which cancels the spell if it hasn't been held long enough or casts it if it has
-        //if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") ||
-        //    !Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold"))
-        //{
-        //    isHolding = false;
-        //    if (audioManager)
-        //    {
-        //        audioManager.PlaySFX(otherShootingSoundFX);
-        //    }
-        //    playerHand.SetTrigger("VoidCastSuccess");
-        //}
+        Debug.Log(targetPos.magnitude);
     }
 
     public override void ElementEffect()
