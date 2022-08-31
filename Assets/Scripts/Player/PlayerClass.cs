@@ -169,6 +169,10 @@ public class PlayerClass : MonoBehaviour
         {
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().DeathUpdate();
         }
+        else
+        {
+            Debug.Log("Player missing quest manager");
+        }
 
         for (int i = 0; i < heldItems.Count; i++)
         {

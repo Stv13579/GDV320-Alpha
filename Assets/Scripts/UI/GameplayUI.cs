@@ -43,6 +43,7 @@ public class GameplayUI : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Shooting>();
         playerClass = player.gameObject.GetComponent<PlayerClass>();
         comboTimer = maxComboTimer;
+        Debug.Log("G UI on");
     }
 
     void Update()
