@@ -214,8 +214,6 @@ public class BaseElementClass : MonoBehaviour
         }
         else
         {
-            //Set out of mana anim
-            playerHand.SetTrigger("NoMana");
             return false;
         }
     }
