@@ -21,11 +21,6 @@ public class CrystalElement : BaseElementClass
 
     [SerializeField]
     private float damageSpeedDecreaser;
-    // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-    }
 
     public override void ElementEffect()
     {

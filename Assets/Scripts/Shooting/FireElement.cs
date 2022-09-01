@@ -10,30 +10,25 @@ public class FireElement : BaseElementClass
     //Click to fire (if we have the mana/not in delay)
     //Instantiate the projectile in the right direction etc.
     [SerializeField]
-    GameObject fireBall;
+    private GameObject fireBall;
 
     [SerializeField]
-    float projectileSpeed;
+    private float projectileSpeed;
 
     [SerializeField]
-    float explosionArea;
+    private float explosionArea;
 
     [SerializeField]
-    float explosionDamage;
+    private float explosionDamage;
 
     [SerializeField]
-    float gravity;
+    private float gravity;
 
     [SerializeField]
-    AnimationCurve gravCurve;
+    private AnimationCurve gravCurve;
 
     [SerializeField]
-    float gravityLifetime;
-
-    protected override void Update()
-    {
-        base.Update();
-    }
+    private float gravityLifetime;
 
     //Fires the fireball, passing damage, speed, aoe etc
     public override void ElementEffect()
@@ -78,16 +73,4 @@ public class FireElement : BaseElementClass
             }
         }
     }
-    //protected override bool PayCosts(float modifier = 1)
-    //{
-    //    //Override of paycosts so that mana is only subtracted at then end, in case the cast is cancelled
-    //    if (playerClass.ManaCheck(manaCost * modifier, manaTypes))
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
 }

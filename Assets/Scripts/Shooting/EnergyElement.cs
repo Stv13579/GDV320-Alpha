@@ -86,7 +86,7 @@ public class EnergyElement : BaseElementClass
                     }
             }
     }
-    public void HitShield()
+    private void HitShield()
     {
         if(beenHit)
         {
@@ -105,7 +105,7 @@ public class EnergyElement : BaseElementClass
         energyShield.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetFloat("_ShieldDamage", materialChanger);
     }
     // function to deactivate shield
-    public void DeactivateEnergyShield()
+    private void DeactivateEnergyShield()
     {
         shieldStateChange = shieldState.shieldDown;
         energyShield.SetActive(false);

@@ -4,24 +4,16 @@ using UnityEngine;
 
 public class WaterProjectile : BaseElementSpawnClass
 {
-    float speed;
+    private float speed;
 
-    float damage;
+    private float damage;
 
-    float projectileLifetime = 100;
-
-    [SerializeField]
-    private GameObject hitMarker;
+    private float projectileLifetime = 100;
 
     [SerializeField]
     private LayerMask bounceLayers;
 
-    void Start()
-    {
-        hitMarker = GameObject.Find("GameplayUI");
-    }
-
-    void Update()
+    private void Update()
     {
         if (projectileLifetime > 0)
         {
@@ -56,7 +48,6 @@ public class WaterProjectile : BaseElementSpawnClass
 
     }
 
-
     private void OnCollisionEnter(Collision collision)
     {
         if (bounceLayers == (bounceLayers | (1 << collision.collider.gameObject.layer)))
@@ -68,16 +59,6 @@ public class WaterProjectile : BaseElementSpawnClass
         {
             collision.collider.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             Debug.Log(collision.collider.gameObject.name);
-            if (hitMarker)
-            {
-                hitMarker.transform.GetChild(8).gameObject.SetActive(true);
-                Invoke("HitMarkerDsable", 0.2f);
-            }
         }
-    }
-
-    private void HitMarkerDsable()
-    {
-        hitMarker.transform.GetChild(8).gameObject.SetActive(false);
     }
 }

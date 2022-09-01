@@ -11,10 +11,10 @@ public class ShardCannonElement : BaseElementClass
     //Click to fire (if we have the mana/not in delay)
     //Instantiate the projectile in the right direction etc.
     [SerializeField]
-    GameObject shardProj;
+    private GameObject shardProj;
 
     [SerializeField]
-    float projectileSpeed;
+    private float projectileSpeed;
 
     protected override void Update()
     {
@@ -25,12 +25,8 @@ public class ShardCannonElement : BaseElementClass
     public override void ElementEffect()
     {
         base.ElementEffect();
-        //
-
         Quaternion rot = Camera.main.transform.rotation;
         rot = rot * Quaternion.Euler(90, 0, 0);
-
-        //rot.SetEulerAngles(rot.eulerAngles.x + 90, rot.eulerAngles.y, rot.eulerAngles.z);
         GameObject newShard = Instantiate(shardProj, shootingTranform.position, rot);
         newShard.GetComponent<ShardProjectile>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.crystalDamageMultiplier), attackTypes);
     }

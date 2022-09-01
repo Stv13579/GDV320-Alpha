@@ -16,7 +16,7 @@ public class LandMineProj : MonoBehaviour
     [SerializeField]
     private GameObject explosion;
     [SerializeField]
-    LayerMask enemyDetect;
+    private LayerMask enemyDetect;
     // Start is called before the first frame update
     void Start()
     {
@@ -106,4 +106,9 @@ public class LandMineProj : MonoBehaviour
             willExplode = true;
         }
     }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireSphere(transform.position, explosiveRadius);
+    //}
 }

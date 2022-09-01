@@ -4,32 +4,19 @@ using UnityEngine;
 
 public class ShardProjectile : BaseElementSpawnClass
 {
-    float speed;
+    private float speed;
 
-    float damage;
+    private float damage;
 
-    int pierceAmount;
-
-    [SerializeField]
-    GameObject impactSpawn;
+    private int pierceAmount;
 
     [SerializeField]
-    private GameObject hitMarker;
-    void Start()
-    {
-        hitMarker = GameObject.Find("GameplayUI");
-    }
+    private GameObject impactSpawn;
 
-    void Update()
+    private void Update()
     {
-        
-
         Vector3 movement = transform.up * speed * Time.deltaTime;
-
         transform.position += movement;
-
-
-
     }
 
     public void SetVars(float spd, float dmg, List<BaseEnemyClass.Types> types)
@@ -40,16 +27,11 @@ public class ShardProjectile : BaseElementSpawnClass
 
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
-
-
         if (other.gameObject.layer == 8)
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            //hitMarker.transform.GetChild(7).gameObject.SetActive(true);
-            //Invoke("HitMarkerDsable", 0.2f);
         }
 
         if (other.gameObject.tag != "Player")
@@ -61,15 +43,10 @@ public class ShardProjectile : BaseElementSpawnClass
             }
             else
             {
-                
                 Destroy(gameObject);
             }            
         }
 
 
-    }
-    private void HitMarkerDsable()
-    {
-        hitMarker.transform.GetChild(7).gameObject.SetActive(false);
     }
 }
