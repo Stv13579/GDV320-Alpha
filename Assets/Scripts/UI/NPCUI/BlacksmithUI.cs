@@ -28,7 +28,7 @@ public class BlacksmithUI : NPCUI
         foreach (Transform button in GameObject.Find("UpgradeButtons").transform)
         {
             buttons.Add(button.gameObject);
-            buttons[i].transform.GetComponent<Image>().sprite = elements[i].uiSprite;
+            buttons[i].transform.GetChild(1).GetComponent<Image>().sprite = elements[i].uiSprite;
             buttons[i].GetComponent<UpgradeButton>().SetElement(elements[i]);       
             i++;
         }

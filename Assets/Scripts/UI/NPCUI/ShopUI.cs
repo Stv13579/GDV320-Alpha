@@ -28,7 +28,7 @@ public class ShopUI : NPCUI
 
         int itemsAdded = 0;
         int exitCounter = 0;
-        while(itemsAdded < 3)
+        while(itemsAdded < 4)
         {
             //Get a random item from the global item list, check if the item is valid to give to the player, and if so add it, otherwise try again
             int i = Random.Range(0, items.itemList.Count);
@@ -58,14 +58,14 @@ public class ShopUI : NPCUI
                 itemsAdded = 3;
             }
         }
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < 4; i++)
         {
             //Give the UI buttons the necessary information for each item they contain
             buttons[i].transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = shopItems[i].itemName;
             buttons[i].transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = shopItems[i].sprites[0];
             buttons[i].transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().sprite = shopItems[i].sprites[1];
-            buttons[i].transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = shopItems[i].currencyCost.ToString();
-            buttons[i].transform.GetChild(0).GetChild(3).GetComponent<TextMeshProUGUI>().text = shopItems[i].description;
+            buttons[i].transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = shopItems[i].description;
+            buttons[i].transform.GetChild(0).GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = shopItems[i].currencyCost.ToString();
         }
     }
 
