@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2853011323406635977
+--- !u!114 &-7604963156698303432
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,21 +20,20 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_VFX_Fire
-  m_Shader: {fileID: 4800000, guid: 9da5ed44507aff84fa15b9eaa0c0953e, type: 3}
+  m_Name: MAT_VFX_DragonLilyFireExplode
+  m_Shader: {fileID: 4800000, guid: 4f21cff5e1fe62449aaf98ee3b261d01, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2999
   stringTagMap: {}
-  disabledShaderPasses:
-  - SHADOWCASTER
+  disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: eddaf50f3e1645d488e4da45f5f7c106, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -46,11 +45,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Gradient:
-        m_Texture: {fileID: 2800000, guid: b8731cd690d11c543b3dad3c8274c59e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MAT_VFX_FireSprites:
-        m_Texture: {fileID: 2800000, guid: eddaf50f3e1645d488e4da45f5f7c106, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8884a15b81f07fa41aa2797e9bbdf33d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -65,67 +60,81 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SoftEgdeMask_Texture:
+        m_Texture: {fileID: 2800000, guid: 9a7be70759d48ff48a8ef359791bfa99, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture0:
+        m_Texture: {fileID: 2800000, guid: 379e2786f4192444e985ab5314608bdc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture1:
+        m_Texture: {fileID: 2800000, guid: 379e2786f4192444e985ab5314608bdc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
-    - _AlphaClipThreshold: 1
     - _AlphaCutoff: 0.5
     - _Blend: 0
-    - _BlendOp: 0
     - _BumpScale: 1
-    - _CameraFadingEnabled: 0
-    - _CameraFarFadeDistance: 2
-    - _CameraNearFadeDistance: 1
-    - _ColorMode: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DistortionBlend: 0.5
-    - _DistortionEnabled: 0
-    - _DistortionStrength: 1
-    - _DistortionStrengthScaled: 0.1
-    - _DstBlend: 10
+    - _Disolve_Ammount: 0
+    - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _FlipbookBlending: 0
-    - _FlipbookMode: 0
+    - _Fres_Power_MaxNew: 0
+    - _Fres_Power_MinNew: 0
+    - _Fres_Scale_MaxNew: 0
+    - _Fres_Scale_MinNew: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _InvFade: 1
     - _Metallic: 0
-    - _Mode: 0
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _ShieldDamage: 0
+    - _Slash_Voronoi_Scale: 12.94
+    - _Slash_Voronoi_Speed: 4
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _SoftParticlesEnabled: 0
-    - _SoftParticlesFarFadeDistance: 1
-    - _SoftParticlesNearFadeDistance: 0
+    - _SoftEdgeFade: 1
     - _SpecularHighlights: 1
-    - _SrcBlend: 5
-    - _Strenght: 1
-    - _Surface: 1
-    - _TessEdgeLength: 16
-    - _TessMax: 25
-    - _TessMaxDisp: 25
-    - _TessMin: 10
-    - _TessPhongStrength: 0.5
-    - _TessValue: 16
-    - _Voronoi_Angle: 5
-    - _Voronoi_Power_Exp: 0.54
-    - _Voronoi_Scale: 5
+    - _SrcBlend: 1
+    - _StopSplash: 0
+    - _Strenght: 1.92
+    - _Surface: 0
+    - _ToggleSoftMask: 0
+    - _VignettePowerExp: 1.29
+    - _VignetteSmoothness: 2.5
+    - _Voronoi_2_Scale: 3
+    - _Voronoi_2_Speed: 2
+    - _Voronoi_Power_Exp: 1.24
+    - _Voronoi_Scale: 0
+    - _Voronoi_Speed: 0
     - _WorkflowMode: 1
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
-    - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
+    - _BaseColour: {r: 1.0592737, g: 1.0592737, b: 1.0592737, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Colour_1: {r: 19.698313, g: 0, b: 0, a: 0}
+    - _Colour_2: {r: 0, g: 0, b: 0, a: 0}
+    - _Colour_Impact_1: {r: 0, g: 0, b: 0, a: 0}
+    - _Colour_Impact_2: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Flame_BaseColour: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
-    - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
+    - _Fres_ScaleX_PowerY_Speeds: {r: 1, g: 1, b: 0, a: 0}
+    - _Panner_1_Speed: {r: 1, g: 0, b: 0, a: 0}
+    - _Panner_2_Speed: {r: 1, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    - _UVOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _UVTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _VoronoiRemap: {r: -1, g: 1, b: 0, a: 1.18}
