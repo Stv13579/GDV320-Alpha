@@ -10,6 +10,8 @@ public class BossRoom : Room
     [SerializeField]
     Transform spawnPosition;
 
+    [SerializeField]
+    GameObject spawner;
 
     bool bossSpawned = false;
     bool bossDead = false;
@@ -46,6 +48,7 @@ public class BossRoom : Room
             bossSpawned = true;
             //Spawn the boss once
             currentBoss = Instantiate(bosses.GetBoss(), spawnPosition.position, Quaternion.identity);
+            currentBoss.GetComponent<BaseEnemyClass>().SetSpawner(spawner);
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(currentBoss, "Boss");
             //Lock the doors
             LockDoors();

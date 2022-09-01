@@ -604,39 +604,51 @@ MonoBehaviour:
     audioSource: {fileID: 0}
   - name: Shield Enemy Attack
     clip: {fileID: 8300000, guid: 0e7133c8b6272e449b75a1d2cd95d417, type: 3}
-    volume: 0.05
+    volume: 0.1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
   - name: Shield Enemy Damage
     clip: {fileID: 8300000, guid: ea21c7cbacb070546a3a73c3b58d4672, type: 3}
-    volume: 0.05
+    volume: 0.1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
   - name: Shield Enemy Death
     clip: {fileID: 8300000, guid: 7bf199ee5caf9d14b8dfd8d78ca7a4f1, type: 3}
-    volume: 0.05
+    volume: 0.1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
   - name: Shield Boss Attack
     clip: {fileID: 8300000, guid: 0e7133c8b6272e449b75a1d2cd95d417, type: 3}
-    volume: 0.05
+    volume: 0.1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
   - name: Shield Boss Damage
     clip: {fileID: 8300000, guid: bceb1be04132d5344b8bc73041bb24e2, type: 3}
-    volume: 0.05
+    volume: 0.1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
   - name: Shield Boss Death
     clip: {fileID: 8300000, guid: fa6beb9ee2c94be46ade1d3e40411d22, type: 3}
-    volume: 0.05
+    volume: 0.1
     pitch: 1
     loop: 0
+    audioSource: {fileID: 0}
+  - name: Low Health Slow Heart Beat
+    clip: {fileID: 8300000, guid: d6b340046c52cb24aa28bb4661c0dc69, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+  - name: Low Health Fast Heart Beat
+    clip: {fileID: 8300000, guid: 7b16e9851b5fbd5418e940a92b7ee056, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
     audioSource: {fileID: 0}
   Musics:
   - name: Hub Room Music
@@ -706,3 +718,4 @@ MonoBehaviour:
     loop: 1
     audioSource: {fileID: 0}
   initialMusic: Credits
+  audioDistance: 30

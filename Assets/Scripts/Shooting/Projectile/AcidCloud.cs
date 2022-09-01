@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class AcidCloud : BaseElementSpawnClass
 {
-    float damage;
+    private float damage;
 
-    float cloudSize;
+    private float cloudSize;
 
-    float cloudDuration;
+    private float cloudDuration;
 
-    [SerializeField] GameObject acidBurnVFX;
+    private float damageTicker;
 
-    AudioManager audioManager;
+    private float currentDamageTicker;
+
+    [SerializeField] 
+    private GameObject acidBurnVFX;
+
+    private AudioManager audioManager;
 
     private void Start()
     {
@@ -23,7 +28,7 @@ public class AcidCloud : BaseElementSpawnClass
             audioManager.PlaySFX("Acid Cloud Shot");
         }
     }
-    void Update()
+    private void Update()
     {
         if(transform.localScale.x < cloudSize)
         {
@@ -32,6 +37,7 @@ public class AcidCloud : BaseElementSpawnClass
         }
 
         cloudDuration -= Time.deltaTime;
+        currentDamageTicker += Time.deltaTime;
         if(cloudDuration <= 1)
         {
             this.transform.parent.GetChild(0).gameObject.GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
@@ -48,24 +54,29 @@ public class AcidCloud : BaseElementSpawnClass
         }
     }
 
-    public void SetVars(float dmg, float size, float duration, List<BaseEnemyClass.Types> types)
+    public void SetVars(float dmg, float size, float duration, List<BaseEnemyClass.Types> types, float tempDamageTicker)
     {
         //Set up the variables according to the element script
         damage = dmg;
         cloudSize = size;
         cloudDuration = duration;
         attackTypes = types;
+        damageTicker = tempDamageTicker;
     }
 
     private void OnTriggerStay(Collider other)
     {
         if(other.GetComponent<BaseEnemyClass>())
         {
-            //If an enemy is inside the cloud, deal damage to it
-            other.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+            if (currentDamageTicker >= damageTicker)
+            {
+                //If an enemy is inside the cloud, deal damage to it
+                other.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+                currentDamageTicker = 0.0f;
+            }
             if(other.gameObject.GetComponentInChildren<AcidBurnScript>())
             {
-                other.gameObject.GetComponentInChildren<AcidBurnScript>().timer = 2.0f;
+                other.gameObject.GetComponentInChildren<AcidBurnScript>().SetTimer(2.0f);
             }
         }
     }

@@ -5,35 +5,31 @@ using UnityEngine;
 public class Fireball : BaseElementSpawnClass
 {
 
-    float speed;
+    private float speed;
 
-    float damage;
-    float explosionDamage;
+    private float damage;
+    private float explosionDamage;
 
-    float gravity;
+    private float gravity;
 
-    AnimationCurve gravCurve;
+    private AnimationCurve gravCurve;
 
-    float gravityLifetime;
-    float startLifetime;
+    private float gravityLifetime;
+    private float startLifetime;
 
-    float explosionRadii;
+    private float explosionRadii;
 
-
-    [SerializeField]
-    private GameObject hitMarker;
-
-    AudioManager audioManager;
+    private AudioManager audioManager;
 
     [SerializeField]
-    LayerMask enemyDetect;
-    void Start()
+    private LayerMask enemyDetect;
+
+    private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
-        hitMarker = GameObject.Find("GameplayUI");
     }
 
-    void Update()
+    private void Update()
     {
         if(gravityLifetime > 0)
         {
@@ -74,11 +70,9 @@ public class Fireball : BaseElementSpawnClass
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(other.gameObject.name);
-
         //if enemy, hit them for the damage
         Collider taggedEnemy = null;
-        if(other.isTrigger && other.gameObject.layer != 10)
+        if(other.isTrigger && other.gameObject.layer != 10 && !other.GetComponent<SporeCloudScript>())
         {
             return;
         }
@@ -91,20 +85,11 @@ public class Fireball : BaseElementSpawnClass
             this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
             this.gameObject.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
-
-
         }
         if (other.gameObject.layer == 8 && active && other.GetComponent<BaseEnemyClass>())
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            if (hitMarker)
-            {
-                hitMarker.transform.GetChild(7).gameObject.SetActive(true);
-                Invoke("HitMarkerDsable", 0.2f);
-            }
             taggedEnemy = other;
-
-
         }
         if (other.gameObject.layer != 11 && other.gameObject.layer != 20 && other.gameObject.tag != "Node" && active)
         {
@@ -146,10 +131,5 @@ public class Fireball : BaseElementSpawnClass
         }
 
 
-    }
-
-    private void HitMarkerDsable()
-    {
-        hitMarker.transform.GetChild(7).gameObject.SetActive(false);
     }
 }

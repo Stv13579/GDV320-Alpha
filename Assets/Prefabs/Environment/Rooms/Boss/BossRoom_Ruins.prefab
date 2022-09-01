@@ -424,8 +424,12 @@ MonoBehaviour:
   weighting: 0
   illegal: 0
   gridPos: {x: 0, y: 0}
+  visited: 0
+  hasLilly: 0
+  hiddenLilly: {fileID: 0}
   bosses: {fileID: 11400000, guid: 754ac8e1beab73047a3f53db1c5d0573, type: 2}
   spawnPosition: {fileID: 2956793518125795251}
+  spawner: {fileID: 261941238194521263}
   portalObject: {fileID: 339857286421543826, guid: ef9dfb9fbfb2db94893051b3335a0a5a,
     type: 3}
   portalSpawnPosition: {fileID: 8455909334520959226}
@@ -106276,12 +106280,17 @@ PrefabInstance:
     - target: {fileID: 177030300292316633, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 177030300292316646, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_RootOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 177030301024911787, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2315818420668267954, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
@@ -106441,6 +106450,12 @@ PrefabInstance:
 --- !u!1 &7971564393761877235 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8031824282616010117, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
+    type: 3}
+  m_PrefabInstance: {fileID: 132410018509830518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &261941238194521263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 177030300292316633, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
     type: 3}
   m_PrefabInstance: {fileID: 132410018509830518}
   m_PrefabAsset: {fileID: 0}

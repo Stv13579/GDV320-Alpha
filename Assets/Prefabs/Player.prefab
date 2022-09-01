@@ -123,6 +123,36 @@ Transform:
   m_Father: {fileID: 5625023911835613078}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1381243733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1381243734}
+  m_Layer: 0
+  m_Name: Projectile Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1381243734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381243733}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 543450651769805563}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1511683286
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519134937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21, y: 0, z: 0}
+  m_LocalPosition: {x: -11, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5625023911835613078}
@@ -513,10 +543,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7611b7647fa799347af631f36fcb9091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitDelay: 0
   laserBeamEndParticle: {fileID: 5765847359698139306}
   laserBeamEffectParticle: {fileID: 6303370703232215908}
-  isHittingObj: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 2163968
@@ -585,7 +613,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 1048576
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: c60291eda168e2743b2b6533207ca75b, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: ab0311677b6155d469d2e3a5da6f2343, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -693,7 +721,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 7339831
+    m_Bits: 6422327
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1097,11 +1125,12 @@ MonoBehaviour:
   itemUI: {fileID: 0}
   gameOverScreen: {fileID: 5938581657908307557, guid: c15b7a340c63df74189d70226e0485bc,
     type: 3}
-  fallSpawner: {fileID: 0}
   pushDuration: 0
-  fallDamage: 25
   fireDOT: 0.01
   fireEffect: {fileID: 7688067040465559332}
+  lowHealthLimit: 50
+  lowHealthFastHeartBeat: Low Health Fast Heart Beat
+  lowHealthSlowHeartBeat: Low Health Slow Heart Beat
 --- !u!114 &1363181307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1162,6 +1191,7 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 21300000, guid: 6ee77b03add3bef47a42ac7213c82bf0, type: 3}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 00000000
   manaTypes: 00000000
   playerClass: {fileID: 0}
@@ -1236,6 +1266,7 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 21300000, guid: 60ba117551a488647a057174be37c3fd, type: 3}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 01000000
   manaTypes: 01000000
   playerClass: {fileID: 0}
@@ -1308,6 +1339,7 @@ MonoBehaviour:
   crosshair: {fileID: -2653462120342444952, guid: e3611543415e2534d80aaaefa8d6d06a,
     type: 3}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 02000000
   manaTypes: 02000000
   playerClass: {fileID: 5625023910511142016}
@@ -1355,6 +1387,7 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 0}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 
   manaTypes: 03000000
   playerClass: {fileID: 0}
@@ -1407,6 +1440,7 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 0}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 
   manaTypes: 04000000
   playerClass: {fileID: 0}
@@ -1454,6 +1488,7 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: 6ab9fb339d19e8748bc3302889167ece, type: 3}
   crosshair: {fileID: 0}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 
   manaTypes: 05000000
   playerClass: {fileID: 5625023910511142016}
@@ -1470,7 +1505,7 @@ MonoBehaviour:
   damageMulti: []
   switchAnimationName: VoidTransition
   startCoolDown: 0
-  cooldownTimer: 1.5
+  cooldownTimer: 1
   currentElementType: 103
   dashDistance: 20
   dashTime: 0.5
@@ -1490,7 +1525,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 7085110900658056965, guid: d8b6c40de411ad8478e6bba3774af010, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 7
+  manaCost: 10
   animationToPlay: LaserBeamCast
   animationToPlayAlt: 
   playerHand: {fileID: 2017859571}
@@ -1499,6 +1534,7 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 21300000, guid: 770339e41d8494046adb4a9a0b4714db, type: 3}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 00000000
   manaTypes: 0000000004000000
   playerClass: {fileID: 0}
@@ -1510,15 +1546,16 @@ MonoBehaviour:
   otherShootingSoundFX: Laser Beam Shot
   switchElementSFX: Laser Beam Equip
   idleSFX: Laser Beam Idle
-  damage: 7
+  damage: 5
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: LaserTransition
   startCoolDown: 0
-  cooldownTimer: 2
+  cooldownTimer: 1.5
   currentElementType: 201
   laserBeam: {fileID: 3981687641008780923}
   playerMovement: {fileID: 5625023911835613076}
+  hitDelay: 0.1
 --- !u!114 &443619680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1534,7 +1571,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 9102101168774939595, guid: 8fba95ab9aaab0f46a8049a35f4d6dad, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 10
+  manaCost: 50
   animationToPlay: ShardCannonCast
   animationToPlayAlt: ShardCannonCastAlt
   playerHand: {fileID: 2017859571}
@@ -1543,6 +1580,7 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 21300000, guid: db3d8f6650a6d9d42aa38560b3d2008d, type: 3}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 01000000
   manaTypes: 0100000004000000
   playerClass: {fileID: 0}
@@ -1554,12 +1592,12 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Shard Cannon Equip
   idleSFX: Shard Cannon Idle (maybe)
-  damage: 40
+  damage: 50
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: ShardCannonTransition
   startCoolDown: 0
-  cooldownTimer: 1.5
+  cooldownTimer: 3
   currentElementType: 202
   shardProj: {fileID: 2115769081119537338, guid: 316042c01d1629e499fece67a8fd0bed,
     type: 3}
@@ -1579,7 +1617,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 6858203384706500376, guid: 3467d4b068c26bc4989b1e6a07190e13, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 5
+  manaCost: 10
   animationToPlay: AcidCloudCast
   animationToPlayAlt: AcidCloudCastAlt
   playerHand: {fileID: 2017859571}
@@ -1588,6 +1626,7 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 21300000, guid: da9efba32dcd01d4d94eca11706d7877, type: 3}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 00000000
   manaTypes: 0000000003000000
   playerClass: {fileID: 0}
@@ -1599,7 +1638,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Acid Cloud Equip
   idleSFX: Acid Cloud Idle
-  damage: 3
+  damage: 10
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: AcidCloudTransition
@@ -1610,6 +1649,7 @@ MonoBehaviour:
     type: 3}
   cloudSize: 8
   cloudDuration: 10
+  damageTicker: 0.5
 --- !u!114 &6475135526618743007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1625,7 +1665,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 2472826904319485754, guid: 1fff34ddfbcd97e43b2a1c1922dc8f10, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 5
+  manaCost: 50
   animationToPlay: LandMineCast
   animationToPlayAlt: LandMineCastAlt
   playerHand: {fileID: 2017859571}
@@ -1633,10 +1673,11 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: 9bae4940f345aad4e844bc69e6c18f58, type: 3}
   crosshair: {fileID: 21300000, guid: 60ba117551a488647a057174be37c3fd, type: 3}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 00000000
   manaTypes: 0000000005000000
   playerClass: {fileID: 0}
-  shootingTranform: {fileID: 131726689}
+  shootingTranform: {fileID: 1381243734}
   shootingIgnore:
     serializedVersion: 2
     m_Bits: 0
@@ -1644,17 +1685,17 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Land Mine Equip
   idleSFX: Land Mine Idle
-  damage: 30
+  damage: 50
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: LandMineTransition
   startCoolDown: 0
-  cooldownTimer: 1.5
+  cooldownTimer: 1.75
   currentElementType: 204
   landMineProjectile: {fileID: 5230698329136778979, guid: d3d1480b2678d1f4d87879615a4cc650,
     type: 3}
   indicator: {fileID: 739160400}
-  explosiveRadius: 5
+  explosiveRadius: 10
   lifeTimer: 5
   rayCastRange: 10
   layerMask:
@@ -1675,7 +1716,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 6087893857474337523, guid: 3a419bfd3448b67409b8f59075dafc4f, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 20
+  manaCost: 25
   animationToPlay: CurseCast
   animationToPlayAlt: 
   playerHand: {fileID: 2017859571}
@@ -1684,6 +1725,7 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 21300000, guid: 329a242dcf2f84440a96d5fb670f17c3, type: 3}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 01000000
   manaTypes: 0100000003000000
   playerClass: {fileID: 0}
@@ -1695,7 +1737,7 @@ MonoBehaviour:
   otherShootingSoundFX: Curse Release
   switchElementSFX: Curse Equip
   idleSFX: Curse Idle
-  damage: 50
+  damage: 100
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: CurseTransition
@@ -1728,7 +1770,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 2349233446677179650, guid: 9a4a61139a875424f9d9d795ae9973b0, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 5
+  manaCost: 15
   animationToPlay: IceSlashCast
   animationToPlayAlt: IceSlashCastAlt
   playerHand: {fileID: 2017859571}
@@ -1736,6 +1778,7 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: 8cba1ffd09255ef4c855aaf3c56b214e, type: 3}
   crosshair: {fileID: 21300000, guid: 770339e41d8494046adb4a9a0b4714db, type: 3}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 02000000
   manaTypes: 0200000004000000
   playerClass: {fileID: 0}
@@ -1752,7 +1795,7 @@ MonoBehaviour:
   damageMulti: []
   switchAnimationName: IceSlashTransition
   startCoolDown: 0
-  cooldownTimer: 1.5
+  cooldownTimer: 0.8
   currentElementType: 206
   iceSlash: {fileID: 5956346581750816906, guid: dce9c0dcd94895743b712641b0e995fa,
     type: 3}
@@ -1774,7 +1817,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 1249736540608547060, guid: 24d04b33919a91943b35726f9315bcce, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 7
+  manaCost: 10
   animationToPlay: LifeStealCast
   animationToPlayAlt: 
   playerHand: {fileID: 2017859571}
@@ -1782,6 +1825,7 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: 14714c1d7db8e3143a4d841c1f25d930, type: 3}
   crosshair: {fileID: 21300000, guid: 770339e41d8494046adb4a9a0b4714db, type: 3}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 02000000
   manaTypes: 0200000003000000
   playerClass: {fileID: 0}
@@ -1793,17 +1837,19 @@ MonoBehaviour:
   otherShootingSoundFX: Life Steal Shot
   switchElementSFX: Life Steal Equip
   idleSFX: Life Steal Idle
-  damage: 3
+  damage: 5
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: LifeStealTransition
   startCoolDown: 0
   cooldownTimer: 1.5
   currentElementType: 207
-  lifeSteal: {fileID: 2112612720}
+  lifeStealSuccess: {fileID: 3194474830823642876}
+  lifeStealfail: {fileID: 4552281088649957088}
   sphereRadius: 0.5
   sphereRange: 10
-  healValue: 1
+  healValue: 7
+  damageAndHealthTicker: 1
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -1825,7 +1871,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 9012415827748658890, guid: d6d712481672dd54a9e545626a29c41a, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 5
+  manaCost: 10
   animationToPlay: CrystalGrenadeCast
   animationToPlayAlt: CrystalGrenadeCastAlt
   playerHand: {fileID: 2017859571}
@@ -1833,6 +1879,7 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: 3ae395b4079743447b6fac5d36b304c4, type: 3}
   crosshair: {fileID: 21300000, guid: 329a242dcf2f84440a96d5fb670f17c3, type: 3}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 01000000
   manaTypes: 0100000005000000
   playerClass: {fileID: 0}
@@ -1844,19 +1891,19 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Crystal Grenade Equip
   idleSFX: Crystal Grenade Idle (maybe)
-  damage: 5
+  damage: 20
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: CrystalGrenadeTransition
   startCoolDown: 0
-  cooldownTimer: 1.5
+  cooldownTimer: 1
   currentElementType: 208
   CrystalGrenade: {fileID: 4280188033218165808, guid: cfd01d05905cd4a4fa7939edf2bca9a1,
     type: 3}
   projectileSpeed: 20
   gravity: 1
   timeToExplode: 5
-  explosionRange: 5
+  explosionRange: 2
   explosionDamage: 30
 --- !u!114 &450497679
 MonoBehaviour:
@@ -1873,7 +1920,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 2440540508582077956, guid: 50d9fbbcff12ff946aecbaf0b06210ed, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 5
+  manaCost: 50
   animationToPlay: StasisTrapCast
   animationToPlayAlt: StasisTrapCastAlt
   playerHand: {fileID: 2017859571}
@@ -1881,6 +1928,7 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: 5e1860b9ea2286a47822c10916870e3c, type: 3}
   crosshair: {fileID: 21300000, guid: 60ba117551a488647a057174be37c3fd, type: 3}
   upgradeCost: 5
+  upgradeDescription: 
   attackTypes: 02000000
   manaTypes: 0200000005000000
   playerClass: {fileID: 0}
@@ -1892,7 +1940,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Stasis Trap Equip
   idleSFX: Stasis Trap Idle
-  damage: 3
+  damage: 7
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: StasisTrapTransition
@@ -2704,15 +2752,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99ddbcbf9ae0bee46908442e78cd457e, type: 3}
---- !u!4 &1556197111756468327 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1556197112511155575, guid: 99ddbcbf9ae0bee46908442e78cd457e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1963785488}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &507151811668072790 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 507151811852313670, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1963785488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1556197111756468327 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1556197112511155575, guid: 99ddbcbf9ae0bee46908442e78cd457e,
     type: 3}
   m_PrefabInstance: {fileID: 1963785488}
   m_PrefabAsset: {fileID: 0}
@@ -3096,15 +3144,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 646d95399aff60c46898d02987aee4d1, type: 3}
---- !u!1 &2782353506787810485 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 840168143895646795, guid: 646d95399aff60c46898d02987aee4d1,
-    type: 3}
-  m_PrefabInstance: {fileID: 3257236936206159614}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3258373696938199191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3402032801367657, guid: 646d95399aff60c46898d02987aee4d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 3257236936206159614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2782353506787810485 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 840168143895646795, guid: 646d95399aff60c46898d02987aee4d1,
     type: 3}
   m_PrefabInstance: {fileID: 3257236936206159614}
   m_PrefabAsset: {fileID: 0}
@@ -3200,6 +3248,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1831288514330713907, guid: 9d0cd90afa85ff94fa6a88965851589e,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1831288514330713909, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
       propertyPath: m_Layer
@@ -3245,6 +3298,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 2167496882611864083, guid: 9d0cd90afa85ff94fa6a88965851589e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2167496882611864094, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
       propertyPath: m_Layer
@@ -3268,7 +3326,7 @@ PrefabInstance:
     - target: {fileID: 8741999943941267332, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 20
+      value: 10.5
       objectReference: {fileID: 0}
     - target: {fileID: 8741999943941267332, guid: 9d0cd90afa85ff94fa6a88965851589e,
         type: 3}
@@ -3383,9 +3441,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: -5814111869136598520, guid: 9d0cd90afa85ff94fa6a88965851589e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9d0cd90afa85ff94fa6a88965851589e, type: 3}
---- !u!1 &3981687641008780923 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8741999944741850319, guid: 9d0cd90afa85ff94fa6a88965851589e,
+--- !u!4 &3981687641008780920 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
     type: 3}
   m_PrefabInstance: {fileID: 5625023910865451700}
   m_PrefabAsset: {fileID: 0}
@@ -3395,21 +3453,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5625023910865451700}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5765847359698139306 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2167496882611864094, guid: 9d0cd90afa85ff94fa6a88965851589e,
-    type: 3}
-  m_PrefabInstance: {fileID: 5625023910865451700}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3981687641818801459 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8741999943941267335, guid: 9d0cd90afa85ff94fa6a88965851589e,
     type: 3}
   m_PrefabInstance: {fileID: 5625023910865451700}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3981687641008780920 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
+--- !u!1 &5765847359698139306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2167496882611864094, guid: 9d0cd90afa85ff94fa6a88965851589e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5625023910865451700}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3981687641008780923 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8741999944741850319, guid: 9d0cd90afa85ff94fa6a88965851589e,
     type: 3}
   m_PrefabInstance: {fileID: 5625023910865451700}
   m_PrefabAsset: {fileID: 0}
@@ -3420,6 +3478,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1668261772}
     m_Modifications:
+    - target: {fileID: 5110974776435779124, guid: 79669cb00e2316b418cce16453cd29aa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6166600054845046313, guid: 79669cb00e2316b418cce16453cd29aa,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0653
+      objectReference: {fileID: 0}
+    - target: {fileID: 6166600054845046313, guid: 79669cb00e2316b418cce16453cd29aa,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6166600054845046313, guid: 79669cb00e2316b418cce16453cd29aa,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0258
+      objectReference: {fileID: 0}
     - target: {fileID: 7690135595153037752, guid: 79669cb00e2316b418cce16453cd29aa,
         type: 3}
       propertyPath: m_Name
@@ -3428,7 +3506,7 @@ PrefabInstance:
     - target: {fileID: 7690135595153037752, guid: 79669cb00e2316b418cce16453cd29aa,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7690135595153037754, guid: 79669cb00e2316b418cce16453cd29aa,
         type: 3}
@@ -3438,17 +3516,17 @@ PrefabInstance:
     - target: {fileID: 7690135595153037754, guid: 79669cb00e2316b418cce16453cd29aa,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.035
+      value: 0.022
       objectReference: {fileID: 0}
     - target: {fileID: 7690135595153037754, guid: 79669cb00e2316b418cce16453cd29aa,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.03
+      value: -0.023
       objectReference: {fileID: 0}
     - target: {fileID: 7690135595153037754, guid: 79669cb00e2316b418cce16453cd29aa,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.098
+      value: 0.164
       objectReference: {fileID: 0}
     - target: {fileID: 7690135595153037754, guid: 79669cb00e2316b418cce16453cd29aa,
         type: 3}
@@ -3493,9 +3571,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7690135593854234824}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2112612720 stripped
+--- !u!1 &3194474830823642876 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7690135595153037752, guid: 79669cb00e2316b418cce16453cd29aa,
+  m_CorrespondingSourceObject: {fileID: 5110974776435779124, guid: 79669cb00e2316b418cce16453cd29aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 7690135593854234824}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4552281088649957088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6166600054845046312, guid: 79669cb00e2316b418cce16453cd29aa,
     type: 3}
   m_PrefabInstance: {fileID: 7690135593854234824}
   m_PrefabAsset: {fileID: 0}

@@ -19,17 +19,13 @@ public class CrystalProj : BaseElementSpawnClass
     [SerializeField]
     private GameObject particleEffect;
 
-    [SerializeField]
-    private GameObject hitMarker;
-
     private float damageDecreaser;
     private void Start()
     {
-        hitMarker = GameObject.Find("GameplayUI");
         ismoving = true;
     }
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // the max drop off the damage is 0.5f
         if(damage <= 0.5f)
@@ -91,14 +87,7 @@ public class CrystalProj : BaseElementSpawnClass
         if (other.gameObject.layer == 8 && other.gameObject.GetComponent<BaseEnemyClass>())
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            //hitMarker.transform.GetChild(7).gameObject.SetActive(true);
-            //Invoke("HitMarkerDsable", 0.2f);
             Destroy(gameObject);
         }
-    }
-
-    private void HitMarkerDsable()
-    {
-        hitMarker.transform.GetChild(7).gameObject.SetActive(false);
     }
 }

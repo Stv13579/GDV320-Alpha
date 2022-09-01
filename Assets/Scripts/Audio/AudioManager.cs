@@ -179,11 +179,6 @@ public class AudioManager : MonoBehaviour
         Sound soundFadeIn = Array.Find(Musics, item => item.name == fadeIn);
         Sound soundFadeOut = Array.Find(Musics, item => item.name == fadeOut);
 
-        if (!soundFadeOut.audioSource.isPlaying)
-        {
-            return;
-        }
-
         switch (currentState)
         {
             case FadeState.Idle:
@@ -197,6 +192,11 @@ public class AudioManager : MonoBehaviour
                 }
             case FadeState.fadeOutAudio1:
                 {
+                    if (!soundFadeOut.audioSource.isPlaying)
+                    {
+                        currentState = FadeState.Idle;
+                        break;
+                    }
                     soundFadeOut.audioSource.volume -= 0.01f * Time.deltaTime;
                     if (soundFadeOut.audioSource.volume <= 0.0f)
                     {
@@ -214,6 +214,11 @@ public class AudioManager : MonoBehaviour
                 }
             case FadeState.fadeOutAudio2:
                 {
+                    if (!soundFadeIn.audioSource.isPlaying)
+                    {
+                        currentState = FadeState.Idle;
+                        break;
+                    }
                     soundFadeIn.audioSource.volume -= 0.01f * Time.deltaTime;
                     if (soundFadeIn.audioSource.volume <= 0.0f)
                     {

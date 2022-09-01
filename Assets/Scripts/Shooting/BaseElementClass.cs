@@ -41,6 +41,7 @@ public class BaseElementClass : MonoBehaviour
 
     //Additional variables for the blacksmith
     public int upgradeCost = 5;
+    public string upgradeDescription;
 
     [SerializeField]
     protected List<BaseEnemyClass.Types> attackTypes;

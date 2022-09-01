@@ -112,7 +112,14 @@ public class SAIM : MonoBehaviour
     [SerializeField]
     private string initialMusic;
     [SerializeField]
-    private string battleMusic;
+
+    string battleMusic;
+    private int fadeInBattleMusicState;
+    private int fadeInInitialMusicState;
+
+    [SerializeField]
+    bool bossSaim = false;
+
 
     void Start()
     {
@@ -138,24 +145,11 @@ public class SAIM : MonoBehaviour
 
     void Update()
     {
-       //if (audioManager)
-       //{
-       //    audioManager.FadeOutAndPlayMusic(initialMusic, battleMusic);
-       //}
-        //// will be working on this in alpha was a late implementation 
-        //// fades out the audio for the battle music
-        //if (fadeOutBattleAudio == true)
-        //{
-        //    audioManager.sounds[2].audioSource.volume -= 0.01f * Time.deltaTime;
-        //}
-        //// starts the ambient sound again and sets the volume back for the battle music
-        //if (audioManager.sounds[2].audioSource.volume <= 0 && fadeOutAmbientAudio == false)
-        //{
-        //    audioManager.StopMusic(battleMusic);
-        //    audioManager.PlayMusic(initialMusic);
-        //    fadeOutBattleAudio = false;
-        //    audioManager.sounds[2].audioSource.volume = 0.1f;
-        //}
+        if (audioManager)
+        {
+            audioManager.FadeOutAndPlayMusic(initialMusic, battleMusic);
+        }
+
         if (!triggered || roomComplete)
         {
             return;
@@ -164,32 +158,13 @@ public class SAIM : MonoBehaviour
         spawnTimer += Time.deltaTime;
         timeInSpawning += Time.deltaTime;
 
-        if(CheckSpawnConditions())
+        if(CheckSpawnConditions() && !bossSaim)
         {
             Spawn(Random.Range(data.spawnMin, data.spawnMax));
            
         }
 
         CheckEndOfRoom();
-
-        //// fades out the audio for the ambient sound
-        //if (fadeOutAmbientAudio == true)
-        //{
-        //    audioManager.sounds[0].audioSource.volume -= 0.01f * Time.deltaTime;
-        //}
-        //// starts the battle music and sets back the volume of the ambient sound
-        //if (audioManager.sounds[0].audioSource.volume <= 0 && fadeOutBattleAudio == false)
-        //{
-        //    audioManager.StopMusic(battleMusic);
-        //    audioManager.PlayMusic(initialMusic);
-        //    fadeOutAmbientAudio = false;
-        //    audioManager.sounds[0].audioSource.volume = 0.1f;
-        //}
-
-        //if (audioManager)
-        //{
-        //    audioManager.FadeOutAndPlayMusic(battleMusic, initialMusic);
-        //}
 
         //The room has been explored and defeated 
         if (triggered && !roomComplete)
@@ -497,7 +472,10 @@ public class SAIM : MonoBehaviour
         {
             roomComplete = true;
             //Aydens Audio
-            //fadeOutBattleAudio = true;
+            if (audioManager)
+            {
+                audioManager.SetCurrentStateToFadeOutAudio1();
+            }
         }
     }
 
@@ -575,7 +553,10 @@ public class SAIM : MonoBehaviour
             spawnAmount++;
         }
         // Aydens Audio
-       // fadeOutAmbientAudio = true;
+        if(audioManager)
+        {
+            audioManager.SetCurrentStateToFadeOutAudio2();
+        }
     }
 
     public int ChooseEnemy()
