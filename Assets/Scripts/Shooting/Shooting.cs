@@ -41,8 +41,26 @@ public class Shooting : MonoBehaviour
     public List<BaseElementClass> GetPrimaryElements() { return primaryElements; }
     public List<ComboElementList> GetComboElements() { return comboElements; }
     public Sprite GetPrimaryElementSprite() { return primaryElements[leftElementIndex].uiSprite; }
+    public Sprite GetNextPrimaryElementSprite() 
+    { 
+        if((leftElementIndex + 1) >= primaryElements.Count)
+        {
+            return primaryElements[0].uiSprite;
+        }
+
+        return primaryElements[leftElementIndex + 1].uiSprite; 
+    }
 
     public Sprite GetCatalystElementSprite() { return catalystElements[rightElementIndex].uiSprite; }
+    public Sprite GetNextCatalystElementSprite() 
+    {
+        if ((rightElementIndex + 1) >= catalystElements.Count)
+        {
+            return catalystElements[0].uiSprite;
+        }
+
+        return catalystElements[rightElementIndex + 1].uiSprite; 
+    }
 
     public Sprite GetComboElementSprite() { return (comboElements[leftElementIndex].comboElements[rightElementIndex].uiSprite); }
     public Transform GetLeftOrbPos() { return leftOrbPos; }
@@ -104,8 +122,11 @@ public class Shooting : MonoBehaviour
                 if(primaryElements[leftElementIndex].GetStartCoolDown() == false
                    || catalystElements[rightElementIndex].GetStartCoolDown() == false)
                 {
-                    audioManager.PlaySFX(primaryElements[leftElementIndex].GetIdleSFX());
-                    audioManager.PlaySFX(catalystElements[rightElementIndex].GetIdleSFX());
+                    if (audioManager)
+                    {
+                        audioManager.PlaySFX(primaryElements[leftElementIndex].GetIdleSFX());
+                        audioManager.PlaySFX(catalystElements[rightElementIndex].GetIdleSFX());
+                    }
                 }
             }
             else
@@ -115,7 +136,10 @@ public class Shooting : MonoBehaviour
                 // plays shooting idle sound
                 if (comboElements[leftElementIndex].comboElements[rightElementIndex].GetStartCoolDown() == false)
                 {
-                    audioManager.PlaySFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetIdleSFX());
+                    if (audioManager)
+                    {
+                        audioManager.PlaySFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetIdleSFX());
+                    }
                 }
             }
         }
@@ -143,7 +167,10 @@ public class Shooting : MonoBehaviour
             }
             else
             {
-                audioManager.StopSFX(primaryElements[leftElementIndex].GetIdleSFX());
+                if (audioManager)
+                {
+                    audioManager.StopSFX(primaryElements[leftElementIndex].GetIdleSFX());
+                }
             }
             
             // changes element
@@ -153,9 +180,12 @@ public class Shooting : MonoBehaviour
                 leftElementIndex = 0;
             }
 
-            // play audio of switching weapons
-            audioManager.StopSFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
-            audioManager.PlaySFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
+            if (audioManager)
+            {
+                // play audio of switching weapons
+                audioManager.StopSFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
+                audioManager.PlaySFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
+            }
 
             // destroys the current orb
             Destroy(leftOrbPos.GetChild(0).gameObject);
@@ -210,7 +240,10 @@ public class Shooting : MonoBehaviour
             }
             else
             {
-                audioManager.StopSFX(catalystElements[rightElementIndex].GetIdleSFX());
+                if (audioManager)
+                {
+                    audioManager.StopSFX(catalystElements[rightElementIndex].GetIdleSFX());
+                }
                 catalystElements[rightElementIndex].LiftEffect();
             }
 
@@ -221,9 +254,12 @@ public class Shooting : MonoBehaviour
                 rightElementIndex = 0;
             }
 
-            // play audio of switching weapons
-            audioManager.StopSFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
-            audioManager.PlaySFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
+            if (audioManager)
+            {
+                // play audio of switching weapons
+                audioManager.StopSFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
+                audioManager.PlaySFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
+            }
 
             // destroy orbs
             Destroy(rightOrbPos.GetChild(0).gameObject);
@@ -266,8 +302,22 @@ public class Shooting : MonoBehaviour
                 }
             }
         }
+        // if the player is in combo mode and has no mana
+        // takes player out of combo mode and puts them to primary and catalyst elements
+        // player also start to use health as mana
+        if (inComboMode && GetLeftMana()[0] <= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost() ||
+            inComboMode && GetRightMana()[0] <= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost() ||
+            inComboMode && GetLeftMana()[0] <= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost()  && GetRightMana()[0] <= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost())
+        {
+            comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
+            primaryElements[leftElementIndex].AnimationSwitch(true);
+            catalystElements[rightElementIndex].AnimationSwitch(false);
+            uiScript.SetCombo(!inComboMode);
+            inComboMode = false;
+        }
+
         // if player has pressed combo button
-        if (Input.GetKeyUp(KeyCode.F))
+        if (Input.GetKeyUp(KeyCode.F) /*&& GetLeftMana()[0] >= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost() && GetRightMana()[0] >= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost()*/)
         {
             // if in combo mode lift combo element effect
             // else lift catalyst effect
@@ -286,9 +336,12 @@ public class Shooting : MonoBehaviour
             // changes if in combo or no combo mode (switch)
             inComboMode = !inComboMode;
 
-            // stops the idle sound effect for the non combo elements
-            audioManager.StopSFX(primaryElements[leftElementIndex].GetIdleSFX());
-            audioManager.StopSFX(catalystElements[rightElementIndex].GetIdleSFX());
+            if (audioManager)
+            {
+                // stops the idle sound effect for the non combo elements
+                audioManager.StopSFX(primaryElements[leftElementIndex].GetIdleSFX());
+                audioManager.StopSFX(catalystElements[rightElementIndex].GetIdleSFX());
+            }
 
             // destroys orbs
             Destroy(leftOrbPos.GetChild(0).gameObject);
@@ -305,18 +358,24 @@ public class Shooting : MonoBehaviour
             // if not in combo after switch
             if (!inComboMode)
             {
-                // stop combo idle sound effect
-                audioManager.StopSFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetIdleSFX());
+                if (audioManager)
+                {
+                    // stop combo idle sound effect
+                    audioManager.StopSFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetIdleSFX());
+                }
 
                 // play non combo animations
                 primaryElements[leftElementIndex].AnimationSwitch(true);
                 catalystElements[rightElementIndex].AnimationSwitch(false);
 
-                // play switching element sound effects for non combo elements
-                audioManager.StopSFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
-                audioManager.PlaySFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
-                audioManager.StopSFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
-                audioManager.PlaySFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
+                if (audioManager)
+                {
+                    // play switching element sound effects for non combo elements
+                    audioManager.StopSFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
+                    audioManager.PlaySFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
+                    audioManager.StopSFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
+                    audioManager.PlaySFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
+                }
 
                 // change orbs for non combo elements
                 Instantiate(primaryElements[leftElementIndex].GetHandVFX(), leftOrbPos);
@@ -335,9 +394,12 @@ public class Shooting : MonoBehaviour
                 // play combo animation
                 comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch(true);
 
-                // play the switching element sound effect for combo elements
-                audioManager.StopSFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetSwitchElementSFX());
-                audioManager.PlaySFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetSwitchElementSFX());
+                if (audioManager)
+                {
+                    // play the switching element sound effect for combo elements
+                    audioManager.StopSFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetSwitchElementSFX());
+                    audioManager.PlaySFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetSwitchElementSFX());
+                }
 
                 // change orbs for combo elements
                 Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), leftOrbPos);
@@ -350,17 +412,6 @@ public class Shooting : MonoBehaviour
             }
 
         }
-        // if the player is in combo mode and has no mana
-        // takes player out of combo mode and puts them to primary and catalyst elements
-        // player also start to use health as mana
-        if(inComboMode && GetLeftMana()[0] <= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost() && GetRightMana()[0] <= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost())
-        {
-            comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
-            primaryElements[leftElementIndex].AnimationSwitch(true);
-            catalystElements[rightElementIndex].AnimationSwitch(false);
-            uiScript.SetCombo(!inComboMode);
-            inComboMode = false;
-        }
     }
 
     // shooting function for primary and catalyst
@@ -368,7 +419,9 @@ public class Shooting : MonoBehaviour
     private void NonComboShooting()
     {
         //Starts the process of activating the element held in the left hand
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (!primaryElements[leftElementIndex].GetStartCoolDown() && 
+            Input.GetKey(KeyCode.Mouse0) &&
+            primaryElements[leftElementIndex].GetPlayerHand().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             primaryElements[leftElementIndex].ActivateElement();
         }
@@ -396,7 +449,9 @@ public class Shooting : MonoBehaviour
     // shooting function for combo elements
     private void ComboShooting()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (!comboElements[leftElementIndex].comboElements[rightElementIndex].GetStartCoolDown() &&
+            Input.GetKey(KeyCode.Mouse0) &&
+            comboElements[leftElementIndex].comboElements[rightElementIndex].GetPlayerHand().GetCurrentAnimatorStateInfo(2).IsName("Idle"))
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
         }

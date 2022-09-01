@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class Blacksmith1 : Quest
 {
-    List<GameObject> slainEnemies;
+    List<string> slainEnemies = new List<string>();
 
     //Added to death triggers
     public void DeathTypeCheck(GameObject enemy)
     {
-        BaseEnemyClass eType = enemy.GetComponent<BaseEnemyClass>();
 
-        if(!slainEnemies.Exists(enemyType => enemyType.GetComponent<BaseEnemyClass>() == eType))
+        bool slain = false;
+
+        foreach(string collectedEnemy in slainEnemies)
         {
-            slainEnemies.Add(enemy);
+            if(collectedEnemy == enemy.name)
+            {
+                slain = true;
+                break;
+            }
+        }
+
+        if(slain == false)
+        {
+            slainEnemies.Add(enemy.name);
         }
 
         //If there are 12 enemy types in slain enemy, finish the quest
@@ -23,9 +33,14 @@ public class Blacksmith1 : Quest
         }
     }
 
-    public override void SpawnEventBehaviour(GameObject enemySpawning)
+    public override void SpawnEventBehaviour(GameObject enemySpawning, string spawnOrigin)
     {
-        base.SpawnEventBehaviour(enemySpawning);
+        base.SpawnEventBehaviour(enemySpawning, spawnOrigin);
+
+        if(spawnOrigin != "Regular")
+        {
+            return;
+        }
 
         enemySpawning.GetComponent<BaseEnemyClass>().GetDeathTriggers().Add(DeathTypeCheck);
     }

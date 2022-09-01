@@ -32,7 +32,17 @@ public class Quest : MonoBehaviour
 
     }
 
-    public virtual void SpawnEventBehaviour(GameObject enemySpawning)
+    public virtual void FinishRunBehaviour()
+    {
+
+    }
+
+    public virtual void DeathBehaviour()
+    {
+
+    }
+
+    public virtual void SpawnEventBehaviour(GameObject enemySpawning, string spawnOrigin)
     {
 
     }
@@ -58,5 +68,10 @@ public class Quest : MonoBehaviour
         npc.questComplete = false;
 
         trinketToUpgrade.Upgrade();
+    }
+
+    public virtual void FindHiddenObject()
+    {
+
     }
 }

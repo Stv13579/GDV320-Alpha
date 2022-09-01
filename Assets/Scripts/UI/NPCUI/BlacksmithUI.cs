@@ -25,13 +25,18 @@ public class BlacksmithUI : NPCUI
 
         //Apply the buttons functionality to each element, allowing them to upgrade.
         int i = 0;
-        foreach (Transform button in transform.Find("UpgradeButtons"))
+        foreach (Transform button in GameObject.Find("UpgradeButtons").transform)
         {
             buttons.Add(button.gameObject);
-            buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = elements[i].elementName;
-            buttons[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = elements[i].upgradeCost.ToString();
+            buttons[i].transform.GetComponent<Image>().sprite = elements[i].uiSprite;
+            buttons[i].GetComponent<UpgradeButton>().SetElement(elements[i]);       
             i++;
         }
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void UpgradeButton(int index)
@@ -42,14 +47,12 @@ public class BlacksmithUI : NPCUI
             elements[index].Upgrade();
             buttons[index].SetActive(false);
             player.ChangeMoney(-elements[index].upgradeCost);
-            audioManager.StopSFX("Shop Buy");
-            audioManager.PlaySFX("Shop Buy");
+            if (audioManager)
+            {
+                audioManager.StopSFX("Shop Buy");
+                audioManager.PlaySFX("Shop Buy");
+            }
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

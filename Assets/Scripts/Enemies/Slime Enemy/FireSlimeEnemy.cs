@@ -41,8 +41,11 @@ public class FireSlimeEnemy : WaterSlimeEnemy
             GameObject tempEnemyTrail = Instantiate(enemyTrail, transform.position, Quaternion.LookRotation(Vector3.down, forward));
             tempEnemyTrail.transform.localScale = enemyFireTrailScale;
             tempEnemyTrail.GetComponent<FireSlimeTrail>().SetVars(damageAmount * (prophecyManager.prophecyDamageMulti));
-            audioManager.StopSFX("Fire Slime Trail Initial");
-            audioManager.PlaySFX("Fire Slime Trail Initial", player.transform, this.transform);
+            if (audioManager)
+            {
+                audioManager.StopSFX("Fire Slime Trail Initial");
+                audioManager.PlaySFX("Fire Slime Trail Initial", player.transform, this.transform);
+            }
             spawnTimer = spawnTimerLength;
         }
     }

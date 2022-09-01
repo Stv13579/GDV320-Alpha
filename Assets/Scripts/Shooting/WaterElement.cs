@@ -9,19 +9,13 @@ public class WaterElement : BaseElementClass
     //Click to fire (if we have the mana/not in delay)
     //Instantiate the projectile in the right direction etc.
     [SerializeField]
-    GameObject waterProj;
+    private GameObject waterProj;
 
     [SerializeField]
-    float projectileSpeed = 5;
+    private float projectileSpeed = 5;
 
     [SerializeField]
-    public float projectileLifetime = 10;
-
-    protected override void Update()
-    {
-        base.Update();
-        //playerHand
-    }
+    private float projectileLifetime = 10;
 
     //Fires the projectile, passing damage, speed, etc
     public override void ElementEffect()
@@ -53,14 +47,20 @@ public class WaterElement : BaseElementClass
         if (randomAnimationToPlay == 0)
         {
             playerHand.SetTrigger(animationName);
-            audioManager.StopSFX(shootingSoundFX);
-            audioManager.PlaySFX(shootingSoundFX);
+            if (audioManager)
+            {
+                audioManager.StopSFX(shootingSoundFX);
+                audioManager.PlaySFX(shootingSoundFX);
+            }
         }
         else
         {
             playerHand.SetTrigger(animationNameAlt);
-            audioManager.StopSFX(otherShootingSoundFX);
-            audioManager.PlaySFX(otherShootingSoundFX);
+            if (audioManager)
+            {
+                audioManager.StopSFX(otherShootingSoundFX);
+                audioManager.PlaySFX(otherShootingSoundFX);
+            }
         }
     }
 }

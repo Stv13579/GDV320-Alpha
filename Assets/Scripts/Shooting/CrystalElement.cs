@@ -19,11 +19,8 @@ public class CrystalElement : BaseElementClass
     [SerializeField]
     private float damageLimit;
 
-    // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-    }
+    [SerializeField]
+    private float damageSpeedDecreaser;
 
     public override void ElementEffect()
     {
@@ -39,13 +36,13 @@ public class CrystalElement : BaseElementClass
                 newCrystalPro.transform.RotateAround(shootingTranform.position, Camera.main.transform.up, 3.0f * i - 5.0f);
                 newCrystalPro.transform.RotateAround(shootingTranform.position, Camera.main.transform.right, 3.0f * j - 5.0f);
                 // setting the varibles from CrystalProj script
-                newCrystalPro.GetComponent<CrystalProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.crystalDamageMultiplier), damageCurve, lifeTimer, attackTypes, damageLimit);
+                newCrystalPro.GetComponent<CrystalProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.crystalDamageMultiplier), damageCurve, lifeTimer, attackTypes, damageLimit, damageSpeedDecreaser);
             }
         }
         //RaycastHit hit;
         //Physics.Raycast(this.gameObject.transform.position, Camera.main.transform.forward, out hit, 100, shootingIgnore);
         //if (hit.collider)
-        //    {
+        //{
         //    crystalProjectile.transform.LookAt(hit.point);
         //}
     }
@@ -61,14 +58,20 @@ public class CrystalElement : BaseElementClass
         if (randomAnimationToPlay == 0)
         {
             playerHand.SetTrigger(animationName);
-            audioManager.StopSFX(shootingSoundFX);
-            audioManager.PlaySFX(shootingSoundFX);
+            if (audioManager)
+            {
+                audioManager.StopSFX(shootingSoundFX);
+                audioManager.PlaySFX(shootingSoundFX);
+            }
         }
         else
         {
             playerHand.SetTrigger(animationNameAlt);
-            audioManager.StopSFX(otherShootingSoundFX);
-            audioManager.PlaySFX(otherShootingSoundFX);
+            if (audioManager)
+            {
+                audioManager.StopSFX(otherShootingSoundFX);
+                audioManager.PlaySFX(otherShootingSoundFX);
+            }
         }
     }
 }

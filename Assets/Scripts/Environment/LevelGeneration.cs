@@ -17,6 +17,9 @@ public class LevelGeneration : MonoBehaviour
     List<GameObject> placedRooms = new List<GameObject>();
 
     List<GameObject> genericRooms = new List<GameObject>();
+    public List<GameObject> GetGenericRooms() { return genericRooms; }
+
+    List<GameObject> otherRooms = new List<GameObject>();
 
     public List<GameObject> GetRooms() { return placedRooms; }
 
@@ -43,33 +46,36 @@ public class LevelGeneration : MonoBehaviour
         }
 
         //Place the boss room
-        bossRoom = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleBossRooms);
+        bossRoom = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), otherRooms, possibleBossRooms);
         bossRoom.GetComponent<Room>().illegal = true;
 
         ResetWeighting();
 
         //Place shop and NPC rooms
-        shop = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleRespiteRooms);
+        shop = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), otherRooms, possibleRespiteRooms);
         shop.GetComponent<Room>().illegal = true;
         shop.GetComponent<RespiteRoom>().isShoppe =  true;
 
-        NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleRespiteRooms);
+        NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), otherRooms, possibleRespiteRooms);
         NPC.GetComponent<Room>().illegal = true;
 
         //Check if the player is carrying the balanced compass and roll to see if it triggers if so.
-        if (GameObject.Find("Player").GetComponent<PlayerClass>().heldItems.Contains(GameObject.Find("TrinketManager").GetComponent<BalancedCompass>()))
+        if(GameObject.Find("TrinketManager"))
         {
-            Debug.Log("Checking for extra room!");
-
-            int randomRoll = Random.Range(0, 100);
-
-            if(randomRoll < GameObject.Find("TrinketManager").GetComponent<BalancedCompass>().GetActivationChance())
+            if (GameObject.Find("Player").GetComponent<PlayerClass>().heldItems.Contains(GameObject.Find("TrinketManager").GetComponent<BalancedCompass>()))
             {
-                NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), genericRooms, possibleRespiteRooms);
-                NPC.GetComponent<Room>().illegal = true;
+                Debug.Log("Checking for extra room!");
+
+                int randomRoll = Random.Range(0, 100);
+
+                if (randomRoll < GameObject.Find("TrinketManager").GetComponent<BalancedCompass>().GetActivationChance())
+                {
+                    NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), otherRooms, possibleRespiteRooms);
+                    NPC.GetComponent<Room>().illegal = true;
+                }
             }
         }
-
+        
         foreach(GameObject room in placedRooms)
         {
             room.GetComponent<Room>().CloseDoors();

@@ -16,7 +16,7 @@ public class LandMineProj : MonoBehaviour
     [SerializeField]
     private GameObject explosion;
     [SerializeField]
-    LayerMask enemyDetect;
+    private LayerMask enemyDetect;
     // Start is called before the first frame update
     void Start()
     {
@@ -97,9 +97,18 @@ public class LandMineProj : MonoBehaviour
                     }
                 }
             }
-            audioManager.StopSFX("Land Mine Explosion");
-            audioManager.PlaySFX("Land Mine Explosion");
+
+            if (audioManager)
+            {
+                audioManager.StopSFX("Land Mine Explosion");
+                audioManager.PlaySFX("Land Mine Explosion");
+            }
             willExplode = true;
         }
     }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireSphere(transform.position, explosiveRadius);
+    //}
 }

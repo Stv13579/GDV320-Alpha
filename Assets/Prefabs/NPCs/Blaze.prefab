@@ -1,0 +1,209 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1228599317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133590630952970766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2344e4682f1397046a0828eefdad3550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storyDialogues:
+  - dialogues:
+    - lines:
+      - Look at you, fearless!
+      - You remind me of some people very dear to me.
+      - Well, enough of that.
+    - lines:
+      - Remember to take care out there.
+      - Whatever happens to you effects everyone you know.
+      - It's easy to think you're only risking your own life.
+      - Or unlife, I guess.
+    - lines:
+      - Do you wonder what they are doing?
+      - The people you left behind?
+      - I hope they're all doing okay...
+  - dialogues:
+    - lines:
+      - Ha! I see you are thriving in the wilds out there!
+      - My kids were always running around in the woods too.
+      - Scraped their knees just the same as well...
+      - Anyway, enough about that.
+    - lines:
+      - You were smushed up pretty bad last I saw you,
+      - but I suppose I can't convince you to stay here where it's nice and safe.
+      - If my other half was here she would give you a talking to like you wouldn't
+        believe.
+      - Ha!
+    - lines:
+      - Seriously, you need to take things slow.
+      - I see the way you go galavanting about.
+      - Sorry.
+      - I just... I hope everything is okay.
+  - dialogues:
+    - lines:
+      - Huh, seems like you can handle yourself pretty well now.
+      - And even if you do fall, here you are back again.
+      - All that worry for nothing I guess...
+    - lines:
+      - Sometimes I wonder if you'll ever come back everytime you step through that
+        doorway.
+      - But you always do.
+      - I wonder where my family are now, how they are faring.
+      - Are they as hardy?
+      - I hope so.
+    - lines:
+      - It's hard to step back when you feel the need to help!
+      - Still, I shouldn't expect you need much in the way of help anymore.
+  giveQuest:
+  - lines:
+    - 'Hey, I know I can''t control you, but I can''t help but worry everytime I
+      see you disappear around the next bend. '
+    - Would you do some reasearch for me?
+    - Break some of those feral spirits, then we can see how we can keep you safe.
+  - lines:
+    - It's not enough kid, you just keep getting beat.
+    - If you're gonna keep getting yourself killed, at least let me help you mitigate
+      some pain.
+  - lines:
+    - 'I''ve been thinking about things, my place in amongst this all. '
+    - I don't suppose you could find something for me?
+    - I lost it when I first came here.
+    - 'It''s a little picture of some people, you''ll know it when you see it. '
+  recieveHandIn:
+  - lines:
+    - Hmm, judging by the scars and burn marks this should do nicely.
+    - Take it, and make sure you wear it when you go into battle.
+  - lines:
+    - Hmph.
+    - Good job I guess.
+    - Let me fix you something stronger.
+  - lines:
+    - Huh, there it is.
+    - Hm?
+    - Thats funny.
+    - They look older than when I lost this.
+    - Some strange magic of this place I suppose.
+    - 'They''re still smiling though... '
+    - Here.
+    - My finest work I think.
+  currentDialogue:
+    lines: []
+  noMoreDialogue:
+    lines:
+    - Humph, All done
+  place: 0
+  interactPositon: 0
+  dataToApply: Blacksmith
+  data: {fileID: 11400000, guid: de91b2d632e4158499949ff41dfd72b3, type: 2}
+  baseRandoms:
+  - lines:
+    - Oh, hey.
+    - Let me see what you have
+    - No doubt you need something fixing up
+  - lines:
+    - I heard some pretty serious noises up ahead
+    - Be careful
+    - Not that you can't take care of youself-
+    - Nevermind
+  - lines:
+    - Working on spirit powers is strange
+    - But rewarding
+    - Like metal, if you hit it hard enough, it yields
+    - But it's best to work alongside it
+    - Like a valued comrade
+    - Firm but fair
+    - Thats the way
+  offeringType: Upgrades
+--- !u!1001 &4695615697489262229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2582171700705221785, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: npcUI
+      value: 
+      objectReference: {fileID: 368482654307949614, guid: 146e1e1b120c37d48b3ccbd1a4c79e8f,
+        type: 3}
+    - target: {fileID: 2582171700705221785, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: npcOfferingUI
+      value: 
+      objectReference: {fileID: 368482654307949614, guid: 146e1e1b120c37d48b3ccbd1a4c79e8f,
+        type: 3}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 75.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221787, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_Name
+      value: Blaze
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3947044421949730439, guid: 01b84641070c05a468128367ec429509, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 01b84641070c05a468128367ec429509, type: 3}
+--- !u!1 &7133590630952970766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2582171700705221787, guid: 01b84641070c05a468128367ec429509,
+    type: 3}
+  m_PrefabInstance: {fileID: 4695615697489262229}
+  m_PrefabAsset: {fileID: 0}

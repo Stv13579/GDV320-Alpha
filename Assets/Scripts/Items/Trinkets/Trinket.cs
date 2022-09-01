@@ -19,6 +19,7 @@ public class Trinket : Item
         base.AddEffect(player);
     }
 
+
     public void Upgrade()
     {
         uState++;

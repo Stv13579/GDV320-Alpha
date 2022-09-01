@@ -41,6 +41,7 @@ public class BaseElementClass : MonoBehaviour
 
     //Additional variables for the blacksmith
     public int upgradeCost = 5;
+    public string upgradeDescription;
 
     [SerializeField]
     protected List<BaseEnemyClass.Types> attackTypes;
@@ -97,7 +98,6 @@ public class BaseElementClass : MonoBehaviour
     protected float cooldownTimer;
     protected float currentCoolDownTimer;
 
-
     public enum ElementType
     {
         None = 0,
@@ -147,9 +147,12 @@ public class BaseElementClass : MonoBehaviour
     // this gets call in activate elements
     protected virtual void StartAnims(string animationName, string animationNameAlt = null)
     {
-        audioManager.StopSFX(idleSFX);
-        audioManager.StopSFX(shootingSoundFX);
-        audioManager.PlaySFX(shootingSoundFX);
+        if (audioManager)
+        {
+            audioManager.StopSFX(idleSFX);
+            audioManager.StopSFX(shootingSoundFX);
+            audioManager.PlaySFX(shootingSoundFX);
+        }
     }
     //Called from the hand objects when the appropriate event triggers to turn on the vfx
     // gets called same time as elementeffect
@@ -212,8 +215,6 @@ public class BaseElementClass : MonoBehaviour
         }
         else
         {
-            //Set out of mana anim
-            playerHand.SetTrigger("NoMana");
             return false;
         }
     }
@@ -224,7 +225,7 @@ public class BaseElementClass : MonoBehaviour
     {
         if (!startCoolDown)
         {
-            if(PayCosts())
+            if (PayCosts())
             {
                 StartAnims(animationToPlay, animationToPlayAlt);
             }
@@ -253,7 +254,6 @@ public class BaseElementClass : MonoBehaviour
                 // cooldown is off and player can shoot again
                 currentCoolDownTimer = cooldownTimer;
                 startCoolDown = false;
-                playerHand.SetTrigger("StopShooting");
             }
         }
     }

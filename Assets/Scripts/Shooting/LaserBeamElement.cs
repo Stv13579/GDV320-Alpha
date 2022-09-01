@@ -11,7 +11,10 @@ public class LaserBeamElement : BaseElementClass
     private PlayerMovement playerMovement;
 
     private bool usingLaser;
-   
+
+    [SerializeField]
+    private float hitDelay;
+
     protected override void Start()
     {
         base.Start();
@@ -33,12 +36,15 @@ public class LaserBeamElement : BaseElementClass
     // deactivate laser function
     public void DeactivateLaser()
     {
-       usingLaser = false;
-       laserBeam.SetActive(false);
-       playerHand.SetTrigger("LaserBeamStopCast");
-       audioManager.StopSFX(shootingSoundFX);
-       laserBeam.GetComponentInChildren<LaserBeam>().isHittingObj = false;
-       StatModifier.RemoveModifier(playerMovement.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.25f, "Laser"));
+        usingLaser = false;
+        laserBeam.SetActive(false);
+        playerHand.SetTrigger("LaserBeamStopCast");
+        if (audioManager)
+        {
+            audioManager.StopSFX(shootingSoundFX);
+        }
+        laserBeam.GetComponentInChildren<LaserBeam>().SetIsHittingObj(false);
+        StatModifier.RemoveModifier(playerMovement.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.25f, "Laser"));
     }
     // activates the laserBeam
     public override void ElementEffect()
@@ -47,7 +53,7 @@ public class LaserBeamElement : BaseElementClass
         usingLaser = true;
         laserBeam.transform.GetChild(0).localScale = new Vector3(0, 1, 0);
         laserBeam.SetActive(true);
-        laserBeam.GetComponentInChildren<LaserBeam>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), attackTypes);
+        laserBeam.GetComponentInChildren<LaserBeam>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), attackTypes, hitDelay);
         StatModifier.AddModifier(playerMovement.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.25f, "Laser"));
     }
     public override void LiftEffect()

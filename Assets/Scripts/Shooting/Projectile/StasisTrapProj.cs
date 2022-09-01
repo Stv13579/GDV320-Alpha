@@ -18,6 +18,7 @@ public class StasisTrapProj : MonoBehaviour
 
     [SerializeField]
     private GameObject aftermathVFX;
+
     private enum StasisTrapProjState
     {
         idle,
@@ -25,16 +26,16 @@ public class StasisTrapProj : MonoBehaviour
         aftermath,
         destroy
     }
-    StasisTrapProjState currentstate = StasisTrapProjState.idle;
+    private StasisTrapProjState currentstate = StasisTrapProjState.idle;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         duration = 0.0f;
         audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         duration += Time.deltaTime;
         currentDamageTicker += Time.deltaTime;
@@ -74,8 +75,12 @@ public class StasisTrapProj : MonoBehaviour
                         aftermathVFX.GetComponent<ParticleSystem>().Play();
                     }
                     this.GetComponent<Collider>().enabled = false;
-                    audioManager.StopSFX("Stasis Trap Explosion");
-                    audioManager.PlaySFX("Stasis Trap Explosion");
+
+                    if (audioManager)
+                    {
+                        audioManager.StopSFX("Stasis Trap Explosion");
+                        audioManager.PlaySFX("Stasis Trap Explosion");
+                    }
                     if (duration >= maxDuration)
                     {
                         for (int i = 0; i < containedEnemies.Count; i++)

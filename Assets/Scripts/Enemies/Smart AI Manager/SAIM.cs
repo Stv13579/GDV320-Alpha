@@ -110,14 +110,17 @@ public class SAIM : MonoBehaviour
     // Aydens Audio
     AudioManager audioManager;
     [SerializeField]
-    string initialMusic;
+    private string initialMusic;
     [SerializeField]
+
     string battleMusic;
     private int fadeInBattleMusicState;
     private int fadeInInitialMusicState;
 
     [SerializeField]
     bool bossSaim = false;
+
+
     void Start()
     {
         //Aydens Audio manager
@@ -142,22 +145,11 @@ public class SAIM : MonoBehaviour
 
     void Update()
     {
+        if (audioManager)
+        {
+            audioManager.FadeOutAndPlayMusic(initialMusic, battleMusic);
+        }
 
-        audioManager.FadeInAndOutMusic(initialMusic, battleMusic, fadeInInitialMusicState);
-        //// will be working on this in alpha was a late implementation 
-        //// fades out the audio for the battle music
-        //if (fadeOutBattleAudio == true)
-        //{
-        //    audioManager.sounds[2].audioSource.volume -= 0.01f * Time.deltaTime;
-        //}
-        //// starts the ambient sound again and sets the volume back for the battle music
-        //if (audioManager.sounds[2].audioSource.volume <= 0 && fadeOutAmbientAudio == false)
-        //{
-        //    audioManager.StopMusic(battleMusic);
-        //    audioManager.PlayMusic(initialMusic);
-        //    fadeOutBattleAudio = false;
-        //    audioManager.sounds[2].audioSource.volume = 0.1f;
-        //}
         if (!triggered || roomComplete)
         {
             return;
@@ -174,20 +166,6 @@ public class SAIM : MonoBehaviour
 
         CheckEndOfRoom();
 
-        //// fades out the audio for the ambient sound
-        //if (fadeOutAmbientAudio == true)
-        //{
-        //    audioManager.sounds[0].audioSource.volume -= 0.01f * Time.deltaTime;
-        //}
-        //// starts the battle music and sets back the volume of the ambient sound
-        //if (audioManager.sounds[0].audioSource.volume <= 0 && fadeOutBattleAudio == false)
-        //{
-        //    audioManager.StopMusic(battleMusic);
-        //    audioManager.PlayMusic(initialMusic);
-        //    fadeOutAmbientAudio = false;
-        //    audioManager.sounds[0].audioSource.volume = 0.1f;
-        //}
-        audioManager.FadeInAndOutMusic(battleMusic, initialMusic, fadeInBattleMusicState);
         //The room has been explored and defeated 
         if (triggered && !roomComplete)
         {
@@ -494,7 +472,10 @@ public class SAIM : MonoBehaviour
         {
             roomComplete = true;
             //Aydens Audio
-            fadeInBattleMusicState = 1;
+            if (audioManager)
+            {
+                audioManager.SetCurrentStateToFadeOutAudio1();
+            }
         }
     }
 
@@ -558,13 +539,24 @@ public class SAIM : MonoBehaviour
             GameObject spawnedEnemy = Instantiate(data.enemyTypes[Random.Range(0, data.enemyTypes.Count)], spawnPosition, Quaternion.identity);
             spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
 
-            GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy);
+            if(GameObject.Find("Quest Manager"))
+            {
+                GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy, "Regular");
+            }
+            
+            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().heldItems)
+            {
+                item.SpawnTrigger(this.gameObject);
+            }
 
             spawnedEnemies.Add(spawnedEnemy.GetComponent<BaseEnemyClass>());
             spawnAmount++;
         }
         // Aydens Audio
-        fadeInInitialMusicState = 1;
+        if(audioManager)
+        {
+            audioManager.SetCurrentStateToFadeOutAudio2();
+        }
     }
 
     public int ChooseEnemy()

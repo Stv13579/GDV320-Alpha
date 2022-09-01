@@ -86,7 +86,7 @@ public class EnergyElement : BaseElementClass
                     }
             }
     }
-    public void HitShield()
+    private void HitShield()
     {
         if(beenHit)
         {
@@ -105,13 +105,17 @@ public class EnergyElement : BaseElementClass
         energyShield.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetFloat("_ShieldDamage", materialChanger);
     }
     // function to deactivate shield
-    public void DeactivateEnergyShield()
+    private void DeactivateEnergyShield()
     {
         shieldStateChange = shieldState.shieldDown;
         energyShield.SetActive(false);
-       useShield = false;
-       playerHand.SetTrigger("EnergyStopCast");
-       audioManager.StopSFX(shootingSoundFX);
+        useShield = false;
+        playerHand.SetTrigger("EnergyStopCast");
+
+        if (audioManager)
+        {
+            audioManager.StopSFX(shootingSoundFX);
+        }
        // go through the list of enemies
        // remove them from the list and 
        for (int i = 0; i < containedEnemies.Count; i++)
@@ -152,8 +156,11 @@ public class EnergyElement : BaseElementClass
         base.StartAnims(animationName);
         playerHand.ResetTrigger("EnergyStopCast");
         playerHand.SetTrigger(animationName);
-        audioManager.PlaySFX(shootingSoundFX);
-        audioManager.PlaySFX(otherShootingSoundFX);
+        if (audioManager)
+        {
+            audioManager.PlaySFX(shootingSoundFX);
+            audioManager.PlaySFX(otherShootingSoundFX);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -175,7 +182,8 @@ public class EnergyElement : BaseElementClass
                 Destroy(other.gameObject);
             }
             if (other.gameObject.layer == 22 && other.GetComponent<BaseRangedProjectileScript>() ||
-                other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())
+                other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>() ||
+                 other.gameObject.tag == "Enemy" && other.GetComponent<BaseEnemyClass>())
             {
                 materialChanger = 1.0f;
                 energyShield.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetFloat("_ShieldDamage", materialChanger);

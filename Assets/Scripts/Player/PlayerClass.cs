@@ -9,18 +9,6 @@ public class PlayerClass : MonoBehaviour
     float currentHealth, maxHealth, baseMaxHealth, defense, baseDefense;
 
     StatModifier.FullStat health = new StatModifier.FullStat(0), defenseStat = new StatModifier.FullStat(0);
-    //float defenseMultiplier = 1.0f;
-    //public struct defenseMultiSource
-    //{
-    //    public float multiplier;
-    //    public string source;
-    //    public defenseMultiSource(float multi, string s)
-    //    {
-    //        multiplier = multi;
-    //        source = s;
-    //    }
-    //}
-    //List<defenseMultiSource> defenseMultipliers = new List<defenseMultiSource>();
 
     [Serializable]
     public enum ManaName
@@ -56,8 +44,6 @@ public class PlayerClass : MonoBehaviour
     public GameObject gameOverScreen;
     private bool dead = false;
 
-    public Transform fallSpawner;
-
     /// <summary>
     /// Pushing Away When Hit
     /// </summary>
@@ -66,14 +52,21 @@ public class PlayerClass : MonoBehaviour
     private float currentPushDuration;
     private Vector3 pushDir;
 
-    [SerializeField]
-    private float fallDamage;
 
     private float fireTimer = 0.0f;
     [SerializeField]
     private float fireDOT;
     [SerializeField]
     private GameObject fireEffect;
+
+    [SerializeField]
+    private float lowHealthLimit;
+    [SerializeField]
+    private string lowHealthFastHeartBeat;
+    [SerializeField]
+    private string lowHealthSlowHeartBeat;
+
+    private AudioManager audioManager;
 
     //[SerializeField]
     //private Material fireMaterial;
@@ -89,6 +82,7 @@ public class PlayerClass : MonoBehaviour
             manaTypes[i].currentMana = manaTypes[i].baseMaxMana;
         }
         itemUI = GameObject.Find("ItemArray");
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
 
@@ -111,20 +105,7 @@ public class PlayerClass : MonoBehaviour
         maxHealth = StatModifier.UpdateValue(health);
         defense = StatModifier.UpdateValue(defenseStat);
 
-
-        if (transform.position.y <= -30)
-        {
-            transform.position = fallSpawner.position;
-            ChangeHealth(-fallDamage);
-            Debug.Log("Reset Position");
-        }
-
-        if (transform.position.y > 70)
-        {
-            transform.position = fallSpawner.position;
-            //ChangeHealth(-fallDamage);
-            Debug.Log("Reset Position");
-        }
+        LowHealthEffect();
 
         if(Input.GetKeyDown(KeyCode.O))
         {
@@ -152,6 +133,28 @@ public class PlayerClass : MonoBehaviour
 
     void Death()
     {
+        if(GameObject.Find("TrinketManager"))
+        {
+            if (heldItems.Contains(GameObject.Find("TrinketManager").GetComponent<LuckyKnuckleBones>()))
+            {
+                Item luckyBones = heldItems.Find(LKB => LKB == GameObject.Find("TrinketManager").GetComponent<LuckyKnuckleBones>());
+                if(luckyBones.GetComponent<LuckyKnuckleBones>().CanRevive())
+                {
+                    ChangeHealth(maxHealth);
+                    return;
+                }    
+            }
+        }
+
+        if(GameObject.Find("Quest Manager"))
+        {
+            GameObject.Find("Quest Manager").GetComponent<QuestManager>().DeathUpdate();
+        }
+        else
+        {
+            Debug.Log("Player missing quest manager");
+        }
+
         for (int i = 0; i < heldItems.Count; i++)
         {
             heldItems[i].DeathTriggers();
@@ -168,9 +171,21 @@ public class PlayerClass : MonoBehaviour
 
     }
 
-    public void ChangeHealth(float healthAmount)
+    public void ChangeHealth(float healthAmount, bool reduceDamage = true)
     {
-        currentHealth = Mathf.Min(currentHealth + healthAmount, maxHealth);
+        //Create a one time defense modifier based on whether the player is recieving damage, or should not apply defense
+        float defenseMod = defense;
+        if(healthAmount > 0 || !reduceDamage)
+        {
+            defenseMod = 1;
+        }
+
+        if(defenseMod > 1 || defenseMod == 0)
+        {
+            defenseMod = 1;
+        }
+
+        currentHealth = Mathf.Min(currentHealth + (healthAmount * defenseMod), maxHealth);
         if (currentHealth <= 0 && !dead)
         {
             Death();
@@ -178,9 +193,21 @@ public class PlayerClass : MonoBehaviour
     }
 
     //Get hit and bounce
-    public void ChangeHealth(float healthAmount, Vector3 enemyPos, float pushForce)
+    public void ChangeHealth(float healthAmount, Vector3 enemyPos, float pushForce, bool reduceDamage = true)
     {
-        currentHealth = Mathf.Min(currentHealth + healthAmount, maxHealth);
+        //Create a one time defense modifier based on whether the player is recieving damage, or should not apply defense
+        float defenseMod = defense;
+        if (healthAmount > 0 || !reduceDamage)
+        {
+            defenseMod = 1;
+        }
+
+        if (defenseMod > 1 || defenseMod == 0)
+        {
+            defenseMod = 1;
+        }
+
+        currentHealth = Mathf.Min(currentHealth + (healthAmount * defenseMod), maxHealth);
 
         Vector3 bounceVec = transform.position - enemyPos;
 
@@ -220,6 +247,24 @@ public class PlayerClass : MonoBehaviour
         return check;
     }
 
+    private void LowHealthEffect()
+    {
+        if(currentHealth <= lowHealthLimit)
+        {
+            if(audioManager)
+            {
+                audioManager.PlaySFX(lowHealthFastHeartBeat);
+                //audioManager.PlaySFX(lowHealthSlowHeartBeat);
+                // play screen effect when we get it
+            }
+        }
+        else
+        {
+            audioManager.StopSFX(lowHealthFastHeartBeat);
+            //audioManager.PlaySFX(lowHealthSlowHeartBeat);
+        }
+
+    }
     public void ChangeMana(float manaAmount, List<ManaName> manaNames)
     {
         foreach (ManaName mana in manaNames)

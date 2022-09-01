@@ -28,7 +28,19 @@ public class RunManager : MonoBehaviour
     {
         player.transform.position = new Vector3(60, 5, 60);
         player.GetComponent<PlayerClass>().StartLevel();
-        GameObject.Find("Quest Manager").GetComponent<QuestManager>().StartLevelUpdate();
-        GameObject.Find("Quest Manager").GetComponent<QuestManager>().inHub = false;
+        if(GameObject.Find("Quest Manager"))
+        {
+            GameObject.Find("Quest Manager").GetComponent<QuestManager>().StartLevelUpdate();
+            GameObject.Find("Quest Manager").GetComponent<QuestManager>().inHub = false;
+        }
+
+    }
+
+    public void FinishRun()
+    {
+        if (GameObject.Find("Quest Manager"))
+        {
+            GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRunUpdate();
+        }
     }
 }

@@ -36,8 +36,11 @@ public class BaseRangedProjectileScript : MonoBehaviour //Sebastian
     {
         if (other.gameObject == player && player.GetComponent<EnergyElement>().GetUseShield() == false)
         {
-            audioManager.StopSFX("Player Damage");
-            audioManager.PlaySFX("Player Damage");
+            if (audioManager)
+            {
+                audioManager.StopSFX("Player Damage");
+                audioManager.PlaySFX("Player Damage");
+            }
             HitEffect(other);
         }
         else if (other.gameObject.layer == 10 || other.gameObject.layer == 16)

@@ -12,7 +12,10 @@ public class GameplayUI : MonoBehaviour
 
     //Serialize all UI elements
     [SerializeField]
-    Image healthBar, manaBar, activePrimaryElement, activeCatalystElement, activeComboElement, crosshair;
+    Image healthBar, activePrimaryElement, inactivePrimaryElement, activeCatalystElement, inactiveCatalystElement, activeComboElement, inactiveComboElement, crosshair;
+
+    [SerializeField]
+    GameObject inactiveComboBorder, activeComboBorder;
 
     [SerializeField]
     List<Image> items;
@@ -20,6 +23,9 @@ public class GameplayUI : MonoBehaviour
 
     [SerializeField]
     TextMeshProUGUI moneyText, leftManaText, rightManaText;
+
+    [SerializeField]
+    Image leftActiveFill, leftInactiveFill, rightActiveFill, rightInactiveFill;
 
     bool combo = false;
 
@@ -37,37 +43,55 @@ public class GameplayUI : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Shooting>();
         playerClass = player.gameObject.GetComponent<PlayerClass>();
         comboTimer = maxComboTimer;
+        Debug.Log("G UI on");
     }
 
     void Update()
     {
         //Getting the current values from the player and updating the UI with them
         healthBar.fillAmount = playerClass.GetCurrentHealth() / playerClass.GetMaxHealth();
-        manaBar.fillAmount = 1;// playerClass.currentMana / playerClass.maxMana;
         moneyText.text = playerClass.money.ToString();
+
         activePrimaryElement.sprite = player.GetPrimaryElementSprite();
+        inactivePrimaryElement.sprite = player.GetNextPrimaryElementSprite();
+        
         activeCatalystElement.sprite = player.GetCatalystElementSprite();
+        inactiveCatalystElement.sprite = player.GetNextCatalystElementSprite();
+
         activeComboElement.sprite = player.GetComboElementSprite();
+        inactiveComboElement.sprite = player.GetComboElementSprite();
         crosshair.sprite = player.GetCrosshair();
 
         Vector2 leftMana = player.GetLeftMana();
-        leftManaText.text = leftMana[0] + "/" + leftMana[1];
+        leftActiveFill.fillAmount = leftMana.x / leftMana.y;
+
+        //leftManaText.text = leftMana[0] + "/" + leftMana[1];
+
         Vector2 rightMana = player.GetRightMana();
-        rightManaText.text = rightMana[0] + "/" + rightMana[1];
+        rightActiveFill.fillAmount = rightMana.x / rightMana.y;
+
+        //rightManaText.text = rightMana[0] + "/" + rightMana[1];
 
         if (combo)
         {
             comboTimer -= Time.deltaTime;
+            activeComboBorder.SetActive(true);
+            inactiveComboBorder.SetActive(false);
         }
         else
         {
             comboTimer += Time.deltaTime;
+            inactiveComboBorder.SetActive(true);
+            activeComboBorder.SetActive(false);
         }
         comboTimer = Mathf.Clamp(comboTimer, 0, maxComboTimer);
 
         ChangeCombo(activePrimaryElement.transform.parent, true);
+        ChangeCombo(inactivePrimaryElement.transform.parent, true);
         ChangeCombo(activeCatalystElement.transform.parent, true);
+        ChangeCombo(inactiveCatalystElement.transform.parent, true);
         ChangeCombo(activeComboElement.transform.parent, false);
+        ChangeCombo(inactiveComboElement.transform.parent, false);
     }
 
     public void AddItem(Sprite[] sprites)
@@ -84,8 +108,6 @@ public class GameplayUI : MonoBehaviour
 
     void ChangeCombo(Transform uiObject, bool doCombo)
     {
-
-
         if(doCombo)
         {
             Color colour = uiObject.GetComponent<Image>().color;
@@ -95,12 +117,16 @@ public class GameplayUI : MonoBehaviour
         }
         else
         {
-            Color colour = uiObject.GetComponent<Image>().color;
-            float alpha = Mathf.Lerp(1.0f, 0.15f, comboTimer / maxComboTimer);
-            uiObject.GetComponent<Image>().color = new Color(colour.r, colour.g, colour.b, alpha);
+            //Color colour = uiObject.GetComponent<Image>().color;
+            //float alpha = Mathf.Lerp(1.0f, 0.15f, comboTimer / maxComboTimer);
+            //uiObject.GetComponent<Image>().color = new Color(colour.r, colour.g, colour.b, alpha);
         }
         for (int i = 0; i < uiObject.childCount; i++)
         {
+            if(uiObject.GetChild(i).name == "ActiveFill" || uiObject.GetChild(i).name == "InactiveFill")
+            {
+                continue;
+            }
             if (doCombo)
             {
                 float alpha = Mathf.Lerp(0.15f, 1.0f, comboTimer / maxComboTimer);
@@ -114,6 +140,8 @@ public class GameplayUI : MonoBehaviour
                     Color colour = uiObject.GetChild(i).GetComponent<TextMeshProUGUI>().color;
                     uiObject.GetChild(i).GetComponent<TextMeshProUGUI>().color = new Color(colour.r, colour.g, colour.b, alpha);
                 }
+
+
 
             }
             else
@@ -132,5 +160,6 @@ public class GameplayUI : MonoBehaviour
                 }
             }
         }
+
     }
 }

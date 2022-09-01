@@ -53,13 +53,31 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void SpawnUpdate(GameObject enemySpawning)
+    public void FinishRunUpdate()
     {
         foreach (Quest q in activeQuests)
         {
-            q.SpawnEventBehaviour(enemySpawning);
+            q.FinishRunBehaviour();
         }
     }
+
+    public void DeathUpdate()
+    {
+        foreach (Quest q in activeQuests)
+        {
+            q.DeathBehaviour();
+        }
+    }
+
+    public void SpawnUpdate(GameObject enemySpawning, string spawnOrigin)
+    {
+        foreach (Quest q in activeQuests)
+        {
+            q.SpawnEventBehaviour(enemySpawning, spawnOrigin);
+        }
+    }
+
+
 
     public void AddToQuests(Quest qToAdd)
     {

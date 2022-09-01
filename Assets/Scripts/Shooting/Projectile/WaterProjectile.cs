@@ -4,26 +4,16 @@ using UnityEngine;
 
 public class WaterProjectile : BaseElementSpawnClass
 {
-    float speed;
+    private float speed;
 
-    float damage;
+    private float damage;
 
-    float projectileLifetime = 100;
-
-    [SerializeField]
-    private GameObject hitMarker;
+    private float projectileLifetime = 100;
 
     [SerializeField]
     private LayerMask bounceLayers;
 
-    AudioManager audioManager;
-    void Start()
-    {
-        audioManager = FindObjectOfType<AudioManager>();
-        hitMarker = GameObject.Find("GameplayUI");
-    }
-
-    void Update()
+    private void Update()
     {
         if (projectileLifetime > 0)
         {
@@ -38,18 +28,17 @@ public class WaterProjectile : BaseElementSpawnClass
 
         transform.position += movement;
 
-        //if (this.gameObject.transform.GetChild(1).GetChild(0).gameObject.GetComponent<ParticleSystem>().time >= 2)
-        //{
-        //    Destroy(this.gameObject);
-        //}
-
-        //if (transform.position.y < -100)
-        //{
-        //    Destroy(gameObject);
-        //}
-
+        growing();
     }
-
+    private void growing()
+    {
+        if (this.gameObject.transform.localScale.x <= 1.0f &&
+           this.gameObject.transform.localScale.y <= 1.0f &&
+           this.gameObject.transform.localScale.z <= 1.0f)
+        {
+            this.gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+        }   
+    }
     public void SetVars(float spd, float dmg, float lifeTime, List<BaseEnemyClass.Types> types)
     {
         speed = spd;
@@ -58,7 +47,6 @@ public class WaterProjectile : BaseElementSpawnClass
         attackTypes = types;
 
     }
-
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -72,10 +60,5 @@ public class WaterProjectile : BaseElementSpawnClass
             collision.collider.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             Debug.Log(collision.collider.gameObject.name);
         }
-    }
-
-    private void HitMarkerDsable()
-    {
-        hitMarker.transform.GetChild(7).gameObject.SetActive(false);
     }
 }

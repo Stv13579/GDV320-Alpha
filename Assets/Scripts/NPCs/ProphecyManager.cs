@@ -21,4 +21,9 @@ public class ProphecyManager : MonoBehaviour
     public List<Multiplier> weaknessMultipliers = new List<Multiplier>();
     public List<Multiplier> healthMultipliers = new List<Multiplier>();
 
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
 }

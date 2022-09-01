@@ -1,0 +1,298 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &481930236017693459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448134756215137388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b68b1a05d6cedc5428f5bea95ec61bd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storyDialogues:
+  - dialogues:
+    - lines:
+      - Hello there.
+      - 'I was a medium in my life too by the way. '
+      - It's not like I just decided I can interpret the weave of fate.
+      - It takes many years to reach this level of expertise.
+    - lines:
+      - Actually, I knew more that most about what comes after.
+      - I didn't expect it to be quite so... violent.
+      - I must say, you are quite brave to go risking it out there.
+      - Always so sure that no matter how much of a beating you take you'll come
+        right back.
+    - lines:
+      - I wonder what those feral spirits feel out there?
+      - Nothing at all perhaps?
+  - dialogues:
+    - lines:
+      - 'Whoa! '
+      - Sorry, you caught me lost in thought.
+      - I've been going through those readings you gave me.
+      - You are quite unafraid of anything it seems!
+      - Don't you wonder what happens if you- No, nevermind.
+      - You just keep up the good work.
+    - lines:
+      - I've discovered something, I'm not sure if you were aware.
+      - 'This is but a transitionary place, a space between life and death. '
+      - The implications of this, I am sure you understand, are confounding.
+      - Here I was thinking that we had solved one of the great mysteries of life
+        and death, and now we are shrouded in doubt once again.
+    - lines:
+      - I suppose this world is better then the alternative.
+      - 'Great, endless darkness... '
+      - Even the pain of life is a price worth paying for the privilege of existence.
+  - dialogues:
+    - lines:
+      - Being that this is only a- a corridor between spaces neccessitates the fact
+        that we must move on to the next place!
+      - I've seen it, haven't you?
+      - Spirits only linger here for a time, and then they leave.
+      - Poof! Where do they go?
+    - lines:
+      - 'How can you head out there without the slightest inkling of what comes next? '
+      - 'Oblivion could be lurking around any corner! '
+      - I-I don't understand.
+      - I don't understand any of you.
+    - lines:
+      - Ah, hello my friend.
+      - I probably seem a little jumpy lately.
+      - I've had to consider many things.
+      - 'In life I always wanted to know what happened next. '
+      - When my readings indicated the worst, I shrank from everything and everyone
+        in fear.
+      - Recently here I have felt somewhat the same.
+      - It matters not, let's continue.
+  giveQuest:
+  - lines:
+    - Um, excuse me, but could I ask you for a favour?
+    - I would most certainly offer payment in return.
+    - You see, I would rather like to record some readings from you to get a better
+      understanding of the destiny landscape around here.
+    - It would involve some reverse karmic movements however, no easy task.
+    - What do you say?
+  - lines:
+    - Hello, it's that time again.
+    - Our last experiment only revealed more questions I am afraid.
+    - 'I must ask you to swim against the karmic current again. '
+    - 'The ripples you form will hopefully illuminate the true nature of what lies
+      before us. '
+  - lines:
+    - I've realised some things since our last collaboration.
+    - There is little that readings can do to solve a problem such as we face as
+      spirits.
+    - All the same, there is one last thing I'd like from you.
+    - A final reading of specific type; Death.
+    - For  only once something has ended can something new begin.
+  recieveHandIn:
+  - lines:
+    - Hm, interesting.
+    - You have some strange effects on the weave of fate I must say.
+    - Thank you.
+  - lines:
+    - 'How, unexciting. '
+    - Sorry.
+    - You've done an excellent job.
+    - Please accept my thanks.
+  - lines:
+    - Excellent, then we are finished.
+    - I don't need to check; the reading is inconclusive, as they always were.
+    - Good work my friend.
+  currentDialogue:
+    lines: []
+  noMoreDialogue:
+    lines:
+    - You're future is clear...
+  place: 0
+  interactPositon: 0
+  dataToApply: Fortune
+  data: {fileID: 11400000, guid: 975178e0f7498db4bbd40ff1b071b01b, type: 2}
+  baseRandoms:
+  - lines:
+    - AH!
+    - Oh! It's just you.
+    - Sorry, I'm feeling a little jumpy
+    - What were we talking about?
+  - lines:
+    - Oh this is today?
+    - I thought we were yesterday and this was happening next week
+    - Confusing?
+    - Quite clear I think.
+  - lines:
+    - I don't know how you stand it
+    - Out there amongst all those... things.
+    - Yuck.
+    - Anyway, lets see what's ahead.
+  offeringType: Fortunes
+--- !u!1001 &2733033326916696311
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 977136462161774436, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221785, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: npcUI
+      value: 
+      objectReference: {fileID: 4203959002905755236, guid: 79d3f99594006544990a69870532de82,
+        type: 3}
+    - target: {fileID: 2582171700705221785, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: npcOfferingUI
+      value: 
+      objectReference: {fileID: 4203959002905755236, guid: 79d3f99594006544990a69870532de82,
+        type: 3}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582171700705221787, guid: 01b84641070c05a468128367ec429509,
+        type: 3}
+      propertyPath: m_Name
+      value: Freya
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3947044421949730439, guid: 01b84641070c05a468128367ec429509, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 01b84641070c05a468128367ec429509, type: 3}
+--- !u!1 &448134756215137388 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2582171700705221787, guid: 01b84641070c05a468128367ec429509,
+    type: 3}
+  m_PrefabInstance: {fileID: 2733033326916696311}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &448134756215137389 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2582171700705221786, guid: 01b84641070c05a468128367ec429509,
+    type: 3}
+  m_PrefabInstance: {fileID: 2733033326916696311}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4355920924446533658
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 448134756215137389}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 07c46bab93d45f14faa01975ba1ecb95,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 07c46bab93d45f14faa01975ba1ecb95,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 07c46bab93d45f14faa01975ba1ecb95,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 07c46bab93d45f14faa01975ba1ecb95,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 07c46bab93d45f14faa01975ba1ecb95,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 07c46bab93d45f14faa01975ba1ecb95,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 07c46bab93d45f14faa01975ba1ecb95,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 07c46bab93d45f14faa01975ba1ecb95,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 07c46bab93d45f14faa01975ba1ecb95,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 07c46bab93d45f14faa01975ba1ecb95,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 07c46bab93d45f14faa01975ba1ecb95,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 07c46bab93d45f14faa01975ba1ecb95,
+        type: 3}
+      propertyPath: m_Name
+      value: Model_NPC_Freya
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 07c46bab93d45f14faa01975ba1ecb95, type: 3}

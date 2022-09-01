@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
 
 public class CrystalProj : BaseElementSpawnClass
@@ -11,27 +12,23 @@ public class CrystalProj : BaseElementSpawnClass
 
     private float startLifeTimer;
 
-    private AudioManager audioManager;
-
     private bool ismoving;
+
     private float damageLimit;
-    private Vector3 originalPosition;
+
     [SerializeField]
     private GameObject particleEffect;
 
-    [SerializeField]
-    private GameObject hitMarker;
+    private float damageDecreaser;
     private void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
-        hitMarker = GameObject.Find("GameplayUI");
         ismoving = true;
     }
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // the max drop off the damage is 0.5f
-        if(damage <= 0)
+        if(damage <= 0.5f)
         {
             damage = damageLimit;
         }
@@ -41,7 +38,7 @@ public class CrystalProj : BaseElementSpawnClass
             startLifeTimer -= Time.deltaTime;
         }
         // decrease the damage of the crystals every frame
-        damage -= damageCurve.Evaluate(startLifeTimer) * Time.deltaTime;
+        damage -= damageCurve.Evaluate(startLifeTimer) * damageDecreaser * Time.deltaTime;
         // moves the projectiles
         MoveCrystalProjectile();
         KillProjectile();
@@ -54,14 +51,9 @@ public class CrystalProj : BaseElementSpawnClass
             Vector3 projMovement = transform.forward * speed * Time.deltaTime;
             transform.position += projMovement;
         }
-        else
-        {
-            transform.position = originalPosition;
-            particleEffect.SetActive(false);
-        }
     }
     //setter to set the varibles
-    public void SetVars(float spd, float dmg, AnimationCurve dmgCurve, float stLifeTimer, List<BaseEnemyClass.Types> types, float tempDamageLimit)
+    public void SetVars(float spd, float dmg, AnimationCurve dmgCurve, float stLifeTimer, List<BaseEnemyClass.Types> types, float tempDamageLimit, float tempDamageDecreaser)
     {
         speed = spd;
         damage = dmg;
@@ -69,6 +61,7 @@ public class CrystalProj : BaseElementSpawnClass
         startLifeTimer = stLifeTimer;
         attackTypes = types;
         damageLimit = tempDamageLimit;
+        damageDecreaser = tempDamageDecreaser;
     }
     // if the life timer for the projectiles is 0
     // destroy the projectiles
@@ -87,22 +80,14 @@ public class CrystalProj : BaseElementSpawnClass
         // gets embedded in the environment
         if (other.gameObject.layer == 10)
         {
-            originalPosition = transform.position;
-            ismoving = false;
+            Destroy(gameObject);
         }
         //if enemy, hit them for the damage
         // destroy projectile after
         if (other.gameObject.layer == 8 && other.gameObject.GetComponent<BaseEnemyClass>())
         {
             other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            //hitMarker.transform.GetChild(7).gameObject.SetActive(true);
-            //Invoke("HitMarkerDsable", 0.2f);
             Destroy(gameObject);
         }
-    }
-
-    private void HitMarkerDsable()
-    {
-        hitMarker.transform.GetChild(7).gameObject.SetActive(false);
     }
 }

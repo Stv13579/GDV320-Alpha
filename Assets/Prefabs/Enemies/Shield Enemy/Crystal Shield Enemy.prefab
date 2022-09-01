@@ -121,8 +121,6 @@ MonoBehaviour:
   baseDamageAmount: 0
   moveSpeed: 1
   baseMoveSpeed: 1
-  movementMultipliers: []
-  damageMultipliers: []
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
@@ -132,9 +130,10 @@ MonoBehaviour:
     type: 3}
   hitSpawn: {fileID: 4786863155429246897, guid: a3345ae8846797047bedf92710df1138,
     type: 3}
-  attackAudio: 
-  deathAudio: 
-  takeDamageAudio: 
+  attackAudio: Shield Enemy Attack
+  deathAudio: Shield Enemy Death
+  takeDamageAudio: Shield Enemy Damage
+  idleAudio: 
   targettingIndicator: {fileID: 0}
   gravity: -1
   shield: {fileID: 2323224540860659322}
@@ -271,8 +270,6 @@ MonoBehaviour:
   baseDamageAmount: 20
   moveSpeed: 0
   baseMoveSpeed: 0
-  movementMultipliers: []
-  damageMultipliers: []
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 0}
@@ -285,6 +282,7 @@ MonoBehaviour:
   attackAudio: 
   deathAudio: 
   takeDamageAudio: 
+  idleAudio: 
   targettingIndicator: {fileID: 0}
   restoration: 01000000
   attackCollider:

@@ -10,30 +10,25 @@ public class FireElement : BaseElementClass
     //Click to fire (if we have the mana/not in delay)
     //Instantiate the projectile in the right direction etc.
     [SerializeField]
-    GameObject fireBall;
+    private GameObject fireBall;
 
     [SerializeField]
-    float projectileSpeed;
+    private float projectileSpeed;
 
     [SerializeField]
-    float explosionArea;
+    private float explosionArea;
 
     [SerializeField]
-    float explosionDamage;
+    private float explosionDamage;
 
     [SerializeField]
-    float gravity;
+    private float gravity;
 
     [SerializeField]
-    AnimationCurve gravCurve;
+    private AnimationCurve gravCurve;
 
     [SerializeField]
-    float gravityLifetime;
-
-    protected override void Update()
-    {
-        base.Update();
-    }
+    private float gravityLifetime;
 
     //Fires the fireball, passing damage, speed, aoe etc
     public override void ElementEffect()
@@ -47,6 +42,8 @@ public class FireElement : BaseElementClass
             newFireball.transform.LookAt(hit.point);
         }
         newFireball.GetComponent<Fireball>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.fireDamageMultiplier), gravity, gravCurve, gravityLifetime, explosionArea, explosionDamage, attackTypes);
+
+        //playerClass.ChangeMana(-manaCost, manaTypes);
     }
 
     public override void ActivateVFX()
@@ -60,14 +57,20 @@ public class FireElement : BaseElementClass
         if (randomAnimationToPlay == 0)
         {
             playerHand.SetTrigger(animationName);
-            audioManager.StopSFX(shootingSoundFX);
-            audioManager.PlaySFX(shootingSoundFX);
+            if (audioManager)
+            {
+                audioManager.StopSFX(shootingSoundFX);
+                audioManager.PlaySFX(shootingSoundFX);
+            }
         }
         else
         {
             playerHand.SetTrigger(animationNameAlt);
-            audioManager.StopSFX(otherShootingSoundFX);
-            audioManager.PlaySFX(otherShootingSoundFX);
+            if (audioManager)
+            {
+                audioManager.StopSFX(otherShootingSoundFX);
+                audioManager.PlaySFX(otherShootingSoundFX);
+            }
         }
     }
 }
