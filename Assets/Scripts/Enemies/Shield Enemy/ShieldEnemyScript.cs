@@ -39,9 +39,9 @@ public class ShieldEnemyScript : BaseEnemyClass
                 Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
             }
         }
-
-
     }
+
+
     public override void Movement(Vector3 positionToMoveTo, float speed)
     {
         this.gameObject.transform.LookAt(positionToMoveTo);

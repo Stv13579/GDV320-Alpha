@@ -115,6 +115,9 @@ public class SAIM : MonoBehaviour
     string battleMusic;
     private int fadeInBattleMusicState;
     private int fadeInInitialMusicState;
+
+    [SerializeField]
+    bool bossSaim = false;
     void Start()
     {
         //Aydens Audio manager
@@ -163,7 +166,7 @@ public class SAIM : MonoBehaviour
         spawnTimer += Time.deltaTime;
         timeInSpawning += Time.deltaTime;
 
-        if(CheckSpawnConditions())
+        if(CheckSpawnConditions() && !bossSaim)
         {
             Spawn(Random.Range(data.spawnMin, data.spawnMax));
            
