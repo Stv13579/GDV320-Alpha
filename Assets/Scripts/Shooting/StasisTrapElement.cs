@@ -27,6 +27,9 @@ public class StasisTrapElement : BaseElementClass
     [SerializeField]
     private LayerMask layerMask;
 
+    private List<GameObject> stasisTrapList = new List<GameObject>();
+
+    private int maxStasisTraps = 1;
     // Update is called once per frame
     protected override void Update()
     {
@@ -61,14 +64,26 @@ public class StasisTrapElement : BaseElementClass
         // else place trap at the end of the raycast range
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rayCastRange, layerMask))
         {
+            if(stasisTrapList.Count >= maxStasisTraps)
+            {
+                Destroy(stasisTrapList[0]);
+                stasisTrapList.RemoveAt(0);
+            }
             GameObject newStasisTrap = Instantiate(stasisTrap, hit.point + new Vector3(0,0.75f,0), Camera.main.transform.rotation);
             newStasisTrap.GetComponent<StasisTrapProj>().SetVars(damage * (damageMultiplier + elementData.waterDamageMultiplier), maxDuration, currentDamageTicker, maxDamageTicker, attackTypes);
+            stasisTrapList.Add(newStasisTrap);
         }
         else
         {
+            if (stasisTrapList.Count >= maxStasisTraps)
+            {
+                Destroy(stasisTrapList[0]);
+                stasisTrapList.RemoveAt(0);
+            }
             Vector3 pos = Camera.main.transform.position + Camera.main.transform.forward.normalized * rayCastRange;
             GameObject newStasisTrap = Instantiate(stasisTrap, pos + new Vector3(0, 0.75f, 0), Camera.main.transform.rotation);
             newStasisTrap.GetComponent<StasisTrapProj>().SetVars(damage * (damageMultiplier + elementData.waterDamageMultiplier), maxDuration, currentDamageTicker, maxDamageTicker, attackTypes);
+            stasisTrapList.Add(newStasisTrap);
         }
     }
 
@@ -86,5 +101,12 @@ public class StasisTrapElement : BaseElementClass
         base.StartAnims(animationName);
 
         playerHand.SetTrigger(animationName);
+    }
+
+    public override void Upgrade()
+    {
+        base.Upgrade();
+
+        maxStasisTraps += 1;
     }
 }

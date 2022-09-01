@@ -5,15 +5,10 @@ using UnityEngine;
 public class IceSlashProj : BaseElementSpawnClass
 {
     private float speed;
+
     private float damage;
 
     private float startLifeTimer;
-    private AudioManager audioManager;
-    // Start is called before the first frame update
-    void Start()
-    {
-        audioManager = FindObjectOfType<AudioManager>();
-    }
 
     // Update is called once per frame
     void Update()
