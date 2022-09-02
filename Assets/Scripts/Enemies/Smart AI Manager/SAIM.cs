@@ -112,16 +112,18 @@ public class SAIM : MonoBehaviour
     [SerializeField]
     private string initialMusic;
     [SerializeField]
+    private string battleMusic;
 
-    string battleMusic;
-    private int fadeInBattleMusicState;
-    private int fadeInInitialMusicState;
 
     [SerializeField]
     bool bossSaim = false;
 
+    public string GetInitialMusic() { return initialMusic; }
+    public string GetBattleMusic() { return battleMusic; }
+    public void SetInitialMusic(string tempInitialMusic) { initialMusic = tempInitialMusic; } 
+    public void SetBattleMusic(string tempBattleMusic) { battleMusic = tempBattleMusic; } 
 
-    void Start()
+    private void Start()
     {
         //Aydens Audio manager
         audioManager = FindObjectOfType<AudioManager>();
