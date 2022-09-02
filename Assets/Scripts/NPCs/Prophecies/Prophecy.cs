@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Prophecy : MonoBehaviour
@@ -8,6 +9,7 @@ public class Prophecy : MonoBehaviour
     [SerializeField]
     string pName, effect;
     
+    [SerializeField]
     Sprite image;
 
     bool active = false;
@@ -24,6 +26,7 @@ public class Prophecy : MonoBehaviour
     {
         button.GetChild(0).GetComponent<TextMeshProUGUI>().text = pName;
         button.GetChild(1).GetComponent<TextMeshProUGUI>().text = effect;
+        button.GetChild(2).GetComponent<Image>().sprite = image;
     }
 
     public void SetActive()

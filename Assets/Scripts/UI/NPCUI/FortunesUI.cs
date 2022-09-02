@@ -33,7 +33,7 @@ public class FortunesUI : NPCUI
                 audioManager.StopSFX("Shop Buy");
                 audioManager.PlaySFX("Shop Buy");
             }
-            transform.Find("Buy Fortunes").gameObject.SetActive(false);
+            GameObject.Find("FortuneBuy").SetActive(false);
         }
     }
 
@@ -100,6 +100,11 @@ public class FortunesUI : NPCUI
             buttons.Add(button.gameObject);
             prophecies[j].SetCard(button);
             j++;
+
+            if(j > 2)
+            {
+                break;
+            }
         }
 
 

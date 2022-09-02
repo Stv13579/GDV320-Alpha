@@ -260,8 +260,12 @@ public class PlayerClass : MonoBehaviour
         }
         else
         {
-            audioManager.StopSFX(lowHealthFastHeartBeat);
-            //audioManager.PlaySFX(lowHealthSlowHeartBeat);
+            if (audioManager)
+            {
+                audioManager.StopSFX(lowHealthFastHeartBeat);
+                //audioManager.PlaySFX(lowHealthSlowHeartBeat);
+            }
+
         }
 
     }
