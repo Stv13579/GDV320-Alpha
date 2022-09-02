@@ -309,6 +309,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // CoyoteTime function
+    // gives player time to jump when they have just fall off a platform
     private void CoyoteTime()
     {
         // collision detection for player
