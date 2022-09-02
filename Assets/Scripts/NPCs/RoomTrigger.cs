@@ -13,6 +13,16 @@ public class RoomTrigger : MonoBehaviour
         {
             GetComponentInParent<Room>().visited = true;
             triggered = true;
+
+            foreach (Transform mmRoom in GameObject.Find("MiniMap").transform)
+            {
+                if(mmRoom.GetComponent<MinimapRoom>().GetOccupied())
+                {
+                    mmRoom.GetComponent<MinimapRoom>().SetVisited();
+                }    
+            }
+
+            GetComponentInParent<Room>().minimapRoom.SetOccupied();
         }
     }
 
@@ -20,7 +30,6 @@ public class RoomTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            
         }
     }
 }
