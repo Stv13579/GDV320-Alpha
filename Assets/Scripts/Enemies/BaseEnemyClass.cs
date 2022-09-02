@@ -85,7 +85,7 @@ public class BaseEnemyClass : MonoBehaviour
 
     protected Vector3 oldPosition;
 
-    private GameObject hitMarker;
+	private GameObject hitMarker;
 
     public virtual void Awake()
     {
@@ -286,7 +286,7 @@ public class BaseEnemyClass : MonoBehaviour
     {
         hitMarker.transform.GetChild(8).gameObject.SetActive(false);
     }
-    public void RestoreHealth(float amount)
+	public virtual void RestoreHealth(float amount)
     {
         currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
     }

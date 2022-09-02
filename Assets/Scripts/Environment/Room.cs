@@ -14,6 +14,9 @@ public class Room : MonoBehaviour
     protected GameObject roomTrigger;
     public bool visited = false;
 
+    public MinimapRoom minimapRoom;
+    bool setVis = false;
+
     public bool hasLilly;
 
     [SerializeField]
@@ -35,6 +38,9 @@ public class Room : MonoBehaviour
         //{
         //    visited = true;
         //}
+        
+
+
     }
 
 
