@@ -49,6 +49,8 @@ public class EndLevel : MonoBehaviour
 
             //StartCoroutine(screen.GetComponent<LoadingScreen>().LoadScene(sceneToLoad));
 
+            // chooses the music for different scenes
+            // e.g. if the player is entering scene 1 then stop all music and play the hub music
             if(audioManager)
             {
                 if(sceneToLoad == 1)
