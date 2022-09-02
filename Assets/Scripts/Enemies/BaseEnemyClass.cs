@@ -87,6 +87,8 @@ public class BaseEnemyClass : MonoBehaviour
 
 	private GameObject hitMarker;
 
+    private float hitMarkerTimer;
+
     private bool hasTakenDamage;
     public virtual void Awake()
     {
@@ -110,6 +112,12 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Update()
     {
+        
+        hitMarkerTimer += Time.deltaTime;
+        if (hitMarkerTimer >= 0.0f)
+        {
+            hitMarker.transform.GetChild(8).gameObject.SetActive(false);
+        }
         if(transform.position.y < -30)
         {
             Death();
@@ -155,8 +163,6 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
     {
-        hasTakenDamage = true;
-
         //hitSpawn.GetComponent<ParticleSystem>().Clear();
         //hitSpawn.GetComponent<ParticleSystem>().Play();
 
@@ -188,21 +194,10 @@ public class BaseEnemyClass : MonoBehaviour
             enemyAnims.SetTrigger("TakeDamage");
         }
 
-        if(hasTakenDamage)
+        if (hitMarker)
         {
-            if (hitMarker)
-            {
-                hitMarker.transform.GetChild(8).gameObject.SetActive(true);
-                Invoke("HitMarkerDisable", 0.2f);
-                hasTakenDamage = false;
-            }
-        }
-        else
-        {
-            if (hitMarker)
-            {
-                HitMarkerDisable();
-            }
+            hitMarker.transform.GetChild(8).gameObject.SetActive(true);
+            hitMarkerTimer = -0.2f;
         }
 
         if (audioManager)
@@ -301,10 +296,6 @@ public class BaseEnemyClass : MonoBehaviour
         }
     }
 
-    private void HitMarkerDisable()
-    {
-        hitMarker.transform.GetChild(8).gameObject.SetActive(false);
-    }
 	public virtual void RestoreHealth(float amount)
     {
         currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
