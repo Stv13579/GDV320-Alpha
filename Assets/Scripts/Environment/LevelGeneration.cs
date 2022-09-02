@@ -29,12 +29,14 @@ public class LevelGeneration : MonoBehaviour
     List<GameObject> possibleGenericRooms, possibleBossRooms, possibleRespiteRooms, possibleEdgeRooms;
 
     [SerializeField]
-    GameObject mmRoom;
+    GameObject mmRoom, playerIndicator;
 
     [SerializeField]
     float mmSpacing;
 
     GameObject minimap;
+
+    
     void Start()
     {
         minimap = GameObject.Find("MiniMap");
@@ -45,7 +47,7 @@ public class LevelGeneration : MonoBehaviour
     bool GenerateLevel()
     {
         startRoom = PlaceRoom(new Vector3(0, 0, 0), genericRooms, possibleGenericRooms);
-        startRoom.GetComponent<Room>().minimapRoom.SetOccupied();
+        startRoom.GetComponent<Room>().minimapRoom.SetOccupied(Vector3.zero);
 
         int noRooms = Random.Range(minRooms, maxRooms + 1);
 
@@ -87,6 +89,8 @@ public class LevelGeneration : MonoBehaviour
                 }
             }
         }
+
+        Instantiate(playerIndicator, minimap.transform);
         
         foreach(GameObject room in placedRooms)
         {

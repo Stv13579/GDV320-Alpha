@@ -14,15 +14,22 @@ public class RoomTrigger : MonoBehaviour
             GetComponentInParent<Room>().visited = true;
             triggered = true;
 
+            Vector3 cachedPos = new Vector3();
+
             foreach (Transform mmRoom in GameObject.Find("MiniMap").transform)
             {
-                if(mmRoom.GetComponent<MinimapRoom>().GetOccupied())
+                if (mmRoom.name != "RoomIcon(Clone)")
+                {
+                    continue;
+                }
+                if (mmRoom.GetComponent<MinimapRoom>().GetOccupied())
                 {
                     mmRoom.GetComponent<MinimapRoom>().SetVisited();
+                    cachedPos = mmRoom.transform.localPosition;
                 }    
             }
 
-            GetComponentInParent<Room>().minimapRoom.SetOccupied();
+            GetComponentInParent<Room>().minimapRoom.SetOccupied(cachedPos);
         }
     }
 

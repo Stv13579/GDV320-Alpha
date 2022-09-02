@@ -20,10 +20,20 @@ public class MinimapRoom : MonoBehaviour
     [SerializeField]
     Color visitedColour, occupiedColour, unexploredColour;
     public void SetVisited() { GetComponent<Image>().color = visitedColour; }
-    public void SetOccupied() { GetComponent<Image>().color = occupiedColour; 
-    
-        
-    
+    public void SetOccupied(Vector3 oldRoomPos) { GetComponent<Image>().color = occupiedColour;
+
+        //Move all the rooms on the minimap so this one is central
+        Vector3 amountToMove = oldRoomPos - transform.localPosition;
+
+        foreach (Transform mmRoom in GameObject.Find("MiniMap").transform)
+        {
+            if(mmRoom.name != "RoomIcon(Clone)")
+            {
+
+            }
+            mmRoom.localPosition += amountToMove;
+        }
+
     }
 
     
