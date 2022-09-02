@@ -87,6 +87,7 @@ public class BaseEnemyClass : MonoBehaviour
 
     private GameObject hitMarker;
 
+    private bool hasTakenDamage;
     public virtual void Awake()
     {
         prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
@@ -154,6 +155,7 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
     {
+        hasTakenDamage = true;
         GameObject hitSpn = Instantiate(hitSpawn, transform.position, Quaternion.identity);
         Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
         hitSpn.transform.localScale = scale;
@@ -181,11 +183,24 @@ public class BaseEnemyClass : MonoBehaviour
         {
             enemyAnims.SetTrigger("TakeDamage");
         }
-        if (hitMarker)
+
+        if(hasTakenDamage)
         {
-            hitMarker.transform.GetChild(8).gameObject.SetActive(true);
-            Invoke("HitMarkerDsable", 0.2f);
+            if (hitMarker)
+            {
+                hitMarker.transform.GetChild(8).gameObject.SetActive(true);
+                Invoke("HitMarkerDisable", 0.2f);
+                hasTakenDamage = false;
+            }
         }
+        else
+        {
+            if (hitMarker)
+            {
+                HitMarkerDisable();
+            }
+        }
+
         if (audioManager)
         {
             audioManager.StopSFX(takeDamageAudio);
@@ -282,7 +297,7 @@ public class BaseEnemyClass : MonoBehaviour
         }
     }
 
-    private void HitMarkerDsable()
+    private void HitMarkerDisable()
     {
         hitMarker.transform.GetChild(8).gameObject.SetActive(false);
     }
