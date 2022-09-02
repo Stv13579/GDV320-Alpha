@@ -28,12 +28,6 @@ public class SmoothTransformFollow : MonoBehaviour
     // the hands will follow the camera as the player moves the mouse
     private void Update()
     {
-#if UNITY_EDITOR
-        if(!Application.isPlaying)
-        {
-            SetToTarget();
-        }
-#endif
         transform.position = Vector3.Lerp(transform.position, targetTransform.position, moveSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetTransform.rotation, rotateSpeed * Time.deltaTime);
     }
