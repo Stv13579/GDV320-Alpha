@@ -19,8 +19,6 @@ MonoBehaviour:
   baseDamageAmount: 3
   moveSpeed: 500
   baseMoveSpeed: 500
-  movementMultipliers: []
-  damageMultipliers: []
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
@@ -28,11 +26,11 @@ MonoBehaviour:
   resistances: 02000000
   deathSpawn: {fileID: 1584426400794531735, guid: f49572f8a25942242a110636866f6bdd,
     type: 3}
-  hitSpawn: {fileID: 8873115531169138571, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
-    type: 3}
+  hitSpawn: {fileID: 1124191323197552849}
   attackAudio: Player Damage
   deathAudio: Slime Death
   takeDamageAudio: Slime Damage
+  idleAudio: 
   targettingIndicator: {fileID: 2207227147477192214}
   jumpForce: 200
   pushForce: 10
@@ -178,9 +176,90 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2416866107423554891}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &7832416717652441961 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5564262669661783586, guid: 4f3b9ac4d206bf247b6814675daddc12,
+    type: 3}
+  m_PrefabInstance: {fileID: 2416866107423554891}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2207227147477192214 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4551955659223167837, guid: 4f3b9ac4d206bf247b6814675daddc12,
     type: 3}
   m_PrefabInstance: {fileID: 2416866107423554891}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8411120590916861786
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7832416717652441961}
+    m_Modifications:
+    - target: {fileID: 6059538653295654984, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059538653295654984, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059538653295654984, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059538653295654984, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059538653295654984, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059538653295654984, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059538653295654984, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059538653295654984, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059538653295654984, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059538653295654984, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059538653295654984, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8873115531169138571, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Slime_Crystal_Damage
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f6a1c9e799a27c14cbe74b5fe39bfc25, type: 3}
+--- !u!1 &1124191323197552849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8873115531169138571, guid: f6a1c9e799a27c14cbe74b5fe39bfc25,
+    type: 3}
+  m_PrefabInstance: {fileID: 8411120590916861786}
   m_PrefabAsset: {fileID: 0}

@@ -87,9 +87,6 @@ public class BaseEnemyClass : MonoBehaviour
 
 	private GameObject hitMarker;
 
-    private float hitMarkerTimer;
-
-    private bool hasTakenDamage;
     public virtual void Awake()
     {
         prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
@@ -112,13 +109,7 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Update()
     {
-        
-        hitMarkerTimer += Time.deltaTime;
-        if (hitMarkerTimer >= 0.0f)
-        {
-            hitMarker.transform.GetChild(8).gameObject.SetActive(false);
-        }
-        if(transform.position.y < -30)
+        if (transform.position.y < -30)
         {
             Death();
             currentHealth = 0;
@@ -163,12 +154,13 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
     {
-        //hitSpawn.GetComponent<ParticleSystem>().Clear();
-        //hitSpawn.GetComponent<ParticleSystem>().Play();
+        hitSpawn.GetComponent<ParticleSystem>().Clear();
+        hitSpawn.GetComponent<ParticleSystem>().Play();
 
-        GameObject hitSpn = Instantiate(hitSpawn, transform.position, Quaternion.identity);
-        Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
-        hitSpn.transform.localScale = scale;
+        //GameObject hitSpn = Instantiate(hitSpawn, transform.position, Quaternion.identity);
+        //Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
+        //hitSpn.transform.localScale = scale;
+
         float multiplier = 1;
         foreach (Types type in attackTypes)
         {
@@ -194,11 +186,8 @@ public class BaseEnemyClass : MonoBehaviour
             enemyAnims.SetTrigger("TakeDamage");
         }
 
-        if (hitMarker)
-        {
-            hitMarker.transform.GetChild(8).gameObject.SetActive(true);
-            hitMarkerTimer = -0.2f;
-        }
+        StopCoroutine(HitMarker());
+        StartCoroutine(HitMarker());
 
         if (audioManager)
         {
@@ -278,6 +267,15 @@ public class BaseEnemyClass : MonoBehaviour
         }
     }
 
+    IEnumerator HitMarker()
+    {
+        if (hitMarker)
+        {
+            hitMarker.transform.GetChild(8).gameObject.SetActive(true);
+        }
+        yield return new WaitForSeconds(0.2f);
+        hitMarker.transform.GetChild(8).gameObject.SetActive(false);
+    }
     public void Targetted(bool targetted, Color colour)
     {
         if(targettingIndicator.active == false && targetted == true)

@@ -19,8 +19,6 @@ MonoBehaviour:
   baseDamageAmount: 3
   moveSpeed: 500
   baseMoveSpeed: 500
-  movementMultipliers: []
-  damageMultipliers: []
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
@@ -28,11 +26,11 @@ MonoBehaviour:
   resistances: 01000000
   deathSpawn: {fileID: 6298907768690529144, guid: a0b61e964697a6a45a37535f48a3b594,
     type: 3}
-  hitSpawn: {fileID: 4786863155429246897, guid: a3345ae8846797047bedf92710df1138,
-    type: 3}
+  hitSpawn: {fileID: 4822822640996457391}
   attackAudio: Player Damage
   deathAudio: Slime Death
   takeDamageAudio: Slime Damage
+  idleAudio: 
   targettingIndicator: {fileID: 5820064549849268897}
   jumpForce: 200
   pushForce: 10
@@ -51,6 +49,81 @@ MonoBehaviour:
   decalManager: {fileID: 0}
   spawnTimer: 0
   spawnTimerLength: 1
+--- !u!1001 &36100326285777950
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2510463480032081886}
+    m_Modifications:
+    - target: {fileID: 3613582232381482748, guid: a3345ae8846797047bedf92710df1138,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613582232381482748, guid: a3345ae8846797047bedf92710df1138,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613582232381482748, guid: a3345ae8846797047bedf92710df1138,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613582232381482748, guid: a3345ae8846797047bedf92710df1138,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613582232381482748, guid: a3345ae8846797047bedf92710df1138,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613582232381482748, guid: a3345ae8846797047bedf92710df1138,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613582232381482748, guid: a3345ae8846797047bedf92710df1138,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613582232381482748, guid: a3345ae8846797047bedf92710df1138,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613582232381482748, guid: a3345ae8846797047bedf92710df1138,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613582232381482748, guid: a3345ae8846797047bedf92710df1138,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613582232381482748, guid: a3345ae8846797047bedf92710df1138,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4786863155429246897, guid: a3345ae8846797047bedf92710df1138,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Slime_Fire_Damage
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a3345ae8846797047bedf92710df1138, type: 3}
+--- !u!1 &4822822640996457391 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4786863155429246897, guid: a3345ae8846797047bedf92710df1138,
+    type: 3}
+  m_PrefabInstance: {fileID: 36100326285777950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8065610830941483516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,6 +207,12 @@ PrefabInstance:
 --- !u!1 &6006430129558487468 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4374664503427002448, guid: 4f3b9ac4d206bf247b6814675daddc12,
+    type: 3}
+  m_PrefabInstance: {fileID: 8065610830941483516}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2510463480032081886 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5564262669661783586, guid: 4f3b9ac4d206bf247b6814675daddc12,
     type: 3}
   m_PrefabInstance: {fileID: 8065610830941483516}
   m_PrefabAsset: {fileID: 0}
