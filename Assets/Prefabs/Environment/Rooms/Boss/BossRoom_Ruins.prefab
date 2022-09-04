@@ -424,8 +424,12 @@ MonoBehaviour:
   weighting: 0
   illegal: 0
   gridPos: {x: 0, y: 0}
+  visited: 0
+  hasLilly: 0
+  hiddenLilly: {fileID: 0}
   bosses: {fileID: 11400000, guid: 754ac8e1beab73047a3f53db1c5d0573, type: 2}
   spawnPosition: {fileID: 2956793518125795251}
+  spawner: {fileID: 261941238194521263}
   portalObject: {fileID: 339857286421543826, guid: ef9dfb9fbfb2db94893051b3335a0a5a,
     type: 3}
   portalSpawnPosition: {fileID: 8455909334520959226}
@@ -2973,7 +2977,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1047470665396480515}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: AreaLimit_Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12361,7 +12365,7 @@ GameObject:
   - component: {fileID: 8900746154623011966}
   - component: {fileID: 1581598198125523254}
   - component: {fileID: 3283297122508844518}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: New Game Object (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16769,7 +16773,7 @@ GameObject:
   - component: {fileID: 8469431430419031683}
   - component: {fileID: 2337613083265120995}
   - component: {fileID: 8385137106378346099}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: New Game Object (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27796,7 +27800,7 @@ GameObject:
   - component: {fileID: 3073872885083588514}
   - component: {fileID: 8048697996443591966}
   - component: {fileID: 8688974812444006889}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: New Game Object (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33209,7 +33213,7 @@ GameObject:
   - component: {fileID: 679084403575238394}
   - component: {fileID: 2145924805822605858}
   - component: {fileID: 2953627942882669804}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: New Game Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106276,12 +106280,17 @@ PrefabInstance:
     - target: {fileID: 177030300292316633, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 177030300292316646, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 177030301024911787, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2315818420668267954, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
@@ -106303,6 +106312,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6176350207684168776, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6727839196367861373, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_Size.x
@@ -106316,7 +106330,7 @@ PrefabInstance:
     - target: {fileID: 6767836439206277197, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7488509814216088037, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
@@ -106423,7 +106437,7 @@ PrefabInstance:
     - target: {fileID: 8330871923743077299, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8868667652809365451, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
@@ -106441,6 +106455,12 @@ PrefabInstance:
 --- !u!1 &7971564393761877235 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8031824282616010117, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
+    type: 3}
+  m_PrefabInstance: {fileID: 132410018509830518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &261941238194521263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 177030300292316633, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
     type: 3}
   m_PrefabInstance: {fileID: 132410018509830518}
   m_PrefabAsset: {fileID: 0}

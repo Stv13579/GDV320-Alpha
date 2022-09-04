@@ -47,6 +47,11 @@ public class WaterSlimeEnemy : BaseEnemyClass
         jumpTimer -= Time.deltaTime;
         if(jumpTimer <= 0)
         {
+            if (audioManager)
+            {
+                audioManager.StopSFX("Slime Bounce");
+                audioManager.PlaySFX("Slime Bounce", player.transform, this.transform);
+            }
             RaycastHit hit;
             if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, 10, viewToPlayer) && spawner)
             {

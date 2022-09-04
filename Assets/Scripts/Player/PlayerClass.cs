@@ -9,18 +9,6 @@ public class PlayerClass : MonoBehaviour
     float currentHealth, maxHealth, baseMaxHealth, defense, baseDefense;
 
     StatModifier.FullStat health = new StatModifier.FullStat(0), defenseStat = new StatModifier.FullStat(0);
-    //float defenseMultiplier = 1.0f;
-    //public struct defenseMultiSource
-    //{
-    //    public float multiplier;
-    //    public string source;
-    //    public defenseMultiSource(float multi, string s)
-    //    {
-    //        multiplier = multi;
-    //        source = s;
-    //    }
-    //}
-    //List<defenseMultiSource> defenseMultipliers = new List<defenseMultiSource>();
 
     [Serializable]
     public enum ManaName
@@ -56,8 +44,6 @@ public class PlayerClass : MonoBehaviour
     public GameObject gameOverScreen;
     private bool dead = false;
 
-    public Transform fallSpawner;
-
     /// <summary>
     /// Pushing Away When Hit
     /// </summary>
@@ -66,14 +52,21 @@ public class PlayerClass : MonoBehaviour
     private float currentPushDuration;
     private Vector3 pushDir;
 
-    [SerializeField]
-    private float fallDamage;
 
     private float fireTimer = 0.0f;
     [SerializeField]
     private float fireDOT;
     [SerializeField]
     private GameObject fireEffect;
+
+    [SerializeField]
+    private float lowHealthLimit;
+    [SerializeField]
+    private string lowHealthFastHeartBeat;
+    [SerializeField]
+    private string lowHealthSlowHeartBeat;
+
+    private AudioManager audioManager;
 
     //[SerializeField]
     //private Material fireMaterial;
@@ -89,6 +82,7 @@ public class PlayerClass : MonoBehaviour
             manaTypes[i].currentMana = manaTypes[i].baseMaxMana;
         }
         itemUI = GameObject.Find("ItemArray");
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
 
@@ -111,20 +105,7 @@ public class PlayerClass : MonoBehaviour
         maxHealth = StatModifier.UpdateValue(health);
         defense = StatModifier.UpdateValue(defenseStat);
 
-
-        if (transform.position.y <= -30)
-        {
-            transform.position = fallSpawner.position;
-            ChangeHealth(-fallDamage);
-            Debug.Log("Reset Position");
-        }
-
-        if (transform.position.y > 70)
-        {
-            transform.position = fallSpawner.position;
-            //ChangeHealth(-fallDamage);
-            Debug.Log("Reset Position");
-        }
+        LowHealthEffect();
 
         if(Input.GetKeyDown(KeyCode.O))
         {
@@ -266,6 +247,28 @@ public class PlayerClass : MonoBehaviour
         return check;
     }
 
+    private void LowHealthEffect()
+    {
+        if(currentHealth <= lowHealthLimit)
+        {
+            if(audioManager)
+            {
+                audioManager.PlaySFX(lowHealthFastHeartBeat);
+                //audioManager.PlaySFX(lowHealthSlowHeartBeat);
+                // play screen effect when we get it
+            }
+        }
+        else
+        {
+            if (audioManager)
+            {
+                audioManager.StopSFX(lowHealthFastHeartBeat);
+                //audioManager.PlaySFX(lowHealthSlowHeartBeat);
+            }
+
+        }
+
+    }
     public void ChangeMana(float manaAmount, List<ManaName> manaNames)
     {
         foreach (ManaName mana in manaNames)

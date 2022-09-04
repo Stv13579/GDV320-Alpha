@@ -7,14 +7,16 @@ public class AcidCloudElement : BaseElementClass
     //Creates a cloud of acid, which deals damage over time to enemies within the cloud
 
     [SerializeField]
-    GameObject cloudProj;
-
-
-    [SerializeField]
-    float cloudSize;
+    private GameObject cloudProj;
 
     [SerializeField]
-    float cloudDuration;
+    private float cloudSize;
+
+    [SerializeField]
+    private float cloudDuration;
+
+    [SerializeField]
+    private float damageTicker;
 
     protected override void Update()
     {
@@ -27,7 +29,7 @@ public class AcidCloudElement : BaseElementClass
         Vector3 camLook = Camera.main.transform.forward;
         camLook = new Vector3(camLook.x, 0.0f, camLook.z).normalized;
         GameObject cloud = Instantiate(cloudProj, shootingTranform.position + (camLook * 3), Quaternion.identity);
-        cloud.transform.GetChild(1).gameObject.GetComponent<AcidCloud>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier) , cloudSize, cloudDuration, attackTypes);
+        cloud.transform.GetChild(1).gameObject.GetComponent<AcidCloud>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier) , cloudSize, cloudDuration, attackTypes, damageTicker);
     }
 
     public override void ActivateVFX()

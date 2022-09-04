@@ -69,7 +69,8 @@ public class VoidElement : BaseElementClass
             }
             targetPos = Indicator.transform.position;
         }
-        if(!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") && trueDashDistance < 10 ||
+        //Checking if the mouse button has been released at a certain distance, cancels the spell
+        if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") && trueDashDistance < 10 ||
             !Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold") && trueDashDistance < 10)
         {
             isHolding = false;
@@ -85,17 +86,6 @@ public class VoidElement : BaseElementClass
             }
             playerHand.SetTrigger("VoidCastSuccess");
         }
-        //Checking if the mouse button has been released, which cancels the spell if it hasn't been held long enough or casts it if it has
-        //if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") ||
-        //    !Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold"))
-        //{
-        //    isHolding = false;
-        //    if (audioManager)
-        //    {
-        //        audioManager.PlaySFX(otherShootingSoundFX);
-        //    }
-        //    playerHand.SetTrigger("VoidCastSuccess");
-        //}
     }
 
     public override void ElementEffect()
@@ -147,7 +137,7 @@ public class VoidElement : BaseElementClass
         }
     }
 
-    IEnumerator Dash()
+    private IEnumerator Dash()
     {
         playerClass.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(false);
         //voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.1f);

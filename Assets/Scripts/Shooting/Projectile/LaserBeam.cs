@@ -4,35 +4,37 @@ using UnityEngine;
 
 public class LaserBeam : MonoBehaviour
 {
-    float damage;
-    List<BaseEnemyClass.Types> attackTypes;
+    private float damage;
+    private List<BaseEnemyClass.Types> attackTypes;
 
-    List<GameObject> containedEnemies = new List<GameObject>();
+    private List<GameObject> containedEnemies = new List<GameObject>();
 
-    [SerializeField]
-    float hitDelay;
-    float currentHitDelay;
+    private float hitDelay;
 
-    AudioManager audioManager;
+    private float currentHitDelay;
 
     [SerializeField]
     private GameObject laserBeamEndParticle;
     [SerializeField]
     private GameObject laserBeamEffectParticle;
 
-    public bool isHittingObj;
+    private bool isHittingObj;
 
-    public LayerMask layerMask;
+    [SerializeField]
+    private LayerMask layerMask;
 
-    float initalLaserScale = 20.0f;
+    private float initalLaserScale = 20.0f;
+
+    public bool GetIsHittingObj() { return isHittingObj; }
+    public void SetIsHittingObj(bool tempIsHittingObj) { isHittingObj = tempIsHittingObj; }
+
     private void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
         isHittingObj = false;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // if hitting an object show the particle effect of laserbeam hitting
         if(isHittingObj == true)
@@ -82,11 +84,12 @@ public class LaserBeam : MonoBehaviour
         }
     }
     // setter
-    public void SetVars(float dmg, List<BaseEnemyClass.Types> types)
+    public void SetVars(float dmg, List<BaseEnemyClass.Types> types, float tempHitDelay)
     {
         damage = dmg;
         attackTypes = types;
         containedEnemies.Clear();
+        hitDelay = tempHitDelay;
     }
     private void OnTriggerStay(Collider other)
     {

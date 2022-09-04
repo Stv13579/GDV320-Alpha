@@ -1,25 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 //base class that all enemies derive from.
 public class BaseEnemyClass : MonoBehaviour
 {
-
-
     [SerializeField]
     protected float currentHealth, maxHealth, baseMaxHealth, damageAmount, baseDamageAmount, moveSpeed, baseMoveSpeed;
 
     protected StatModifier.FullStat health = new StatModifier.FullStat(0), damage = new StatModifier.FullStat(0), speed = new StatModifier.FullStat(0);
-
-    
 
     #region
 
     protected ProphecyManager prophecyManager;
 
     #endregion
-
 
     //The amount of flat damage any instance of incoming damage is reduced by
     [SerializeField]
@@ -89,6 +85,8 @@ public class BaseEnemyClass : MonoBehaviour
 
     protected Vector3 oldPosition;
 
+    private GameObject hitMarker;
+
     public virtual void Awake()
     {
         prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
@@ -99,7 +97,7 @@ public class BaseEnemyClass : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         oldPosition = new Vector3(-1000, -1000, -1000);
         enemyAnims = GetComponentInChildren<Animator>();
-
+        hitMarker = GameObject.Find("GameplayUI");
         health.baseValue = baseMaxHealth;
         damage.baseValue = baseDamageAmount;
         speed.baseValue = baseMoveSpeed;
@@ -183,6 +181,11 @@ public class BaseEnemyClass : MonoBehaviour
         {
             enemyAnims.SetTrigger("TakeDamage");
         }
+        if (hitMarker)
+        {
+            hitMarker.transform.GetChild(8).gameObject.SetActive(true);
+            Invoke("HitMarkerDsable", 0.2f);
+        }
         if (audioManager)
         {
             audioManager.StopSFX(takeDamageAudio);
@@ -229,11 +232,6 @@ public class BaseEnemyClass : MonoBehaviour
                     break;
             }
 
-            
-            
-            
-
-
             //Death triggers
 
             foreach (DeathTrigger dTrigs in deathTriggers)
@@ -245,6 +243,10 @@ public class BaseEnemyClass : MonoBehaviour
 
             if (audioManager)
             {
+                if(idleAudio != null)
+                {
+                    audioManager.StopSFX(idleAudio);
+                }
                 audioManager.StopSFX(deathAudio);
                 audioManager.PlaySFX(deathAudio, player.transform, this.transform);
             }
@@ -280,6 +282,10 @@ public class BaseEnemyClass : MonoBehaviour
         }
     }
 
+    private void HitMarkerDsable()
+    {
+        hitMarker.transform.GetChild(8).gameObject.SetActive(false);
+    }
     public void RestoreHealth(float amount)
     {
         currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);

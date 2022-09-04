@@ -57,6 +57,11 @@ MonoBehaviour:
   prophecyHealthMulti: 1
   wealth: 0
   famine: 0
+  damageMultipliers: []
+  effectMultipliers: []
+  resistMultipliers: []
+  weaknessMultipliers: []
+  healthMultipliers: []
 --- !u!114 &8414824065125251048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,8 +74,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cd30b6cb7c6c24fab269121ae6fe33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pName: Wealth
+  pName: Greed
   effect: Brave great danger for greater wealth
+  image: {fileID: 21300000, guid: 6955d09ae8d4923499c37a8ce96a73ba, type: 3}
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
 --- !u!114 &5187520269776117262
 MonoBehaviour:
@@ -86,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pName: Wrath
   effect: Your enemies strengths become greater, as do their weaknesses
+  image: {fileID: 21300000, guid: 0b1ec148eb280d14bb04af3a180794f2, type: 3}
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
 --- !u!114 &5057102656930001468
 MonoBehaviour:
@@ -101,4 +108,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pName: Famine
   effect: Your enemies will wither, as will their harvest
+  image: {fileID: 21300000, guid: 32348bb91e157224b8a5bc97009cb787, type: 3}
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}

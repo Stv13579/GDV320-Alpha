@@ -17142,7 +17142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4005112091527824755}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: AreaLimit_Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35294,6 +35294,9 @@ MonoBehaviour:
   weighting: 0
   illegal: 0
   gridPos: {x: 0, y: 0}
+  visited: 0
+  hasLilly: 0
+  hiddenLilly: {fileID: 0}
   isShoppe: 0
 --- !u!1 &4032864102547716078
 GameObject:
@@ -36745,7 +36748,7 @@ GameObject:
   - component: {fileID: 661546404073058039}
   - component: {fileID: 447028493380165070}
   - component: {fileID: 2555159336751234286}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: New Game Object (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41247,7 +41250,7 @@ GameObject:
   - component: {fileID: 2588316818144563876}
   - component: {fileID: 4110430703740391655}
   - component: {fileID: 988938402778210589}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: New Game Object (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53845,7 +53848,7 @@ GameObject:
   - component: {fileID: 1003398855561830500}
   - component: {fileID: 1869979258722202102}
   - component: {fileID: 483256153288136347}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: New Game Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63319,7 +63322,7 @@ GameObject:
   - component: {fileID: 5530367245099383101}
   - component: {fileID: 9105773633150229939}
   - component: {fileID: 5438421184342273091}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: New Game Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72991,7 +72994,7 @@ PrefabInstance:
     - target: {fileID: 177030300292316646, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1905730427594235131, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
@@ -73003,10 +73006,15 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6176350207684168776, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 6767836439206277197, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8031824280958252433, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
@@ -73103,7 +73111,7 @@ PrefabInstance:
     - target: {fileID: 8330871923743077299, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 17
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6602675031923391963, guid: 2ec6660bcb3bd1049874da3d9eb2bf4b, type: 3}
