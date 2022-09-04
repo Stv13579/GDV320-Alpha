@@ -26,6 +26,25 @@ public class MinimapRoom : MonoBehaviour
     float maxDist;
 
 
+    private void Update()
+    {
+        if(transform.localPosition.x > maxDist * maxRoomCull || transform.localPosition.y > maxDist * maxRoomCull
+           || transform.localPosition.x < -maxDist * maxRoomCull  || transform.localPosition.y < -maxDist * maxRoomCull)
+        {
+            GetComponent<Image>().enabled = false;
+            roomIcon.enabled = false;
+        }
+        else
+        {
+            GetComponent<Image>().enabled = true;
+            if(isShop || isBoss || isBreak)
+            {
+                roomIcon.enabled = true;
+            }
+            
+        }    
+    }
+
     public void SetMaxDist(float newMax) { maxDist = newMax; }
 
     public void SetVisited() { GetComponent<Image>().color = visitedColour; }
@@ -42,18 +61,9 @@ public class MinimapRoom : MonoBehaviour
             }
             mmRoom.localPosition += amountToMove;
 
-            //if((mmRoom.localPosition - transform.localPosition).magnitude >= maxDist*maxRoomCull)
-            //{
-            //    mmRoom.GetComponent<Image>().enabled = false;
-            //    mmRoom.GetComponent<MinimapRoom>().roomIcon.enabled = false;
-            //}
-            //else
-            //{
-            //    mmRoom.GetComponent<Image>().enabled = true;
-            //    mmRoom.GetComponent<MinimapRoom>().roomIcon.enabled = true;
-            //}
+            
 
-           
+
         }
 
     }
