@@ -25,6 +25,8 @@ public class BossRoom : Room
     [SerializeField]
     Transform portalSpawnPosition;
 
+    public BossList GetList() { return bosses; }
+
     public void Update()
     {
         base.Update();

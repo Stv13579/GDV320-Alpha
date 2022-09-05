@@ -38,4 +38,12 @@ public class BossList : ScriptableObject
         return null; //Shouldn't be needed but it complained witout it
     }
 
+    public void ResetList()
+    {
+        foreach (BossListEntry boss in bossList)
+        {
+            boss.SetSpawned(false);
+        }
+    }
+
 }

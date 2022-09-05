@@ -87,6 +87,25 @@ public class Shooting : MonoBehaviour
 
         return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
     }
+
+    public Vector2 GetNextLeftMana()
+    {
+        PlayerClass player = this.gameObject.GetComponent<PlayerClass>();
+
+        int i;
+
+        if ((leftElementIndex + 1) >= primaryElements.Count)
+        {
+            i = Array.FindIndex(player.manaTypes, item => item.manaName == primaryElements[0].GetManaName());
+
+            return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+        }
+
+        i = Array.FindIndex(player.manaTypes, item => item.manaName == primaryElements[leftElementIndex + 1].GetManaName());
+
+        return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+    }
+
     public Vector2 GetRightMana()
     {
         PlayerClass player = this.gameObject.GetComponent<PlayerClass>();
@@ -94,7 +113,25 @@ public class Shooting : MonoBehaviour
 
         return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
     }
-    
+
+    public Vector2 GetNextRightMana()
+    {
+        PlayerClass player = this.gameObject.GetComponent<PlayerClass>();
+
+        int i;
+
+        if ((rightElementIndex + 1) >= catalystElements.Count)
+        {
+            i = Array.FindIndex(player.manaTypes, item => item.manaName == catalystElements[0].GetManaName());
+
+            return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+        }
+
+        i = Array.FindIndex(player.manaTypes, item => item.manaName == catalystElements[rightElementIndex + 1].GetManaName());
+
+        return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+    }
+
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();

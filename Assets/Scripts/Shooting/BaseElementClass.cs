@@ -138,7 +138,7 @@ public class BaseElementClass : MonoBehaviour
         playerClass = player.GetComponent<PlayerClass>();
         //shootingTranform = GameObject.Find("Elements").transform;
         audioManager = FindObjectOfType<AudioManager>();
-        elementData = Resources.Load<ElementStats>("Element/ElementData");
+        elementData = GetComponent<ElementStats>();
         shootingScript = player.GetComponent<Shooting>();
         currentCoolDownTimer = cooldownTimer;
     }

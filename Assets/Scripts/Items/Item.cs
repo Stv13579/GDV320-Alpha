@@ -19,7 +19,7 @@ public class Item : MonoBehaviour
     {
         player.itemUI.transform.parent.gameObject.GetComponent<GameplayUI>().AddItem(sprites);
         player.heldItems.Add(this);
-        elementData = Resources.Load<ElementStats>("Element/ElementData");
+        elementData = player.GetComponent<ElementStats>();
 
     }
 

@@ -41,11 +41,21 @@ public class LevelGeneration : MonoBehaviour
     {
         minimap = GameObject.Find("MiniMap");
         GenerateLevel();
+        if (GameObject.Find("Run Manager"))
+        {
+            GameObject.Find("Run Manager").GetComponent<RunManager>().StartNewLevel();
+        }
     }
 
     //Encapsulates the generation process, and returns false if there is a fail for whatever reason
     bool GenerateLevel()
     {
+        foreach(Transform room in minimap.transform)
+        {
+            Destroy(room.gameObject);
+        }
+
+
         startRoom = PlaceRoom(new Vector3(0, 0, 0), genericRooms, possibleGenericRooms);
         
 
