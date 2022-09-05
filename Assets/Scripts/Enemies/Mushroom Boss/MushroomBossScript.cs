@@ -16,8 +16,10 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
     Vector3 movement = Vector3.zero;
     [SerializeField]
     float gravity = 1.0f;
-    GameObject nearestNode;
-    float contactTimer = 0.0f;
+	GameObject nearestNode;
+	Vector3 bestNodePos = Vector3.zero;
+	float contactTimer = 0.0f;
+	CharacterController controller;
 
     public override void Awake()
     {
@@ -31,7 +33,8 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 
     private void Start()
     {
-        StartCoroutine(FindNode());
+	    StartCoroutine(FindNode());
+	    controller = GetComponent<CharacterController>();
 
     }
     public override void Update()
@@ -47,14 +50,17 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 
         if (!attacking)
         {
-            if (Vector3.Distance(this.transform.position, player.transform.position) < 15)
+        	
+        	//Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
+        	
+	        if (Vector3.Distance(this.transform.position, player.transform.position) < 15)
             {
 
-                Movement(player.transform.position, moveSpeed);
+		        Movement(player.transform.position, moveSpeed);
             }
             else
             {
-                Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
+	            Movement(bestNodePos, moveSpeed);
             }
         }
     }
@@ -64,11 +70,12 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
         this.gameObject.transform.LookAt(positionToMoveTo);
         this.gameObject.transform.eulerAngles = new Vector3(0, this.gameObject.transform.eulerAngles.y, 0);
         movement = this.transform.forward * speed * Time.deltaTime;
-        if (!this.gameObject.GetComponent<CharacterController>().isGrounded)
-        {
-            movement += new Vector3(0, gravity, 0);
-        }
-        this.gameObject.GetComponent<CharacterController>().Move(movement);
+	    //if (!controller.isGrounded)
+        //{
+        //    movement += new Vector3(0, gravity, 0);
+        //}
+	    this.transform.position += movement;
+	    controller.Move(movement);
     }
 
     IEnumerator FindNode()
@@ -82,23 +89,26 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
                 if (newDistance < distance)
                 {
                     distance = newDistance;
-                    nearestNode = node.gameObject;
+	                nearestNode = node.gameObject;
+	                bestNodePos = nearestNode.GetComponent<Node>().bestNextNodePos;
                 }
             }
             yield return new WaitForSeconds(1);
-        }
+	    }
     }
 
     public void SpawnSporeCloud()
     {
-        bool sporing = true;
+	    bool sporing = true;
+	    Debug.Log("Sporing");
         while(sporing)
         {
             int randNodeInt = Random.Range(0, spawner.GetComponent<SAIM>().aliveNodes.Count);
             GameObject randNode = spawner.GetComponent<SAIM>().aliveNodes[randNodeInt].gameObject;
             if(Vector3.Distance(randNode.transform.position, player.transform.position) < 20)
             {
-                Instantiate(sporeCloud, randNode.transform.position, Quaternion.identity);
+	            Instantiate(sporeCloud, randNode.transform.position, Quaternion.identity);
+	            sporing = false;
             }
         }
         attacking = false;

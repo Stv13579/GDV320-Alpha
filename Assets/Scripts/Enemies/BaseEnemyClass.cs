@@ -118,12 +118,6 @@ public class BaseEnemyClass : MonoBehaviour
         {
             hitMarker.transform.GetChild(8).gameObject.SetActive(false);
         }
-        if(transform.position.y < -30)
-        {
-            Death();
-            currentHealth = 0;
-        }
-
         if(transform.position.y > 100)
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;

@@ -539,7 +539,7 @@ public class SAIM : MonoBehaviour
             ChooseEnemy();
 
             GameObject spawnedEnemy = Instantiate(data.enemyTypes[Random.Range(0, data.enemyTypes.Count)], spawnPosition, Quaternion.identity);
-            spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
+	        spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
 
             if(GameObject.Find("Quest Manager"))
             {
