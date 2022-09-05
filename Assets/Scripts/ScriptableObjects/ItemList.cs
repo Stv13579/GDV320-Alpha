@@ -9,5 +9,15 @@ using UnityEditor;
 //Scriptable Object to store all items in for access elsewhere
 public class ItemList : ScriptableObject
 {
-    public List<ItemEntry> itemList;
+	public List<ItemEntry> itemList;
+    
+	public void ResetList()
+	{
+		for(int i = 0; i < itemList.Count; i++)
+		{
+			itemList[i].alreadyAdded = false;
+		}
+		
+	}
+	
 }

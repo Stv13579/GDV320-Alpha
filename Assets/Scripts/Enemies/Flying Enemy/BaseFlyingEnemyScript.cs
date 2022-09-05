@@ -135,7 +135,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
         }
     }
 
-    protected virtual void Effect()
+	public virtual void Effect()
     {
         effect = false;
         timer = 0.0f;

@@ -5319,6 +5319,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3854718125816411880}
   - component: {fileID: 3948473692232493176}
+  - component: {fileID: 5870372187386831545}
+  - component: {fileID: 144458540342268174}
   m_Layer: 8
   m_Name: Ranged_Enemy
   m_TagString: Untagged
@@ -5462,6 +5464,37 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.7573402, y: -0.0007741004, z: 0.0017021596}
     m_Extent: {x: 0.8220806, y: 0.34474885, z: 0.33053824}
   m_DirtyAABB: 0
+--- !u!95 &5870372187386831545
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2742274913534164033}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2531a43ceda4ca042960618112f8d8a5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &144458540342268174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2742274913534164033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705c0637b26046143bdcbf7a55f16464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2847857466545261747
 GameObject:
   m_ObjectHideFlags: 0
@@ -10777,7 +10810,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5638500257173200652}
   - component: {fileID: 8131862436286790866}
-  - component: {fileID: 5004672023540106677}
   - component: {fileID: 5004672023540106676}
   - component: {fileID: 2798271848610933008}
   - component: {fileID: 2824561833933869716}
@@ -10849,25 +10881,6 @@ MonoBehaviour:
   groundDetect:
     serializedVersion: 2
     m_Bits: 1024
---- !u!95 &5004672023540106677
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5004672023540106678}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2531a43ceda4ca042960618112f8d8a5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!64 &5004672023540106676
 MeshCollider:
   m_ObjectHideFlags: 0
