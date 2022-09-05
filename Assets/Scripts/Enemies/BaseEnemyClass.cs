@@ -109,10 +109,11 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Update()
     {
-        if (transform.position.y < -30)
+        
+        hitMarkerTimer += Time.deltaTime;
+        if (hitMarkerTimer >= 0.0f)
         {
-            Death();
-            currentHealth = 0;
+            hitMarker.transform.GetChild(8).gameObject.SetActive(false);
         }
 
         if(transform.position.y > 100)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
 {
     //Find all the enemies around the target enemy, buff their attack, and find a new target
-    protected override void Effect()
+	public override void Effect()
     {
         base.Effect();
         Debug.Log("Effect");

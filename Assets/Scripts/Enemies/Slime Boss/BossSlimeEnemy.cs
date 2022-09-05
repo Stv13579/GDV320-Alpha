@@ -65,7 +65,9 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     [SerializeField]
     private Vector3 fireTrailScale;
     [SerializeField]
-    GameObject enemyTrail;
+	GameObject enemyTrail;
+	[SerializeField]
+	GameObject chargeVFX;
 
     /// <summary>
     /// Normal Type Properties
@@ -324,12 +326,15 @@ public class BossSlimeEnemy : WaterSlimeEnemy
             moveVec.y = 0;
             moveVec.y -= 1 * Time.deltaTime;
             transform.position += moveVec;
-            currentChargeDuration -= Time.deltaTime;
+	        currentChargeDuration -= Time.deltaTime;
+	        chargeVFX.SetActive(true);
         }
         else
         {
             currentChargeDuration = fireChargeDuration;
-            currentAttackTime = timeBetweenAttacks;
+	        currentAttackTime = timeBetweenAttacks;
+	        chargeVFX.SetActive(false);
+
         }
     }
 

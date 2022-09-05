@@ -8,7 +8,7 @@ public class WaterFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
     float healthRestore = 2.0f;
     //Find all the enemies around the target enemy, heal them, and find a new target
 
-    protected override void Effect()
+	public override void Effect()
     {
 
         base.Effect();
