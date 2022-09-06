@@ -11,6 +11,60 @@ public class Shooting : MonoBehaviour
     private List<BaseElementClass> catalystElements;
     [SerializeField]
     private List<ComboElementList> comboElements;
+    
+    //Sets the combo elements based on the current base elements
+    public BaseElementClass CalculateCombo(BaseElementClass primary, BaseElementClass catalyst)
+    {
+        BaseElementClass chosenCombo = new BaseElementClass();
+
+        if(primary is FireElement)
+        {
+            if(catalyst is VoidElement)
+            {
+                chosenCombo = GetComponent<LandMineElement>();
+            }
+            else if(catalyst is NecroticElement)
+            {
+                chosenCombo = GetComponent<AcidCloudElement>();
+            }
+            else if(catalyst is EnergyElement)
+            {
+                chosenCombo = GetComponent<LaserBeamElement>();
+            }
+        }
+        else if (primary is WaterElement)
+        {
+            if (catalyst is VoidElement)
+            {
+                chosenCombo = GetComponent<StasisTrapElement>();
+            }
+            else if (catalyst is NecroticElement)
+            {
+                chosenCombo = GetComponent<LifeStealElement>();
+            }
+            else if (catalyst is EnergyElement)
+            {
+                chosenCombo = GetComponent<IceSlashElement>();
+            }
+        }
+        else if (primary is CrystalElement)
+        {
+            if (catalyst is VoidElement)
+            {
+                chosenCombo = GetComponent<IceSlashElement>();
+            }
+            else if (catalyst is NecroticElement)
+            {
+                chosenCombo = GetComponent<CurseElement>();
+            }
+            else if (catalyst is EnergyElement)
+            {
+                chosenCombo = GetComponent<ShardCannonElement>();
+            }
+        }
+
+        return chosenCombo;
+    }
 
     [Serializable]
     public struct ComboElementList

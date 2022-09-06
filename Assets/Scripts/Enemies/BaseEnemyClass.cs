@@ -109,14 +109,8 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Update()
     {
-        
-        hitMarkerTimer += Time.deltaTime;
-        if (hitMarkerTimer >= 0.0f)
-        {
-            hitMarker.transform.GetChild(8).gameObject.SetActive(false);
-        }
 
-        if(transform.position.y > 100)
+        if (transform.position.y > 100)
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
