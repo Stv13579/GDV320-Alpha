@@ -30,7 +30,7 @@ public class ElementSlots : DragSlot
 
             if (!isPrimary )
             {
-                if (eQuip.GetPrimary() || player.GetCatalystElements().Exists(ele => ele.name == eQuip.GetElementType())))
+                if (eQuip.GetPrimary() || player.GetCatalystElements().Exists(ele => ele.name == eQuip.GetElementType()))
                 {
                     Debug.Log("Already holding that element");
                     return;
