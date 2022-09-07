@@ -67,7 +67,8 @@ public class VoidElement : BaseElementClass
             {
                 Indicator.transform.position = this.transform.position + Camera.main.transform.forward * trueDashDistance;
             }
-            targetPos = (this.transform.position + Camera.main.transform.forward * trueDashDistance * 2);
+            //targetPos = (this.transform.position + Camera.main.transform.forward * trueDashDistance * 1.5f);
+            targetPos = Indicator.transform.position;
         }
         //Checking if the mouse button has been released at a certain distance, cancels the spell
         if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") && trueDashDistance < 10 ||
@@ -127,15 +128,15 @@ public class VoidElement : BaseElementClass
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(dashing)
-        {
-            StopCoroutine(Dash());
-            dashing = false;
-            this.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(true);
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if(dashing)
+    //    {
+    //        StopCoroutine(Dash());
+    //        dashing = false;
+    //        this.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(true);
+    //    }
+    //}
 
     private IEnumerator Dash()
     {
