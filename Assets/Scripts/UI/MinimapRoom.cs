@@ -19,6 +19,34 @@ public class MinimapRoom : MonoBehaviour
 
     [SerializeField]
     Color visitedColour, occupiedColour, unexploredColour;
+
+    [SerializeField]
+    int maxRoomCull;
+    
+    float maxDist;
+
+
+    private void Update()
+    {
+        if(transform.localPosition.x > maxDist * maxRoomCull || transform.localPosition.y > maxDist * maxRoomCull
+           || transform.localPosition.x < -maxDist * maxRoomCull  || transform.localPosition.y < -maxDist * maxRoomCull)
+        {
+            GetComponent<Image>().enabled = false;
+            roomIcon.enabled = false;
+        }
+        else
+        {
+            GetComponent<Image>().enabled = true;
+            if(isShop || isBoss || isBreak)
+            {
+                roomIcon.enabled = true;
+            }
+            
+        }    
+    }
+
+    public void SetMaxDist(float newMax) { maxDist = newMax; }
+
     public void SetVisited() { GetComponent<Image>().color = visitedColour; }
     public void SetOccupied(Vector3 oldRoomPos) { GetComponent<Image>().color = occupiedColour;
 
@@ -29,9 +57,13 @@ public class MinimapRoom : MonoBehaviour
         {
             if(mmRoom.name != "RoomIcon(Clone)")
             {
-
+                continue;
             }
             mmRoom.localPosition += amountToMove;
+
+            
+
+
         }
 
     }

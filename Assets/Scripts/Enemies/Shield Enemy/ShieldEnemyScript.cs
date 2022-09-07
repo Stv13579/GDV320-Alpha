@@ -17,8 +17,13 @@ public class ShieldEnemyScript : BaseEnemyClass
     public override void Awake()
     {
         base.Awake();
-        StartCoroutine(FindNode());
     }
+	// Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
+	protected void Start()
+	{
+		StartCoroutine(FindNode());
+
+	}
     public override void Update()
     {
         base.Update();
