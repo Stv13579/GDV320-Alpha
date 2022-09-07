@@ -30,7 +30,7 @@ public class ElementSlots : DragSlot
 
             if (!isPrimary )
             {
-                if (eQuip.GetPrimary() || player.GetCatalystElements().Exists(ele => ele.name == eQuip.GetElementType()))
+                if (eQuip.GetPrimary() || player.GetCatalystElements().Exists(ele => ele.GetType() == System.Type.GetType(eQuip.GetElementType())))
                 {
                     Debug.Log("Already holding that element");
                     return;
@@ -38,7 +38,7 @@ public class ElementSlots : DragSlot
             }
             else if(isPrimary )
             {
-                if(!eQuip.GetPrimary() || player.GetPrimaryElements().Contains((BaseElementClass)FindObjectOfType(System.Type.GetType(eQuip.GetElementType()))))
+                if(!eQuip.GetPrimary() || player.GetPrimaryElements().Exists(ele => ele.GetType() == System.Type.GetType(eQuip.GetElementType())))
                 {
                     Debug.Log("Already holding that element");
                     return;
@@ -58,7 +58,7 @@ public class ElementSlots : DragSlot
 
             if (!isPrimary)
             {
-                if (eQuip.GetPrimary() || player.GetCatalystElements().Contains((BaseElementClass)FindObjectOfType(System.Type.GetType(eQuip.GetElementType()))))
+                if (eQuip.GetPrimary() || player.GetCatalystElements().Exists(ele => ele.GetType() == System.Type.GetType(eQuip.GetElementType())))
                 {
                     Debug.Log("Already holding that element");
                     return;
@@ -66,7 +66,7 @@ public class ElementSlots : DragSlot
             }
             else if (isPrimary)
             {
-                if (!eQuip.GetPrimary() || player.GetPrimaryElements().Contains((BaseElementClass)FindObjectOfType(System.Type.GetType(eQuip.GetElementType()))))
+                if (!eQuip.GetPrimary() || player.GetPrimaryElements().Exists(ele => ele.GetType() == System.Type.GetType(eQuip.GetElementType())))
                 {
                     Debug.Log("Already holding that element");
                     return;
@@ -78,15 +78,15 @@ public class ElementSlots : DragSlot
 
         if (isPrimary)
         {
-            player.GetPrimaryElements()[elementSlot] = null;
-            player.GetComboElements()[elementSlot].comboElements[0] = null;
-            player.GetComboElements()[elementSlot].comboElements[1] = null;
+            player.GetPrimaryElements()[elementSlot] = new BaseElementClass();
+            player.GetComboElements()[elementSlot].comboElements[0] = new BaseElementClass();
+            player.GetComboElements()[elementSlot].comboElements[1] = new BaseElementClass();
         }
         else
         {
-            player.GetCatalystElements()[elementSlot] = null;
-            player.GetComboElements()[0].comboElements[elementSlot] = null;
-            player.GetComboElements()[1].comboElements[elementSlot] = null;
+            player.GetCatalystElements()[elementSlot] = new BaseElementClass();
+            player.GetComboElements()[0].comboElements[elementSlot] = new BaseElementClass();
+            player.GetComboElements()[1].comboElements[elementSlot] = new BaseElementClass();
         }
         
     }

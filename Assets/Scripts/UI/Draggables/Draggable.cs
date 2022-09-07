@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Draggable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField]
     GameObject draggedObject;

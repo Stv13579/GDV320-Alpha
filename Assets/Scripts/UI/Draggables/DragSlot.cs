@@ -5,24 +5,23 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
-public class DragSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+public class DragSlot : HoverOver, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField]
     protected string type;
 
     protected DraggedObject equippingObject;
 
-    DraggedObject.LoadoutVariables lVars;
-
-    public void SetLoadoutVariables(DraggedObject.LoadoutVariables newVars) { lVars = newVars; }
+    
 
     [SerializeField]
     Image equippedIcon;
 
     public void SetIcon(Sprite equipping) { equippedIcon.sprite = equipping; }
 
-    public virtual void OnPointerEnter(PointerEventData pData)
+    public override void OnPointerEnter(PointerEventData pData)
     {
+        base.OnPointerEnter(pData);
         Debug.Log("Hovering Over");
         if(FindObjectOfType(System.Type.GetType(type)))
         {
@@ -57,11 +56,12 @@ public class DragSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
-    public virtual void ClearSlot()
+    public override void ClearSlot()
     {
+        base.ClearSlot();
         equippingObject = null;
         equippedIcon.enabled = false;
-        lVars = new DraggedObject.LoadoutVariables();
+        
     }
     
 }
