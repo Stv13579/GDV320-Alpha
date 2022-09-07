@@ -40,8 +40,8 @@ public class FireSlimeTrail : MonoBehaviour
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
         decalManager = FindObjectOfType<DecalRendererManager>();
 
-        decalRenderer = decalManager.GenerateDecalRenderer(effectMaterial);
-        decal.material = decalRenderer.decalMaterial;
+	    //decalRenderer = decalManager.GenerateDecalRenderer(effectMaterial);
+	    //decal.material = decalRenderer.decalMaterial;
 
         if (audioManager)
         {
@@ -53,7 +53,7 @@ public class FireSlimeTrail : MonoBehaviour
     void Update()
     {
         trailDuration += Time.deltaTime;
-        decalRenderer.materialInstance.SetFloat("_CenterPoint", fireTrailAnimation.Evaluate(trailDuration / trailLength));
+	    //decalRenderer.materialInstance.SetFloat("_CenterPoint", fireTrailAnimation.Evaluate(trailDuration / trailLength));
         Countdown();
         // deletes the trail after trailDuration >= trailLength
         if (trailDuration >= trailLength)
@@ -62,7 +62,7 @@ public class FireSlimeTrail : MonoBehaviour
             {
                 audioManager.StopSFX("Fire Slime Trail Alive");
             }
-            decalManager.ReleaseDecalRenderer(decalRenderer);
+	        //decalManager.ReleaseDecalRenderer(decalRenderer);
             Destroy(gameObject);
         }
         // turn on particle

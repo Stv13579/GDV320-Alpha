@@ -109,8 +109,7 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Update()
     {
-
-        if (transform.position.y > 100)
+        if(transform.position.y > 100)
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
         }

@@ -408,7 +408,7 @@ public class Shooting : MonoBehaviour
         }
 
         // if player has pressed combo button
-        if (Input.GetKeyUp(KeyCode.F) /*&& GetLeftMana()[0] >= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost() && GetRightMana()[0] >= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost()*/)
+        if (Input.GetKeyUp(KeyCode.F) && GetLeftMana()[0] >= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost() && GetRightMana()[0] >= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost())
         {
             // if in combo mode lift combo element effect
             // else lift catalyst effect
