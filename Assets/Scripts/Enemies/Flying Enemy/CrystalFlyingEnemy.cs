@@ -45,7 +45,7 @@ public class CrystalFlyingEnemy : BaseFlyingEnemyScript //Sebastian
         }
     }
     //Lowers the playes defense temporarily
-    protected override void Effect()
+	public override void Effect()
     {
         base.Effect();
         StatModifier.StartAddModifierTemporary(playerClass, playerClass.GetDefenseStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Flying Enemy"), 10.0f);

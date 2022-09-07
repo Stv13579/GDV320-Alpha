@@ -38,7 +38,7 @@ public class FireSlimeEnemy : WaterSlimeEnemy
             float angle = Random.Range(0.0f, Mathf.PI * 2.0f);
             Vector3 forward = new Vector3(Mathf.Cos(angle), 0.0f, Mathf.Sin(angle));
             // creates a plane which is the trail of the fire slime
-            GameObject tempEnemyTrail = Instantiate(enemyTrail, transform.position, Quaternion.LookRotation(Vector3.down, forward));
+	        GameObject tempEnemyTrail = Instantiate(enemyTrail, transform.position + new Vector3(0, 1, 0), Quaternion.LookRotation(Vector3.down, forward));
             tempEnemyTrail.transform.localScale = enemyFireTrailScale;
             tempEnemyTrail.GetComponent<FireSlimeTrail>().SetVars(damageAmount * (prophecyManager.prophecyDamageMulti));
             if (audioManager)

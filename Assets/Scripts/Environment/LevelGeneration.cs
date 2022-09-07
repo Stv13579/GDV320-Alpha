@@ -47,7 +47,7 @@ public class LevelGeneration : MonoBehaviour
     bool GenerateLevel()
     {
         startRoom = PlaceRoom(new Vector3(0, 0, 0), genericRooms, possibleGenericRooms);
-        startRoom.GetComponent<Room>().minimapRoom.SetOccupied(Vector3.zero);
+        
 
         int noRooms = Random.Range(minRooms, maxRooms + 1);
 
@@ -97,6 +97,8 @@ public class LevelGeneration : MonoBehaviour
             room.GetComponent<Room>().CloseDoors();
         }
 
+        startRoom.GetComponent<Room>().minimapRoom.SetOccupied(Vector3.zero);
+
         AddWorldEdge();
 
         return true;
@@ -124,6 +126,7 @@ public class LevelGeneration : MonoBehaviour
             room.GetComponent<Room>().minimapRoom = Instantiate(mmRoom, minimap.transform, false).GetComponent<MinimapRoom>();
             room.GetComponent<Room>().minimapRoom.SetUnexplored();
             room.GetComponent<Room>().minimapRoom.transform.localPosition = new Vector3(roomPos.x * mmSpacing, roomPos.z * mmSpacing, 0);
+            room.GetComponent<Room>().minimapRoom.SetMaxDist(mmSpacing * 120);
 
         }
 

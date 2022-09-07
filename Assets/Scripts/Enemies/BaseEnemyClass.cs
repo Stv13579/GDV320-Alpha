@@ -87,7 +87,6 @@ public class BaseEnemyClass : MonoBehaviour
 
 	private GameObject hitMarker;
 
-    private bool hasTakenDamage;
     public virtual void Awake()
     {
         prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
@@ -110,12 +109,6 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Update()
     {
-        if(transform.position.y < -30)
-        {
-            Death();
-            currentHealth = 0;
-        }
-
         if(transform.position.y > 100)
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -155,14 +148,13 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
     {
-        hasTakenDamage = true;
+        hitSpawn.GetComponent<ParticleSystem>().Clear();
+        hitSpawn.GetComponent<ParticleSystem>().Play();
 
-        //hitSpawn.GetComponent<ParticleSystem>().Clear();
-        //hitSpawn.GetComponent<ParticleSystem>().Play();
+        //GameObject hitSpn = Instantiate(hitSpawn, transform.position, Quaternion.identity);
+        //Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
+        //hitSpn.transform.localScale = scale;
 
-        GameObject hitSpn = Instantiate(hitSpawn, transform.position, Quaternion.identity);
-        Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
-        hitSpn.transform.localScale = scale;
         float multiplier = 1;
         foreach (Types type in attackTypes)
         {
@@ -188,22 +180,8 @@ public class BaseEnemyClass : MonoBehaviour
             enemyAnims.SetTrigger("TakeDamage");
         }
 
-        if(hasTakenDamage)
-        {
-            if (hitMarker)
-            {
-                hitMarker.transform.GetChild(8).gameObject.SetActive(true);
-                Invoke("HitMarkerDisable", 0.2f);
-                hasTakenDamage = false;
-            }
-        }
-        else
-        {
-            if (hitMarker)
-            {
-                HitMarkerDisable();
-            }
-        }
+        StopCoroutine(HitMarker());
+        StartCoroutine(HitMarker());
 
         if (audioManager)
         {
@@ -283,6 +261,15 @@ public class BaseEnemyClass : MonoBehaviour
         }
     }
 
+    IEnumerator HitMarker()
+    {
+        if (hitMarker)
+        {
+            hitMarker.transform.GetChild(8).gameObject.SetActive(true);
+        }
+        yield return new WaitForSeconds(0.2f);
+        hitMarker.transform.GetChild(8).gameObject.SetActive(false);
+    }
     public void Targetted(bool targetted, Color colour)
     {
         if(targettingIndicator.active == false && targetted == true)
@@ -301,10 +288,6 @@ public class BaseEnemyClass : MonoBehaviour
         }
     }
 
-    private void HitMarkerDisable()
-    {
-        hitMarker.transform.GetChild(8).gameObject.SetActive(false);
-    }
 	public virtual void RestoreHealth(float amount)
     {
         currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
