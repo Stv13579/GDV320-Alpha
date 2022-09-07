@@ -93,6 +93,7 @@ public class LifeStealElement : BaseElementClass
                 {
                     audioManager.PlaySFX(shootingSoundFX);
                 }
+                lifeStealSuccess.transform.localScale = new Vector3(0.05f, 0.05f, objectHit[0].distance / 10);
                 lifeStealSuccess.SetActive(true);
                 lifeStealfail.SetActive(false);
                 if (currentDamageAndHealthTicker >= damageAndHealthTicker)

@@ -28,8 +28,18 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField]
     List<GameObject> possibleGenericRooms, possibleBossRooms, possibleRespiteRooms, possibleEdgeRooms;
 
+    [SerializeField]
+    GameObject mmRoom, playerIndicator;
+
+    [SerializeField]
+    float mmSpacing;
+
+    GameObject minimap;
+
+    
     void Start()
     {
+        minimap = GameObject.Find("MiniMap");
         GenerateLevel();
     }
 
@@ -37,6 +47,7 @@ public class LevelGeneration : MonoBehaviour
     bool GenerateLevel()
     {
         startRoom = PlaceRoom(new Vector3(0, 0, 0), genericRooms, possibleGenericRooms);
+        startRoom.GetComponent<Room>().minimapRoom.SetOccupied(Vector3.zero);
 
         int noRooms = Random.Range(minRooms, maxRooms + 1);
 
@@ -48,16 +59,19 @@ public class LevelGeneration : MonoBehaviour
         //Place the boss room
         bossRoom = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), otherRooms, possibleBossRooms);
         bossRoom.GetComponent<Room>().illegal = true;
+        bossRoom.GetComponent<Room>().minimapRoom.SetAsBoss();
 
         ResetWeighting();
 
         //Place shop and NPC rooms
         shop = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), otherRooms, possibleRespiteRooms);
         shop.GetComponent<Room>().illegal = true;
+        shop.GetComponent<Room>().minimapRoom.SetAsShop();
         shop.GetComponent<RespiteRoom>().isShoppe =  true;
 
         NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), otherRooms, possibleRespiteRooms);
         NPC.GetComponent<Room>().illegal = true;
+        NPC.GetComponent<Room>().minimapRoom.SetAsBreak();
 
         //Check if the player is carrying the balanced compass and roll to see if it triggers if so.
         if(GameObject.Find("TrinketManager"))
@@ -75,6 +89,8 @@ public class LevelGeneration : MonoBehaviour
                 }
             }
         }
+
+        Instantiate(playerIndicator, minimap.transform);
         
         foreach(GameObject room in placedRooms)
         {
@@ -87,7 +103,7 @@ public class LevelGeneration : MonoBehaviour
     }
 
     //Instantiates a new room at a given position and add it to the appropriate list, returning it for further use
-    GameObject PlaceRoom(Vector3 roomPos, List<GameObject> typedList, List<GameObject> roomPrefabs, bool addToPlacedRooms = true)
+    GameObject PlaceRoom(Vector3 roomPos, List<GameObject> typedList, List<GameObject> roomPrefabs, bool dontPlaceOnMap = false, bool addToPlacedRooms = true)
     {
         GameObject roomToSpawn = roomPrefabs[Random.Range(0, roomPrefabs.Count)];
 
@@ -103,7 +119,15 @@ public class LevelGeneration : MonoBehaviour
         room.GetComponent<Room>().gridPos = new Vector2Int((int)(room.transform.position.x / roomSize), (int)(room.transform.position.z / roomSize));
         roomPositions.Add(room.GetComponent<Room>().gridPos);
 
+        if(!dontPlaceOnMap)
+        {
+            room.GetComponent<Room>().minimapRoom = Instantiate(mmRoom, minimap.transform, false).GetComponent<MinimapRoom>();
+            room.GetComponent<Room>().minimapRoom.SetUnexplored();
+            room.GetComponent<Room>().minimapRoom.transform.localPosition = new Vector3(roomPos.x * mmSpacing, roomPos.z * mmSpacing, 0);
 
+        }
+
+        
 
         return room;
     }
@@ -328,7 +352,7 @@ public class LevelGeneration : MonoBehaviour
 
             foreach (Vector2 pos in legalPositions)
             {
-                PlaceRoom(new Vector3(pos.x * roomSize, 0, pos.y * roomSize), genericRooms, possibleEdgeRooms, false);
+                PlaceRoom(new Vector3(pos.x * roomSize, 0, pos.y * roomSize), genericRooms, possibleEdgeRooms, true, false);
             }
             
         }

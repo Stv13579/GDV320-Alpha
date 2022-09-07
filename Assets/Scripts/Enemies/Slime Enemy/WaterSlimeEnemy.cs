@@ -23,7 +23,9 @@ public class WaterSlimeEnemy : BaseEnemyClass
     protected float jumpTimer = 0.0f;
 
     Vector3 pos = Vector3.zero;
-    protected Vector3 posOffset = Vector3.zero;
+	protected Vector3 posOffset = Vector3.zero;
+    
+	float hurtTimer = 0.0f;
 
     public override void Awake()
     {
@@ -147,9 +149,21 @@ public class WaterSlimeEnemy : BaseEnemyClass
 
     protected virtual void Update()
     {
-        base.Update();
+	    base.Update();
+        
         Movement(player.transform.position);
-        damageTicker -= Time.deltaTime;
+	    damageTicker -= Time.deltaTime;
+	    if(hurtTimer > 0)
+	    {
+	    	hurtTimer -= Time.deltaTime;
+	    	if(hurtTimer <= 0)
+	    	{
+		    	this.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Renderer>().material.SetFloat("_IsBeingDamaged", 0);
+
+	    	}
+	    	
+	    }
+	    
     }
     
     // when the slime collides with the ground player audio for slime bounce
@@ -228,4 +242,12 @@ public class WaterSlimeEnemy : BaseEnemyClass
         }
 
     }
+    
+	public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
+	{
+		base.TakeDamage(damageToTake, attackTypes, extraSpawnScale);
+		this.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Renderer>().material.SetFloat("_IsBeingDamaged", 1);
+		hurtTimer = 0.2f;
+	}
+	
 }

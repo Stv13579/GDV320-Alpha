@@ -183,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
         if (willSlideOnSlopes && isSlidng)
         {
             velocity += new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z).normalized * slopeSpeed;
-            isGrounded = false;
+            //isGrounded = false;
         }
 
         // as the player gains velo when coming off the ramp

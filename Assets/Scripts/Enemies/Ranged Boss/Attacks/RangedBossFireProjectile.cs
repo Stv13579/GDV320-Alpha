@@ -6,7 +6,11 @@ public class RangedBossFireProjectile : BaseRangedProjectileScript //Sebastian
 {
     GameObject telegraph;
     [SerializeField]
-    float radius = 2.0f;
+	float radius = 2.0f;
+    
+	[SerializeField]
+	GameObject impactEffect;
+	bool hit = false;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -26,13 +30,37 @@ public class RangedBossFireProjectile : BaseRangedProjectileScript //Sebastian
                 damaged = true;
             }
         }
-        Destroy(telegraph);
-        Destroy(this.gameObject);
+	    Destroy(telegraph);
+	    foreach (ParticleSystem particles in GetComponentsInChildren<ParticleSystem>())
+	    {
+	    	particles.Stop();
+	    }
+	    
+	    impactEffect.active = true;
+	    hit = true;
+
+	    
     }
+    
+	protected override void Update()
+	{
+		if(hit)
+		{
+			if(!impactEffect.GetComponent<ParticleSystem>().isPlaying)
+			{
+				Destroy(this.gameObject);
+			}
+			
+		}
+	}
 
     protected override void OnTriggerEnter(Collider other)
-    {
-        HitEffect(other);
+	{
+		if(!hit)
+		{        
+			HitEffect(other);
+		}
+		
     }
 
     public void SetTelegraph(GameObject tele)
