@@ -5,7 +5,7 @@ using UnityEngine;
 public class VoidElement : BaseElementClass
 {
     [SerializeField]
-    private float dashDistance = 10.0f;
+    private float dashDistance = 20.0f;
     private float trueDashDistance = 0.0f;
     [SerializeField]
     private float dashTime = 0.5f;
@@ -67,6 +67,7 @@ public class VoidElement : BaseElementClass
             {
                 Indicator.transform.position = this.transform.position + Camera.main.transform.forward * trueDashDistance;
             }
+            //targetPos = (this.transform.position + Camera.main.transform.forward * trueDashDistance * 1.5f);
             targetPos = Indicator.transform.position;
         }
         //Checking if the mouse button has been released at a certain distance, cancels the spell
@@ -127,15 +128,15 @@ public class VoidElement : BaseElementClass
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(dashing)
-        {
-            StopCoroutine(Dash());
-            dashing = false;
-            this.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(true);
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if(dashing)
+    //    {
+    //        StopCoroutine(Dash());
+    //        dashing = false;
+    //        this.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(true);
+    //    }
+    //}
 
     private IEnumerator Dash()
     {
