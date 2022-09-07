@@ -5,7 +5,7 @@ using UnityEngine;
 public class VoidElement : BaseElementClass
 {
     [SerializeField]
-    private float dashDistance = 10.0f;
+    private float dashDistance = 20.0f;
     private float trueDashDistance = 0.0f;
     [SerializeField]
     private float dashTime = 0.5f;
@@ -67,7 +67,7 @@ public class VoidElement : BaseElementClass
             {
                 Indicator.transform.position = this.transform.position + Camera.main.transform.forward * trueDashDistance;
             }
-            targetPos = Indicator.transform.position;
+            targetPos = (this.transform.position + Camera.main.transform.forward * trueDashDistance * 2);
         }
         //Checking if the mouse button has been released at a certain distance, cancels the spell
         if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") && trueDashDistance < 10 ||
