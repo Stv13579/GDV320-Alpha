@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class ComboSlot : HoverOver, IPointerEnterHandler
 {
     [SerializeField]
+    ElementSlots prime, cata;
+
+    [SerializeField]
     Image comboIcon;
 
     public override void OnPointerEnter(PointerEventData pData)
