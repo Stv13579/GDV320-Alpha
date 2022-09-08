@@ -30,15 +30,10 @@ public class Interact : MonoBehaviour
     }
     void Update()
     {
-        npc.AssessInteract();
-
-
-        //if(npc.interactPositon >= npcTalkUIs.Count)
-        //{
-        //    canInteract = false;
-        //}
-     
-
+        if(npc)
+        {
+            npc.AssessInteract();
+        }
         if(!canInteract)
         {
 
@@ -51,21 +46,15 @@ public class Interact : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T) && inRange && !inUI)
         {
-            //If the shop hasn't yet been opened, create it so that it generates appropriate items, otherwise reopen it
-            //if (instantiatedUIs[npc.interactPositon] == null)
-            //{
-            //    instantiatedUIs[npc.interactPositon] = Instantiate(npcUIs[npc.interactPositon]);
-            //    instantiatedUIs[npc.interactPositon].GetComponent<NPCUI>().NPC = this;
-            //}
-            //else
-            //{
-            //    instantiatedUIs[npc.interactPositon].SetActive(true);
-            //}
 
             if (instantiatedMenu == null)
             {
                 instantiatedMenu = Instantiate(menu);
-                instantiatedMenu.GetComponent<NPCUI>().NPC = this;
+                if(npc)
+                {
+                    instantiatedMenu.GetComponent<NPCUI>().NPC = this;
+                }
+
             }
             else
             {
@@ -138,7 +127,10 @@ public class Interact : MonoBehaviour
 
     public void LeaveUI()
     {
-        npc.AssessInteract();
+        if(npc)
+        {
+            npc.AssessInteract();
+        }
         //Unlock the players actions, disable the shop
         inUI = false;
         if(instantiatedTalkUI != null)

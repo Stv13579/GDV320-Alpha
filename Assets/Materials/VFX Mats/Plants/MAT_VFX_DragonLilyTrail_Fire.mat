@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MAT_VFX_DragonLilyTrail_Fire
+  m_Shader: {fileID: 4800000, guid: dd814b26c336682468c136dd8483cadf, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _ExtraTex_Slot1:
+        m_Texture: {fileID: 2800000, guid: be47f903924282b47803625b7592708e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ExtraTex_Slot2:
+        m_Texture: {fileID: 2800000, guid: bcf9928001deb8c4485e99ef210908a9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Gradient_Tex1:
+        m_Texture: {fileID: 2800000, guid: 1a5c24b58c99a884a9b4691754c940c9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Gradient_Tex2:
+        m_Texture: {fileID: 2800000, guid: 0657a5221c5250d42b0a4fbf87afb555, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Gradient_Tex3:
+        m_Texture: {fileID: 2800000, guid: c3d20a68aa4c8a04abb967b6770ab1db, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainCentreBeam:
+        m_Texture: {fileID: 2800000, guid: 8b9790e1445f49640a8caeb52392efd2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _StrenghtTex1: 5
+    - _StrenghtTex2: 21.59
+    - _StrenghtTex3: 10
+    - _VoronoiScale: 5.73
+    - _Voronoi_Angle: 3
+    m_Colors:
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ExtraTexSlot2_PannerSpeed: {r: -2, g: 0, b: 0, a: 0}
+    - _ExtraTexSlot_PannerSpeed: {r: -3, g: 0, b: 0, a: 0}
+    - _MainCentreBeam_PannerSpeed: {r: -5, g: 0, b: 0, a: 0}
+    - _RemapXCoords: {r: 0, g: -1.5, b: 1.04, a: 0.88}
+    - _VoronoiColour: {r: 25.09804, g: 0, b: 0, a: 0}
+    - _Voronoi_Tiling: {r: 0.18, g: -1.9, b: 0, a: 5.1}

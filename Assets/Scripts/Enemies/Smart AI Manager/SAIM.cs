@@ -802,9 +802,6 @@ public class SAIM : MonoBehaviour
 
         }
 
-
-       
-
         //See difficulty difference and make changes to spawning and behaviour as appropriate.
         SetBasedOnDiffculty();
 

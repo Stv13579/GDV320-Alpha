@@ -65,10 +65,16 @@ public class GameplayUI : MonoBehaviour
         Vector2 leftMana = player.GetLeftMana();
         leftActiveFill.fillAmount = leftMana.x / leftMana.y;
 
+        Vector2 leftNextMana = player.GetNextLeftMana();
+        leftInactiveFill.fillAmount = leftNextMana.x / leftNextMana.y;
+
         //leftManaText.text = leftMana[0] + "/" + leftMana[1];
 
         Vector2 rightMana = player.GetRightMana();
         rightActiveFill.fillAmount = rightMana.x / rightMana.y;
+
+        Vector2 rightNextMana = player.GetNextRightMana();
+        rightInactiveFill.fillAmount = rightNextMana.x / rightNextMana.y;
 
         //rightManaText.text = rightMana[0] + "/" + rightMana[1];
 
@@ -103,6 +109,19 @@ public class GameplayUI : MonoBehaviour
             items[itemIndex].enabled = true;
             items[itemIndex].transform.GetChild(0).GetComponent<Image>().enabled = true;
             itemIndex++;
+        }
+    }
+
+    public void RemoveItem(Sprite[] sprites)
+    {
+        if (itemIndex > items.Count)
+        {
+            itemIndex--;
+            items[itemIndex].sprite = sprites[0];
+            items[itemIndex].transform.GetChild(0).GetComponent<Image>().sprite = sprites[1];
+            items[itemIndex].enabled = false;
+            items[itemIndex].transform.GetChild(0).GetComponent<Image>().enabled = false;
+            
         }
     }
 

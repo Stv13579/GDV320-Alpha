@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7190613651226108049}
   - component: {fileID: 7190613651226108048}
   - component: {fileID: 7190613651226108055}
-  - component: {fileID: 7190613651226108054}
   - component: {fileID: 7190613651226108053}
+  - component: {fileID: 7533734960462683760}
   m_Layer: 22
   m_Name: RangedCrystalProjectile
   m_TagString: Untagged
@@ -30,7 +30,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2826634695660366544}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7190613651226108052}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -81,19 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &7190613651226108054
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7190613651226108052}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7190613651226108053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,5 +94,92 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689c817e1cfcb0a499adbd57b00b2e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  damage: 0
+--- !u!136 &7533734960462683760
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7190613651226108052}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 3.43
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &7060163421284870
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7190613651226108049}
+    m_Modifications:
+    - target: {fileID: 2820146625247789270, guid: 7d4019a9a4f0b614f82f8d522d79f2c9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820146625247789270, guid: 7d4019a9a4f0b614f82f8d522d79f2c9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820146625247789270, guid: 7d4019a9a4f0b614f82f8d522d79f2c9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820146625247789270, guid: 7d4019a9a4f0b614f82f8d522d79f2c9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820146625247789270, guid: 7d4019a9a4f0b614f82f8d522d79f2c9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820146625247789270, guid: 7d4019a9a4f0b614f82f8d522d79f2c9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820146625247789270, guid: 7d4019a9a4f0b614f82f8d522d79f2c9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820146625247789270, guid: 7d4019a9a4f0b614f82f8d522d79f2c9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820146625247789270, guid: 7d4019a9a4f0b614f82f8d522d79f2c9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820146625247789270, guid: 7d4019a9a4f0b614f82f8d522d79f2c9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820146625247789270, guid: 7d4019a9a4f0b614f82f8d522d79f2c9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482255962340157670, guid: 7d4019a9a4f0b614f82f8d522d79f2c9,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_RangedEnemy_CrystalProjectile
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d4019a9a4f0b614f82f8d522d79f2c9, type: 3}
+--- !u!4 &2826634695660366544 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2820146625247789270, guid: 7d4019a9a4f0b614f82f8d522d79f2c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7060163421284870}
+  m_PrefabAsset: {fileID: 0}

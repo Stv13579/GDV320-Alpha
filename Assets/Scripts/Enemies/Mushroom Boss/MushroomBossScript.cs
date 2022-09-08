@@ -20,6 +20,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 	Vector3 bestNodePos = Vector3.zero;
 	float contactTimer = 0.0f;
 	CharacterController controller;
+	Rigidbody rb;
 
     public override void Awake()
     {
@@ -35,6 +36,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
     {
 	    StartCoroutine(FindNode());
 	    controller = GetComponent<CharacterController>();
+	    rb = GetComponent<Rigidbody>();
 
     }
     public override void Update()
@@ -50,9 +52,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 
         if (!attacking)
         {
-        	
-        	//Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
-        	
+        	        	
 	        if (Vector3.Distance(this.transform.position, player.transform.position) < 15)
             {
 
@@ -74,8 +74,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
         //{
         //    movement += new Vector3(0, gravity, 0);
         //}
-	    this.transform.position += movement;
-	    controller.Move(movement);
+	    rb.velocity = movement;
     }
 
     IEnumerator FindNode()
