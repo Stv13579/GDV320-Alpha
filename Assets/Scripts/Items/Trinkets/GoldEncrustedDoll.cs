@@ -6,6 +6,7 @@ public class GoldEncrustedDoll : Trinket
 {
     [SerializeField]
     DropsList dropList;
+
     public override void AddEffect(PlayerClass player)
     {
         base.AddEffect(player);

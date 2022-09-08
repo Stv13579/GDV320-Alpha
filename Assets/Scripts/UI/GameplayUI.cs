@@ -112,6 +112,19 @@ public class GameplayUI : MonoBehaviour
         }
     }
 
+    public void RemoveItem(Sprite[] sprites)
+    {
+        if (itemIndex > items.Count)
+        {
+            itemIndex--;
+            items[itemIndex].sprite = sprites[0];
+            items[itemIndex].transform.GetChild(0).GetComponent<Image>().sprite = sprites[1];
+            items[itemIndex].enabled = false;
+            items[itemIndex].transform.GetChild(0).GetComponent<Image>().enabled = false;
+            
+        }
+    }
+
     void ChangeCombo(Transform uiObject, bool doCombo)
     {
         if(doCombo)
