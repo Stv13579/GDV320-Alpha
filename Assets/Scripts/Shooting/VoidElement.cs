@@ -59,16 +59,19 @@ public class VoidElement : BaseElementClass
                 averageNorm.Normalize();
                 //Set the target pos to the average position
                 Indicator.transform.position = averagePos;
+                targetPos = averagePos;
                 Vector3 size = this.gameObject.GetComponent<CharacterController>().bounds.size;
                 //Move the target position out slightly by the average normal
                 Indicator.transform.position += new Vector3(averageNorm.x * size.x, averageNorm.y * size.y, averageNorm.z * size.z);
+                targetPos += new Vector3(averageNorm.x * size.x, averageNorm.y * size.y, averageNorm.z * size.z);
             }
             else
             {
-                Indicator.transform.position = this.transform.position + Camera.main.transform.forward * trueDashDistance;
+                Indicator.transform.position = this.transform.position + Camera.main.transform.forward * (trueDashDistance / 2);
+                targetPos = this.transform.position + Camera.main.transform.forward * trueDashDistance;
             }
             //targetPos = (this.transform.position + Camera.main.transform.forward * trueDashDistance * 1.5f);
-            targetPos = Indicator.transform.position;
+            //targetPos = Indicator.transform.position;
         }
         //Checking if the mouse button has been released at a certain distance, cancels the spell
         if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") && trueDashDistance < 10 ||
