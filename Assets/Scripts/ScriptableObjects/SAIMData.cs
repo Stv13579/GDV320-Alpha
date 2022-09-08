@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SAIM Data")]
 public class SAIMData : ScriptableObject
 {
-
     [SerializeField]
     public List<GameObject> enemyTypes;
 
@@ -45,4 +44,9 @@ public class SAIMData : ScriptableObject
     public int playerDamageThreshold;
 
     public int enemyKillThreshold;
+
+    public void ResetDifficulty()
+    {
+        adjustedDifficulty = 1;
+    }    
 }

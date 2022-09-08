@@ -53,6 +53,8 @@ public class GameOverScreen : MonoBehaviour
     public void ReturnToHub()
     {
         Destroy(GameObject.Find("Player"));
+        Destroy(GameObject.Find("ProphecyManager"));
+        FindObjectOfType<SAIM>().data.ResetDifficulty();
         operation.allowSceneActivation = true;
     }
 

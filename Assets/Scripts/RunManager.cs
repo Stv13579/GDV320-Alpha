@@ -42,5 +42,11 @@ public class RunManager : MonoBehaviour
         {
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRunUpdate();
         }
+
+        if(FindObjectOfType<BossRoom>())
+        {
+            FindObjectOfType<BossRoom>().GetList().ResetList();
+        }
+
     }
 }
