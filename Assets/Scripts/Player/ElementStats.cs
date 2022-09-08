@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class ElementStats : ScriptableObject
+public class ElementStats : MonoBehaviour
 {
     public List<Multiplier> crystaldamageMultis = new List<Multiplier>();
     public List<Multiplier> fireDamageMultis = new List<Multiplier>();

@@ -18,6 +18,11 @@ public class RunManager : MonoBehaviour
        
     }
 
+    private void Awake()
+    {
+        player = GameObject.Find("Player");
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -42,5 +47,11 @@ public class RunManager : MonoBehaviour
         {
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRunUpdate();
         }
+
+        if(FindObjectOfType<BossRoom>())
+        {
+            FindObjectOfType<BossRoom>().GetList().ResetList();
+        }
+
     }
 }

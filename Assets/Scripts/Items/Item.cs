@@ -19,13 +19,13 @@ public class Item : MonoBehaviour
     {
         player.itemUI.transform.parent.gameObject.GetComponent<GameplayUI>().AddItem(sprites);
         player.heldItems.Add(this);
-        elementData = Resources.Load<ElementStats>("Element/ElementData");
+        elementData = player.GetComponent<ElementStats>();
 
     }
 
     public virtual void RemoveEffect()
     {
-
+        FindObjectOfType<PlayerClass>().itemUI.transform.parent.gameObject.GetComponent<GameplayUI>().RemoveItem(sprites);
     }
 
     //Called by certain actions which might trigger an item effect e.g. a particular attack.

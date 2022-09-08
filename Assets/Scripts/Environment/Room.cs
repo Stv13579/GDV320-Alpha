@@ -26,10 +26,7 @@ public class Room : MonoBehaviour
     {
         levelGenerator = GameObject.Find("Level Generator").GetComponent<LevelGeneration>();
         roomTrigger = transform.Find("RoomTriggerBox").gameObject;
-        if(GameObject.Find("Run Manager"))
-        {
-            GameObject.Find("Run Manager").GetComponent<RunManager>().StartNewLevel();
-        }
+        
 
         this.GetComponent<TerrainCollider>().enabled = false;
         this.GetComponent<TerrainCollider>().enabled = true;
@@ -96,8 +93,10 @@ public class Room : MonoBehaviour
     void SetLocked(string doorToLock)
     {
         activeDoors.Add(transform.Find(doorToLock).gameObject);
-        activeDoors[activeDoors.Count - 1].transform.Find("ClosedGateway").gameObject.SetActive(false);
-        activeDoors[activeDoors.Count - 1].transform.Find("LockedGateway").gameObject.SetActive(false);
+        transform.Find(doorToLock).gameObject.transform.Find("ClosedGateway").gameObject.SetActive(false);
+        transform.Find(doorToLock).gameObject.transform.Find("LockedGateway").gameObject.SetActive(false);
+        //activeDoors[activeDoors.Count - 1].transform.Find("ClosedGateway").gameObject.SetActive(false);
+        //activeDoors[activeDoors.Count - 1].transform.Find("LockedGateway").gameObject.SetActive(false);
     }
 
     //Inaccessible routes
