@@ -93,8 +93,10 @@ public class Room : MonoBehaviour
     void SetLocked(string doorToLock)
     {
         activeDoors.Add(transform.Find(doorToLock).gameObject);
-        activeDoors[activeDoors.Count - 1].transform.Find("ClosedGateway").gameObject.SetActive(false);
-        activeDoors[activeDoors.Count - 1].transform.Find("LockedGateway").gameObject.SetActive(false);
+        transform.Find(doorToLock).gameObject.transform.Find("ClosedGateway").gameObject.SetActive(false);
+        transform.Find(doorToLock).gameObject.transform.Find("LockedGateway").gameObject.SetActive(false);
+        //activeDoors[activeDoors.Count - 1].transform.Find("ClosedGateway").gameObject.SetActive(false);
+        //activeDoors[activeDoors.Count - 1].transform.Find("LockedGateway").gameObject.SetActive(false);
     }
 
     //Inaccessible routes

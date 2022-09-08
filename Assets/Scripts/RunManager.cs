@@ -18,6 +18,11 @@ public class RunManager : MonoBehaviour
        
     }
 
+    private void Awake()
+    {
+        player = GameObject.Find("Player");
+    }
+
     // Update is called once per frame
     void Update()
     {
