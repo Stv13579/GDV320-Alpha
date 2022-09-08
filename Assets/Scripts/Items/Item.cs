@@ -25,7 +25,7 @@ public class Item : MonoBehaviour
 
     public virtual void RemoveEffect()
     {
-
+        FindObjectOfType<PlayerClass>().itemUI.transform.parent.gameObject.GetComponent<GameplayUI>().RemoveItem(sprites);
     }
 
     //Called by certain actions which might trigger an item effect e.g. a particular attack.
