@@ -36,8 +36,10 @@ public class BaseElementClass : MonoBehaviour
 
     //Variables for UI purposes
     public string elementName;
+    public string elementDescription;
     public Sprite uiSprite;
     public Sprite crosshair;
+    public HoverOver.LoadoutVariables lVars;
 
     //Additional variables for the blacksmith
     public int upgradeCost = 5;
@@ -121,8 +123,9 @@ public class BaseElementClass : MonoBehaviour
         StasisTrap = 209
     }
     [SerializeField]
-    public ElementType currentElementType = ElementType.Fire;
+    protected ElementType currentElementType = ElementType.None;
 
+    public ElementType GetCurrentElementType() { return currentElementType; }
     public string GetSwitchElementSFX() { return switchElementSFX; }
     public bool GetStartCoolDown() { return startCoolDown; }
     public string GetIdleSFX() { return idleSFX; }
@@ -134,6 +137,9 @@ public class BaseElementClass : MonoBehaviour
 
     protected virtual void Start()
     {
+        lVars.Name = elementName;
+        lVars.Icon = uiSprite;
+        lVars.Description = elementDescription;
         player = GameObject.Find("Player");
         playerClass = player.GetComponent<PlayerClass>();
         //shootingTranform = GameObject.Find("Elements").transform;

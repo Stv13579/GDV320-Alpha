@@ -5,8 +5,20 @@ using UnityEngine.EventSystems;
 
 public class HoverOver : MonoBehaviour, IPointerEnterHandler
 {
+    [System.Serializable]
+    public struct LoadoutVariables
+    {
+        public string Description;
+        public string Name;
+        public Sprite Icon;
+    }
+
     [SerializeField]
-    protected DraggedObject.LoadoutVariables lVars;
+    protected LoadoutVariables lVars;
+    public LoadoutVariables GetVars() { return lVars; }
+
+
+
     public void SetLoadoutVariables(DraggedObject.LoadoutVariables newVars) { lVars = newVars; }
 
     public virtual void OnPointerEnter(PointerEventData pData)
@@ -17,6 +29,7 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler
         //Do description vars and name in details box
         DetailsWindow deetBox = GameObject.Find("DetailsWindow").GetComponent<DetailsWindow>();
         deetBox.SetWindow(lVars.Description, lVars.Name);
+
         
     }
 

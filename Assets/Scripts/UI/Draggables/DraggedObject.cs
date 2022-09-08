@@ -3,26 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggedObject : MonoBehaviour
+public class DraggedObject : HoverOver
 {
-    [System.Serializable]
-    public struct LoadoutVariables
-    {
-        public string Description;
-        public string Name;
-    }
-
-    [SerializeField]
-    LoadoutVariables lVars;
-    public LoadoutVariables GetVars() { return lVars; }
-
-    [SerializeField]
-    Sprite icon;
+    
 
     public virtual void Equip(DragSlot slot) 
     {
-        slot.SetIcon(icon);
         slot.SetLoadoutVariables(lVars);
+        
     }
 
     void Update()

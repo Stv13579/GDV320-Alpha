@@ -12,12 +12,12 @@ public class DragSlot : HoverOver, IPointerEnterHandler, IPointerExitHandler, IP
 
     protected DraggedObject equippingObject;
 
-    
+    public DraggedObject GetEquippingObj() { return equippingObject; }
 
     [SerializeField]
     Image equippedIcon;
 
-    public void SetIcon(Sprite equipping) { equippedIcon.sprite = equipping; }
+    public void SetIcon() { equippedIcon.sprite = lVars.Icon; }
 
     public override void OnPointerEnter(PointerEventData pData)
     {
@@ -28,6 +28,7 @@ public class DragSlot : HoverOver, IPointerEnterHandler, IPointerExitHandler, IP
             //Put that object in this slot
             equippingObject = (DraggedObject)FindObjectOfType(System.Type.GetType(type));
             equippingObject.Equip(this);
+            SetIcon();
             equippedIcon.enabled = true;
         }
 
