@@ -70,10 +70,10 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
         this.gameObject.transform.LookAt(positionToMoveTo);
         this.gameObject.transform.eulerAngles = new Vector3(0, this.gameObject.transform.eulerAngles.y, 0);
         movement = this.transform.forward * speed * Time.deltaTime;
-	    if (!controller.isGrounded)
-        {
-            movement += new Vector3(0, gravity, 0);
-        }
+	    //if (!controller.isGrounded)
+        //{
+        //    movement += new Vector3(0, gravity, 0);
+        //}
 	    rb.velocity = movement;
     }
 

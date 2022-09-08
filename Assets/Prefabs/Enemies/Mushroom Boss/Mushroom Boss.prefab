@@ -148,7 +148,7 @@ MonoBehaviour:
   damageAmount: 0
   baseDamageAmount: 0
   moveSpeed: 1
-  baseMoveSpeed: 200
+  baseMoveSpeed: 50
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 0}
@@ -166,7 +166,6 @@ MonoBehaviour:
   bossHealthbar: {fileID: 6299793086757786782, guid: 9f18c4d05787113469db983280c132c5,
     type: 3}
   gravity: -1
-  rb: {fileID: -6729614984893795230}
 --- !u!143 &591729758280582792
 CharacterController:
   m_ObjectHideFlags: 0
@@ -176,7 +175,7 @@ CharacterController:
   m_GameObject: {fileID: 1768930533829934408}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 13
   m_Radius: 5
@@ -193,13 +192,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768930533829934408}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &5923152022923209447
 GameObject:
