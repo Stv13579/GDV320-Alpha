@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float slopeSpeed;
     private Vector3 hitPointNormal;
-    private bool isSlidng
+    private bool isSliding
     {
         get
         {
@@ -180,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
 
         // if on a slope bigger then the slope limit
         // push play off the slope
-        if (willSlideOnSlopes && isSlidng)
+        if (willSlideOnSlopes && isSliding)
         {
             velocity += new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z).normalized * slopeSpeed;
             //isGrounded = false;

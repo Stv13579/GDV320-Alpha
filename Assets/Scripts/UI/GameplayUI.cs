@@ -192,6 +192,9 @@ public class GameplayUI : MonoBehaviour
             hitMarker.transform.GetChild(8).gameObject.SetActive(true);
         }
         yield return new WaitForSeconds(0.2f);
-        hitMarker.transform.GetChild(8).gameObject.SetActive(false);
+        if (hitMarker)
+        {
+            hitMarker.transform.GetChild(8).gameObject.SetActive(false);
+        }
     }
 }

@@ -119,9 +119,9 @@ public class BaseEnemyClass : MonoBehaviour
 
         if(uiScript)
         {
-            if(uiScript.GetHitMarker().activeInHierarchy == true)
+            if(uiScript.GetHitMarker().transform.GetChild(8).gameObject.activeInHierarchy == true)
             {
-                StopCoroutine(uiScript.HitMarker());
+                StartCoroutine(uiScript.HitMarker());
             }
         }
     }
