@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class WaterProjectile : BaseElementSpawnClass
 {
-    private float speed;
+    float speed;
 
-    private float damage;
+    float damage;
 
-    private float projectileLifetime = 100;
+    float projectileLifetime = 100;
 
     [SerializeField]
-    private LayerMask bounceLayers;
+    LayerMask bounceLayers;
 
+    AudioManager audioManager;
+
+    GameObject player;
+    private void Awake()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+        player = GameObject.Find("Player");
+    }
     private void Update()
     {
         if (projectileLifetime > 0)
@@ -54,11 +62,20 @@ public class WaterProjectile : BaseElementSpawnClass
         {
             this.transform.forward = Vector3.Reflect(this.transform.forward, collision.contacts[0].normal);
             //this.transform.eulerAngles = new Vector3(0, this.transform.rotation.y, 0);
+            if(audioManager)
+            {
+                audioManager.StopSFX("Water Element Impact");
+                audioManager.PlaySFX("Water Element Impact", player.transform, this.transform);
+            }
         }
         if(collision.collider.tag == "Enemy")
         {
             collision.collider.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            Debug.Log(collision.collider.gameObject.name);
+            if (audioManager)
+            {
+                audioManager.StopSFX("Water Element Impact");
+                audioManager.PlaySFX("Water Element Impact", player.transform, this.transform);
+            }
         }
     }
 }

@@ -85,8 +85,7 @@ public class BaseEnemyClass : MonoBehaviour
 
     protected Vector3 oldPosition;
 
-	private GameObject hitMarker;
-
+    GameplayUI uiScript;
     public virtual void Awake()
     {
         prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
@@ -97,7 +96,7 @@ public class BaseEnemyClass : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         oldPosition = new Vector3(-1000, -1000, -1000);
         enemyAnims = GetComponentInChildren<Animator>();
-        hitMarker = GameObject.Find("GameplayUI");
+        uiScript = FindObjectOfType<GameplayUI>();
         health.baseValue = baseMaxHealth;
         damage.baseValue = baseDamageAmount;
         speed.baseValue = baseMoveSpeed;
@@ -118,6 +117,13 @@ public class BaseEnemyClass : MonoBehaviour
         damageAmount = StatModifier.UpdateValue(damage);
         moveSpeed = StatModifier.UpdateValue(speed);
 
+        if(uiScript)
+        {
+            if(uiScript.GetHitMarker().activeInHierarchy == true)
+            {
+                StopCoroutine(uiScript.HitMarker());
+            }
+        }
     }
 
     //Movement
@@ -179,10 +185,11 @@ public class BaseEnemyClass : MonoBehaviour
         {
             enemyAnims.SetTrigger("TakeDamage");
         }
-
-        StopCoroutine(HitMarker());
-        StartCoroutine(HitMarker());
-
+        if (uiScript)
+        {
+            StopCoroutine(uiScript.HitMarker());
+            StartCoroutine(uiScript.HitMarker());
+        }
         if (audioManager)
         {
             audioManager.StopSFX(takeDamageAudio);
@@ -261,15 +268,6 @@ public class BaseEnemyClass : MonoBehaviour
         }
     }
 
-    IEnumerator HitMarker()
-    {
-        if (hitMarker)
-        {
-            hitMarker.transform.GetChild(8).gameObject.SetActive(true);
-        }
-        yield return new WaitForSeconds(0.2f);
-        hitMarker.transform.GetChild(8).gameObject.SetActive(false);
-    }
     public void Targetted(bool targetted, Color colour)
     {
         if(targettingIndicator.active == false && targetted == true)
