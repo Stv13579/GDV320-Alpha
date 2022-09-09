@@ -72,6 +72,7 @@ public class PlayerClass : MonoBehaviour
     //private Material fireMaterial;
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         currentHealth = baseMaxHealth;
         health.baseValue = baseMaxHealth;
         defenseStat.baseValue = baseDefense;
@@ -89,6 +90,7 @@ public class PlayerClass : MonoBehaviour
     public void StartLevel()
     {
         itemUI = GameObject.Find("ItemArray");
+        ;
     }
 
     void Update()

@@ -11,6 +11,8 @@ public class Shooting : MonoBehaviour
     private List<BaseElementClass> catalystElements;
     [SerializeField]
     private List<ComboElementList> comboElements;
+
+    public BaseElementClass blankElement;
     
     //Sets the combo elements based on the current base elements
     public BaseElementClass CalculateCombo(BaseElementClass primary, BaseElementClass catalyst)

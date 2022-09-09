@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class HoverOver : MonoBehaviour, IPointerEnterHandler
+public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [System.Serializable]
     public struct LoadoutVariables
@@ -17,8 +18,18 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler
     protected LoadoutVariables lVars;
     public LoadoutVariables GetVars() { return lVars; }
 
+    [SerializeField]
+    Image highlight;
+
+    [SerializeField]
+    Color hoveredAlpha;
+    Color idleAlpha;
 
 
+    private void Awake()
+    {
+        idleAlpha = highlight.color;
+    }
     public void SetLoadoutVariables(DraggedObject.LoadoutVariables newVars) { lVars = newVars; }
 
     public virtual void OnPointerEnter(PointerEventData pData)
@@ -29,8 +40,25 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler
         //Do description vars and name in details box
         DetailsWindow deetBox = GameObject.Find("DetailsWindow").GetComponent<DetailsWindow>();
         deetBox.SetWindow(lVars.Description, lVars.Name);
+        if(!highlight)
+        {
+            return;
+        }
+        Color hAl = highlight.color;
+        hAl.a = hoveredAlpha.a;
+        highlight.color = hAl;
+    }
 
-        
+    public virtual void OnPointerExit(PointerEventData pData)
+    {
+        if(!highlight)
+        {
+            return;
+        }
+
+        Color hAl = highlight.color;
+        hAl.a = idleAlpha.a;
+        highlight.color = hAl;
     }
 
     public virtual void ClearSlot()

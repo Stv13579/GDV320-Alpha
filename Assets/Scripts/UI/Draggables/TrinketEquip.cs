@@ -21,8 +21,9 @@ public class TrinketEquip : DraggedObject
         if(FindObjectOfType<PlayerClass>().heldItems.Count > 0)
         {
 
-            FindObjectOfType<PlayerClass>().heldItems.Clear();
             FindObjectOfType<PlayerClass>().heldItems[0].RemoveEffect();
+            FindObjectOfType<PlayerClass>().heldItems.Clear();
+            
 
         }
 
