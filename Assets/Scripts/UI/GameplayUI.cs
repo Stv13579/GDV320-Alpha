@@ -114,13 +114,18 @@ public class GameplayUI : MonoBehaviour
 
     public void RemoveItem(Sprite[] sprites)
     {
-        if (itemIndex > items.Count)
+
+        foreach (Image item in items)
         {
-            itemIndex--;
-            items[itemIndex].sprite = sprites[0];
-            items[itemIndex].transform.GetChild(0).GetComponent<Image>().sprite = sprites[1];
-            items[itemIndex].enabled = false;
-            items[itemIndex].transform.GetChild(0).GetComponent<Image>().enabled = false;
+            if(item.sprite == sprites[0])
+            {
+                item.sprite = sprites[0];
+                item.transform.GetChild(0).GetComponent<Image>().sprite = sprites[1];
+                item.enabled = false;
+                item.transform.GetChild(0).GetComponent<Image>().enabled = false;
+                itemIndex--;
+            }
+            
             
         }
     }

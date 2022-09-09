@@ -78,15 +78,15 @@ public class ElementSlots : DragSlot
 
         if (isPrimary)
         {
-            player.GetPrimaryElements()[elementSlot] = new BaseElementClass();
-            player.GetComboElements()[elementSlot].comboElements[0] = new BaseElementClass();
-            player.GetComboElements()[elementSlot].comboElements[1] = new BaseElementClass();
+            player.GetPrimaryElements()[elementSlot] = player.blankElement;
+            player.GetComboElements()[elementSlot].comboElements[0] = player.blankElement;
+            player.GetComboElements()[elementSlot].comboElements[1] = player.blankElement;
         }
         else
         {
-            player.GetCatalystElements()[elementSlot] = new BaseElementClass();
-            player.GetComboElements()[0].comboElements[elementSlot] = new BaseElementClass();
-            player.GetComboElements()[1].comboElements[elementSlot] = new BaseElementClass();
+            player.GetCatalystElements()[elementSlot] = player.blankElement;
+            player.GetComboElements()[0].comboElements[elementSlot] =  player.blankElement;
+            player.GetComboElements()[1].comboElements[elementSlot] = player.blankElement;
         }
         
     }

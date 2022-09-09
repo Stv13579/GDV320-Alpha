@@ -12,6 +12,8 @@ public class DragSlot : HoverOver, IPointerEnterHandler, IPointerExitHandler, IP
 
     protected DraggedObject equippingObject;
 
+
+
     public DraggedObject GetEquippingObj() { return equippingObject; }
 
     [SerializeField]
@@ -35,8 +37,9 @@ public class DragSlot : HoverOver, IPointerEnterHandler, IPointerExitHandler, IP
         //Do description vars and name in details box
     }
 
-    public void OnPointerExit(PointerEventData pData)
+    public override void OnPointerExit(PointerEventData pData)
     {
+        base.OnPointerExit(pData);
         if (Input.GetKey(KeyCode.Mouse0))
         {
             ClearSlot();
