@@ -25,13 +25,27 @@ public class BossRoom : Room
     [SerializeField]
     Transform portalSpawnPosition;
 
-    public BossList GetList() { return bosses; }
+    // audio manager
+    AudioManager audioManager;
 
+    RunManager runManager;
+    public BossList GetList() { return bosses; }
+    void Awake()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+        runManager = FindObjectOfType<RunManager>();
+    }
     public void Update()
     {
         base.Update();
-        
-        if(bossSpawned)
+
+        // need to fix boss audio with saim audio
+        //if (audioManager)
+        //{
+        //    audioManager.FadeOutAndPlayMusic($"Level {runManager.GetSceneIndex() - 1} Non Combat", $"Level {runManager.GetSceneIndex() - 1} Boss");
+        //}
+
+        if (bossSpawned)
         {
             if (FindObjectsOfType<BaseEnemyClass>().Length == 0 && !bossDead && bossSpawned)
             {
@@ -42,6 +56,12 @@ public class BossRoom : Room
                 bossDead = true;
 
                 Destroy(GameObject.Find("Boss Healthbar(Clone)"));
+                
+                //if the boss dies set this to true
+                if (audioManager)
+                {
+                    audioManager.SetCurrentStateToFadeOutAudio2();
+                }
             }
         }
 
@@ -54,6 +74,12 @@ public class BossRoom : Room
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(currentBoss, "Boss");
             //Lock the doors
             LockDoors();
+
+            // when the boss spawns set this to true
+            if (audioManager)
+            {
+                audioManager.SetCurrentStateToFadeOutAudio1();
+            }
         }
 
 

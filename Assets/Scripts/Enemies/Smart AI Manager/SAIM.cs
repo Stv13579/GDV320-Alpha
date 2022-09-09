@@ -109,24 +109,20 @@ public class SAIM : MonoBehaviour
 
     // Aydens Audio
     AudioManager audioManager;
-    [SerializeField]
-    private string initialMusic;
-    [SerializeField]
-    private string battleMusic;
 
+    RunManager runManager;
 
     [SerializeField]
     bool bossSaim = false;
 
-    public string GetInitialMusic() { return initialMusic; }
-    public string GetBattleMusic() { return battleMusic; }
-    public void SetInitialMusic(string tempInitialMusic) { initialMusic = tempInitialMusic; } 
-    public void SetBattleMusic(string tempBattleMusic) { battleMusic = tempBattleMusic; } 
-
-    private void Start()
+    void Awake()
     {
         //Aydens Audio manager
         audioManager = FindObjectOfType<AudioManager>();
+        runManager = FindObjectOfType<RunManager>();
+    }
+    private void Start()
+    {
 
         data.adjustedDifficulty = data.difficulty;
         data.player = GameObject.Find("Player");
@@ -149,7 +145,7 @@ public class SAIM : MonoBehaviour
     {
         if (audioManager)
         {
-            audioManager.FadeOutAndPlayMusic(initialMusic, battleMusic);
+            audioManager.FadeOutAndPlayMusic($"Level {runManager.GetSceneIndex() - 1} Non Combat", $"Level {runManager.GetSceneIndex() - 1} Combat");
         }
 
         if (!triggered || roomComplete)
