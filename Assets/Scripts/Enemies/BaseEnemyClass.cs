@@ -66,6 +66,9 @@ public class BaseEnemyClass : MonoBehaviour
     [HideInInspector]
     protected List<DeathTrigger> deathTriggers = new List<DeathTrigger>();
 
+    public delegate void HitTrigger(BaseEnemyClass ownedEnemy, List<Types> type);
+
+    protected List<HitTrigger> hitTriggers = new List<HitTrigger>();
 
     protected Vector3 moveDirection;
     protected AudioManager audioManager;
@@ -152,7 +155,7 @@ public class BaseEnemyClass : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
+    public virtual void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
     {
         hitSpawn.GetComponent<ParticleSystem>().Clear();
         hitSpawn.GetComponent<ParticleSystem>().Play();
@@ -160,6 +163,22 @@ public class BaseEnemyClass : MonoBehaviour
         //GameObject hitSpn = Instantiate(hitSpawn, transform.position, Quaternion.identity);
         //Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
         //hitSpn.transform.localScale = scale;
+        
+        
+        if(applyTriggers)
+        {
+            foreach (Item item in playerClass.heldItems)
+            {
+                item.OnHitTriggers(this, attackTypes);
+            }
+
+            //Call all hit triggers; effects which trigger whenever the enemy is hit
+            foreach (HitTrigger hTrigs in hitTriggers)
+            {
+                hTrigs(this, attackTypes);
+            }
+        }
+        
 
         float multiplier = 1;
         foreach (Types type in attackTypes)
@@ -198,7 +217,7 @@ public class BaseEnemyClass : MonoBehaviour
         Death();
     }
 
-    //Death
+    //Checks if the enemy has died and applies relevant behaviour, such as triggering any on death effects, before destroying it
     public virtual void Death()
     {
         if(isDead)
@@ -334,6 +353,10 @@ public class BaseEnemyClass : MonoBehaviour
     public List<DeathTrigger> GetDeathTriggers()
     {
         return deathTriggers;
+    }
+    public List<HitTrigger> GetHitTriggers()
+    {
+        return hitTriggers;
     }
 
     public StatModifier.FullStat GetHealthStat()

@@ -14,7 +14,7 @@ public class SporeCloudScript : BaseEnemyClass
         contactTimer -= Time.deltaTime;
     }
 
-    public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
+    public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
     {
         if(attackTypes.Contains(Types.Fire) && !onFire)
         {

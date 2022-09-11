@@ -39,6 +39,14 @@ public class Item : MonoBehaviour
 
     }
 
+
+
+    //Called whenever the player hits an enemy (specifically the take damage function in enemy)
+    public virtual void OnHitTriggers(BaseEnemyClass enemyHit, List<BaseEnemyClass.Types> types)
+    {
+
+    }
+
     public virtual void SpawnTrigger(GameObject enemySpawning)
     {
 

@@ -243,9 +243,9 @@ public class WaterSlimeEnemy : BaseEnemyClass
 
     }
     
-	public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
+	public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
 	{
-		base.TakeDamage(damageToTake, attackTypes, extraSpawnScale);
+		base.TakeDamage(damageToTake, attackTypes, extraSpawnScale, applyTriggers);
 		this.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Renderer>().material.SetFloat("_IsBeingDamaged", 1);
 		hurtTimer = 0.2f;
 	}

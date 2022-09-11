@@ -36,7 +36,6 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         Debug.Log("Hovering Over");
 
-
         //Do description vars and name in details box
         DetailsWindow deetBox = GameObject.Find("DetailsWindow").GetComponent<DetailsWindow>();
         deetBox.SetWindow(lVars.Description, lVars.Name);

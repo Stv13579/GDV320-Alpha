@@ -476,9 +476,9 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         
     }
     //If the slime gets to hald health, spit into two new slimes
-    public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
+    public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
     {
-        base.TakeDamage(damageToTake, attackTypes, 2);
+        base.TakeDamage(damageToTake, attackTypes, 2, applyTriggers);
         if(currentHealth <= maxHealth / 2 && !split)
         {
             Split(gameObject);
