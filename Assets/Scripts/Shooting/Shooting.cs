@@ -257,12 +257,35 @@ public class Shooting : MonoBehaviour
             if (inComboMode)
             {
                 comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
+
+                // change combo element orbs 
+                if (leftOrbPos.childCount < 2 && rightOrbPos.childCount < 2)
+                {
+                    Destroy(rightOrbPos.GetChild(0).gameObject);
+                    Destroy(leftOrbPos.GetChild(0).gameObject);
+                }
+                // checks for wrist VFXs
+                if (rightOrbPos.parent.parent.childCount == 2)
+                {
+                    Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
+                }
             }
             else
             {
                 if (audioManager)
                 {
                     audioManager.StopSFX(primaryElements[leftElementIndex].GetIdleSFX());
+                }
+
+                // destroys the current orb
+                if(leftOrbPos.childCount < 2)
+                {
+                    Destroy(leftOrbPos.GetChild(0).gameObject);
+                }
+                // checks for wrist VFXs
+                if (leftOrbPos.parent.parent.childCount == 2)
+                {
+                    Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
                 }
             }
             
@@ -280,15 +303,6 @@ public class Shooting : MonoBehaviour
                 audioManager.PlaySFX(primaryElements[leftElementIndex].GetSwitchElementSFX());
             }
 
-            // destroys the current orb
-            Destroy(leftOrbPos.GetChild(0).gameObject);
-
-
-            if (leftOrbPos.parent.parent.childCount == 2)
-            {
-                Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
-            }
-
             if (!inComboMode)
             {
                 // play animation to switch primary element
@@ -296,7 +310,10 @@ public class Shooting : MonoBehaviour
 
 
                 // instanciate primary element orbs 
-                Instantiate(primaryElements[leftElementIndex].GetHandVFX(), leftOrbPos);
+                if (leftOrbPos.childCount < 2)
+                {
+                    Instantiate(primaryElements[leftElementIndex].GetHandVFX(), leftOrbPos);
+                }
                 if (primaryElements[leftElementIndex].GetWristVFX())
                 {
                     Instantiate(primaryElements[leftElementIndex].GetWristVFX(), leftOrbPos.parent.parent);
@@ -307,18 +324,15 @@ public class Shooting : MonoBehaviour
                 // play animation to switch combo element
                 comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch(true);
 
-                // change combo element orbs 
-                Destroy(rightOrbPos.GetChild(0).gameObject);
-                if (rightOrbPos.parent.parent.childCount == 2)
+                if (leftOrbPos.transform.childCount < 2 && rightOrbPos.transform.childCount < 2)
                 {
-                    Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
-                }
-                Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), leftOrbPos);
-                Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), rightOrbPos);
-                if (comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX())
-                {
-                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX(), leftOrbPos.parent.parent);
-                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX(), rightOrbPos.parent.parent);
+                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), leftOrbPos);
+                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), rightOrbPos);
+                    if (comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX())
+                    {
+                        Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX(), leftOrbPos.parent.parent);
+                        Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX(), rightOrbPos.parent.parent);
+                    }
                 }
 
             }
@@ -330,6 +344,15 @@ public class Shooting : MonoBehaviour
             if (inComboMode)
             {
                 comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
+
+                // change the orbs for combo
+                Destroy(leftOrbPos.GetChild(0).gameObject);
+                Destroy(rightOrbPos.GetChild(0).gameObject);
+                // checks for wrist VFXs
+                if (leftOrbPos.parent.parent.childCount == 2)
+                {
+                    Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
+                }
             }
             else
             {
@@ -338,6 +361,17 @@ public class Shooting : MonoBehaviour
                     audioManager.StopSFX(catalystElements[rightElementIndex].GetIdleSFX());
                 }
                 catalystElements[rightElementIndex].LiftEffect();
+
+                // destroy orbs
+                if (rightOrbPos.childCount < 2)
+                {
+                    Destroy(rightOrbPos.GetChild(0).gameObject);
+                }
+                // checks for wrist VFXs
+                if (rightOrbPos.parent.parent.childCount == 2)
+                {
+                    Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
+                }
             }
 
             // changes element
@@ -354,13 +388,6 @@ public class Shooting : MonoBehaviour
                 audioManager.PlaySFX(catalystElements[rightElementIndex].GetSwitchElementSFX());
             }
 
-            // destroy orbs
-            Destroy(rightOrbPos.GetChild(0).gameObject);
-            if (rightOrbPos.parent.parent.childCount == 2)
-            {
-                Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
-            }
-
             // if not in combo mode
             if (!inComboMode)
             {
@@ -368,7 +395,10 @@ public class Shooting : MonoBehaviour
                 catalystElements[rightElementIndex].AnimationSwitch(false);
 
                 // instanciate catalyst orbs
-                Instantiate(catalystElements[rightElementIndex].GetHandVFX(), rightOrbPos);
+                if (rightOrbPos.childCount < 2)
+                {
+                    Instantiate(catalystElements[rightElementIndex].GetHandVFX(), rightOrbPos);
+                }
                 if (catalystElements[rightElementIndex].GetWristVFX())
                 {
                     Instantiate(catalystElements[rightElementIndex].GetWristVFX(), rightOrbPos.parent.parent);
@@ -380,18 +410,15 @@ public class Shooting : MonoBehaviour
                 // play animation for combo elements
                 comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch(true);
 
-                // change the orbs for combo
-                Destroy(leftOrbPos.GetChild(0).gameObject);
-                if (leftOrbPos.parent.parent.childCount == 2)
+                if (leftOrbPos.transform.childCount < 2 && rightOrbPos.transform.childCount < 2)
                 {
-                    Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
-                }
-                Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), leftOrbPos);
-                Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), rightOrbPos);
-                if (comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX())
-                {
-                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX(), leftOrbPos.parent.parent);
-                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX(), rightOrbPos.parent.parent);
+                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), leftOrbPos);
+                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), rightOrbPos);
+                    if (comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX())
+                    {
+                        Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX(), leftOrbPos.parent.parent);
+                        Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX(), rightOrbPos.parent.parent);
+                    }
                 }
             }
         }
@@ -417,10 +444,50 @@ public class Shooting : MonoBehaviour
             if (inComboMode)
             {
                 comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
+
+                // destroys orbs
+                if (rightOrbPos.childCount < 2)
+                {
+                    Destroy(leftOrbPos.GetChild(0).gameObject);
+                }
+                // checks for wrist VFXs
+                if (leftOrbPos.parent.parent.childCount == 2)
+                {
+                    Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
+                }
+                if (rightOrbPos.childCount < 2)
+                {
+                    Destroy(rightOrbPos.GetChild(0).gameObject);
+                }
+                // checks for wrist VFXs
+                if (rightOrbPos.parent.parent.childCount == 2)
+                {
+                    Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
+                }
             }
             else
             {
                 catalystElements[rightElementIndex].LiftEffect();
+
+                // destroys orbs
+                if (rightOrbPos.childCount < 2)
+                {
+                    Destroy(leftOrbPos.GetChild(0).gameObject);
+                }
+                // checks for wrist VFXs
+                if (leftOrbPos.parent.parent.childCount == 2)
+                {
+                    Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
+                }
+                if (rightOrbPos.childCount < 2)
+                {
+                    Destroy(rightOrbPos.GetChild(0).gameObject);
+                }
+                // checks for wrist VFXs
+                if (rightOrbPos.parent.parent.childCount == 2)
+                {
+                    Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
+                }
             }
 
             // sets the ui
@@ -434,18 +501,6 @@ public class Shooting : MonoBehaviour
                 // stops the idle sound effect for the non combo elements
                 audioManager.StopSFX(primaryElements[leftElementIndex].GetIdleSFX());
                 audioManager.StopSFX(catalystElements[rightElementIndex].GetIdleSFX());
-            }
-
-            // destroys orbs
-            Destroy(leftOrbPos.GetChild(0).gameObject);
-            if (leftOrbPos.parent.parent.childCount == 2)
-            {
-                Destroy(leftOrbPos.parent.parent.GetChild(1).gameObject);
-            }
-            Destroy(rightOrbPos.GetChild(0).gameObject);
-            if (rightOrbPos.parent.parent.childCount == 2)
-            {
-                Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
             }
 
             // if not in combo after switch
@@ -471,15 +526,18 @@ public class Shooting : MonoBehaviour
                 }
 
                 // change orbs for non combo elements
-                Instantiate(primaryElements[leftElementIndex].GetHandVFX(), leftOrbPos);
-                if (primaryElements[leftElementIndex].GetWristVFX())
+                if (leftOrbPos.transform.childCount < 2 && rightOrbPos.transform.childCount < 2)
                 {
-                    Instantiate(primaryElements[leftElementIndex].GetWristVFX(), leftOrbPos.parent.parent);
-                }
-                Instantiate(catalystElements[rightElementIndex].GetHandVFX(), rightOrbPos);
-                if (catalystElements[rightElementIndex].GetWristVFX())
-                {
-                    Instantiate(catalystElements[rightElementIndex].GetWristVFX(), rightOrbPos.parent.parent);
+                    Instantiate(primaryElements[leftElementIndex].GetHandVFX(), leftOrbPos);
+                    if (primaryElements[leftElementIndex].GetWristVFX())
+                    {
+                        Instantiate(primaryElements[leftElementIndex].GetWristVFX(), leftOrbPos.parent.parent);
+                    }
+                    Instantiate(catalystElements[rightElementIndex].GetHandVFX(), rightOrbPos);
+                    if (catalystElements[rightElementIndex].GetWristVFX())
+                    {
+                        Instantiate(catalystElements[rightElementIndex].GetWristVFX(), rightOrbPos.parent.parent);
+                    }
                 }
             }
             else
@@ -495,12 +553,15 @@ public class Shooting : MonoBehaviour
                 }
 
                 // change orbs for combo elements
-                Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), leftOrbPos);
-                Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), rightOrbPos);
-                if (comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX())
+                if (leftOrbPos.transform.childCount < 2 && rightOrbPos.transform.childCount < 2)
                 {
-                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX(), leftOrbPos.parent.parent);
-                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX(), rightOrbPos.parent.parent);
+                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), leftOrbPos);
+                    Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetHandVFX(), rightOrbPos);
+                    if (comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX())
+                    {
+                        Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX(), leftOrbPos.parent.parent);
+                        Instantiate(comboElements[leftElementIndex].comboElements[rightElementIndex].GetWristVFX(), rightOrbPos.parent.parent);
+                    }
                 }
             }
 
