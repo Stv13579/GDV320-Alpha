@@ -27,7 +27,7 @@ public class EnemyTestingUI : MonoBehaviour
             doneLocking = false;
             doneUnlocking = true;
         }
-
-        
     }
+
+
 }
