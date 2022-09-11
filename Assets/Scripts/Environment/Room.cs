@@ -24,12 +24,16 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
-        levelGenerator = GameObject.Find("Level Generator").GetComponent<LevelGeneration>();
-        roomTrigger = transform.Find("RoomTriggerBox").gameObject;
+        
         
 
         this.GetComponent<TerrainCollider>().enabled = false;
         this.GetComponent<TerrainCollider>().enabled = true;
+        
+        roomTrigger = transform.Find("RoomTriggerBox").gameObject;
+
+        if(GameObject.Find("Level Generator"))
+            levelGenerator = GameObject.Find("Level Generator").GetComponent<LevelGeneration>();
 
     }
 
