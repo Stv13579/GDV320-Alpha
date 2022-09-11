@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1684941436}
-  m_IndirectSpecularColor: {r: 0.0038784551, g: 0.0084829945, b: 0.02212788, a: 1}
+  m_IndirectSpecularColor: {r: 0.004156301, g: 0.008785212, b: 0.022002488, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5987,12 +5987,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!95 &748678192 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2017859571, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
-    type: 3}
-  m_PrefabInstance: {fileID: 1157369481}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &771432791
 Mesh:
   m_ObjectHideFlags: 0
@@ -11393,91 +11387,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -3814465932704652785, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
-        type: 3}
-      propertyPath: uiSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 14714c1d7db8e3143a4d841c1f25d930,
-        type: 3}
-    - target: {fileID: -3814465932704652785, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
-        type: 3}
-      propertyPath: elementName
-      value: Necrotic
-      objectReference: {fileID: 0}
-    - target: {fileID: 450497680, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: uiSprite
-      value: 
-      objectReference: {fileID: -7654870270679289077, guid: d39b8bc076de18747869f25ce241874b,
-        type: 3}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: blankEnemy
-      value: 
-      objectReference: {fileID: 1157369483}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: blankElement
-      value: 
-      objectReference: {fileID: 1157369483}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: comboElements.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: primaryElements.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: catalystElements.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: primaryElements.Array.data[0]
-      value: 
-      objectReference: {fileID: 1157369483}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: primaryElements.Array.data[1]
-      value: 
-      objectReference: {fileID: 1157369483}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: catalystElements.Array.data[0]
-      value: 
-      objectReference: {fileID: 1157369483}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: catalystElements.Array.data[1]
-      value: 
-      objectReference: {fileID: 1157369483}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: comboElements.Array.data[0].comboElements.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: comboElements.Array.data[1].comboElements.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: comboElements.Array.data[0].comboElements.Array.data[0]
-      value: 
-      objectReference: {fileID: 1157369483}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: comboElements.Array.data[0].comboElements.Array.data[1]
-      value: 
-      objectReference: {fileID: 1157369483}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: comboElements.Array.data[1].comboElements.Array.data[0]
-      value: 
-      objectReference: {fileID: 1157369483}
-    - target: {fileID: 1363181307, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
-      propertyPath: comboElements.Array.data[1].comboElements.Array.data[1]
-      value: 
-      objectReference: {fileID: 1157369483}
     - target: {fileID: 3816411532900317090, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.27199984
-      objectReference: {fileID: 0}
-    - target: {fileID: 5625023910511142016, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
-        type: 3}
-      propertyPath: money
-      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5625023911835613078, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
         type: 3}
@@ -11541,59 +11454,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3c8d9beac7f5f14aaa36cd4e751fb94, type: 3}
---- !u!1 &1157369482 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5625023911835613081, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
-    type: 3}
-  m_PrefabInstance: {fileID: 1157369481}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1157369483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1157369482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4898c051a82298b4aaa25706e70be7a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activatedVFX: {fileID: 0}
-  handVFX: {fileID: 7128103365064262050, guid: 38ba7214c9215794098efd48e6d1078a, type: 3}
-  wristVFX: {fileID: 0}
-  manaCost: 0
-  animationToPlay: 
-  animationToPlayAlt: 
-  playerHand: {fileID: 748678192}
-  elementName: Nothing
-  elementDescription: 
-  uiSprite: {fileID: 21300000, guid: 85181b9e9858d1042a5a4e28644bdf6f, type: 3}
-  crosshair: {fileID: 21300000, guid: a1beddc51ae054248aade49c9117f554, type: 3}
-  lVars:
-    Description: 
-    Name: 
-    Icon: {fileID: 0}
-  upgradeCost: 5
-  upgradeDescription: 
-  attackTypes: 
-  manaTypes: 05000000
-  playerClass: {fileID: 0}
-  shootingTranform: {fileID: 0}
-  shootingIgnore:
-    serializedVersion: 2
-    m_Bits: 0
-  shootingSoundFX: 
-  otherShootingSoundFX: 
-  switchElementSFX: 
-  idleSFX: 
-  damage: 0
-  damageMultiplier: 1
-  damageMulti: []
-  switchAnimationName: 
-  startCoolDown: 0
-  cooldownTimer: 0
-  currentElementType: 0
 --- !u!43 &1170775742
 Mesh:
   m_ObjectHideFlags: 0
@@ -64594,8 +64454,6 @@ MonoBehaviour:
   roomComplete: 0
   data: {fileID: 11400000, guid: 93a350c4038134444b9794f303a0daf6, type: 2}
   allowableHeightDifference: 0
-  initialMusic: Ambient Sound
-  battleMusic: Inlevel Music
   bossSaim: 0
 --- !u!4 &4936645288540319803
 Transform:
