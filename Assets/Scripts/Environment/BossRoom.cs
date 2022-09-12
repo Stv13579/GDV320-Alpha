@@ -42,7 +42,10 @@ public class BossRoom : Room
         // need to fix boss audio with saim audio
         //if (audioManager)
         //{
+        //if (runManager)
+        //{
         //    audioManager.FadeOutAndPlayMusic($"Level {runManager.GetSceneIndex() - 1} Non Combat", $"Level {runManager.GetSceneIndex() - 1} Boss");
+        //}
         //}
 
         if (bossSpawned)
