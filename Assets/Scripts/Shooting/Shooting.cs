@@ -53,7 +53,7 @@ public class Shooting : MonoBehaviour
         {
             if (catalyst is VoidElement)
             {
-                chosenCombo = GetComponent<IceSlashElement>();
+                chosenCombo = GetComponent<CrystalGrenadeElement>();
             }
             else if (catalyst is NecroticElement)
             {

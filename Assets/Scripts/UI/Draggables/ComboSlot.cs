@@ -35,7 +35,7 @@ public class ComboSlot : HoverOver, IPointerEnterHandler
 
             return;
         }
-        if (player.GetPrimaryElements()[prime.GetElementSlot()].GetCurrentElementType() == BaseElementClass.ElementType.None)
+        if (player.GetCatalystElements()[cata.GetElementSlot()].GetCurrentElementType() == BaseElementClass.ElementType.None)
         {
             comboIcon.enabled = false;
 

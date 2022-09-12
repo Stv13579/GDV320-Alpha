@@ -108,6 +108,11 @@ public class BaseEnemyClass : MonoBehaviour
         {
             audioManager.PlaySFX(idleAudio);
         }
+
+        if(spawner == null)
+        {
+            spawner = FindObjectOfType<SAIM>().gameObject;
+        }
     }
 
     public virtual void Update()
