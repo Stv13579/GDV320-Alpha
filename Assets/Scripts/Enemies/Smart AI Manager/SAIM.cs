@@ -144,8 +144,10 @@ public class SAIM : MonoBehaviour
     {
         if (audioManager)
         {
-            if(runManager)
+            if (runManager)
+            {
                 audioManager.FadeOutAndPlayMusic($"Level {runManager.GetSceneIndex() - 1} Non Combat", $"Level {runManager.GetSceneIndex() - 1} Combat");
+            }
         }
 
         if (!triggered || roomComplete)
