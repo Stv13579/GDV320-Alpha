@@ -91,7 +91,8 @@ public class BaseEnemyClass : MonoBehaviour
     GameplayUI uiScript;
     public virtual void Awake()
     {
-        prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
+        if(GameObject.Find("ProphecyManager"))
+            prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
         startY = transform.position.y;
         player = GameObject.Find("Player");
         playerClass = player.GetComponent<PlayerClass>();
@@ -372,5 +373,18 @@ public class BaseEnemyClass : MonoBehaviour
     public StatModifier.FullStat GetSpeedStat()
     {
         return speed;
+    }
+
+    //For testing purposes only, in conjunction with enemy testing UI
+    public void AddHealth(int amount)
+    {
+        currentHealth += amount;
+        maxHealth += amount;
+    }
+
+    public void AddDamage(int amount)
+    {
+        damageAmount += amount;
+        baseDamageAmount += amount;
     }
 }

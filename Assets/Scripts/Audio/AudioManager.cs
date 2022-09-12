@@ -113,6 +113,11 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound: " + name + " was not found!"); // error message
             return;
         }
+        if (s.audioSource == null) // if no sound, dont try play one 
+        {
+            Debug.LogWarning("Sound source: " + name + " was not found!"); // error message
+            return;
+        }
         if (playerPos != null && enemyPos != null)
         {
             float positionDistance = Vector3.Distance(playerPos.position, enemyPos.position);
@@ -133,6 +138,11 @@ public class AudioManager : MonoBehaviour
         if (s == null) // if no sound, dont try play one 
         {
             Debug.LogWarning("Sound: " + name + " was not found!"); // error message
+            return;
+        }
+        if (s.audioSource == null) // if no sound, dont try play one 
+        {
+            Debug.LogWarning("Sound source: " + name + " was not found!"); // error message
             return;
         }
 
