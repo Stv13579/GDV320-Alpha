@@ -41,7 +41,7 @@ public class RunManager : MonoBehaviour
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().StartLevelUpdate();
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().inHub = false;
         }
-
+        player.GetComponent<Shooting>().SetLoadOutChosen(true);
     }
 
     public void FinishRun()
