@@ -64,6 +64,7 @@ public class SAIM : MonoBehaviour
     public LayerMask blankSpaceLayerMask;
     public LayerMask verticalSpaceLayerMask;
     public LayerMask impassableLayerMask;
+    public LayerMask cullLayerMask;
     bool doneonce = false;
 
     [HideInInspector]
@@ -696,7 +697,7 @@ public class SAIM : MonoBehaviour
                 }
                 
 
-                if(CheckHeightDifference(currentNode, node))
+                if(CheckHeightDifference(currentNode, node) || CollisonCull(currentNode, node))
                 {
                     continue;
                 }
@@ -727,6 +728,18 @@ public class SAIM : MonoBehaviour
         return false;
     }
 
+    //If the node goes through a wall, dont connect it. This is to account for thin walls not otherwise picked up on by the placed nodes
+    bool CollisonCull(Node mainNode, Node neighbourNode)
+    {
+
+        if (Physics.Raycast(mainNode.transform.position, neighbourNode.transform.position - mainNode.transform.position, nodeSpacing , cullLayerMask))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     //Using the integrated field, generate the flow field by pointing each node at the next node
     void GenerateFlowField()
     {
@@ -742,7 +755,7 @@ public class SAIM : MonoBehaviour
             //This will be the node with the lowest bestCost.
             foreach (Node currentNeigbourNode in currentNodeNeigbours)
             {
-                if(currentNeigbourNode.bestCost < bestCost && !CheckHeightDifference(currentNode, currentNeigbourNode))
+                if(currentNeigbourNode.bestCost < bestCost && !CheckHeightDifference(currentNode, currentNeigbourNode) && !CollisonCull(currentNode, currentNeigbourNode))
                 {
                     bestCost = currentNeigbourNode.bestCost;
                     currentNode.bestNextNodePos = currentNeigbourNode.transform.position;

@@ -40,6 +40,7 @@ public class EnemyTestingUI : MonoBehaviour
             Destroy(this.gameObject);
         }
         playerClass = FindObjectOfType<PlayerClass>();
+        FindObjectOfType<SAIM>().triggered = true;
     }
 
 
@@ -102,6 +103,7 @@ public class EnemyTestingUI : MonoBehaviour
 
     public void SpawnEnemies()
     {
+        
         FindObjectOfType<SAIM>().Spawn(enemiesToSpawn, ((int)eType * 3) + (int)eEle);
     }
 

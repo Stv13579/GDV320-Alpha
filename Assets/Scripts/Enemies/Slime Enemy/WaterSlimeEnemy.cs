@@ -90,13 +90,13 @@ public class WaterSlimeEnemy : BaseEnemyClass
         }
         else
         {
-            if(Vector3.SqrMagnitude(this.transform.position - pos) > 10)
-            {
-                Vector3 dir = (pos - this.transform.position).normalized;
-                Vector3 move = dir * ((moveSpeed) / 50) * Time.deltaTime;
-                this.transform.position += move;
-            }
-
+            //if(Vector3.SqrMagnitude(this.transform.position - pos) > 10)
+            //{
+            //    Vector3 dir = (pos - this.transform.position).normalized;
+            //    Vector3 move = dir * ((moveSpeed) / 50) * Time.deltaTime;
+            //    this.transform.position += move;
+            //}
+            Movement(positionToMoveTo, groundMoveSpeed);
         }
         
     }

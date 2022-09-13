@@ -15,8 +15,10 @@ public class EnemyTestingEditorScript : Editor
 
         if(GUILayout.Button("Spawn Enemies"))
         {
+            EditorUtility.SetDirty(FindObjectOfType<SAIM>());
             eUI.SpawnEnemies();
             EditorUtility.SetDirty(eUI);
+            
         }
 
         if (GUILayout.Button("Clear Enemies"))
