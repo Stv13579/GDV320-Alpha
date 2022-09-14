@@ -17,7 +17,7 @@ public class StartGameController : MonoBehaviour
     public void StartGame()
     {
 
-        LoadGame();
+        //LoadGame();
 
         if (audioManager)
         {
