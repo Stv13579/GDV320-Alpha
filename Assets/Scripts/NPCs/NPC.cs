@@ -44,17 +44,15 @@ public class NPC : MonoBehaviour
         {
             base.Action();
 
-            if(!heldData.seenStoryPoints.Contains(this))
+            
+            heldData.intraStoryPosition++;
+            if(heldData.intraStoryPosition == 3)
             {
-                heldData.seenStoryPoints.Add(this);
-                heldData.intraStoryPosition++;
-                if(heldData.intraStoryPosition == 3)
-                {
-                    heldData.intraStoryPosition = 0;
-                    
-                    heldData.questReady = true;
-                }
+                heldData.intraStoryPosition = 0;
+
+                heldData.questReady = true;
             }
+            
         }
     }
     
@@ -183,10 +181,7 @@ public class NPC : MonoBehaviour
         }
         else if(storyTime > 0 && storyDialogues[data.storyPosition].dialogues.Count > 0 && !data.onQuest)
         {
-            possibleDialogues.AddRange(storyDialogues[data.storyPosition].dialogues);
-
-            //Remove all story stuff that has been seen already
-            possibleDialogues.RemoveAll(DiagPred);
+            possibleDialogues.Add(storyDialogues[data.storyPosition].dialogues[data.intraStoryPosition]);
         }
         else
         {
@@ -233,10 +228,7 @@ public class NPC : MonoBehaviour
     }
 
 
-    bool DiagPred(Dialogue diag)
-    {
-        return data.seenStoryPoints.Contains(diag);
-    }
+   
 
 
 }

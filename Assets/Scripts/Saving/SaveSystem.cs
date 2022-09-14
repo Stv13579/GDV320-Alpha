@@ -26,7 +26,14 @@ public static class SaveSystem
             NPCSaveData sData;
             using (FileStream stream = new FileStream(path, FileMode.Open))
             {
-                sData = (NPCSaveData)formatter.Deserialize(stream);
+                if(stream.Length == 0)
+                {
+                    sData = null;
+                }
+                else
+                {
+                    sData = (NPCSaveData)formatter.Deserialize(stream);
+                }
             }
             return sData;
         }

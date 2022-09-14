@@ -14,6 +14,8 @@ public class NPCSaveData : SaveData
     public bool onQuest;
     public bool questComplete;
 
+    List<int> seenStoryIndexes = new List<int>();
+
     public NPCSaveData(NPCData data)
     {
         storyPosition = data.storyPosition;
@@ -23,5 +25,6 @@ public class NPCSaveData : SaveData
         questReady = data.questReady;
         onQuest = data.onQuest;
         questComplete = data.questComplete;
+
     }
 }

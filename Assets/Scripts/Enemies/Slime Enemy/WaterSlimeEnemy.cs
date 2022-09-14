@@ -13,6 +13,9 @@ public class WaterSlimeEnemy : BaseEnemyClass
     protected float pushForce;
 
     [SerializeField]
+    protected float attackJumpForce;
+
+    [SerializeField]
     LayerMask viewToPlayer;
 
     [SerializeField]
@@ -39,6 +42,11 @@ public class WaterSlimeEnemy : BaseEnemyClass
     public override void Attacking()
     {
         base.Attacking();
+        //Add some force in the opposite direction
+        Vector3 knockAway = player.transform.position - transform.position;
+        knockAway.y = 10;
+        GetComponent<Rigidbody>().AddForce(-knockAway * attackJumpForce);
+
         playerClass.ChangeHealth(-damageAmount * (prophecyManager.prophecyDamageMulti), transform.position, pushForce);
     }
     //Moves towards the player if the slime can see them, othewise follow the flowfield to them
