@@ -24,7 +24,7 @@ public static class SaveSystem
         {
             BinaryFormatter formatter = new BinaryFormatter();
             NPCSaveData sData;
-            using (FileStream stream = new FileStream(path, FileMode.Create))
+            using (FileStream stream = new FileStream(path, FileMode.Open))
             {
                 sData = (NPCSaveData)formatter.Deserialize(stream);
             }

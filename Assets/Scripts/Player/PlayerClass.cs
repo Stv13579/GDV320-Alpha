@@ -97,7 +97,7 @@ public class PlayerClass : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape))
         {
             //Save the game
-
+            SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Lotl"));
 
             Application.Quit();
         }
