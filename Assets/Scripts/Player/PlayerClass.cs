@@ -90,13 +90,20 @@ public class PlayerClass : MonoBehaviour
     public void StartLevel()
     {
         itemUI = GameObject.Find("ItemArray");
-        ;
     }
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            //Save the game
+
+
+            Application.Quit();
+        }
+
         //Don't forget to remove this
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             BaseEnemyClass[] enemies = FindObjectsOfType<BaseEnemyClass>();
             foreach(BaseEnemyClass enemy in enemies)

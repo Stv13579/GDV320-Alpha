@@ -210,10 +210,7 @@ public class Shooting : MonoBehaviour
             InstanciateCatalystOrb();
             loadOutChosen = false;
         }
-        if(Input.GetKey(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
+        
         SwitchingElements();
         if (ableToShoot)
         {
