@@ -132,6 +132,9 @@ public class NPC : MonoBehaviour
     [SerializeField]
     protected NPCData data;
 
+    //Initialise with this on load
+    protected NPCSaveData saveData;
+
     [SerializeField]
     List<Dialogue> baseRandoms;
 
