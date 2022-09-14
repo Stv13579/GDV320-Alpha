@@ -117,6 +117,12 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Update()
     {
+
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
         if(transform.position.y > 100)
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;

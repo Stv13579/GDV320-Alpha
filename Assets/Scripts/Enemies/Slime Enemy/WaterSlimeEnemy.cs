@@ -49,6 +49,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
         jumpTimer -= Time.deltaTime;
         if(jumpTimer <= 0)
         {
+
             if (audioManager)
             {
                 audioManager.StopSFX("Slime Bounce");
@@ -59,10 +60,10 @@ public class WaterSlimeEnemy : BaseEnemyClass
             {
                 float distance = float.MaxValue;
                 Vector3 nearestNode = Vector3.zero;
-                foreach(Node node in spawner.GetComponent<SAIM>().aliveNodes)
+                foreach (Node node in spawner.GetComponent<SAIM>().aliveNodes)
                 {
                     float newDistance = Vector3.SqrMagnitude(node.gameObject.transform.position - this.transform.position);
-                    if(newDistance < distance)
+                    if (newDistance < distance)
                     {
                         distance = newDistance;
                         nearestNode = node.bestNextNodePos;
@@ -72,7 +73,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
                 Quaternion rot = transform.rotation;
                 rot.eulerAngles = new Vector3(0, rot.eulerAngles.y + 135, 0);
                 transform.rotation = rot;
-                pos = nearestNode;
+                pos = moveDirection;
             }
             else
             {
@@ -230,14 +231,16 @@ public class WaterSlimeEnemy : BaseEnemyClass
         {
             for (int i = 0; i < 2; i++)
             {
-                WaterSlimeEnemy newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2), Quaternion.identity).GetComponent<WaterSlimeEnemy>();
-                newSlime.maxHealth = maxHealth / 2;
-                newSlime.damageAmount = damageAmount / 2;
-                newSlime.transform.localScale = this.transform.localScale / 2;
-                newSlime.moveSpeed = moveSpeed / 2;
-                newSlime.generation = generation + 1;
-                newSlime.spawner = spawner;
-                spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime);
+                GameObject newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2), Quaternion.identity);
+                newSlime.GetComponent<WaterSlimeEnemy>().maxHealth = maxHealth / 2;
+                newSlime.GetComponent<WaterSlimeEnemy>().baseMaxHealth = baseMaxHealth / 2;
+                newSlime.GetComponent<WaterSlimeEnemy>().health.baseValue = maxHealth / 2;
+                newSlime.GetComponent<WaterSlimeEnemy>().damageAmount = damageAmount / 2;
+                newSlime.GetComponent<WaterSlimeEnemy>().transform.localScale = this.transform.localScale / 2;
+                newSlime.GetComponent<WaterSlimeEnemy>().moveSpeed = moveSpeed / 2;
+                newSlime.GetComponent<WaterSlimeEnemy>().generation = generation + 1;
+                newSlime.GetComponent<WaterSlimeEnemy>().spawner = spawner;
+                spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime.GetComponent<WaterSlimeEnemy>());
             }
         }
 
