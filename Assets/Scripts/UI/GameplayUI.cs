@@ -102,6 +102,11 @@ public class GameplayUI : MonoBehaviour
         ChangeCombo(inactiveCatalystElement.transform.parent, true);
         ChangeCombo(activeComboElement.transform.parent, false);
         ChangeCombo(inactiveComboElement.transform.parent, false);
+
+        if(hitMarker.transform.GetChild(8).gameObject.active == true)
+        {
+            StartCoroutine(HitMarker());
+        }
     }
 
     public void AddItem(Sprite[] sprites)
