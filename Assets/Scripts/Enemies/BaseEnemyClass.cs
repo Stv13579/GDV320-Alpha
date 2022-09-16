@@ -131,6 +131,14 @@ public class BaseEnemyClass : MonoBehaviour
         maxHealth = StatModifier.UpdateValue(health);
         damageAmount = StatModifier.UpdateValue(damage);
         moveSpeed = StatModifier.UpdateValue(speed);
+
+        if (uiScript)
+        {
+            if (uiScript.GetHitMarker().transform.GetChild(8).gameObject.activeInHierarchy == true)
+            {
+                StartCoroutine(uiScript.HitMarker());
+            }
+        }
     }
 
     //Movement
