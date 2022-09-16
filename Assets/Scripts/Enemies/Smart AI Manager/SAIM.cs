@@ -600,6 +600,49 @@ public class SAIM : MonoBehaviour
             audioManager.SetCurrentStateToFadeOutAudio2();
         }
     }
+    
+    //Given a SAIM data object, will manually spawn an enemy of each type on that object.
+    public void ManualSpawn()
+    {
+        List<Node> spawnNodes = new List<Node>();
+
+        foreach (Transform spawnNode in transform.Find("SpawnPositions"))
+        {
+            spawnNodes.Add(spawnNode.GetComponent<Node>());
+        }
+
+        foreach (GameObject eType in data.enemyTypes)
+        {
+            Vector3 spawnPosition = spawnNodes[Random.Range(0, spawnNodes.Count - 1)].transform.position;
+
+            spawnPosition.x += Random.Range(-1.0f, 2.0f);
+            spawnPosition.z += Random.Range(-1.0f, 2.0f);
+            spawnPosition.y += 2;
+
+            GameObject spawnedEnemy = Instantiate(eType, spawnPosition, Quaternion.identity);
+            spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
+
+            if (GameObject.Find("Quest Manager"))
+            {
+                GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy, "Regular");
+            }
+
+            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().heldItems)
+            {
+                item.SpawnTrigger(this.gameObject);
+            }
+
+            spawnedEnemies.Add(spawnedEnemy.GetComponent<BaseEnemyClass>());
+            spawnAmount++;
+        }
+        // Aydens Audio
+        if (audioManager)
+        {
+            audioManager.SetCurrentStateToFadeOutAudio2();
+        }
+
+        triggered = true;
+    }
 
     public int ChooseEnemy()
     {

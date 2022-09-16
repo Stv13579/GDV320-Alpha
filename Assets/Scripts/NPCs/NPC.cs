@@ -100,6 +100,27 @@ public class NPC : MonoBehaviour
         }
     }
 
+    [Serializable]
+    public class Tutorial : Dialogue
+    {
+        public delegate void TutorialAction();
+
+        public TutorialAction tutAct;
+
+        public Tutorial(NPCData npcData) : base(npcData) { }
+
+        //Add the quest to the manager
+        public override void Action()
+        {
+            if (actionTaken)
+            {
+                return;
+            }
+            base.Action();
+            tutAct();
+        }
+    }
+
     //A Serialzed way to store all story dialogue
     [Serializable]
     public class StoryDialogues
@@ -136,9 +157,14 @@ public class NPC : MonoBehaviour
     [SerializeField]
     List<Dialogue> baseRandoms;
 
+    [SerializeField]
+    List<Tutorial> tutorialDialogues;
 
     [SerializeField]
     public string offeringType;
+
+    [SerializeField]
+    bool tutorial;
 
     //Defines an NPC in the broad sense
     //Holds dialogue and functionality for questlines.
@@ -169,7 +195,12 @@ public class NPC : MonoBehaviour
             dg.SetHeldData(data);
         }
 
-        if (data.questComplete)
+        if(tutorial)
+        {
+            tutorialDialogues[0].tutAct = TutorialAction;
+            possibleDialogues.Add(tutorialDialogues[0]);
+        }
+        else if (data.questComplete)
         {
             ResolveQuest();
             return;
@@ -227,7 +258,10 @@ public class NPC : MonoBehaviour
         currentDialogue = recieveHandIn[data.storyPosition];
     }
 
-
+    public virtual void TutorialAction()
+    {
+    
+    }
    
 
 

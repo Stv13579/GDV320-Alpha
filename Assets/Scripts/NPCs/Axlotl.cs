@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Axlotl : NPC
 {
+    //Only used for the tutorial!
+    [SerializeField]
+    SAIM tutorialSAIM;
 
     class Greetings : Dialogue
     {
@@ -18,6 +21,12 @@ public class Axlotl : NPC
         }
     }
 
-   
+    public override void TutorialAction()
+    {
+        base.TutorialAction();
+        tutorialSAIM.ManualSpawn();
+        //Dissappear
+        GameObject.Destroy(gameObject);
+    }
 
 }

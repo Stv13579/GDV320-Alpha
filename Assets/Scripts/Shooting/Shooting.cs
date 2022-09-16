@@ -83,6 +83,9 @@ public class Shooting : MonoBehaviour
 
     bool loadOutChosen;
 
+    [SerializeField]
+    bool tutorial;
+
     AudioManager audioManager;
 
     [SerializeField]
@@ -197,6 +200,11 @@ public class Shooting : MonoBehaviour
         primaryElements[leftElementIndex].GetPlayerHand().SetInteger("ElementL", leftElementIndex + 1);
         catalystElements[rightElementIndex].GetPlayerHand().SetInteger("ElementR", rightElementIndex + 101);
         uiScript = GameObject.Find("GameplayUI").GetComponent<GameplayUI>();
+
+        if(tutorial)
+        {
+            loadOutChosen = true;
+        }
     }
     private void Update()
     {
@@ -206,8 +214,8 @@ public class Shooting : MonoBehaviour
             catalystElements[rightElementIndex].AnimationSwitch(false);
             DestroyLeftOrb();
             DestroyRightOrb();
-            InstanciatePrimaryOrb();
-            InstanciateCatalystOrb();
+            InstantiatePrimaryOrb();
+            InstantiateCatalystOrb();
             loadOutChosen = false;
         }
         
@@ -259,7 +267,7 @@ public class Shooting : MonoBehaviour
     private void SwitchingElements()
     {
         // check if the player has pressed q
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (Input.GetKeyUp(KeyCode.Q) && !GetPrimaryElements().Contains(blankElement))
         {
             // if in combomode lift the element effect that is a combo element
             // else stop idle sound for primary element
@@ -296,17 +304,17 @@ public class Shooting : MonoBehaviour
             {
                 // play animation to switch primary element
                 primaryElements[leftElementIndex].AnimationSwitch(true);
-                // instanciate primary element orbs 
-                InstanciatePrimaryOrb();
+                // instantiate primary element orbs 
+                InstantiatePrimaryOrb();
             }
             else
             {
                 // play animation to switch combo element
                 comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch(true);
-                InstanciateComboOrbs();
+                InstantiateComboOrbs();
             }
         }
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.E) && !GetCatalystElements().Contains(blankElement))
         {
             // if in combomode lift the element effect that is a combo element
             // else lift effect for catalyst and stop idle sound
@@ -346,13 +354,13 @@ public class Shooting : MonoBehaviour
                 // play animation for catalyst
                 catalystElements[rightElementIndex].AnimationSwitch(false);
                 // instanciate catalyst orbs
-                InstanciateCatalystOrb();
+                InstantiateCatalystOrb();
             }
             else
             {
                 // play animation for combo elements
                 comboElements[leftElementIndex].comboElements[rightElementIndex].AnimationSwitch(true);
-                InstanciateComboOrbs();
+                InstantiateComboOrbs();
             }
         }
         // if the player is in combo mode and has no mana
@@ -423,8 +431,8 @@ public class Shooting : MonoBehaviour
                 }
 
                 // change orbs for non combo elements
-                InstanciatePrimaryOrb();
-                InstanciateCatalystOrb();
+                InstantiatePrimaryOrb();
+                InstantiateCatalystOrb();
             }
             else
             {
@@ -437,7 +445,7 @@ public class Shooting : MonoBehaviour
                     audioManager.StopSFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetSwitchElementSFX());
                     audioManager.PlaySFX(comboElements[leftElementIndex].comboElements[rightElementIndex].GetSwitchElementSFX());
                 }
-                InstanciateComboOrbs();
+                InstantiateComboOrbs();
             }
 
         }
@@ -524,7 +532,7 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void InstanciateCatalystOrb()
+    private void InstantiateCatalystOrb()
     {
         // instanciate catalyst orbs
         if (rightOrbPos.childCount < 2)
@@ -536,7 +544,7 @@ public class Shooting : MonoBehaviour
             Instantiate(catalystElements[rightElementIndex].GetWristVFX(), rightOrbPos.parent.parent);
         }
     }
-    private void InstanciatePrimaryOrb()
+    private void InstantiatePrimaryOrb()
     {
         if (leftOrbPos.childCount < 2)
         {
@@ -548,7 +556,7 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void InstanciateComboOrbs()
+    private void InstantiateComboOrbs()
     {
         // change orbs for combo elements
         if (leftOrbPos.transform.childCount < 2 && rightOrbPos.transform.childCount < 2)
