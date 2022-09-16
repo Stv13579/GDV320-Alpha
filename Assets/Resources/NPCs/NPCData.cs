@@ -17,6 +17,10 @@ public class NPCData : ScriptableObject
 
     public void LoadData(NPCSaveData sData)
     {
+        if(sData == null)
+        {
+            return;
+        }
         storyPosition = sData.storyPosition;
         intraStoryPosition = sData.intraStoryPosition;
 
