@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MinimapRoom : MonoBehaviour
 {   
     [SerializeField]
-    bool isShop, isBreak, isBoss;
+    public bool isShop, isBreak, isBoss;
 
     [SerializeField]
     Image roomIcon;
@@ -48,7 +48,9 @@ public class MinimapRoom : MonoBehaviour
     public void SetMaxDist(float newMax) { maxDist = newMax; }
 
     public void SetVisited() { GetComponent<Image>().color = visitedColour; }
-    public void SetOccupied(Vector3 oldRoomPos) { GetComponent<Image>().color = occupiedColour;
+    public void SetOccupied(Vector3 oldRoomPos) 
+    { 
+        GetComponent<Image>().color = occupiedColour;
 
         //Move all the rooms on the minimap so this one is central
         Vector3 amountToMove = oldRoomPos - transform.localPosition;

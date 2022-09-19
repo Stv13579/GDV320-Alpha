@@ -8,25 +8,13 @@ public class Axlotl : NPC
     [SerializeField]
     SAIM tutorialSAIM;
 
-    class Greetings : Dialogue
-    {
-        public Greetings(NPCData npcData) :  base(npcData){}
-
-
-        public override void Action()
-        {
-
-            //Play an animation
-            base.Action();
-        }
-    }
-
     public override void TutorialAction()
     {
         base.TutorialAction();
         tutorialSAIM.ManualSpawn();
         //Dissappear
-        GameObject.Destroy(gameObject);
+
+        gameObject.SetActive(false);
     }
 
 }

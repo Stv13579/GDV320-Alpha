@@ -8,6 +8,7 @@ public class Room : MonoBehaviour
     public int weighting;
     public bool illegal = false;
     public Vector2Int gridPos = Vector2Int.zero;
+    [SerializeField]
     List<GameObject> activeDoors = new List<GameObject>();
     LevelGeneration levelGenerator;
     bool locked = false;

@@ -14,6 +14,10 @@ public class EndLevel : MonoBehaviour
     GameObject player;
 
     AudioManager audioManager;
+
+    [SerializeField]
+    int numberOfLevels;
+
     private void Start()
     {
         player = GameObject.Find("Player");
@@ -35,9 +39,9 @@ public class EndLevel : MonoBehaviour
 
         index++;
 
-        if (index > SceneManager.sceneCountInBuildSettings)
+        if (index > numberOfLevels)
         {
-            index = 0;
+            index = 1;
             Destroy(player);
         }
 
