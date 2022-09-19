@@ -26,16 +26,26 @@ public class StartGameController : MonoBehaviour
             audioManager.StopMusic(audioManager.GetInitialMusic());
             audioManager.PlayMusic("Hub Room Music");
         }
-        SceneManager.LoadScene(1);
+
+        if (SaveSystem.LoadStartedState())
+        {
+            SceneManager.LoadScene(1);
+        }
+        else
+        {
+            SceneManager.LoadScene(5);
+        }
+
+        
     }
 
     public void LoadGame()
     {
         //Get all npc data and equal it to the saved data, then initialise any lax variables
         lilly.LoadData(SaveSystem.LoadNPCData(lilly.name));
-        //blaze.LoadData(SaveSystem.LoadNPCData(blaze.name));
-        //silvain.LoadData(SaveSystem.LoadNPCData(silvain.name));
-        //freya.LoadData(SaveSystem.LoadNPCData(freya.name));
+        blaze.LoadData(SaveSystem.LoadNPCData(blaze.name));
+        silvain.LoadData(SaveSystem.LoadNPCData(silvain.name));
+        freya.LoadData(SaveSystem.LoadNPCData(freya.name));
 
     }
 }

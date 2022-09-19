@@ -213,6 +213,11 @@ public class SAIM : MonoBehaviour
 
         foreach (BaseEnemyClass enemy in spawnedEnemies)
         {
+            if(enemy == null)
+            {
+                continue;
+            }
+
             float distToNode = float.MaxValue;
 
             //If the distance moved is miniscule since the last frame, continue.
