@@ -8,8 +8,10 @@ public class WellLovedArmour : Trinket
     {
         base.AddEffect(player);
 
-        StatModifier.Modifier reduceDamageMulti = new StatModifier.Modifier((int)uState * 5 + 5, "WellLovedArmour");
 
-        GameObject.Find("Player").GetComponent<PlayerClass>().GetDefenseStat().multiplicativeModifiers.Add(reduceDamageMulti);
+        StatModifier.Modifier reduceDamageMulti = new StatModifier.Modifier(1 - ((int)uState * 5 + 5)/100, "WellLovedArmour");
+
+        StatModifier.AddModifier(player.GetDefenseStat().multiplicativeModifiers, reduceDamageMulti);
+        StatModifier.UpdateValue(player.GetDefenseStat());
     }
 }

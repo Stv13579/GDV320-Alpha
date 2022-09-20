@@ -44,17 +44,15 @@ public class NPC : MonoBehaviour
         {
             base.Action();
 
-            if(!heldData.seenStoryPoints.Contains(this))
+            
+            heldData.intraStoryPosition++;
+            if(heldData.intraStoryPosition == 3)
             {
-                heldData.seenStoryPoints.Add(this);
-                heldData.intraStoryPosition++;
-                if(heldData.intraStoryPosition == 3)
-                {
-                    heldData.intraStoryPosition = 0;
-                    
-                    heldData.questReady = true;
-                }
+                heldData.intraStoryPosition = 0;
+
+                heldData.questReady = true;
             }
+            
         }
     }
     
@@ -102,6 +100,27 @@ public class NPC : MonoBehaviour
         }
     }
 
+    [Serializable]
+    public class Tutorial : Dialogue
+    {
+        public delegate void TutorialAction();
+
+        public TutorialAction tutAct;
+
+        public Tutorial(NPCData npcData) : base(npcData) { }
+
+        //Add the quest to the manager
+        public override void Action()
+        {
+            if (actionTaken)
+            {
+                return;
+            }
+            base.Action();
+            tutAct();
+        }
+    }
+
     //A Serialzed way to store all story dialogue
     [Serializable]
     public class StoryDialogues
@@ -132,12 +151,20 @@ public class NPC : MonoBehaviour
     [SerializeField]
     protected NPCData data;
 
+    //Initialise with this on load
+    protected NPCSaveData saveData;
+
     [SerializeField]
     List<Dialogue> baseRandoms;
 
+    [SerializeField]
+    List<Tutorial> tutorialDialogues;
 
     [SerializeField]
     public string offeringType;
+
+    [SerializeField]
+    bool tutorial;
 
     //Defines an NPC in the broad sense
     //Holds dialogue and functionality for questlines.
@@ -168,7 +195,12 @@ public class NPC : MonoBehaviour
             dg.SetHeldData(data);
         }
 
-        if (data.questComplete)
+        if(tutorial)
+        {
+            tutorialDialogues[0].tutAct = TutorialAction;
+            possibleDialogues.Add(tutorialDialogues[0]);
+        }
+        else if (data.questComplete)
         {
             ResolveQuest();
             return;
@@ -180,10 +212,7 @@ public class NPC : MonoBehaviour
         }
         else if(storyTime > 0 && storyDialogues[data.storyPosition].dialogues.Count > 0 && !data.onQuest)
         {
-            possibleDialogues.AddRange(storyDialogues[data.storyPosition].dialogues);
-
-            //Remove all story stuff that has been seen already
-            possibleDialogues.RemoveAll(DiagPred);
+            possibleDialogues.Add(storyDialogues[data.storyPosition].dialogues[data.intraStoryPosition]);
         }
         else
         {
@@ -229,11 +258,11 @@ public class NPC : MonoBehaviour
         currentDialogue = recieveHandIn[data.storyPosition];
     }
 
-
-    bool DiagPred(Dialogue diag)
+    public virtual void TutorialAction()
     {
-        return data.seenStoryPoints.Contains(diag);
+    
     }
+   
 
 
 }

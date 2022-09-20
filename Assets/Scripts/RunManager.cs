@@ -1,26 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RunManager : MonoBehaviour
 {
 
     GameObject player;
     bool lastLevel;
-    
+    int sceneIndex;
+
+    public int GetSceneIndex() { return sceneIndex; }
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
         GameObject.Find("Quest Manager").GetComponent<QuestManager>().StartRunUpdate();
-        DontDestroyOnLoad(player);
         //DontDestroyOnLoad(gameObject);
-       
     }
 
-    private void Awake()
+    void Awake()
     {
         player = GameObject.Find("Player");
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
     // Update is called once per frame
@@ -38,7 +41,7 @@ public class RunManager : MonoBehaviour
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().StartLevelUpdate();
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().inHub = false;
         }
-
+        player.GetComponent<Shooting>().SetLoadOutChosen(true);
     }
 
     public void FinishRun()

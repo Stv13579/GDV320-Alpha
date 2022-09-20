@@ -36,11 +36,15 @@ public class LevelGeneration : MonoBehaviour
 
     GameObject minimap;
 
+    [SerializeField]
+    bool tutorial;
     
     void Start()
     {
         minimap = GameObject.Find("MiniMap");
+
         GenerateLevel();
+
         if (GameObject.Find("Run Manager"))
         {
             GameObject.Find("Run Manager").GetComponent<RunManager>().StartNewLevel();

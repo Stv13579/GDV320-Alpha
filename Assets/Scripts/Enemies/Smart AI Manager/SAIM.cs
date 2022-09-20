@@ -6,7 +6,6 @@ using UnityEditor;
 [System.Serializable]
 public class SAIM : MonoBehaviour
 {
-    [HideInInspector]
     public List<BaseEnemyClass> spawnedEnemies;
 
     [SerializeField, HideInInspector]
@@ -65,6 +64,7 @@ public class SAIM : MonoBehaviour
     public LayerMask blankSpaceLayerMask;
     public LayerMask verticalSpaceLayerMask;
     public LayerMask impassableLayerMask;
+    public LayerMask cullLayerMask;
     bool doneonce = false;
 
     [HideInInspector]
@@ -109,24 +109,20 @@ public class SAIM : MonoBehaviour
 
     // Aydens Audio
     AudioManager audioManager;
-    [SerializeField]
-    private string initialMusic;
-    [SerializeField]
-    private string battleMusic;
 
+    RunManager runManager;
 
     [SerializeField]
     bool bossSaim = false;
 
-    public string GetInitialMusic() { return initialMusic; }
-    public string GetBattleMusic() { return battleMusic; }
-    public void SetInitialMusic(string tempInitialMusic) { initialMusic = tempInitialMusic; } 
-    public void SetBattleMusic(string tempBattleMusic) { battleMusic = tempBattleMusic; } 
-
-    private void Start()
+    void Awake()
     {
         //Aydens Audio manager
         audioManager = FindObjectOfType<AudioManager>();
+        runManager = FindObjectOfType<RunManager>();
+    }
+    private void Start()
+    {
 
         data.adjustedDifficulty = data.difficulty;
         data.player = GameObject.Find("Player");
@@ -149,7 +145,10 @@ public class SAIM : MonoBehaviour
     {
         if (audioManager)
         {
-            audioManager.FadeOutAndPlayMusic(initialMusic, battleMusic);
+            if (runManager)
+            {
+                audioManager.FadeOutAndPlayMusic($"Level {runManager.GetSceneIndex() - 1} Non Combat", $"Level {runManager.GetSceneIndex() - 1} Combat");
+            }
         }
 
         if (!triggered || roomComplete)
@@ -518,7 +517,7 @@ public class SAIM : MonoBehaviour
         return false;
     }
 
-    //if there is a spawn event, use this to spawn the enemies.
+    //if there is a spawn event, use this to spawn the enemies randomly.
     public void Spawn(int amountToSpawn)
     {
         List<Node> spawnNodes = new List<Node>();
@@ -559,6 +558,90 @@ public class SAIM : MonoBehaviour
         {
             audioManager.SetCurrentStateToFadeOutAudio2();
         }
+    }
+
+    //use this overload to spawn enemies of a certain type more specifically.
+    public void Spawn(int amountToSpawn, int spawnTypeIndex)
+    {
+        List<Node> spawnNodes = new List<Node>();
+
+        foreach (Transform spawnNode in transform.Find("SpawnPositions"))
+        {
+            spawnNodes.Add(spawnNode.GetComponent<Node>());
+        }
+
+        for (int i = 0; i < amountToSpawn; i++)
+        {
+            Vector3 spawnPosition = spawnNodes[Random.Range(0, spawnNodes.Count - 1)].transform.position;
+
+            spawnPosition.x += Random.Range(-1.0f, 2.0f);
+            spawnPosition.z += Random.Range(-1.0f, 2.0f);
+            spawnPosition.y += 2;
+
+            GameObject spawnedEnemy = Instantiate(data.enemyTypes[spawnTypeIndex], spawnPosition, Quaternion.identity);
+            spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
+
+            if (GameObject.Find("Quest Manager"))
+            {
+                GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy, "Regular");
+            }
+
+            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().heldItems)
+            {
+                item.SpawnTrigger(this.gameObject);
+            }
+
+            spawnedEnemies.Add(spawnedEnemy.GetComponent<BaseEnemyClass>());
+            spawnAmount++;
+        }
+        // Aydens Audio
+        if (audioManager)
+        {
+            audioManager.SetCurrentStateToFadeOutAudio2();
+        }
+    }
+    
+    //Given a SAIM data object, will manually spawn an enemy of each type on that object.
+    public void ManualSpawn()
+    {
+        List<Node> spawnNodes = new List<Node>();
+
+        foreach (Transform spawnNode in transform.Find("SpawnPositions"))
+        {
+            spawnNodes.Add(spawnNode.GetComponent<Node>());
+        }
+
+        foreach (GameObject eType in data.enemyTypes)
+        {
+            Vector3 spawnPosition = spawnNodes[Random.Range(0, spawnNodes.Count - 1)].transform.position;
+
+            spawnPosition.x += Random.Range(-1.0f, 2.0f);
+            spawnPosition.z += Random.Range(-1.0f, 2.0f);
+            spawnPosition.y += 2;
+
+            GameObject spawnedEnemy = Instantiate(eType, spawnPosition, Quaternion.identity);
+            spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
+
+            if (GameObject.Find("Quest Manager"))
+            {
+                GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy, "Regular");
+            }
+
+            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().heldItems)
+            {
+                item.SpawnTrigger(this.gameObject);
+            }
+
+            spawnedEnemies.Add(spawnedEnemy.GetComponent<BaseEnemyClass>());
+            spawnAmount++;
+        }
+        // Aydens Audio
+        if (audioManager)
+        {
+            audioManager.SetCurrentStateToFadeOutAudio2();
+        }
+
+        triggered = true;
     }
 
     public int ChooseEnemy()
@@ -657,7 +740,7 @@ public class SAIM : MonoBehaviour
                 }
                 
 
-                if(CheckHeightDifference(currentNode, node))
+                if(CheckHeightDifference(currentNode, node) || CollisonCull(currentNode, node))
                 {
                     continue;
                 }
@@ -688,6 +771,18 @@ public class SAIM : MonoBehaviour
         return false;
     }
 
+    //If the node goes through a wall, dont connect it. This is to account for thin walls not otherwise picked up on by the placed nodes
+    bool CollisonCull(Node mainNode, Node neighbourNode)
+    {
+
+        if (Physics.Raycast(mainNode.transform.position, neighbourNode.transform.position - mainNode.transform.position, nodeSpacing , cullLayerMask))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     //Using the integrated field, generate the flow field by pointing each node at the next node
     void GenerateFlowField()
     {
@@ -703,7 +798,7 @@ public class SAIM : MonoBehaviour
             //This will be the node with the lowest bestCost.
             foreach (Node currentNeigbourNode in currentNodeNeigbours)
             {
-                if(currentNeigbourNode.bestCost < bestCost && !CheckHeightDifference(currentNode, currentNeigbourNode))
+                if(currentNeigbourNode.bestCost < bestCost && !CheckHeightDifference(currentNode, currentNeigbourNode) && !CollisonCull(currentNode, currentNeigbourNode))
                 {
                     bestCost = currentNeigbourNode.bestCost;
                     currentNode.bestNextNodePos = currentNeigbourNode.transform.position;

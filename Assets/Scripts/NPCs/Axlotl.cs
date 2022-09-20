@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class Axlotl : NPC
 {
+    //Only used for the tutorial!
+    [SerializeField]
+    SAIM tutorialSAIM;
 
-    class Greetings : Dialogue
+    public override void TutorialAction()
     {
-        public Greetings(NPCData npcData) :  base(npcData){}
+        base.TutorialAction();
+        tutorialSAIM.ManualSpawn();
+        //Dissappear
 
-
-        public override void Action()
-        {
-
-            //Play an animation
-            base.Action();
-        }
+        gameObject.SetActive(false);
     }
-
-   
 
 }

@@ -9,12 +9,27 @@ public class EnemyShield : BaseEnemyClass
     [SerializeField]
     Collider[] attackCollider, defenseCollider;
     bool attacking = false;
-    public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
+    public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
     {
         GameObject hitSpn = Instantiate(hitSpawn, transform.position, Quaternion.identity);
         Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
         hitSpn.transform.localScale = scale;
         float multiplier = 1;
+
+        if (applyTriggers)
+        {
+            foreach (Item item in playerClass.heldItems)
+            {
+                item.OnHitTriggers(this, attackTypes);
+            }
+
+            //Call all hit triggers; effects which trigger whenever the enemy is hit
+            foreach (HitTrigger hTrigs in hitTriggers)
+            {
+                hTrigs(this, attackTypes);
+            }
+        }
+
         foreach (Types type in attackTypes)
         {
             foreach (Types weak in weaknesses)

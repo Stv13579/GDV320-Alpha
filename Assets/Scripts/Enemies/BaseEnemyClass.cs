@@ -7,7 +7,7 @@ using UnityEngine.Timeline;
 public class BaseEnemyClass : MonoBehaviour
 {
     [SerializeField]
-    protected float currentHealth, maxHealth, baseMaxHealth, damageAmount, baseDamageAmount, moveSpeed, baseMoveSpeed;
+    protected float currentHealth, maxHealth, baseMaxHealth, damageAmount, baseDamageAmount, groundMoveSpeed, moveSpeed, baseMoveSpeed;
 
     protected StatModifier.FullStat health = new StatModifier.FullStat(0), damage = new StatModifier.FullStat(0), speed = new StatModifier.FullStat(0);
 
@@ -66,6 +66,9 @@ public class BaseEnemyClass : MonoBehaviour
     [HideInInspector]
     protected List<DeathTrigger> deathTriggers = new List<DeathTrigger>();
 
+    public delegate void HitTrigger(BaseEnemyClass ownedEnemy, List<Types> type);
+
+    protected List<HitTrigger> hitTriggers = new List<HitTrigger>();
 
     protected Vector3 moveDirection;
     protected AudioManager audioManager;
@@ -85,11 +88,11 @@ public class BaseEnemyClass : MonoBehaviour
 
     protected Vector3 oldPosition;
 
-	private GameObject hitMarker;
-
+    GameplayUI uiScript;
     public virtual void Awake()
     {
-        prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
+        if(GameObject.Find("ProphecyManager"))
+            prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
         startY = transform.position.y;
         player = GameObject.Find("Player");
         playerClass = player.GetComponent<PlayerClass>();
@@ -97,7 +100,7 @@ public class BaseEnemyClass : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         oldPosition = new Vector3(-1000, -1000, -1000);
         enemyAnims = GetComponentInChildren<Animator>();
-        hitMarker = GameObject.Find("GameplayUI");
+        uiScript = FindObjectOfType<GameplayUI>();
         health.baseValue = baseMaxHealth;
         damage.baseValue = baseDamageAmount;
         speed.baseValue = baseMoveSpeed;
@@ -105,10 +108,21 @@ public class BaseEnemyClass : MonoBehaviour
         {
             audioManager.PlaySFX(idleAudio);
         }
+
+        if(spawner == null)
+        {
+            spawner = FindObjectOfType<SAIM>().gameObject;
+        }
     }
 
     public virtual void Update()
     {
+
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
         if(transform.position.y > 100)
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -118,6 +132,13 @@ public class BaseEnemyClass : MonoBehaviour
         damageAmount = StatModifier.UpdateValue(damage);
         moveSpeed = StatModifier.UpdateValue(speed);
 
+        if (uiScript)
+        {
+            if (uiScript.GetHitMarker().transform.GetChild(8).gameObject.activeInHierarchy == true)
+            {
+                StartCoroutine(uiScript.HitMarker());
+            }
+        }
     }
 
     //Movement
@@ -146,7 +167,7 @@ public class BaseEnemyClass : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1)
+    public virtual void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
     {
         hitSpawn.GetComponent<ParticleSystem>().Clear();
         hitSpawn.GetComponent<ParticleSystem>().Play();
@@ -154,6 +175,22 @@ public class BaseEnemyClass : MonoBehaviour
         //GameObject hitSpn = Instantiate(hitSpawn, transform.position, Quaternion.identity);
         //Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
         //hitSpn.transform.localScale = scale;
+        
+        
+        if(applyTriggers)
+        {
+            foreach (Item item in playerClass.heldItems)
+            {
+                item.OnHitTriggers(this, attackTypes);
+            }
+
+            //Call all hit triggers; effects which trigger whenever the enemy is hit
+            foreach (HitTrigger hTrigs in hitTriggers)
+            {
+                hTrigs(this, attackTypes);
+            }
+        }
+        
 
         float multiplier = 1;
         foreach (Types type in attackTypes)
@@ -179,10 +216,11 @@ public class BaseEnemyClass : MonoBehaviour
         {
             enemyAnims.SetTrigger("TakeDamage");
         }
-
-        StopCoroutine(HitMarker());
-        StartCoroutine(HitMarker());
-
+        if (uiScript)
+        {
+            StopCoroutine(uiScript.HitMarker());
+            StartCoroutine(uiScript.HitMarker());
+        }
         if (audioManager)
         {
             audioManager.StopSFX(takeDamageAudio);
@@ -191,7 +229,7 @@ public class BaseEnemyClass : MonoBehaviour
         Death();
     }
 
-    //Death
+    //Checks if the enemy has died and applies relevant behaviour, such as triggering any on death effects, before destroying it
     public virtual void Death()
     {
         if(isDead)
@@ -261,15 +299,6 @@ public class BaseEnemyClass : MonoBehaviour
         }
     }
 
-    IEnumerator HitMarker()
-    {
-        if (hitMarker)
-        {
-            hitMarker.transform.GetChild(8).gameObject.SetActive(true);
-        }
-        yield return new WaitForSeconds(0.2f);
-        hitMarker.transform.GetChild(8).gameObject.SetActive(false);
-    }
     public void Targetted(bool targetted, Color colour)
     {
         if(targettingIndicator.active == false && targetted == true)
@@ -337,6 +366,10 @@ public class BaseEnemyClass : MonoBehaviour
     {
         return deathTriggers;
     }
+    public List<HitTrigger> GetHitTriggers()
+    {
+        return hitTriggers;
+    }
 
     public StatModifier.FullStat GetHealthStat()
     {
@@ -351,5 +384,18 @@ public class BaseEnemyClass : MonoBehaviour
     public StatModifier.FullStat GetSpeedStat()
     {
         return speed;
+    }
+
+    //For testing purposes only, in conjunction with enemy testing UI
+    public void AddHealth(int amount)
+    {
+        currentHealth += amount;
+        maxHealth += amount;
+    }
+
+    public void AddDamage(int amount)
+    {
+        damageAmount += amount;
+        baseDamageAmount += amount;
     }
 }

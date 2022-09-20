@@ -29,7 +29,7 @@ public class GameOverScreen : MonoBehaviour
         {
             backgroundTimer += Time.deltaTime;
         }
-        background.color = new Color(0, 0, 0, backgroundTimer);
+        background.color = new Color(background.color.r, background.color.g, background.color.b, backgroundTimer);
         if(background.color.a >= 1)
         {
             if(textTimer < 1)

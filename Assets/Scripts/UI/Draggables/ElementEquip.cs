@@ -38,7 +38,7 @@ public class ElementEquip : DraggedObject
             }
             if (player.GetPrimaryElements()[eSlot.GetElementSlot()] && player.GetCatalystElements()[1])
             {
-                player.GetComboElements()[eSlot.GetElementSlot()].comboElements[1] = player.CalculateCombo(player.GetPrimaryElements()[eSlot.GetElementSlot()], player.GetCatalystElements()[0]);
+                player.GetComboElements()[eSlot.GetElementSlot()].comboElements[1] = player.CalculateCombo(player.GetPrimaryElements()[eSlot.GetElementSlot()], player.GetCatalystElements()[1]);
             }
         }
         else

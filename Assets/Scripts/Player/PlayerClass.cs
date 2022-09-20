@@ -72,6 +72,7 @@ public class PlayerClass : MonoBehaviour
     //private Material fireMaterial;
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         currentHealth = baseMaxHealth;
         health.baseValue = baseMaxHealth;
         defenseStat.baseValue = baseDefense;
@@ -93,8 +94,19 @@ public class PlayerClass : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            //Save the game
+            SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Lotl"));
+            SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Blacksmith"));
+            SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Fortune"));
+            SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Shop"));
+
+            Application.Quit();
+        }
+
         //Don't forget to remove this
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             BaseEnemyClass[] enemies = FindObjectsOfType<BaseEnemyClass>();
             foreach(BaseEnemyClass enemy in enemies)

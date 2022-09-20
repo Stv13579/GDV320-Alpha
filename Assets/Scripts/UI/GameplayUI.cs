@@ -35,6 +35,9 @@ public class GameplayUI : MonoBehaviour
 
     float comboTimer = 1.0f;
 
+    GameObject hitMarker;
+
+    public GameObject GetHitMarker() { return hitMarker; }
     public bool GetCombo() { return combo; }
     public void SetCombo(bool tempCombo) { combo = tempCombo; }
 
@@ -42,6 +45,7 @@ public class GameplayUI : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<Shooting>();
         playerClass = player.gameObject.GetComponent<PlayerClass>();
+        hitMarker = GameObject.Find("GameplayUI");
         comboTimer = maxComboTimer;
         Debug.Log("G UI on");
     }
@@ -98,6 +102,11 @@ public class GameplayUI : MonoBehaviour
         ChangeCombo(inactiveCatalystElement.transform.parent, true);
         ChangeCombo(activeComboElement.transform.parent, false);
         ChangeCombo(inactiveComboElement.transform.parent, false);
+
+        if(hitMarker.transform.GetChild(8).gameObject.active == true)
+        {
+            StartCoroutine(HitMarker());
+        }
     }
 
     public void AddItem(Sprite[] sprites)
@@ -114,13 +123,18 @@ public class GameplayUI : MonoBehaviour
 
     public void RemoveItem(Sprite[] sprites)
     {
-        if (itemIndex > items.Count)
+
+        foreach (Image item in items)
         {
-            itemIndex--;
-            items[itemIndex].sprite = sprites[0];
-            items[itemIndex].transform.GetChild(0).GetComponent<Image>().sprite = sprites[1];
-            items[itemIndex].enabled = false;
-            items[itemIndex].transform.GetChild(0).GetComponent<Image>().enabled = false;
+            if(item.sprite == sprites[0])
+            {
+                item.sprite = sprites[0];
+                item.transform.GetChild(0).GetComponent<Image>().sprite = sprites[1];
+                item.enabled = false;
+                item.transform.GetChild(0).GetComponent<Image>().enabled = false;
+                itemIndex--;
+            }
+            
             
         }
     }
@@ -180,5 +194,17 @@ public class GameplayUI : MonoBehaviour
             }
         }
 
+    }
+    public IEnumerator HitMarker()
+    {
+        if (hitMarker)
+        {
+            hitMarker.transform.GetChild(8).gameObject.SetActive(true);
+        }
+        yield return new WaitForSeconds(0.2f);
+        if (hitMarker)
+        {
+            hitMarker.transform.GetChild(8).gameObject.SetActive(false);
+        }
     }
 }

@@ -8,6 +8,7 @@ public class Room : MonoBehaviour
     public int weighting;
     public bool illegal = false;
     public Vector2Int gridPos = Vector2Int.zero;
+    [SerializeField]
     List<GameObject> activeDoors = new List<GameObject>();
     LevelGeneration levelGenerator;
     bool locked = false;
@@ -24,12 +25,16 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
-        levelGenerator = GameObject.Find("Level Generator").GetComponent<LevelGeneration>();
-        roomTrigger = transform.Find("RoomTriggerBox").gameObject;
+        
         
 
         this.GetComponent<TerrainCollider>().enabled = false;
         this.GetComponent<TerrainCollider>().enabled = true;
+        
+        roomTrigger = transform.Find("RoomTriggerBox").gameObject;
+
+        if(GameObject.Find("Level Generator"))
+            levelGenerator = GameObject.Find("Level Generator").GetComponent<LevelGeneration>();
 
     }
 

@@ -18,7 +18,10 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
     [SerializeField]
     float projectileSpeed;
 
-    float destroyTimer = 0.0f;
+	float destroyTimer = 0.0f;
+	[SerializeField]
+	GameObject burrowVFX, burrowingVFX;
+	GameObject burrowMovementVFX;
 
 
     [SerializeField]
@@ -118,38 +121,46 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
         Vector3 startPos = this.transform.position;
         Vector3 endPos = this.transform.position + new Vector3(0, -50, 0);
         burrowing = true;
-        timer = 0.0f;
-        while(timer < burrowTime)
+	    timer = 0.0f;
+	    Instantiate(burrowVFX, this.transform.position - new Vector3(0, 0.3f, 0), Quaternion.identity);
+	    burrowMovementVFX = Instantiate(burrowingVFX, this.transform.position, Quaternion.identity);
+        
+	    Node nodeChosen = null;
+	    Vector3 emergePos = Vector3.zero;
+	    //Finds a SAIM node, checks if it's valid, if so moves the enemy to below it and starts emerging, otherwise finds another node
+	    while(nodeChosen == null)
+	    {
+		    int rand = Random.Range(0, spawner.GetComponent<SAIM>().aliveNodes.Count);
+		    nodeChosen = spawner.GetComponent<SAIM>().aliveNodes[rand];
+		    RaycastHit hit;
+		    Physics.SphereCast(nodeChosen.gameObject.transform.position, 0.5f, -nodeChosen.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
+		    emergePos = hit.point - this.transform.GetChild(1).localPosition * 2;
+		    if (Vector3.Distance(player.transform.position, emergePos) > 10 && Vector3.Distance(player.transform.position, emergePos) < 20)
+		    {
+
+
+
+		    }
+		    else
+		    {
+			    nodeChosen = null;
+		    }
+		    yield return null;
+	    }
+	    
+	    burrowMovementVFX.GetComponent<BurrowMovementScript>().SetVars(emergePos, burrowTime * 2);
+	    
+	    while(timer < burrowTime)
         {
             timer += Time.deltaTime;
 
             this.transform.position = Vector3.Lerp(startPos, endPos, timer / burrowTime);
             yield return null;
         }
+	    this.transform.position = emergePos + new Vector3(0, -50, 0);
 
-        Node nodeChosen = null;
-        //Finds a SAIM node, checks if it's valid, if so moves the enemy to below it and starts emerging, otherwise finds another node
-        while(nodeChosen == null)
-        {
-            int rand = Random.Range(0, spawner.GetComponent<SAIM>().aliveNodes.Count);
-            nodeChosen = spawner.GetComponent<SAIM>().aliveNodes[rand];
-            RaycastHit hit;
-            Physics.SphereCast(nodeChosen.gameObject.transform.position, 0.5f, -nodeChosen.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
-            Vector3 emergePos = hit.point - this.transform.GetChild(1).localPosition * 2;
-            if (Vector3.Distance(player.transform.position, emergePos) > 10 && Vector3.Distance(player.transform.position, emergePos) < 20)
-            {
+	    StartCoroutine(Emerge());
 
-                this.transform.position = emergePos + new Vector3(0, -50, 0);
-
-
-                StartCoroutine(Emerge());
-            }
-            else
-            {
-                nodeChosen = null;
-            }
-            yield return null;
-        }
         StopCoroutine(Burrow());
 
     }
@@ -158,11 +169,16 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
     {
         Vector3 startPos = this.transform.position;
         Vector3 endPos = this.transform.position + new Vector3(0, 50, 0);
-        timer = 0.0f;
+	    timer = 0.0f;
+	    bool spawnedBurrow = false;
         while (timer < burrowTime)
         {
             timer += Time.deltaTime;
-
+	        if(timer > burrowTime - 0.5 && !spawnedBurrow)
+	        {
+	        	spawnedBurrow = true;
+		        Instantiate(burrowVFX, endPos - new Vector3(0, 0.3f, 0), Quaternion.identity);
+	        }
             this.transform.position = Vector3.Lerp(startPos, endPos, timer / burrowTime);
             yield return null;
         }

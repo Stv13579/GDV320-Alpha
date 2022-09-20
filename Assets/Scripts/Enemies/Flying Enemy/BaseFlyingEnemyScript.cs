@@ -25,7 +25,9 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
 
     private void Start()
     {
-        FindTarget();
+        //Doing this in start means that if the flying enemy is first in the run order, it will kill itself since no other enemies are alive yet.
+        //This is what kills the flying enemies on spawn for seemingly no reason.
+        //FindTarget();
     }
 
     private void Update()

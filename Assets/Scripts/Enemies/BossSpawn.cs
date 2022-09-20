@@ -23,21 +23,19 @@ public class BossSpawn : MonoBehaviour
 
     // audio manager
     AudioManager audioManager;
-    [SerializeField]
-    private string initialMusic;
-    [SerializeField]
-    private string battleMusic;
 
-    void Start()
+    RunManager runManager;
+
+    void Awake()
     {
         audioManager = FindObjectOfType<AudioManager>();
+        runManager = FindObjectOfType<RunManager>();
     }
-
     void Update()
     {
         if (audioManager)
         {
-            audioManager.FadeOutAndPlayMusic(initialMusic, battleMusic);
+            audioManager.FadeOutAndPlayMusic($"Level {runManager.GetSceneIndex() - 1} Non Combat", $"Level {runManager.GetSceneIndex() - 1} Boss");
         }
 
         if (!triggered)

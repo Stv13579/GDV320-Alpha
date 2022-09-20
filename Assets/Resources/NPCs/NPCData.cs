@@ -13,8 +13,21 @@ public class NPCData : ScriptableObject
     public bool questReady = false;
     public bool onQuest = false;
     public bool questComplete = false; 
-
-    public List<NPC.Dialogue> seenStoryPoints = new List<NPC.Dialogue>();
-
     public List<string> quests;
+
+    public void LoadData(NPCSaveData sData)
+    {
+        if(sData == null)
+        {
+            return;
+        }
+        storyPosition = sData.storyPosition;
+        intraStoryPosition = sData.intraStoryPosition;
+
+        questReady = sData.questReady;
+        onQuest = sData.onQuest;
+        questComplete = sData.questComplete;
+
+
+    }
 }

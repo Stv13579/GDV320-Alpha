@@ -50,7 +50,7 @@ public class NecroticElement : BaseElementClass
             {
                 playerClass.ChangeMana(-manaCost, manaTypes);
                 Instantiate(necroticVFX, targetToSlow.transform);
-                enemy.SetDamageResistance(upgraded ? 3.0f : 2.0f);
+                enemy.SetDamageResistance(enemy.GetDamageResistance() * (upgraded ? 3.0f : 2.0f));
             }
         }
     }
