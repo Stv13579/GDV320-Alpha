@@ -190,7 +190,8 @@ public class WaterSlimeEnemy : BaseEnemyClass
         if (collision.gameObject.tag == "Player")
         {
             Attacking();
-            damageTicker = 1.0f;
+	        damageTicker = 1.0f;
+	        GetComponent<Rigidbody>().velocity *= -1;
         }
     }
     public virtual void OnCollisionStay(Collision collision)
@@ -239,7 +240,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
         {
             for (int i = 0; i < 2; i++)
             {
-                GameObject newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2), Quaternion.identity);
+                GameObject newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 2, Quaternion.identity);
                 newSlime.GetComponent<WaterSlimeEnemy>().maxHealth = maxHealth / 2;
                 newSlime.GetComponent<WaterSlimeEnemy>().baseMaxHealth = baseMaxHealth / 2;
                 newSlime.GetComponent<WaterSlimeEnemy>().health.baseValue = maxHealth / 2;
