@@ -15,11 +15,11 @@ public class NPCData : ScriptableObject
     public bool questComplete = false; 
     public List<string> quests;
 
-    public void LoadData(NPCSaveData sData)
+    public bool LoadData(NPCSaveData sData)
     {
         if(sData == null)
         {
-            return;
+            return false;
         }
         storyPosition = sData.storyPosition;
         intraStoryPosition = sData.intraStoryPosition;
@@ -28,6 +28,6 @@ public class NPCData : ScriptableObject
         onQuest = sData.onQuest;
         questComplete = sData.questComplete;
 
-
+        return true;
     }
 }
