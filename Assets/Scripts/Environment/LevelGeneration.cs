@@ -9,7 +9,7 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField]
     int maxWeighting, minWeighting, weightingChange, minRooms, maxRooms;
 
-    GameObject startRoom;
+    public GameObject startRoom;
     GameObject bossRoom;
     GameObject shop;
     GameObject NPC;

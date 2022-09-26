@@ -128,6 +128,11 @@ public class BaseEnemyClass : MonoBehaviour
             GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
 
+        if (transform.position.y < -100)
+        {
+            Death();
+        }
+
         maxHealth = StatModifier.UpdateValue(health);
         damageAmount = StatModifier.UpdateValue(damage);
         moveSpeed = StatModifier.UpdateValue(speed);
