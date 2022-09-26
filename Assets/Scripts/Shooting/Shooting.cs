@@ -229,7 +229,7 @@ public class Shooting : MonoBehaviour
         }
         
         SwitchingElements();
-        if (ableToShoot)
+        if (ableToShoot && (SceneManager.GetActiveScene().name != "Hub Scene"))
         {
             // if the player is out of combo mode
             if (!inComboMode)
