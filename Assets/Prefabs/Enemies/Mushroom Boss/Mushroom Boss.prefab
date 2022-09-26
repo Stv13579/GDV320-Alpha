@@ -46,9 +46,9 @@ GameObject:
   - component: {fileID: 2415644416445313288}
   - component: {fileID: 591729758280582792}
   - component: {fileID: -6729614984893795230}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mushroom Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,15 +147,18 @@ MonoBehaviour:
   baseMaxHealth: 10
   damageAmount: 0
   baseDamageAmount: 0
+  groundMoveSpeed: 0
   moveSpeed: 1
   baseMoveSpeed: 50
   damageThreshold: 0
   damageResistance: 1
-  drops: {fileID: 0}
+  drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
   weaknesses: 
   resistances: 
-  deathSpawn: {fileID: 0}
-  hitSpawn: {fileID: 0}
+  deathSpawn: {fileID: 1140089593594349035, guid: 58cc516cec47cd9448a27c3f1ed9a4a6,
+    type: 3}
+  hitSpawn: {fileID: 2154916016029885947, guid: 927b09bead51b864990a49b3960ddc7c,
+    type: 3}
   attackAudio: 
   deathAudio: 
   takeDamageAudio: 
@@ -212,7 +215,7 @@ GameObject:
   - component: {fileID: 1807105428854005575}
   - component: {fileID: 8770471077152240881}
   - component: {fileID: 3662983193899960628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,6 +362,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Model_Mushroom_Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 85d09b2d394aa1a4cbeaed16ab6de9cd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85d09b2d394aa1a4cbeaed16ab6de9cd, type: 3}
