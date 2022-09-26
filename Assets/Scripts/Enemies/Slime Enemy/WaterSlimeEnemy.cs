@@ -105,7 +105,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
             //    Vector3 move = dir * ((moveSpeed) / 50) * Time.deltaTime;
             //    this.transform.position += move;
             //}
-            Movement(positionToMoveTo, groundMoveSpeed);
+            Movement(positionToMoveTo, moveSpeed / groundMoveSpeed);
         }
         
     }

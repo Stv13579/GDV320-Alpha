@@ -90,13 +90,13 @@ public class Shooting : MonoBehaviour
     AudioManager audioManager;
 
     [SerializeField]
-    private Transform leftOrbPos;
+    Transform leftOrbPos;
 
     [SerializeField]
-    private Transform rightOrbPos;
+    Transform rightOrbPos;
 
     [SerializeField]
-    private GameplayUI uiScript;
+    GameplayUI uiScript;
 
     // Getters
     public List<BaseElementClass> GetCatalystElements() { return catalystElements; }
@@ -380,6 +380,10 @@ public class Shooting : MonoBehaviour
             inComboMode && GetLeftMana()[0] <= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost()  && GetRightMana()[0] <= comboElements[leftElementIndex].comboElements[rightElementIndex].GetManaCost())
         {
             comboElements[leftElementIndex].comboElements[rightElementIndex].LiftEffect();
+            DestroyLeftOrb();
+            DestroyRightOrb();
+            InstantiatePrimaryOrb();
+            InstantiateCatalystOrb();
             primaryElements[leftElementIndex].AnimationSwitch(true);
             catalystElements[rightElementIndex].AnimationSwitch(false);
             uiScript.SetCombo(!inComboMode);
