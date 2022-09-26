@@ -48,6 +48,9 @@ public class GameplayUI : MonoBehaviour
         hitMarker = GameObject.Find("GameplayUI");
         comboTimer = maxComboTimer;
         Debug.Log("G UI on");
+
+
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()

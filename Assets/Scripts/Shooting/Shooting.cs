@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Shooting : MonoBehaviour
 {
@@ -193,19 +194,27 @@ public class Shooting : MonoBehaviour
         return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
     }
     public void SetLoadOutChosen(bool tempLoadOutChosen) { loadOutChosen = tempLoadOutChosen; }
+
+    //A function that is called whenever a new scene is loaded while this object is enabled.
+    public void OnLoadScene(Scene scene, LoadSceneMode mode) { }
+
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         // hard coded for now
         primaryElements[leftElementIndex].GetPlayerHand().SetInteger("ElementL", leftElementIndex + 1);
         catalystElements[rightElementIndex].GetPlayerHand().SetInteger("ElementR", rightElementIndex + 101);
-        uiScript = GameObject.Find("GameplayUI").GetComponent<GameplayUI>();
+
+        uiScript = FindObjectOfType<GameplayUI>();
+        SceneManager.sceneLoaded += OnLoadScene;
 
         if(tutorial)
         {
             loadOutChosen = true;
         }
     }
+
+
     private void Update()
     {
         if(loadOutChosen)
@@ -220,7 +229,7 @@ public class Shooting : MonoBehaviour
         }
         
         SwitchingElements();
-        if (ableToShoot)
+        if (ableToShoot && (SceneManager.GetActiveScene().name != "Hub Scene"))
         {
             // if the player is out of combo mode
             if (!inComboMode)

@@ -9,7 +9,7 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField]
     int maxWeighting, minWeighting, weightingChange, minRooms, maxRooms;
 
-    GameObject startRoom;
+    public GameObject startRoom;
     GameObject bossRoom;
     GameObject shop;
     GameObject NPC;
@@ -369,7 +369,12 @@ public class LevelGeneration : MonoBehaviour
 
             foreach (Vector2 pos in legalPositions)
             {
-                PlaceRoom(new Vector3(pos.x * roomSize, 0, pos.y * roomSize), genericRooms, possibleEdgeRooms, true, false);
+                GameObject edgeRoom = PlaceRoom(new Vector3(pos.x * roomSize, 0, pos.y * roomSize), genericRooms, possibleEdgeRooms, true, false);
+
+                
+
+                //Rotate it so that it is placed with its south edge against the given edge
+
             }
             
         }
