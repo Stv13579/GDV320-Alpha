@@ -263,7 +263,7 @@ public class BaseEnemyClass : MonoBehaviour
                     Drop(drops.currencyList, drops.minCurrencySpawn, drops.maxCurrencySpawn);
                     break;
                 case 1:
-                    Drop(drops.ammoList, drops.minAmmoSpawn, drops.maxAmmoSpawn);
+                    Drop(drops.minAmmoSpawn, drops.maxAmmoSpawn);
                     break;
                 case 2:
                     Drop(drops.healthList, drops.minHealthSpawn, drops.maxHealthSpawn);
@@ -301,6 +301,17 @@ public class BaseEnemyClass : MonoBehaviour
         {
             GameObject drop = Instantiate(drops.GetDrop(dropType), this.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             
+        }
+    }
+
+    //Overload for dropping ammo
+    void Drop(int minSpawn, int maxSpawn)
+    {
+        //Spawn drops
+        for (int i = 0; i < Random.Range(minSpawn, maxSpawn); i++)
+        {
+            GameObject drop = Instantiate(drops.GetAmmoDrop(), this.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+
         }
     }
 

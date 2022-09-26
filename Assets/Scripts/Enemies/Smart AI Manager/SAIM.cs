@@ -209,7 +209,7 @@ public class SAIM : MonoBehaviour
             return;
         }
 
-        GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>().text = spawnedEnemies.Count.ToString();
+        //GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>().text = spawnedEnemies.Count.ToString();
 
         Move();
         
