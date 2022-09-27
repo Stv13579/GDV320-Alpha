@@ -139,7 +139,7 @@ public class BaseEnemyClass : MonoBehaviour
 
         if (uiScript)
         {
-            if (uiScript.GetHitMarker().transform.GetChild(8).gameObject.activeInHierarchy == true)
+            if (uiScript.GetHitMarker().active == true)
             {
                 StartCoroutine(uiScript.HitMarker());
             }

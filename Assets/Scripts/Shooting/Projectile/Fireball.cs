@@ -5,31 +5,23 @@ using UnityEngine;
 public class Fireball : BaseElementSpawnClass
 {
 
-    private float speed;
-
-    private float damage;
-    private float explosionDamage;
-
-    private float gravity;
-
-    private AnimationCurve gravCurve;
-
-    private float gravityLifetime;
-    private float startLifetime;
-
-    private float explosionRadii;
-
-    private AudioManager audioManager;
+    float speed;
+    float damage;
+    float explosionDamage;
+    float gravity;
+    float gravityLifetime;
+    float explosionRadii;
+    AudioManager audioManager;
 
     [SerializeField]
-    private LayerMask enemyDetect;
+    LayerMask enemyDetect;
 
-    private void Start()
+    void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
     }
 
-    private void Update()
+    void Update()
     {
         if(gravityLifetime > 0)
         {
@@ -54,12 +46,11 @@ public class Fireball : BaseElementSpawnClass
 
     }
 
-    public void SetVars(float spd, float dmg, float grav, AnimationCurve grCurve, float lifeTime, float explosionRadius, float expDamage, List<BaseEnemyClass.Types> types)
+    public void SetVars(float spd, float dmg, float grav, float lifeTime, float explosionRadius, float expDamage, List<BaseEnemyClass.Types> types)
     {
         speed = spd;
         damage = dmg;
         gravity = grav;
-        gravCurve = grCurve;
         gravityLifetime = lifeTime;
         explosionRadii = explosionRadius;
         explosionDamage = expDamage;
@@ -68,7 +59,7 @@ public class Fireball : BaseElementSpawnClass
 
 
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         //if enemy, hit them for the damage
         Collider taggedEnemy = null;

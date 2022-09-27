@@ -5,24 +5,24 @@ using UnityEngine;
 public class LandMineElement : BaseElementClass
 {
     [SerializeField]
-    private GameObject landMineProjectile;
+    GameObject landMineProjectile;
 
     [SerializeField]
-    private GameObject indicator;
+    GameObject indicator;
 
     [SerializeField]
-    private float explosiveRadius;
+    float explosiveRadius;
 
     [SerializeField]
-    private float lifeTimer;
+    float lifeTimer;
 
     [SerializeField]
-    private float rayCastRange;
+    float rayCastRange;
 
-    private RaycastHit hit;
+    RaycastHit hit;
 
     [SerializeField]
-    private LayerMask layerMask;
+    LayerMask layerMask;
 
     // Update is called once per frame
     protected override void Update()

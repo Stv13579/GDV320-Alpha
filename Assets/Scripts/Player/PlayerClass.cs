@@ -42,34 +42,33 @@ public class PlayerClass : MonoBehaviour
     public GameObject itemUI;
 
     public GameObject gameOverScreen;
-    private bool dead = false;
+    bool dead = false;
 
     /// <summary>
     /// Pushing Away When Hit
     /// </summary>
     public float pushDuration;
-    private float pushStrength;
-    private float currentPushDuration;
-    private Vector3 pushDir;
+    float pushStrength;
+    float currentPushDuration;
+    Vector3 pushDir;
 
 
-    private float fireTimer = 0.0f;
+    float fireTimer = 0.0f;
     [SerializeField]
-    private float fireDOT;
+    float fireDOT;
     [SerializeField]
-    private GameObject fireEffect;
+    GameObject fireEffect;
 
     [SerializeField]
-    private float lowHealthLimit;
+    float lowHealthLimit;
     [SerializeField]
-    private string lowHealthFastHeartBeat;
+    string lowHealthFastHeartBeat;
     [SerializeField]
-    private string lowHealthSlowHeartBeat;
+    string lowHealthSlowHeartBeat;
 
-    private AudioManager audioManager;
+    AudioManager audioManager;
 
-    //[SerializeField]
-    //private Material fireMaterial;
+    GameplayUI gameplayUI;
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -84,6 +83,7 @@ public class PlayerClass : MonoBehaviour
         }
         itemUI = GameObject.Find("ItemArray");
         audioManager = FindObjectOfType<AudioManager>();
+        gameplayUI = FindObjectOfType<GameplayUI>();
     }
 
 
@@ -307,12 +307,18 @@ public class PlayerClass : MonoBehaviour
         if(fireTimer > 0)
         {
             fireEffect.SetActive(true);
-            //fireMaterial.SetFloat("_Toggle_EffectIntensity", 0.1f);
+            if(gameplayUI)
+            {
+                gameplayUI.GetBurnFullScreen().material.SetFloat("_Toggle_EffectIntensity", 10.0f);
+            }
         }
         else
         {
             fireEffect.SetActive(false);
-            //fireMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
+            if (gameplayUI)
+            {
+                gameplayUI.GetBurnFullScreen().material.SetFloat("_Toggle_EffectIntensity", 0.0f);
+            }
         }
     }
 

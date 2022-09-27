@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class IceSlashProj : BaseElementSpawnClass
 {
-    private float speed;
-
-    private float damage;
-
-    private float startLifeTimer;
+    float speed;
+    float damage;
+    float startLifeTimer;
 
     // Update is called once per frame
     void Update()
@@ -18,13 +16,13 @@ public class IceSlashProj : BaseElementSpawnClass
         KillProjectile();
     }
     // moves the ice slash
-    private void MoveIceSlash()
+    void MoveIceSlash()
     {
         Vector3 movement = transform.forward * speed * Time.deltaTime;
         transform.position += movement;
     }
 
-    private void KillProjectile()
+    void KillProjectile()
     {
         if(startLifeTimer <= 0)
         {
@@ -39,7 +37,7 @@ public class IceSlashProj : BaseElementSpawnClass
         attackTypes = types;
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         // goes through enemies and damages them aswell
         if (other.gameObject.layer == 8 && other.gameObject.GetComponent<BaseEnemyClass>())

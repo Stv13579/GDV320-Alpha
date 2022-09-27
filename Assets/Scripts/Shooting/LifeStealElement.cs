@@ -6,45 +6,39 @@ using static UnityEngine.Rendering.DebugUI;
 public class LifeStealElement : BaseElementClass
 {
     [SerializeField]
-    private GameObject lifeStealSuccess;
+    GameObject lifeStealSuccess;
 
     [SerializeField]
-    private GameObject lifeStealfail;
+    GameObject lifeStealfail;
 
     [SerializeField]
-    private float sphereRadius;
+    float sphereRadius;
 
     [SerializeField]
-    private float sphereRange;
+    float sphereRange;
 
     // might use later
     [SerializeField]
-    private float healValue;
+    float healValue;
 
     [SerializeField]
-    private float damageAndHealthTicker;
-    private float currentDamageAndHealthTicker;
+    float damageAndHealthTicker;
+    float currentDamageAndHealthTicker;
 
-    private bool isTargeting;
-    private bool isShooting;
-
-    [SerializeField]
-    private LayerMask hitLayer;
+    bool isTargeting;
+    bool isShooting;
 
     [SerializeField]
-    private LayerMask environmentLayer;
+    LayerMask hitLayer;
 
-    private GameObject enemy;
+    [SerializeField]
+    LayerMask environmentLayer;
 
-    //[SerializeField]
-    //private Material lifestealFullScreenEffect;
+    GameObject enemy;
 
-    private float lifestealeffectvalue;
     protected override void Start()
     {
         base.Start();
-        lifestealeffectvalue = 0;
-        //lifestealFullScreenEffect.SetFloat("_Toggle_EffectIntensity", lifestealeffectvalue);
     }
     // Update is called once per frame
     protected override void Update()
@@ -56,12 +50,12 @@ public class LifeStealElement : BaseElementClass
             DeactivateLifeSteal();
         }
     }
-    private void ActivateLifeSteal()
+    void ActivateLifeSteal()
     {
         if (isShooting == true)
         {
             currentDamageAndHealthTicker += Time.deltaTime;
-            LifeStealFullScreenEffect(0);
+            gameplayUI.GetLifeStealFullScreen().material.SetFloat("_Toggle_EffectIntensity", 0.0f);
             RaycastHit[] objectHit = Physics.SphereCastAll(Camera.main.transform.position, sphereRadius, Camera.main.transform.forward, sphereRange, hitLayer);
             if(objectHit.Length <= 0)
             {
@@ -89,6 +83,7 @@ public class LifeStealElement : BaseElementClass
             if (isTargeting == true && enemy != null)
             {
                 //LifeStealFullScreenEffect(0.1f);
+                gameplayUI.GetLifeStealFullScreen().material.SetFloat("_Toggle_EffectIntensity", 10.0f);
                 if (audioManager)
                 {
                     audioManager.PlaySFX(shootingSoundFX);
@@ -100,12 +95,13 @@ public class LifeStealElement : BaseElementClass
                 {
                     playerClass.ChangeMana(-manaCost * Time.deltaTime, manaTypes);
                     enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.waterDamageMultiplier), attackTypes);
+                    currentDamageAndHealthTicker = 0;
                 }
                 playerClass.ChangeHealth(healValue);
             }
         }
     }
-    private void DeactivateLifeSteal()
+    void DeactivateLifeSteal()
     {
         if (audioManager)
         {
@@ -116,12 +112,7 @@ public class LifeStealElement : BaseElementClass
         lifeStealSuccess.SetActive(false);
         lifeStealfail.SetActive(false);
         playerHand.SetTrigger("LifeStealStopCast");
-        LifeStealFullScreenEffect(0);
-    }
-    private void LifeStealFullScreenEffect(float value)
-    {
-        lifestealeffectvalue = value;
-        //lifestealFullScreenEffect.SetFloat("_Toggle_EffectIntensity", lifestealeffectvalue);
+        gameplayUI.GetLifeStealFullScreen().material.SetFloat("_Toggle_EffectIntensity", 0.0f);
     }
 
     // gets called in the animation event triggers

@@ -4,22 +4,17 @@ using UnityEngine;
 
 public class AcidCloud : BaseElementSpawnClass
 {
-    private float damage;
-
-    private float cloudSize;
-
-    private float cloudDuration;
-
-    private float damageTicker;
-
-    private float currentDamageTicker;
-
+    float damage;
+    float cloudSize;
+    float cloudDuration;
+    float damageTicker;
+    float currentDamageTicker;
     [SerializeField] 
-    private GameObject acidBurnVFX;
+    GameObject acidBurnVFX;
 
-    private AudioManager audioManager;
+    AudioManager audioManager;
 
-    private void Start()
+    void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         if (audioManager)
@@ -28,7 +23,7 @@ public class AcidCloud : BaseElementSpawnClass
             audioManager.PlaySFX("Acid Cloud Shot");
         }
     }
-    private void Update()
+    void Update()
     {
         if(transform.localScale.x < cloudSize)
         {
@@ -64,7 +59,7 @@ public class AcidCloud : BaseElementSpawnClass
         damageTicker = tempDamageTicker;
     }
 
-    private void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if(other.GetComponent<BaseEnemyClass>())
         {
@@ -81,7 +76,7 @@ public class AcidCloud : BaseElementSpawnClass
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<BaseEnemyClass>())
         {

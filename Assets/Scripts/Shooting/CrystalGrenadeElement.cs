@@ -5,22 +5,22 @@ using UnityEngine;
 public class CrystalGrenadeElement : BaseElementClass
 {
     [SerializeField]
-    private GameObject CrystalGrenade;
+    GameObject CrystalGrenade;
 
     [SerializeField]
-    private float projectileSpeed;
+    float projectileSpeed;
 
     [SerializeField]
-    private float gravity;
+    float gravity;
 
     [SerializeField]
-    private float timeToExplode;
+    float timeToExplode;
 
     [SerializeField]
-    private float explosionRange;
+    float explosionRange;
 
     [SerializeField]
-    private float explosionDamage;
+    float explosionDamage;
 
     // gets called in the animation event triggers
     public override void ElementEffect()

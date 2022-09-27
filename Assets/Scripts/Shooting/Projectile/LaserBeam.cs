@@ -4,37 +4,37 @@ using UnityEngine;
 
 public class LaserBeam : MonoBehaviour
 {
-    private float damage;
-    private List<BaseEnemyClass.Types> attackTypes;
+    float damage;
+    List<BaseEnemyClass.Types> attackTypes;
 
-    private List<GameObject> containedEnemies = new List<GameObject>();
+    List<GameObject> containedEnemies = new List<GameObject>();
 
-    private float hitDelay;
+    float hitDelay;
 
-    private float currentHitDelay;
-
-    [SerializeField]
-    private GameObject laserBeamEndParticle;
-    [SerializeField]
-    private GameObject laserBeamEffectParticle;
-
-    private bool isHittingObj;
+    float currentHitDelay;
 
     [SerializeField]
-    private LayerMask layerMask;
+    GameObject laserBeamEndParticle;
+    [SerializeField]
+    GameObject laserBeamEffectParticle;
 
-    private float initalLaserScale = 20.0f;
+    bool isHittingObj;
+
+    [SerializeField]
+    LayerMask layerMask;
+
+    float initalLaserScale = 20.0f;
 
     public bool GetIsHittingObj() { return isHittingObj; }
     public void SetIsHittingObj(bool tempIsHittingObj) { isHittingObj = tempIsHittingObj; }
 
-    private void Start()
+    void Start()
     {
         isHittingObj = false;
     }
 
     // Update is called once per frame
-    private void Update()
+    void Update()
     {
         // if hitting an object show the particle effect of laserbeam hitting
         if(isHittingObj == true)
@@ -91,7 +91,7 @@ public class LaserBeam : MonoBehaviour
         containedEnemies.Clear();
         hitDelay = tempHitDelay;
     }
-    private void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider other)
     {
         //if enemy, hit them for the damage
         if(other.tag == "Enemy" || other.tag == "Environment")
@@ -104,7 +104,7 @@ public class LaserBeam : MonoBehaviour
             containedEnemies.Add(other.gameObject);
         }
     }
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         if (other.tag == "Enemy" || other.tag == "Environment")
         {

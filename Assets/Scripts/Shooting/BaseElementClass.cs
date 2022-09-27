@@ -100,6 +100,8 @@ public class BaseElementClass : MonoBehaviour
     protected float cooldownTimer;
     protected float currentCoolDownTimer;
 
+    protected GameplayUI gameplayUI;
+
     public enum ElementType
     {
         None = 0,
@@ -146,6 +148,7 @@ public class BaseElementClass : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         elementData = GetComponent<ElementStats>();
         shootingScript = player.GetComponent<Shooting>();
+        gameplayUI = FindObjectOfType<GameplayUI>();
         currentCoolDownTimer = cooldownTimer;
     }
 
@@ -166,7 +169,7 @@ public class BaseElementClass : MonoBehaviour
     {
 
     }
-    public virtual void AnimationSwitch(bool isleft)
+    public void AnimationSwitch(bool isleft)
     {
 
         switch (currentElementType)

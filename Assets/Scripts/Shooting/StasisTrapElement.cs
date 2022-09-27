@@ -5,31 +5,31 @@ using UnityEngine;
 public class StasisTrapElement : BaseElementClass
 {
     [SerializeField]
-    private GameObject stasisTrap;
+    GameObject stasisTrap;
 
     [SerializeField]
-    private GameObject indicator;
+    GameObject indicator;
 
     [SerializeField]
-    private float maxDuration;
+    float maxDuration;
 
     [SerializeField]
-    private float currentDamageTicker;
+    float currentDamageTicker;
 
     [SerializeField]
-    private float maxDamageTicker;
+    float maxDamageTicker;
 
     [SerializeField]
-    private float rayCastRange;
+    float rayCastRange;
 
-    private RaycastHit hit;
+    RaycastHit hit;
 
     [SerializeField]
-    private LayerMask layerMask;
+    LayerMask layerMask;
 
-    private List<GameObject> stasisTrapList = new List<GameObject>();
+    List<GameObject> stasisTrapList = new List<GameObject>();
 
-    private int maxStasisTraps = 1;
+    int maxStasisTraps = 1;
     // Update is called once per frame
     protected override void Update()
     {
