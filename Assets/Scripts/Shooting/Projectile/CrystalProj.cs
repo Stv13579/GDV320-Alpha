@@ -4,27 +4,22 @@ using UnityEngine;
 
 public class CrystalProj : BaseElementSpawnClass
 {
-    private float speed;
-    private float damage;
-
-    private AnimationCurve damageCurve;
-
-    private float startLifeTimer;
-
-    private bool ismoving;
-
-    private float damageLimit;
-
+    float speed;
+    float damage;
+    AnimationCurve damageCurve;
+    float startLifeTimer;
+    bool ismoving;
+    float damageLimit;
     [SerializeField]
-    private GameObject particleEffect;
+    GameObject particleEffect;
+    float damageDecreaser;
 
-    private float damageDecreaser;
-    private void Start()
+    void Start()
     {
         ismoving = true;
     }
     // Update is called once per frame
-    private void Update()
+    void Update()
     {
         // the max drop off the damage is 0.5f
         if(damage <= 0.5f)
@@ -43,7 +38,7 @@ public class CrystalProj : BaseElementSpawnClass
         KillProjectile();
     }
     // move crystal projectile forwards
-    private void MoveCrystalProjectile()
+    void MoveCrystalProjectile()
     {
         if (ismoving == true)
         {
@@ -64,7 +59,7 @@ public class CrystalProj : BaseElementSpawnClass
     }
     // if the life timer for the projectiles is 0
     // destroy the projectiles
-    private void KillProjectile()
+    void KillProjectile()
     {
         if (startLifeTimer <= 0)
         {
@@ -72,7 +67,7 @@ public class CrystalProj : BaseElementSpawnClass
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         // if bullet hits the environment
         // stops it from moving

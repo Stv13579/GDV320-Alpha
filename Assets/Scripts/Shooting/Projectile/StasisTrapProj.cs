@@ -4,38 +4,38 @@ using UnityEngine;
 
 public class StasisTrapProj : MonoBehaviour
 {
-    private float damage;
-    private float duration;
-    private float maxDuration;
-    private float maxDamageTicker;
-    private float currentDamageTicker;
-    private List<BaseEnemyClass.Types> attackTypes;
-    private List<GameObject> containedEnemies = new List<GameObject>();
-    private AudioManager audioManager;
+    float damage;
+    float duration;
+    float maxDuration;
+    float maxDamageTicker;
+    float currentDamageTicker;
+    List<BaseEnemyClass.Types> attackTypes;
+    List<GameObject> containedEnemies = new List<GameObject>();
+    AudioManager audioManager;
 
     [SerializeField]
-    private GameObject visualBubble;
+    GameObject visualBubble;
 
     [SerializeField]
-    private GameObject aftermathVFX;
+    GameObject aftermathVFX;
 
-    private enum StasisTrapProjState
+    enum StasisTrapProjState
     {
         idle,
         active,
         aftermath,
         destroy
     }
-    private StasisTrapProjState currentstate = StasisTrapProjState.idle;
+    StasisTrapProjState currentstate = StasisTrapProjState.idle;
     // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
         duration = 0.0f;
         audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
-    private void Update()
+    void Update()
     {
         duration += Time.deltaTime;
         currentDamageTicker += Time.deltaTime;
@@ -115,7 +115,7 @@ public class StasisTrapProj : MonoBehaviour
 
     // if enemy enters trigger collider and is not in the list
     // add to list and turn movement multi to 0
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == 8 && !containedEnemies.Contains(other.gameObject) && other.GetComponent<BaseEnemyClass>())
         {
@@ -130,7 +130,7 @@ public class StasisTrapProj : MonoBehaviour
     }
     // if enemy is still in trigger collider
     // do damage to the enemy
-    private void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())
         {

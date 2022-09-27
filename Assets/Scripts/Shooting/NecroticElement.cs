@@ -5,21 +5,21 @@ using UnityEngine;
 public class NecroticElement : BaseElementClass
 {
     [SerializeField]
-    private GameObject necroticVFX;
+    GameObject necroticVFX;
 
     [SerializeField]
-    private bool isTargeting = false;
+    bool isTargeting = false;
 
-    private GameObject targetToSlow;
-
-    [SerializeField]
-    private PlayerLook lookScript;
+    GameObject targetToSlow;
 
     [SerializeField]
-    private LayerMask NecroticTarget;
+    PlayerLook lookScript;
 
     [SerializeField]
-    private float rayCastRange;
+    LayerMask NecroticTarget;
+
+    [SerializeField]
+    float rayCastRange;
 
     [SerializeField]
     Color outlineColour;

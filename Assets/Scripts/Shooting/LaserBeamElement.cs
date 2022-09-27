@@ -5,15 +5,15 @@ using UnityEngine;
 public class LaserBeamElement : BaseElementClass
 {
     [SerializeField]
-    private GameObject laserBeam;
+    GameObject laserBeam;
 
     [SerializeField]
-    private PlayerMovement playerMovement;
+    PlayerMovement playerMovement;
 
-    private bool usingLaser;
+    bool usingLaser;
 
     [SerializeField]
-    private float hitDelay;
+    float hitDelay;
 
     protected override void Start()
     {
@@ -34,7 +34,7 @@ public class LaserBeamElement : BaseElementClass
         }
     }
     // deactivate laser function
-    public void DeactivateLaser()
+    void DeactivateLaser()
     {
         usingLaser = false;
         laserBeam.SetActive(false);

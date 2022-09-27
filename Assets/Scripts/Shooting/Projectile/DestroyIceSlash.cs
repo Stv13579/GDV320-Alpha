@@ -5,10 +5,10 @@ using UnityEngine;
 public class DestroyIceSlash : MonoBehaviour
 {
     [SerializeField]
-    private LayerMask environment;
+    LayerMask environment;
 
     // if this box collider hits the environment layermask the destroy iceslash
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if(((1<<other.gameObject.layer) & environment) != 0)
         {

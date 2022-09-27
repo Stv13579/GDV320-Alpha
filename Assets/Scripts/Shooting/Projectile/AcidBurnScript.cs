@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class AcidBurnScript : MonoBehaviour
 {
-    private float timer = 2.0f;
+    float timer = 2.0f;
     public float GetTimer() { return timer; }
     public void SetTimer(float tempTimer) { timer = tempTimer; }
     // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
         if(this.gameObject.transform.parent.gameObject.GetComponent<BossSlimeEnemy>())
         {
@@ -17,7 +17,7 @@ public class AcidBurnScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    void Update()
     {
         if (timer >= 0.0f)
         {

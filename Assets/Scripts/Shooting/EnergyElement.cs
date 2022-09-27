@@ -8,27 +8,27 @@ public class EnergyElement : BaseElementClass
     List<GameObject> containedEnemies = new List<GameObject>();
 
     [SerializeField]
-    private GameObject energyShield;
+    GameObject energyShield;
 
     [SerializeField]
     // might change to this method depending if current way works
-    private enum shieldState
+    enum shieldState
     {
         shieldUp,
         parrying,
         shieldDown
     }
     [SerializeField]
-    private shieldState shieldStateChange = shieldState.shieldDown;
+    shieldState shieldStateChange = shieldState.shieldDown;
 
     [SerializeField]
-    private float timeToParry;
-    private bool useShield = false;
+    float timeToParry;
+    bool useShield = false;
 
-    private float materialChanger;
+    float materialChanger;
     [SerializeField]
-    private float materialTimer = 2.0f;
-    private bool beenHit;
+    float materialTimer = 2.0f;
+    bool beenHit;
     public bool GetUseShield() { return useShield; }
     protected override void Start()
     {
@@ -86,7 +86,7 @@ public class EnergyElement : BaseElementClass
                     }
             }
     }
-    private void HitShield()
+    void HitShield()
     {
         if(beenHit)
         {
@@ -105,7 +105,7 @@ public class EnergyElement : BaseElementClass
         energyShield.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetFloat("_ShieldDamage", materialChanger);
     }
     // function to deactivate shield
-    private void DeactivateEnergyShield()
+    void DeactivateEnergyShield()
     {
         shieldStateChange = shieldState.shieldDown;
         energyShield.SetActive(false);

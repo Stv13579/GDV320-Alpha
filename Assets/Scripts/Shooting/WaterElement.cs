@@ -9,13 +9,13 @@ public class WaterElement : BaseElementClass
     //Click to fire (if we have the mana/not in delay)
     //Instantiate the projectile in the right direction etc.
     [SerializeField]
-    private GameObject waterProj;
+    GameObject waterProj;
 
     [SerializeField]
-    private float projectileSpeed = 5;
+    float projectileSpeed = 5;
 
     [SerializeField]
-    private float projectileLifetime = 10;
+    float projectileLifetime = 10;
 
     //Fires the projectile, passing damage, speed, etc
     public override void ElementEffect()
