@@ -5,15 +5,15 @@ using UnityEngine;
 public class VoidElement : BaseElementClass
 {
     [SerializeField]
-    private float dashDistance = 20.0f;
-    private float trueDashDistance = 0.0f;
+    float dashDistance = 20.0f;
+    float trueDashDistance = 0.0f;
     [SerializeField]
-    private float dashTime = 0.5f;
-    private Vector3 targetPos = Vector3.zero;
-    private bool dashing = false;
+    float dashTime = 0.5f;
+    Vector3 targetPos = Vector3.zero;
+    bool dashing = false;
     [SerializeField]
-    private GameObject Indicator;
-    private bool isHolding;
+    GameObject Indicator;
+    bool isHolding;
     //[SerializeField]
     //private Material voidMaterial;
 
