@@ -43,6 +43,7 @@ public class EndLevel : MonoBehaviour
         {
             index = 1;
             Destroy(player);
+            Destroy(GameObject.Find("GameplayUI"));
         }
 
         sceneToLoad = index;
