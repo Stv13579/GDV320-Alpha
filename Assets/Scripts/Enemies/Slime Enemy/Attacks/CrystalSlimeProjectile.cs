@@ -37,7 +37,10 @@ public class CrystalSlimeProjectile : MonoBehaviour
         // shoots the projectiles up and out 
         rb.AddForce(this.transform.up * upForce + this.transform.forward * forwardForce);
         player = GameObject.Find("Player");
-        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+        if(GameObject.Find("Audio Manager"))
+        {
+            audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+        }
     }
 
     // Update is called once per frame
