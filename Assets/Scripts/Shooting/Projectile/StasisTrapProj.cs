@@ -89,6 +89,7 @@ public class StasisTrapProj : MonoBehaviour
                             {
                                 BaseEnemyClass enemy = containedEnemies[i].GetComponent<BaseEnemyClass>();
                                 StatModifier.RemoveModifier(enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0, "Stasis"));
+                                StatModifier.UpdateValue(enemy.GetSpeedStat());
                                 containedEnemies.Remove(containedEnemies[i]);
                             }
                         }
@@ -123,6 +124,7 @@ public class StasisTrapProj : MonoBehaviour
             {
                 BaseEnemyClass enemy = containedEnemies[i].GetComponent<BaseEnemyClass>();
                 StatModifier.AddModifier(enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0, "Stasis"));
+                StatModifier.UpdateValue(enemy.GetSpeedStat());
             }
         }
     }

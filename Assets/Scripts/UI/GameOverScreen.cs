@@ -54,6 +54,7 @@ public class GameOverScreen : MonoBehaviour
     {
         Destroy(GameObject.Find("Player"));
         Destroy(GameObject.Find("ProphecyManager"));
+        Destroy(GameObject.Find("GameplayUI"));
         FindObjectOfType<SAIM>().data.ResetDifficulty();
         operation.allowSceneActivation = true;
     }

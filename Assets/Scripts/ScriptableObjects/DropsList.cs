@@ -42,5 +42,44 @@ public class DropsList : ScriptableObject
         return (dropsList[i].drop);
     }
 
+    public GameObject GetAmmoDrop()
+    {
+        //Get the cata and prime elements and add only the elements of that type to the list to choose from
+
+        int index = 0;
+        List<DropListEntry> dropsList = new List<DropListEntry>();
+
+        foreach (DropListEntry manaType in ammoList)
+        {
+            if(manaType.element == FindObjectOfType<Shooting>().GetCatalystElements()[0].GetManaName() 
+                || manaType.element == FindObjectOfType<Shooting>().GetPrimaryElements()[0].GetManaName()
+                || manaType.element == FindObjectOfType<Shooting>().GetCatalystElements()[1].GetManaName()
+                || manaType.element == FindObjectOfType<Shooting>().GetPrimaryElements()[1].GetManaName())
+            {
+                dropsList.Add(manaType);
+            }
+            index++;
+        }
+
+        int totalWeight = 0;
+        foreach (DropListEntry drop in dropsList)
+        {
+            totalWeight += drop.weighting;
+        }
+        int rand = Random.Range(1, totalWeight);
+        int i = -1;
+        while (rand > 0)
+        {
+            i++;
+            rand -= dropsList[i].weighting;
+
+        }
+        if (i >= 8)
+        {
+            Debug.Log("8");
+        }
+        return (dropsList[i].drop);
+    }
+
 
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using TMPro;
 
 [System.Serializable]
 public class SAIM : MonoBehaviour
@@ -182,6 +183,7 @@ public class SAIM : MonoBehaviour
                 drop.SetRoomEnd(true);
             }
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRoomUpdate();
+            GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>().text = spawnedEnemies.Count.ToString();
         }
 
         AdjustDifficulty();
@@ -207,12 +209,19 @@ public class SAIM : MonoBehaviour
             return;
         }
 
+        //GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>().text = spawnedEnemies.Count.ToString();
+
         Move();
         
         Node pNode = null;
 
         foreach (BaseEnemyClass enemy in spawnedEnemies)
         {
+            if(enemy == null)
+            {
+                continue;
+            }
+
             float distToNode = float.MaxValue;
 
             //If the distance moved is miniscule since the last frame, continue.

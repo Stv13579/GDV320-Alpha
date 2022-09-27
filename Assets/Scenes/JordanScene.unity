@@ -201,6 +201,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de3d986e7cfa101438a4776f0d7da12d, type: 3}
+--- !u!4 &10698491 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+    type: 3}
+  m_PrefabInstance: {fileID: 558005430}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &20304545
 Mesh:
   m_ObjectHideFlags: 0
@@ -5774,6 +5780,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &98704881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 7974775231084806226}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 98704882}
+  m_Layer: 0
+  m_Name: VFX_Dragonlily_FireballProjectileFlames (Missing Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &98704882
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 7974775231084806226}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98704881}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7974775231084806227}
+  m_Father: {fileID: 1888003316}
+  m_RootOrder: 76
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &99202706
 GameObject:
   m_ObjectHideFlags: 0
@@ -5873,7 +5910,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-8700
+  m_Name: pb_Mesh1320616
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6773,7 +6810,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-8706
+  m_Name: pb_Mesh1306992
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -18859,7 +18896,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-6316
+  m_Name: pb_Mesh1301458
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21472,7 +21509,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-9720
+  m_Name: pb_Mesh1359250
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -22036,7 +22073,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-9998
+  m_Name: pb_Mesh1294352
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23184,6 +23221,90 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1761304772}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &558005430
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1606597573}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.874094
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -16.082485
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -41.306736
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6946415852996753593, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e78edad3316587746a002e1991cd9710, type: 2}
+    - target: {fileID: -5981879705739626151, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e78edad3316587746a002e1991cd9710, type: 2}
+    - target: {fileID: 919132149155446097, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_NecroticOrb_Skull (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7977598018681278743, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 46d730c69c573054baac25a75f469b8b, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d00b36944d5dc12459ab095f9207d03a, type: 3}
 --- !u!43 &567701586
 Mesh:
   m_ObjectHideFlags: 0
@@ -24779,7 +24900,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-9604
+  m_Name: pb_Mesh1348570
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -26248,6 +26369,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760900931}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &765476903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 7974775231084806226}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7974775231084806227}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!43 &772265418
 Mesh:
   m_ObjectHideFlags: 0
@@ -29353,7 +29490,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-6492
+  m_Name: pb_Mesh1315524
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -30672,7 +30809,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-8844
+  m_Name: pb_Mesh1238636
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -31993,7 +32130,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-6892
+  m_Name: pb_Mesh1257714
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33092,7 +33229,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-6364
+  m_Name: pb_Mesh1303114
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33655,7 +33792,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-4184
+  m_Name: pb_Mesh1335732
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33871,7 +34008,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1440572370}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -34359,6 +34496,90 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1580142236}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1489002771
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.06
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.89374346
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -30.53
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6946415852996753593, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 74872c9010c8be24dacf81701c487b64, type: 2}
+    - target: {fileID: -5981879705739626151, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 74872c9010c8be24dacf81701c487b64, type: 2}
+    - target: {fileID: 919132149155446097, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_DeathCurseOrb_Skull
+      objectReference: {fileID: 0}
+    - target: {fileID: 7977598018681278743, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b337ae76e4a68f4d9d809b759686ea6, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d00b36944d5dc12459ab095f9207d03a, type: 3}
 --- !u!43 &1492817007
 Mesh:
   m_ObjectHideFlags: 0
@@ -40052,7 +40273,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-9706
+  m_Name: pb_Mesh1379276
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -40256,6 +40477,7 @@ Transform:
   - {fileID: 672599120}
   - {fileID: 1481539117}
   - {fileID: 915536409}
+  - {fileID: 10698491}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -42200,7 +42422,7 @@ PrefabInstance:
     - target: {fileID: 3816411532900317090, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.27199984
+      value: 0.27200007
       objectReference: {fileID: 0}
     - target: {fileID: 4878194474105095071, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
         type: 3}
@@ -42215,17 +42437,17 @@ PrefabInstance:
     - target: {fileID: 5625023911835613078, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 81.15
+      value: 17.48
       objectReference: {fileID: 0}
     - target: {fileID: 5625023911835613078, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.78
+      value: 1.06
       objectReference: {fileID: 0}
     - target: {fileID: 5625023911835613078, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 53.53
+      value: 41.2
       objectReference: {fileID: 0}
     - target: {fileID: 5625023911835613078, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
         type: 3}
@@ -43429,6 +43651,90 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 263200332}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1783624401
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.76
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.89374346
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -30.53
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6946415852996753593, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 29d76e0a41d4ed9448e299f9380680e5, type: 2}
+    - target: {fileID: -5981879705739626151, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 29d76e0a41d4ed9448e299f9380680e5, type: 2}
+    - target: {fileID: 919132149155446097, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_LifestealOrb_Skull
+      objectReference: {fileID: 0}
+    - target: {fileID: 7977598018681278743, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9fddc4daffc4de74eb78ac110ed5d63b, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d00b36944d5dc12459ab095f9207d03a, type: 3}
 --- !u!4 &1786283576 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 508595828905879701, guid: bda491086cce2fc42bab44f9f3a19ccc,
@@ -44592,6 +44898,10 @@ GameObject:
   - component: {fileID: 1888003330}
   - component: {fileID: 1888003329}
   - component: {fileID: 1888003328}
+  - component: {fileID: 1888003334}
+  - component: {fileID: 1888003333}
+  - component: {fileID: 1888003332}
+  - component: {fileID: 1888003331}
   m_Layer: 0
   m_Name: VFX Folder
   m_TagString: Untagged
@@ -44686,7 +44996,7 @@ Transform:
   - {fileID: 4143118475174470228}
   - {fileID: 2612769734638961860}
   - {fileID: 1340334361}
-  - {fileID: 7974775231084806227}
+  - {fileID: 98704882}
   - {fileID: 5783976947973433841}
   - {fileID: 155069437053861138}
   - {fileID: 643252404118025145}
@@ -45332,6 +45642,186 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_NumColorKeys: 7
+    m_NumAlphaKeys: 2
+--- !u!114 &1888003331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888003315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fa01a38ba7df5b45a2b834ef180d59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Export: 0
+  m_ExportPath: Assets/Materials/VFX Mats/All Use/gradients/
+  m_ExportName: Gradients_VFX_NecroticSkull_Lifesteal
+  m_TextureResolution: 128
+  m_TextureGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+--- !u!114 &1888003332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888003315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fa01a38ba7df5b45a2b834ef180d59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Export: 0
+  m_ExportPath: Assets/Materials/VFX Mats/All Use/gradients/
+  m_ExportName: Gradients_VFX_NecroticSkull_DeathCurse
+  m_TextureResolution: 128
+  m_TextureGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+--- !u!114 &1888003333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888003315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fa01a38ba7df5b45a2b834ef180d59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Export: 0
+  m_ExportPath: Assets/Materials/VFX Mats/All Use/gradients/
+  m_ExportName: Gradients_VFX_NecroticSkull_AcidCloud
+  m_TextureResolution: 128
+  m_TextureGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+--- !u!114 &1888003334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888003315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fa01a38ba7df5b45a2b834ef180d59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Export: 0
+  m_ExportPath: Assets/Materials/VFX Mats/All Use/gradients/
+  m_ExportName: Gradients_VFX_NecroticSkull_Necrotic
+  m_TextureResolution: 128
+  m_TextureGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
     m_NumAlphaKeys: 2
 --- !u!1 &1893584088
 GameObject:
@@ -46582,6 +47072,90 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &1985292063
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.499498
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.89374346
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -30.53
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6946415852996753593, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e0add4a74dab3f944b111e8e9c4b4df3, type: 2}
+    - target: {fileID: -5981879705739626151, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e0add4a74dab3f944b111e8e9c4b4df3, type: 2}
+    - target: {fileID: 919132149155446097, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_AcidCloudOrb_Skull
+      objectReference: {fileID: 0}
+    - target: {fileID: 7977598018681278743, guid: d00b36944d5dc12459ab095f9207d03a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c8b8a3dd965316c4494b3d355019245a, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d00b36944d5dc12459ab095f9207d03a, type: 3}
 --- !u!4 &2010913762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7077292892191209451, guid: fbba95b1a308d2d4da4c64be03e85fa1,
@@ -47941,7 +48515,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-6664
+  m_Name: pb_Mesh1365228
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -56747,11 +57321,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1888003316}
     m_Modifications:
-    - target: {fileID: 2935410152079953505, guid: 8397178657a067d48bcc863d6790b078,
-        type: 3}
-      propertyPath: moveWithTransform
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3402536344946380664, guid: 8397178657a067d48bcc863d6790b078,
         type: 3}
       propertyPath: m_RootOrder
@@ -56826,11 +57395,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: VFX_Necrotic_Orb
-      objectReference: {fileID: 0}
-    - target: {fileID: 5311352616125373577, guid: 8397178657a067d48bcc863d6790b078,
-        type: 3}
-      propertyPath: moveWithTransform
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8397178657a067d48bcc863d6790b078, type: 3}
@@ -66804,6 +67368,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Anim_VFX_DeathCurse
       objectReference: {fileID: 0}
+    - target: {fileID: 4205067919598044739, guid: d90c7af31018af246bc8767cec223b09,
+        type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4454587262088173293, guid: d90c7af31018af246bc8767cec223b09,
         type: 3}
       propertyPath: m_RootOrder
@@ -69964,11 +70533,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85cb374b5e6cf6345a32e130c06cb28d, type: 3}
---- !u!4 &7974775231084806227 stripped
+--- !u!4 &7974775231084806227
 Transform:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 7974775231084806226}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765476903}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 98704882}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8143244082473516166
 PrefabInstance:
   m_ObjectHideFlags: 0
