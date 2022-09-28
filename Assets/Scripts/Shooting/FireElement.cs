@@ -10,25 +10,22 @@ public class FireElement : BaseElementClass
     //Click to fire (if we have the mana/not in delay)
     //Instantiate the projectile in the right direction etc.
     [SerializeField]
-    private GameObject fireBall;
+    GameObject fireBall;
 
     [SerializeField]
-    private float projectileSpeed;
+    float projectileSpeed;
 
     [SerializeField]
-    private float explosionArea;
+    float explosionArea;
 
     [SerializeField]
-    private float explosionDamage;
+    float explosionDamage;
 
     [SerializeField]
-    private float gravity;
+    float gravity;
 
     [SerializeField]
-    private AnimationCurve gravCurve;
-
-    [SerializeField]
-    private float gravityLifetime;
+    float gravityLifetime;
 
     //Fires the fireball, passing damage, speed, aoe etc
     public override void ElementEffect()
@@ -41,7 +38,7 @@ public class FireElement : BaseElementClass
         {
             newFireball.transform.LookAt(hit.point);
         }
-        newFireball.GetComponent<Fireball>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.fireDamageMultiplier), gravity, gravCurve, gravityLifetime, explosionArea, explosionDamage, attackTypes);
+        newFireball.GetComponent<Fireball>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.fireDamageMultiplier), gravity, gravityLifetime, explosionArea, explosionDamage, attackTypes);
 
         //playerClass.ChangeMana(-manaCost, manaTypes);
     }

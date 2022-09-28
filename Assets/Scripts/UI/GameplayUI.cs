@@ -37,6 +37,15 @@ public class GameplayUI : MonoBehaviour
 
     GameObject hitMarker;
 
+    Image lifeStealFullScreen;
+    Image voidFullScreen;
+    Image burnFullScreen;
+    Image hurtFullScreen;
+
+    public Image GetLifeStealFullScreen() { return lifeStealFullScreen; }
+    public Image GetVoidFullScreen() { return voidFullScreen; }
+    public Image GetBurnFullScreen() { return burnFullScreen; }
+    public Image GetHurtFullScreen() { return hurtFullScreen; }
     public GameObject GetHitMarker() { return hitMarker; }
     public bool GetCombo() { return combo; }
     public void SetCombo(bool tempCombo) { combo = tempCombo; }
@@ -45,10 +54,13 @@ public class GameplayUI : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<Shooting>();
         playerClass = player.gameObject.GetComponent<PlayerClass>();
-        hitMarker = GameObject.Find("GameplayUI");
+        hitMarker = GameObject.Find("GameplayUI/HitMarker");
+        lifeStealFullScreen = GameObject.Find("GameplayUI/Effects/LifeSteal").GetComponent<Image>();
+        voidFullScreen = GameObject.Find("GameplayUI/Effects/Void").GetComponent<Image>();
+        burnFullScreen = GameObject.Find("GameplayUI/Effects/Burn").GetComponent<Image>();
         comboTimer = maxComboTimer;
         Debug.Log("G UI on");
-
+        hitMarker.SetActive(false);
 
         DontDestroyOnLoad(gameObject);
     }
@@ -106,7 +118,7 @@ public class GameplayUI : MonoBehaviour
         ChangeCombo(activeComboElement.transform.parent, false);
         ChangeCombo(inactiveComboElement.transform.parent, false);
 
-        if(hitMarker.transform.GetChild(8).gameObject.active == true)
+        if(hitMarker.active == true)
         {
             StartCoroutine(HitMarker());
         }
@@ -202,12 +214,12 @@ public class GameplayUI : MonoBehaviour
     {
         if (hitMarker)
         {
-            hitMarker.transform.GetChild(8).gameObject.SetActive(true);
+            hitMarker.SetActive(true);
         }
         yield return new WaitForSeconds(0.2f);
         if (hitMarker)
         {
-            hitMarker.transform.GetChild(8).gameObject.SetActive(false);
+            hitMarker.SetActive(false);
         }
     }
 }

@@ -5,22 +5,22 @@ using UnityEngine;
 public class CrystalElement : BaseElementClass
 {
     [SerializeField]
-    private GameObject crystalProjectile;
+    GameObject crystalProjectile;
 
     [SerializeField]
-    private float projectileSpeed;
+    float projectileSpeed;
 
     [SerializeField]
-    private AnimationCurve damageCurve;
+    AnimationCurve damageCurve;
 
     [SerializeField]
-    private float lifeTimer;
+    float lifeTimer;
 
     [SerializeField]
-    private float damageLimit;
+    float damageLimit;
 
     [SerializeField]
-    private float damageSpeedDecreaser;
+    float damageSpeedDecreaser;
 
     public override void ElementEffect()
     {

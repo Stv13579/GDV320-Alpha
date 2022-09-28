@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class ShardProjectile : BaseElementSpawnClass
 {
-    private float speed;
-
-    private float damage;
-
-    private int pierceAmount;
-
+    float speed;
+    float damage;
+    int pierceAmount;
     [SerializeField]
-    private GameObject impactSpawn;
+    GameObject impactSpawn;
 
-    private void Update()
+    void Update()
     {
         Vector3 movement = transform.up * speed * Time.deltaTime;
         transform.position += movement;
@@ -27,7 +24,7 @@ public class ShardProjectile : BaseElementSpawnClass
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 8)
         {

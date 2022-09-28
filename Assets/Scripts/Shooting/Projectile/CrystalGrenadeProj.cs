@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class CrystalGrenadeProj : BaseElementSpawnClass
 {
-    private float speed;
-    private float damage;
-    private float timerToExplode;
-    private float currentTimer;
-    private float explosionRange;
-    private float explosionDamage;
+    float speed;
+    float damage;
+    float timerToExplode;
+    float currentTimer;
+    float explosionRange;
+    float explosionDamage;
     AudioManager audioManager;
-    private Vector3 originalPosition;
-    private bool isMoving;
-    private bool isAttached;
+    Vector3 originalPosition;
+    bool isMoving;
+    bool isAttached;
     Collider enemy;
     [SerializeField]
-    private GameObject inAir;
+    GameObject inAir;
     [SerializeField]
-    private GameObject attached;
+    GameObject attached;
     [SerializeField]
-    private GameObject explosion;
-    private enum grenadestate
+    GameObject explosion;
+    enum grenadestate
     {
         inAir,
         attached,
@@ -142,7 +142,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
         attackTypes = types;
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())
         {
