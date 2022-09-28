@@ -41,11 +41,16 @@ public class GameplayUI : MonoBehaviour
     Image voidFullScreen;
     Image burnFullScreen;
     Image hurtFullScreen;
-
+    Image lowHealthFullScreen;
+    Image inToxicFullScreen;
+    Image damageIndicator;
     public Image GetLifeStealFullScreen() { return lifeStealFullScreen; }
     public Image GetVoidFullScreen() { return voidFullScreen; }
     public Image GetBurnFullScreen() { return burnFullScreen; }
     public Image GetHurtFullScreen() { return hurtFullScreen; }
+    public Image GetLowHealthFullScreen() { return lowHealthFullScreen; }
+    public Image GetInToxicFullScreen() { return inToxicFullScreen; }
+    public Image GetDamageIndicator() { return damageIndicator; }
     public GameObject GetHitMarker() { return hitMarker; }
     public bool GetCombo() { return combo; }
     public void SetCombo(bool tempCombo) { combo = tempCombo; }
@@ -58,9 +63,16 @@ public class GameplayUI : MonoBehaviour
         lifeStealFullScreen = GameObject.Find("GameplayUI/Effects/LifeSteal").GetComponent<Image>();
         voidFullScreen = GameObject.Find("GameplayUI/Effects/Void").GetComponent<Image>();
         burnFullScreen = GameObject.Find("GameplayUI/Effects/Burn").GetComponent<Image>();
+        hurtFullScreen = GameObject.Find("GameplayUI/Effects/PlayerDamage").GetComponent<Image>();
+        lowHealthFullScreen = GameObject.Find("GameplayUI/Effects/LowHealth").GetComponent<Image>();
+        inToxicFullScreen = GameObject.Find("GameplayUI/Effects/InToxic").GetComponent<Image>();
+        damageIndicator = GameObject.Find("GameplayUI/Effects/DamageIndicator").GetComponent<Image>();
         comboTimer = maxComboTimer;
         Debug.Log("G UI on");
-        hitMarker.SetActive(false);
+        if (hitMarker)
+        {
+            hitMarker.SetActive(false);
+        }
 
         DontDestroyOnLoad(gameObject);
     }
@@ -117,10 +129,12 @@ public class GameplayUI : MonoBehaviour
         ChangeCombo(inactiveCatalystElement.transform.parent, true);
         ChangeCombo(activeComboElement.transform.parent, false);
         ChangeCombo(inactiveComboElement.transform.parent, false);
-
-        if(hitMarker.active == true)
+        if (hitMarker)
         {
-            StartCoroutine(HitMarker());
+            if (hitMarker.active == true)
+            {
+                StartCoroutine(HitMarker());
+            }
         }
     }
 

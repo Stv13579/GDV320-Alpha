@@ -26,7 +26,10 @@ public class VoidElement : BaseElementClass
     }
     void FullScreenEffect()
     {
-        gameplayUI.GetVoidFullScreen().material.SetFloat("_Toggle_EffectIntensity", toggleEffectIntensity);
+        if (gameplayUI)
+        {
+            gameplayUI.GetVoidFullScreen().material.SetFloat("_Toggle_EffectIntensity", toggleEffectIntensity);
+        }
         if (fullScreenOff)
         {
             toggleEffectIntensity -= Time.deltaTime * 10;

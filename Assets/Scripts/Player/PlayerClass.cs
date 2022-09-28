@@ -12,7 +12,7 @@ public class PlayerClass : MonoBehaviour
 
     [Serializable]
     public enum ManaName
-    { 
+    {
         Fire,
         Crystal,
         Water,
@@ -69,6 +69,15 @@ public class PlayerClass : MonoBehaviour
     AudioManager audioManager;
 
     GameplayUI gameplayUI;
+
+    [SerializeField]
+    LayerMask enemies;
+
+    float angle;
+    Quaternion targetRot;
+    Vector3 targetPos;
+
+    float lowHealthValue;
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -84,6 +93,7 @@ public class PlayerClass : MonoBehaviour
         itemUI = GameObject.Find("ItemArray");
         audioManager = FindObjectOfType<AudioManager>();
         gameplayUI = FindObjectOfType<GameplayUI>();
+        lowHealthValue = 0.0f;
     }
 
 
@@ -135,6 +145,7 @@ public class PlayerClass : MonoBehaviour
         }
 
         Push();
+        RotateToTarget();
     }
 
     public void AddItem(Item newItem)
@@ -183,6 +194,25 @@ public class PlayerClass : MonoBehaviour
 
     }
 
+    // need to fix
+    void RotateToTarget()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 1, enemies);
+        for (int i = 0; i < hitColliders.Length; i++)
+        {
+            targetPos = hitColliders[i].transform.position;
+            targetRot = hitColliders[i].transform.rotation;
+        }
+        Vector3 direction = this.transform.position - targetPos;
+
+        targetRot = Quaternion.LookRotation(direction);
+        targetRot.z = -targetRot.y;
+        targetRot.x = 0.0f;
+        targetRot.y = 0.0f;
+
+        Vector3 northDirection = new Vector3(0.0f, 0.0f, this.transform.eulerAngles.y);
+        gameplayUI.GetDamageIndicator().rectTransform.localRotation = targetRot * Quaternion.Euler(northDirection);
+    }
     public void ChangeHealth(float healthAmount, bool reduceDamage = true)
     {
         //Create a one time defense modifier based on whether the player is recieving damage, or should not apply defense
@@ -261,13 +291,21 @@ public class PlayerClass : MonoBehaviour
 
     private void LowHealthEffect()
     {
-        if(currentHealth <= lowHealthLimit)
+        if (gameplayUI)
+        {
+            gameplayUI.GetLowHealthFullScreen().material.SetFloat("_Toggle_EffectIntensity", lowHealthValue);
+        }
+        if (currentHealth <= lowHealthLimit)
         {
             if(audioManager)
             {
                 audioManager.PlaySFX(lowHealthFastHeartBeat);
                 //audioManager.PlaySFX(lowHealthSlowHeartBeat);
-                // play screen effect when we get it
+            }
+            lowHealthValue += Time.deltaTime * 10.0f;
+            if (lowHealthValue >= 10.0f)
+            {
+                lowHealthValue = 10.0f;
             }
         }
         else
@@ -277,9 +315,12 @@ public class PlayerClass : MonoBehaviour
                 audioManager.StopSFX(lowHealthFastHeartBeat);
                 //audioManager.PlaySFX(lowHealthSlowHeartBeat);
             }
-
+            lowHealthValue -= Time.deltaTime * 10.0f;
+            if (lowHealthValue <= 0.0f)
+            {
+                lowHealthValue = 0.0f;
+            }
         }
-
     }
     public void ChangeMana(float manaAmount, List<ManaName> manaNames)
     {
