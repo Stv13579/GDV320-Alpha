@@ -9,4 +9,9 @@ public class RangedAnimationHandler : MonoBehaviour
 		this.transform.parent.gameObject.GetComponent<RangedEnemyScript>().Attack();
 	}
 	
+	public void Burrow()
+	{
+		this.transform.parent.gameObject.GetComponent<RangedEnemyScript>().StartBurrow();
+	}
+	
 }
