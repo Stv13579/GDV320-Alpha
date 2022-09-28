@@ -74,6 +74,8 @@ public class PlayerClass : MonoBehaviour
     LayerMask enemies;
 
     float angle;
+    Quaternion targetRot;
+    Vector3 targetPos;
 
     float lowHealthValue;
     void Start()
@@ -143,7 +145,7 @@ public class PlayerClass : MonoBehaviour
         }
 
         Push();
-        CheckDamageDirection();
+        RotateToTarget();
     }
 
     public void AddItem(Item newItem)
@@ -191,27 +193,25 @@ public class PlayerClass : MonoBehaviour
 
 
     }
+
     // need to fix
-    void CheckDamageDirection()
+    void RotateToTarget()
     {
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 1, enemies);
-        for(int i = 0; i < hitColliders.Length; i++)
+        for (int i = 0; i < hitColliders.Length; i++)
         {
-            angle = GetHitAngle(this.transform, (this.transform.position - hitColliders[i].transform.position).normalized);
-            Debug.Log(hitColliders[i].transform.gameObject);
+            targetPos = hitColliders[i].transform.position;
+            targetRot = hitColliders[i].transform.rotation;
         }
-        gameplayUI.GetDamageIndicator().rectTransform.rotation = Quaternion.Euler(0.0f, 0.0f, -angle);
-    }
+        Vector3 direction = this.transform.position - targetPos;
 
-    float GetHitAngle(Transform player, Vector3 incomingDir)
-    {
-        // flatten to plane
-        Vector3 hitdir = new Vector3(-incomingDir.x, 0.0f, -incomingDir.z);
-        Vector3 playerfwd = Vector3.ProjectOnPlane(this.transform.forward, Vector3.up);
+        targetRot = Quaternion.LookRotation(direction);
+        targetRot.z = -targetRot.y;
+        targetRot.x = 0.0f;
+        targetRot.y = 0.0f;
 
-        // direction between player fwd and incoming object;
-        float hitAngle = Vector3.SignedAngle(playerfwd, hitdir, Vector3.up);
-        return hitAngle;
+        Vector3 northDirection = new Vector3(0.0f, 0.0f, this.transform.eulerAngles.y);
+        gameplayUI.GetDamageIndicator().rectTransform.localRotation = targetRot * Quaternion.Euler(northDirection);
     }
     public void ChangeHealth(float healthAmount, bool reduceDamage = true)
     {

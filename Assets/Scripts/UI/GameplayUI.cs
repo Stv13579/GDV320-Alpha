@@ -69,7 +69,10 @@ public class GameplayUI : MonoBehaviour
         damageIndicator = GameObject.Find("GameplayUI/Effects/DamageIndicator").GetComponent<Image>();
         comboTimer = maxComboTimer;
         Debug.Log("G UI on");
-        hitMarker.SetActive(false);
+        if (hitMarker)
+        {
+            hitMarker.SetActive(false);
+        }
 
         DontDestroyOnLoad(gameObject);
     }
@@ -126,10 +129,12 @@ public class GameplayUI : MonoBehaviour
         ChangeCombo(inactiveCatalystElement.transform.parent, true);
         ChangeCombo(activeComboElement.transform.parent, false);
         ChangeCombo(inactiveComboElement.transform.parent, false);
-
-        if(hitMarker.active == true)
+        if (hitMarker)
         {
-            StartCoroutine(HitMarker());
+            if (hitMarker.active == true)
+            {
+                StartCoroutine(HitMarker());
+            }
         }
     }
 
