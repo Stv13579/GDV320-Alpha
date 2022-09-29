@@ -135,7 +135,6 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     {
 
 	    base.Update();
-        Death();
 
         if(!ExecuteAttack())
         {
