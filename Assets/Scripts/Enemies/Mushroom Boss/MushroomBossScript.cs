@@ -51,8 +51,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
         }
 
         if (!attacking)
-        {
-        	        	
+        {	
 	        if (Vector3.Distance(this.transform.position, player.transform.position) < 15)
             {
 
