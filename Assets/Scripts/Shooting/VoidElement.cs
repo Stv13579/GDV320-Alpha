@@ -32,14 +32,17 @@ public class VoidElement : BaseElementClass
         }
         if (fullScreenOff)
         {
+            gameplayUI.GetVoidFullScreen().gameObject.SetActive(true);
             toggleEffectIntensity -= Time.deltaTime * 10;
         }
         else
         {
+            gameplayUI.GetVoidFullScreen().gameObject.SetActive(true);
             toggleEffectIntensity = 10.0f;
         }
         if(toggleEffectIntensity <= 0.0f)
         {
+            gameplayUI.GetVoidFullScreen().gameObject.SetActive(false);
             toggleEffectIntensity = 0.0f;
         }
     }
