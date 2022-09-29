@@ -36,7 +36,8 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
         healthbarScript.maxHealth = maxHealth;
     }
     public override void Update()
-    {
+	{
+		base.Update();
         if(enemyAnims.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             timer -= Time.deltaTime;
