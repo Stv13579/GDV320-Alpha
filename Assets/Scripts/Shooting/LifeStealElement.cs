@@ -87,6 +87,7 @@ public class LifeStealElement : BaseElementClass
             {
                 if (gameplayUI)
                 {
+                    gameplayUI.GetLifeStealFullScreen().gameObject.SetActive(true);
                     gameplayUI.GetLifeStealFullScreen().material.SetFloat("_Toggle_EffectIntensity", 10.0f);
                 }
                 if (audioManager)
@@ -120,6 +121,7 @@ public class LifeStealElement : BaseElementClass
         if (gameplayUI)
         {
             gameplayUI.GetLifeStealFullScreen().material.SetFloat("_Toggle_EffectIntensity", 0.0f);
+            gameplayUI.GetLifeStealFullScreen().gameObject.SetActive(false);
         }
     }
 

@@ -69,14 +69,43 @@ public class GameplayUI : MonoBehaviour
         damageIndicator = GameObject.Find("GameplayUI/Effects/DamageIndicator").GetComponent<Image>();
         comboTimer = maxComboTimer;
         Debug.Log("G UI on");
+        DontDestroyOnLoad(gameObject);
+    }
+    void Awake()
+    {
         if (hitMarker)
         {
             hitMarker.SetActive(false);
         }
-
-        DontDestroyOnLoad(gameObject);
+        if (lifeStealFullScreen)
+        {
+            lifeStealFullScreen.gameObject.SetActive(false);
+        }
+        if (voidFullScreen)
+        {
+            voidFullScreen.gameObject.SetActive(false);
+        }
+        if (burnFullScreen)
+        {
+            burnFullScreen.gameObject.SetActive(false);
+        }
+        if(hurtFullScreen)
+        {
+            hurtFullScreen.gameObject.SetActive(false);
+        }
+        if(lowHealthFullScreen)
+        {
+            lowHealthFullScreen.gameObject.SetActive(false);
+        }
+        if(inToxicFullScreen)
+        {
+            inToxicFullScreen.gameObject.SetActive(false);
+        }
+        if(damageIndicator)
+        {
+            damageIndicator.gameObject.SetActive(false);
+        }
     }
-
     void Update()
     {
         //Getting the current values from the player and updating the UI with them

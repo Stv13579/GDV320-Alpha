@@ -70,7 +70,8 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
                     if (Vector3.Distance(player.transform.position, this.gameObject.transform.position) < 10 || Vector3.Distance(player.transform.position, this.gameObject.transform.position) > 20)
                     {
 	                    enemyAnims.SetTrigger("Burrow");
-	                    burrowing = true;
+                        enemyAnims.SetBool("IsBurrow", true);
+                        burrowing = true;
 	                    Instantiate(burrowVFX, this.transform.position - new Vector3(0, 0.3f, 0), Quaternion.identity);
                     }
                 }
@@ -189,6 +190,7 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
             this.transform.position = Vector3.Lerp(startPos, endPos, timer / burrowTime);
             yield return null;
         }
+        enemyAnims.SetBool("IsBurrow", false);
 	    enemyAnims.SetTrigger("Emerge");
 
         burrowing = false;
