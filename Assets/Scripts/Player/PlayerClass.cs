@@ -197,6 +197,7 @@ public class PlayerClass : MonoBehaviour
     // need to fix
     void RotateToTarget()
     {
+        gameplayUI.GetDamageIndicator().gameObject.SetActive(false);
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 1, enemies);
         for (int i = 0; i < hitColliders.Length; i++)
         {

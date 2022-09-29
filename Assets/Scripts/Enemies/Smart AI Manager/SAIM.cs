@@ -116,11 +116,13 @@ public class SAIM : MonoBehaviour
     [SerializeField]
     bool bossSaim = false;
 
+    BossRoom bossRoom;
     void Awake()
     {
         //Aydens Audio manager
         audioManager = FindObjectOfType<AudioManager>();
         runManager = FindObjectOfType<RunManager>();
+        bossRoom = FindObjectOfType<BossRoom>();
     }
     private void Start()
     {
@@ -144,11 +146,17 @@ public class SAIM : MonoBehaviour
 
     void Update()
     {
-        if (audioManager)
+        if (bossRoom)
         {
-            if (runManager)
+            if (!bossRoom.GetBossSpawned() || bossRoom.GetBossDead())
             {
-                audioManager.FadeOutAndPlayMusic($"Level {runManager.GetSceneIndex() - 1} Non Combat", $"Level {runManager.GetSceneIndex() - 1} Combat");
+                if (audioManager)
+                {
+                    if (runManager)
+                    {
+                        audioManager.FadeOutAndPlayMusic($"Level {runManager.GetSceneIndex() - 1} Non Combat", $"Level {runManager.GetSceneIndex() - 1} Combat");
+                    }
+                }
             }
         }
 

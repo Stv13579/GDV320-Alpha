@@ -238,7 +238,12 @@ public class BaseEnemyClass : MonoBehaviour
 
         //Instead of calling death here, make an animation trigger instead
         if (currentHealth <= 0)
-            enemyAnims.SetTrigger("Dead");
+        {
+            if (enemyAnims)
+            {
+                enemyAnims.SetTrigger("Dead");
+            }
+        }
         //Death();
     }
 

@@ -30,6 +30,9 @@ public class BossRoom : Room
 
     RunManager runManager;
     public BossList GetList() { return bosses; }
+
+    public bool GetBossSpawned() { return bossSpawned; }
+    public bool GetBossDead() { return bossDead; }
     void Awake()
     {
         audioManager = FindObjectOfType<AudioManager>();
@@ -40,13 +43,16 @@ public class BossRoom : Room
         base.Update();
 
         // need to fix boss audio with saim audio
-        //if (audioManager)
-        //{
-        //if (runManager)
-        //{
-        //    audioManager.FadeOutAndPlayMusic($"Level {runManager.GetSceneIndex() - 1} Non Combat", $"Level {runManager.GetSceneIndex() - 1} Boss");
-        //}
-        //}
+        if (bossSpawned)
+        {
+            if (audioManager)
+            {
+                if (runManager)
+                {
+                    audioManager.FadeOutAndPlayMusic($"Level {runManager.GetSceneIndex() - 1} Non Combat", $"Level {runManager.GetSceneIndex() - 1} Boss");
+                }
+            }
+        }
 
         if (bossSpawned)
         {
@@ -59,11 +65,11 @@ public class BossRoom : Room
                 bossDead = true;
 
                 Destroy(GameObject.Find("Boss Healthbar(Clone)"));
-                
+
                 //if the boss dies set this to true
                 if (audioManager)
                 {
-                    audioManager.SetCurrentStateToFadeOutAudio2();
+                    audioManager.SetCurrentStateToFadeOutAudio1();
                 }
             }
         }
@@ -78,10 +84,9 @@ public class BossRoom : Room
             //Lock the doors
             LockDoors();
 
-            // when the boss spawns set this to true
             if (audioManager)
             {
-                audioManager.SetCurrentStateToFadeOutAudio1();
+                audioManager.SetCurrentStateToFadeOutAudio2();
             }
         }
 
