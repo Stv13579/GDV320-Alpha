@@ -43,6 +43,7 @@ public class GameplayUI : MonoBehaviour
     Image hurtFullScreen;
     Image lowHealthFullScreen;
     Image inToxicFullScreen;
+    [SerializeField]
     Image damageIndicator;
     public Image GetLifeStealFullScreen() { return lifeStealFullScreen; }
     public Image GetVoidFullScreen() { return voidFullScreen; }
@@ -66,7 +67,6 @@ public class GameplayUI : MonoBehaviour
         hurtFullScreen = GameObject.Find("GameplayUI/Effects/PlayerDamage").GetComponent<Image>();
         lowHealthFullScreen = GameObject.Find("GameplayUI/Effects/LowHealth").GetComponent<Image>();
         inToxicFullScreen = GameObject.Find("GameplayUI/Effects/InToxic").GetComponent<Image>();
-        damageIndicator = GameObject.Find("GameplayUI/Effects/DamageIndicator").GetComponent<Image>();
         comboTimer = maxComboTimer;
         Debug.Log("G UI on");
         DontDestroyOnLoad(gameObject);
@@ -262,6 +262,20 @@ public class GameplayUI : MonoBehaviour
         if (hitMarker)
         {
             hitMarker.SetActive(false);
+        }
+    }
+
+    public IEnumerator DamageIndicator()
+    {
+        if(damageIndicator)
+        {
+            Instantiate(damageIndicator);
+            damageIndicator.gameObject.SetActive(true);
+        }
+        yield return new WaitForSeconds(0.5f);
+        if(damageIndicator)
+        {
+            Destroy(damageIndicator);
         }
     }
 }
