@@ -117,7 +117,7 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Update()
     {
-        if( GetComponentInChildren<Animator>().GetNextAnimatorStateInfo(0).IsName("Death") )
+        if(GetComponentInChildren<Animator>() && GetComponentInChildren<Animator>().GetNextAnimatorStateInfo(0).IsName("Death"))
         {
             return;
         }
