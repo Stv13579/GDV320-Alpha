@@ -117,6 +117,10 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Update()
     {
+        if( GetComponentInChildren<Animator>().GetNextAnimatorStateInfo(0).IsName("Death") )
+        {
+            return;
+        }
 
         if(currentHealth > maxHealth)
         {
@@ -231,7 +235,11 @@ public class BaseEnemyClass : MonoBehaviour
             audioManager.StopSFX(takeDamageAudio);
             audioManager.PlaySFX(takeDamageAudio, player.transform, this.transform);
         }
-        Death();
+
+        //Instead of calling death here, make an animation trigger instead
+        if (currentHealth <= 0)
+            enemyAnims.SetTrigger("Dead");
+        //Death();
     }
 
     //Checks if the enemy has died and applies relevant behaviour, such as triggering any on death effects, before destroying it
@@ -245,7 +253,6 @@ public class BaseEnemyClass : MonoBehaviour
         {
             isDead = true;
             //Normally do death animation/vfx, might even fade alpha w/e before deleting.
-
 
 
             //Destroy for now
