@@ -70,9 +70,7 @@ public class GameplayUI : MonoBehaviour
         comboTimer = maxComboTimer;
         Debug.Log("G UI on");
         DontDestroyOnLoad(gameObject);
-    }
-    void Awake()
-    {
+
         if (hitMarker)
         {
             hitMarker.SetActive(false);
@@ -89,23 +87,24 @@ public class GameplayUI : MonoBehaviour
         {
             burnFullScreen.gameObject.SetActive(false);
         }
-        if(hurtFullScreen)
+        if (hurtFullScreen)
         {
             hurtFullScreen.gameObject.SetActive(false);
         }
-        if(lowHealthFullScreen)
+        if (lowHealthFullScreen)
         {
             lowHealthFullScreen.gameObject.SetActive(false);
         }
-        if(inToxicFullScreen)
+        if (inToxicFullScreen)
         {
             inToxicFullScreen.gameObject.SetActive(false);
         }
-        if(damageIndicator)
+        if (damageIndicator)
         {
             damageIndicator.gameObject.SetActive(false);
         }
     }
+
     void Update()
     {
         //Getting the current values from the player and updating the UI with them

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de640fe3d0db1804a85f9fc8f5cadab6, type: 3}
   m_Name: ForwardRendererNonBlit
   m_EditorClassIdentifier: 
-  m_RendererFeatures: []
-  m_RendererFeatureMap: 
+  m_RendererFeatures:
+  - {fileID: 3637021454760204513}
+  m_RendererFeatureMap: e1d8744bbe4b7932
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   shaders:
     blitPS: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}
@@ -36,3 +37,24 @@ MonoBehaviour:
     failOperation: 0
     zFailOperation: 0
   m_ShadowTransparentReceive: 1
+--- !u!114 &3637021454760204513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68f1a22d534c40f4c846c91adf34e19c, type: 3}
+  m_Name: NewFastSSAOUrp
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    Event: 500
+    Intensity: 2.42
+    BlurAmount: 1.45
+    Radius: 0.709
+    Area: 0.2
+    FastMode: 0
+    BlitMaterial: {fileID: 2100000, guid: 590f4c2590b114244819c30772127b89, type: 2}
