@@ -74,6 +74,7 @@ public class BossRoom : Room
             //Spawn the boss once
             currentBoss = Instantiate(bosses.GetBoss(), spawnPosition.position, Quaternion.identity);
             currentBoss.GetComponent<BaseEnemyClass>().SetSpawner(spawner);
+            spawner.GetComponent<SAIM>().spawnedEnemies.Add(currentBoss.GetComponent<BaseEnemyClass>());
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(currentBoss, "Boss");
             //Lock the doors
             LockDoors();
