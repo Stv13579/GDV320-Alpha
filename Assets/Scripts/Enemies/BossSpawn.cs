@@ -26,10 +26,12 @@ public class BossSpawn : MonoBehaviour
 
     RunManager runManager;
 
+    SAIM saim;
     void Awake()
     {
         audioManager = FindObjectOfType<AudioManager>();
         runManager = FindObjectOfType<RunManager>();
+        saim = FindObjectOfType<SAIM>();
     }
     void Update()
     {

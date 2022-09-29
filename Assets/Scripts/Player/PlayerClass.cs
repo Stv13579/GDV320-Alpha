@@ -197,6 +197,7 @@ public class PlayerClass : MonoBehaviour
     // need to fix
     void RotateToTarget()
     {
+        gameplayUI.GetDamageIndicator().gameObject.SetActive(false);
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 1, enemies);
         for (int i = 0; i < hitColliders.Length; i++)
         {
@@ -302,6 +303,7 @@ public class PlayerClass : MonoBehaviour
                 audioManager.PlaySFX(lowHealthFastHeartBeat);
                 //audioManager.PlaySFX(lowHealthSlowHeartBeat);
             }
+            gameplayUI.GetLowHealthFullScreen().gameObject.SetActive(true);
             lowHealthValue += Time.deltaTime * 10.0f;
             if (lowHealthValue >= 10.0f)
             {
@@ -319,6 +321,7 @@ public class PlayerClass : MonoBehaviour
             if (lowHealthValue <= 0.0f)
             {
                 lowHealthValue = 0.0f;
+                gameplayUI.GetLowHealthFullScreen().gameObject.SetActive(false);
             }
         }
     }
@@ -350,6 +353,7 @@ public class PlayerClass : MonoBehaviour
             fireEffect.SetActive(true);
             if(gameplayUI)
             {
+                gameplayUI.GetBurnFullScreen().gameObject.SetActive(true);
                 gameplayUI.GetBurnFullScreen().material.SetFloat("_Toggle_EffectIntensity", 10.0f);
             }
         }
@@ -358,6 +362,7 @@ public class PlayerClass : MonoBehaviour
             fireEffect.SetActive(false);
             if (gameplayUI)
             {
+                gameplayUI.GetBurnFullScreen().gameObject.SetActive(false);
                 gameplayUI.GetBurnFullScreen().material.SetFloat("_Toggle_EffectIntensity", 0.0f);
             }
         }

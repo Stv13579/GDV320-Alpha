@@ -139,9 +139,9 @@ public class BaseElementClass : MonoBehaviour
 
     protected virtual void Start()
     {
-        lVars.Name = elementName;
+        //lVars.Name = elementName;
         lVars.Icon = uiSprite;
-        lVars.Description = elementDescription;
+        //lVars.Description = elementDescription;
         player = GameObject.Find("Player");
         playerClass = player.GetComponent<PlayerClass>();
         //shootingTranform = GameObject.Find("Elements").transform;

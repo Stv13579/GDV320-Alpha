@@ -134,7 +134,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     protected override void Update()
     {
 
-        Death();
+	    base.Update();
 
         if(!ExecuteAttack())
         {

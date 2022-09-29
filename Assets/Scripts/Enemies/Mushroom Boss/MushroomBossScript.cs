@@ -52,15 +52,14 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 
         if (!attacking)
         {
-        	        	
-	        if (Vector3.Distance(this.transform.position, player.transform.position) < 15)
+            if (Vector3.Distance(this.transform.position, player.transform.position) < 15)
             {
 
-		        Movement(player.transform.position, moveSpeed);
+                Movement(player.transform.position, moveSpeed);
             }
             else
             {
-	            Movement(bestNodePos, moveSpeed);
+                Movement(bestNodePos, moveSpeed);
             }
         }
     }
@@ -70,11 +69,12 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
         this.gameObject.transform.LookAt(positionToMoveTo);
         this.gameObject.transform.eulerAngles = new Vector3(0, this.gameObject.transform.eulerAngles.y, 0);
         movement = this.transform.forward * speed * Time.deltaTime;
-	    //if (!controller.isGrounded)
+        //if (!controller.isGrounded)
         //{
         //    movement += new Vector3(0, gravity, 0);
         //}
-	    rb.velocity = movement;
+        //rb.velocity = movement;
+        transform.position += movement;
     }
 
     IEnumerator FindNode()
@@ -116,7 +116,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 
     private void OnCollisionStay(Collision collision)
     {
-        if(collision.collider.gameObject == player && contactTimer <= 0)
+        if(collision.collider.gameObject.tag == "Player" && contactTimer <= 0)
         {
             playerClass.ChangeHealth(-damageAmount);
             contactTimer = 0.3f;

@@ -32,7 +32,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
 
     private void Update()
     {
-        
+	    base.Update();
         {
             //Only start moving every few seconds, that way it's not constantly moving to try and approach its target
             {
