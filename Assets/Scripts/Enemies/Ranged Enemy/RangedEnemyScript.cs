@@ -215,5 +215,9 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
         return attackTimeMulti;
     }
 
+    public override void Death()
+    {
+        base.Death();
+    }
 }
 
