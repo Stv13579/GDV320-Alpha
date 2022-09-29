@@ -7,16 +7,16 @@ public class AcidCloudElement : BaseElementClass
     //Creates a cloud of acid, which deals damage over time to enemies within the cloud
 
     [SerializeField]
-    private GameObject cloudProj;
+    GameObject cloudProj;
 
     [SerializeField]
-    private float cloudSize;
+    float cloudSize;
 
     [SerializeField]
-    private float cloudDuration;
+    float cloudDuration;
 
     [SerializeField]
-    private float damageTicker;
+    float damageTicker;
 
     protected override void Update()
     {

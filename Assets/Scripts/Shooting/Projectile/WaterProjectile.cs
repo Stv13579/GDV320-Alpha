@@ -16,12 +16,12 @@ public class WaterProjectile : BaseElementSpawnClass
     AudioManager audioManager;
 
     GameObject player;
-    private void Awake()
+    void Awake()
     {
         audioManager = FindObjectOfType<AudioManager>();
         player = GameObject.Find("Player");
     }
-    private void Update()
+    void Update()
     {
         if (projectileLifetime > 0)
         {
@@ -38,7 +38,7 @@ public class WaterProjectile : BaseElementSpawnClass
 
         growing();
     }
-    private void growing()
+    void growing()
     {
         if (this.gameObject.transform.localScale.x <= 1.0f &&
            this.gameObject.transform.localScale.y <= 1.0f &&
@@ -56,7 +56,7 @@ public class WaterProjectile : BaseElementSpawnClass
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (bounceLayers == (bounceLayers | (1 << collision.collider.gameObject.layer)))
         {

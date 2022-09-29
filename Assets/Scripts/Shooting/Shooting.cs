@@ -198,7 +198,7 @@ public class Shooting : MonoBehaviour
     //A function that is called whenever a new scene is loaded while this object is enabled.
     public void OnLoadScene(Scene scene, LoadSceneMode mode) { }
 
-    private void Start()
+    void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         // hard coded for now
@@ -215,7 +215,7 @@ public class Shooting : MonoBehaviour
     }
 
 
-    private void Update()
+    void Update()
     {
         if(loadOutChosen)
         {
@@ -273,7 +273,7 @@ public class Shooting : MonoBehaviour
     // lifts elements effect
     // plays animations and sound effects
     // and changes orbs
-    private void SwitchingElements()
+    void SwitchingElements()
     {
         // check if the player has pressed q
         if (Input.GetKeyUp(KeyCode.Q) && !GetPrimaryElements().Contains(blankElement))
@@ -466,7 +466,7 @@ public class Shooting : MonoBehaviour
 
     // shooting function for primary and catalyst
     // checks if player has press any input for mouse 0 and 1
-    private void NonComboShooting()
+    void NonComboShooting()
     {
         //Starts the process of activating the element held in the left hand
         if (!primaryElements[leftElementIndex].GetStartCoolDown() && 
@@ -483,7 +483,7 @@ public class Shooting : MonoBehaviour
 
     // lifts the shooting effects of the non combo elements
     // mostly used for hold elements
-    private void StopNonComboShooting()
+    void StopNonComboShooting()
     {
         //Stops the process of activating the element held in the left hand
         if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -497,7 +497,7 @@ public class Shooting : MonoBehaviour
     }
 
     // shooting function for combo elements
-    private void ComboShooting()
+    void ComboShooting()
     {
         if (!comboElements[leftElementIndex].comboElements[rightElementIndex].GetStartCoolDown() &&
             Input.GetKey(KeyCode.Mouse0) &&
@@ -508,7 +508,7 @@ public class Shooting : MonoBehaviour
     }
 
     // lift effect function for combo elements
-    private void StopComboShooting()
+    void StopComboShooting()
     {
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
@@ -516,7 +516,7 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void DestroyRightOrb()
+    void DestroyRightOrb()
     {
         // destroy orbs
         if (rightOrbPos.childCount == 1)
@@ -530,7 +530,7 @@ public class Shooting : MonoBehaviour
             Destroy(rightOrbPos.parent.parent.GetChild(1).gameObject);
         }
     }
-    private void DestroyLeftOrb()
+    void DestroyLeftOrb()
     {
         // destroys the current orb
         if (leftOrbPos.childCount == 1)
@@ -545,7 +545,7 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void InstantiateCatalystOrb()
+    void InstantiateCatalystOrb()
     {
         // instanciate catalyst orbs
         if (rightOrbPos.childCount < 2)
@@ -557,7 +557,7 @@ public class Shooting : MonoBehaviour
             Instantiate(catalystElements[rightElementIndex].GetWristVFX(), rightOrbPos.parent.parent);
         }
     }
-    private void InstantiatePrimaryOrb()
+    void InstantiatePrimaryOrb()
     {
         if (leftOrbPos.childCount < 2)
         {
@@ -569,7 +569,7 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void InstantiateComboOrbs()
+    void InstantiateComboOrbs()
     {
         // change orbs for combo elements
         if (leftOrbPos.transform.childCount < 2 && rightOrbPos.transform.childCount < 2)

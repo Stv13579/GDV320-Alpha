@@ -14,17 +14,42 @@ public class VoidElement : BaseElementClass
     [SerializeField]
     GameObject Indicator;
     bool isHolding;
-    //[SerializeField]
-    //private Material voidMaterial;
+
+    bool fullScreenOff;
+    float toggleEffectIntensity;
 
     protected override void Start()
     {
         base.Start();
-        //voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
+        toggleEffectIntensity = -1.0f;
+        fullScreenOff = true;
+    }
+    void FullScreenEffect()
+    {
+        if (gameplayUI)
+        {
+            gameplayUI.GetVoidFullScreen().material.SetFloat("_Toggle_EffectIntensity", toggleEffectIntensity);
+        }
+        if (fullScreenOff)
+        {
+            gameplayUI.GetVoidFullScreen().gameObject.SetActive(true);
+            toggleEffectIntensity -= Time.deltaTime * 10;
+        }
+        else
+        {
+            gameplayUI.GetVoidFullScreen().gameObject.SetActive(true);
+            toggleEffectIntensity = 10.0f;
+        }
+        if(toggleEffectIntensity <= 0.0f)
+        {
+            gameplayUI.GetVoidFullScreen().gameObject.SetActive(false);
+            toggleEffectIntensity = 0.0f;
+        }
     }
     protected override void Update()
     {
         base.Update();
+        FullScreenEffect();
         if (isHolding)
         {
             RaycastHit hit1;
@@ -131,20 +156,12 @@ public class VoidElement : BaseElementClass
         }
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if(dashing)
-    //    {
-    //        StopCoroutine(Dash());
-    //        dashing = false;
-    //        this.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(true);
-    //    }
-    //}
-
-    private IEnumerator Dash()
+    IEnumerator Dash()
     {
         playerClass.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(false);
         //voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.1f);
+        //gameplayUI.GetVoidFullScreen().material.SetFloat("_Toggle_EffectIntensity", 10.0f);
+        fullScreenOff = false;
         dashing = true;
         float timer = 0.0f;
         Vector3 startPos = this.transform.position;
@@ -155,7 +172,9 @@ public class VoidElement : BaseElementClass
             yield return null;
         }
         this.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(true);
+        fullScreenOff = true;
         //voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
+        //gameplayUI.GetVoidFullScreen().material.SetFloat("_Toggle_EffectIntensity", 0.0f);
         StopCoroutine(Dash());
     }
 

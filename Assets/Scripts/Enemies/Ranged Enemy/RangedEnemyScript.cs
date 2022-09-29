@@ -12,7 +12,8 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
     LayerMask viewToPlayer;
     [SerializeField]
     float burrowTime;
-    bool burrowing = false;
+	bool burrowing = false;
+	bool burrowRoutine = false;
     [SerializeField]
     GameObject projectile;
     [SerializeField]
@@ -68,8 +69,10 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
                     //Make sure the player isn't too close or too far
                     if (Vector3.Distance(player.transform.position, this.gameObject.transform.position) < 10 || Vector3.Distance(player.transform.position, this.gameObject.transform.position) > 20)
                     {
-                        enemyAnims.SetTrigger("Burrow");
-                        StartCoroutine(Burrow());
+	                    enemyAnims.SetTrigger("Burrow");
+                        enemyAnims.SetBool("IsBurrow", true);
+                        burrowing = true;
+	                    Instantiate(burrowVFX, this.transform.position - new Vector3(0, 0.3f, 0), Quaternion.identity);
                     }
                 }
                 
@@ -115,16 +118,22 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
             }
         }
     }
-    //Starts the enemy burrowing
+	//Starts the enemy burrowing
+	public void StartBurrow()
+	{
+		if(!burrowRoutine)
+		{
+			StartCoroutine(Burrow());
+		}
+	}
+	//Sets up the burrowing VFX, moves the enemy underground, then starts it emerging
     IEnumerator Burrow()
     {
         Vector3 startPos = this.transform.position;
         Vector3 endPos = this.transform.position + new Vector3(0, -50, 0);
-        burrowing = true;
 	    timer = 0.0f;
-	    Instantiate(burrowVFX, this.transform.position - new Vector3(0, 0.3f, 0), Quaternion.identity);
 	    burrowMovementVFX = Instantiate(burrowingVFX, this.transform.position, Quaternion.identity);
-        
+	    burrowRoutine = true;
 	    Node nodeChosen = null;
 	    Vector3 emergePos = Vector3.zero;
 	    //Finds a SAIM node, checks if it's valid, if so moves the enemy to below it and starts emerging, otherwise finds another node
@@ -135,7 +144,7 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
 		    RaycastHit hit;
 		    Physics.SphereCast(nodeChosen.gameObject.transform.position, 0.5f, -nodeChosen.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
 		    emergePos = hit.point - this.transform.GetChild(1).localPosition * 2;
-		    if (Vector3.Distance(player.transform.position, emergePos) > 10 && Vector3.Distance(player.transform.position, emergePos) < 20)
+		    if (Vector3.Distance(player.transform.position, emergePos) > 12 && Vector3.Distance(player.transform.position, emergePos) < 18)
 		    {
 
 
@@ -160,11 +169,10 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
 	    this.transform.position = emergePos + new Vector3(0, -50, 0);
 
 	    StartCoroutine(Emerge());
-
         StopCoroutine(Burrow());
 
     }
-    //Starts the enemy emerging from the ground
+	//Moves the enemy up out of the ground
     IEnumerator Emerge()
     {
         Vector3 startPos = this.transform.position;
@@ -182,8 +190,13 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
             this.transform.position = Vector3.Lerp(startPos, endPos, timer / burrowTime);
             yield return null;
         }
+        enemyAnims.SetBool("IsBurrow", false);
+	    enemyAnims.SetTrigger("Emerge");
+
         burrowing = false;
-        timer = 0.0f;
+	    timer = 0.0f;
+	    burrowRoutine = false;
+
         StopCoroutine(Emerge());
     }
 

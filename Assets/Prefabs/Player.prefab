@@ -1245,6 +1245,9 @@ MonoBehaviour:
   lowHealthLimit: 50
   lowHealthFastHeartBeat: Low Health Fast Heart Beat
   lowHealthSlowHeartBeat: Low Health Slow Heart Beat
+  enemies:
+    serializedVersion: 2
+    m_Bits: 4194560
 --- !u!114 &1363181307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1329,30 +1332,6 @@ MonoBehaviour:
   explosionArea: 2
   explosionDamage: 2
   gravity: 1
-  gravCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   gravityLifetime: 1
 --- !u!114 &5625023910511142018
 MonoBehaviour:
@@ -1672,8 +1651,8 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 21300000, guid: 770339e41d8494046adb4a9a0b4714db, type: 3}
   lVars:
-    Description: 
-    Name: 
+    Description: A powerful beam of heat. Difficult to use but deals massive damage
+    Name: Laser
     Icon: {fileID: 0}
   upgradeCost: 5
   upgradeDescription: 
@@ -1723,8 +1702,8 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 21300000, guid: db3d8f6650a6d9d42aa38560b3d2008d, type: 3}
   lVars:
-    Description: 
-    Name: 
+    Description: A high powered projectile attack. Slow to fire but highly accurate.
+    Name: Shard Cannon
     Icon: {fileID: 0}
   upgradeCost: 5
   upgradeDescription: 
@@ -1774,8 +1753,8 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 21300000, guid: da9efba32dcd01d4d94eca11706d7877, type: 3}
   lVars:
-    Description: 
-    Name: 
+    Description: A cloud of static acid which burns those who enter.
+    Name: Acid Cloud
     Icon: {fileID: 0}
   upgradeCost: 5
   upgradeDescription: 
@@ -1826,8 +1805,9 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: 9bae4940f345aad4e844bc69e6c18f58, type: 3}
   crosshair: {fileID: 21300000, guid: 60ba117551a488647a057174be37c3fd, type: 3}
   lVars:
-    Description: 
-    Name: 
+    Description: A mine which explodes whenever an enemy comes close enough dealing
+      massive damage in an area.
+    Name: Star Mine
     Icon: {fileID: 0}
   upgradeCost: 5
   upgradeDescription: 
@@ -1883,8 +1863,9 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 21300000, guid: 329a242dcf2f84440a96d5fb670f17c3, type: 3}
   lVars:
-    Description: 
-    Name: 
+    Description: Curse an enemy to explode when they die, sending shards of crystal
+      in area and dealing massive damage to nearby allies.
+    Name: Explosion Curse
     Icon: {fileID: 0}
   upgradeCost: 5
   upgradeDescription: 
@@ -1941,8 +1922,9 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: 8cba1ffd09255ef4c855aaf3c56b214e, type: 3}
   crosshair: {fileID: 21300000, guid: 770339e41d8494046adb4a9a0b4714db, type: 3}
   lVars:
-    Description: 
-    Name: 
+    Description: A wide blade of ice which cuts through the air dealing damage to
+      those it collides with.
+    Name: Ice Slash
     Icon: {fileID: 0}
   upgradeCost: 5
   upgradeDescription: 
@@ -1994,8 +1976,9 @@ MonoBehaviour:
     type: 3}
   crosshair: {fileID: 21300000, guid: 770339e41d8494046adb4a9a0b4714db, type: 3}
   lVars:
-    Description: 
-    Name: 
+    Description: A beam which drains enemies of their lifeforce, granting it to the
+      user instead.
+    Name: Life Drain
     Icon: {fileID: 0}
   upgradeCost: 5
   upgradeDescription: 
@@ -2010,7 +1993,7 @@ MonoBehaviour:
   otherShootingSoundFX: Life Steal Shot
   switchElementSFX: Life Steal Equip
   idleSFX: Life Steal Idle
-  damage: 5
+  damage: 3
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: LifeStealTransition
@@ -2021,8 +2004,8 @@ MonoBehaviour:
   lifeStealfail: {fileID: 4552281088649957088}
   sphereRadius: 0.5
   sphereRange: 10
-  healValue: 7
-  damageAndHealthTicker: 1
+  healValue: 1
+  damageAndHealthTicker: 0.5
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -2053,8 +2036,9 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: 3ae395b4079743447b6fac5d36b304c4, type: 3}
   crosshair: {fileID: 21300000, guid: 329a242dcf2f84440a96d5fb670f17c3, type: 3}
   lVars:
-    Description: 
-    Name: 
+    Description: A grendade which attaches to any target it hits, eventually exploding
+      damaging all enemies around it.
+    Name: Gravity Grendade
     Icon: {fileID: 0}
   upgradeCost: 5
   upgradeDescription: 
@@ -2107,8 +2091,9 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: 5e1860b9ea2286a47822c10916870e3c, type: 3}
   crosshair: {fileID: 21300000, guid: 60ba117551a488647a057174be37c3fd, type: 3}
   lVars:
-    Description: 
-    Name: 
+    Description: A ball of ball of water and gravity which stops enemies from moving,
+      damaging them in the process.
+    Name: Stasis Trap
     Icon: {fileID: 0}
   upgradeCost: 5
   upgradeDescription: 
@@ -2768,6 +2753,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: -3583459701164218790, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -3365720766303406756, guid: 99ddbcbf9ae0bee46908442e78cd457e,
         type: 3}
       propertyPath: m_Layer
@@ -2952,6 +2942,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658319505139606911, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6079890296643451561, guid: 99ddbcbf9ae0bee46908442e78cd457e,
         type: 3}

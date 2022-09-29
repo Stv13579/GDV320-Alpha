@@ -11,10 +11,10 @@ public class ShardCannonElement : BaseElementClass
     //Click to fire (if we have the mana/not in delay)
     //Instantiate the projectile in the right direction etc.
     [SerializeField]
-    private GameObject shardProj;
+    GameObject shardProj;
 
     [SerializeField]
-    private float projectileSpeed;
+    float projectileSpeed;
 
     protected override void Update()
     {

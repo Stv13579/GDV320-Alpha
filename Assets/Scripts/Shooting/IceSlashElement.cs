@@ -5,16 +5,16 @@ using UnityEngine;
 public class IceSlashElement : BaseElementClass
 {
     [SerializeField]
-    private GameObject iceSlash;
+    GameObject iceSlash;
 
     [SerializeField]
-    private float projectileSpeed;
+    float projectileSpeed;
 
     [SerializeField]
-    private float lifeTimer;
+    float lifeTimer;
 
     [SerializeField]
-    private GameObject iceSlashShootVFX;
+    GameObject iceSlashShootVFX;
 
     // gets called in the animation event triggers
     public override void ElementEffect()
@@ -30,7 +30,7 @@ public class IceSlashElement : BaseElementClass
     {
         base.ActivateVFX();
     }
-    private void PlayVFX()
+    void PlayVFX()
     {
         if (randomAnimationToPlay == 0)
         {

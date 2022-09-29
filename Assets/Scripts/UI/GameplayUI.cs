@@ -37,6 +37,20 @@ public class GameplayUI : MonoBehaviour
 
     GameObject hitMarker;
 
+    Image lifeStealFullScreen;
+    Image voidFullScreen;
+    Image burnFullScreen;
+    Image hurtFullScreen;
+    Image lowHealthFullScreen;
+    Image inToxicFullScreen;
+    Image damageIndicator;
+    public Image GetLifeStealFullScreen() { return lifeStealFullScreen; }
+    public Image GetVoidFullScreen() { return voidFullScreen; }
+    public Image GetBurnFullScreen() { return burnFullScreen; }
+    public Image GetHurtFullScreen() { return hurtFullScreen; }
+    public Image GetLowHealthFullScreen() { return lowHealthFullScreen; }
+    public Image GetInToxicFullScreen() { return inToxicFullScreen; }
+    public Image GetDamageIndicator() { return damageIndicator; }
     public GameObject GetHitMarker() { return hitMarker; }
     public bool GetCombo() { return combo; }
     public void SetCombo(bool tempCombo) { combo = tempCombo; }
@@ -45,14 +59,53 @@ public class GameplayUI : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<Shooting>();
         playerClass = player.gameObject.GetComponent<PlayerClass>();
-        hitMarker = GameObject.Find("GameplayUI");
+        hitMarker = GameObject.Find("GameplayUI/HitMarker");
+        lifeStealFullScreen = GameObject.Find("GameplayUI/Effects/LifeSteal").GetComponent<Image>();
+        voidFullScreen = GameObject.Find("GameplayUI/Effects/Void").GetComponent<Image>();
+        burnFullScreen = GameObject.Find("GameplayUI/Effects/Burn").GetComponent<Image>();
+        hurtFullScreen = GameObject.Find("GameplayUI/Effects/PlayerDamage").GetComponent<Image>();
+        lowHealthFullScreen = GameObject.Find("GameplayUI/Effects/LowHealth").GetComponent<Image>();
+        inToxicFullScreen = GameObject.Find("GameplayUI/Effects/InToxic").GetComponent<Image>();
+        damageIndicator = GameObject.Find("GameplayUI/Effects/DamageIndicator").GetComponent<Image>();
         comboTimer = maxComboTimer;
         Debug.Log("G UI on");
-
-
         DontDestroyOnLoad(gameObject);
     }
-
+    void Awake()
+    {
+        if (hitMarker)
+        {
+            hitMarker.SetActive(false);
+        }
+        if (lifeStealFullScreen)
+        {
+            lifeStealFullScreen.gameObject.SetActive(false);
+        }
+        if (voidFullScreen)
+        {
+            voidFullScreen.gameObject.SetActive(false);
+        }
+        if (burnFullScreen)
+        {
+            burnFullScreen.gameObject.SetActive(false);
+        }
+        if(hurtFullScreen)
+        {
+            hurtFullScreen.gameObject.SetActive(false);
+        }
+        if(lowHealthFullScreen)
+        {
+            lowHealthFullScreen.gameObject.SetActive(false);
+        }
+        if(inToxicFullScreen)
+        {
+            inToxicFullScreen.gameObject.SetActive(false);
+        }
+        if(damageIndicator)
+        {
+            damageIndicator.gameObject.SetActive(false);
+        }
+    }
     void Update()
     {
         //Getting the current values from the player and updating the UI with them
@@ -105,10 +158,12 @@ public class GameplayUI : MonoBehaviour
         ChangeCombo(inactiveCatalystElement.transform.parent, true);
         ChangeCombo(activeComboElement.transform.parent, false);
         ChangeCombo(inactiveComboElement.transform.parent, false);
-
-        if(hitMarker.transform.GetChild(8).gameObject.active == true)
+        if (hitMarker)
         {
-            StartCoroutine(HitMarker());
+            if (hitMarker.active == true)
+            {
+                StartCoroutine(HitMarker());
+            }
         }
     }
 
@@ -202,12 +257,12 @@ public class GameplayUI : MonoBehaviour
     {
         if (hitMarker)
         {
-            hitMarker.transform.GetChild(8).gameObject.SetActive(true);
+            hitMarker.SetActive(true);
         }
         yield return new WaitForSeconds(0.2f);
         if (hitMarker)
         {
-            hitMarker.transform.GetChild(8).gameObject.SetActive(false);
+            hitMarker.SetActive(false);
         }
     }
 }

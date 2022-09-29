@@ -16,14 +16,18 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
     LayerMask groundDetect;
     [SerializeField]
     GameObject bossHealthbar;
-
+	int fireAttack = 5;
+	int fireAttackCounter = 0;
+	bool waterAttacking = false;
+	int homingAttack = 5;
+	int homingAttackCounter = 0;
 
     public override void Awake()
     {
         base.Awake();
         RaycastHit hit;
         Physics.Raycast(this.gameObject.transform.position, -this.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
-        Vector3 emergePos = hit.point - this.transform.GetChild(1).localPosition * 2;
+	    Vector3 emergePos = hit.point - this.transform.GetChild(1).localPosition * 2 - new Vector3(0, 2, 0);
         this.transform.position = emergePos;
         GameObject healthbar = Instantiate(bossHealthbar);
         BossHealthbarScript healthbarScript = healthbar.GetComponent<BossHealthbarScript>();
@@ -37,6 +41,8 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
         {
             timer -= Time.deltaTime;
         }
+	    this.transform.LookAt(player.transform);
+	    this.transform.eulerAngles = new Vector3(0, this.transform.eulerAngles.y, 0);
         //Pick a random attack and send it to the animator
         if (timer <= 0.0f)
         {
@@ -63,60 +69,62 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
         //For debug, remove later
         if(Input.GetKeyDown(KeyCode.O))
         {
-            StartCoroutine(FireAttack(5));
+	        enemyAnims.SetTrigger("Fire");
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            StartCoroutine(WaterAttack(60));
+	        enemyAnims.SetTrigger("Water");
         }
         if (Input.GetKeyDown(KeyCode.U))
         {
-            CrystalAttack();
+	        enemyAnims.SetTrigger("Crystal");
         }
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            StartCoroutine(HomingAttack(5));
+	        enemyAnims.SetTrigger("Homing");
         }
     }
-    //Homing attack, randomly instantiates a homing attack variant toSpawn times
-    public IEnumerator HomingAttack(int toSpawn)
-    {
-        int i = 0;
-        while (i < toSpawn)
-        {
-            GameObject homingProj = Instantiate(homingProjectiles[Random.Range(0, homingProjectiles.Length)], projectileSpawnPos.position, Quaternion.identity);
-            i++;
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
-    //Fire attack, instantiates toSpawn number of fake fireballs, shoots them in the air, which then spawn real fireballs over the player
-    public IEnumerator FireAttack(int toSpawn)
-    {
-        int i = 0;
-        while(i < toSpawn)
-        {
-            GameObject fireProj = Instantiate(fakeFireProjectile, projectileSpawnPos.position, Quaternion.identity);
-            fireProj.transform.forward = transform.up;
-            fireProj.GetComponent<RangedBossFakeFireProjectileScript>().SetDamage(damageAmount);
-            i++;
-            yield return new WaitForSeconds(0.2f);
-        }
-    }
+
+    
+	public void HomingAttack()
+	{
+		GameObject homingProj = Instantiate(homingProjectiles[Random.Range(0, homingProjectiles.Length)], projectileSpawnPos.position, Quaternion.identity);
+		homingAttackCounter++;
+		if(homingAttackCounter >= homingAttack)
+		{
+			enemyAnims.SetTrigger("StopHoming");
+			homingAttackCounter = 0;
+		}
+
+	}
+
+    
+	public void FireAttack()
+	{
+		GameObject fireProj = Instantiate(fakeFireProjectile, projectileSpawnPos.position, Quaternion.identity);
+		fireProj.transform.forward = transform.up;
+		fireProj.GetComponent<RangedBossFakeFireProjectileScript>().SetDamage(damageAmount);
+		fireAttackCounter++;
+		if(fireAttackCounter >= fireAttack)
+		{
+			enemyAnims.SetTrigger("StopFire");
+			fireAttackCounter = 0;
+		}
+
+	}
     //Water attack, fire toSpawn number of water projectiles evenly in a circle around the boss
-    public IEnumerator WaterAttack(int toSpawn)
-    {
-        //Will change when animations are in
-        float angle = 360 / toSpawn;
-        int i = 0;
-        while (i < toSpawn)
-        {
-            GameObject waterProj = Instantiate(waterProjectile, tempProjectileSpawnPos.position, Quaternion.identity);
+    public IEnumerator WaterAttack()
+	{
+		//Will change when animations are in
+		while (waterAttacking)
+	    {
+		    Debug.Log("Water");
+			GameObject waterProj = Instantiate(waterProjectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
             waterProj.GetComponent<RangedBossWaterProjectileScript>().SetVars(15, damageAmount);
-            waterProj.transform.eulerAngles = new Vector3(0, angle * i, 0);
             Physics.IgnoreCollision(this.GetComponent<Collider>(), waterProj.GetComponent<Collider>());
-            i++;
-            yield return new WaitForSeconds(0.1f);
-        }
+			yield return new WaitForSeconds(0.01f);
+	    }
+		StopCoroutine(WaterAttack());
     }
     //Crystal attack, fires a large crystal projectile towards the player, which can embed in the ground and explode
     public void CrystalAttack()
@@ -128,16 +136,22 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
     //Starts the homing attack, so it can be called by the animator
     public void StartHoming()
     {
-        StartCoroutine(HomingAttack(5));
+	    //StartCoroutine(HomingAttack(5));
     }
     //Starts the fire attack, so it can be called by the animator
     public void StartFire()
     {
-        StartCoroutine(FireAttack(5));
+	    //StartCoroutine(FireAttack(5));
     }
     //Starts the water attack, so it can be called by the animator
     public void StartWater()
-    {
-        StartCoroutine(WaterAttack(60));
-    }
+	{
+		waterAttacking = true;
+        StartCoroutine(WaterAttack());
+	}
+    
+	public void StopWater()
+	{
+		waterAttacking = false;
+	}
 }

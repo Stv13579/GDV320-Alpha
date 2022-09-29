@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class LandMineProj : MonoBehaviour
 {
-    private float damage;
-    private float explosiveRadius;
-    private float lifeTimer;
-    private List<BaseEnemyClass.Types> attackTypes;
-    private AudioManager audioManager;
-    private bool willExplode;
-    private float timerToDestroy;
+    float damage;
+    float explosiveRadius;
+    float lifeTimer;
+    List<BaseEnemyClass.Types> attackTypes;
+    AudioManager audioManager;
+    bool willExplode;
+    float timerToDestroy;
     [SerializeField]
-    private GameObject mine;
+    GameObject mine;
     [SerializeField]
-    private GameObject explosion;
+    GameObject explosion;
     [SerializeField]
-    private LayerMask enemyDetect;
+    LayerMask enemyDetect;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +52,7 @@ public class LandMineProj : MonoBehaviour
     }
     // kills the landmine if its been siting in the level for too long and nothing has happened to it or
     // if the animation has finished
-    private void KillProjectile()
+    void KillProjectile()
     {
         if(lifeTimer <= 0  && !willExplode)
         {
@@ -72,7 +72,7 @@ public class LandMineProj : MonoBehaviour
 
     }
     
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         // if the other object is an enemy
         if (other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())
