@@ -84,13 +84,17 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
             FindTarget();
 
         }
-        if(target.GetComponent<RangedEnemyScript>())
-        {
-            if(target.GetComponent<RangedEnemyScript>().GetBurrowing())
-            {
-                FindTarget();
-            }
-        }
+	    if(target)
+	    {
+		    if(target.GetComponent<RangedEnemyScript>())
+		    {
+			    if(target.GetComponent<RangedEnemyScript>().GetBurrowing())
+			    {
+				    FindTarget();
+			    }
+		    }
+	    }
+
         this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, moveSpeed * Time.deltaTime);
     }
 
@@ -132,8 +136,8 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
         {
             //target = this.gameObject;
             //targetPos = player.transform.position + new Vector3(0, 10, 0);
-            currentHealth = 0;
-            Death();
+            //currentHealth = 0;
+            //Death();
         }
     }
 

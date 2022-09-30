@@ -37,6 +37,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 	    StartCoroutine(FindNode());
 	    controller = GetComponent<CharacterController>();
 	    rb = GetComponent<Rigidbody>();
+	    deathTriggers.Add(DestroySporeClouds());
 
     }
     public override void Update()
@@ -122,4 +123,13 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
             contactTimer = 0.3f;
         }
     }
+    
+	public void DestroySporeClouds()
+	{
+		SporeCloudScript[] spores = FindObjectOfType<SporeCloudScript>();
+		for(int i = spores.Length - 1; i > 0; i--)
+		{
+			Destroy(spores[i]);
+		}
+	}
 }
