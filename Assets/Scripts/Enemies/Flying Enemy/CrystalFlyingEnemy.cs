@@ -26,11 +26,6 @@ public class CrystalFlyingEnemy : BaseFlyingEnemyScript //Sebastian
 
             if (!enemy.gameObject.GetComponent<BaseFlyingEnemyScript>())
             {
-                if (enemy.gameObject != target)
-                {
-                    target = enemy.gameObject;
-                }
-                targetPos = target.transform.position + new Vector3(0, 10, 0);
                 RaycastHit hit1;
                 if (!Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit1, Vector3.Distance(this.transform.position, targetPos), moveDetect))
                 {
@@ -40,8 +35,8 @@ public class CrystalFlyingEnemy : BaseFlyingEnemyScript //Sebastian
         }
         if(validEnemies.Count <= 0)
         {
-            currentHealth = 0;
-            Death();
+            //currentHealth = 0;
+            //Death();
         }
     }
     //Lowers the playes defense temporarily
@@ -49,6 +44,5 @@ public class CrystalFlyingEnemy : BaseFlyingEnemyScript //Sebastian
     {
         base.Effect();
         StatModifier.StartAddModifierTemporary(playerClass, playerClass.GetDefenseStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Flying Enemy"), 10.0f);
-
     }
 }
