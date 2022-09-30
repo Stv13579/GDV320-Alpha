@@ -38,6 +38,7 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
     public override void Update()
 	{
 		base.Update();
+		this.GetComponent<MeshCollider>().sharedMesh = this.transform.GetChild(2).GetChild(0).GetComponent<SkinnedMeshRenderer>().sharedMesh;
         if(enemyAnims.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             timer -= Time.deltaTime;
