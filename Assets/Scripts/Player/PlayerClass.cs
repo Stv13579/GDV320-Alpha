@@ -194,10 +194,8 @@ public class PlayerClass : MonoBehaviour
 
     }
 
-    // need to fix
     void RotateToTarget()
     {
-        gameplayUI.GetDamageIndicator().gameObject.SetActive(false);
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 1, enemies);
         for (int i = 0; i < hitColliders.Length; i++)
         {
@@ -214,6 +212,7 @@ public class PlayerClass : MonoBehaviour
         Vector3 northDirection = new Vector3(0.0f, 0.0f, this.transform.eulerAngles.y);
         gameplayUI.GetDamageIndicator().rectTransform.localRotation = targetRot * Quaternion.Euler(northDirection);
     }
+
     public void ChangeHealth(float healthAmount, bool reduceDamage = true)
     {
         //Create a one time defense modifier based on whether the player is recieving damage, or should not apply defense
