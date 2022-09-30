@@ -37,7 +37,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 	    StartCoroutine(FindNode());
 	    controller = GetComponent<CharacterController>();
 	    rb = GetComponent<Rigidbody>();
-	    deathTriggers.Add(DestroySporeClouds());
+	    deathTriggers.Add(DestroySporeClouds);
 
     }
     public override void Update()
@@ -124,12 +124,12 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
         }
     }
     
-	public void DestroySporeClouds()
+	protected virtual void DestroySporeClouds(GameObject temp)
 	{
-		SporeCloudScript[] spores = FindObjectOfType<SporeCloudScript>();
+		SporeCloudScript[] spores = FindObjectsOfType<SporeCloudScript>();
 		for(int i = spores.Length - 1; i > 0; i--)
 		{
-			Destroy(spores[i]);
+			Destroy(spores[i].gameObject);
 		}
 	}
 }
