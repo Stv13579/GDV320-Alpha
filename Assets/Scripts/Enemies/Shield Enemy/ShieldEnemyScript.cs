@@ -211,7 +211,7 @@ public class ShieldEnemyScript : BaseEnemyClass
 
     public void CapDamage()
     {
-        player.GetComponent<PlayerClass>().ChangeHealth(-damageAmount, transform.position, 500);
+        player.GetComponent<PlayerClass>().ChangeHealth(-damageAmount, gameObject);
         capHitter.SetActive(false);
     }
 

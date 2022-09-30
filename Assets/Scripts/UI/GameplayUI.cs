@@ -51,8 +51,7 @@ public class GameplayUI : MonoBehaviour
     LayerMask enemies;
 
     float angle;
-    Quaternion targetRot;
-    Vector3 targetPos;
+    
 
     public Image GetLifeStealFullScreen() { return lifeStealFullScreen; }
     public Image GetVoidFullScreen() { return voidFullScreen; }
@@ -296,34 +295,48 @@ public class GameplayUI : MonoBehaviour
             hitMarkerShield.SetActive(false);
         }
     }
-    public IEnumerator DamageIndicator()
+    public IEnumerator DamageIndicator(GameObject source)
     {
         Image tempDamageIndicator = null;
         if (damageIndicator)
         {
             tempDamageIndicator = Instantiate(damageIndicator, this.gameObject.transform);
         }
-        float rotate = 3.0f;
-        while (rotate > 0)
+        float indicatorLife = 4.0f;
+        Vector3 targetPos;
+        while (indicatorLife > 0)
         {
-            Collider[] hitColliders = Physics.OverlapSphere(player.transform.position, 1, enemies);
-            for (int i = 0; i < hitColliders.Length; i++)
+            if(source == null)
             {
-                targetPos = hitColliders[i].transform.forward;
-                targetRot = hitColliders[i].transform.rotation;
+                break;
             }
 
-            Vector3 otherDir = new Vector3(-targetPos.x, 0f, -targetPos.z);
-            Vector3 playerFwd = Vector3.ProjectOnPlane(player.transform.forward, Vector3.up);
+            targetPos = source.transform.position;
 
-            float angle = Vector3.SignedAngle(playerFwd, otherDir, Vector3.up);
+            //Find the angle between the forward vector of the player and the angle between the source and player
+            Vector3 targetVec = targetPos - player.transform.GetChild(1).position;
 
-            tempDamageIndicator.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -angle);
+            float worldAngle = Vector3.SignedAngle(new Vector3(player.transform.GetChild(1).forward.x, 0, player.transform.GetChild(1).forward.z), new Vector3(targetVec.x, 0, targetVec.z), Vector3.up);
 
-            rotate -= Time.deltaTime;
+            tempDamageIndicator.GetComponent<RectTransform>().rotation = Quaternion.Euler(0.0f, 0.0f, (worldAngle - 180) * -1);
+
+            indicatorLife -= Time.deltaTime;
 
             yield return null;
         }
+        float fadeTime = 2.0f;
+        while(fadeTime > 0)
+        {
+            fadeTime -= Time.deltaTime;
+
+            Color temp = tempDamageIndicator.GetComponent<Image>().color;
+            temp.a = fadeTime / 2;
+            tempDamageIndicator.GetComponent<Image>().color = temp;
+
+            yield return null;
+        }
+
+
         if (damageIndicator)
         {
             Destroy(tempDamageIndicator);

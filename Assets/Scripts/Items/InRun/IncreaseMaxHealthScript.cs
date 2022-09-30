@@ -12,6 +12,6 @@ public class IncreaseMaxHealthScript : Item
     public void IncreaseMaxHealth(PlayerClass player)
     {
         StatModifier.AddModifier(player.GetHealthStat().additiveModifiers, new StatModifier.Modifier(100.0f, "Health Ring" + GetInstanceID()));
-        player.ChangeHealth(100.0f);
+        player.ChangeHealth(100.0f, null);
     }
 }

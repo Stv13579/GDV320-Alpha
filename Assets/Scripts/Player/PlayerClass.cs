@@ -128,7 +128,7 @@ public class PlayerClass : MonoBehaviour
 
         if(fireTimer > 0)
         {
-            ChangeHealth(-fireDOT);
+            ChangeHealth(-fireDOT, null);
             fireTimer -= Time.deltaTime;
         }
         else
@@ -154,7 +154,7 @@ public class PlayerClass : MonoBehaviour
                 Item luckyBones = heldItems.Find(LKB => LKB == GameObject.Find("TrinketManager").GetComponent<LuckyKnuckleBones>());
                 if(luckyBones.GetComponent<LuckyKnuckleBones>().CanRevive())
                 {
-                    ChangeHealth(maxHealth);
+                    ChangeHealth(maxHealth, null);
                     return;
                 }    
             }
@@ -185,7 +185,7 @@ public class PlayerClass : MonoBehaviour
 
     }
 
-    public void ChangeHealth(float healthAmount, bool reduceDamage = true)
+    public void ChangeHealth(float healthAmount, GameObject source, bool reduceDamage = true)
     {
         //Create a one time defense modifier based on whether the player is recieving damage, or should not apply defense
         float defenseMod = defense;
@@ -205,56 +205,18 @@ public class PlayerClass : MonoBehaviour
         {
             if (gameplayUI)
             {
-                StopCoroutine(gameplayUI.DamageIndicator());
-                StartCoroutine(gameplayUI.DamageIndicator());
+                //StopCoroutine(gameplayUI.DamageIndicator());
+                StartCoroutine(gameplayUI.DamageIndicator(source));
             }
         }
-
-        if (currentHealth <= 0 && !dead)
-        {
-        Death();
-        }
-    }
-
-    //Get hit and bounce
-    public void ChangeHealth(float healthAmount, Vector3 enemyPos, float pushForce, bool reduceDamage = true)
-    {
-        //Create a one time defense modifier based on whether the player is recieving damage, or should not apply defense
-        float defenseMod = defense;
-        if (healthAmount > 0 || !reduceDamage)
-        {
-            defenseMod = 1;
-        }
-
-        if (defenseMod > 1 || defenseMod == 0)
-        {
-            defenseMod = 1;
-        }
-
-        currentHealth = Mathf.Min(currentHealth + (healthAmount * defenseMod), maxHealth);
-
-        Vector3 bounceVec = transform.position - enemyPos;
-
-        pushDir = bounceVec.normalized;
-        pushDir.y = 1;
-        pushStrength = pushForce;
-        currentPushDuration = 0;
-
-        if (healthAmount < 0)
-        {
-            if (gameplayUI)
-            {
-                StopCoroutine(gameplayUI.DamageIndicator());
-                StartCoroutine(gameplayUI.DamageIndicator());
-            }
-        }
-
 
         if (currentHealth <= 0 && !dead)
         {
             Death();
         }
     }
+
+   
 
     public void Push()
     {
@@ -324,7 +286,7 @@ public class PlayerClass : MonoBehaviour
             manaTypes[i].currentMana = Mathf.Min(manaTypes[i].currentMana + manaAmount, manaTypes[i].maxMana);
             if (manaTypes[i].currentMana < 0)
             {
-                ChangeHealth(manaTypes[i].currentMana);
+                ChangeHealth(manaTypes[i].currentMana, null);
                 manaTypes[i].currentMana = 0;
             }
             //manaTypes[i].currentMana = Mathf.Max(manaTypes[i].currentMana, 0);

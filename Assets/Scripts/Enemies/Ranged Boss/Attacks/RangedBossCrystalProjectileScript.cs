@@ -38,7 +38,7 @@ public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript //Se
     {
        if(moving && other.GetComponent<PlayerClass>())
         {
-            other.GetComponent<PlayerClass>().ChangeHealth(-damage * 5);
+            other.GetComponent<PlayerClass>().ChangeHealth(-damage * 5, FindObjectOfType<RangedBossScript>().gameObject);
             Explode();
         }
         else if (other.gameObject.layer == 10)

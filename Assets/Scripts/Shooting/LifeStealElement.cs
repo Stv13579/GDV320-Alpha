@@ -103,7 +103,7 @@ public class LifeStealElement : BaseElementClass
                     enemy.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.waterDamageMultiplier), attackTypes);
                     currentDamageAndHealthTicker = 0;
                 }
-                playerClass.ChangeHealth(healValue);
+                playerClass.ChangeHealth(healValue, null);
             }
         }
     }

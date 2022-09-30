@@ -47,7 +47,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
         knockAway.y = 10;
         GetComponent<Rigidbody>().AddForce(-knockAway * attackJumpForce);
 
-        playerClass.ChangeHealth(-damageAmount * (prophecyManager.prophecyDamageMulti), transform.position, pushForce);
+        playerClass.ChangeHealth(-damageAmount * (prophecyManager.prophecyDamageMulti), gameObject);
     }
     //Moves towards the player if the slime can see them, othewise follow the flowfield to them
     public override void Movement(Vector3 positionToMoveTo)

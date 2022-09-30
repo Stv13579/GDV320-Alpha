@@ -17,7 +17,7 @@ public class RangedBossHomingProjectileScript : BaseEnemyClass //Sebastian
         //if it hits the player, damage them
         if (other.gameObject.GetComponent<PlayerClass>())
         {
-            other.gameObject.GetComponent<PlayerClass>().ChangeHealth(-damageAmount);
+            other.gameObject.GetComponent<PlayerClass>().ChangeHealth(-damageAmount, FindObjectOfType<RangedBossScript>().gameObject);
             Destroy(this.gameObject);
         }
         else if (other.gameObject.layer == 10)

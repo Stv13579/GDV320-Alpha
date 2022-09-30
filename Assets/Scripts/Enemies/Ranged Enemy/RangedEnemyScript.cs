@@ -99,12 +99,14 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
             audioManager.PlaySFX(attackAudio);
         }
         GameObject newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
+        newProjectile.GetComponent<BaseRangedProjectileScript>().origin = gameObject;
         newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed, damageAmount * (prophecyManager.prophecyDamageMulti));
         if (newProjectile.GetComponent<CrystalRangedProjectile>())
         {
             for (int i = 1; i < 3; i++)
             {
                 newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
+                newProjectile.GetComponent<BaseRangedProjectileScript>().origin = gameObject;
                 newProjectile.transform.RotateAround(projectileSpawnPos.position, projectileSpawnPos.up, -5.0f * i);
                 newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed , damageAmount * (prophecyManager.prophecyDamageMulti));
 
@@ -112,6 +114,7 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
             for (int i = 1; i < 3; i++)
             {
                 newProjectile = Instantiate(projectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
+                newProjectile.GetComponent<BaseRangedProjectileScript>().origin = gameObject;
                 newProjectile.transform.RotateAround(projectileSpawnPos.position, projectileSpawnPos.up, 5.0f * i);
                 newProjectile.GetComponent<BaseRangedProjectileScript>().SetVars(projectileSpeed, damageAmount * (prophecyManager.prophecyDamageMulti));
 

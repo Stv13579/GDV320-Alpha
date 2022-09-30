@@ -93,16 +93,7 @@ public class EnemyShield : BaseEnemyClass
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (attacking)
-        {
-            if (other.gameObject.GetComponent<PlayerClass>())
-            {
-                other.gameObject.GetComponent<PlayerClass>().ChangeHealth(-damageAmount);
-            }
-        }
-    }
+
 
     public override void Death()
     {

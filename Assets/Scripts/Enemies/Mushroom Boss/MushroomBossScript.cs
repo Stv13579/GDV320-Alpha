@@ -118,7 +118,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
     {
         if(collision.collider.gameObject.tag == "Player" && contactTimer <= 0)
         {
-            playerClass.ChangeHealth(-damageAmount);
+            playerClass.ChangeHealth(-damageAmount, gameObject);
             contactTimer = 0.3f;
         }
     }
