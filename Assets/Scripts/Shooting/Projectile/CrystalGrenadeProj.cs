@@ -84,7 +84,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                     for (int i = 0; i < objectsHit.Length; i++)
                     {
                         if (objectsHit[i].gameObject.layer == 8 &&
-                            objectsHit[i].GetComponent<BaseEnemyClass>())
+	                        objectsHit[i].GetComponentInParent<BaseEnemyClass>())
                         {
                             RaycastHit hit;
                             if (Physics.Raycast(this.transform.position + (objectsHit[i].transform.position - this.transform.position).normalized * -2, (objectsHit[i].transform.position - this.transform.position).normalized, out hit, 5, enemyDetect))
@@ -95,7 +95,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                                 }
                                 else
                                 {
-                                    objectsHit[i].GetComponent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
+	                                objectsHit[i].GetComponentInParent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
                                 }
 
                             }
@@ -144,14 +144,14 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())
+	    if(other.gameObject.layer == 8 && other.GetComponentInParent<BaseEnemyClass>())
         {
-            this.GetComponent<Rigidbody>().useGravity = false;
+		    this.GetComponentInParent<Rigidbody>().useGravity = false;
             isAttached = true;
             this.gameObject.transform.SetParent(other.transform);
-            this.GetComponent<Rigidbody>().isKinematic = true;
+		    this.GetComponentInParent<Rigidbody>().isKinematic = true;
             speed = 0;
-            other.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+		    other.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             other = enemy;
         }
         else if(other.gameObject.layer == 10)
