@@ -36,6 +36,7 @@ public class GameplayUI : MonoBehaviour
     float comboTimer = 1.0f;
 
     GameObject hitMarker;
+    GameObject hitMarkerShield;
 
     Image lifeStealFullScreen;
     Image voidFullScreen;
@@ -43,6 +44,7 @@ public class GameplayUI : MonoBehaviour
     Image hurtFullScreen;
     Image lowHealthFullScreen;
     Image inToxicFullScreen;
+    [SerializeField]
     Image damageIndicator;
     public Image GetLifeStealFullScreen() { return lifeStealFullScreen; }
     public Image GetVoidFullScreen() { return voidFullScreen; }
@@ -52,6 +54,7 @@ public class GameplayUI : MonoBehaviour
     public Image GetInToxicFullScreen() { return inToxicFullScreen; }
     public Image GetDamageIndicator() { return damageIndicator; }
     public GameObject GetHitMarker() { return hitMarker; }
+    public GameObject GetHitMarkerShield() { return hitMarkerShield; }
     public bool GetCombo() { return combo; }
     public void SetCombo(bool tempCombo) { combo = tempCombo; }
 
@@ -60,13 +63,13 @@ public class GameplayUI : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Shooting>();
         playerClass = player.gameObject.GetComponent<PlayerClass>();
         hitMarker = GameObject.Find("GameplayUI/HitMarker");
+        hitMarkerShield = GameObject.Find("GameplayUI/HitMarkerShield");
         lifeStealFullScreen = GameObject.Find("GameplayUI/Effects/LifeSteal").GetComponent<Image>();
         voidFullScreen = GameObject.Find("GameplayUI/Effects/Void").GetComponent<Image>();
         burnFullScreen = GameObject.Find("GameplayUI/Effects/Burn").GetComponent<Image>();
         hurtFullScreen = GameObject.Find("GameplayUI/Effects/PlayerDamage").GetComponent<Image>();
         lowHealthFullScreen = GameObject.Find("GameplayUI/Effects/LowHealth").GetComponent<Image>();
         inToxicFullScreen = GameObject.Find("GameplayUI/Effects/InToxic").GetComponent<Image>();
-        damageIndicator = GameObject.Find("GameplayUI/Effects/DamageIndicator").GetComponent<Image>();
         comboTimer = maxComboTimer;
         Debug.Log("G UI on");
         DontDestroyOnLoad(gameObject);
@@ -74,6 +77,10 @@ public class GameplayUI : MonoBehaviour
         if (hitMarker)
         {
             hitMarker.SetActive(false);
+        }
+        if(hitMarkerShield)
+        {
+            hitMarkerShield.SetActive(false);
         }
         if (lifeStealFullScreen)
         {
@@ -98,10 +105,6 @@ public class GameplayUI : MonoBehaviour
         if (inToxicFullScreen)
         {
             inToxicFullScreen.gameObject.SetActive(false);
-        }
-        if (damageIndicator)
-        {
-            damageIndicator.gameObject.SetActive(false);
         }
     }
 
@@ -157,11 +160,19 @@ public class GameplayUI : MonoBehaviour
         ChangeCombo(inactiveCatalystElement.transform.parent, true);
         ChangeCombo(activeComboElement.transform.parent, false);
         ChangeCombo(inactiveComboElement.transform.parent, false);
+
         if (hitMarker)
         {
             if (hitMarker.active == true)
             {
                 StartCoroutine(HitMarker());
+            }
+        }
+        if(hitMarkerShield)
+        {
+            if(hitMarkerShield.active == true)
+            {
+                StartCoroutine(HitMarkerShield());
             }
         }
     }
@@ -262,6 +273,32 @@ public class GameplayUI : MonoBehaviour
         if (hitMarker)
         {
             hitMarker.SetActive(false);
+        }
+    }
+    public IEnumerator HitMarkerShield()
+    {
+        if (hitMarkerShield)
+        {
+            hitMarkerShield.SetActive(true);
+        }
+        yield return new WaitForSeconds(0.2f);
+        if (hitMarkerShield)
+        {
+            hitMarkerShield.SetActive(false);
+        }
+    }
+    public IEnumerator DamageIndicator()
+    {
+        Image tempDamageIndicator = null;
+        if(damageIndicator)
+        {
+            tempDamageIndicator = Instantiate(damageIndicator, this.gameObject.transform);
+        }
+        player.gameObject.GetComponent<PlayerClass>().RotateToTarget();
+        yield return new WaitForSeconds(3.0f);
+        if(damageIndicator)
+        {
+            Destroy(tempDamageIndicator);
         }
     }
 }
