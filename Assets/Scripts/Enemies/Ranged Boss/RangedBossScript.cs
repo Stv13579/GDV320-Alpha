@@ -27,7 +27,7 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
         base.Awake();
         RaycastHit hit;
         Physics.Raycast(this.gameObject.transform.position, -this.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
-	    Vector3 emergePos = hit.point - this.transform.GetChild(1).localPosition * 2 - new Vector3(0, 2, 0);
+	    Vector3 emergePos = hit.point - this.transform.GetChild(2).GetChild(3).localPosition * 2 - new Vector3(0, 2, 0);
         this.transform.position = emergePos;
         GameObject healthbar = Instantiate(bossHealthbar);
         BossHealthbarScript healthbarScript = healthbar.GetComponent<BossHealthbarScript>();

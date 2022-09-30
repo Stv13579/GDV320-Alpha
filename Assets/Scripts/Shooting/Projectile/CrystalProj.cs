@@ -78,9 +78,9 @@ public class CrystalProj : BaseElementSpawnClass
         }
         //if enemy, hit them for the damage
         // destroy projectile after
-        if (other.gameObject.layer == 8 && other.gameObject.GetComponent<BaseEnemyClass>())
+	    if (other.gameObject.layer == 8 && other.gameObject.GetComponentInParent<BaseEnemyClass>())
         {
-            other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+		    other.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             Destroy(gameObject);
         }
     }
