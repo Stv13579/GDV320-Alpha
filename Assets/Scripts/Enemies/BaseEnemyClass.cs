@@ -7,7 +7,7 @@ using UnityEngine.Timeline;
 public class BaseEnemyClass : MonoBehaviour
 {
     [SerializeField]
-    protected float currentHealth, maxHealth, baseMaxHealth, damageAmount, baseDamageAmount, groundMoveSpeed, moveSpeed, baseMoveSpeed;
+    protected float currentHealth, maxHealth, baseMaxHealth, damageAmount, baseDamageAmount, groundMoveSpeed, moveSpeed, baseMoveSpeed, rotationSpeed;
 
     protected StatModifier.FullStat health = new StatModifier.FullStat(0), damage = new StatModifier.FullStat(0), speed = new StatModifier.FullStat(0);
 
