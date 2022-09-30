@@ -84,7 +84,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
             FindTarget();
 
         }
-        if(target.GetComponent<RangedEnemyScript>())
+        if(target)
         {
             if(target.GetComponent<RangedEnemyScript>().GetBurrowing())
             {

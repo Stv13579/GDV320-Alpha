@@ -70,13 +70,6 @@ public class PlayerClass : MonoBehaviour
 
     GameplayUI gameplayUI;
 
-    [SerializeField]
-    LayerMask enemies;
-
-    float angle;
-    Quaternion targetRot;
-    Vector3 targetPos;
-
     float lowHealthValue;
     void Start()
     {
@@ -144,17 +137,6 @@ public class PlayerClass : MonoBehaviour
         }
 
         Push();
-
-        if(gameplayUI)
-        {
-            if(gameplayUI.GetDamageIndicator())
-            {
-                if(gameplayUI.GetDamageIndicator().gameObject.active == true)
-                {
-                    StartCoroutine(gameplayUI.DamageIndicator());
-                }
-            }
-        }
     }
 
     public void AddItem(Item newItem)
@@ -203,25 +185,6 @@ public class PlayerClass : MonoBehaviour
 
     }
 
-   public void RotateToTarget()
-   {
-        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 1, enemies);
-        for (int i = 0; i < hitColliders.Length; i++)
-        {
-            targetPos = hitColliders[i].transform.position;
-            targetRot = hitColliders[i].transform.rotation;
-        }
-        Vector3 direction = this.transform.position - targetPos;
-
-        targetRot = Quaternion.LookRotation(direction);
-        targetRot.z = -targetRot.y;
-        targetRot.x = 0.0f;
-        targetRot.y = 0.0f;
-
-        Vector3 northDirection = new Vector3(0.0f, 0.0f, -this.transform.eulerAngles.y);
-        gameplayUI.GetDamageIndicator().rectTransform.localRotation = targetRot * Quaternion.Euler(northDirection);
-    }
-
     public void ChangeHealth(float healthAmount, bool reduceDamage = true)
     {
         //Create a one time defense modifier based on whether the player is recieving damage, or should not apply defense
@@ -237,10 +200,14 @@ public class PlayerClass : MonoBehaviour
         }
         currentHealth = Mathf.Min(currentHealth + (healthAmount * defenseMod), maxHealth);
 
-        if (gameplayUI)
+
+        if (healthAmount < 0)
         {
-            StopCoroutine(gameplayUI.DamageIndicator());
-            StartCoroutine(gameplayUI.DamageIndicator());
+            if (gameplayUI)
+            {
+                StopCoroutine(gameplayUI.DamageIndicator());
+                StartCoroutine(gameplayUI.DamageIndicator());
+            }
         }
 
         if (currentHealth <= 0 && !dead)
@@ -273,10 +240,13 @@ public class PlayerClass : MonoBehaviour
         pushStrength = pushForce;
         currentPushDuration = 0;
 
-        if (gameplayUI)
+        if (healthAmount < 0)
         {
-            StopCoroutine(gameplayUI.DamageIndicator());
-            StartCoroutine(gameplayUI.DamageIndicator());
+            if (gameplayUI)
+            {
+                StopCoroutine(gameplayUI.DamageIndicator());
+                StartCoroutine(gameplayUI.DamageIndicator());
+            }
         }
 
 
