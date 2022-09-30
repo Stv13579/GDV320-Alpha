@@ -24,6 +24,13 @@ public class ShieldEnemyScript : BaseEnemyClass
     [SerializeField]
     LayerMask checkToSee;
 
+    bool guardBroken = false;
+
+    [SerializeField]
+    float brokenShieldTimer;
+
+    float guardTimer;
+
     public override void Awake()
     {
         base.Awake();
@@ -38,9 +45,25 @@ public class ShieldEnemyScript : BaseEnemyClass
     public override void Update()
     {
         base.Update();
+
+        if(guardBroken)
+        {
+            guardTimer -= Time.deltaTime;
+
+            if(guardTimer < 0)
+            {
+                guardBroken = false;
+                enemyAnims.SetTrigger("Shield Regen");
+                SetShield(true);
+            }
+
+            return;
+        }
+
+        RaycastHit hitInfo;
         if (shielding)
         {
-            RaycastHit hitInfo;
+           
             
             //Debug.DrawRay(transform.position, player.transform.position - transform.position);
             //ShieldRotation(player.transform.position, moveSpeed);
@@ -69,8 +92,10 @@ public class ShieldEnemyScript : BaseEnemyClass
         }
         else
         {
-            if (Vector3.Distance(this.transform.position, player.transform.position) < 8)
+
+            if (!Physics.Raycast(transform.position, player.transform.position - transform.position, out hitInfo, Vector3.Distance(this.transform.position, player.transform.position), checkToSee))
             {
+
 
                 Movement(player.transform.position, moveSpeed);
             }
@@ -251,4 +276,13 @@ public class ShieldEnemyScript : BaseEnemyClass
         attacking = false;
 
     }
+
+    public void GuardBreak()
+    {
+        guardBroken = true;
+        enemyAnims.SetTrigger("Shield Broken");
+        guardTimer = brokenShieldTimer;
+        SetShield(false);
+    }
+
 }

@@ -112,13 +112,13 @@ public class EnemyShield : BaseEnemyClass
         }
         if (currentHealth <= 0)
         {
-            isDead = true;
             //Normally do death animation/vfx, might even fade alpha w/e before deleting.
 
+            GetComponentInParent<ShieldEnemyScript>().GuardBreak();
+            //Destroy(gameObject);
 
-            Destroy(gameObject);
-
-
+            currentHealth = maxHealth;
+            
         }
     }
 }
