@@ -127,7 +127,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 	protected virtual void DestroySporeClouds(GameObject temp)
 	{
 		SporeCloudScript[] spores = FindObjectsOfType<SporeCloudScript>();
-		for(int i = spores.Length - 1; i > 0; i--)
+		for(int i = spores.Length - 1; i >= 0; i--)
 		{
 			Destroy(spores[i].gameObject);
 		}
