@@ -46,6 +46,14 @@ public class GameplayUI : MonoBehaviour
     Image inToxicFullScreen;
     [SerializeField]
     Image damageIndicator;
+
+    [SerializeField]
+    LayerMask enemies;
+
+    float angle;
+    Quaternion targetRot;
+    Vector3 targetPos;
+
     public Image GetLifeStealFullScreen() { return lifeStealFullScreen; }
     public Image GetVoidFullScreen() { return voidFullScreen; }
     public Image GetBurnFullScreen() { return burnFullScreen; }
@@ -175,6 +183,7 @@ public class GameplayUI : MonoBehaviour
                 StartCoroutine(HitMarkerShield());
             }
         }
+
     }
 
     public void AddItem(Sprite[] sprites)
@@ -290,13 +299,32 @@ public class GameplayUI : MonoBehaviour
     public IEnumerator DamageIndicator()
     {
         Image tempDamageIndicator = null;
-        if(damageIndicator)
+        if (damageIndicator)
         {
             tempDamageIndicator = Instantiate(damageIndicator, this.gameObject.transform);
         }
-        player.gameObject.GetComponent<PlayerClass>().RotateToTarget();
-        yield return new WaitForSeconds(3.0f);
-        if(damageIndicator)
+        float rotate = 3.0f;
+        while (rotate > 0)
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(player.transform.position, 1, enemies);
+            for (int i = 0; i < hitColliders.Length; i++)
+            {
+                targetPos = hitColliders[i].transform.forward;
+                targetRot = hitColliders[i].transform.rotation;
+            }
+
+            Vector3 otherDir = new Vector3(-targetPos.x, 0f, -targetPos.z);
+            Vector3 playerFwd = Vector3.ProjectOnPlane(player.transform.forward, Vector3.up);
+
+            float angle = Vector3.SignedAngle(playerFwd, otherDir, Vector3.up);
+
+            tempDamageIndicator.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -angle);
+
+            rotate -= Time.deltaTime;
+
+            yield return null;
+        }
+        if (damageIndicator)
         {
             Destroy(tempDamageIndicator);
         }
