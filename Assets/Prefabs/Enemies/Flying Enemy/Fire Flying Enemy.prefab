@@ -110,11 +110,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045452580190906751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -609.7458, y: 61.747417, z: -171.54712}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2007136173744618346}
   - {fileID: 5121240916422757965}
+  - {fileID: 6509235447840888431}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -195,6 +196,7 @@ MonoBehaviour:
   baseMaxHealth: 30
   damageAmount: 0
   baseDamageAmount: 0
+  groundMoveSpeed: 0
   moveSpeed: 10
   baseMoveSpeed: 10
   damageThreshold: 0
@@ -202,10 +204,9 @@ MonoBehaviour:
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
   weaknesses: 02000000
   resistances: 01000000
-  deathSpawn: {fileID: 1140089593594349035, guid: 58cc516cec47cd9448a27c3f1ed9a4a6,
+  deathSpawn: {fileID: 9206286970091307890, guid: dcb342e7febe9034db5f55b1669220ca,
     type: 3}
-  hitSpawn: {fileID: 2154916016029885947, guid: 927b09bead51b864990a49b3960ddc7c,
-    type: 3}
+  hitSpawn: {fileID: 9220163682881030405}
   attackAudio: Flying Enemy Attack
   deathAudio: Flying Enemy Death
   takeDamageAudio: Flying Enemy Damage
@@ -24427,4 +24428,85 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 70bd3a2b5f68a5047810405372f3cf95,
     type: 3}
   m_PrefabInstance: {fileID: 4654738528443197862}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6080121126367298935
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2045452580190906738}
+    m_Modifications:
+    - target: {fileID: 1023899125203555096, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023899125203555096, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023899125203555096, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023899125203555096, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023899125203555096, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023899125203555096, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023899125203555096, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023899125203555096, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023899125203555096, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023899125203555096, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023899125203555096, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140266746035588210, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_FlyingEnemies_Fire_Damage
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cbb86004c49698f4eb6ffdee66a6c4e1, type: 3}
+--- !u!1 &9220163682881030405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3140266746035588210, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6080121126367298935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6509235447840888431 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1023899125203555096, guid: cbb86004c49698f4eb6ffdee66a6c4e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6080121126367298935}
   m_PrefabAsset: {fileID: 0}

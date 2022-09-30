@@ -43,7 +43,7 @@ public class NecroticElement : BaseElementClass
         }
 
         isTargeting = false;
-        if (targetToSlow && targetToSlow.GetComponent<BaseEnemyClass>() && !targetToSlow.GetComponent<EnemyShield>())
+	    if (targetToSlow && targetToSlow.GetComponentInParent<BaseEnemyClass>() && !targetToSlow.GetComponent<EnemyShield>())
         {
             BaseEnemyClass enemy = targetToSlow.GetComponent<BaseEnemyClass>();
             if (enemy.GetDamageResistance() != 2.0f || enemy.GetDamageResistance() != 3.0f)
@@ -75,6 +75,10 @@ public class NecroticElement : BaseElementClass
                 {
 
                 }
+                else if (targetRayCast.collider.gameObject.GetComponent<EnemyShield>())
+                {
+                	
+                }
                 else
                 {
                     // else if facing a new target
@@ -82,10 +86,10 @@ public class NecroticElement : BaseElementClass
                     // and put target on new target
                     if(targetToSlow)
                     {
-                        targetToSlow.GetComponent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
+	                    targetToSlow.GetComponentInParent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
                     }
                     targetToSlow = targetRayCast.collider.gameObject;
-                    targetToSlow.GetComponent<BaseEnemyClass>().Targetted(true, outlineColour);
+	                targetToSlow.GetComponentInParent<BaseEnemyClass>().Targetted(true, outlineColour);
                 }
             }
         }
@@ -93,7 +97,7 @@ public class NecroticElement : BaseElementClass
         {
             if(targetToSlow)
             {
-                targetToSlow.GetComponent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
+	            targetToSlow.GetComponentInParent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
             }
         }
     }

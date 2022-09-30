@@ -76,7 +76,7 @@ public class LifeStealElement : BaseElementClass
             }
             // if objectHit is in the enemy layer
             // suck health from him
-            else if (objectHit[0].transform.gameObject.layer == 8 && objectHit[0].transform.GetComponent<BaseEnemyClass>())
+            else if (objectHit[0].transform.gameObject.layer == 8 && objectHit[0].transform.GetComponentInParent<BaseEnemyClass>())
             {
                 // turn targeting on
                 // damage enemy
@@ -100,7 +100,7 @@ public class LifeStealElement : BaseElementClass
                 if (currentDamageAndHealthTicker >= damageAndHealthTicker)
                 {
                     playerClass.ChangeMana(-manaCost * Time.deltaTime, manaTypes);
-                    enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.waterDamageMultiplier), attackTypes);
+                    enemy.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.waterDamageMultiplier), attackTypes);
                     currentDamageAndHealthTicker = 0;
                 }
                 playerClass.ChangeHealth(healValue);

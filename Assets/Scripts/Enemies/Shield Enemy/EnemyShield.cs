@@ -55,6 +55,13 @@ public class EnemyShield : BaseEnemyClass
             }
         }
         currentHealth -= (damageToTake * multiplier) * damageResistance - damageThreshold;
+
+        if(uiScript)
+        {
+            StopCoroutine(uiScript.HitMarkerShield());
+            StartCoroutine(uiScript.HitMarkerShield());
+        }
+
         Death();
 
     }

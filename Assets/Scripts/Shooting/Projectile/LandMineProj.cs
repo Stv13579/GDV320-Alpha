@@ -81,7 +81,7 @@ public class LandMineProj : MonoBehaviour
             for(int i = 0; i < objectsHitByExplosion.Length; i++)
             {
                 if (objectsHitByExplosion[i].gameObject.layer == 8 && 
-                    objectsHitByExplosion[i].GetComponent<BaseEnemyClass>())
+	                objectsHitByExplosion[i].GetComponentInParent<BaseEnemyClass>())
                 {
                     RaycastHit hit;
                     if (Physics.Raycast(this.transform.position /*+ (objectsHitByExplosion[i].transform.position - this.transform.position).normalized * -2*/, (objectsHitByExplosion[i].transform.position - this.transform.position).normalized, out hit, 5, enemyDetect))
@@ -92,7 +92,7 @@ public class LandMineProj : MonoBehaviour
                         }
                         else
                         {
-                            objectsHitByExplosion[i].GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+	                        objectsHitByExplosion[i].GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
                         }
                     }
 

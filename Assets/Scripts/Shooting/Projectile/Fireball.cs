@@ -77,9 +77,9 @@ public class Fireball : BaseElementSpawnClass
             this.gameObject.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
         }
-        if (other.gameObject.layer == 8 && active && other.GetComponent<BaseEnemyClass>())
+	    if (other.gameObject.layer == 8 && active && other.GetComponentInParent<BaseEnemyClass>())
         {
-            other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+	        other.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             taggedEnemy = other;
         }
         if (other.gameObject.layer != 11 && other.gameObject.layer != 20 && other.gameObject.tag != "Node" && active)
@@ -99,7 +99,7 @@ public class Fireball : BaseElementSpawnClass
                         }
                         else
                         {
-                            objectsHit[i].GetComponent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
+	                        objectsHit[i].GetComponentInParent<BaseEnemyClass>().TakeDamage(explosionDamage, attackTypes);
                         }
 
                     }

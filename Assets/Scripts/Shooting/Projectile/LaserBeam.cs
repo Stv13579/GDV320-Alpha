@@ -74,7 +74,7 @@ public class LaserBeam : MonoBehaviour
                 if(enemy)
                 {
 
-                    enemy.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+	                enemy.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
                 }
                 else
                 {
