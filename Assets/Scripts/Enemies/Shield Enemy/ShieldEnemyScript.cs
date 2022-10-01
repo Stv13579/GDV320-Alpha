@@ -8,34 +8,94 @@ public class ShieldEnemyScript : BaseEnemyClass
     [SerializeField]
     float gravity;
     GameObject nearestNode;
-    bool attacking = false;
+    public bool attacking = false;
     [SerializeField]
     GameObject shield;
     [SerializeField]
     float attackTime = 0.8f;
 
+    [SerializeField]
+    public GameObject capHitter;
+
+    Vector3 previousPosition;
+
+    bool shielding = false;
+
+    [SerializeField]
+    LayerMask checkToSee;
+
+    bool guardBroken = false;
+
+    [SerializeField]
+    float brokenShieldTimer;
+
+    float guardTimer;
+
     public override void Awake()
     {
         base.Awake();
+
     }
 	// Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
 	protected void Start()
 	{
 		StartCoroutine(FindNode());
-
+        previousPosition = transform.position;
 	}
     public override void Update()
     {
         base.Update();
-        if (!attacking)
+
+        if(guardBroken)
         {
-            if(Vector3.Distance(this.transform.position, player.transform.position) < 5 && shield)
+            guardTimer -= Time.deltaTime;
+
+            if(guardTimer < 0)
             {
-                //enemyAnims.SetTrigger("Attacking");
+                guardBroken = false;
+                enemyAnims.SetTrigger("Shield Regen");
+                SetShield(true);
+            }
+
+            return;
+        }
+
+        RaycastHit hitInfo;
+        if (shielding)
+        {
+           
+            
+            //Debug.DrawRay(transform.position, player.transform.position - transform.position);
+            //ShieldRotation(player.transform.position, moveSpeed);
+            if (!Physics.Raycast(transform.position, player.transform.position - transform.position, out hitInfo, Vector3.Distance(this.transform.position, player.transform.position), checkToSee))
+            {
+
+ 
+                ShieldRotation(player.transform.position, moveSpeed);
+            }
+            else
+            {
+                ShieldRotation(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
+                //ShieldMovement(player.transform.position, moveSpeed);
+            }
+            if (Vector3.Distance(this.transform.position, player.transform.position) > 8)
+            {
+                ShieldMovement(player.transform.position, moveSpeed);
+               
+            }
+            
+
+            if (Vector3.Distance(this.transform.position, player.transform.position) < 3 && !attacking)
+            {
                 Attack();
             }
-            if (Vector3.Distance(this.transform.position, player.transform.position) < 8)
+        }
+        else
+        {
+
+            if (!Physics.Raycast(transform.position, player.transform.position - transform.position, out hitInfo, Vector3.Distance(this.transform.position, player.transform.position), checkToSee))
             {
+
 
                 Movement(player.transform.position, moveSpeed);
             }
@@ -44,13 +104,75 @@ public class ShieldEnemyScript : BaseEnemyClass
                 Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
             }
         }
+
+        AssessShielding();
+
+        enemyAnims.SetFloat("MoveSpeed", (previousPosition - transform.position).magnitude);
+        previousPosition = transform.position;
     }
 
+    void AssessShielding()
+    {
+
+        //Check if the angle between forward of the shield mushroom and the player to shield vector is small, then shield. If not, unshield.
+        float angle = Vector3.Angle(transform.forward, player.transform.position - transform.position);
+        Debug.Log(angle);
+        if(angle < 90)
+        {
+            
+            enemyAnims.SetTrigger("Shield Up");
+            
+        }
+        else
+        {
+            enemyAnims.SetTrigger("Shield Down");
+        }
+    }
+
+    public void SetShield(bool state)
+    {
+        shielding = state;
+        shield.SetActive(state);
+    }
 
     public override void Movement(Vector3 positionToMoveTo, float speed)
     {
-        this.gameObject.transform.LookAt(positionToMoveTo);
-        this.gameObject.transform.eulerAngles = new Vector3(0, this.gameObject.transform.eulerAngles.y, 0);
+        //this.gameObject.transform.LookAt(positionToMoveTo);
+        //this.gameObject.transform.eulerAngles = new Vector3(0, this.gameObject.transform.eulerAngles.y, 0);
+
+
+        //get the direction of rotation
+        float dir = Mathf.Sign(Vector3.SignedAngle(transform.forward, positionToMoveTo - transform.position, Vector3.up));
+
+        //rotate towards the disired vector/angle in that direction, modified by a scalar
+
+        transform.Rotate(Vector3.up, dir * Time.deltaTime * rotationSpeed);
+
+        if( Vector3.Angle(transform.forward, positionToMoveTo - transform.position) < 10 && Vector3.Angle(transform.forward, positionToMoveTo - transform.position) > -10)
+        {
+            transform.LookAt(positionToMoveTo);
+            transform.eulerAngles = new Vector3(0, this.gameObject.transform.eulerAngles.y, 0);
+        }
+        //move along the forward vector
+
+
+        movement = this.transform.forward * speed * Time.deltaTime;
+        if (!this.gameObject.GetComponent<CharacterController>().isGrounded)
+        {
+            movement += new Vector3(0, gravity, 0);
+        }
+        this.gameObject.GetComponent<CharacterController>().Move(movement);
+
+    }
+
+    //Rotate much slower
+    public void ShieldMovement(Vector3 positionToMoveTo, float speed)
+    {
+        //this.gameObject.transform.LookAt(positionToMoveTo);
+        //this.gameObject.transform.eulerAngles = new Vector3(0, this.gameObject.transform.eulerAngles.y, 0);
+
+
+        
         movement = this.transform.forward * speed * Time.deltaTime;
         if (!this.gameObject.GetComponent<CharacterController>().isGrounded)
         {
@@ -59,16 +181,38 @@ public class ShieldEnemyScript : BaseEnemyClass
         this.gameObject.GetComponent<CharacterController>().Move(movement);
     }
 
+    public void ShieldRotation(Vector3 positionToMoveTo, float speed)
+    {
+        //get the direction of rotation
+        float dir = Mathf.Sign(Vector3.SignedAngle(transform.forward, positionToMoveTo - transform.position, Vector3.up));
+
+        //rotate towards the disired vector/angle in that direction, modified by a scalar
+
+        transform.Rotate(Vector3.up, dir * Time.deltaTime * rotationSpeed * 0.1f);
+
+        //if (Vector3.Angle(transform.forward, positionToMoveTo - transform.position) < 10 && Vector3.Angle(transform.forward, positionToMoveTo - transform.position) > -10)
+        //{
+        //    transform.LookAt(positionToMoveTo);
+        //    transform.eulerAngles = new Vector3(0, this.gameObject.transform.eulerAngles.y, 0);
+        //}
+
+
+
+    }
+
+
     public void Attack()
     {
-        //Enable and disable necessary hitboxes
-        if(!attacking)
-        {
-            if(shield)
-            {
-                StartCoroutine(ShieldBash());
-            }
-        }
+
+        attacking = true;
+        enemyAnims.SetTrigger("Attacking");
+        capHitter.SetActive(true);
+    }
+
+    public void CapDamage()
+    {
+        player.GetComponent<PlayerClass>().ChangeHealth(-damageAmount, gameObject);
+        capHitter.SetActive(false);
     }
 
     public void EndAttack()
@@ -132,4 +276,13 @@ public class ShieldEnemyScript : BaseEnemyClass
         attacking = false;
 
     }
+
+    public void GuardBreak()
+    {
+        guardBroken = true;
+        enemyAnims.SetTrigger("Shield Broken");
+        guardTimer = brokenShieldTimer;
+        SetShield(false);
+    }
+
 }

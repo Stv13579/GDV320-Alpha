@@ -36,6 +36,7 @@ public class GameplayUI : MonoBehaviour
     float comboTimer = 1.0f;
 
     GameObject hitMarker;
+    GameObject hitMarkerShield;
 
     Image lifeStealFullScreen;
     Image voidFullScreen;
@@ -43,7 +44,15 @@ public class GameplayUI : MonoBehaviour
     Image hurtFullScreen;
     Image lowHealthFullScreen;
     Image inToxicFullScreen;
+    [SerializeField]
     Image damageIndicator;
+
+    [SerializeField]
+    LayerMask enemies;
+
+    float angle;
+    
+
     public Image GetLifeStealFullScreen() { return lifeStealFullScreen; }
     public Image GetVoidFullScreen() { return voidFullScreen; }
     public Image GetBurnFullScreen() { return burnFullScreen; }
@@ -52,6 +61,7 @@ public class GameplayUI : MonoBehaviour
     public Image GetInToxicFullScreen() { return inToxicFullScreen; }
     public Image GetDamageIndicator() { return damageIndicator; }
     public GameObject GetHitMarker() { return hitMarker; }
+    public GameObject GetHitMarkerShield() { return hitMarkerShield; }
     public bool GetCombo() { return combo; }
     public void SetCombo(bool tempCombo) { combo = tempCombo; }
 
@@ -60,13 +70,13 @@ public class GameplayUI : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Shooting>();
         playerClass = player.gameObject.GetComponent<PlayerClass>();
         hitMarker = GameObject.Find("GameplayUI/HitMarker");
+        hitMarkerShield = GameObject.Find("GameplayUI/HitMarkerShield");
         lifeStealFullScreen = GameObject.Find("GameplayUI/Effects/LifeSteal").GetComponent<Image>();
         voidFullScreen = GameObject.Find("GameplayUI/Effects/Void").GetComponent<Image>();
         burnFullScreen = GameObject.Find("GameplayUI/Effects/Burn").GetComponent<Image>();
         hurtFullScreen = GameObject.Find("GameplayUI/Effects/PlayerDamage").GetComponent<Image>();
         lowHealthFullScreen = GameObject.Find("GameplayUI/Effects/LowHealth").GetComponent<Image>();
         inToxicFullScreen = GameObject.Find("GameplayUI/Effects/InToxic").GetComponent<Image>();
-        damageIndicator = GameObject.Find("GameplayUI/Effects/DamageIndicator").GetComponent<Image>();
         comboTimer = maxComboTimer;
         Debug.Log("G UI on");
         DontDestroyOnLoad(gameObject);
@@ -74,6 +84,10 @@ public class GameplayUI : MonoBehaviour
         if (hitMarker)
         {
             hitMarker.SetActive(false);
+        }
+        if(hitMarkerShield)
+        {
+            hitMarkerShield.SetActive(false);
         }
         if (lifeStealFullScreen)
         {
@@ -98,10 +112,6 @@ public class GameplayUI : MonoBehaviour
         if (inToxicFullScreen)
         {
             inToxicFullScreen.gameObject.SetActive(false);
-        }
-        if (damageIndicator)
-        {
-            damageIndicator.gameObject.SetActive(false);
         }
     }
 
@@ -157,6 +167,7 @@ public class GameplayUI : MonoBehaviour
         ChangeCombo(inactiveCatalystElement.transform.parent, true);
         ChangeCombo(activeComboElement.transform.parent, false);
         ChangeCombo(inactiveComboElement.transform.parent, false);
+
         if (hitMarker)
         {
             if (hitMarker.active == true)
@@ -164,6 +175,14 @@ public class GameplayUI : MonoBehaviour
                 StartCoroutine(HitMarker());
             }
         }
+        if(hitMarkerShield)
+        {
+            if(hitMarkerShield.active == true)
+            {
+                StartCoroutine(HitMarkerShield());
+            }
+        }
+
     }
 
     public void AddItem(Sprite[] sprites)
@@ -262,6 +281,65 @@ public class GameplayUI : MonoBehaviour
         if (hitMarker)
         {
             hitMarker.SetActive(false);
+        }
+    }
+    public IEnumerator HitMarkerShield()
+    {
+        if (hitMarkerShield)
+        {
+            hitMarkerShield.SetActive(true);
+        }
+        yield return new WaitForSeconds(0.2f);
+        if (hitMarkerShield)
+        {
+            hitMarkerShield.SetActive(false);
+        }
+    }
+    public IEnumerator DamageIndicator(GameObject source)
+    {
+        Image tempDamageIndicator = null;
+        if (damageIndicator)
+        {
+            tempDamageIndicator = Instantiate(damageIndicator, this.gameObject.transform);
+        }
+        float indicatorLife = 4.0f;
+        Vector3 targetPos;
+        while (indicatorLife > 0)
+        {
+            if(source == null)
+            {
+                break;
+            }
+
+            targetPos = source.transform.position;
+
+            //Find the angle between the forward vector of the player and the angle between the source and player
+            Vector3 targetVec = targetPos - player.transform.GetChild(1).position;
+
+            float worldAngle = Vector3.SignedAngle(new Vector3(player.transform.GetChild(1).forward.x, 0, player.transform.GetChild(1).forward.z), new Vector3(targetVec.x, 0, targetVec.z), Vector3.up);
+
+            tempDamageIndicator.GetComponent<RectTransform>().rotation = Quaternion.Euler(0.0f, 0.0f, (worldAngle - 180) * -1);
+
+            indicatorLife -= Time.deltaTime;
+
+            yield return null;
+        }
+        float fadeTime = 2.0f;
+        while(fadeTime > 0)
+        {
+            fadeTime -= Time.deltaTime;
+
+            Color temp = tempDamageIndicator.GetComponent<Image>().color;
+            temp.a = fadeTime / 2;
+            tempDamageIndicator.GetComponent<Image>().color = temp;
+
+            yield return null;
+        }
+
+
+        if (damageIndicator)
+        {
+            Destroy(tempDamageIndicator);
         }
     }
 }

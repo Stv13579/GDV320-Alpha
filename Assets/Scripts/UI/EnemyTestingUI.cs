@@ -98,7 +98,7 @@ public class EnemyTestingUI : MonoBehaviour
 
     public void ResetHealth()
     {
-        playerClass.GetComponent<PlayerClass>().ChangeHealth(1000);
+        playerClass.GetComponent<PlayerClass>().ChangeHealth(1000, null);
     }
 
     public void SpawnEnemies()

@@ -48,11 +48,11 @@ public class CurseElement : BaseElementClass
         targeting = false;
         //curse the target
         //Give it a death trigger
-        if (targetToCurse && !targetToCurse.GetComponent<BaseEnemyClass>().GetDeathTriggers().Contains(DeathEffect))
+	    if (targetToCurse && !targetToCurse.GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Contains(DeathEffect))
         {
             //Attach an effect to it
-            Instantiate(curseVFX, targetToCurse.transform);
-            targetToCurse.GetComponent<BaseEnemyClass>().GetDeathTriggers().Add(DeathEffect);
+		    Instantiate(curseVFX, targetToCurse.transform.root);
+		    targetToCurse.GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Add(DeathEffect);
             playerClass.ChangeMana(-manaCost, manaTypes);
         }
     }
@@ -68,9 +68,9 @@ public class CurseElement : BaseElementClass
         {
             foreach (Collider hit in hitColls)
             {
-                if (hit.tag == "Enemy" && hit.GetComponent<BaseEnemyClass>())
+	            if (hit.tag == "Enemy" && hit.GetComponentInParent<BaseEnemyClass>())
                 {
-                    hit.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.crystalDamageMultiplier), types);
+		            hit.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.crystalDamageMultiplier), types);
                 }
             }
         }
@@ -112,12 +112,12 @@ public class CurseElement : BaseElementClass
 
                     if (targetToCurse)
                     {
-                        targetToCurse.GetComponent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
+	                    targetToCurse.GetComponentInParent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
                     }
                     if(!rayHit.collider.gameObject.GetComponent<EnemyShield>())
                     {
                         targetToCurse = rayHit.collider.gameObject;
-                        targetToCurse.GetComponent<BaseEnemyClass>().Targetted(true, outlineColour);
+	                    targetToCurse.GetComponentInParent<BaseEnemyClass>().Targetted(true, outlineColour);
                     }
 
                 }
@@ -130,7 +130,7 @@ public class CurseElement : BaseElementClass
         {
             if (targetToCurse)
             {
-                targetToCurse.GetComponent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
+	            targetToCurse.GetComponentInParent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
             }
         }
     }

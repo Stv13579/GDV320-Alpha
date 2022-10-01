@@ -33,6 +33,7 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
             for (int i = 0; i < 5; i++)
             {
                 GameObject tempEnemyProjectile = Instantiate(enemyProjectile, transform.position + new Vector3(0.0f, 3.0f, 0.0f), Quaternion.identity);
+                tempEnemyProjectile.GetComponent<CrystalSlimeProjectile>().enemy = gameObject;
                 // ignores physics for the with the crystal slime and the enemy crystal slime projectiles 
                 Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), tempEnemyProjectile.GetComponent<Collider>());
                 // setting scale of enemy projectile based on enemy size
@@ -87,6 +88,7 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
             for (int i = 0; i < 2; i++)
             {
 	            CrystalSlimeEnemy newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 2, Quaternion.identity).GetComponent<CrystalSlimeEnemy>();
+                
                 StatModifier.AddModifier(newSlime.GetHealthStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
                 StatModifier.AddModifier(newSlime.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
                 StatModifier.AddModifier(newSlime.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));

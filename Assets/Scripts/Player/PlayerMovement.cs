@@ -397,7 +397,7 @@ public class PlayerMovement : MonoBehaviour
             dir.y = 0;
             dir = dir.normalized;
 
-            other.gameObject.GetComponent<Rigidbody>().AddForce(dir * collisionForce, ForceMode.Impulse);
+	        other.gameObject.GetComponentInParent<Rigidbody>().AddForce(dir * collisionForce, ForceMode.Impulse);
         }
     }
 

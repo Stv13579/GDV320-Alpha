@@ -35,7 +35,7 @@ public class SporeCloudScript : BaseEnemyClass
     {
         if(other.gameObject == player && contactTimer <= 0.0f)
         {
-            playerClass.ChangeHealth(-damageAmount);
+            playerClass.ChangeHealth(-damageAmount, gameObject);
             contactTimer = 0.3f;
         }
     }

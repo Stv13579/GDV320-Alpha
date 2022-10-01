@@ -100,7 +100,7 @@ public class FireSlimeTrail : MonoBehaviour
         {
             if(trailDamageTicker <= 0)
             {
-                other.GetComponent<PlayerClass>().ChangeHealth(-trailDamage);
+                other.GetComponent<PlayerClass>().ChangeHealth(-trailDamage, gameObject);
                 trailDamageTicker = 1.0f;
 
                 if (audioManager)

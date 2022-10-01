@@ -148,7 +148,7 @@ public class SAIM : MonoBehaviour
     {
         if (bossRoom)
         {
-            if (!bossRoom.GetBossSpawned() || bossRoom.GetBossDead())
+            if (!bossRoom.GetBossSpawned())
             {
                 if (audioManager)
                 {

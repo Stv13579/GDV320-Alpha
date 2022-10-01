@@ -27,7 +27,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
     {
         //Doing this in start means that if the flying enemy is first in the run order, it will kill itself since no other enemies are alive yet.
         //This is what kills the flying enemies on spawn for seemingly no reason.
-        //FindTarget();
+        FindTarget();
     }
 
     private void Update()
@@ -35,27 +35,27 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
 	    base.Update();
         {
             //Only start moving every few seconds, that way it's not constantly moving to try and approach its target
+            //Move only if far from its target
+            if (!effect && Vector3.Distance(transform.position, target.transform.position) > 10)
             {
-                if (!effect)
-                {
-                    Movement();
-                }
-                else
-                {
-                    enemyAnims.SetTrigger("Stop Move");
-                    enemyAnims.ResetTrigger("Move");
+                Movement();
+            }
+            else
+            {
+                enemyAnims.SetTrigger("Stop Move");
+                enemyAnims.ResetTrigger("Move");
+                effect = true;
+                enemyAnims.SetTrigger("Effect");
 
-
-                }
             }
 
             //Activate the effect every few seconds, with multiplier if we want it
-            timer += Time.deltaTime;
-            if(timer > effectTimer * effectTimerMulti && !effect)
-            {
-                effect = true;
-                enemyAnims.SetTrigger("Effect");
-            }
+            //timer += Time.deltaTime;
+            //if(timer > effectTimer * effectTimerMulti && !effect)
+            //{
+            //    effect = true;
+            //    enemyAnims.SetTrigger("Effect");
+            //}
             Quaternion startRot = this.transform.rotation;
             this.transform.LookAt(targetPos);
             this.transform.eulerAngles += new Vector3(0, 90, 0);
@@ -84,12 +84,16 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
             FindTarget();
 
         }
-        if(target.GetComponent<RangedEnemyScript>())
+        if(target)
         {
-            if(target.GetComponent<RangedEnemyScript>().GetBurrowing())
+            if(target.GetComponent<RangedEnemyScript>())
             {
-                FindTarget();
+                if(target.GetComponent<RangedEnemyScript>().GetBurrowing())
+                {
+                    FindTarget();
+                }
             }
+
         }
         this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, moveSpeed * Time.deltaTime);
     }
@@ -132,8 +136,11 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
         {
             //target = this.gameObject;
             //targetPos = player.transform.position + new Vector3(0, 10, 0);
-            currentHealth = 0;
-            Death();
+            //currentHealth = 0;
+            //Death();
+            target = player;
+            targetPos = player.transform.position + new Vector3(0, 10, 0);
+
         }
     }
 

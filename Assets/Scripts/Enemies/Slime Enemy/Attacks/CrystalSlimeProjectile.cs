@@ -28,6 +28,8 @@ public class CrystalSlimeProjectile : MonoBehaviour
     private float rotTimerMax = 1.0f;
 
     private Vector3 originPos;
+
+    public GameObject enemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -89,7 +91,7 @@ public class CrystalSlimeProjectile : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            other.gameObject.GetComponentInParent<PlayerClass>().ChangeHealth(-projectileDamage);
+            other.gameObject.GetComponentInParent<PlayerClass>().ChangeHealth(-projectileDamage, enemy);
             Destroy(this.gameObject);
 
             if (audioManager)

@@ -28,7 +28,7 @@ public class ShardProjectile : BaseElementSpawnClass
     {
         if (other.gameObject.layer == 8)
         {
-            other.gameObject.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+	        other.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
         }
 
         if (other.gameObject.tag != "Player")

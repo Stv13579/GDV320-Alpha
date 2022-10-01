@@ -55,6 +55,13 @@ public class EnemyShield : BaseEnemyClass
             }
         }
         currentHealth -= (damageToTake * multiplier) * damageResistance - damageThreshold;
+
+        if(uiScript)
+        {
+            StopCoroutine(uiScript.HitMarkerShield());
+            StartCoroutine(uiScript.HitMarkerShield());
+        }
+
         Death();
 
     }
@@ -86,16 +93,7 @@ public class EnemyShield : BaseEnemyClass
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (attacking)
-        {
-            if (other.gameObject.GetComponent<PlayerClass>())
-            {
-                other.gameObject.GetComponent<PlayerClass>().ChangeHealth(-damageAmount);
-            }
-        }
-    }
+
 
     public override void Death()
     {
@@ -105,13 +103,13 @@ public class EnemyShield : BaseEnemyClass
         }
         if (currentHealth <= 0)
         {
-            isDead = true;
             //Normally do death animation/vfx, might even fade alpha w/e before deleting.
 
+            GetComponentInParent<ShieldEnemyScript>().GuardBreak();
+            //Destroy(gameObject);
 
-            Destroy(gameObject);
-
-
+            currentHealth = maxHealth;
+            
         }
     }
 }

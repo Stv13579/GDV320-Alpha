@@ -32,7 +32,6 @@ public class BossRoom : Room
     public BossList GetList() { return bosses; }
 
     public bool GetBossSpawned() { return bossSpawned; }
-    public bool GetBossDead() { return bossDead; }
     void Awake()
     {
         audioManager = FindObjectOfType<AudioManager>();
@@ -42,7 +41,6 @@ public class BossRoom : Room
     {
         base.Update();
 
-        // need to fix boss audio with saim audio
         if (bossSpawned)
         {
             if (audioManager)
