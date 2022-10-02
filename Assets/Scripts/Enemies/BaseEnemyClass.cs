@@ -118,8 +118,13 @@ public class BaseEnemyClass : MonoBehaviour
             spawner = FindObjectOfType<SAIM>().gameObject;
         }
 
-        buffVFX = transform.Find("SupportVFXHarness").GetChild(0).GetComponent<ParticleSystem>();
-        healVFX = transform.Find("SupportVFXHarness").GetChild(1).GetComponent<ParticleSystem>();
+
+        if(transform.Find("SupportVFXHarness").gameObject && transform.Find("SupportVFXHarness").gameObject)
+        {
+            buffVFX = transform.Find("SupportVFXHarness").GetChild(0).GetComponent<ParticleSystem>();
+            healVFX = transform.Find("SupportVFXHarness").GetChild(1).GetComponent<ParticleSystem>();
+        }
+
 
     }
 
