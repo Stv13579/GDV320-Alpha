@@ -133,6 +133,7 @@ public class ShieldEnemyScript : BaseEnemyClass
     {
         shielding = state;
         shield.SetActive(state);
+        shield.transform.GetChild(0).gameObject.SetActive(state);
     }
 
     public override void Movement(Vector3 positionToMoveTo, float speed)
@@ -207,12 +208,14 @@ public class ShieldEnemyScript : BaseEnemyClass
         attacking = true;
         enemyAnims.SetTrigger("Attacking");
         capHitter.SetActive(true);
+        SetShield(false);
     }
 
     public void CapDamage()
     {
         player.GetComponent<PlayerClass>().ChangeHealth(-damageAmount, gameObject);
         capHitter.SetActive(false);
+        
     }
 
     public void EndAttack()

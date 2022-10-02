@@ -16,5 +16,6 @@ public class ShieldAnimationHandler : MonoBehaviour
         GetComponentInParent<ShieldEnemyScript>().attacking = false;
         GetComponent<Animator>().ResetTrigger("Attacking");
         GetComponentInParent<ShieldEnemyScript>().capHitter.SetActive(false);
+        GetComponentInParent<ShieldEnemyScript>().SetShield(true);
     }
 }
