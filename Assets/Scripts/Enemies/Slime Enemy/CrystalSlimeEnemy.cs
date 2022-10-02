@@ -87,8 +87,9 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
         {
             for (int i = 0; i < 2; i++)
             {
-	            CrystalSlimeEnemy newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 2, Quaternion.identity).GetComponent<CrystalSlimeEnemy>();
-                
+	            CrystalSlimeEnemy newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 4, Quaternion.identity).GetComponent<CrystalSlimeEnemy>();
+	            newSlime.GetComponent<Rigidbody>().AddForce(this.transform.up * 5 + this.transform.forward * 5);
+	            newSlime.RestoreHealth(0);
                 StatModifier.AddModifier(newSlime.GetHealthStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
                 StatModifier.AddModifier(newSlime.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
                 StatModifier.AddModifier(newSlime.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
