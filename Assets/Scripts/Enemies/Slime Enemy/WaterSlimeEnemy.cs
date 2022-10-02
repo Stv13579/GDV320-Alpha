@@ -240,7 +240,9 @@ public class WaterSlimeEnemy : BaseEnemyClass
         {
             for (int i = 0; i < 2; i++)
             {
-                GameObject newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 2, Quaternion.identity);
+	            GameObject newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 4, Quaternion.identity);
+	            newSlime.GetComponent<Rigidbody>().AddForce(this.transform.up * 5 + this.transform.forward * 5);
+	            newSlime.GetComponent<WaterSlimeEnemy>().RestoreHealth(0);
                 newSlime.GetComponent<WaterSlimeEnemy>().maxHealth = maxHealth / 2;
                 newSlime.GetComponent<WaterSlimeEnemy>().baseMaxHealth = baseMaxHealth / 2;
                 newSlime.GetComponent<WaterSlimeEnemy>().health.baseValue = maxHealth / 2;
