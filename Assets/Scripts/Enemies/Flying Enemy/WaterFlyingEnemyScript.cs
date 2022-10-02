@@ -13,7 +13,7 @@ public class WaterFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
 
         base.Effect();
         Debug.Log("Effect");
-        Collider[] objects = Physics.OverlapSphere(target.transform.position, 5.0f);
+        Collider[] objects = Physics.OverlapSphere(transform.position, effectRange);
         foreach (Collider col in objects)
         {
             if (col.gameObject.GetComponent<BaseEnemyClass>())

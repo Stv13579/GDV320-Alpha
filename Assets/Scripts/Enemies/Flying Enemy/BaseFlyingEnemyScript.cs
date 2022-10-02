@@ -8,7 +8,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
     protected Vector3 targetPos;
     protected float timer = 0.0f;
     [SerializeField]
-    float effectTimer, effectRange;
+    protected float effectTimer, effectRange;
     float effectTimerMulti = 1.0f;
     protected bool effect = false;
     bool moving = false;
@@ -42,9 +42,8 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
         {
             //Only start moving every few seconds, that way it's not constantly moving to try and approach its target
             //Move only if far from its target
-            Debug.DrawRay(transform.position, (new Vector3(target.transform.position.x, 0, target.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z)).normalized * effectRange, Color.blue);
-            Debug.Log(Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(target.transform.position.x, 0, target.transform.position.z)));
-            if (Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(target.transform.position.x, 0, target.transform.position.z))> effectRange)
+            
+            if (target && Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(target.transform.position.x, 0, target.transform.position.z))> effectRange)
             {
                 Movement();
                 enemyAnims.SetTrigger("ExitEffect");

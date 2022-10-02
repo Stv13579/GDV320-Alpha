@@ -5231,8 +5231,8 @@ MonoBehaviour:
   takeDamageAudio: Slime Damage
   idleAudio: 
   targettingIndicator: {fileID: 4551955659223167837}
-  healVFX: {fileID: 0}
-  buffVFX: {fileID: 0}
+  healVFX: {fileID: 5502626168197139598}
+  buffVFX: {fileID: 479999355304995502}
   jumpForce: 200
   pushForce: 10
   attackJumpForce: 300
@@ -24707,6 +24707,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7496128014842550311}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &479999355304995502 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7975545534382715529, guid: 104d3874fb359934d8f22691c0b2043b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7496128014842550311}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5502626168197139598 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2619645749975291049, guid: 104d3874fb359934d8f22691c0b2043b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7496128014842550311}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8783031894467294813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24776,15 +24788,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dba3c9cd22f34fd40a2a7fc037b1a5c3, type: 3}
---- !u!1 &8386567643483162495 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 972929455091577122, guid: dba3c9cd22f34fd40a2a7fc037b1a5c3,
-    type: 3}
-  m_PrefabInstance: {fileID: 8783031894467294813}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8386567643483162490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 972929455091577127, guid: dba3c9cd22f34fd40a2a7fc037b1a5c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 8783031894467294813}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8386567643483162495 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 972929455091577122, guid: dba3c9cd22f34fd40a2a7fc037b1a5c3,
     type: 3}
   m_PrefabInstance: {fileID: 8783031894467294813}
   m_PrefabAsset: {fileID: 0}
