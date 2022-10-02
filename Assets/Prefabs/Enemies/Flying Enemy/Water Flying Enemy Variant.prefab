@@ -20,6 +20,7 @@ MonoBehaviour:
   groundMoveSpeed: 0
   moveSpeed: 10
   baseMoveSpeed: 10
+  rotationSpeed: 0
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
@@ -33,10 +34,15 @@ MonoBehaviour:
   takeDamageAudio: Flying Enemy Damage
   idleAudio: Flying Enemy Idle
   targettingIndicator: {fileID: 1404768966937678259}
+  healVFX: {fileID: 0}
+  buffVFX: {fileID: 0}
   effectTimer: 10
+  effectRange: 10
   moveDetect:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 66560
+  hoverHeight: 8
+  buffingVFX: {fileID: 5531425865701484073}
   healthRestore: 2
 --- !u!1001 &525650552378622142
 PrefabInstance:
@@ -185,6 +191,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water Flying Enemy Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2618050434216619261, guid: 1fd1aea56a319fa409d011771046677e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5121240916422757965, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_RootOrder
@@ -193,13 +204,18 @@ PrefabInstance:
     - target: {fileID: 6509235447840888431, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8153343602719881785, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f7eba71bbdd925d4694739ac8378bed0, type: 2}
+    - target: {fileID: 9005416686079827364, guid: 1fd1aea56a319fa409d011771046677e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9220163682881030405, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_IsActive
@@ -300,3 +316,93 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 927b09bead51b864990a49b3960ddc7c, type: 3}
+--- !u!1001 &5856663807070324469
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 661075115052961979}
+    m_Modifications:
+    - target: {fileID: 2126998884027735396, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998884284896300, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998885231173826, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_FlyingEnemies_Healer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998885231173852, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998885231173855, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998885231173855, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998885231173855, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998885231173855, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998885231173855, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998885231173855, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998885231173855, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998885231173855, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998885231173855, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998885231173855, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126998885231173855, guid: dc0fe59f297e0bd45971d7e420dcada3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dc0fe59f297e0bd45971d7e420dcada3, type: 3}
+--- !u!198 &5531425865701484073 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2126998885231173852, guid: dc0fe59f297e0bd45971d7e420dcada3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5856663807070324469}
+  m_PrefabAsset: {fileID: 0}

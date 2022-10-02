@@ -20,6 +20,7 @@ MonoBehaviour:
   groundMoveSpeed: 0
   moveSpeed: 10
   baseMoveSpeed: 10
+  rotationSpeed: 0
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
@@ -33,10 +34,15 @@ MonoBehaviour:
   takeDamageAudio: Flying Enemy Damage
   idleAudio: Flying Enemy Idle
   targettingIndicator: {fileID: 974846540245362027}
+  healVFX: {fileID: 0}
+  buffVFX: {fileID: 0}
   effectTimer: 10
+  effectRange: 10
   moveDetect:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 66560
+  hoverHeight: 8
+  buffingVFX: {fileID: 3450530040892383726}
 --- !u!114 &8427034607053154000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +132,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2618050434216619256, guid: 1fd1aea56a319fa409d011771046677e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8153343602719881785, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -160,6 +171,12 @@ GameObject:
 --- !u!1 &5183095492235418086 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5501601964307469559, guid: 1fd1aea56a319fa409d011771046677e,
+    type: 3}
+  m_PrefabInstance: {fileID: 844302016384437521}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3450530040892383726 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2618050434216619263, guid: 1fd1aea56a319fa409d011771046677e,
     type: 3}
   m_PrefabInstance: {fileID: 844302016384437521}
   m_PrefabAsset: {fileID: 0}

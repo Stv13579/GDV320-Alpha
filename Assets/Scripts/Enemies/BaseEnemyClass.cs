@@ -89,6 +89,10 @@ public class BaseEnemyClass : MonoBehaviour
     protected Vector3 oldPosition;
 
     protected GameplayUI uiScript;
+
+    [SerializeField]
+    public ParticleSystem healVFX, buffVFX;
+
     public virtual void Awake()
     {
         if(GameObject.Find("ProphecyManager"))
@@ -113,6 +117,10 @@ public class BaseEnemyClass : MonoBehaviour
         {
             spawner = FindObjectOfType<SAIM>().gameObject;
         }
+
+        buffVFX = transform.Find("SupportVFXHarness").GetChild(0).GetComponent<ParticleSystem>();
+        healVFX = transform.Find("SupportVFXHarness").GetChild(1).GetComponent<ParticleSystem>();
+
     }
 
     public virtual void Update()
