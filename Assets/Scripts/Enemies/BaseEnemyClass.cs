@@ -93,6 +93,8 @@ public class BaseEnemyClass : MonoBehaviour
     [SerializeField]
     public ParticleSystem healVFX, buffVFX;
 
+	[SerializeField]
+	List<Material> enemyMat = new List<Material>();
     public virtual void Awake()
     {
         if(GameObject.Find("ProphecyManager"))
@@ -124,7 +126,15 @@ public class BaseEnemyClass : MonoBehaviour
             buffVFX = transform.Find("SupportVFXHarness").GetChild(0).GetComponent<ParticleSystem>();
             healVFX = transform.Find("SupportVFXHarness").GetChild(1).GetComponent<ParticleSystem>();
         }
-
+		
+	    if(enemyAnims)
+	    {
+	    	Material[] mats = enemyAnims.gameObject.transform.GetComponentInChildren<Renderer>().materials;
+	    	for(int i = 0; i < mats.Length; i++)
+	    	{
+	    		enemyMat.Add(mats[i]);
+	    	}
+	    }
 
     }
 
@@ -256,6 +266,11 @@ public class BaseEnemyClass : MonoBehaviour
             audioManager.StopSFX(takeDamageAudio);
             audioManager.PlaySFX(takeDamageAudio, player.transform, this.transform);
         }
+        
+	    foreach(Material mat in enemyMat)
+	    {
+	    	mat.SetFloat("_Toggle_EnemyHPEmissive", Mathf.Clamp(currentHealth / maxHealth, 0, 1));
+	    }
 
         //Instead of calling death here, make an animation trigger instead
         if (currentHealth <= 0)
@@ -368,7 +383,11 @@ public class BaseEnemyClass : MonoBehaviour
 
 	public virtual void RestoreHealth(float amount)
     {
-        currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
+	    currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
+	    foreach(Material mat in enemyMat)
+	    {
+	    	mat.SetFloat("_Toggle_EnemyHPEmissive", Mathf.Clamp(currentHealth / maxHealth, 0, 1));
+	    }
     }
 
 
