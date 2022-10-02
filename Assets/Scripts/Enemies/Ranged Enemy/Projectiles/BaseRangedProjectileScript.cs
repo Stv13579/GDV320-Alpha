@@ -9,6 +9,8 @@ public class BaseRangedProjectileScript : MonoBehaviour //Sebastian
     protected GameObject player;
     protected float timer = 0;
     private AudioManager audioManager;
+
+    public GameObject origin;
     // Start is called before the first frame update
     protected virtual void Start()
     {

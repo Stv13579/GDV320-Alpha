@@ -8,7 +8,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
     protected Vector3 targetPos;
     protected float timer = 0.0f;
     [SerializeField]
-    float effectTimer;
+    protected float effectTimer, effectRange;
     float effectTimerMulti = 1.0f;
     protected bool effect = false;
     bool moving = false;
@@ -16,6 +16,12 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
     protected LayerMask moveDetect;
 
     float moveTimer = 0.0f;
+
+    [SerializeField]
+    float hoverHeight;
+
+    [SerializeField]
+    protected ParticleSystem buffingVFX;
 
     public override void Awake()
     {
@@ -27,7 +33,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
     {
         //Doing this in start means that if the flying enemy is first in the run order, it will kill itself since no other enemies are alive yet.
         //This is what kills the flying enemies on spawn for seemingly no reason.
-        //FindTarget();
+        FindTarget();
     }
 
     private void Update()
@@ -35,27 +41,28 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
 	    base.Update();
         {
             //Only start moving every few seconds, that way it's not constantly moving to try and approach its target
+            //Move only if far from its target
+            
+            if (target && Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(target.transform.position.x, 0, target.transform.position.z))> effectRange)
             {
-                if (!effect)
-                {
-                    Movement();
-                }
-                else
-                {
-                    enemyAnims.SetTrigger("Stop Move");
-                    enemyAnims.ResetTrigger("Move");
-
-
-                }
+                Movement();
+                enemyAnims.SetTrigger("ExitEffect");
             }
-
-            //Activate the effect every few seconds, with multiplier if we want it
-            timer += Time.deltaTime;
-            if(timer > effectTimer * effectTimerMulti && !effect)
+            else
             {
                 effect = true;
                 enemyAnims.SetTrigger("Effect");
+                enemyAnims.ResetTrigger("ExitEffect");
+
             }
+
+            //Activate the effect every few seconds, with multiplier if we want it
+            //timer += Time.deltaTime;
+            //if(timer > effectTimer * effectTimerMulti && !effect)
+            //{
+            //    effect = true;
+            //    enemyAnims.SetTrigger("Effect");
+            //}
             Quaternion startRot = this.transform.rotation;
             this.transform.LookAt(targetPos);
             this.transform.eulerAngles += new Vector3(0, 90, 0);
@@ -73,7 +80,6 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
     void Movement()
     {
         //Check if the path to its destination is clear, if not pick a new destination
-        enemyAnims.SetTrigger("Move");
         RaycastHit hit;
         if(Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
         {
@@ -84,13 +90,18 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
             FindTarget();
 
         }
-        if(target.GetComponent<RangedEnemyScript>())
+        if(target)
         {
-            if(target.GetComponent<RangedEnemyScript>().GetBurrowing())
+            if(target.GetComponent<RangedEnemyScript>())
             {
-                FindTarget();
+                if(target.GetComponent<RangedEnemyScript>().GetBurrowing())
+                {
+                    FindTarget();
+                }
             }
+
         }
+        SetTargetPos();
         this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, moveSpeed * Time.deltaTime);
     }
 
@@ -114,7 +125,8 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
                 {
                     target = enemy.gameObject;
                 }
-                targetPos = target.transform.position + new Vector3(0, 10, 0);
+                //SetTargetPos();
+
                 RaycastHit hit;
                 if (!Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
                 {
@@ -126,15 +138,26 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
         {
             int i = Random.Range(0, validEnemies.Count);
             target = validEnemies[i].gameObject;
-            targetPos = target.transform.position + new Vector3(0, 10, 0);
+            //SetTargetPos();
         }
         else
         {
             //target = this.gameObject;
             //targetPos = player.transform.position + new Vector3(0, 10, 0);
-            currentHealth = 0;
-            Death();
+            //currentHealth = 0;
+            //Death();
+            target = player;
+            //SetTargetPos();
         }
+    }
+
+    void SetTargetPos()
+    {
+        targetPos = target.transform.position;
+        //ray cast down from target pos to find the floor, place it there (on y) then move it up
+        RaycastHit targetHit;
+        Physics.Raycast(targetPos + new Vector3(0, 1000, 0), Vector3.down, out targetHit, 10000, moveDetect);
+        targetPos = targetHit.point + new Vector3(0, hoverHeight, 0);
     }
 
 	public virtual void Effect()
@@ -142,6 +165,9 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
         effect = false;
         timer = 0.0f;
         enemyAnims.ResetTrigger("Effect");
+
+        buffingVFX.Play();
+
         if (audioManager)
         {
             audioManager.StopSFX(attackAudio);

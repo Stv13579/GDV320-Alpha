@@ -61,12 +61,12 @@ public class AcidCloud : BaseElementSpawnClass
 
     void OnTriggerStay(Collider other)
     {
-        if(other.GetComponent<BaseEnemyClass>())
+	    if(other.GetComponentInParent<BaseEnemyClass>())
         {
             if (currentDamageTicker >= damageTicker)
             {
                 //If an enemy is inside the cloud, deal damage to it
-                other.GetComponent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+	            other.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
                 currentDamageTicker = 0.0f;
             }
             if(other.gameObject.GetComponentInChildren<AcidBurnScript>())
@@ -78,10 +78,10 @@ public class AcidCloud : BaseElementSpawnClass
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<BaseEnemyClass>())
+	    if (other.GetComponentInParent<BaseEnemyClass>())
         {
             //When enemy enters cloud, add vfx
-            Instantiate(acidBurnVFX, other.transform);
+		    Instantiate(acidBurnVFX, other.transform.root);
         }
     }
 }
