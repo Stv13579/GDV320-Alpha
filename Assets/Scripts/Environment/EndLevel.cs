@@ -66,7 +66,10 @@ public class EndLevel : MonoBehaviour
             }
             else
             {
-                audioManager.StopMusic("Hub Room Music");
+                for (int i = 0; i < audioManager.GetMusics().Length; i++)
+                {
+                    audioManager.GetMusics()[i].audioSource.Stop();
+                }
                 audioManager.PlayMusic($"Level {sceneToLoad - 1} Non Combat");
             }
 

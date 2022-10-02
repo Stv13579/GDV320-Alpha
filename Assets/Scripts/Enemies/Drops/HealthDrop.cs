@@ -9,7 +9,7 @@ public class HealthDrop : BaseDropScript //Sebastian
     protected override void PickupEffect()
     {
         base.PickupEffect();
-        player.gameObject.GetComponent<PlayerClass>().ChangeHealth(healthRestore);
+        player.gameObject.GetComponent<PlayerClass>().ChangeHealth(healthRestore, null);
     }
 
     public void SetHealth(float health)

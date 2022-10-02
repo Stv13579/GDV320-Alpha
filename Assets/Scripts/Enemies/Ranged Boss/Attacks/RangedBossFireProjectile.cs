@@ -26,7 +26,7 @@ public class RangedBossFireProjectile : BaseRangedProjectileScript //Sebastian
         {
             if (collider.gameObject.GetComponent<PlayerClass>() && !damaged && player.GetComponent<EnergyElement>().GetUseShield() == false)
             {
-                collider.gameObject.GetComponent<PlayerClass>().ChangeHealth(-damage);
+                collider.gameObject.GetComponent<PlayerClass>().ChangeHealth(-damage, origin);
                 damaged = true;
             }
         }

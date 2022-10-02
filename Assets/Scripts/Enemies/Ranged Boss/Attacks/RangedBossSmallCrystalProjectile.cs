@@ -11,7 +11,7 @@ public class RangedBossSmallCrystalProjectile : BaseRangedProjectileScript //Seb
     //Damage the player
     protected override void HitEffect(Collider other)
     {
-        player.GetComponent<PlayerClass>().ChangeHealth(-damage);
+        player.GetComponent<PlayerClass>().ChangeHealth(-damage, FindObjectOfType<RangedBossScript>().gameObject);
         Destroy(this.gameObject);
     }
 

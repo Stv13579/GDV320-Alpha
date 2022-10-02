@@ -9,7 +9,7 @@ public class FireRangedProjectile : BaseRangedProjectileScript //Sebastian
     //Deals damage, sets the player on fire
     protected override void HitEffect(Collider other)
     {
-        player.GetComponent<PlayerClass>().ChangeHealth(-damage);
+        player.GetComponent<PlayerClass>().ChangeHealth(-damage, origin);
         player.GetComponent<PlayerClass>().OnFire(fireDuration);
         Destroy(this.gameObject);
     }

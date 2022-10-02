@@ -122,7 +122,7 @@ public class EnergyElement : BaseElementClass
        {
             if(containedEnemies[i])
             {
-                BaseEnemyClass enemy = containedEnemies[i].gameObject.GetComponent<BaseEnemyClass>();
+	            BaseEnemyClass enemy = containedEnemies[i].gameObject.GetComponentInParent<BaseEnemyClass>();
                 StatModifier.RemoveModifier(enemy.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.0f, "Shield"));
             }
             containedEnemies.Remove(containedEnemies[i]);
@@ -167,13 +167,13 @@ public class EnergyElement : BaseElementClass
     {
         if (useShield)
         {
-            if (other.gameObject.layer == 8  && other.GetComponent<BaseEnemyClass>() || 
-                other.gameObject.tag == "Enemy" && other.GetComponent<BaseEnemyClass>())
+	        if (other.gameObject.layer == 8  && other.GetComponentInParent<BaseEnemyClass>() || 
+                other.gameObject.tag == "Enemy" && other.GetComponentInParent<BaseEnemyClass>())
             {
                 if (!containedEnemies.Contains(other.gameObject))
                 {
                     containedEnemies.Add(other.gameObject);
-                    BaseEnemyClass enemy = other.gameObject.GetComponent<BaseEnemyClass>();
+                    BaseEnemyClass enemy = other.gameObject.GetComponentInParent<BaseEnemyClass>();
                     StatModifier.AddModifier(enemy.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.0f, "Shield"));
                 }
             }
@@ -182,8 +182,8 @@ public class EnergyElement : BaseElementClass
                 Destroy(other.gameObject);
             }
             if (other.gameObject.layer == 22 && other.GetComponent<BaseRangedProjectileScript>() ||
-                other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>() ||
-                 other.gameObject.tag == "Enemy" && other.GetComponent<BaseEnemyClass>())
+                other.gameObject.layer == 8 && other.GetComponentInParent<BaseEnemyClass>() ||
+                 other.gameObject.tag == "Enemy" && other.GetComponentInParent<BaseEnemyClass>())
             {
                 materialChanger = 1.0f;
                 energyShield.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetFloat("_ShieldDamage", materialChanger);

@@ -7,7 +7,7 @@ using UnityEngine.Timeline;
 public class BaseEnemyClass : MonoBehaviour
 {
     [SerializeField]
-    protected float currentHealth, maxHealth, baseMaxHealth, damageAmount, baseDamageAmount, groundMoveSpeed, moveSpeed, baseMoveSpeed;
+    protected float currentHealth, maxHealth, baseMaxHealth, damageAmount, baseDamageAmount, groundMoveSpeed, moveSpeed, baseMoveSpeed, rotationSpeed;
 
     protected StatModifier.FullStat health = new StatModifier.FullStat(0), damage = new StatModifier.FullStat(0), speed = new StatModifier.FullStat(0);
 
@@ -88,7 +88,11 @@ public class BaseEnemyClass : MonoBehaviour
 
     protected Vector3 oldPosition;
 
-    GameplayUI uiScript;
+    protected GameplayUI uiScript;
+
+    [SerializeField]
+    public ParticleSystem healVFX, buffVFX;
+
     public virtual void Awake()
     {
         if(GameObject.Find("ProphecyManager"))
@@ -113,6 +117,10 @@ public class BaseEnemyClass : MonoBehaviour
         {
             spawner = FindObjectOfType<SAIM>().gameObject;
         }
+
+        buffVFX = transform.Find("SupportVFXHarness").GetChild(0).GetComponent<ParticleSystem>();
+        healVFX = transform.Find("SupportVFXHarness").GetChild(1).GetComponent<ParticleSystem>();
+
     }
 
     public virtual void Update()
@@ -146,6 +154,14 @@ public class BaseEnemyClass : MonoBehaviour
             if (uiScript.GetHitMarker().active == true)
             {
                 StartCoroutine(uiScript.HitMarker());
+            }
+        }
+
+        if(uiScript)
+        {
+            if(uiScript.GetHitMarkerShield().active == true)
+            {
+                StartCoroutine(uiScript.HitMarkerShield());
             }
         }
     }

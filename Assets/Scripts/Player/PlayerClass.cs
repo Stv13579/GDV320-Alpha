@@ -70,13 +70,6 @@ public class PlayerClass : MonoBehaviour
 
     GameplayUI gameplayUI;
 
-    [SerializeField]
-    LayerMask enemies;
-
-    float angle;
-    Quaternion targetRot;
-    Vector3 targetPos;
-
     float lowHealthValue;
     void Start()
     {
@@ -95,7 +88,6 @@ public class PlayerClass : MonoBehaviour
         gameplayUI = FindObjectOfType<GameplayUI>();
         lowHealthValue = 0.0f;
     }
-
 
     public void StartLevel()
     {
@@ -136,7 +128,7 @@ public class PlayerClass : MonoBehaviour
 
         if(fireTimer > 0)
         {
-            ChangeHealth(-fireDOT);
+            ChangeHealth(-fireDOT, null);
             fireTimer -= Time.deltaTime;
         }
         else
@@ -145,7 +137,6 @@ public class PlayerClass : MonoBehaviour
         }
 
         Push();
-        RotateToTarget();
     }
 
     public void AddItem(Item newItem)
@@ -163,7 +154,7 @@ public class PlayerClass : MonoBehaviour
                 Item luckyBones = heldItems.Find(LKB => LKB == GameObject.Find("TrinketManager").GetComponent<LuckyKnuckleBones>());
                 if(luckyBones.GetComponent<LuckyKnuckleBones>().CanRevive())
                 {
-                    ChangeHealth(maxHealth);
+                    ChangeHealth(maxHealth, null);
                     return;
                 }    
             }
@@ -194,27 +185,7 @@ public class PlayerClass : MonoBehaviour
 
     }
 
-    // need to fix
-    void RotateToTarget()
-    {
-        gameplayUI.GetDamageIndicator().gameObject.SetActive(false);
-        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 1, enemies);
-        for (int i = 0; i < hitColliders.Length; i++)
-        {
-            targetPos = hitColliders[i].transform.position;
-            targetRot = hitColliders[i].transform.rotation;
-        }
-        Vector3 direction = this.transform.position - targetPos;
-
-        targetRot = Quaternion.LookRotation(direction);
-        targetRot.z = -targetRot.y;
-        targetRot.x = 0.0f;
-        targetRot.y = 0.0f;
-
-        Vector3 northDirection = new Vector3(0.0f, 0.0f, this.transform.eulerAngles.y);
-        gameplayUI.GetDamageIndicator().rectTransform.localRotation = targetRot * Quaternion.Euler(northDirection);
-    }
-    public void ChangeHealth(float healthAmount, bool reduceDamage = true)
+    public void ChangeHealth(float healthAmount, GameObject source, bool reduceDamage = true)
     {
         //Create a one time defense modifier based on whether the player is recieving damage, or should not apply defense
         float defenseMod = defense;
@@ -227,43 +198,25 @@ public class PlayerClass : MonoBehaviour
         {
             defenseMod = 1;
         }
-
         currentHealth = Mathf.Min(currentHealth + (healthAmount * defenseMod), maxHealth);
+
+
+        if (healthAmount < 0)
+        {
+            if (gameplayUI)
+            {
+                //StopCoroutine(gameplayUI.DamageIndicator());
+                StartCoroutine(gameplayUI.DamageIndicator(source));
+            }
+        }
+
         if (currentHealth <= 0 && !dead)
         {
             Death();
         }
     }
 
-    //Get hit and bounce
-    public void ChangeHealth(float healthAmount, Vector3 enemyPos, float pushForce, bool reduceDamage = true)
-    {
-        //Create a one time defense modifier based on whether the player is recieving damage, or should not apply defense
-        float defenseMod = defense;
-        if (healthAmount > 0 || !reduceDamage)
-        {
-            defenseMod = 1;
-        }
-
-        if (defenseMod > 1 || defenseMod == 0)
-        {
-            defenseMod = 1;
-        }
-
-        currentHealth = Mathf.Min(currentHealth + (healthAmount * defenseMod), maxHealth);
-
-        Vector3 bounceVec = transform.position - enemyPos;
-
-        pushDir = bounceVec.normalized;
-        pushDir.y = 1;
-        pushStrength = pushForce;
-        currentPushDuration = 0;
-
-        if (currentHealth <= 0 && !dead)
-        {
-            Death();
-        }
-    }
+   
 
     public void Push()
     {
@@ -333,7 +286,7 @@ public class PlayerClass : MonoBehaviour
             manaTypes[i].currentMana = Mathf.Min(manaTypes[i].currentMana + manaAmount, manaTypes[i].maxMana);
             if (manaTypes[i].currentMana < 0)
             {
-                ChangeHealth(manaTypes[i].currentMana);
+                ChangeHealth(manaTypes[i].currentMana, null);
                 manaTypes[i].currentMana = 0;
             }
             //manaTypes[i].currentMana = Mathf.Max(manaTypes[i].currentMana, 0);

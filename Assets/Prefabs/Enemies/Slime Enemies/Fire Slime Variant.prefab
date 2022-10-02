@@ -20,6 +20,7 @@ MonoBehaviour:
   groundMoveSpeed: 100
   moveSpeed: 500
   baseMoveSpeed: 500
+  rotationSpeed: 0
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
@@ -33,6 +34,8 @@ MonoBehaviour:
   takeDamageAudio: Slime Damage
   idleAudio: 
   targettingIndicator: {fileID: 5820064549849268897}
+  healVFX: {fileID: 2572557084162243954}
+  buffVFX: {fileID: 7586175651838794578}
   jumpForce: 200
   pushForce: 10
   attackJumpForce: 0
@@ -133,6 +136,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1908173067133758005, guid: 4f3b9ac4d206bf247b6814675daddc12,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2141055289212222040, guid: 4f3b9ac4d206bf247b6814675daddc12,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -221,6 +229,18 @@ Transform:
 --- !u!1 &5820064549849268897 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4551955659223167837, guid: 4f3b9ac4d206bf247b6814675daddc12,
+    type: 3}
+  m_PrefabInstance: {fileID: 8065610830941483516}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7586175651838794578 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 479999355304995502, guid: 4f3b9ac4d206bf247b6814675daddc12,
+    type: 3}
+  m_PrefabInstance: {fileID: 8065610830941483516}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2572557084162243954 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5502626168197139598, guid: 4f3b9ac4d206bf247b6814675daddc12,
     type: 3}
   m_PrefabInstance: {fileID: 8065610830941483516}
   m_PrefabAsset: {fileID: 0}

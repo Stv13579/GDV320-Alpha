@@ -9,7 +9,7 @@ public class FireFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
     {
         base.Effect();
         Debug.Log("Effect");
-        Collider[] objects = Physics.OverlapSphere(target.transform.position, 5.0f);
+        Collider[] objects = Physics.OverlapSphere(transform.position, effectRange);
         foreach(Collider col in objects)
         {
             if(col.gameObject.GetComponent<BaseEnemyClass>())
@@ -17,6 +17,7 @@ public class FireFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
                 BaseEnemyClass enemy = col.gameObject.GetComponent<BaseEnemyClass>();
 
                 StatModifier.StartAddModifierTemporary(enemy, enemy.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(1.5f, "FireFlyingAttackBuff"), 10.0f);
+                enemy.buffVFX.Play();
             }
         }
         FindTarget();

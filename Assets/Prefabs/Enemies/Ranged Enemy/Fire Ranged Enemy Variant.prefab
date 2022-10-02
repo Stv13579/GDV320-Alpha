@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2480069521173961458, guid: 96e5b5d76ae5b414c99c5406c59bf787,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184050341929651491, guid: 96e5b5d76ae5b414c99c5406c59bf787,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5004672023540106678, guid: 96e5b5d76ae5b414c99c5406c59bf787,
         type: 3}
       propertyPath: m_Name
@@ -69,6 +79,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8131862436286790866, guid: 96e5b5d76ae5b414c99c5406c59bf787,
         type: 3}
+      propertyPath: buffVFX
+      value: 
+      objectReference: {fileID: 7436976849226116187}
+    - target: {fileID: 8131862436286790866, guid: 96e5b5d76ae5b414c99c5406c59bf787,
+        type: 3}
+      propertyPath: healVFX
+      value: 
+      objectReference: {fileID: 3297055546176899707}
+    - target: {fileID: 8131862436286790866, guid: 96e5b5d76ae5b414c99c5406c59bf787,
+        type: 3}
       propertyPath: hitSpawn
       value: 
       objectReference: {fileID: 5093975182472009187}
@@ -118,11 +138,28 @@ PrefabInstance:
       propertyPath: resistances.Array.data[0]
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8921489390933811950, guid: 96e5b5d76ae5b414c99c5406c59bf787,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96e5b5d76ae5b414c99c5406c59bf787, type: 3}
 --- !u!4 &5627120011484926242 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5638500257173200652, guid: 96e5b5d76ae5b414c99c5406c59bf787,
+    type: 3}
+  m_PrefabInstance: {fileID: 11384112267709998}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7436976849226116187 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7430097986222416501, guid: 96e5b5d76ae5b414c99c5406c59bf787,
+    type: 3}
+  m_PrefabInstance: {fileID: 11384112267709998}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3297055546176899707 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3308192198181766229, guid: 96e5b5d76ae5b414c99c5406c59bf787,
     type: 3}
   m_PrefabInstance: {fileID: 11384112267709998}
   m_PrefabAsset: {fileID: 0}
