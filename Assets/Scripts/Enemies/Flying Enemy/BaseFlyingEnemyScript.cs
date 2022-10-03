@@ -81,7 +81,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
     {
         //Check if the path to its destination is clear, if not pick a new destination
         RaycastHit hit;
-        if(Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
+        if(Physics.Raycast(this.transform.position, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
         {
             FindTarget();
         }
@@ -128,7 +128,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
                 //SetTargetPos();
 
                 RaycastHit hit;
-                if (!Physics.SphereCast(this.transform.position, 0.5f, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
+                if (!Physics.Raycast(this.transform.position, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
                 {
                     validEnemies.Add(enemy);
                 }

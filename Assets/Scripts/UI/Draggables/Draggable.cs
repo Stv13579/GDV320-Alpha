@@ -19,8 +19,8 @@ public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
             return;
         }
         //Instantiate the dragged object
-        Instantiate(draggedObject, transform);
-
+        GameObject draggedOut = Instantiate(draggedObject, transform);
+        draggedOut.GetComponent<DraggedObject>().SetLoadoutVariables(lVars);
     }
 
     public void OnPointerUp(PointerEventData eData)
