@@ -16,9 +16,9 @@ public class DropsList : ScriptableObject
 
     public int minAmmoSpawn = 2;
     public int maxAmmoSpawn = 4;
-
-    public int minHealthSpawn = 1;
-    public int maxHealthSpawn = 1;
+	
+	[SerializeField]
+	int minHealthSpawn = 1, maxHealthSpawn = 1;
 
     public GameObject GetDrop(List<DropListEntry> dropsList)
     {
@@ -80,6 +80,21 @@ public class DropsList : ScriptableObject
         }
         return (dropsList[i].drop);
     }
+    
+	public void SetHealthDrops(int valueToSet)
+	{
+		minHealthSpawn += valueToSet;
+		maxHealthSpawn += valueToSet;
+	}
+	
+	public int GetMinHealthSpawn()
+	{
+		return minHealthSpawn;
+	}
 
+	public int GetMaxHealthSpawn()
+	{
+		return maxHealthSpawn;
+	}
 
 }

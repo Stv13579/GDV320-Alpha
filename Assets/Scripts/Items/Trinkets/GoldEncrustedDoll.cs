@@ -9,13 +9,14 @@ public class GoldEncrustedDoll : Trinket
 
     public override void AddEffect(PlayerClass player)
     {
-        base.AddEffect(player);
+	    base.AddEffect(player);
+	    DropsList[] instances = Resources.FindObjectsOfTypeAll<DropsList>();
+	    dropList = instances[0];
         dropList.maxAmmoSpawn += (int)uState;
         dropList.minAmmoSpawn += (int)uState;
         dropList.maxCurrencySpawn += (int)uState;
-        dropList.minCurrencySpawn += (int)uState;
-        dropList.maxHealthSpawn += (int)uState;
-        dropList.minHealthSpawn += (int)uState;
+	    dropList.minCurrencySpawn += (int)uState;
+	    dropList.SetHealthDrops((int)uState);
 
     }
 
@@ -27,7 +28,7 @@ public class GoldEncrustedDoll : Trinket
         dropList.minAmmoSpawn     -= (int)uState;
         dropList.maxCurrencySpawn -= (int)uState;
         dropList.minCurrencySpawn -= (int)uState;
-        dropList.maxHealthSpawn   -= (int)uState;
-        dropList.minHealthSpawn   -= (int)uState;
+	    dropList.SetHealthDrops(-(int)uState);
+
     }
 }

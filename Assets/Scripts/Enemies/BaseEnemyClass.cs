@@ -216,7 +216,6 @@ public class BaseEnemyClass : MonoBehaviour
         //Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
         //hitSpn.transform.localScale = scale;
         
-        
         if(applyTriggers)
         {
             foreach (Item item in playerClass.heldItems)
@@ -231,7 +230,7 @@ public class BaseEnemyClass : MonoBehaviour
             }
         }
         
-
+	    Debug.Log(damageToTake);
         float multiplier = 1;
         foreach (Types type in attackTypes)
         {
@@ -250,6 +249,8 @@ public class BaseEnemyClass : MonoBehaviour
                 }
             }
         }
+	    Debug.Log((damageToTake * multiplier) * damageResistance - damageThreshold);
+
         currentHealth -= (damageToTake * multiplier) * damageResistance - damageThreshold;
 
         if(enemyAnims)
@@ -314,7 +315,7 @@ public class BaseEnemyClass : MonoBehaviour
                     Drop(drops.minAmmoSpawn, drops.maxAmmoSpawn);
                     break;
                 case 2:
-                    Drop(drops.healthList, drops.minHealthSpawn, drops.maxHealthSpawn);
+	                Drop(drops.healthList, drops.GetMinHealthSpawn(), drops.GetMaxHealthSpawn());
                     break;
                 default:
                     break;

@@ -36,7 +36,7 @@ public class CrystalElement : BaseElementClass
                 newCrystalPro.transform.RotateAround(shootingTranform.position, Camera.main.transform.up, Random.Range(1.0f, 3.0f) * i - Random.Range(1.0f, 5.0f));
                 newCrystalPro.transform.RotateAround(shootingTranform.position, Camera.main.transform.right, Random.Range(1.0f, 3.0f) * j - Random.Range(1.0f, 5.0f));
                 // setting the varibles from CrystalProj script
-                newCrystalPro.GetComponent<CrystalProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.crystalDamageMultiplier), damageCurve, lifeTimer, attackTypes, damageLimit, damageSpeedDecreaser);
+	            newCrystalPro.GetComponent<CrystalProj>().SetVars(projectileSpeed, damage * (damageMultiplier * elementData.crystalDamageMultiplier), damageCurve, lifeTimer, attackTypes, damageLimit, damageSpeedDecreaser);
             }
         }
         //RaycastHit hit;
