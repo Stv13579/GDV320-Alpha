@@ -218,7 +218,7 @@ public class BaseEnemyClass : MonoBehaviour
         
         if(applyTriggers)
         {
-            foreach (Item item in playerClass.heldItems)
+            foreach (Item item in playerClass.GetHeldItems())
             {
                 item.OnHitTriggers(this, attackTypes);
             }

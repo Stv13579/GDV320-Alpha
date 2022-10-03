@@ -78,12 +78,8 @@ public class ShieldEnemyScript : BaseEnemyClass
                 ShieldRotation(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
                 //ShieldMovement(player.transform.position, moveSpeed);
             }
-            if (Vector3.Distance(this.transform.position, player.transform.position) > 8)
-            {
-                ShieldMovement(player.transform.position, moveSpeed);
-               
-            }
-            
+
+            ShieldMovement(player.transform.position, moveSpeed);
 
             if (Vector3.Distance(this.transform.position, player.transform.position) < 3 && !attacking)
             {
@@ -117,7 +113,7 @@ public class ShieldEnemyScript : BaseEnemyClass
         //Check if the angle between forward of the shield mushroom and the player to shield vector is small, then shield. If not, unshield.
         float angle = Vector3.Angle(transform.forward, player.transform.position - transform.position);
         Debug.Log(angle);
-        if(angle < 90)
+        if(angle < 75)
         {
             
             enemyAnims.SetTrigger("Shield Up");

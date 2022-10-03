@@ -10,74 +10,74 @@ using UnityEngine;
 /// </summary>
 public class PlayerMovement : MonoBehaviour
 {
-    private PlayerLook lookScript;
-    private CharacterController cController;
+    PlayerLook lookScript;
+    CharacterController cController;
 
     [SerializeField]
-    private float gravity;
+    float gravity;
     [SerializeField]
-    private float jumpSpeed;
+    float jumpSpeed;
     [SerializeField]
-    private float acceleration;
+    float acceleration;
     [SerializeField]
-    private AnimationCurve frictionCurve = AnimationCurve.Linear(0.0f, 0.1f, 1.0f, 1.0f);
+    AnimationCurve frictionCurve = AnimationCurve.Linear(0.0f, 0.1f, 1.0f, 1.0f);
     [SerializeField]
-    private float movementSpeed, maxMovementSpeed = 13.0f, baseMaxMovementSpeed = 13.0f;
+    float movementSpeed, maxMovementSpeed = 13.0f, baseMaxMovementSpeed = 13.0f;
 
     StatModifier.FullStat speed = new StatModifier.FullStat(0.0f);
 
     [SerializeField]
-    private float coyoteTime;
-    private float currentCoyoteTime;
+    float coyoteTime;
+    float currentCoyoteTime;
 
-    private Vector3 velocity;
+    Vector3 velocity;
 
     [SerializeField]
-    private float airStraffMod;
+    float airStraffMod;
 
-    private bool isGrounded = false;
+    bool isGrounded = false;
 
-    private float headBobTimer = 0.0f;
-    private float headBobFrequency = 1.0f;
-    private float headBobAmplitude = 0.02f;
+    float headBobTimer = 0.0f;
+    float headBobFrequency = 1.0f;
+    float headBobAmplitude = 0.02f;
     // the default position of the head
-    private float headBobNeutral = 0.80f;
-    private float headBobMinSpeed = 0.1f;
-    private float headBobBlendSpeed = 4.0f;
+    float headBobNeutral = 0.80f;
+    float headBobMinSpeed = 0.1f;
+    float headBobBlendSpeed = 4.0f;
     [SerializeField] 
-    private AnimationCurve headBobBlendCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
-    private float headBobMultiplier = 0.0f;
-    private Vector3 oldPos;
-    private Vector3 newPos;
+    AnimationCurve headBobBlendCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
+    float headBobMultiplier = 0.0f;
+    Vector3 oldPos;
+    Vector3 newPos;
 
     // sound
-    private float randIndexTimer = 0.0f;
-    private AudioManager audioManager;
+    float randIndexTimer = 0.0f;
+    AudioManager audioManager;
 
     // head shaking
-    private bool isHeadShaking;
+    bool isHeadShaking;
 
     // FOV change
     [SerializeField]
-    private float initialFOV = 90.0f;
+    float initialFOV = 90.0f;
     [SerializeField]
-    private float increasedFOVMoving = 92.0f;
+    float increasedFOVMoving = 92.0f;
 
     // increase movement speed over time
     [SerializeField]
-    private float moveTime = 0.0f;
+    float moveTime = 0.0f;
     [SerializeField]
-    private AnimationCurve moveAnimaCurve;
+    AnimationCurve moveAnimaCurve;
 
     [SerializeField]
-    private LayerMask environmentLayer;
+    LayerMask environmentLayer;
 
     //sliding parameters
-    private bool willSlideOnSlopes = true;
+    bool willSlideOnSlopes = true;
     [SerializeField]
-    private float slopeSpeed;
-    private Vector3 hitPointNormal;
-    private bool isSliding
+    float slopeSpeed;
+    Vector3 hitPointNormal;
+    bool isSliding
     {
         get
         {
@@ -95,36 +95,36 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    private float maxVeloMagnitude = 1.5f;
+    float maxVeloMagnitude = 1.5f;
 
     [SerializeField]
-    private Transform cameraHolder;
-    private Vector3 cameraHolderTargetPos;
-    private float cameraHolderTargetAngle;
-    private float currentCameraHolderAngle;
+    Transform cameraHolder;
+    Vector3 cameraHolderTargetPos;
+    float cameraHolderTargetAngle;
+    float currentCameraHolderAngle;
     [SerializeField]
-    private float cameraShakePosPunchLerp = 8.0f;
+    float cameraShakePosPunchLerp = 8.0f;
     [SerializeField]
-    private float cameraShakePosLerp = 16.0f;
+    float cameraShakePosLerp = 16.0f;
     [SerializeField]
-    private float cameraShakeAnglePunchLerp = 20.0f;
+    float cameraShakeAnglePunchLerp = 20.0f;
     [SerializeField]
-    private float cameraShakeAngleLerp = 40.0f;
+    float cameraShakeAngleLerp = 40.0f;
     // how deep the drop is (camera pos)
     [SerializeField]
-    private float cameraShakeDrop = 0.1f;
+    float cameraShakeDrop = 0.1f;
     // how deep the dip is (camera angle)
     [SerializeField]
-    private float cameraShakeDip = 25.0f;
+    float cameraShakeDip = 25.0f;
 
     [SerializeField]
-    private float collisionForce = 0.5f;
+    float collisionForce = 0.5f;
 
-    private bool ableToMove = true;
+    bool ableToMove = true;
     public void SetAbleToMove(bool tempAbleToMove) { ableToMove = tempAbleToMove; }
 
     // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         lookScript = this.gameObject.GetComponent<PlayerLook>();
@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    void Update()
     {
         maxMovementSpeed = StatModifier.UpdateValue(speed);
         if (ableToMove)
@@ -147,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
     // lerps the camera pos and camera angle to their targets
     // then lerps from target to zero
     // quick and dirty way of getting smooth bumping
-    private void UpdateCameraShake()
+    void UpdateCameraShake()
     {
         cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, cameraHolderTargetPos, cameraShakePosLerp * Time.deltaTime);
         currentCameraHolderAngle = Mathf.Lerp(currentCameraHolderAngle, cameraHolderTargetAngle, cameraShakeAngleLerp * Time.deltaTime);
@@ -159,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // manages all of the player movement e.g. jumping, coyote time, sliding, friction, gravity
-    private void PlayerMoving()
+    void PlayerMoving()
     {
         // reads players input 
         float x = Input.GetAxisRaw("Horizontal");
@@ -256,7 +256,7 @@ public class PlayerMovement : MonoBehaviour
 
     // there is the players movement based on a curve
     // if the player moves for a certain amount of time then their acceleration increase
-    private void MovingCurve()
+    void MovingCurve()
     {
         if (((cController.collisionFlags & CollisionFlags.Below) != 0) && Mathf.Abs(velocity.x) > 0.1f || Mathf.Abs(velocity.z) > 0.1f)
         {
@@ -297,7 +297,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // jump function
-    private void Jumping()
+    void Jumping()
     {
         // checks if player is on the ground and if player has press space
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
@@ -310,7 +310,7 @@ public class PlayerMovement : MonoBehaviour
 
     // CoyoteTime function
     // gives player time to jump when they have just fall off a platform
-    private void CoyoteTime()
+    void CoyoteTime()
     {
         // collision detection for player
         if ((cController.collisionFlags & CollisionFlags.Below) != 0)
@@ -343,7 +343,7 @@ public class PlayerMovement : MonoBehaviour
 
     // HeadBobbing Function
     // blends headbobbing on and off smoothly
-    private void HeadBobbing()
+    void HeadBobbing()
     {
         // getting the difference between the oldpos and newpos
         Vector3 frameMove = newPos - oldPos;
@@ -381,14 +381,14 @@ public class PlayerMovement : MonoBehaviour
 
     // Camera Shake function
     // this drops the camerea when play hits ground
-    private void CameraShake()
+    void CameraShake()
     {
         cameraHolderTargetPos = new Vector3(0, -cameraShakeDrop, 0);
         cameraHolderTargetAngle = cameraShakeDip;
     }
 
 
-    private void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider other)
     {
         // collision with the enemy
         if (other.gameObject.layer == 8)

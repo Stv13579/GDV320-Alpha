@@ -44,8 +44,15 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
     public override void Update()
     {
         base.Update();
- 
 
+        if (Vector3.Angle(transform.forward, player.transform.position - transform.position) > 10)
+        {
+            float dir = Mathf.Sign(Vector3.SignedAngle(transform.forward, player.transform.position - transform.position, Vector3.up));
+
+            //rotate towards the disired vector/angle in that direction, modified by a scalar
+
+            transform.Rotate(Vector3.up, dir * Time.deltaTime * rotationSpeed * 0.1f);
+        }
         RaycastHit hit;
         //Makes sure it can see the player
         if (Physics.Raycast(projectileSpawnPos.position, player.transform.position - projectileSpawnPos.position, out hit, Mathf.Infinity, viewToPlayer))
@@ -62,12 +69,18 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
                         timer = 0;
                         enemyAnims.SetTrigger("Attacking");
                     }
-                    transform.LookAt(player.transform.position);
-                    Quaternion rot = transform.rotation;
-                    rot.eulerAngles = new Vector3(0, rot.eulerAngles.y, 0);
-                    transform.rotation = rot;
+
+                    //transform.LookAt(player.transform.position);
+                    //Quaternion rot = transform.rotation;
+                    //rot.eulerAngles = new Vector3(0, rot.eulerAngles.y, 0);
+                    //transform.rotation = rot;
+
+                    //get the direction of rotation
+                    
+                    
+
                     //Make sure the player isn't too close or too far
-                    if (Vector3.Distance(player.transform.position, this.gameObject.transform.position) < 10 || Vector3.Distance(player.transform.position, this.gameObject.transform.position) > 20)
+                    if (Vector3.Distance(player.transform.position, this.gameObject.transform.position) < 5 || Vector3.Distance(player.transform.position, this.gameObject.transform.position) > 20)
                     {
 	                    enemyAnims.SetTrigger("Burrow");
                         enemyAnims.SetBool("IsBurrow", true);
