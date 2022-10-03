@@ -11,7 +11,7 @@ public class Shop1 : Quest
     {
         base.DeathBehaviour();
 
-        if(GameObject.Find("Player").GetComponent<PlayerClass>().money >= currencyCompletion)
+        if(GameObject.Find("Player").GetComponent<PlayerClass>().GetMoney() >= currencyCompletion)
         {
             FinishQuest();
         }
@@ -21,7 +21,7 @@ public class Shop1 : Quest
     {
         base.FinishRunBehaviour();
 
-        if (GameObject.Find("Player").GetComponent<PlayerClass>().money >= currencyCompletion)
+        if (GameObject.Find("Player").GetComponent<PlayerClass>().GetMoney() >= currencyCompletion)
         {
             FinishQuest();
         }

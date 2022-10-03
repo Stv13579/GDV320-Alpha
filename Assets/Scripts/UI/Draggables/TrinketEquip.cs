@@ -18,11 +18,11 @@ public class TrinketEquip : DraggedObject
 
         //Add the item to the player items, removing any existing items
 
-        if(FindObjectOfType<PlayerClass>().heldItems.Count > 0)
+        if(FindObjectOfType<PlayerClass>().GetHeldItems().Count > 0)
         {
 
-            FindObjectOfType<PlayerClass>().heldItems[0].RemoveEffect();
-            FindObjectOfType<PlayerClass>().heldItems.Clear();
+            FindObjectOfType<PlayerClass>().GetHeldItems()[0].RemoveEffect();
+            FindObjectOfType<PlayerClass>().GetHeldItems().Clear();
             
 
         }

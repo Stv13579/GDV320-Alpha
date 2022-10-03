@@ -90,7 +90,7 @@ public class LevelGeneration : MonoBehaviour
         //Check if the player is carrying the balanced compass and roll to see if it triggers if so.
         if(GameObject.Find("TrinketManager"))
         {
-            if (GameObject.Find("Player").GetComponent<PlayerClass>().heldItems.Contains(GameObject.Find("TrinketManager").GetComponent<BalancedCompass>()))
+            if (GameObject.Find("Player").GetComponent<PlayerClass>().GetHeldItems().Contains(GameObject.Find("TrinketManager").GetComponent<BalancedCompass>()))
             {
                 Debug.Log("Checking for extra room!");
 
