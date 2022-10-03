@@ -121,7 +121,7 @@ public class BaseEnemyClass : MonoBehaviour
         }
 
 
-        if(transform.Find("SupportVFXHarness").gameObject && transform.Find("SupportVFXHarness").gameObject)
+        if(transform.Find("SupportVFXHarness") != null && transform.Find("SupportVFXHarness") != null)
         {
             buffVFX = transform.Find("SupportVFXHarness").GetChild(0).GetComponent<ParticleSystem>();
             healVFX = transform.Find("SupportVFXHarness").GetChild(1).GetComponent<ParticleSystem>();
