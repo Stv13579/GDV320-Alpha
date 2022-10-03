@@ -99,7 +99,9 @@ public class LevelGeneration : MonoBehaviour
                 if (randomRoll < GameObject.Find("TrinketManager").GetComponent<BalancedCompass>().GetActivationChance())
                 {
                     NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), otherRooms, possibleRespiteRooms);
-                    NPC.GetComponent<Room>().illegal = true;
+	                NPC.GetComponent<Room>().illegal = true;
+	                NPC.GetComponent<Room>().minimapRoom.SetAsBreak();
+
                 }
             }
         }

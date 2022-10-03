@@ -208,7 +208,8 @@ public class GameplayUI : MonoBehaviour
                 item.transform.GetChild(0).GetComponent<Image>().sprite = sprites[1];
                 item.enabled = false;
                 item.transform.GetChild(0).GetComponent<Image>().enabled = false;
-                itemIndex--;
+	            itemIndex--;
+	            return;
             }
             
             

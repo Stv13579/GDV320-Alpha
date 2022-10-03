@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -20446,6 +20446,116 @@ Transform:
   - {fileID: 1805003720}
   m_Father: {fileID: 0}
   m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &532893685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 532893690}
+  - component: {fileID: 532893689}
+  - component: {fileID: 532893688}
+  - component: {fileID: 532893687}
+  - component: {fileID: 532893686}
+  m_Layer: 0
+  m_Name: Trinkets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &532893686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532893685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60d3fae70db5c6e4785f176085f634e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  add: 0
+  currencyCost: 0
+  sprites: []
+  itemName: 
+  description: 
+  uState: 0
+--- !u!114 &532893687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532893685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd494e3340a2494f97e6d4f2e3bd547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  add: 0
+  currencyCost: 0
+  sprites: []
+  itemName: 
+  description: 
+  uState: 0
+--- !u!114 &532893688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532893685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995955fbc34744b4585d48fd33b1d247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  add: 0
+  currencyCost: 0
+  sprites: []
+  itemName: 
+  description: 
+  uState: 0
+  dropList: {fileID: 0}
+--- !u!114 &532893689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532893685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d742ae66cd2b4249899f4a2fcc451e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  add: 0
+  currencyCost: 0
+  sprites: []
+  itemName: 
+  description: 
+  uState: 0
+  tier1Chance: 0
+  tier2Chance: 0
+  tier3Chance: 0
+--- !u!4 &532893690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532893685}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 40.83644, y: -10.330089, z: 66.97097}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &537255945
 Mesh:

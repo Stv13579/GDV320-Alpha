@@ -8,7 +8,7 @@ using System;
 public class Item : MonoBehaviour
 {
 	[SerializeField]
-	bool add = false;
+	bool add = false, remove = false;
     GameObject UIWidget;
     public float currencyCost;
     public Sprite[] sprites;
@@ -27,6 +27,11 @@ public class Item : MonoBehaviour
 		{
 			AddEffect(GameObject.Find("Player").GetComponent<PlayerClass>());
 			add = false;
+		}
+		if(remove)
+		{
+			RemoveEffect();
+			remove = false;
 		}
 			
 	}
