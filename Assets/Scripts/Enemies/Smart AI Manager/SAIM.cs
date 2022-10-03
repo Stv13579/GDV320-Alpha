@@ -562,7 +562,7 @@ public class SAIM : MonoBehaviour
                 GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy, "Regular");
             }
             
-            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().heldItems)
+            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().GetHeldItems())
             {
                 item.SpawnTrigger(this.gameObject);
             }
@@ -603,7 +603,7 @@ public class SAIM : MonoBehaviour
                 GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy, "Regular");
             }
 
-            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().heldItems)
+            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().GetHeldItems())
             {
                 item.SpawnTrigger(this.gameObject);
             }
@@ -644,7 +644,7 @@ public class SAIM : MonoBehaviour
                 GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy, "Regular");
             }
 
-            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().heldItems)
+            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().GetHeldItems())
             {
                 item.SpawnTrigger(this.gameObject);
             }
