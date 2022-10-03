@@ -10,37 +10,37 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
     [SerializeField] 
-    private Camera currentCamera;
+    Camera currentCamera;
 
     // current rotation of camera
     [SerializeField]
-    private float spin = 0.0f;
+    float spin = 0.0f;
     [SerializeField]
-    private float tilt = 0.0f;
+    float tilt = 0.0f;
     [SerializeField]
-    private float roll = 0.0f;
+    float roll = 0.0f;
 
-    private float targetRoll = 0.0f;
+    float targetRoll = 0.0f;
     [SerializeField]
-    private float rollSpeed = 4.0f;
+    float rollSpeed = 4.0f;
     [SerializeField]
-    private float maxRoll = 2.5f;
+    float maxRoll = 2.5f;
 
     [SerializeField] 
-    private Vector2 tiltExtents = new Vector2(-85.0f, 85.0f);
-    private float bumpTilt = 0.0f;
+    Vector2 tiltExtents = new Vector2(-85.0f, 85.0f);
+    float bumpTilt = 0.0f;
 
     [SerializeField] 
-    private Vector2 spinExtents = new Vector2(0.0f, 0.0f);
+    Vector2 spinExtents = new Vector2(0.0f, 0.0f);
 
     [SerializeField] 
-    private float sensitivity = 2.0f;
+    float sensitivity = 2.0f;
 
-    private bool cursorLocked = false;
+    bool cursorLocked = false;
 
-    private bool ableToMove = true;
+    bool ableToMove = true;
 
-    private float rollNumber = 0.5f;
+    float rollNumber = 0.5f;
 
     // getter and setters
     public Camera GetCamera() { return currentCamera; }
@@ -53,20 +53,20 @@ public class PlayerLook : MonoBehaviour
     public void SetAbleToMove(bool tempAbleToMove) { ableToMove = tempAbleToMove; }
 
     // function is called when script is loaded or values have change on inspector
-    private void OnValidate()
+    void OnValidate()
     {
         currentCamera.transform.localEulerAngles = new Vector3(tilt, spin, 0);
     }
 
     // Start is called before the first frame update
     // TO DO:
-    private void Start()
+    void Start()
     {
         ToggleCursor();
     }
 
     // Update is called once per frame
-    private void Update()
+    void Update()
     {
         if (ableToMove)
         {
@@ -105,7 +105,7 @@ public class PlayerLook : MonoBehaviour
     }
 
     // moves the players head around so that they can look around
-    private void MoveCamera()
+    void MoveCamera()
     {
         // if cursor is locked
         if (cursorLocked)
@@ -135,7 +135,7 @@ public class PlayerLook : MonoBehaviour
     // function for player tilting 
     // checks for input and does tilting
     // TO DO:
-    private void RollInput()
+    void RollInput()
     {
         if (Input.GetKey(KeyCode.A))
         {
@@ -153,7 +153,7 @@ public class PlayerLook : MonoBehaviour
 
     // function that checks for input to toggle cursor on or off
     // for debugging purposes
-    private void HandleEditorInputs()
+    void HandleEditorInputs()
     {
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Tab))

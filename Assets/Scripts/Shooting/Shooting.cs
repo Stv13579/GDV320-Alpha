@@ -145,9 +145,9 @@ public class Shooting : MonoBehaviour
     public Vector2 GetLeftMana()
     {
         PlayerClass player = this.gameObject.GetComponent<PlayerClass>();
-        int i = Array.FindIndex(player.manaTypes, item => item.manaName == primaryElements[leftElementIndex].GetManaName());
+        int i = Array.FindIndex(player.GetManaTypeArray(), item => item.manaName == primaryElements[leftElementIndex].GetManaName());
 
-        return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+        return new Vector2(player.GetManaTypeArray()[i].currentMana, player.GetManaTypeArray()[i].maxMana);
     }
 
     public Vector2 GetNextLeftMana()
@@ -158,22 +158,22 @@ public class Shooting : MonoBehaviour
 
         if ((leftElementIndex + 1) >= primaryElements.Count)
         {
-            i = Array.FindIndex(player.manaTypes, item => item.manaName == primaryElements[0].GetManaName());
+            i = Array.FindIndex(player.GetManaTypeArray(), item => item.manaName == primaryElements[0].GetManaName());
 
-            return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+            return new Vector2(player.GetManaTypeArray()[i].currentMana, player.GetManaTypeArray()[i].maxMana);
         }
 
-        i = Array.FindIndex(player.manaTypes, item => item.manaName == primaryElements[leftElementIndex + 1].GetManaName());
+        i = Array.FindIndex(player.GetManaTypeArray(), item => item.manaName == primaryElements[leftElementIndex + 1].GetManaName());
 
-        return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+        return new Vector2(player.GetManaTypeArray()[i].currentMana, player.GetManaTypeArray()[i].maxMana);
     }
 
     public Vector2 GetRightMana()
     {
         PlayerClass player = this.gameObject.GetComponent<PlayerClass>();
-        int i = Array.FindIndex(player.manaTypes, item => item.manaName == catalystElements[rightElementIndex].GetManaName());
+        int i = Array.FindIndex(player.GetManaTypeArray(), item => item.manaName == catalystElements[rightElementIndex].GetManaName());
 
-        return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+        return new Vector2(player.GetManaTypeArray()[i].currentMana, player.GetManaTypeArray()[i].maxMana);
     }
 
     public Vector2 GetNextRightMana()
@@ -184,14 +184,14 @@ public class Shooting : MonoBehaviour
 
         if ((rightElementIndex + 1) >= catalystElements.Count)
         {
-            i = Array.FindIndex(player.manaTypes, item => item.manaName == catalystElements[0].GetManaName());
+            i = Array.FindIndex(player.GetManaTypeArray(), item => item.manaName == catalystElements[0].GetManaName());
 
-            return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+            return new Vector2(player.GetManaTypeArray()[i].currentMana, player.GetManaTypeArray()[i].maxMana);
         }
 
-        i = Array.FindIndex(player.manaTypes, item => item.manaName == catalystElements[rightElementIndex + 1].GetManaName());
+        i = Array.FindIndex(player.GetManaTypeArray(), item => item.manaName == catalystElements[rightElementIndex + 1].GetManaName());
 
-        return new Vector2(player.manaTypes[i].currentMana, player.manaTypes[i].maxMana);
+        return new Vector2(player.GetManaTypeArray()[i].currentMana, player.GetManaTypeArray()[i].maxMana);
     }
     public void SetLoadOutChosen(bool tempLoadOutChosen) { loadOutChosen = tempLoadOutChosen; }
 

@@ -22,10 +22,10 @@ public class FortunesUI : NPCUI
 
     public void FortuneButton()
     {
-        if (player.money >= cost)
+        if (player.GetMoney() >= cost)
         {
             //Start placing the buttons
-            player.money -= cost;
+            player.SubtractMoney(cost);
 
             SetProphecies();
             if (audioManager)
