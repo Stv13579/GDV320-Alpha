@@ -119,7 +119,7 @@ public class GameplayUI : MonoBehaviour
     {
         //Getting the current values from the player and updating the UI with them
         healthBar.fillAmount = playerClass.GetCurrentHealth() / playerClass.GetMaxHealth();
-        moneyText.text = playerClass.money.ToString();
+        moneyText.text = playerClass.GetMoney().ToString();
 
         activePrimaryElement.sprite = player.GetPrimaryElementSprite();
         inactivePrimaryElement.sprite = player.GetNextPrimaryElementSprite();
@@ -302,7 +302,7 @@ public class GameplayUI : MonoBehaviour
         {
             tempDamageIndicator = Instantiate(damageIndicator, this.gameObject.transform);
         }
-        float indicatorLife = 4.0f;
+        float indicatorLife = 1.0f;
         Vector3 targetPos;
         while (indicatorLife > 0)
         {
@@ -324,7 +324,7 @@ public class GameplayUI : MonoBehaviour
 
             yield return null;
         }
-        float fadeTime = 2.0f;
+        float fadeTime = 1.0f;
         while(fadeTime > 0)
         {
             fadeTime -= Time.deltaTime;

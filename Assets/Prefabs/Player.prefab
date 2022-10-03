@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131726688}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0272, y: -0.0413, z: 0}
+  m_LocalPosition: {x: 0.025, y: -0.0413, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1556197111756468327}
@@ -177,7 +177,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511683286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0547, y: -0.0399, z: 0.0008}
+  m_LocalPosition: {x: 0.025, y: -0.0399, z: 0.0008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2812520820995258018}
@@ -509,7 +509,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2342924018183944106}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1327,20 +1327,14 @@ MonoBehaviour:
       additiveModifiers: []
       additiveMultiplicativeModifiers: []
       multiplicativeModifiers: []
-  money: 100
   heldItems: []
-  itemUI: {fileID: 0}
   gameOverScreen: {fileID: 5938581657908307557, guid: c15b7a340c63df74189d70226e0485bc,
     type: 3}
-  pushDuration: 0
   fireDOT: 0.01
   fireEffect: {fileID: 7688067040465559332}
   lowHealthLimit: 50
   lowHealthFastHeartBeat: Low Health Fast Heart Beat
   lowHealthSlowHeartBeat: Low Health Slow Heart Beat
-  enemies:
-    serializedVersion: 2
-    m_Bits: 4194560
 --- !u!114 &1363181307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1386,7 +1380,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 7128103365064262050, guid: 38ba7214c9215794098efd48e6d1078a, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 1
+  manaCost: 5
   animationToPlay: FireProj
   animationToPlayAlt: FireProjAlt
   playerHand: {fileID: 2017859571}
@@ -1412,7 +1406,7 @@ MonoBehaviour:
   otherShootingSoundFX: Fire Element Shot Alt
   switchElementSFX: Fire Element Equip
   idleSFX: Fire Element Idle
-  damage: 15
+  damage: 17
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: FireTransition
@@ -1442,7 +1436,7 @@ MonoBehaviour:
   handVFX: {fileID: 3588022246820785612, guid: d84d2c64a8d7ce84c97a4650e477e6ef, type: 3}
   wristVFX: {fileID: 4952139987312495225, guid: 2a7f82e3da1331b40af316fc2d1dd30b,
     type: 3}
-  manaCost: 1
+  manaCost: 5
   animationToPlay: CrystalProj
   animationToPlayAlt: CrystalProjAlt
   playerHand: {fileID: 2017859571}
@@ -1468,7 +1462,7 @@ MonoBehaviour:
   otherShootingSoundFX: Crystal Element Shot Alt
   switchElementSFX: Crystal Element Equip
   idleSFX: Crystal Element Idle (maybe)
-  damage: 3
+  damage: 2.5
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: CrystalTransition
@@ -1520,7 +1514,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 1500460943617783291, guid: e2d916ad91d498b4f907b0d381291644, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 1
+  manaCost: 5
   animationToPlay: WaterProj
   animationToPlayAlt: WaterProjAlt
   playerHand: {fileID: 2017859571}
@@ -1546,7 +1540,7 @@ MonoBehaviour:
   otherShootingSoundFX: Water Element Shot Alt
   switchElementSFX: Water Element Equip
   idleSFX: Water Element Idle
-  damage: 20
+  damage: 17
   damageMultiplier: 1
   damageMulti: []
   switchAnimationName: WaterTransition
@@ -2059,7 +2053,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 1249736540608547060, guid: 24d04b33919a91943b35726f9315bcce, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 10
+  manaCost: 100
   animationToPlay: LifeStealCast
   animationToPlayAlt: 
   playerHand: {fileID: 2017859571}

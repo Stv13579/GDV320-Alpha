@@ -43,7 +43,10 @@ public class NecroticElement : BaseElementClass
         }
 
         isTargeting = false;
-	    if (targetToSlow && targetToSlow.GetComponentInParent<BaseEnemyClass>() && !targetToSlow.GetComponent<EnemyShield>())
+	    if (targetToSlow && targetToSlow.GetComponentInParent<BaseEnemyClass>() && !targetToSlow.GetComponent<EnemyShield>() &&
+            targetToSlow.GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 2.0f || 
+            targetToSlow && targetToSlow.GetComponentInParent<BaseEnemyClass>() && !targetToSlow.GetComponent<EnemyShield>() &&
+            targetToSlow.GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 3.0f)
         {
 		    BaseEnemyClass enemy = targetToSlow.GetComponentInParent<BaseEnemyClass>();
             if (enemy.GetDamageResistance() != 2.0f || enemy.GetDamageResistance() != 3.0f)

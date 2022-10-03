@@ -41,7 +41,7 @@ public class BlacksmithUI : NPCUI
 
     public void UpgradeButton(int index)
     {
-        if (player.money >= elements[index].upgradeCost)
+        if (player.GetMoney() >= elements[index].upgradeCost)
         {
             //Call an upgrade function for that element
             elements[index].Upgrade();

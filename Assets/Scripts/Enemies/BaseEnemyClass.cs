@@ -93,6 +93,8 @@ public class BaseEnemyClass : MonoBehaviour
     [SerializeField]
     public ParticleSystem healVFX, buffVFX;
 
+	[SerializeField]
+	List<Material> enemyMat = new List<Material>();
     public virtual void Awake()
     {
         if(GameObject.Find("ProphecyManager"))
@@ -118,8 +120,21 @@ public class BaseEnemyClass : MonoBehaviour
             spawner = FindObjectOfType<SAIM>().gameObject;
         }
 
-        buffVFX = transform.Find("SupportVFXHarness").GetChild(0).GetComponent<ParticleSystem>();
-        healVFX = transform.Find("SupportVFXHarness").GetChild(1).GetComponent<ParticleSystem>();
+
+        if(transform.Find("SupportVFXHarness") != null && transform.Find("SupportVFXHarness") != null)
+        {
+            buffVFX = transform.Find("SupportVFXHarness").GetChild(0).GetComponent<ParticleSystem>();
+            healVFX = transform.Find("SupportVFXHarness").GetChild(1).GetComponent<ParticleSystem>();
+        }
+		
+	    if(enemyAnims)
+	    {
+	    	Material[] mats = enemyAnims.gameObject.transform.GetComponentInChildren<Renderer>().materials;
+	    	for(int i = 0; i < mats.Length; i++)
+	    	{
+	    		enemyMat.Add(mats[i]);
+	    	}
+	    }
 
     }
 
@@ -201,10 +216,9 @@ public class BaseEnemyClass : MonoBehaviour
         //Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
         //hitSpn.transform.localScale = scale;
         
-        
         if(applyTriggers)
         {
-            foreach (Item item in playerClass.heldItems)
+            foreach (Item item in playerClass.GetHeldItems())
             {
                 item.OnHitTriggers(this, attackTypes);
             }
@@ -216,7 +230,7 @@ public class BaseEnemyClass : MonoBehaviour
             }
         }
         
-
+	    Debug.Log(damageToTake);
         float multiplier = 1;
         foreach (Types type in attackTypes)
         {
@@ -235,6 +249,8 @@ public class BaseEnemyClass : MonoBehaviour
                 }
             }
         }
+	    Debug.Log((damageToTake * multiplier) * damageResistance - damageThreshold);
+
         currentHealth -= (damageToTake * multiplier) * damageResistance - damageThreshold;
 
         if(enemyAnims)
@@ -251,6 +267,11 @@ public class BaseEnemyClass : MonoBehaviour
             audioManager.StopSFX(takeDamageAudio);
             audioManager.PlaySFX(takeDamageAudio, player.transform, this.transform);
         }
+        
+	    foreach(Material mat in enemyMat)
+	    {
+	    	mat.SetFloat("_Toggle_EnemyHPEmissive", Mathf.Clamp(currentHealth / maxHealth, 0, 1));
+	    }
 
         //Instead of calling death here, make an animation trigger instead
         if (currentHealth <= 0)
@@ -294,7 +315,7 @@ public class BaseEnemyClass : MonoBehaviour
                     Drop(drops.minAmmoSpawn, drops.maxAmmoSpawn);
                     break;
                 case 2:
-                    Drop(drops.healthList, drops.minHealthSpawn, drops.maxHealthSpawn);
+	                Drop(drops.healthList, drops.GetMinHealthSpawn(), drops.GetMaxHealthSpawn());
                     break;
                 default:
                     break;
@@ -363,7 +384,11 @@ public class BaseEnemyClass : MonoBehaviour
 
 	public virtual void RestoreHealth(float amount)
     {
-        currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
+	    currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
+	    foreach(Material mat in enemyMat)
+	    {
+	    	mat.SetFloat("_Toggle_EnemyHPEmissive", Mathf.Clamp(currentHealth / maxHealth, 0, 1));
+	    }
     }
 
 

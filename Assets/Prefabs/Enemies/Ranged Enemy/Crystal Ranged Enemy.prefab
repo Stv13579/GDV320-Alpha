@@ -10903,7 +10903,7 @@ MonoBehaviour:
   groundMoveSpeed: 0
   moveSpeed: 15
   baseMoveSpeed: 15
-  rotationSpeed: 0
+  rotationSpeed: 1000
   damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
@@ -10919,10 +10919,11 @@ MonoBehaviour:
   targettingIndicator: {fileID: 7112952547350365205}
   healVFX: {fileID: 0}
   buffVFX: {fileID: 0}
-  attackTime: 5
+  enemyMat: []
+  attackTime: 3
   viewToPlayer:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 2165760
   burrowTime: 2
   projectile: {fileID: 7190613651226108052, guid: e1fdf123f765a42408333e9b3ecdb4b8,
     type: 3}
@@ -26896,12 +26897,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: aa06d1e5bf3d5cb4fabf503cd122fa9d, type: 2}
+      objectReference: {fileID: 2100000, guid: 20bace48dc522984683395b6ef12052a, type: 2}
     - target: {fileID: -36441636422381409, guid: 6abd42cf2cf064a4f91e6856c345e5d2,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 441d27e044e83ed4997f70969077ff11, type: 2}
+      objectReference: {fileID: 2100000, guid: 04cad745e21a8484ba7303c8e061b099, type: 2}
     - target: {fileID: 919132149155446097, guid: 6abd42cf2cf064a4f91e6856c345e5d2,
         type: 3}
       propertyPath: m_Name
