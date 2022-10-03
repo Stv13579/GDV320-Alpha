@@ -13,10 +13,10 @@ public class IncreaseMaxManaScript : Item
     public void IncreaseMaxMana(PlayerClass player)
     {
         int index = 0;
-        foreach (PlayerClass.ManaType mana in player.manaTypes)
+        foreach (PlayerClass.ManaType mana in player.GetManaTypeArray())
         {
-            StatModifier.AddModifier(player.manaTypes[index].mana.additiveModifiers, new StatModifier.Modifier(100.0f, "Mana Ring" + GetInstanceID()));
-            player.manaTypes[index].maxMana = StatModifier.UpdateValue(player.manaTypes[index].mana); 
+            StatModifier.AddModifier(player.GetManaTypeArray()[index].mana.additiveModifiers, new StatModifier.Modifier(100.0f, "Mana Ring" + GetInstanceID()));
+            player.GetManaTypeArray()[index].maxMana = StatModifier.UpdateValue(player.GetManaTypeArray()[index].mana); 
             index++;
         }
     }

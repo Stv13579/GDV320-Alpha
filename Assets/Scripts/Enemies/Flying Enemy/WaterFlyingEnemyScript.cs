@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class WaterFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
 {
     [SerializeField]
@@ -19,7 +20,11 @@ public class WaterFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
             if (col.gameObject.GetComponent<BaseEnemyClass>())
             {
                 col.gameObject.GetComponent<BaseEnemyClass>().RestoreHealth(healthRestore);
-                col.gameObject.GetComponent<BaseEnemyClass>().healVFX.Play();
+                if(col.gameObject.GetComponent<BaseEnemyClass>().healVFX)
+                {
+                    col.gameObject.GetComponent<BaseEnemyClass>().healVFX.Play();
+                }
+                
             }
         }
         FindTarget();
