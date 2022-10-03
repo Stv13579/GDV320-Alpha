@@ -6,7 +6,15 @@ using System;
 public class PlayerClass : MonoBehaviour
 {
     [SerializeField]
-    float currentHealth, maxHealth, baseMaxHealth, defense, baseDefense;
+    float currentHealth;
+    [SerializeField]
+    float maxHealth;
+    [SerializeField]
+    float baseMaxHealth;
+    [SerializeField]
+    float defense;
+    [SerializeField]
+    float baseDefense;
 
     StatModifier.FullStat health = new StatModifier.FullStat(0), defenseStat = new StatModifier.FullStat(0);
 
@@ -32,22 +40,24 @@ public class PlayerClass : MonoBehaviour
         public StatModifier.FullStat mana;
     }
     [SerializeField]
-    public ManaType[] manaTypes;
-    public float money;
+    ManaType[] manaTypes;
+    float money;
 
     //A list of items which are collectible objects which add extra effects to the player
-    public List<Item> heldItems = new List<Item>();
+    [SerializeField]
+    List<Item> heldItems = new List<Item>();
 
     [HideInInspector]
-    public GameObject itemUI;
+    GameObject itemUI;
 
-    public GameObject gameOverScreen;
+    [SerializeField]
+    GameObject gameOverScreen;
     bool dead = false;
 
     /// <summary>
     /// Pushing Away When Hit
     /// </summary>
-    public float pushDuration;
+    float pushDuration;
     float pushStrength;
     float currentPushDuration;
     Vector3 pushDir;
@@ -71,6 +81,14 @@ public class PlayerClass : MonoBehaviour
     GameplayUI gameplayUI;
 
     float lowHealthValue;
+
+    public ManaType[] GetManaTypeArray() { return manaTypes; }
+    public List<Item> GetHeldItems() { return heldItems; }
+    public GameObject GetItemUI() { return itemUI; }
+    public GameObject GetGameOverScreen() { return gameOverScreen; }
+    public void SetGameOverScreen(GameObject tempGameOverScreen) { gameOverScreen = tempGameOverScreen; }
+    public float GetMoney() { return money; }
+    public void SubtractMoney(float cost) { money -= cost; }
     void Start()
     {
         DontDestroyOnLoad(gameObject);

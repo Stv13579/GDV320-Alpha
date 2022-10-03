@@ -71,11 +71,11 @@ public class ShopUI : NPCUI
 
     private void Update()
     {
-        moneyText.text = "Money: " + player.money.ToString();
+        moneyText.text = "Money: " + player.GetMoney().ToString();
     }
     public void Button(int button)
     {
-        if(player.money >= shopItems[button].currencyCost)
+        if(player.GetMoney() >= shopItems[button].currencyCost)
         {
             //If he player has enough money, give the player the item, take away their money, and remove he option from the shop
             Item item = (Item)inventory.AddComponent(shopItems[button].GetType());

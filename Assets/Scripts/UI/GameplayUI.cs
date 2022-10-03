@@ -119,7 +119,7 @@ public class GameplayUI : MonoBehaviour
     {
         //Getting the current values from the player and updating the UI with them
         healthBar.fillAmount = playerClass.GetCurrentHealth() / playerClass.GetMaxHealth();
-        moneyText.text = playerClass.money.ToString();
+        moneyText.text = playerClass.GetMoney().ToString();
 
         activePrimaryElement.sprite = player.GetPrimaryElementSprite();
         inactivePrimaryElement.sprite = player.GetNextPrimaryElementSprite();
