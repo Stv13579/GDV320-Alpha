@@ -12,7 +12,9 @@ public class EmeraldEye : Item
 
     public override void AddEffect(PlayerClass player)
     {
-        base.AddEffect(player);
+	    base.AddEffect(player);
+	    DropsList[] instances = Resources.FindObjectsOfTypeAll<DropsList>();
+	    dropList = instances[0];
         dropList.maxHealthSpawn += increaseDropAmount;
         dropList.minHealthSpawn += increaseDropAmount;
 
