@@ -8,20 +8,22 @@ public class EmeraldEye : Item
     DropsList dropList;
 
     [SerializeField]
-    int increaseDropAmount;
+	int increaseDropAmount = 1;
 
     public override void AddEffect(PlayerClass player)
     {
-        base.AddEffect(player);
-        dropList.maxHealthSpawn += increaseDropAmount;
-        dropList.minHealthSpawn += increaseDropAmount;
+	    base.AddEffect(player);
+	    DropsList[] instances = Resources.FindObjectsOfTypeAll<DropsList>();
+	    dropList = instances[0];
+	    dropList.SetHealthDrops(increaseDropAmount);
+
 
     }
 
     public override void RemoveEffect()
     {
         base.RemoveEffect();
-        dropList.maxHealthSpawn -= increaseDropAmount;
-        dropList.minHealthSpawn -= increaseDropAmount;
+	    dropList.SetHealthDrops(-increaseDropAmount);
+
     }
 }
