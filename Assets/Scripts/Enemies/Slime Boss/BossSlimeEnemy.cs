@@ -59,9 +59,6 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     Vector3 chargeVec;
     [SerializeField]
     private LayerMask trailLayerMask;
-    float trailCastDistance = 1.0f;
-    float backCastDistance = 0.1f;
-    float trailOffset = 0.01f;
     [SerializeField]
     private Vector3 fireTrailScale;
     [SerializeField]
@@ -122,16 +119,16 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         if(!GameObject.Find("Boss Healthbar(Clone)"))
         {
             bossHealthBar = Instantiate(healthBar).GetComponent<BossHealthbarScript>();
-            bossHealthBar.enemies.Add(this);
-            bossHealthBar.bossName.text = "King Slime";
-            bossHealthBar.maxHealth = maxHealth;
+	        bossHealthBar.AddEnemy(this);
+	        bossHealthBar.SetName("King Slime");
+	        bossHealthBar.SetMaxHealth(maxHealth);
 
         }
         deathTriggers.Remove(Split);
 
     }
 
-    protected override void Update()
+	public override void Update()
     {
 
 	    base.Update();
@@ -504,10 +501,10 @@ public class BossSlimeEnemy : WaterSlimeEnemy
                 StatModifier.AddModifier(newSlime.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
                 newSlime.transform.localScale = this.transform.localScale / 2;
                 newSlime.generation = generation + 1;
-                bossHealthBar.enemies.Add(newSlime);
+	            bossHealthBar.AddEnemy(newSlime);
                 newSlime.bossHealthBar = bossHealthBar;
             }
-            bossHealthBar.enemies.Remove(this);
+	        bossHealthBar.RemoveEnemy(this);
             split = true;
             Destroy(this.gameObject);
         }

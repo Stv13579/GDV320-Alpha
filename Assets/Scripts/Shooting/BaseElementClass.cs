@@ -34,16 +34,23 @@ public class BaseElementClass : MonoBehaviour
     [SerializeField]
     protected Animator playerHand;
 
-    //Variables for UI purposes
-    public string elementName;
-    public string elementDescription;
-    public Sprite uiSprite;
-    public Sprite crosshair;
-    public HoverOver.LoadoutVariables lVars;
+	//Variables for UI purposes
+	[SerializeField]
+	string elementName;
+	[SerializeField]
+	string elementDescription;
+	[SerializeField]
+	Sprite uiSprite;
+	[SerializeField]
+	Sprite crosshair;
+	[SerializeField]
+    HoverOver.LoadoutVariables lVars;
 
-    //Additional variables for the blacksmith
-    public int upgradeCost = 5;
-    public string upgradeDescription;
+	//Additional variables for the blacksmith
+	[SerializeField]
+	int upgradeCost = 5;
+	[SerializeField]
+    string upgradeDescription;
 
     [SerializeField]
     protected List<BaseEnemyClass.Types> attackTypes;
@@ -78,9 +85,8 @@ public class BaseElementClass : MonoBehaviour
     [SerializeField]
     protected float damage;
 
-    [HideInInspector]
-    public float damageMultiplier = 1;
-    public List<Multiplier> damageMulti = new List<Multiplier>();
+	protected float damageMultiplier = 1;
+    List<Multiplier> damageMulti = new List<Multiplier>();
 
     protected ElementStats elementData;
 
@@ -285,5 +291,35 @@ public class BaseElementClass : MonoBehaviour
         }
     }
 
-    public Animator GetPlayerHand() {return playerHand;}
+	public Animator GetPlayerHand() {return playerHand;}
+    
+	public Sprite GetSprite()
+	{
+		return uiSprite;
+	}
+	
+	public Sprite GetCrosshair()
+	{
+		return crosshair;
+	}
+	
+	public HoverOver.LoadoutVariables GetLVars()
+	{
+		return lVars;
+	}
+	
+	public int GetUpgradeCost()
+	{
+		return upgradeCost;
+	}
+	
+	public string GetName()
+	{
+		return elementName;
+	}
+	
+	public string GetDescription()
+	{
+		return elementDescription;
+	}
 }

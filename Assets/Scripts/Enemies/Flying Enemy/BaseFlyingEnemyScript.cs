@@ -11,11 +11,8 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
     protected float effectTimer, effectRange;
     float effectTimerMulti = 1.0f;
     protected bool effect = false;
-    bool moving = false;
     [SerializeField]
     protected LayerMask moveDetect;
-
-    float moveTimer = 0.0f;
 
     [SerializeField]
     float hoverHeight;
@@ -36,7 +33,7 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
         FindTarget();
     }
 
-    private void Update()
+	public override void Update()
     {
 	    base.Update();
         {

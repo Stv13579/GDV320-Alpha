@@ -170,14 +170,14 @@ public class GameplayUI : MonoBehaviour
 
         if (hitMarker)
         {
-            if (hitMarker.active == true)
+	        if (hitMarker.activeSelf == true)
             {
                 StartCoroutine(HitMarker());
             }
         }
         if(hitMarkerShield)
         {
-            if(hitMarkerShield.active == true)
+            if(hitMarkerShield.activeSelf == true)
             {
                 StartCoroutine(HitMarkerShield());
             }

@@ -6,18 +6,20 @@ using UnityEngine.UI;
 
 public class LotlUI : NPCUI
 {
-    List<Item> giftItems = new List<Item>();
-    public List<GameObject> buttons;
-    public ItemList items;
+	List<Item> giftItems = new List<Item>();
+	[SerializeField]
+	List<GameObject> buttons;
+	[SerializeField]
+    ItemList items;
 
     List<int> ids = new List<int>();
 
     // Start is called before the first frame update
-    void Start()
-    {
+	public override void Start()
+	{
         base.Start();
 
-        foreach (ItemEntry item in items.itemList)
+        foreach (ItemEntry item in items.GetItemList())
         {
             item.alreadyAdded = false;
         }
@@ -28,16 +30,16 @@ public class LotlUI : NPCUI
         while (itemsAdded < 3)
         {
             //Get a random item from the global item list, check if the item is valid to give to the player, and if so add it, otherwise try again
-            int i = Random.Range(0, items.itemList.Count);
-            Item item = (Item)this.gameObject.AddComponent(System.Type.GetType(items.itemList[i].item));
-            if (!items.itemList[i].alreadyAdded || (items.itemList[i].alreadyAdded && items.itemList[i].mulipleAllowed))
+            int i = Random.Range(0, items.GetItemList().Count);
+            Item item = (Item)this.gameObject.AddComponent(System.Type.GetType(items.GetItemList()[i].item));
+            if (!items.GetItemList()[i].alreadyAdded || (items.GetItemList()[i].alreadyAdded && items.GetItemList()[i].mulipleAllowed))
             {
-                item.sprites = items.itemList[i].sprites;
-                item.itemName = items.itemList[i].itemName;
-                item.description = items.itemList[i].description;
+                item.sprites = items.GetItemList()[i].sprites;
+                item.itemName = items.GetItemList()[i].itemName;
+                item.description = items.GetItemList()[i].description;
                 giftItems.Add(item);
                 ids.Add(i);
-                items.itemList[i].alreadyAdded = true;
+                items.GetItemList()[i].alreadyAdded = true;
                 itemsAdded += 1;
             }
             else
@@ -95,7 +97,7 @@ public class LotlUI : NPCUI
             if (buttons[i].activeInHierarchy)
             {
                 //If an item isn't bought when leaving the shop, mark it available to be obtained again
-                items.itemList[ids[i]].alreadyAdded = false;
+                items.GetItemList()[ids[i]].alreadyAdded = false;
             }
         }
         base.Close();

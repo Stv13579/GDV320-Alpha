@@ -31,9 +31,9 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
         this.transform.position = emergePos;
         GameObject healthbar = Instantiate(bossHealthbar);
         BossHealthbarScript healthbarScript = healthbar.GetComponent<BossHealthbarScript>();
-        healthbarScript.enemies.Add(this);
-        healthbarScript.bossName.text = "Dragon Lily";
-        healthbarScript.maxHealth = maxHealth;
+	    healthbarScript.AddEnemy(this);
+	    healthbarScript.SetName("Dragon Lily");
+	    healthbarScript.SetMaxHealth(maxHealth);
     }
     public override void Update()
 	{

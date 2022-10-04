@@ -15,7 +15,7 @@ public class EmeraldEye : Item
 	    base.AddEffect(player);
 	    DropsList[] instances = Resources.FindObjectsOfTypeAll<DropsList>();
 	    dropList = instances[0];
-	    dropList.SetHealthDrops(increaseDropAmount);
+	    dropList.ModifyHealthDropQuantity(increaseDropAmount);
 
 
     }
@@ -23,7 +23,7 @@ public class EmeraldEye : Item
     public override void RemoveEffect()
     {
         base.RemoveEffect();
-	    dropList.SetHealthDrops(-increaseDropAmount);
+	    dropList.ModifyHealthDropQuantity(-increaseDropAmount);
 
     }
 }

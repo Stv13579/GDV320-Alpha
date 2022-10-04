@@ -8,7 +8,6 @@ public class EnemyShield : BaseEnemyClass
     protected List<Types> restoration;
     [SerializeField]
     Collider[] attackCollider, defenseCollider;
-    bool attacking = false;
     public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
     {
         hitSpawn.GetComponent<ParticleSystem>().Clear();
@@ -75,7 +74,6 @@ public class EnemyShield : BaseEnemyClass
         {
             col.enabled = false;
         }
-        attacking = true;
     }
 
     public void EndAttack()
@@ -88,7 +86,6 @@ public class EnemyShield : BaseEnemyClass
         {
             col.enabled = true;
         }
-        attacking = false;
 
     }
 

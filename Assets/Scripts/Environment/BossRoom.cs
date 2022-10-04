@@ -37,9 +37,8 @@ public class BossRoom : Room
         audioManager = FindObjectOfType<AudioManager>();
         runManager = FindObjectOfType<RunManager>();
     }
-    public void Update()
+	public void Update()
     {
-        base.Update();
 
         if (bossSpawned)
         {

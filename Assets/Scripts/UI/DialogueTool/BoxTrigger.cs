@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class BoxTrigger : MonoBehaviour
 {
-    public GameObject interactButton;
-    public DialogueManager dialogueManager;
-    [Header("You Need to drag the right scriptable object for the right NPC dialogue")]
-    public DialogueData dialogueData;
+	[SerializeField]
+	GameObject interactButton;
+	[SerializeField]
+    DialogueManager dialogueManager;
+	[Header("You Need to drag the right scriptable object for the right NPC dialogue")]
+	[SerializeField]
+    DialogueData dialogueData;
     // finds the interact button and dialoguemanager so that the user doesnt have to drag and drop it every time
     private void OnValidate()
     {

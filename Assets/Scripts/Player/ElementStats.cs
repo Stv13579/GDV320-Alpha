@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
 public class ElementStats : MonoBehaviour
 {
     public List<Multiplier> crystaldamageMultis = new List<Multiplier>();

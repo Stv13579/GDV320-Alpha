@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class NPCUI : MonoBehaviour
 {
-    [HideInInspector]
-    public Interact NPC;
+	protected Interact NPC;
 
     protected PlayerClass player;
     protected GameObject inventory;
     protected AudioManager audioManager;
 
-    public void Start()
+	public virtual void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         player = GameObject.Find("Player").GetComponent<PlayerClass>();
@@ -23,5 +22,15 @@ public class NPCUI : MonoBehaviour
 
         NPC.LeaveUI();
     }
+    
+	public Interact GetNPC()
+	{
+		return NPC;
+	}
+	
+	public void SetNPC(Interact newNPC)
+	{
+		NPC = newNPC;
+	}
 
 }

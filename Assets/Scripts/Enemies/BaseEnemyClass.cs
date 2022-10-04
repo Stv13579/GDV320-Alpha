@@ -91,6 +91,14 @@ public class BaseEnemyClass : MonoBehaviour
 
 	[SerializeField]
 	List<Material> enemyMat = new List<Material>();
+	
+	
+	[SerializeField]
+	float maxDistance = 120.0f;
+	float damageTimer = 0.0f;
+	[SerializeField]
+	float maxDamageTimer = 30.0f;
+	
     public virtual void Awake()
     {
         if(GameObject.Find("ProphecyManager"))
@@ -140,7 +148,7 @@ public class BaseEnemyClass : MonoBehaviour
         {
             return;
         }
-
+		
         if(currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
@@ -162,7 +170,7 @@ public class BaseEnemyClass : MonoBehaviour
 
         if (uiScript)
         {
-            if (uiScript.GetHitMarker().active == true)
+	        if (uiScript.GetHitMarker().activeSelf == true)
             {
                 StartCoroutine(uiScript.HitMarker());
             }
@@ -170,11 +178,19 @@ public class BaseEnemyClass : MonoBehaviour
 
         if(uiScript)
         {
-            if(uiScript.GetHitMarkerShield().active == true)
+            if(uiScript.GetHitMarkerShield().activeSelf == true)
             {
                 StartCoroutine(uiScript.HitMarkerShield());
             }
         }
+        
+	    damageTimer += Time.deltaTime;
+	    //Softlock prevention check
+	    if(damageTimer > maxDamageTimer && Vector3.Distance(this.transform.position, player.transform.position) > maxDistance)
+	    {
+	    	currentHealth = -10;
+		    enemyAnims.SetTrigger("Dead");
+	    }
     }
 
     //Movement
@@ -277,6 +293,8 @@ public class BaseEnemyClass : MonoBehaviour
                 enemyAnims.SetTrigger("Dead");
             }
         }
+        
+	    damageTimer = 0;
         //Death();
     }
 
@@ -305,13 +323,13 @@ public class BaseEnemyClass : MonoBehaviour
             switch (dropType)
             {
                 case 0:
-                    Drop(drops.currencyList, drops.minCurrencySpawn, drops.maxCurrencySpawn);
+	                Drop(drops.GetCurrencyList(), drops.GetMinCurrencySpawn(), drops.GetMaxCurrencySpawn());
                     break;
                 case 1:
-                    Drop(drops.minAmmoSpawn, drops.maxAmmoSpawn);
+	                Drop(drops.GetMinAmmoSpawn(), drops.GetMaxAmmoSpawn());
                     break;
                 case 2:
-	                Drop(drops.healthList, drops.GetMinHealthSpawn(), drops.GetMaxHealthSpawn());
+	                Drop(drops.GetHealthList(), drops.GetMinHealthSpawn(), drops.GetMaxHealthSpawn());
                     break;
                 default:
                     break;
@@ -362,12 +380,12 @@ public class BaseEnemyClass : MonoBehaviour
 
     public void Targetted(bool targetted, Color colour)
     {
-        if(targettingIndicator.active == false && targetted == true)
+        if(targettingIndicator.activeSelf == false && targetted == true)
         {
             targettingIndicator.SetActive(targetted);
         }
         
-        if(targettingIndicator.active == true && targetted == false)
+        if(targettingIndicator.activeSelf == true && targetted == false)
         {
             targettingIndicator.SetActive(targetted);
         }

@@ -52,7 +52,7 @@ public class Interact : MonoBehaviour
                 instantiatedMenu = Instantiate(menu);
                 if(npc)
                 {
-                    instantiatedMenu.GetComponent<NPCUI>().NPC = this;
+	                instantiatedMenu.GetComponent<NPCUI>().SetNPC(this);
                 }
 
             }

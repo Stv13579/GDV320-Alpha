@@ -15,7 +15,7 @@ public class FortunesUI : NPCUI
 
     //Present the player with the opporunity to look into the future, for a price.
     //If paid, offer there possible futures in the form of tarot cards.
-    void Start()
+	public override void Start()
     {
         base.Start();
     }

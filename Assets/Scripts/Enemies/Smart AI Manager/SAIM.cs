@@ -66,7 +66,6 @@ public class SAIM : MonoBehaviour
     public LayerMask verticalSpaceLayerMask;
     public LayerMask impassableLayerMask;
     public LayerMask cullLayerMask;
-    bool doneonce = false;
 
     [HideInInspector]
     public bool triggered = false, playerLeaving = false, roomComplete = false;
@@ -127,10 +126,10 @@ public class SAIM : MonoBehaviour
     private void Start()
     {
 
-        data.adjustedDifficulty = data.difficulty;
-        data.player = GameObject.Find("Player");
-        diffAdjTimerDAM = data.difficultyAdjustTimerTotal_DAMAGE;
-        diffAdjTimerKIL = data.difficultyAdjustTimerTotal_KILLS;
+	    data.SetAdjustedDifficulty(data.GetDifficulty());
+	    data.SetPlayer(GameObject.Find("Player"));
+	    diffAdjTimerDAM = data.GetAdjustTimerDamage();
+	    diffAdjTimerKIL = data.GetAdjustTimerKills();
         
         //CreateAndKillNodes();
         foreach (Transform child in blockerMaster.transform)
@@ -170,7 +169,7 @@ public class SAIM : MonoBehaviour
 
         if(CheckSpawnConditions() && !bossSaim)
         {
-            Spawn(Random.Range(data.spawnMin, data.spawnMax));
+	        Spawn(Random.Range(data.GetMinSpawns(), data.GetMaxSpawns()));
            
         }
 
@@ -509,24 +508,24 @@ public class SAIM : MonoBehaviour
             return false;
         }
 
-        if (spawnAmount >= data.totalSpawns)
+	    if (spawnAmount >= data.GetTotalSpawns())
         {
             spawningFinished = true;
             return false;
         }
 
-        if (timeInSpawning >= data.spawnDuration)
+	    if (timeInSpawning >= data.GetSpawnDuration())
         {
             spawningFinished = true;
             return false;
         }
 
-        if (spawnTimer >= data.totalSpawnTimer)
+	    if (spawnTimer >= data.GetTotalSpawnTimer())
         {
             return true;
         }
 
-        if(spawnedEnemies.Count <= data.enemyMinimum)
+	    if(spawnedEnemies.Count <= data.GetEnemyMinimum())
         {
             return true;
         }
@@ -554,7 +553,7 @@ public class SAIM : MonoBehaviour
 
             ChooseEnemy();
 
-            GameObject spawnedEnemy = Instantiate(data.enemyTypes[Random.Range(0, data.enemyTypes.Count)], spawnPosition, Quaternion.identity);
+            GameObject spawnedEnemy = Instantiate(data.GetEnemyList()[Random.Range(0, data.GetEnemyList().Count)], spawnPosition, Quaternion.identity);
 	        spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
 
             if(GameObject.Find("Quest Manager"))
@@ -595,7 +594,7 @@ public class SAIM : MonoBehaviour
             spawnPosition.z += Random.Range(-1.0f, 2.0f);
             spawnPosition.y += 2;
 
-            GameObject spawnedEnemy = Instantiate(data.enemyTypes[spawnTypeIndex], spawnPosition, Quaternion.identity);
+            GameObject spawnedEnemy = Instantiate(data.GetEnemyList()[spawnTypeIndex], spawnPosition, Quaternion.identity);
             spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
 
             if (GameObject.Find("Quest Manager"))
@@ -628,7 +627,7 @@ public class SAIM : MonoBehaviour
             spawnNodes.Add(spawnNode.GetComponent<Node>());
         }
 
-        foreach (GameObject eType in data.enemyTypes)
+        foreach (GameObject eType in data.GetEnemyList())
         {
             Vector3 spawnPosition = spawnNodes[Random.Range(0, spawnNodes.Count - 1)].transform.position;
 
@@ -665,11 +664,11 @@ public class SAIM : MonoBehaviour
     {
         if(fireUse > crystalUse)
         {
-            return Mathf.Min(Random.Range(0, data.enemyTypes.Count), Random.Range(0, data.enemyTypes.Count));
+            return Mathf.Min(Random.Range(0, data.GetEnemyList().Count), Random.Range(0, data.GetEnemyList().Count));
         }
         else
         {
-            return Mathf.Max(Random.Range(0, data.enemyTypes.Count), Random.Range(0, data.enemyTypes.Count));
+            return Mathf.Max(Random.Range(0, data.GetEnemyList().Count), Random.Range(0, data.GetEnemyList().Count));
         }
     }
 
@@ -881,14 +880,14 @@ public class SAIM : MonoBehaviour
         diffAdjTimerDAM -= Time.deltaTime;
         if(diffAdjTimerDAM < 0)
         {
-            if(currentDamageTaken >= data.playerDamageThreshold)
+	        if(currentDamageTaken >= data.GetPlayerDamageThreshold())
             {
                 //If so, reduce diff.
-                data.adjustedDifficulty--;
-                Debug.Log("Diff Down!" + data.adjustedDifficulty);
+		        data.SetAdjustedDifficulty(data.GetAdjustedDifficulty() - 1);
+                Debug.Log("Diff Down!" + data.GetAdjustedDifficulty());
             }
 
-            diffAdjTimerDAM = data.difficultyAdjustTimerTotal_DAMAGE;
+	        diffAdjTimerDAM = data.GetAdjustTimerDamage();
             currentDamageTaken = 0;
 
         }
@@ -905,14 +904,14 @@ public class SAIM : MonoBehaviour
         diffAdjTimerKIL -= Time.deltaTime;
         if (diffAdjTimerKIL < 0)
         {
-            if (currentKills >= data.enemyKillThreshold)
+	        if (currentKills >= data.GetEnemyKillThreshold())
             {
                 //If so, reduce diff.
-                data.adjustedDifficulty++;
-                Debug.Log("Diff Up!" + data.adjustedDifficulty);
+		        data.SetAdjustedDifficulty(data.GetAdjustedDifficulty() + 1);
+                Debug.Log("Diff Up!" + data.GetAdjustedDifficulty());
             }
 
-            diffAdjTimerKIL = data.difficultyAdjustTimerTotal_KILLS;
+	        diffAdjTimerKIL = data.GetAdjustTimerKills();
             currentKills = 0;
 
         }
@@ -925,33 +924,33 @@ public class SAIM : MonoBehaviour
     //Sets the variables that control actual difficulty (spawn rates for example) based on the diff variables
     void SetBasedOnDiffculty()
     {
-        if(data.adjustedDifficulty > 10)
+	    if(data.GetAdjustedDifficulty() > 10)
         {
-            data.adjustedDifficulty = 10;
+		    data.SetAdjustedDifficulty(10);
             Debug.Log("Diff capped!");
         }
 
-        int actualDiff = data.difficulty + (data.adjustedDifficulty < 1 ? 1 : data.adjustedDifficulty);
+	    int actualDiff = data.GetDifficulty() + (data.GetAdjustedDifficulty() < 1 ? 1 : data.GetAdjustedDifficulty());
 
         if(actualDiff < 5)
         {
-            data.spawnMax = 3;
-            data.spawnMin = 1;
+	        data.SetMaxSpawns(3);
+	        data.SetMinSpawns(1);
         }
         else if (actualDiff < 10)
         {
-            data.spawnMax = 6;
-            data.spawnMin = 2;
+	        data.SetMaxSpawns(6);
+	        data.SetMinSpawns(2);
         }
         else if (actualDiff < 15)
         {
-            data.spawnMax = 10;
-            data.spawnMin = 5;
+	        data.SetMaxSpawns(10);
+	        data.SetMinSpawns(5);
         }
         else if (actualDiff < 20)
         {
-            data.spawnMax = 20;
-            data.spawnMin = 10;
+	        data.SetMaxSpawns(20);
+	        data.SetMinSpawns(10);
         }
 
 

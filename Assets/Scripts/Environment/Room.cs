@@ -16,7 +16,6 @@ public class Room : MonoBehaviour
     public bool visited = false;
 
     public MinimapRoom minimapRoom;
-    bool setVis = false;
 
     public bool hasLilly;
 
@@ -38,16 +37,6 @@ public class Room : MonoBehaviour
 
     }
 
-    public void Update()
-    {
-        //if(GetComponentInChildren<RoomTrigger>().triggered)
-        //{
-        //    visited = true;
-        //}
-        
-
-
-    }
 
 
     //Closes off all the illegal/irrelevant exits and collates the remaining ones

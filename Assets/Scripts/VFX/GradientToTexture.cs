@@ -6,7 +6,7 @@ using System.IO;
 [ExecuteAlways]
 public class GradientToTexture : MonoBehaviour
 {
-    public bool m_Export = false;
+	public bool m_Export = false;
 
     public string m_ExportPath = "Assets/";
     public string m_ExportName = "GradientExport";

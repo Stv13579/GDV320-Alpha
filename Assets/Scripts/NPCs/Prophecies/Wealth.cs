@@ -14,8 +14,7 @@ public class Wealth : Prophecy
         ProphecyManager pM = GetComponentInParent<ProphecyManager>();
         pM.wealth = true;
         newWealthDamageMulti = new Multiplier(1.25f, "Wealth");
-        drops.minCurrencySpawn *= 2;
-        drops.maxCurrencySpawn *= 2;
+	    drops.MultiplyCurrencyDropQuantity(2);
         pM.prophecyDamageMulti = Multiplier.AddMultiplier(pM.damageMultipliers, newWealthDamageMulti);
         
     }

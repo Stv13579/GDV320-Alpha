@@ -7,15 +7,18 @@ using UnityEngine;
 
 public class DropsList : ScriptableObject
 {
-    public List<DropListEntry> currencyList;
-    public List<DropListEntry> ammoList;
-    public List<DropListEntry> healthList;
-
-    public int minCurrencySpawn = 1;
-    public int maxCurrencySpawn = 2;
-
-    public int minAmmoSpawn = 2;
-    public int maxAmmoSpawn = 4;
+	[SerializeField]
+	List<DropListEntry> currencyList;
+	[SerializeField]
+	List<DropListEntry> ammoList;
+	[SerializeField]
+    List<DropListEntry> healthList;
+	
+	[SerializeField]
+	int minCurrencySpawn = 1, maxCurrencySpawn = 2;
+	
+	[SerializeField]
+	int minAmmoSpawn = 2, maxAmmoSpawn = 4;
 	
 	[SerializeField]
 	int minHealthSpawn = 1, maxHealthSpawn = 1;
@@ -25,21 +28,21 @@ public class DropsList : ScriptableObject
         int totalWeight = 0;
         foreach(DropListEntry drop in dropsList)
         {
-            totalWeight += drop.weighting;
+	        totalWeight += drop.GetWeighting();
         }
         int rand = Random.Range(1, totalWeight);
         int i = -1;
         while(rand > 0)
         {
             i++;
-            rand -= dropsList[i].weighting;
+	        rand -= dropsList[i].GetWeighting();
             
         }
         if(i >= 8)
         {
             Debug.Log("8");
         }
-        return (dropsList[i].drop);
+	    return (dropsList[i].GetDrop());
     }
 
     public GameObject GetAmmoDrop()
@@ -51,10 +54,10 @@ public class DropsList : ScriptableObject
 
         foreach (DropListEntry manaType in ammoList)
         {
-            if(manaType.element == FindObjectOfType<Shooting>().GetCatalystElements()[0].GetManaName() 
-                || manaType.element == FindObjectOfType<Shooting>().GetPrimaryElements()[0].GetManaName()
-                || manaType.element == FindObjectOfType<Shooting>().GetCatalystElements()[1].GetManaName()
-                || manaType.element == FindObjectOfType<Shooting>().GetPrimaryElements()[1].GetManaName())
+	        if(manaType.GetElement() == FindObjectOfType<Shooting>().GetCatalystElements()[0].GetManaName() 
+                || manaType.GetElement() == FindObjectOfType<Shooting>().GetPrimaryElements()[0].GetManaName()
+                || manaType.GetElement() == FindObjectOfType<Shooting>().GetCatalystElements()[1].GetManaName()
+                || manaType.GetElement() == FindObjectOfType<Shooting>().GetPrimaryElements()[1].GetManaName())
             {
                 dropsList.Add(manaType);
             }
@@ -64,27 +67,42 @@ public class DropsList : ScriptableObject
         int totalWeight = 0;
         foreach (DropListEntry drop in dropsList)
         {
-            totalWeight += drop.weighting;
+	        totalWeight += drop.GetWeighting();
         }
         int rand = Random.Range(1, totalWeight);
         int i = -1;
         while (rand > 0)
         {
             i++;
-            rand -= dropsList[i].weighting;
+	        rand -= dropsList[i].GetWeighting();
 
         }
         if (i >= 8)
         {
             Debug.Log("8");
         }
-        return (dropsList[i].drop);
+	    return (dropsList[i].GetDrop());
     }
     
-	public void SetHealthDrops(int valueToSet)
+	public List<DropListEntry> GetCurrencyList()
 	{
-		minHealthSpawn += valueToSet;
-		maxHealthSpawn += valueToSet;
+		return currencyList;
+	}
+	
+	public List<DropListEntry> GetHealthList()
+	{
+		return healthList;
+	}
+	
+	public List<DropListEntry> GetAmmoList()
+	{
+		return ammoList;
+	}
+    
+	public void ModifyHealthDropQuantity(int valueToModify)
+	{
+		minHealthSpawn += valueToModify;
+		maxHealthSpawn += valueToModify;
 	}
 	
 	public int GetMinHealthSpawn()
@@ -96,5 +114,50 @@ public class DropsList : ScriptableObject
 	{
 		return maxHealthSpawn;
 	}
+	
+	public void ModifyCurrencyDropQuantity(int valueToModify)
+	{
+		minCurrencySpawn += valueToModify;
+		maxCurrencySpawn += valueToModify;
+	}
+	
+	public void MultiplyCurrencyDropQuantity(int multiplier)
+	{
+		minCurrencySpawn *= multiplier;
+		maxCurrencySpawn *= multiplier;
+	}
+	
+	public int GetMinCurrencySpawn()
+	{
+		return minCurrencySpawn;
+	}
+
+	public int GetMaxCurrencySpawn()
+	{
+		return maxCurrencySpawn;
+	}
+	
+	public void ModifyAmmoDropQuantity(int valueToModify)
+	{
+		minAmmoSpawn += valueToModify;
+		maxAmmoSpawn += valueToModify;
+	}
+	
+	public void MultiplyAmmoDropQuantity(float multiplier)
+	{
+		minAmmoSpawn = Mathf.RoundToInt((float)minAmmoSpawn * multiplier);
+		maxAmmoSpawn = Mathf.RoundToInt((float)maxAmmoSpawn * multiplier);
+	}
+	
+	public int GetMinAmmoSpawn()
+	{
+		return minAmmoSpawn;
+	}
+
+	public int GetMaxAmmoSpawn()
+	{
+		return maxAmmoSpawn;
+	}
+	
 
 }

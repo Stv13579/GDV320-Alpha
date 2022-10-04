@@ -8,7 +8,7 @@ public class StartRunScript : MonoBehaviour
     {
         Shooting player = FindObjectOfType<Shooting>();
 
-        if(player.GetCatalystElements().Contains(player.blankElement) || player.GetPrimaryElements().Contains(player.blankElement))
+        if(player.GetCatalystElements().Contains(player.GetBlankElement()) || player.GetPrimaryElements().Contains(player.GetBlankElement()))
         {
             Debug.Log("Choose a loadout first!");
             return;

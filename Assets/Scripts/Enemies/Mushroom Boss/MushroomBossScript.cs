@@ -15,7 +15,6 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
     bool attacking = false;
     Vector3 movement = Vector3.zero;
     [SerializeField]
-    float gravity = 1.0f;
 	GameObject nearestNode;
 	Vector3 bestNodePos = Vector3.zero;
 	float contactTimer = 0.0f;
@@ -27,9 +26,9 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
         base.Awake();
         GameObject healthbar = Instantiate(bossHealthbar);
         BossHealthbarScript healthbarScript = healthbar.GetComponent<BossHealthbarScript>();
-        healthbarScript.enemies.Add(this);
-        healthbarScript.bossName.text = "Mushlord";
-        healthbarScript.maxHealth = maxHealth;
+	    healthbarScript.AddEnemy(this);
+	    healthbarScript.SetName("Mushlord");
+	    healthbarScript.SetMaxHealth(maxHealth);
     }
 
     private void Start()

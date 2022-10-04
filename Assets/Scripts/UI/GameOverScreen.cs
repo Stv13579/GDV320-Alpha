@@ -6,13 +6,17 @@ using TMPro;
 using UnityEngine.SceneManagement;
 public class GameOverScreen : MonoBehaviour
 {
-    public Image background;
-    public TextMeshProUGUI text;
-    public GameObject button;
+	[SerializeField]
+	Image background;
+	[SerializeField]
+	TextMeshProUGUI text;
+	[SerializeField]
+    GameObject button;
     float backgroundTimer = 0;
     float textTimer = 0;
-    float buttonTimer = 0;
-    public int sceneToLoad;
+	float buttonTimer = 0;
+	[SerializeField]
+    int sceneToLoad;
 
     AsyncOperation operation;
 

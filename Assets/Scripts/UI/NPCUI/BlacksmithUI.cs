@@ -13,7 +13,7 @@ public class BlacksmithUI : NPCUI
 
     
     
-    void Start()
+	public override void Start()
     {
         base.Start();
 
@@ -28,7 +28,7 @@ public class BlacksmithUI : NPCUI
         foreach (Transform button in GameObject.Find("UpgradeButtons").transform)
         {
             buttons.Add(button.gameObject);
-            buttons[i].transform.GetChild(1).GetComponent<Image>().sprite = elements[i].uiSprite;
+	        buttons[i].transform.GetChild(1).GetComponent<Image>().sprite = elements[i].GetSprite();
             buttons[i].GetComponent<UpgradeButton>().SetElement(elements[i]);       
             i++;
         }
@@ -41,12 +41,12 @@ public class BlacksmithUI : NPCUI
 
     public void UpgradeButton(int index)
     {
-        if (player.GetMoney() >= elements[index].upgradeCost)
+	    if (player.GetMoney() >= elements[index].GetUpgradeCost())
         {
             //Call an upgrade function for that element
             elements[index].Upgrade();
             buttons[index].SetActive(false);
-            player.ChangeMoney(-elements[index].upgradeCost);
+            player.ChangeMoney(-elements[index].GetUpgradeCost());
             if (audioManager)
             {
                 audioManager.StopSFX("Shop Buy");
