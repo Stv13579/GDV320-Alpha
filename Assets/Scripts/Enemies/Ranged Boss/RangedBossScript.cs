@@ -67,24 +67,6 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
             }
             timer = Random.Range(2.0f, 4.0f);
         }
-
-        //For debug, remove later
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-	        enemyAnims.SetTrigger("Fire");
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-	        enemyAnims.SetTrigger("Water");
-        }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-	        enemyAnims.SetTrigger("Crystal");
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-	        enemyAnims.SetTrigger("Homing");
-        }
     }
 
     

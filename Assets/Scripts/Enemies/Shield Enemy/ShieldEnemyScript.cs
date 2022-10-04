@@ -112,7 +112,6 @@ public class ShieldEnemyScript : BaseEnemyClass
 
         //Check if the angle between forward of the shield mushroom and the player to shield vector is small, then shield. If not, unshield.
         float angle = Vector3.Angle(transform.forward, player.transform.position - transform.position);
-        Debug.Log(angle);
         if(angle < 75)
         {
             
