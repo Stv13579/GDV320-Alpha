@@ -60,7 +60,7 @@ public class EndLevel : MonoBehaviour
             {
                 for (int i = 0; i < audioManager.GetMusics().Length; i++)
                 {
-                    audioManager.GetMusics()[i].audioSource.Stop();
+                    audioManager.GetMusics()[i].GetAudioSource().Stop();
                 }
                 audioManager.PlayMusic("Hub Room Music");
             }
@@ -68,7 +68,7 @@ public class EndLevel : MonoBehaviour
             {
                 for (int i = 0; i < audioManager.GetMusics().Length; i++)
                 {
-                    audioManager.GetMusics()[i].audioSource.Stop();
+                    audioManager.GetMusics()[i].GetAudioSource().Stop();
                 }
                 audioManager.PlayMusic($"Level {sceneToLoad - 1} Non Combat");
             }

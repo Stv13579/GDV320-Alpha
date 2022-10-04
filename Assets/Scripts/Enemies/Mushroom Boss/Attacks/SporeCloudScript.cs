@@ -8,6 +8,11 @@ public class SporeCloudScript : BaseEnemyClass
     GameObject fireVFX;
     bool onFire = false;
     float contactTimer = 0.0f;
+    GameplayUI gameplayUI;
+    private void Start()
+    {
+        gameplayUI = FindObjectOfType<GameplayUI>();
+    }
     public override void Update()
     {
         base.Update();
@@ -26,8 +31,9 @@ public class SporeCloudScript : BaseEnemyClass
     IEnumerator StartFire()
     {
         onFire = true;
-        Instantiate(fireVFX, this.transform.position, Quaternion.identity, this.transform );
+        Instantiate(fireVFX, this.transform.position, Quaternion.identity, this.transform);
         yield return new WaitForSeconds(5);
+        gameplayUI.GetInToxicFullScreen().gameObject.SetActive(false);
         Destroy(this.gameObject);
     }
 
@@ -35,8 +41,18 @@ public class SporeCloudScript : BaseEnemyClass
     {
         if(other.gameObject == player && contactTimer <= 0.0f)
         {
+            gameplayUI.GetInToxicFullScreen().gameObject.SetActive(true);
+            gameplayUI.GetInToxicFullScreen().material.SetFloat("_Toggle_EffectIntensity", 10.0f);
             playerClass.ChangeHealth(-damageAmount, gameObject);
             contactTimer = 0.3f;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject == player)
+        {
+            gameplayUI.GetInToxicFullScreen().gameObject.SetActive(false);
+            gameplayUI.GetInToxicFullScreen().material.SetFloat("_Toggle_EffectIntensity", 0.0f);
         }
     }
 }
