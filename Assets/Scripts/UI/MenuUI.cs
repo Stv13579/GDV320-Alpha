@@ -20,7 +20,7 @@ public class MenuUI : NPCUI
             if (NPC.instantiatedTalkUI == null)
             {
                 NPC.instantiatedTalkUI = Instantiate(NPC.npcTalkUI);
-                NPC.instantiatedTalkUI.GetComponent<NPCUI>().NPC = NPC;
+	            NPC.instantiatedTalkUI.GetComponent<NPCUI>().SetNPC(NPC);
             }
             else
             {
@@ -35,13 +35,13 @@ public class MenuUI : NPCUI
             if(NPC.canSeeOfferings == false)
             {
                 NPC.instantiatedTalkUI = Instantiate(NPC.npcTalkUI);
-                NPC.instantiatedTalkUI.GetComponent<NPCUI>().NPC = NPC;
-                NPC.instantiatedTalkUI.GetComponent<DialogueUI>().noOffering = true;
+	            NPC.instantiatedTalkUI.GetComponent<NPCUI>().SetNPC(NPC);
+	            NPC.instantiatedTalkUI.GetComponent<DialogueUI>().SetNoOffering(true);
             }
             else if (NPC.instantiatedOfferingUI == null)
             {
                 NPC.instantiatedOfferingUI = Instantiate(NPC.npcOfferingUI);
-                NPC.instantiatedOfferingUI.GetComponent<NPCUI>().NPC = NPC;
+	            NPC.instantiatedOfferingUI.GetComponent<NPCUI>().SetNPC(NPC);
             }
             else
             {

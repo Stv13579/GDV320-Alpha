@@ -14,15 +14,15 @@ public class TutorialManager : MonoBehaviour
         Instantiate(playerIndicator, minimap.transform);
         foreach (MinimapRoom mmRoom in FindObjectsOfType<MinimapRoom>())
         {
-            if (mmRoom.isShop)
+	        if (mmRoom.GetIsShop())
             {
                 mmRoom.SetAsShop();
             }
-            if (mmRoom.isBreak)
+	        if (mmRoom.GetIsBreak())
             {
                 mmRoom.SetAsBreak();
             }
-            if (mmRoom.isBoss)
+	        if (mmRoom.GetIsBoss())
             {
                 mmRoom.SetAsBoss();
             }

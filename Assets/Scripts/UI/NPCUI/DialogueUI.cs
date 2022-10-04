@@ -9,8 +9,9 @@ public class DialogueUI : NPCUI
 {
     [SerializeField]
     NPC.Dialogue dialogueLines;
-    GameObject dialogueBox;
-    public bool noOffering = false;
+	GameObject dialogueBox;
+	[SerializeField]
+    bool noOffering = false;
 
     [SerializeField]
     TextMeshProUGUI nameField;
@@ -70,5 +71,15 @@ public class DialogueUI : NPCUI
     {
         place = 0;
     }
+    
+	public bool GetNoOffering()
+	{
+		return noOffering;
+	}
+	
+	public void SetNoOffering(bool offering)
+	{
+		noOffering = offering;
+	}
 
 }

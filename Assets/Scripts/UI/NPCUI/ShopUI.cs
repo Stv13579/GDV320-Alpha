@@ -6,13 +6,16 @@ using TMPro;
 
 public class ShopUI : NPCUI
 {
-    List<Item> shopItems = new List<Item>();
-    public List<GameObject> buttons;
-    public ItemList items;
+	List<Item> shopItems = new List<Item>();
+	[SerializeField]
+	List<GameObject> buttons;
+	[SerializeField]
+    ItemList items;
 
     List<int> ids = new List<int>();
-
-    public TextMeshProUGUI moneyText;
+	
+	[SerializeField]
+    TextMeshProUGUI moneyText;
 
 
     private void Start()

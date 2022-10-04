@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class LotlUI : NPCUI
 {
-    List<Item> giftItems = new List<Item>();
-    public List<GameObject> buttons;
-    public ItemList items;
+	List<Item> giftItems = new List<Item>();
+	[SerializeField]
+	List<GameObject> buttons;
+	[SerializeField]
+    ItemList items;
 
     List<int> ids = new List<int>();
 

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class NPCUI : MonoBehaviour
 {
-    [HideInInspector]
-    public Interact NPC;
+	protected Interact NPC;
 
     protected PlayerClass player;
     protected GameObject inventory;
@@ -23,5 +22,15 @@ public class NPCUI : MonoBehaviour
 
         NPC.LeaveUI();
     }
+    
+	public Interact GetNPC()
+	{
+		return NPC;
+	}
+	
+	public void SetNPC(Interact newNPC)
+	{
+		NPC = newNPC;
+	}
 
 }

@@ -7,9 +7,9 @@ using TMPro;
 public class UpgradeButton : MonoBehaviour, IPointerEnterHandler
 {
     [SerializeField]
-    private GameObject detailWindow;
+    GameObject detailWindow;
 
-    private BaseElementClass element;
+    BaseElementClass element;
 
     public void SetElement(BaseElementClass ele) { element = ele; }
 

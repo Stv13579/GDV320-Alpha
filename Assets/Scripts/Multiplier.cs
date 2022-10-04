@@ -6,8 +6,8 @@ using System;
 [Serializable]
 public class Multiplier
 {
-    public float multiplier;
-    public string source;
+    float multiplier;
+    string source;
     public Multiplier(float multi = 1.0f, string s = "")
     {
         multiplier = multi;

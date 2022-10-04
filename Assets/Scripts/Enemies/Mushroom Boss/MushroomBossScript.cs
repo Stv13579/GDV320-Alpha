@@ -27,9 +27,9 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
         base.Awake();
         GameObject healthbar = Instantiate(bossHealthbar);
         BossHealthbarScript healthbarScript = healthbar.GetComponent<BossHealthbarScript>();
-        healthbarScript.enemies.Add(this);
-        healthbarScript.bossName.text = "Mushlord";
-        healthbarScript.maxHealth = maxHealth;
+	    healthbarScript.AddEnemy(this);
+	    healthbarScript.SetName("Mushlord");
+	    healthbarScript.SetMaxHealth(maxHealth);
     }
 
     private void Start()

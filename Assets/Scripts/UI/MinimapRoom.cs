@@ -6,7 +6,11 @@ using UnityEngine.UI;
 public class MinimapRoom : MonoBehaviour
 {   
     [SerializeField]
-    public bool isShop, isBreak, isBoss;
+	bool isShop, isBreak, isBoss;
+	public bool GetIsShop() {return isShop;}
+	public bool GetIsBreak() {return isBreak;}
+	public bool GetIsBoss() {return isBoss;}
+
 
     [SerializeField]
     Image roomIcon;

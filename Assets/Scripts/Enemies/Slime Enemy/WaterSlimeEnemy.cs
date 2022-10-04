@@ -156,7 +156,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
 
     }
 
-    protected virtual void Update()
+	public override void Update()
     {
 	    base.Update();
         
