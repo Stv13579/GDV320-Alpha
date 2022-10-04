@@ -47,8 +47,16 @@ public class EndLevel : MonoBehaviour
         }
 
         sceneToLoad = index;
-
-        SceneManager.LoadScene(sceneToLoad);
+		
+	    if(Object.FindObjectOfType<LevelPreloaderScript>())
+	    {
+		    Object.FindObjectOfType<LevelPreloaderScript>().LoadScene();
+		    Debug.Log("Test");
+	    }
+	    else
+	    {
+		    SceneManager.LoadScene(sceneToLoad);
+	    }
 
         //StartCoroutine(screen.GetComponent<LoadingScreen>().LoadScene(sceneToLoad));
 
