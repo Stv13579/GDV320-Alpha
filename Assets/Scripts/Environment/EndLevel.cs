@@ -51,7 +51,6 @@ public class EndLevel : MonoBehaviour
 	    if(Object.FindObjectOfType<LevelPreloaderScript>())
 	    {
 		    Object.FindObjectOfType<LevelPreloaderScript>().LoadScene();
-		    Debug.Log("Test");
 	    }
 	    else
 	    {

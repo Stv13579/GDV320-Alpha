@@ -184,7 +184,6 @@ public class LevelGeneration : MonoBehaviour
 
 
         if (room == null) { 
-            Debug.Log("Room not chosen!");
             return ChooseRoom();
         };
         return room;
