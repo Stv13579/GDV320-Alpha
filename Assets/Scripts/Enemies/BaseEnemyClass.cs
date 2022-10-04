@@ -91,6 +91,14 @@ public class BaseEnemyClass : MonoBehaviour
 
 	[SerializeField]
 	List<Material> enemyMat = new List<Material>();
+	
+	
+	[SerializeField]
+	float maxDistance = 120.0f;
+	float damageTimer = 0.0f;
+	[SerializeField]
+	float maxDamageTimer = 30.0f;
+	
     public virtual void Awake()
     {
         if(GameObject.Find("ProphecyManager"))
@@ -140,7 +148,7 @@ public class BaseEnemyClass : MonoBehaviour
         {
             return;
         }
-
+		
         if(currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
@@ -175,6 +183,14 @@ public class BaseEnemyClass : MonoBehaviour
                 StartCoroutine(uiScript.HitMarkerShield());
             }
         }
+        
+	    damageTimer += Time.deltaTime;
+	    //Softlock prevention check
+	    if(damageTimer > maxDamageTimer && Vector3.Distance(this.transform.position, player.transform.position) > maxDistance)
+	    {
+	    	currentHealth = -10;
+		    enemyAnims.SetTrigger("Dead");
+	    }
     }
 
     //Movement
@@ -277,6 +293,8 @@ public class BaseEnemyClass : MonoBehaviour
                 enemyAnims.SetTrigger("Dead");
             }
         }
+        
+	    damageTimer = 0;
         //Death();
     }
 
