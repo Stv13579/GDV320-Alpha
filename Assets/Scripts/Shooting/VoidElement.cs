@@ -121,7 +121,7 @@ public class VoidElement : BaseElementClass
     {
         base.ElementEffect();
         //Subtract the mana cost
-        playerClass.ChangeMana(-manaCost, manaTypes);
+        playerClass.ChangeMana(-manaCost * (upgraded ? 1 : 0.5f), manaTypes);
         if (shootingScript.GetCatalystElements()[shootingScript.GetRightElementIndex()] == this &&
             shootingScript.GetInComboMode() == false)
         {
