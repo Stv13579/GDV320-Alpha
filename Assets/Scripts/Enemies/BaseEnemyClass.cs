@@ -305,13 +305,13 @@ public class BaseEnemyClass : MonoBehaviour
             switch (dropType)
             {
                 case 0:
-                    Drop(drops.currencyList, drops.minCurrencySpawn, drops.maxCurrencySpawn);
+	                Drop(drops.GetCurrencyList(), drops.GetMinCurrencySpawn(), drops.GetMaxCurrencySpawn());
                     break;
                 case 1:
-                    Drop(drops.minAmmoSpawn, drops.maxAmmoSpawn);
+	                Drop(drops.GetMinAmmoSpawn(), drops.GetMaxAmmoSpawn());
                     break;
                 case 2:
-	                Drop(drops.healthList, drops.GetMinHealthSpawn(), drops.GetMaxHealthSpawn());
+	                Drop(drops.GetHealthList(), drops.GetMinHealthSpawn(), drops.GetMaxHealthSpawn());
                     break;
                 default:
                     break;

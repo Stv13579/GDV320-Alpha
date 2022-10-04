@@ -46,7 +46,7 @@ public class ComboSlot : HoverOver, IPointerEnterHandler
         {
             comboIcon.enabled = true;
 
-            lVars = player.GetComboElements()[prime.GetElementSlot()].comboElements[cata.GetElementSlot()].lVars;
+            lVars = player.GetComboElements()[prime.GetElementSlot()].comboElements[cata.GetElementSlot()].GetLVars();
 
             comboIcon.sprite = lVars.Icon;
         }

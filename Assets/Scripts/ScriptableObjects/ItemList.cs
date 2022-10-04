@@ -9,7 +9,8 @@ using UnityEditor;
 //Scriptable Object to store all items in for access elsewhere
 public class ItemList : ScriptableObject
 {
-	public List<ItemEntry> itemList;
+	[SerializeField]
+	List<ItemEntry> itemList;
     
 	public void ResetList()
 	{
@@ -18,6 +19,11 @@ public class ItemList : ScriptableObject
 			itemList[i].alreadyAdded = false;
 		}
 		
+	}
+	
+	public List<ItemEntry> GetItemList()
+	{
+		return itemList;
 	}
 	
 }

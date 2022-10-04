@@ -16,8 +16,7 @@ public class Famine : Prophecy
         pM.famine = true;
         newFamineHealthMulti = new Multiplier(0.5f, "Famine");
 
-        drops.minAmmoSpawn /= 2;
-        drops.maxAmmoSpawn /= 2;
+	    drops.MultiplyAmmoDropQuantity(0.5f);
 
         pM.prophecyHealthMulti = Multiplier.AddMultiplier(pM.healthMultipliers, newFamineHealthMulti);
 

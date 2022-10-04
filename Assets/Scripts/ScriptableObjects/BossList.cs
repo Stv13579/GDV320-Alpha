@@ -7,14 +7,27 @@ using System;
 [Serializable]
 public struct BossListEntry
 {
-    public GameObject boss;
-    public int difficulty;
-    public bool spawned;
+	[SerializeField]
+	GameObject boss;
+	[SerializeField]
+	int difficulty;
+	[SerializeField]
+    bool spawned;
 
     public void SetSpawned(bool set)
     {
         spawned = set;
     }
+    
+	public bool GetSpawned()
+	{
+		return spawned;
+	}
+	
+	public GameObject GetBoss()
+	{
+		return boss;
+	}
 }
 [CreateAssetMenu(fileName = "Boss List")]
 
@@ -28,11 +41,11 @@ public class BossList : ScriptableObject
         while(searching)
         {
             int i = UnityEngine.Random.Range(0, bossList.Count);
-            if(!bossList[i].spawned)
+	        if(!bossList[i].GetSpawned())
             {
                 bossList[i].SetSpawned(true);
                 searching = false;
-                return (bossList[i].boss);
+		        return (bossList[i].GetBoss());
             }
         }
         return null; //Shouldn't be needed but it complained witout it

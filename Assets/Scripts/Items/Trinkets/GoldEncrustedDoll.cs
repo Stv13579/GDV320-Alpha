@@ -12,11 +12,9 @@ public class GoldEncrustedDoll : Trinket
 	    base.AddEffect(player);
 	    DropsList[] instances = Resources.FindObjectsOfTypeAll<DropsList>();
 	    dropList = instances[0];
-        dropList.maxAmmoSpawn += (int)uState;
-        dropList.minAmmoSpawn += (int)uState;
-        dropList.maxCurrencySpawn += (int)uState;
-	    dropList.minCurrencySpawn += (int)uState;
-	    dropList.SetHealthDrops((int)uState);
+	    dropList.ModifyAmmoDropQuantity((int)uState);
+	    dropList.ModifyCurrencyDropQuantity((int)uState);
+	    dropList.ModifyHealthDropQuantity((int)uState);
 
     }
 
@@ -24,11 +22,9 @@ public class GoldEncrustedDoll : Trinket
     {
         base.RemoveEffect();
 
-        dropList.maxAmmoSpawn     -= (int)uState;
-        dropList.minAmmoSpawn     -= (int)uState;
-        dropList.maxCurrencySpawn -= (int)uState;
-        dropList.minCurrencySpawn -= (int)uState;
-	    dropList.SetHealthDrops(-(int)uState);
+	    dropList.ModifyAmmoDropQuantity((int)uState);
+	    dropList.ModifyCurrencyDropQuantity((int)uState);
+	    dropList.ModifyHealthDropQuantity(-(int)uState);
 
     }
 }

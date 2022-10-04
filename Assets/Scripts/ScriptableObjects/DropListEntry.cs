@@ -5,7 +5,25 @@ using System;
 [Serializable]
 public class DropListEntry
 {
-    public GameObject drop;
-    public PlayerClass.ManaName element;
-    public int weighting;
+	[SerializeField]
+	GameObject drop;
+	[SerializeField]
+	PlayerClass.ManaName element;
+	[SerializeField]
+	int weighting;
+    
+	public GameObject GetDrop()
+	{
+		return drop;
+	}
+	
+	public PlayerClass.ManaName GetElement()
+	{
+		return element;
+	}
+	
+	public int GetWeighting()
+	{
+		return weighting;
+	}
 }

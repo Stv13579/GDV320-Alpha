@@ -13,7 +13,8 @@ public class Shooting : MonoBehaviour
     [SerializeField]
     List<ComboElementList> comboElements;
 
-    public BaseElementClass blankElement;
+	[SerializeField]
+    BaseElementClass blankElement;
     
     //Sets the combo elements based on the current base elements
     public BaseElementClass CalculateCombo(BaseElementClass primary, BaseElementClass catalyst)
@@ -102,29 +103,29 @@ public class Shooting : MonoBehaviour
     public List<BaseElementClass> GetCatalystElements() { return catalystElements; }
     public List<BaseElementClass> GetPrimaryElements() { return primaryElements; }
     public List<ComboElementList> GetComboElements() { return comboElements; }
-    public Sprite GetPrimaryElementSprite() { return primaryElements[leftElementIndex].uiSprite; }
+	public Sprite GetPrimaryElementSprite() { return primaryElements[leftElementIndex].GetSprite(); }
     public Sprite GetNextPrimaryElementSprite() 
     { 
         if((leftElementIndex + 1) >= primaryElements.Count)
         {
-            return primaryElements[0].uiSprite;
+            return primaryElements[0].GetSprite();
         }
 
-        return primaryElements[leftElementIndex + 1].uiSprite; 
+        return primaryElements[leftElementIndex + 1].GetSprite(); 
     }
 
-    public Sprite GetCatalystElementSprite() { return catalystElements[rightElementIndex].uiSprite; }
+    public Sprite GetCatalystElementSprite() { return catalystElements[rightElementIndex].GetSprite(); }
     public Sprite GetNextCatalystElementSprite() 
     {
         if ((rightElementIndex + 1) >= catalystElements.Count)
         {
-            return catalystElements[0].uiSprite;
+            return catalystElements[0].GetSprite();
         }
 
-        return catalystElements[rightElementIndex + 1].uiSprite; 
+        return catalystElements[rightElementIndex + 1].GetSprite(); 
     }
 
-    public Sprite GetComboElementSprite() { return (comboElements[leftElementIndex].comboElements[rightElementIndex].uiSprite); }
+    public Sprite GetComboElementSprite() { return (comboElements[leftElementIndex].comboElements[rightElementIndex].GetSprite()); }
     public Transform GetLeftOrbPos() { return leftOrbPos; }
     public Transform GetRightOrbPos() { return rightOrbPos; }
     public int GetLeftElementIndex() { return leftElementIndex; }
@@ -135,11 +136,11 @@ public class Shooting : MonoBehaviour
     {
         if (inComboMode)
         {
-            return (comboElements[leftElementIndex].comboElements[rightElementIndex].crosshair);
+            return (comboElements[leftElementIndex].comboElements[rightElementIndex].GetCrosshair());
         }
         else
         {
-            return (primaryElements[leftElementIndex].crosshair);
+            return (primaryElements[leftElementIndex].GetCrosshair());
         }
     }
     public Vector2 GetLeftMana()
@@ -586,4 +587,9 @@ public class Shooting : MonoBehaviour
             }
         }
     }
+    
+	public BaseElementClass GetBlankElement()
+	{
+		return blankElement;
+	}
 }
