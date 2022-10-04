@@ -19,7 +19,7 @@ public class DialogueUI : NPCUI
     int place = 0;
     //Show dialogue lines as specified, activate the action once exhausted, then delete itself
 
-    private void Start()
+	public override void Start()
     {
         base.Start();
         NPC.npc.AssessDialogue();

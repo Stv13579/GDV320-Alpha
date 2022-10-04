@@ -13,7 +13,7 @@ public class BlacksmithUI : NPCUI
 
     
     
-    void Start()
+	public override void Start()
     {
         base.Start();
 

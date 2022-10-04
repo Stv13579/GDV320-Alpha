@@ -36,7 +36,7 @@ public class RangedBossFireProjectile : BaseRangedProjectileScript //Sebastian
 	    	particles.Stop();
 	    }
 	    
-	    impactEffect.active = true;
+	    impactEffect.SetActive(true);
 	    hit = true;
 
 	    

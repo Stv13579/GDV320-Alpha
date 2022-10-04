@@ -66,7 +66,6 @@ public class SAIM : MonoBehaviour
     public LayerMask verticalSpaceLayerMask;
     public LayerMask impassableLayerMask;
     public LayerMask cullLayerMask;
-    bool doneonce = false;
 
     [HideInInspector]
     public bool triggered = false, playerLeaving = false, roomComplete = false;

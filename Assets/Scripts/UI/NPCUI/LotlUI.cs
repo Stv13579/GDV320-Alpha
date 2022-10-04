@@ -15,8 +15,8 @@ public class LotlUI : NPCUI
     List<int> ids = new List<int>();
 
     // Start is called before the first frame update
-    void Start()
-    {
+	public override void Start()
+	{
         base.Start();
 
         foreach (ItemEntry item in items.GetItemList())

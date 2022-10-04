@@ -59,9 +59,6 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     Vector3 chargeVec;
     [SerializeField]
     private LayerMask trailLayerMask;
-    float trailCastDistance = 1.0f;
-    float backCastDistance = 0.1f;
-    float trailOffset = 0.01f;
     [SerializeField]
     private Vector3 fireTrailScale;
     [SerializeField]

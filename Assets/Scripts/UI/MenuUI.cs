@@ -6,7 +6,7 @@ using TMPro;
 public class MenuUI : NPCUI
 {
 
-    private void Start()
+	public override void Start()
     {
         transform.Find("Offerings").GetComponentInChildren<TextMeshProUGUI>().text = NPC.npc.offeringType;
         transform.Find("Talk").GetComponentInChildren<TextMeshProUGUI>().text = "Talk";

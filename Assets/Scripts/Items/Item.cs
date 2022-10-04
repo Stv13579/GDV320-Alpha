@@ -7,8 +7,6 @@ using System;
 [Serializable]
 public class Item : MonoBehaviour
 {
-	[SerializeField]
-	bool add = false, remove = false;
     GameObject UIWidget;
     public float currencyCost;
     public Sprite[] sprites;
@@ -19,22 +17,6 @@ public class Item : MonoBehaviour
 
 
 
-
-	// Update is called every frame, if the MonoBehaviour is enabled.
-	protected void Update()
-	{
-		if(add)
-		{
-			AddEffect(GameObject.Find("Player").GetComponent<PlayerClass>());
-			add = false;
-		}
-		if(remove)
-		{
-			RemoveEffect();
-			remove = false;
-		}
-			
-	}
     //Any effects from obtaining an item go here e.g. if the item increases max health, add it here.
     public virtual void AddEffect(PlayerClass player)
     {

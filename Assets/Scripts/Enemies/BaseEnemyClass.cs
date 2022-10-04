@@ -170,7 +170,7 @@ public class BaseEnemyClass : MonoBehaviour
 
         if (uiScript)
         {
-            if (uiScript.GetHitMarker().active == true)
+	        if (uiScript.GetHitMarker().activeSelf == true)
             {
                 StartCoroutine(uiScript.HitMarker());
             }
@@ -178,7 +178,7 @@ public class BaseEnemyClass : MonoBehaviour
 
         if(uiScript)
         {
-            if(uiScript.GetHitMarkerShield().active == true)
+            if(uiScript.GetHitMarkerShield().activeSelf == true)
             {
                 StartCoroutine(uiScript.HitMarkerShield());
             }
@@ -380,12 +380,12 @@ public class BaseEnemyClass : MonoBehaviour
 
     public void Targetted(bool targetted, Color colour)
     {
-        if(targettingIndicator.active == false && targetted == true)
+        if(targettingIndicator.activeSelf == false && targetted == true)
         {
             targettingIndicator.SetActive(targetted);
         }
         
-        if(targettingIndicator.active == true && targetted == false)
+        if(targettingIndicator.activeSelf == true && targetted == false)
         {
             targettingIndicator.SetActive(targetted);
         }

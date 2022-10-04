@@ -10,7 +10,7 @@ public class NPCUI : MonoBehaviour
     protected GameObject inventory;
     protected AudioManager audioManager;
 
-    public void Start()
+	public virtual void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         player = GameObject.Find("Player").GetComponent<PlayerClass>();

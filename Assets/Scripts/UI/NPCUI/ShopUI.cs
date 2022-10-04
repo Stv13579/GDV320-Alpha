@@ -18,7 +18,7 @@ public class ShopUI : NPCUI
     TextMeshProUGUI moneyText;
 
 
-    private void Start()
+	public override void Start()
     {
         base.Start();
 

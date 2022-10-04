@@ -15,7 +15,6 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
     bool attacking = false;
     Vector3 movement = Vector3.zero;
     [SerializeField]
-    float gravity = 1.0f;
 	GameObject nearestNode;
 	Vector3 bestNodePos = Vector3.zero;
 	float contactTimer = 0.0f;

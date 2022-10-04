@@ -10,7 +10,6 @@ public class VoidElement : BaseElementClass
     [SerializeField]
     float dashTime = 0.5f;
     Vector3 targetPos = Vector3.zero;
-    bool dashing = false;
     [SerializeField]
     GameObject Indicator;
     bool isHolding;
@@ -162,7 +161,6 @@ public class VoidElement : BaseElementClass
         //voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.1f);
         //gameplayUI.GetVoidFullScreen().material.SetFloat("_Toggle_EffectIntensity", 10.0f);
         fullScreenOff = false;
-        dashing = true;
         float timer = 0.0f;
         Vector3 startPos = this.transform.position;
         while(timer < dashTime)

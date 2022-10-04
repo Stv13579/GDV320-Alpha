@@ -8,5 +8,6 @@ public class DeathAnimationHandler : MonoBehaviour
     {
 	    this.transform.parent.gameObject.GetComponent<BaseEnemyClass>().Death();
 	    Debug.Log(this.transform.parent.gameObject.name);
+	    
     }
 }
