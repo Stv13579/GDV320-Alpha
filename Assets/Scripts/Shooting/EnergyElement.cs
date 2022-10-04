@@ -68,6 +68,7 @@ public class EnergyElement : BaseElementClass
                             shieldStateChange = shieldState.shieldUp;
                             timeToParry = 0.0f;
                             //parrycode;
+                            GetComponent<PlayerClass>().ChangeMana(50, manaTypes);
                         }
                     break;
                     }

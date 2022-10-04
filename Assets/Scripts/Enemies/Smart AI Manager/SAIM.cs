@@ -564,7 +564,7 @@ public class SAIM : MonoBehaviour
             
             foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().GetHeldItems())
             {
-                item.SpawnTrigger(this.gameObject);
+                item.SpawnTrigger(spawnedEnemy);
             }
 
             spawnedEnemies.Add(spawnedEnemy.GetComponent<BaseEnemyClass>());
@@ -605,7 +605,7 @@ public class SAIM : MonoBehaviour
 
             foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().GetHeldItems())
             {
-                item.SpawnTrigger(this.gameObject);
+                item.SpawnTrigger(spawnedEnemy);
             }
 
             spawnedEnemies.Add(spawnedEnemy.GetComponent<BaseEnemyClass>());
@@ -646,7 +646,7 @@ public class SAIM : MonoBehaviour
 
             foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().GetHeldItems())
             {
-                item.SpawnTrigger(this.gameObject);
+                item.SpawnTrigger(spawnedEnemy);
             }
 
             spawnedEnemies.Add(spawnedEnemy.GetComponent<BaseEnemyClass>());

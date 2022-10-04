@@ -15,7 +15,7 @@ public class NPCUI : MonoBehaviour
     {
         audioManager = FindObjectOfType<AudioManager>();
         player = GameObject.Find("Player").GetComponent<PlayerClass>();
-        inventory = GameObject.Find("Player").transform.GetChild(2).gameObject;
+        inventory = GameObject.Find("Player").transform.GetChild(0).gameObject;
     }
 
     public virtual void Close()

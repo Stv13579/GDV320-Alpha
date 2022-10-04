@@ -17,10 +17,6 @@ public class BaseEnemyClass : MonoBehaviour
 
     #endregion
 
-    //The amount of flat damage any instance of incoming damage is reduced by
-    [SerializeField]
-    protected float damageThreshold;
-
     //The amount of percentage damage any instance of incoming damage is reduced by
     [SerializeField]
     protected float damageResistance = 1;
@@ -249,9 +245,9 @@ public class BaseEnemyClass : MonoBehaviour
                 }
             }
         }
-	    Debug.Log((damageToTake * multiplier) * damageResistance - damageThreshold);
+	    Debug.Log((damageToTake * multiplier) * damageResistance);
 
-        currentHealth -= (damageToTake * multiplier) * damageResistance - damageThreshold;
+        currentHealth -= (damageToTake * multiplier) * damageResistance;
 
         if(enemyAnims)
         {

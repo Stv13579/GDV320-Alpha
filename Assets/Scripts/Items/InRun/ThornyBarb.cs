@@ -5,8 +5,7 @@ using UnityEngine;
 public class ThornyBarb : Item
 {
     //A multiplicative number (probably between 0 and 1)
-    [SerializeField]
-    float damageIncrease = 0;
+    float damageIncrease = 0.25f;
 
     StatModifier.Modifier thornyMod;
 
