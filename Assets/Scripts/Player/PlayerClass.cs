@@ -41,6 +41,7 @@ public class PlayerClass : MonoBehaviour
     }
     [SerializeField]
     ManaType[] manaTypes;
+    [SerializeField]
     float money;
 
     //A list of items which are collectible objects which add extra effects to the player
@@ -212,7 +213,7 @@ public class PlayerClass : MonoBehaviour
             defenseMod = 1;
         }
 
-        if(defenseMod > 1 || defenseMod == 0)
+        if(defenseMod == 0)
         {
             defenseMod = 1;
         }

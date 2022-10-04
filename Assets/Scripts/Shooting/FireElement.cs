@@ -38,7 +38,7 @@ public class FireElement : BaseElementClass
         {
             newFireball.transform.LookAt(hit.point);
         }
-        newFireball.GetComponent<Fireball>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.fireDamageMultiplier), gravity, gravityLifetime, explosionArea, explosionDamage, attackTypes);
+        newFireball.GetComponent<Fireball>().SetVars(projectileSpeed, damage * (damageMultiplier * elementData.fireDamageMultiplier), gravity, gravityLifetime, explosionArea, explosionDamage, attackTypes);
 
         //playerClass.ChangeMana(-manaCost, manaTypes);
     }
