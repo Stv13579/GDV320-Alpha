@@ -53,7 +53,7 @@ public class EnemyShield : BaseEnemyClass
                 }
             }
         }
-        currentHealth -= (damageToTake * multiplier) * damageResistance - damageThreshold;
+        currentHealth -= (damageToTake * multiplier) * damageResistance;
 
         if(uiScript)
         {
