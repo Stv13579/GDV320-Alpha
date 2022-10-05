@@ -114,10 +114,11 @@ public class BaseEnemyClass : MonoBehaviour
         health.baseValue = baseMaxHealth;
         damage.baseValue = baseDamageAmount;
         speed.baseValue = baseMoveSpeed;
-        if (idleAudio != null && audioManager)
-        {
-            audioManager.PlaySFX(idleAudio);
-        }
+        //
+        //if (idleAudio != null && audioManager)
+        //{
+        //    audioManager.PlaySFX(idleAudio);
+        //}
 
         if(spawner == null)
         {
@@ -346,10 +347,10 @@ public class BaseEnemyClass : MonoBehaviour
 
             if (audioManager)
             {
-                if(idleAudio != null)
-                {
-                    audioManager.StopSFX(idleAudio);
-                }
+                //if(idleAudio != null)
+                //{
+                //    audioManager.StopSFX(idleAudio);
+                //}
                 audioManager.StopSFX(deathAudio);
                 audioManager.PlaySFX(deathAudio, player.transform, this.transform);
             }

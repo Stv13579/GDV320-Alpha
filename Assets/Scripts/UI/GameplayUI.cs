@@ -41,9 +41,9 @@ public class GameplayUI : MonoBehaviour
     Image lifeStealFullScreen;
     Image voidFullScreen;
     Image burnFullScreen;
-    Image hurtFullScreen;
     Image lowHealthFullScreen;
     Image inToxicFullScreen;
+    Image slowedFullScreen;
     [SerializeField]
     Image damageIndicator;
 
@@ -56,9 +56,9 @@ public class GameplayUI : MonoBehaviour
     public Image GetLifeStealFullScreen() { return lifeStealFullScreen; }
     public Image GetVoidFullScreen() { return voidFullScreen; }
     public Image GetBurnFullScreen() { return burnFullScreen; }
-    public Image GetHurtFullScreen() { return hurtFullScreen; }
     public Image GetLowHealthFullScreen() { return lowHealthFullScreen; }
     public Image GetInToxicFullScreen() { return inToxicFullScreen; }
+    public Image GetSlowedFullScreen() { return slowedFullScreen; }
     public Image GetDamageIndicator() { return damageIndicator; }
     public GameObject GetHitMarker() { return hitMarker; }
     public GameObject GetHitMarkerShield() { return hitMarkerShield; }
@@ -74,9 +74,9 @@ public class GameplayUI : MonoBehaviour
         lifeStealFullScreen = GameObject.Find("GameplayUI/Effects/LifeSteal").GetComponent<Image>();
         voidFullScreen = GameObject.Find("GameplayUI/Effects/Void").GetComponent<Image>();
         burnFullScreen = GameObject.Find("GameplayUI/Effects/Burn").GetComponent<Image>();
-        hurtFullScreen = GameObject.Find("GameplayUI/Effects/PlayerDamage").GetComponent<Image>();
         lowHealthFullScreen = GameObject.Find("GameplayUI/Effects/LowHealth").GetComponent<Image>();
         inToxicFullScreen = GameObject.Find("GameplayUI/Effects/InToxic").GetComponent<Image>();
+        slowedFullScreen = GameObject.Find("GameplayUI/Effects/Slowed").GetComponent<Image>();
         comboTimer = maxComboTimer;
         Debug.Log("G UI on");
         DontDestroyOnLoad(gameObject);
@@ -101,10 +101,6 @@ public class GameplayUI : MonoBehaviour
         {
             burnFullScreen.gameObject.SetActive(false);
         }
-        if (hurtFullScreen)
-        {
-            hurtFullScreen.gameObject.SetActive(false);
-        }
         if (lowHealthFullScreen)
         {
             lowHealthFullScreen.gameObject.SetActive(false);
@@ -112,6 +108,10 @@ public class GameplayUI : MonoBehaviour
         if (inToxicFullScreen)
         {
             inToxicFullScreen.gameObject.SetActive(false);
+        }
+        if(slowedFullScreen)
+        {
+            slowedFullScreen.gameObject.SetActive(false);
         }
     }
 
