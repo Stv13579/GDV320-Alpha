@@ -217,6 +217,13 @@ public class Shooting : MonoBehaviour
     void Awake()
     {
         audioManager = FindObjectOfType<AudioManager>();
+        primaryElements[leftElementIndex].AnimationSwitch(true);
+        catalystElements[rightElementIndex].AnimationSwitch(false);
+        DestroyLeftOrb();
+        DestroyRightOrb();
+        InstantiatePrimaryOrb();
+        InstantiateCatalystOrb();
+        inComboMode = false;
     }
 
     void Update()
