@@ -243,7 +243,6 @@ public class BaseEnemyClass : MonoBehaviour
             }
         }
         
-	    Debug.Log(damageToTake);
         float multiplier = 1;
         foreach (Types type in attackTypes)
         {
@@ -262,7 +261,6 @@ public class BaseEnemyClass : MonoBehaviour
                 }
             }
         }
-	    Debug.Log((damageToTake * multiplier) * damageResistance);
 
         currentHealth -= (damageToTake * multiplier) * damageResistance;
 

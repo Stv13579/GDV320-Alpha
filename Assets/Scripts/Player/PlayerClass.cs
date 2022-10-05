@@ -158,6 +158,8 @@ public class PlayerClass : MonoBehaviour
         else
         {
             fireEffect.SetActive(false);
+            gameplayUI.GetBurnFullScreen().gameObject.SetActive(false);
+            gameplayUI.GetBurnFullScreen().material.SetFloat("_Toggle_EffectIntensity", 0.0f);
         }
 
         Push();

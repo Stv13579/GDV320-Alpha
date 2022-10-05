@@ -54,7 +54,6 @@ public class LifeStealElement : BaseElementClass
     {
         if (isShooting == true)
         {
-            playerClass.ChangeMana(-manaCost * Time.deltaTime, manaTypes);
             currentDamageAndHealthTicker += Time.deltaTime;
             if (gameplayUI)
             {
@@ -98,6 +97,7 @@ public class LifeStealElement : BaseElementClass
                 lifeStealSuccess.transform.localScale = new Vector3(0.05f, 0.05f, objectHit[0].distance / 10);
                 lifeStealSuccess.SetActive(true);
                 lifeStealfail.SetActive(false);
+                playerClass.ChangeMana(-manaCost * Time.deltaTime, manaTypes);
                 if (currentDamageAndHealthTicker >= damageAndHealthTicker)
                 {
                     enemy.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.waterDamageMultiplier), attackTypes);

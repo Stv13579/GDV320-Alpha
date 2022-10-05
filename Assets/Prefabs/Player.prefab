@@ -510,7 +510,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2342924018183944106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalPosition: {x: 0, y: -20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5625023911835613078}
@@ -1333,7 +1333,7 @@ MonoBehaviour:
     type: 3}
   fireDOT: 0.01
   fireEffect: {fileID: 7688067040465559332}
-  lowHealthLimit: 50
+  lowHealthLimit: 75
   lowHealthFastHeartBeat: Low Health Fast Heart Beat
   lowHealthSlowHeartBeat: Low Health Slow Heart Beat
 --- !u!114 &1363181307
@@ -1381,7 +1381,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 7128103365064262050, guid: 38ba7214c9215794098efd48e6d1078a, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 3
+  manaCost: 1
   animationToPlay: FireProj
   animationToPlayAlt: FireProjAlt
   playerHand: {fileID: 2017859571}
@@ -1407,7 +1407,7 @@ MonoBehaviour:
   otherShootingSoundFX: Fire Element Shot Alt
   switchElementSFX: Fire Element Equip
   idleSFX: Fire Element Idle
-  damage: 17
+  damage: 20
   switchAnimationName: FireTransition
   startCoolDown: 0
   cooldownTimer: 0.6
@@ -1435,7 +1435,7 @@ MonoBehaviour:
   handVFX: {fileID: 3588022246820785612, guid: d84d2c64a8d7ce84c97a4650e477e6ef, type: 3}
   wristVFX: {fileID: 4952139987312495225, guid: 2a7f82e3da1331b40af316fc2d1dd30b,
     type: 3}
-  manaCost: 3
+  manaCost: 1
   animationToPlay: CrystalProj
   animationToPlayAlt: CrystalProjAlt
   playerHand: {fileID: 2017859571}
@@ -1461,14 +1461,14 @@ MonoBehaviour:
   otherShootingSoundFX: Crystal Element Shot Alt
   switchElementSFX: Crystal Element Equip
   idleSFX: Crystal Element Idle (maybe)
-  damage: 2.5
+  damage: 3
   switchAnimationName: CrystalTransition
   startCoolDown: 0
   cooldownTimer: 1.3
   currentElementType: 2
   crystalProjectile: {fileID: 767471284418207900, guid: 6d74d8f7a4c049649922bd1346f7f9c6,
     type: 3}
-  projectileSpeed: 65
+  projectileSpeed: 50
   damageCurve:
     serializedVersion: 2
     m_Curve:
@@ -1511,7 +1511,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 1500460943617783291, guid: e2d916ad91d498b4f907b0d381291644, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 3
+  manaCost: 1
   animationToPlay: WaterProj
   animationToPlayAlt: WaterProjAlt
   playerHand: {fileID: 2017859571}
@@ -1537,7 +1537,7 @@ MonoBehaviour:
   otherShootingSoundFX: Water Element Shot Alt
   switchElementSFX: Water Element Equip
   idleSFX: Water Element Idle
-  damage: 17
+  damage: 20
   switchAnimationName: WaterTransition
   startCoolDown: 0
   cooldownTimer: 0.8
@@ -2057,7 +2057,7 @@ MonoBehaviour:
   otherShootingSoundFX: Life Steal Shot
   switchElementSFX: Life Steal Equip
   idleSFX: Life Steal Idle
-  damage: 6
+  damage: 7
   switchAnimationName: LifeStealTransition
   startCoolDown: 0
   cooldownTimer: 1.5
@@ -2168,7 +2168,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Stasis Trap Equip
   idleSFX: Stasis Trap Idle
-  damage: 7
+  damage: 10
   switchAnimationName: StasisTrapTransition
   startCoolDown: 0
   cooldownTimer: 1.5
