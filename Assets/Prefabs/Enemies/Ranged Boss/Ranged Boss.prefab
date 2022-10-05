@@ -24388,15 +24388,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 20
-  baseMaxHealth: 20
+  maxHealth: 500
+  baseMaxHealth: 500
   damageAmount: 2
   baseDamageAmount: 2
   groundMoveSpeed: 0
   moveSpeed: 0
   baseMoveSpeed: 0
   rotationSpeed: 0
-  damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
   weaknesses: 
@@ -24409,6 +24408,11 @@ MonoBehaviour:
   takeDamageAudio: Ranged Boss Damage
   idleAudio: 
   targettingIndicator: {fileID: 4335289269587943172}
+  healVFX: {fileID: 0}
+  buffVFX: {fileID: 0}
+  enemyMat: []
+  maxDistance: 120
+  maxDamageTimer: 30
   projectileSpawnPos: {fileID: 7463681346582876170}
   tempProjectileSpawnPos: {fileID: 7314399184733861405}
   fireProjectile: {fileID: 5436927605413035607, guid: b3d71c9646cbe5841ae2add5b67626aa,
