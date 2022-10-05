@@ -11,7 +11,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 276263fc6ec2ab848bd528676ef28e6e, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -29,6 +29,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Diffuse:
         m_Texture: {fileID: 2800000, guid: 40cfa72d7a927ff4f9d9c4ee1c57bc18, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseBlink:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -51,12 +55,20 @@ Material:
         m_Texture: {fileID: 2800000, guid: 9cd6ee011ea58e3468429ff119beb61c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SlimeEmmisiveBlink:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SubSurfMulti:
         m_Texture: {fileID: 2800000, guid: 40cfa72d7a927ff4f9d9c4ee1c57bc18, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SubSurfMultiBlink:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -67,6 +79,8 @@ Material:
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
     - _Blend: 0
+    - _BlinkSpeed: 1
+    - _BlinkingEmissiveRate: 0.3
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -77,6 +91,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Highlight_Strenght: 1
+    - _IsBeingDamaged: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Outline_Alpha: 1
@@ -98,11 +113,13 @@ Material:
     - _SubSurf_Alpha: 1
     - _SubSurface_Stenght: 10
     - _Surface: 0
+    - _Toggle_EnemyHPEmissive: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Damage_Colour: {r: 2, g: 0, b: 0, a: 0}
     - _Diffuse_Colour: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Outline_Colour: {r: 0, g: 0, b: 0, a: 0}
