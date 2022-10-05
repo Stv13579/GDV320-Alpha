@@ -48,7 +48,6 @@ public class BurrowMovementScript : MonoBehaviour
 			}
 			if(Mathf.Abs(this.transform.position.y - pos.y) > 1)
 			{
-				Debug.Log(Mathf.Abs(this.transform.position.y - pos.y));
 				GetComponent<ParticleSystem>().Pause();
 			}
 			this.transform.position = pos;
