@@ -5,7 +5,7 @@ using UnityEngine;
 public class TrinketEquip : DraggedObject
 {
     [SerializeField]
-    string trinketName;
+    public string trinketName;
 
     private void Start()
     {
