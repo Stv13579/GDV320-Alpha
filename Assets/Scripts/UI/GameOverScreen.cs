@@ -19,11 +19,16 @@ public class GameOverScreen : MonoBehaviour
     int sceneToLoad;
 
     AsyncOperation operation;
+    AudioManager audioManager;
 
     void Start()
     {
         //Load the hub scene in the background while the button fades in
         StartCoroutine(LoadScene());
+    }
+    void Awake()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -61,6 +66,14 @@ public class GameOverScreen : MonoBehaviour
         Destroy(GameObject.Find("GameplayUI"));
         FindObjectOfType<SAIM>().data.ResetDifficulty();
         operation.allowSceneActivation = true;
+        if (audioManager)
+        {
+            for (int i = 0; i < audioManager.GetMusics().Length; i++)
+            {
+                audioManager.GetMusics()[i].GetAudioSource().Stop();
+            }
+            audioManager.PlayMusic("Hub Room Music");
+        }
     }
 
     public IEnumerator LoadScene()

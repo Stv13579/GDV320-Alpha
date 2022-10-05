@@ -179,7 +179,7 @@ public class SAIM : MonoBehaviour
         if (triggered && !roomComplete)
         {
             containingRoom.LockDoors();
-
+            GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>().text = spawnedEnemies.Count.ToString();
         }
         else
         {
