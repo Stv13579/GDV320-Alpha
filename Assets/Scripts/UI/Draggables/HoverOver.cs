@@ -25,6 +25,8 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     Color hoveredAlpha;
     Color idleAlpha;
 
+    [SerializeField]
+    public bool hidden = false;
 
     private void Awake()
     {
@@ -38,7 +40,14 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
         //Do description vars and name in details box
         DetailsWindow deetBox = GameObject.Find("DetailsWindow").GetComponent<DetailsWindow>();
-        deetBox.SetWindow(lVars.Description, lVars.Name);
+        if(hidden)
+        {
+            deetBox.SetWindow("???", "???");
+        }
+        else
+        {
+            deetBox.SetWindow(lVars.Description, lVars.Name);
+        }
         if(!highlight)
         {
             return;
