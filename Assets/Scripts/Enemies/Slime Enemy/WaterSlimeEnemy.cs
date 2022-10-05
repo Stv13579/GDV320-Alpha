@@ -242,12 +242,10 @@ public class WaterSlimeEnemy : BaseEnemyClass
 	            GameObject newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 4, Quaternion.identity);
 	            newSlime.GetComponent<Rigidbody>().AddForce(this.transform.up * 5 + this.transform.forward * 5);
 	            newSlime.GetComponent<WaterSlimeEnemy>().RestoreHealth(0);
-                newSlime.GetComponent<WaterSlimeEnemy>().maxHealth = maxHealth / 2;
-                newSlime.GetComponent<WaterSlimeEnemy>().baseMaxHealth = baseMaxHealth / 2;
-                newSlime.GetComponent<WaterSlimeEnemy>().health.baseValue = maxHealth / 2;
-                newSlime.GetComponent<WaterSlimeEnemy>().damageAmount = damageAmount / 2;
+	            StatModifier.AddModifier(newSlime.GetComponent<WaterSlimeEnemy>().GetHealthStat().multiplicativeModifiers, new StatModifier.Modifier(1.0f / (generation * 4 + 2), "Split " + generation));
+	            StatModifier.AddModifier(newSlime.GetComponent<WaterSlimeEnemy>().GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
+	            StatModifier.AddModifier(newSlime.GetComponent<WaterSlimeEnemy>().GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
                 newSlime.GetComponent<WaterSlimeEnemy>().transform.localScale = this.transform.localScale / 2;
-                newSlime.GetComponent<WaterSlimeEnemy>().moveSpeed = moveSpeed / 2;
                 newSlime.GetComponent<WaterSlimeEnemy>().generation = generation + 1;
                 newSlime.GetComponent<WaterSlimeEnemy>().spawner = spawner;
                 spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime.GetComponent<WaterSlimeEnemy>());

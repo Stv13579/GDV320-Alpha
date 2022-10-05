@@ -8,7 +8,6 @@ public class FireFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
 	public override void Effect()
     {
         base.Effect();
-        Debug.Log("Effect");
         Collider[] objects = Physics.OverlapSphere(transform.position, effectRange);
         foreach(Collider col in objects)
         {

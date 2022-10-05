@@ -8,6 +8,8 @@ public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
     [SerializeField]
     GameObject draggedObject;
 
+    public GameObject GetDragged() { return draggedObject;}
+
     bool canDrag = true;
 
     public void SetDraggable(bool draggable) { canDrag = draggable; }

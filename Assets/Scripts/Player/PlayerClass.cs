@@ -83,6 +83,9 @@ public class PlayerClass : MonoBehaviour
 
     float lowHealthValue;
 
+    bool slowed;
+    float slowedtimer = 10.0f;
+
     public ManaType[] GetManaTypeArray() { return manaTypes; }
     public List<Item> GetHeldItems() { return heldItems; }
     public GameObject GetItemUI() { return itemUI; }
@@ -90,6 +93,7 @@ public class PlayerClass : MonoBehaviour
     public void SetGameOverScreen(GameObject tempGameOverScreen) { gameOverScreen = tempGameOverScreen; }
     public float GetMoney() { return money; }
     public void SubtractMoney(float cost) { money -= cost; }
+    public void SetSlowed(bool tempslowed) { slowed = tempslowed; }
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -139,6 +143,7 @@ public class PlayerClass : MonoBehaviour
         defense = StatModifier.UpdateValue(defenseStat);
 
         LowHealthEffect();
+        FullScreenSlowed();
 
         if(Input.GetKeyDown(KeyCode.O))
         {
@@ -153,6 +158,8 @@ public class PlayerClass : MonoBehaviour
         else
         {
             fireEffect.SetActive(false);
+            gameplayUI.GetBurnFullScreen().gameObject.SetActive(false);
+            gameplayUI.GetBurnFullScreen().material.SetFloat("_Toggle_EffectIntensity", 0.0f);
         }
 
         Push();
@@ -340,6 +347,25 @@ public class PlayerClass : MonoBehaviour
         }
     }
 
+    void FullScreenSlowed()
+    {
+        if(slowed)
+        {
+            gameplayUI.GetSlowedFullScreen().gameObject.SetActive(true);
+            gameplayUI.GetSlowedFullScreen().material.SetFloat("_Toggle_EffectIntensity", 10.0f);
+            slowedtimer -= Time.deltaTime;
+            if (slowedtimer <= 0.0f)
+            {
+                slowed = false;
+                slowedtimer = 10.0f;
+            }
+        }
+        if(!slowed)
+        {
+            gameplayUI.GetSlowedFullScreen().gameObject.SetActive(false);
+            gameplayUI.GetSlowedFullScreen().material.SetFloat("_Toggle_EffectIntensity", 0.0f);
+        }
+    }
     public StatModifier.FullStat GetHealthStat()
     {
         return health;

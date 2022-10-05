@@ -16,7 +16,10 @@ public class TriggerScript : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            transform.parent.GetComponent<SAIM>().playerLeaving = true;
+        	if(transform.parent.GetComponent<SAIM>())
+        	{
+	        	transform.parent.GetComponent<SAIM>().playerLeaving = true;
+        	}
         }
     }
 }

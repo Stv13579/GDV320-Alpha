@@ -122,9 +122,12 @@ public class StasisTrapProj : MonoBehaviour
             containedEnemies.Add(other.gameObject);
             for (int i = 0; i < containedEnemies.Count; i++)
             {
-	            BaseEnemyClass enemy = containedEnemies[i].GetComponentInParent<BaseEnemyClass>();
-                StatModifier.AddModifier(enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0, "Stasis"));
-                StatModifier.UpdateValue(enemy.GetSpeedStat());
+                if (containedEnemies[i])
+                {
+                    BaseEnemyClass enemy = containedEnemies[i].GetComponentInParent<BaseEnemyClass>();
+                    StatModifier.AddModifier(enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0, "Stasis"));
+                    StatModifier.UpdateValue(enemy.GetSpeedStat());
+                }
             }
         }
     }

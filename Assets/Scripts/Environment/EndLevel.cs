@@ -45,10 +45,17 @@ public class EndLevel : MonoBehaviour
             Destroy(player);
             Destroy(GameObject.Find("GameplayUI"));
         }
-
+        player.GetComponent<Shooting>().SetLoadScene(true);
         sceneToLoad = index;
-
-        SceneManager.LoadScene(sceneToLoad);
+		
+	    if(Object.FindObjectOfType<LevelPreloaderScript>())
+	    {
+		    Object.FindObjectOfType<LevelPreloaderScript>().LoadScene();
+	    }
+	    else
+	    {
+		    SceneManager.LoadScene(sceneToLoad);
+	    }
 
         //StartCoroutine(screen.GetComponent<LoadingScreen>().LoadScene(sceneToLoad));
 
@@ -60,7 +67,7 @@ public class EndLevel : MonoBehaviour
             {
                 for (int i = 0; i < audioManager.GetMusics().Length; i++)
                 {
-                    audioManager.GetMusics()[i].audioSource.Stop();
+                    audioManager.GetMusics()[i].GetAudioSource().Stop();
                 }
                 audioManager.PlayMusic("Hub Room Music");
             }
@@ -68,7 +75,7 @@ public class EndLevel : MonoBehaviour
             {
                 for (int i = 0; i < audioManager.GetMusics().Length; i++)
                 {
-                    audioManager.GetMusics()[i].audioSource.Stop();
+                    audioManager.GetMusics()[i].GetAudioSource().Stop();
                 }
                 audioManager.PlayMusic($"Level {sceneToLoad - 1} Non Combat");
             }

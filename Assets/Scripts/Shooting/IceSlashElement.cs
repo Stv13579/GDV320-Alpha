@@ -22,7 +22,7 @@ public class IceSlashElement : BaseElementClass
         base.ElementEffect();
         PlayVFX();
         GameObject iceSlashTemp = Instantiate(iceSlash, shootingTranform.position, Camera.main.transform.rotation);
-        iceSlashTemp.GetComponent<IceSlashProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.waterDamageMultiplier), lifeTimer, attackTypes);
+	    iceSlashTemp.GetComponent<IceSlashProj>().SetVars(projectileSpeed, damage * (damageMultiplier * elementData.waterDamageMultiplier), lifeTimer, attackTypes);
     }
 
     // gets called in the animation event triggers

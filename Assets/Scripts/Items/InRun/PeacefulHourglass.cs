@@ -8,7 +8,7 @@ public class PeacefulHourglass : Item
     float addedDamagePerSecond, maxAddedDamage;
     float currentAddedDamage, addTimer;
 
-    private void Update()
+    void Update()
     {
         if(addTimer >= 1)
         {

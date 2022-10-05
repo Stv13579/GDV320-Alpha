@@ -13,25 +13,25 @@ public class Shooting : MonoBehaviour
     [SerializeField]
     List<ComboElementList> comboElements;
 
-	[SerializeField]
+    [SerializeField]
     BaseElementClass blankElement;
-    
+
     //Sets the combo elements based on the current base elements
     public BaseElementClass CalculateCombo(BaseElementClass primary, BaseElementClass catalyst)
     {
         BaseElementClass chosenCombo = new BaseElementClass();
 
-        if(primary is FireElement)
+        if (primary is FireElement)
         {
-            if(catalyst is VoidElement)
+            if (catalyst is VoidElement)
             {
                 chosenCombo = GetComponent<LandMineElement>();
             }
-            else if(catalyst is NecroticElement)
+            else if (catalyst is NecroticElement)
             {
                 chosenCombo = GetComponent<AcidCloudElement>();
             }
-            else if(catalyst is EnergyElement)
+            else if (catalyst is EnergyElement)
             {
                 chosenCombo = GetComponent<LaserBeamElement>();
             }
@@ -88,6 +88,8 @@ public class Shooting : MonoBehaviour
     [SerializeField]
     bool tutorial;
 
+    bool loadScene;
+
     AudioManager audioManager;
 
     [SerializeField]
@@ -103,26 +105,26 @@ public class Shooting : MonoBehaviour
     public List<BaseElementClass> GetCatalystElements() { return catalystElements; }
     public List<BaseElementClass> GetPrimaryElements() { return primaryElements; }
     public List<ComboElementList> GetComboElements() { return comboElements; }
-	public Sprite GetPrimaryElementSprite() { return primaryElements[leftElementIndex].GetSprite(); }
-    public Sprite GetNextPrimaryElementSprite() 
-    { 
-        if((leftElementIndex + 1) >= primaryElements.Count)
+    public Sprite GetPrimaryElementSprite() { return primaryElements[leftElementIndex].GetSprite(); }
+    public Sprite GetNextPrimaryElementSprite()
+    {
+        if ((leftElementIndex + 1) >= primaryElements.Count)
         {
             return primaryElements[0].GetSprite();
         }
 
-        return primaryElements[leftElementIndex + 1].GetSprite(); 
+        return primaryElements[leftElementIndex + 1].GetSprite();
     }
 
     public Sprite GetCatalystElementSprite() { return catalystElements[rightElementIndex].GetSprite(); }
-    public Sprite GetNextCatalystElementSprite() 
+    public Sprite GetNextCatalystElementSprite()
     {
         if ((rightElementIndex + 1) >= catalystElements.Count)
         {
             return catalystElements[0].GetSprite();
         }
 
-        return catalystElements[rightElementIndex + 1].GetSprite(); 
+        return catalystElements[rightElementIndex + 1].GetSprite();
     }
 
     public Sprite GetComboElementSprite() { return (comboElements[leftElementIndex].comboElements[rightElementIndex].GetSprite()); }
@@ -132,6 +134,8 @@ public class Shooting : MonoBehaviour
     public int GetRightElementIndex() { return rightElementIndex; }
     public bool GetInComboMode() { return inComboMode; }
     public void SetAbleToShoot(bool tempAbleToShoot) { ableToShoot = tempAbleToShoot; }
+    public bool GetLoadScene() { return loadScene; }
+    public void SetLoadScene(bool tempLoadScene) { loadScene = tempLoadScene; }
     public Sprite GetCrosshair()
     {
         if (inComboMode)
@@ -221,7 +225,7 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
-        if(loadOutChosen)
+        if(loadOutChosen || loadScene)
         {
             primaryElements[leftElementIndex].AnimationSwitch(true);
             catalystElements[rightElementIndex].AnimationSwitch(false);
@@ -229,7 +233,10 @@ public class Shooting : MonoBehaviour
             DestroyRightOrb();
             InstantiatePrimaryOrb();
             InstantiateCatalystOrb();
+            inComboMode = false;
+            uiScript.SetCombo(!inComboMode);
             loadOutChosen = false;
+            loadScene = false;
         }
         
         SwitchingElements();
