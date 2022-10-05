@@ -12,7 +12,7 @@ public class PlayerIndicator : MonoBehaviour
     private void Update()
     {
         Vector3 rot = transform.rotation.eulerAngles;
-        rot.z = - (player.transform.rotation.eulerAngles.y + 180);
-        transform.rotation = Quaternion.Euler(rot);
+        rot.z = - (player.transform.rotation.eulerAngles.y);
+            transform.rotation = Quaternion.Euler(rot);
     }
 }
