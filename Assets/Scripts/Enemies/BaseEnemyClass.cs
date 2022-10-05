@@ -243,7 +243,6 @@ public class BaseEnemyClass : MonoBehaviour
             }
         }
         
-	    Debug.Log(damageToTake);
         float multiplier = 1;
         foreach (Types type in attackTypes)
         {
