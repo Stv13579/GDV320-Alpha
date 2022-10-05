@@ -78,7 +78,6 @@ public class GameplayUI : MonoBehaviour
         inToxicFullScreen = GameObject.Find("GameplayUI/Effects/InToxic").GetComponent<Image>();
         slowedFullScreen = GameObject.Find("GameplayUI/Effects/Slowed").GetComponent<Image>();
         comboTimer = maxComboTimer;
-        Debug.Log("G UI on");
         DontDestroyOnLoad(gameObject);
 
         if (hitMarker)
