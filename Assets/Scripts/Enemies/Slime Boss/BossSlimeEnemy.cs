@@ -501,6 +501,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
 	            StatModifier.AddModifier(newSlime.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
 	            newSlime.fireTrailScale /= 2;
 	            newSlime.normalSlimeJumpForce /= 2;
+	            newSlime.projScale /= 2;
                 newSlime.transform.localScale = this.transform.localScale / 2;
                 newSlime.generation = generation + 1;
 	            bossHealthBar.AddEnemy(newSlime);
