@@ -261,7 +261,6 @@ public class BaseEnemyClass : MonoBehaviour
                 }
             }
         }
-	    Debug.Log((damageToTake * multiplier) * damageResistance);
 
         currentHealth -= (damageToTake * multiplier) * damageResistance;
 
