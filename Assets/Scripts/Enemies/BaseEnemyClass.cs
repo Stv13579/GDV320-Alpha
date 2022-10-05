@@ -243,7 +243,6 @@ public class BaseEnemyClass : MonoBehaviour
             }
         }
         
-	    Debug.Log(damageToTake);
         float multiplier = 1;
         foreach (Types type in attackTypes)
         {
@@ -262,7 +261,6 @@ public class BaseEnemyClass : MonoBehaviour
                 }
             }
         }
-	    Debug.Log((damageToTake * multiplier) * damageResistance);
 
         currentHealth -= (damageToTake * multiplier) * damageResistance;
 
@@ -280,11 +278,11 @@ public class BaseEnemyClass : MonoBehaviour
             audioManager.StopSFX(takeDamageAudio);
             audioManager.PlaySFX(takeDamageAudio, player.transform, this.transform);
         }
-        
-	    foreach(Material mat in enemyMat)
-	    {
-	    	mat.SetFloat("_Toggle_EnemyHPEmissive", Mathf.Clamp(currentHealth / maxHealth, 0, 1));
-	    }
+
+        foreach (Material mat in enemyMat)
+        {
+            mat.SetFloat("_Toggle_EnemyHPEmissive", Mathf.Clamp(currentHealth / maxHealth, 0, 1));
+        }
 
         //Instead of calling death here, make an animation trigger instead
         if (currentHealth <= 0)
@@ -400,10 +398,10 @@ public class BaseEnemyClass : MonoBehaviour
 	public virtual void RestoreHealth(float amount)
     {
 	    currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
-	    foreach(Material mat in enemyMat)
-	    {
-	    	mat.SetFloat("_Toggle_EnemyHPEmissive", Mathf.Clamp(currentHealth / maxHealth, 0, 1));
-	    }
+        foreach (Material mat in enemyMat)
+        {
+            mat.SetFloat("_Toggle_EnemyHPEmissive", Mathf.Clamp(currentHealth / maxHealth, 0, 1));
+        }
     }
 
 

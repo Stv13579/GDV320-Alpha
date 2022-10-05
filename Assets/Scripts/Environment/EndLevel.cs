@@ -45,7 +45,7 @@ public class EndLevel : MonoBehaviour
             Destroy(player);
             Destroy(GameObject.Find("GameplayUI"));
         }
-
+        player.GetComponent<Shooting>().SetLoadScene(true);
         sceneToLoad = index;
 		
 	    if(Object.FindObjectOfType<LevelPreloaderScript>())

@@ -116,12 +116,16 @@ public class SAIM : MonoBehaviour
     bool bossSaim = false;
 
     BossRoom bossRoom;
+
+    TextMeshProUGUI enemyCounter;
+
     void Awake()
     {
         //Aydens Audio manager
         audioManager = FindObjectOfType<AudioManager>();
         runManager = FindObjectOfType<RunManager>();
         bossRoom = FindObjectOfType<BossRoom>();
+        enemyCounter = GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>();
     }
     private void Start()
     {
@@ -144,7 +148,7 @@ public class SAIM : MonoBehaviour
     }
 
     void Update()
-    {
+	{
         if (bossRoom)
         {
             if (!bossRoom.GetBossSpawned())
@@ -179,7 +183,7 @@ public class SAIM : MonoBehaviour
         if (triggered && !roomComplete)
         {
             containingRoom.LockDoors();
-            GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>().text = spawnedEnemies.Count.ToString();
+            enemyCounter.text = spawnedEnemies.Count.ToString();
         }
         else
         {
@@ -190,10 +194,10 @@ public class SAIM : MonoBehaviour
                 drop.SetRoomEnd(true);
             }
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRoomUpdate();
-            GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>().text = spawnedEnemies.Count.ToString();
+            enemyCounter.text = spawnedEnemies.Count.ToString();
         }
-
-        AdjustDifficulty();
+	    AdjustDifficulty();
+		
 
 
 
@@ -493,6 +497,7 @@ public class SAIM : MonoBehaviour
             {
                 audioManager.SetCurrentStateToFadeOutAudio1();
             }
+	        Destroy(this);
         }
     }
 
