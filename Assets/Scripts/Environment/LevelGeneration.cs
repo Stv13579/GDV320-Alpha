@@ -327,6 +327,25 @@ public class LevelGeneration : MonoBehaviour
         return true;
     }
 
+    public bool CheckEdgePosition(Vector2 posToCheck)
+    {
+        //Iterate through all taken room positions and return false if the room is found to be taken
+        foreach (Vector2 pos in roomPositions)
+        {
+            foreach(GameObject room in placedRooms)
+            {
+                if (pos == posToCheck && room.GetComponent<Room>().gridPos == pos)
+                {
+                    return false;
+                }
+            }
+
+            
+        }
+
+        return true;
+    }
+
 
     //Recalculates weighting, setting the new spawn to highest, and reducing the rest
     void RecalculateWeighting(GameObject lastPlacedRoom)
