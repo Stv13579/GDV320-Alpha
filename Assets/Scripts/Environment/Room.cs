@@ -10,7 +10,7 @@ public class Room : MonoBehaviour
     public Vector2Int gridPos = Vector2Int.zero;
     [SerializeField]
     List<GameObject> activeDoors = new List<GameObject>();
-    LevelGeneration levelGenerator;
+    protected LevelGeneration levelGenerator;
     bool locked = false;
     protected GameObject roomTrigger;
     public bool visited = false;
@@ -22,7 +22,7 @@ public class Room : MonoBehaviour
     [SerializeField]
     GameObject hiddenLilly;
 
-    private void Start()
+    protected void Start()
     {
         
         
