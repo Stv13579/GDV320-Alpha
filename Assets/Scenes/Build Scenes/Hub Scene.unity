@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.33613607, g: 0.29118174, b: 0.46098307, a: 1}
+  m_IndirectSpecularColor: {r: 0.3363307, g: 0.29202896, b: 0.4629229, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -26974,6 +26974,11 @@ PrefabInstance:
       propertyPath: enemies.m_Bits
       value: 4194560
       objectReference: {fileID: 0}
+    - target: {fileID: 5625023910628228236, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
+        type: 3}
+      propertyPath: far clip plane
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5625023911835613078, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
         type: 3}
       propertyPath: m_RootOrder
@@ -42676,6 +42681,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3925962378959240323, guid: 5bf0ee0908ffff04896a7d4a5593bc16,
         type: 3}
+    - target: {fileID: 2148085700090367104, guid: dd6e8e841745aff44816aa89fc796730,
+        type: 3}
+      propertyPath: m_Name
+      value: Blacksmith
+      objectReference: {fileID: 0}
     - target: {fileID: 2148085700090367106, guid: dd6e8e841745aff44816aa89fc796730,
         type: 3}
       propertyPath: menu
@@ -42711,6 +42721,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 35.578648
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921061685942864181, guid: dd6e8e841745aff44816aa89fc796730,
+        type: 3}
+      propertyPath: m_Name
+      value: Model_NPC_Blaze
       objectReference: {fileID: 0}
     - target: {fileID: 3274829864339483274, guid: dd6e8e841745aff44816aa89fc796730,
         type: 3}
@@ -52201,6 +52216,11 @@ PrefabInstance:
       objectReference: {fileID: 1941301607}
     - target: {fileID: 2799552168907736150, guid: 0f9c9b34ebabc744f8e6005b4277cc92,
         type: 3}
+      propertyPath: q1Proph
+      value: 
+      objectReference: {fileID: 415431150}
+    - target: {fileID: 2799552168907736150, guid: 0f9c9b34ebabc744f8e6005b4277cc92,
+        type: 3}
       propertyPath: trinketToUpgrade
       value: 
       objectReference: {fileID: 1941301608}
@@ -52221,6 +52241,11 @@ PrefabInstance:
       objectReference: {fileID: 1941301608}
     - target: {fileID: 2799552168907736153, guid: 0f9c9b34ebabc744f8e6005b4277cc92,
         type: 3}
+      propertyPath: q1Proph
+      value: 
+      objectReference: {fileID: 415431150}
+    - target: {fileID: 2799552168907736153, guid: 0f9c9b34ebabc744f8e6005b4277cc92,
+        type: 3}
       propertyPath: trinketToUpgrade
       value: 
       objectReference: {fileID: 1941301608}
@@ -52229,16 +52254,31 @@ PrefabInstance:
       propertyPath: trinketToUpgrade
       value: 
       objectReference: {fileID: 1941301609}
+    - target: {fileID: 2799552168907736154, guid: 0f9c9b34ebabc744f8e6005b4277cc92,
+        type: 3}
+      propertyPath: currencyCompletion
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2799552168907736155, guid: 0f9c9b34ebabc744f8e6005b4277cc92,
         type: 3}
       propertyPath: trinketToUpgrade
       value: 
       objectReference: {fileID: 1941301609}
+    - target: {fileID: 2799552168907736155, guid: 0f9c9b34ebabc744f8e6005b4277cc92,
+        type: 3}
+      propertyPath: currencyCompletion
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2799552168907736156, guid: 0f9c9b34ebabc744f8e6005b4277cc92,
         type: 3}
       propertyPath: trinketToUpgrade
       value: 
       objectReference: {fileID: 1941301606}
+    - target: {fileID: 2799552168907736157, guid: 0f9c9b34ebabc744f8e6005b4277cc92,
+        type: 3}
+      propertyPath: chanceToSpawn
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2799552168907736157, guid: 0f9c9b34ebabc744f8e6005b4277cc92,
         type: 3}
       propertyPath: trinketToUpgrade
