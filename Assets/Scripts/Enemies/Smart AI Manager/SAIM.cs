@@ -144,7 +144,7 @@ public class SAIM : MonoBehaviour
     }
 
     void Update()
-    {
+	{
         if (bossRoom)
         {
             if (!bossRoom.GetBossSpawned())
@@ -192,8 +192,8 @@ public class SAIM : MonoBehaviour
             GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRoomUpdate();
             GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>().text = spawnedEnemies.Count.ToString();
         }
-
-        AdjustDifficulty();
+	    AdjustDifficulty();
+		
 
 
 
@@ -493,6 +493,7 @@ public class SAIM : MonoBehaviour
             {
                 audioManager.SetCurrentStateToFadeOutAudio1();
             }
+	        Destroy(this);
         }
     }
 
