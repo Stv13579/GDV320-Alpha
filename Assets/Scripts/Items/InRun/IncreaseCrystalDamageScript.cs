@@ -9,7 +9,7 @@ public class IncreaseCrystalDamageScript : Item
 
     void Start()
     {
-        itemName = "Crystal Ring";
+        itemName = "Amethyst Heart";
     }
 
     public override void AddEffect(PlayerClass player)

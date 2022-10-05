@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PeacefulHourglass : Item
 {
-    [SerializeField]
-    float addedDamagePerSecond, maxAddedDamage;
+    
+    float addedDamagePerSecond = 5, maxAddedDamage = 50;
     float currentAddedDamage, addTimer;
 
     void Update()
