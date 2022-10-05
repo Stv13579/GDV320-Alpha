@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IncreaseWaterDamageScript : Item
 {
-    private void Start()
+    void Start()
     {
         itemName = "Flowing Band";
     }

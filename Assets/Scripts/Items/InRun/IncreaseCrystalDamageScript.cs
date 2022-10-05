@@ -7,7 +7,7 @@ public class IncreaseCrystalDamageScript : Item
 
     
 
-    private void Start()
+    void Start()
     {
         itemName = "Crystal Ring";
     }
