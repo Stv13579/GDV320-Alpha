@@ -39,7 +39,7 @@ public class EndLevel : MonoBehaviour
 
         index++;
 
-        if (index >= numberOfLevels)
+        if (index > numberOfLevels)
         {
             index = 1;
             Destroy(player);
