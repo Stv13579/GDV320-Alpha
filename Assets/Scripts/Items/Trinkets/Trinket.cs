@@ -14,6 +14,14 @@ public class Trinket : Item
 
     public UnlockState uState = UnlockState.Locked;
 
+    [SerializeField]
+    NPCData associatedNPC;
+
+    private void Start()
+    {
+        uState = (UnlockState)associatedNPC.storyPosition;
+    }
+
     public override void AddEffect(PlayerClass player)
     {
         base.AddEffect(player);

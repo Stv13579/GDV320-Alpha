@@ -13,6 +13,11 @@ public class FireFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
         {
             if(col.gameObject.GetComponent<BaseEnemyClass>())
             {
+                if(col.gameObject.GetComponent<BaseFlyingEnemyScript>())
+                {
+                    continue;
+                }
+
                 BaseEnemyClass enemy = col.gameObject.GetComponent<BaseEnemyClass>();
 
                 StatModifier.StartAddModifierTemporary(enemy, enemy.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(1.5f, "FireFlyingAttackBuff"), 10.0f);

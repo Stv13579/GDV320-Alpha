@@ -19,6 +19,11 @@ public class WaterFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
         {
             if (col.gameObject.GetComponent<BaseEnemyClass>())
             {
+                if (col.gameObject.GetComponent<BaseFlyingEnemyScript>())
+                {
+                    continue;
+                }
+
                 col.gameObject.GetComponent<BaseEnemyClass>().RestoreHealth(healthRestore);
                 if(col.gameObject.GetComponent<BaseEnemyClass>().healVFX)
                 {
