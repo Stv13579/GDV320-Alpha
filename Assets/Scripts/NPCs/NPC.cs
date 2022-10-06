@@ -166,10 +166,15 @@ public class NPC : MonoBehaviour
     [SerializeField]
     bool tutorial;
 
+    [SerializeField]
+    GameObject neckBone;
+    GameObject player;
+
     //Defines an NPC in the broad sense
     //Holds dialogue and functionality for questlines.
     public void Start()
     {
+        player = FindObjectOfType<PlayerClass>().gameObject;
         //Create an array of possible dialogues and then choose one at random.
         //Possible dialogues include the random ones, the current story position, or a deterministic quest dialogue.
         int storyTime = UnityEngine.Random.Range(0, 2);
@@ -220,6 +225,21 @@ public class NPC : MonoBehaviour
         }
 
         currentDialogue = possibleDialogues[UnityEngine.Random.Range(0, possibleDialogues.Count)];
+    }
+
+    private void FixedUpdate()
+    {
+        if(neckBone)
+        {
+            ////Rotate towards the player
+            if (Vector3.Angle(transform.forward, player.transform.position - transform.position) < 60
+                && Vector3.Angle(transform.forward, player.transform.position - transform.position) > 0.01f)
+            {
+                Vector3 rot = neckBone.transform.localRotation.eulerAngles;
+                rot.x = -Vector3.SignedAngle(transform.forward, player.transform.position - transform.position, Vector3.up);
+                neckBone.transform.localRotation = Quaternion.Euler(rot);
+            }
+        }
     }
 
     //Choose which dialogues to add to the current dialogue list

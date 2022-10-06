@@ -44,6 +44,11 @@ public class EndLevel : MonoBehaviour
             index = 1;
             Destroy(player);
             Destroy(GameObject.Find("GameplayUI"));
+            //Save the game
+            SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Lotl"));
+            SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Blacksmith"));
+            SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Fortune"));
+            SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Shop"));
         }
         player.GetComponent<Shooting>().SetLoadScene(true);
         sceneToLoad = index;

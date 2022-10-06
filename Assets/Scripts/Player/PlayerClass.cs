@@ -119,7 +119,7 @@ public class PlayerClass : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape) && Cursor.lockState != CursorLockMode.Locked)
         {
             //Save the game
             SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Lotl"));
@@ -128,17 +128,18 @@ public class PlayerClass : MonoBehaviour
             SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Shop"));
 
             Application.Quit();
+
         }
 
         //Don't forget to remove this
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            BaseEnemyClass[] enemies = FindObjectsOfType<BaseEnemyClass>();
-            foreach(BaseEnemyClass enemy in enemies)
-            {
-                enemy.TakeDamage(1000, new List<BaseEnemyClass.Types>());
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    BaseEnemyClass[] enemies = FindObjectsOfType<BaseEnemyClass>();
+        //    foreach(BaseEnemyClass enemy in enemies)
+        //    {
+        //        enemy.TakeDamage(1000, new List<BaseEnemyClass.Types>());
+        //    }
+        //}
         maxHealth = StatModifier.UpdateValue(health);
         defense = StatModifier.UpdateValue(defenseStat);
 
