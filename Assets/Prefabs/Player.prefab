@@ -1750,7 +1750,7 @@ MonoBehaviour:
   currentElementType: 201
   laserBeam: {fileID: 3981687641008780923}
   playerMovement: {fileID: 5625023911835613076}
-  hitDelay: 0.1
+  hitDelay: 0.25
 --- !u!114 &443619680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2057,7 +2057,7 @@ MonoBehaviour:
   otherShootingSoundFX: Life Steal Shot
   switchElementSFX: Life Steal Equip
   idleSFX: Life Steal Idle
-  damage: 10
+  damage: 5
   switchAnimationName: LifeStealTransition
   startCoolDown: 0
   cooldownTimer: 1.5
@@ -2065,9 +2065,9 @@ MonoBehaviour:
   lifeStealSuccess: {fileID: 3194474830823642876}
   lifeStealfail: {fileID: 4552281088649957088}
   sphereRadius: 0.5
-  sphereRange: 10
-  healValue: 1
-  damageAndHealthTicker: 0.5
+  sphereRange: 13
+  healValue: 0.25
+  damageAndHealthTicker: 0.3
   hitLayer:
     serializedVersion: 2
     m_Bits: 256

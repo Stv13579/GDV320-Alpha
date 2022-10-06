@@ -68,7 +68,6 @@ public class LaserBeam : MonoBehaviour
 
         if(currentHitDelay > hitDelay)
         {
-            currentHitDelay = 0;
             foreach (GameObject enemy in containedEnemies.ToArray())
             {
                 if(enemy)
@@ -81,6 +80,7 @@ public class LaserBeam : MonoBehaviour
                     containedEnemies.Remove(enemy);
                 }
             }
+            currentHitDelay = 0;
         }
     }
     // setter
