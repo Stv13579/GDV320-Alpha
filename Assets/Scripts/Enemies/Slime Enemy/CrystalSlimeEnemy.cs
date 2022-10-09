@@ -98,7 +98,7 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
                 newSlime.spawner = spawner;
                 spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime);
 
-	            newSlime.GetComponent<SphereCollider>().radius *= 1.2 * generation;
+	            newSlime.GetComponent<SphereCollider>().radius *= 1.2f * generation;
 	            newSlime.enemyProjectileScale = enemyProjectileScale / 1.5f;
 
             }
