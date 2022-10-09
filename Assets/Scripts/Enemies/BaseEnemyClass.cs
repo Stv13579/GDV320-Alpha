@@ -94,7 +94,7 @@ public class BaseEnemyClass : MonoBehaviour
 	
 	
 	[SerializeField]
-	float maxDistance = 120.0f;
+	float maxDistance = 10.0f;
 	float damageTimer = 0.0f;
 	[SerializeField]
 	float maxDamageTimer = 30.0f;
