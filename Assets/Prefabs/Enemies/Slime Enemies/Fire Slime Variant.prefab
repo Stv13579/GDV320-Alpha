@@ -21,13 +21,11 @@ MonoBehaviour:
   moveSpeed: 500
   baseMoveSpeed: 500
   rotationSpeed: 0
-  damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
   weaknesses: 02000000
   resistances: 01000000
-  deathSpawn: {fileID: 6298907768690529144, guid: a0b61e964697a6a45a37535f48a3b594,
-    type: 3}
+  deathSpawn: {fileID: 9177077570632712725}
   hitSpawn: {fileID: 4822822640996457391}
   attackAudio: Player Damage
   deathAudio: Slime Death
@@ -36,6 +34,9 @@ MonoBehaviour:
   targettingIndicator: {fileID: 5820064549849268897}
   healVFX: {fileID: 2572557084162243954}
   buffVFX: {fileID: 7586175651838794578}
+  enemyMat: []
+  maxDistance: 120
+  maxDamageTimer: 30
   jumpForce: 200
   pushForce: 10
   attackJumpForce: 0
@@ -128,6 +129,81 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4786863155429246897, guid: a3345ae8846797047bedf92710df1138,
     type: 3}
   m_PrefabInstance: {fileID: 36100326285777950}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2896289908999836013
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2510463480032081886}
+    m_Modifications:
+    - target: {fileID: 2819931175281865269, guid: a0b61e964697a6a45a37535f48a3b594,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819931175281865269, guid: a0b61e964697a6a45a37535f48a3b594,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819931175281865269, guid: a0b61e964697a6a45a37535f48a3b594,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819931175281865269, guid: a0b61e964697a6a45a37535f48a3b594,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819931175281865269, guid: a0b61e964697a6a45a37535f48a3b594,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819931175281865269, guid: a0b61e964697a6a45a37535f48a3b594,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819931175281865269, guid: a0b61e964697a6a45a37535f48a3b594,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819931175281865269, guid: a0b61e964697a6a45a37535f48a3b594,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819931175281865269, guid: a0b61e964697a6a45a37535f48a3b594,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819931175281865269, guid: a0b61e964697a6a45a37535f48a3b594,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819931175281865269, guid: a0b61e964697a6a45a37535f48a3b594,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298907768690529144, guid: a0b61e964697a6a45a37535f48a3b594,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Slime_Fire_Death
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a0b61e964697a6a45a37535f48a3b594, type: 3}
+--- !u!1 &9177077570632712725 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6298907768690529144, guid: a0b61e964697a6a45a37535f48a3b594,
+    type: 3}
+  m_PrefabInstance: {fileID: 2896289908999836013}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8065610830941483516
 PrefabInstance:

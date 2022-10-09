@@ -21,13 +21,11 @@ MonoBehaviour:
   moveSpeed: 500
   baseMoveSpeed: 500
   rotationSpeed: 0
-  damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
   weaknesses: 00000000
   resistances: 02000000
-  deathSpawn: {fileID: 1584426400794531735, guid: f49572f8a25942242a110636866f6bdd,
-    type: 3}
+  deathSpawn: {fileID: 24780754433454685}
   hitSpawn: {fileID: 1124191323197552849}
   attackAudio: Player Damage
   deathAudio: Slime Death
@@ -36,6 +34,9 @@ MonoBehaviour:
   targettingIndicator: {fileID: 2207227147477192214}
   healVFX: {fileID: 7914847319957287365}
   buffVFX: {fileID: 2820135405712021477}
+  enemyMat: []
+  maxDistance: 120
+  maxDamageTimer: 30
   jumpForce: 200
   pushForce: 10
   attackJumpForce: 0
@@ -50,6 +51,81 @@ MonoBehaviour:
   enemyProjectile: {fileID: 5267926084121278719, guid: 319ee57292d1b084a9fa57cf30f26e56,
     type: 3}
   enemyProjectileScale: {x: 0.02, y: 0.02, z: 0.02}
+--- !u!1001 &1559664518489859530
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7832416717652441961}
+    m_Modifications:
+    - target: {fileID: 1584426400794531735, guid: f49572f8a25942242a110636866f6bdd,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Slime_Crystal_Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236038652651825236, guid: f49572f8a25942242a110636866f6bdd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236038652651825236, guid: f49572f8a25942242a110636866f6bdd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236038652651825236, guid: f49572f8a25942242a110636866f6bdd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236038652651825236, guid: f49572f8a25942242a110636866f6bdd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236038652651825236, guid: f49572f8a25942242a110636866f6bdd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236038652651825236, guid: f49572f8a25942242a110636866f6bdd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236038652651825236, guid: f49572f8a25942242a110636866f6bdd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236038652651825236, guid: f49572f8a25942242a110636866f6bdd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236038652651825236, guid: f49572f8a25942242a110636866f6bdd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236038652651825236, guid: f49572f8a25942242a110636866f6bdd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236038652651825236, guid: f49572f8a25942242a110636866f6bdd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f49572f8a25942242a110636866f6bdd, type: 3}
+--- !u!1 &24780754433454685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1584426400794531735, guid: f49572f8a25942242a110636866f6bdd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1559664518489859530}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2416866107423554891
 PrefabInstance:
   m_ObjectHideFlags: 0

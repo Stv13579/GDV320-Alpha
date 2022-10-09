@@ -147,8 +147,15 @@ public class BaseEnemyClass : MonoBehaviour
     {
         if(GetComponentInChildren<Animator>() && GetComponentInChildren<Animator>().GetNextAnimatorStateInfo(0).IsName("Death"))
         {
+
+        	
             return;
         }
+		
+	    if(!deathSpawn)
+	    {
+		    Destroy(this.gameObject);
+	    }
 		
         if(currentHealth > maxHealth)
         {
@@ -340,8 +347,10 @@ public class BaseEnemyClass : MonoBehaviour
             {
                 dTrigs(gameObject);
             }
-
-            Instantiate(deathSpawn, transform.position, Quaternion.identity);
+			
+	        deathSpawn.GetComponent<ParticleSystem>().Play();
+	        enemyAnims.gameObject.SetActive(false);
+	        //Instantiate(deathSpawn, transform.position, Quaternion.identity);
 
             if (audioManager)
             {
@@ -352,7 +361,7 @@ public class BaseEnemyClass : MonoBehaviour
                 audioManager.StopSFX(deathAudio);
                 audioManager.PlaySFX(deathAudio, player.transform, this.transform);
             }
-            Destroy(gameObject);
+	        //Destroy(gameObject);
         }
     }
 

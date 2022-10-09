@@ -21,13 +21,11 @@ MonoBehaviour:
   moveSpeed: 10
   baseMoveSpeed: 10
   rotationSpeed: 0
-  damageThreshold: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
   weaknesses: 01000000
   resistances: 00000000
-  deathSpawn: {fileID: 7146713477264106298, guid: d575376d2ad453d48bb20e4a2b4bb08c,
-    type: 3}
+  deathSpawn: {fileID: 8371652549049462333}
   hitSpawn: {fileID: 5825286939940197783}
   attackAudio: Flying Enemy Attack
   deathAudio: Flying Enemy Death
@@ -36,6 +34,9 @@ MonoBehaviour:
   targettingIndicator: {fileID: 1404768966937678259}
   healVFX: {fileID: 0}
   buffVFX: {fileID: 0}
+  enemyMat: []
+  maxDistance: 120
+  maxDamageTimer: 30
   effectTimer: 10
   effectRange: 10
   moveDetect:
@@ -126,6 +127,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 387988243599795695, guid: 1fd1aea56a319fa409d011771046677e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007136173744618346, guid: 1fd1aea56a319fa409d011771046677e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2045452580190906738, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_RootOrder
@@ -191,6 +202,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water Flying Enemy Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2618050434216619256, guid: 1fd1aea56a319fa409d011771046677e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2618050434216619261, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_IsActive
@@ -199,12 +215,12 @@ PrefabInstance:
     - target: {fileID: 5121240916422757965, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6509235447840888431, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8153343602719881785, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
@@ -214,7 +230,7 @@ PrefabInstance:
     - target: {fileID: 9005416686079827364, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9220163682881030405, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
@@ -241,6 +257,81 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 446078423730382970, guid: 1fd1aea56a319fa409d011771046677e,
     type: 3}
   m_PrefabInstance: {fileID: 1535292170577803721}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1657377068364909831
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 661075115052961979}
+    m_Modifications:
+    - target: {fileID: 7146713477264106245, guid: d575376d2ad453d48bb20e4a2b4bb08c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146713477264106245, guid: d575376d2ad453d48bb20e4a2b4bb08c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146713477264106245, guid: d575376d2ad453d48bb20e4a2b4bb08c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146713477264106245, guid: d575376d2ad453d48bb20e4a2b4bb08c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146713477264106245, guid: d575376d2ad453d48bb20e4a2b4bb08c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146713477264106245, guid: d575376d2ad453d48bb20e4a2b4bb08c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146713477264106245, guid: d575376d2ad453d48bb20e4a2b4bb08c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146713477264106245, guid: d575376d2ad453d48bb20e4a2b4bb08c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146713477264106245, guid: d575376d2ad453d48bb20e4a2b4bb08c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146713477264106245, guid: d575376d2ad453d48bb20e4a2b4bb08c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146713477264106245, guid: d575376d2ad453d48bb20e4a2b4bb08c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146713477264106298, guid: d575376d2ad453d48bb20e4a2b4bb08c,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_FlyingEnemies_Water_Death
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d575376d2ad453d48bb20e4a2b4bb08c, type: 3}
+--- !u!1 &8371652549049462333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7146713477264106298, guid: d575376d2ad453d48bb20e4a2b4bb08c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1657377068364909831}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4295185015855123622
 PrefabInstance:
