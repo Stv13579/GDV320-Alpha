@@ -248,7 +248,8 @@ public class WaterSlimeEnemy : BaseEnemyClass
                 newSlime.GetComponent<WaterSlimeEnemy>().transform.localScale = this.transform.localScale / 2;
                 newSlime.GetComponent<WaterSlimeEnemy>().generation = generation + 1;
                 newSlime.GetComponent<WaterSlimeEnemy>().spawner = spawner;
-                spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime.GetComponent<WaterSlimeEnemy>());
+	            spawner.GetComponent<SAIM>().spawnedEnemies.Add(newSlime.GetComponent<WaterSlimeEnemy>());
+	            newSlime.GetComponent<SphereCollider>().radius *= 1.2 * generation;
             }
         }
 

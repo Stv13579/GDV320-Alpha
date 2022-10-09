@@ -80,7 +80,7 @@ public class BaseEnemyClass : MonoBehaviour
     protected string idleAudio;
 
     [SerializeField]
-    GameObject targettingIndicator;
+	GameObject targettingIndicator, witheredVFX, cursedVFX;
 
     protected Vector3 oldPosition;
 
@@ -489,4 +489,14 @@ public class BaseEnemyClass : MonoBehaviour
         damageAmount += amount;
         baseDamageAmount += amount;
     }
+    
+	public void SetCursed()
+	{
+		cursedVFX.SetActive(true);
+	}
+	
+	public void SetWithered()
+	{
+		witheredVFX.SetActive(true);
+	}
 }
