@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using TMPro;
+using Unity.Jobs;
+using System.Threading;
 
 [System.Serializable]
 public class SAIM : MonoBehaviour
@@ -104,8 +106,7 @@ public class SAIM : MonoBehaviour
     int currentKills;
     float currentDamageTaken;
 
-    int fireUse;
-    int crystalUse;
+	static int fireUse = 0, crystalUse = 0, waterUse = 0;
 
     // Aydens Audio
     AudioManager audioManager;
@@ -118,6 +119,8 @@ public class SAIM : MonoBehaviour
     BossRoom bossRoom;
 
     TextMeshProUGUI enemyCounter;
+
+
 
     void Awake()
     {
@@ -148,7 +151,6 @@ public class SAIM : MonoBehaviour
         player = GameObject.Find("Player");
 
         containingRoom = transform.parent.GetComponent<Room>();
-        
     }
 
     void Update()
@@ -275,8 +277,12 @@ public class SAIM : MonoBehaviour
         if (pNode != playerNode)
         {
             playerNode = pNode;
-            CreateIntegrationFlowField(playerNode);
-            GenerateFlowField();
+            //CreateIntegrationFlowField();
+            Thread flowThread = new Thread(CreateIntegrationFlowField);
+	        flowThread.Start();
+	        Thread genThread = new Thread(GenerateFlowField);
+	        genThread.Start();
+	        //GenerateFlowField();
         }
         
     }
@@ -554,7 +560,7 @@ public class SAIM : MonoBehaviour
 
         for (int i = 0; i < amountToSpawn; i++)
         {
-            Vector3 spawnPosition = spawnNodes[Random.Range(0, spawnNodes.Count - 1 )].transform.position;
+	        Vector3 spawnPosition = spawnNodes[UnityEngine.Random.Range(0, spawnNodes.Count - 1 )].transform.position;
 
             spawnPosition.x += Random.Range(-1.0f, 2.0f);
             spawnPosition.z += Random.Range(-1.0f, 2.0f);
@@ -625,6 +631,54 @@ public class SAIM : MonoBehaviour
             audioManager.SetCurrentStateToFadeOutAudio2();
         }
     }
+	//Spawn override using squad system
+	public void Spawn(int squadsToSpawn, bool overrider)
+	{
+		List<Node> spawnNodes = new List<Node>();
+
+		foreach (Transform spawnNode in transform.Find("SpawnPositions"))
+		{
+			spawnNodes.Add(spawnNode.GetComponent<Node>());
+		}
+		
+		int iterator = 0;
+		
+		for(int i = 0; i < squadsToSpawn; i++)
+		{
+			EnemySquad squad = ChooseSquad();
+
+			foreach(GameObject enemy in squad.enemies)
+			{
+				Vector3 spawnPosition = spawnNodes[iterator % 4].transform.position;
+				spawnPosition.x += Random.Range(-1.0f, 2.0f);
+				spawnPosition.z += Random.Range(-1.0f, 2.0f);
+				spawnPosition.y += 2;
+			
+				GameObject spawnedEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
+				spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
+
+				if (GameObject.Find("Quest Manager"))
+				{
+					GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy, "Regular");
+				}
+
+				foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().GetHeldItems())
+				{
+					item.SpawnTrigger(spawnedEnemy);
+				}
+
+				spawnedEnemies.Add(spawnedEnemy.GetComponent<BaseEnemyClass>());
+				spawnAmount++;
+				iterator++;
+			}
+		}
+		// Aydens Audio
+		if (audioManager)
+		{
+			audioManager.SetCurrentStateToFadeOutAudio2();
+		}
+
+	}
     
     //Given a SAIM data object, will manually spawn an enemy of each type on that object.
     public void ManualSpawn()
@@ -680,6 +734,66 @@ public class SAIM : MonoBehaviour
             return Mathf.Max(Random.Range(0, data.GetEnemyList().Count), Random.Range(0, data.GetEnemyList().Count));
         }
     }
+    
+	public EnemySquad ChooseSquad()
+	{
+		float rand = Random.Range(0.0f, 1.0f);
+		if(rand > 0.5f)
+		{
+			return data.GetSquadsList()[Random.Range(0, data.GetSquadsList().Count)];
+		}
+		else if (rand > 0.3f)
+		{
+			//Select weak element
+			bool searching = true;
+			while(searching)
+			{
+				EnemySquad squad = data.GetSquadsList()[Random.Range(0, data.GetSquadsList().Count)];
+				if(fireUse >= crystalUse && fireUse >= waterUse && squad.element == BaseEnemyClass.Types.Crystal)
+				{
+					searching = false;
+					return squad;
+				}
+				else if(crystalUse >= fireUse && crystalUse >= waterUse && squad.element == BaseEnemyClass.Types.Water)
+				{
+					searching = false;
+					return squad;
+				}
+				else if(waterUse >= crystalUse && waterUse >= fireUse && squad.element == BaseEnemyClass.Types.Fire)
+				{
+					searching = false;
+					return squad;
+				}
+			}
+			return data.GetSquadsList()[0];
+		}
+		else
+		{
+			//Select strong element
+			bool searching = true;
+			while(searching)
+			{
+				EnemySquad squad = data.GetSquadsList()[Random.Range(0, data.GetSquadsList().Count)];
+				if(fireUse >= crystalUse && fireUse >= waterUse && squad.element == BaseEnemyClass.Types.Water)
+				{
+					searching = false;
+					return squad;
+				}
+				else if(crystalUse >= fireUse && crystalUse >= waterUse && squad.element == BaseEnemyClass.Types.Fire)
+				{
+					searching = false;
+					return squad;
+				}
+				else if(waterUse >= crystalUse && waterUse >= fireUse && squad.element == BaseEnemyClass.Types.Crystal)
+				{
+					searching = false;
+					return squad;
+				}
+			}
+			return data.GetSquadsList()[0];
+
+		}
+	}
 
     public void SelectSpawnNode()
     {
@@ -735,7 +849,7 @@ public class SAIM : MonoBehaviour
     }
 
     //Given a target location, give out nodes the values which will eventually dictate direction
-    public void CreateIntegrationFlowField(Node destNode)
+    public void CreateIntegrationFlowField()
     {
         foreach (Node node in aliveNodes)
         {
@@ -743,7 +857,7 @@ public class SAIM : MonoBehaviour
         }
 
 
-        destinationNode = destNode;
+        destinationNode = GetPlayerNode();
 
         destinationNode.SetDestination();
 
@@ -768,10 +882,11 @@ public class SAIM : MonoBehaviour
                 }
                 
 
-                //if(CheckHeightDifference(currentNode, node) || CollisonCull(currentNode, node))
-                //{
-                //    continue;
-                //}
+
+	            if(CheckHeightDifference(currentNode, node))//|| CollisonCull(currentNode, node))
+                {
+                    continue;
+                }
 
                 //If the neigbour node being checked has a higher best cost than the current node's best cost plus this neigbour node's best cost,
                 //change it's best cost to that value and enque it to become the next node to be checked. 
@@ -790,8 +905,8 @@ public class SAIM : MonoBehaviour
     //If there is a height difference (going up), return true, otherwise false
     bool CheckHeightDifference(Node mainNode, Node neighbourNode)
     {
-        if (mainNode.transform.position.y > neighbourNode.transform.position.y + allowableHeightDifference
-            || mainNode.transform.position.y < neighbourNode.transform.position.y - allowableHeightDifference)
+        if (mainNode.position.y > neighbourNode.position.y + allowableHeightDifference
+            || mainNode.position.y < neighbourNode.position.y - allowableHeightDifference)
         {
             return true;
         }
@@ -829,7 +944,7 @@ public class SAIM : MonoBehaviour
                 if(currentNeigbourNode.bestCost < bestCost /*&& !CheckHeightDifference(currentNode, currentNeigbourNode) && !CollisonCull(currentNode, currentNeigbourNode)*/)
                 {
                     bestCost = currentNeigbourNode.bestCost;
-                    currentNode.bestNextNodePos = currentNeigbourNode.transform.position;
+                    currentNode.bestNextNodePos = currentNeigbourNode.position;
 
                 }
             }
@@ -937,7 +1052,7 @@ public class SAIM : MonoBehaviour
 
     //Sets the variables that control actual difficulty (spawn rates for example) based on the diff variables
     void SetBasedOnDiffculty()
-    {
+	{ 
 	    if(data.GetAdjustedDifficulty() > 10)
         {
 		    data.SetAdjustedDifficulty(10);
@@ -969,5 +1084,100 @@ public class SAIM : MonoBehaviour
 
 
     }
+    
+    public Node GetPlayerNode()
+    {
+        return playerNode;
+    }
+    
+	public static void AddFireUse()
+	{
+		fireUse += 1;
+	}
+	
+	public static void AddCrystalUse()
+	{
+		crystalUse += 1;
+	}
+	
+	public static void AddWaterUse()
+	{
+		waterUse += 1;
+	}
 
 }
+
+
+//public struct FlowfieldJob : IJob
+//{
+
+//    List<Node> aliveNodes;
+//    Node destinationNode;
+		
+//	public FlowfieldJob()
+//	{
+			
+//	}
+		
+//	public void Execute()
+//	{
+//        foreach (Node node in aliveNodes)
+//        {
+//            node.ResetNode();
+//        }
+
+
+//        destinationNode = ;
+
+//        destinationNode.SetDestination();
+
+//        Queue<Node> nodesToCheck = new Queue<Node>();
+
+//        nodesToCheck.Enqueue(destinationNode);
+
+//        //Grow the queue as we check local nodes, finishing once all nodes are checked, starting with the destination node.
+//        while (nodesToCheck.Count > 0)
+//        {
+//            Node currentNode = nodesToCheck.Dequeue();
+//            List<Node> currentNeighbours = GetNeighbourNodes(currentNode, false);
+
+//            foreach (Node node in currentNeighbours)
+//            {
+//                //If the neighbour is a wall or other impassable terrain, straight up ignore it and move on
+
+//                //Adjust for height here
+//                if (node.cost == int.MaxValue)
+//                {
+//                    continue;
+//                }
+
+
+//                if (CheckHeightDifference(currentNode, node) || CollisonCull(currentNode, node))
+//                {
+//                    continue;
+//                }
+
+//                //If the neigbour node being checked has a higher best cost than the current node's best cost plus this neigbour node's best cost,
+//                //change it's best cost to that value and enque it to become the next node to be checked. 
+//                //This will stop the algo backtracking, as long as max best cost is sufficiently high enough.
+//                if (node.cost + currentNode.bestCost < node.bestCost)
+//                {
+//                    node.bestCost = node.cost + currentNode.bestCost;
+//                    nodesToCheck.Enqueue(node);
+//                }
+
+//            }
+//        }
+//    }
+
+//    bool CheckHeightDifference(Node mainNode, Node neighbourNode)
+//    {
+//        if (mainNode.transform.position.y > neighbourNode.transform.position.y + allowableHeightDifference
+//            || mainNode.transform.position.y < neighbourNode.transform.position.y - allowableHeightDifference)
+//        {
+//            return true;
+//        }
+
+//        return false;
+//    }
+//}

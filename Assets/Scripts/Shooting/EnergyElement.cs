@@ -33,6 +33,7 @@ public class EnergyElement : BaseElementClass
     protected override void Start()
     {
         base.Start();
+        activatedVFX.SetActive(false);
     }
     protected override void Update()
     {
@@ -128,10 +129,7 @@ public class EnergyElement : BaseElementClass
             }
             containedEnemies.Remove(containedEnemies[i]);
        }
-       if (shootingScript.GetRightOrbPos().childCount > 1)
-       {
-           Destroy(shootingScript.GetRightOrbPos().GetChild(1).gameObject);
-       }
+       activatedVFX.SetActive(false);
     }
 
     public override void ElementEffect()
@@ -139,7 +137,7 @@ public class EnergyElement : BaseElementClass
         base.ElementEffect();
         energyShield.SetActive(true);
         useShield = true;
-        Instantiate(activatedVFX, shootingScript.GetRightOrbPos());
+        activatedVFX.SetActive(true);
     }
     
     public override void ActivateVFX()

@@ -6,7 +6,10 @@ using UnityEngine;
 public class SAIMData : ScriptableObject
 {
     [SerializeField]
-    List<GameObject> enemyTypes;
+	List<GameObject> enemyTypes;
+    
+	[SerializeField]
+	List<EnemySquad> enemySquads;
 
     GameObject player;
 
@@ -141,6 +144,11 @@ public class SAIMData : ScriptableObject
 	public List<GameObject> GetEnemyList()
 	{
 		return enemyTypes;
+	}
+	
+	public List<EnemySquad> GetSquadsList()
+	{
+		return enemySquads;
 	}
 	
 	public int GetPlayerDamageThreshold()

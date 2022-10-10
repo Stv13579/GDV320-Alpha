@@ -22,6 +22,7 @@ public class VoidElement : BaseElementClass
         base.Start();
         toggleEffectIntensity = -1.0f;
         fullScreenOff = true;
+        activatedVFX.SetActive(false);
     }
     void FullScreenEffect()
     {
@@ -140,7 +141,7 @@ public class VoidElement : BaseElementClass
         playerHand.ResetTrigger("VoidStopCast");
         Indicator.SetActive(true);
         isHolding = true;
-        Instantiate(activatedVFX, shootingScript.GetRightOrbPos());
+        activatedVFX.SetActive(true);
     }
     protected override bool PayCosts(float modifier = 1)
     {
@@ -158,8 +159,6 @@ public class VoidElement : BaseElementClass
     IEnumerator Dash()
     {
         playerClass.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(false);
-        //voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.1f);
-        //gameplayUI.GetVoidFullScreen().material.SetFloat("_Toggle_EffectIntensity", 10.0f);
         fullScreenOff = false;
         float timer = 0.0f;
         Vector3 startPos = this.transform.position;
@@ -171,8 +170,6 @@ public class VoidElement : BaseElementClass
         }
         this.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(true);
         fullScreenOff = true;
-        //voidMaterial.SetFloat("_Toggle_EffectIntensity", 0.0f);
-        //gameplayUI.GetVoidFullScreen().material.SetFloat("_Toggle_EffectIntensity", 0.0f);
         StopCoroutine(Dash());
     }
 
@@ -180,10 +177,7 @@ public class VoidElement : BaseElementClass
     {
         base.LiftEffect();
         Indicator.SetActive(false);
-        if (shootingScript.GetRightOrbPos().childCount > 1)
-        {
-            Destroy(shootingScript.GetRightOrbPos().GetChild(1).gameObject);
-        }
+        activatedVFX.SetActive(false);
     }
     public override void Upgrade()
     {
