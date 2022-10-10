@@ -21,7 +21,25 @@ public class CrystalElement : BaseElementClass
 
     [SerializeField]
     float damageSpeedDecreaser;
-
+    protected override void Start()
+    {
+        base.Start();
+        wristVFX.SetActive(false);
+    }
+    protected override void Update()
+    {
+        base.Update();
+        //if this element is turned on turn on indicator
+        if (shootingScript.GetPrimaryElements()[shootingScript.GetLeftElementIndex()] == this
+            && shootingScript.GetInComboMode() == false)
+        {
+            wristVFX.SetActive(true);
+        }
+        else
+        {
+            wristVFX.SetActive(false);
+        }
+    }
     public override void ElementEffect()
     {
         base.ElementEffect();
