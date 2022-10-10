@@ -107,12 +107,9 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
     //Locate the player for the crystal enemy, pick an enemy for the other variants
     protected virtual void FindTarget()
     {
-        BaseEnemyClass[] enemies = FindObjectsOfType<BaseEnemyClass>();
 
-
-
-        List<BaseEnemyClass> validEnemies = new List<BaseEnemyClass>();
-        foreach (BaseEnemyClass enemy in enemies)
+        //List<BaseEnemyClass> validEnemies = new List<BaseEnemyClass>();
+        foreach (BaseEnemyClass enemy in spawner.GetComponent<SAIM>().spawnedEnemies)
         {
             //Get a list of all non-flying enemies that the enemy can reach
 
@@ -125,27 +122,28 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
                 //SetTargetPos();
 
                 RaycastHit hit;
-                if (!Physics.Raycast(this.transform.position, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
+                if (!Physics.Raycast(this.transform.position, (this.transform.position - target.transform.position).normalized, out hit, Vector3.Distance(this.transform.position, target.transform.position), moveDetect))
                 {
-                    validEnemies.Add(enemy);
+                    //validEnemies.Add(enemy);
+                    break;
                 }
             }
         }
-        if(validEnemies.Count > 0)
-        {
-            int i = Random.Range(0, validEnemies.Count);
-            target = validEnemies[i].gameObject;
-            //SetTargetPos();
-        }
-        else
-        {
-            //target = this.gameObject;
-            //targetPos = player.transform.position + new Vector3(0, 10, 0);
-            //currentHealth = 0;
-            //Death();
-            target = player;
-            //SetTargetPos();
-        }
+        //if(validEnemies.Count > 0)
+        //{
+        //    int i = Random.Range(0, validEnemies.Count);
+        //    target = validEnemies[i].gameObject;
+        //    //SetTargetPos();
+        //}
+        //else
+        //{
+        //    //target = this.gameObject;
+        //    //targetPos = player.transform.position + new Vector3(0, 10, 0);
+        //    //currentHealth = 0;
+        //    //Death();
+        //    target = player;
+        //    //SetTargetPos();
+        //}
     }
 
     void SetTargetPos()
