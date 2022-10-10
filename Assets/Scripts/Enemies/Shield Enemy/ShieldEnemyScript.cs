@@ -31,6 +31,12 @@ public class ShieldEnemyScript : BaseEnemyClass
 
     float guardTimer;
 
+    [SerializeField]
+    int moveDelayFrames;
+    int currentDelayFrames;
+
+    float timeSinceLastMove;
+
     public override void Awake()
     {
         base.Awake();
@@ -63,21 +69,35 @@ public class ShieldEnemyScript : BaseEnemyClass
         RaycastHit hitInfo;
         if (shielding)
         {
-           
-            
+
+
             //Debug.DrawRay(transform.position, player.transform.position - transform.position);
             //ShieldRotation(player.transform.position, moveSpeed);
-            if (!Physics.Raycast(transform.position, player.transform.position - transform.position, out hitInfo, Vector3.Distance(this.transform.position, player.transform.position), checkToSee))
-            {
+            //if (!Physics.Raycast(transform.position, player.transform.position - transform.position, out hitInfo, Vector3.Distance(this.transform.position, player.transform.position), checkToSee))
+            //{
 
- 
-                ShieldRotation(player.transform.position, moveSpeed);
-            }
-            else
-            {
-                ShieldRotation(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
-                //ShieldMovement(player.transform.position, moveSpeed);
-            }
+
+            //    ShieldRotation(player.transform.position, moveSpeed);
+            //}
+            //else
+            //{
+            //    ShieldRotation(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
+            //    //ShieldMovement(player.transform.position, moveSpeed);
+            //}
+            ShieldRotation(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
+
+
+            //if(currentDelayFrames > moveDelayFrames)
+            //{
+            //    ShieldMovement(player.transform.position, moveSpeed);
+            //    timeSinceLastMove = 0;
+            //    currentDelayFrames = 0;
+            //}
+            //else
+            //{
+            //    timeSinceLastMove += Time.deltaTime;
+            //    currentDelayFrames++;
+            //}
 
             ShieldMovement(player.transform.position, moveSpeed);
 
@@ -89,16 +109,29 @@ public class ShieldEnemyScript : BaseEnemyClass
         else
         {
 
-            if (!Physics.Raycast(transform.position, player.transform.position - transform.position, out hitInfo, Vector3.Distance(this.transform.position, player.transform.position), checkToSee))
-            {
+            //if (!Physics.Raycast(transform.position, player.transform.position - transform.position, out hitInfo, Vector3.Distance(this.transform.position, player.transform.position), checkToSee))
+            //{
 
 
-                Movement(player.transform.position, moveSpeed);
-            }
-            else
-            {
-                Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
-            }
+            //    Movement(player.transform.position, moveSpeed);
+            //}
+            //else
+            //{
+            //    Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
+            //}
+
+            //if (currentDelayFrames > moveDelayFrames)
+            //{
+            //    Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
+            //    timeSinceLastMove = 0;
+            //}
+            //else
+            //{
+            //    timeSinceLastMove += Time.deltaTime;
+            //    currentDelayFrames++;
+            //}
+
+            Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
         }
 
         AssessShielding();
@@ -135,7 +168,7 @@ public class ShieldEnemyScript : BaseEnemyClass
     {
         //this.gameObject.transform.LookAt(positionToMoveTo);
         //this.gameObject.transform.eulerAngles = new Vector3(0, this.gameObject.transform.eulerAngles.y, 0);
-
+        float angleBetwixt = Vector3.Angle(transform.forward, positionToMoveTo - transform.position);
 
         //get the direction of rotation
         float dir = Mathf.Sign(Vector3.SignedAngle(transform.forward, positionToMoveTo - transform.position, Vector3.up));
@@ -144,7 +177,7 @@ public class ShieldEnemyScript : BaseEnemyClass
 
         transform.Rotate(Vector3.up, dir * Time.deltaTime * rotationSpeed);
 
-        if( Vector3.Angle(transform.forward, positionToMoveTo - transform.position) < 10 && Vector3.Angle(transform.forward, positionToMoveTo - transform.position) > -10)
+        if( angleBetwixt < 10 && angleBetwixt > -10)
         {
             transform.LookAt(positionToMoveTo);
             transform.eulerAngles = new Vector3(0, this.gameObject.transform.eulerAngles.y, 0);
@@ -152,12 +185,12 @@ public class ShieldEnemyScript : BaseEnemyClass
         //move along the forward vector
 
 
-        movement = this.transform.forward * speed * Time.deltaTime;
+        movement = this.transform.forward * speed * (Time.deltaTime + timeSinceLastMove);
         if (!this.gameObject.GetComponent<CharacterController>().isGrounded)
         {
             movement += new Vector3(0, gravity, 0);
         }
-        this.gameObject.GetComponent<CharacterController>().Move(movement);
+        this.gameObject.GetComponent<CharacterController>().SimpleMove(movement);
 
     }
 
@@ -169,12 +202,13 @@ public class ShieldEnemyScript : BaseEnemyClass
 
 
         
-        movement = this.transform.forward * speed * Time.deltaTime;
+        movement = this.transform.forward * speed * (Time.deltaTime + timeSinceLastMove);
         if (!this.gameObject.GetComponent<CharacterController>().isGrounded)
         {
             movement += new Vector3(0, gravity, 0);
         }
-        this.gameObject.GetComponent<CharacterController>().Move(movement);
+        this.gameObject.GetComponent<CharacterController>().SimpleMove(movement);
+
     }
 
     public void ShieldRotation(Vector3 positionToMoveTo, float speed)
