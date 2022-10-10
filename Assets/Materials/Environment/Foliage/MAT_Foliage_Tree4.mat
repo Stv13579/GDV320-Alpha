@@ -64,6 +64,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: c36792e1c13751d4e9664f1ca719ed6c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Nosie:
+        m_Texture: {fileID: 2800000, guid: 2b1f2585ebd0b9840af8154391d9f91f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -89,17 +93,27 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _NoiseScale: 0.5
     - _OcclusionStrength: 1
+    - _PowerExp: 0.2
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _SSSScale: 0.08
-    - _SSS_Power: 4
-    - _SSS_Size: 0.4
+    - _SSSScale: 0.1
+    - _SSS_Power: 2
+    - _SSS_Size: 1.8
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _TessMax: 300
+    - _TessMin: 1
+    - _TessValue: 2
+    - _VertexPower: 2.5
+    - _WindNoiseScale: 0.3
+    - _WindScrolling: 0.3
+    - _WindSpeed: 5
+    - _WindStrength: 0.4
     - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
@@ -107,8 +121,10 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffuseColour: {r: 0.012609099, g: 0.05463943, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelControl: {r: 0.21, g: 5.4, b: 0, a: 0}
-    - _NormalRemap: {r: 1.56, g: 1.61, b: 0, a: 1}
-    - _SSSDistance: {r: 0, g: 10, b: 0, a: 0}
-    - _SSS_Colour: {r: 0.8666667, g: 0.36366186, b: 0.011764705, a: 0}
+    - _FresnelControl: {r: 0.2, g: 7.87, b: 0, a: 0}
+    - _NormalRemap: {r: 0.5, g: 0.7, b: 0, a: 0}
+    - _SSSDistance: {r: 0, g: 0.75, b: 0, a: 0}
+    - _SSS_Colour: {r: 0.8603976, g: 0.36488065, b: 0.013514099, a: 0}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
+    - _VertexOffsetDirection: {r: 0.3, g: -0.3, b: 0, a: 0}
+    - _WindDirection: {r: -0.3, g: 0.3, b: 0, a: 0}
