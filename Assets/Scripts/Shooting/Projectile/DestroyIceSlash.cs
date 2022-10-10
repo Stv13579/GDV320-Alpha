@@ -10,7 +10,7 @@ public class DestroyIceSlash : MonoBehaviour
     // if this box collider hits the environment layermask the destroy iceslash
     void OnTriggerEnter(Collider other)
     {
-        if(((1<<other.gameObject.layer) & environment) != 0)
+        if(((1<<other.gameObject.layer) & environment) != 0 || other.GetComponent<EnemyShield>())
         {
             Destroy(gameObject.transform.parent.gameObject);
         }
