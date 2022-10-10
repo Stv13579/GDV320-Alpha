@@ -496,7 +496,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
             {
 	            BossSlimeEnemy newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2), Quaternion.identity).GetComponent<BossSlimeEnemy>();
 	            newSlime.RestoreHealth(0);
-                StatModifier.AddModifier(newSlime.GetHealthStat().multiplicativeModifiers, new StatModifier.Modifier(0.25f, "Split " + generation));
+	            StatModifier.AddModifier(newSlime.GetHealthStat().multiplicativeModifiers, new StatModifier.Modifier(0.25f * (generation + 1), "Split " + generation));
                 StatModifier.AddModifier(newSlime.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
 	            StatModifier.AddModifier(newSlime.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
 	            newSlime.fireTrailScale /= 2;
@@ -509,7 +509,8 @@ public class BossSlimeEnemy : WaterSlimeEnemy
             }
 	        bossHealthBar.RemoveEnemy(this);
             split = true;
-            Destroy(this.gameObject);
+            currentHealth = -10;
+            enemyAnims.SetTrigger("Dead");
         }
     }
 

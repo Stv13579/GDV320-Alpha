@@ -194,7 +194,7 @@ public class BaseEnemyClass : MonoBehaviour
         
 	    damageTimer += Time.deltaTime;
 	    //Softlock prevention check
-	    if(damageTimer > maxDamageTimer && Vector3.Distance(this.transform.position, player.transform.position) > maxDistance)
+	    if(damageTimer > maxDamageTimer)
 	    {
 	    	currentHealth = -10;
 		    enemyAnims.SetTrigger("Dead");
