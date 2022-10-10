@@ -23,6 +23,11 @@ public class NecroticElement : BaseElementClass
 
     [SerializeField]
     Color outlineColour;
+    protected override void Start()
+    {
+        base.Start();
+        activatedVFX.SetActive(false);
+    }
 
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
@@ -66,10 +71,7 @@ public class NecroticElement : BaseElementClass
         // this turns on when helded
         if(isTargeting)
         {
-            if (shootingScript.GetRightOrbPos().childCount < 2)
-            {
-                Instantiate(activatedVFX, shootingScript.GetRightOrbPos());
-            }
+            activatedVFX.SetActive(true);
             RaycastHit targetRayCast;
             if (Physics.Raycast(lookScript.GetCamera().transform.position, lookScript.GetCamera().transform.forward, out targetRayCast, rayCastRange, NecroticTarget))
             {
@@ -110,10 +112,7 @@ public class NecroticElement : BaseElementClass
 
         playerHand.SetTrigger("NecroticStopCast");
 
-        if (shootingScript.GetRightOrbPos().childCount > 1)
-        {
-            Destroy(shootingScript.GetRightOrbPos().GetChild(1).gameObject);
-        }
+        activatedVFX.SetActive(false);  
     }
 
     public override void ActivateVFX()
