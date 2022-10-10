@@ -126,6 +126,10 @@ public class SAIM : MonoBehaviour
         runManager = FindObjectOfType<RunManager>();
         bossRoom = FindObjectOfType<BossRoom>();
         enemyCounter = GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>();
+        foreach (Node node in aliveNodes)
+        {
+            SetNeighbourNodes(node, true);
+        }
     }
     private void Start()
     {
@@ -751,9 +755,9 @@ public class SAIM : MonoBehaviour
         while(nodesToCheck.Count > 0)
         {
             Node currentNode = nodesToCheck.Dequeue();
-            List<Node> currentNeighbours = GetNeighbourNodes(currentNode, false);
+            //List<Node> currentNeighbours = GetNeighbourNodes(currentNode, false);
 
-            foreach (Node node in currentNeighbours)
+            foreach (Node node in currentNode.neighbourNodes)
             {
                 //If the neighbour is a wall or other impassable terrain, straight up ignore it and move on
 
@@ -764,10 +768,10 @@ public class SAIM : MonoBehaviour
                 }
                 
 
-                if(CheckHeightDifference(currentNode, node) || CollisonCull(currentNode, node))
-                {
-                    continue;
-                }
+                //if(CheckHeightDifference(currentNode, node) || CollisonCull(currentNode, node))
+                //{
+                //    continue;
+                //}
 
                 //If the neigbour node being checked has a higher best cost than the current node's best cost plus this neigbour node's best cost,
                 //change it's best cost to that value and enque it to become the next node to be checked. 
@@ -799,7 +803,7 @@ public class SAIM : MonoBehaviour
     bool CollisonCull(Node mainNode, Node neighbourNode)
     {
 
-        if (Physics.Raycast(mainNode.transform.position, neighbourNode.transform.position - mainNode.transform.position, nodeSpacing , cullLayerMask))
+        if (Physics.Raycast(mainNode.transform.position, neighbourNode.transform.position - mainNode.transform.position, (neighbourNode.transform.position - mainNode.transform.position).magnitude, cullLayerMask))
         {
             return true;
         }
@@ -814,15 +818,15 @@ public class SAIM : MonoBehaviour
         //Iterate through each node
         foreach (Node currentNode in aliveNodes)
         {
-            List<Node> currentNodeNeigbours = GetNeighbourNodes(currentNode, true);
+            //List<Node> currentNodeNeigbours = GetNeighbourNodes(currentNode, true);
 
             int bestCost = currentNode.bestCost;
 
             //Look at the node's neigbours to decide which to 'point' at.
             //This will be the node with the lowest bestCost.
-            foreach (Node currentNeigbourNode in currentNodeNeigbours)
+            foreach (Node currentNeigbourNode in currentNode.neighbourNodes)
             {
-                if(currentNeigbourNode.bestCost < bestCost && !CheckHeightDifference(currentNode, currentNeigbourNode) && !CollisonCull(currentNode, currentNeigbourNode))
+                if(currentNeigbourNode.bestCost < bestCost /*&& !CheckHeightDifference(currentNode, currentNeigbourNode) && !CollisonCull(currentNode, currentNeigbourNode)*/)
                 {
                     bestCost = currentNeigbourNode.bestCost;
                     currentNode.bestNextNodePos = currentNeigbourNode.transform.position;
@@ -833,9 +837,9 @@ public class SAIM : MonoBehaviour
     }
 
     //Gets the north south east and west nodes of a given node, plus diags if true
-    List<Node> GetNeighbourNodes(Node nodeCentre, bool isDiag)
+    void SetNeighbourNodes(Node nodeCentre, bool isDiag)
     {
-        List<Node> neigbours = new List<Node>();
+        //List<Node> neigbours = new List<Node>();
 
         for (int i = -1; i < 2; i++)
         {
@@ -861,14 +865,19 @@ public class SAIM : MonoBehaviour
                     }
                     else if(nodeGrid[nodeCentre.gridIndex.x+i].nodeCol[nodeCentre.gridIndex.y+k] != null)
                     {
-                        neigbours.Add(nodeGrid[nodeCentre.gridIndex.x + i].nodeCol[nodeCentre.gridIndex.y + k]);
+
+                        if (CheckHeightDifference(nodeCentre, nodeGrid[nodeCentre.gridIndex.x + i].nodeCol[nodeCentre.gridIndex.y + k]) || CollisonCull(nodeCentre, nodeGrid[nodeCentre.gridIndex.x + i].nodeCol[nodeCentre.gridIndex.y + k]))
+                        {
+                            continue;
+                        }
+
+                        nodeCentre.neighbourNodes.Add(nodeGrid[nodeCentre.gridIndex.x + i].nodeCol[nodeCentre.gridIndex.y + k]);
                     }
                     
                 }
             }
         }
 
-        return neigbours;
     }
 
     //Check every frame and adjust variables accordingly

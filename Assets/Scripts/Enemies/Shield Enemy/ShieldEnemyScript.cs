@@ -73,31 +73,18 @@ public class ShieldEnemyScript : BaseEnemyClass
 
             //Debug.DrawRay(transform.position, player.transform.position - transform.position);
             //ShieldRotation(player.transform.position, moveSpeed);
-            //if (!Physics.Raycast(transform.position, player.transform.position - transform.position, out hitInfo, Vector3.Distance(this.transform.position, player.transform.position), checkToSee))
-            //{
+            if (!Physics.Raycast(transform.position, player.transform.position - transform.position, out hitInfo, Vector3.Distance(this.transform.position, player.transform.position), checkToSee))
+            {
 
 
-            //    ShieldRotation(player.transform.position, moveSpeed);
-            //}
-            //else
-            //{
-            //    ShieldRotation(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
-            //    //ShieldMovement(player.transform.position, moveSpeed);
-            //}
-            ShieldRotation(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
-
-
-            //if(currentDelayFrames > moveDelayFrames)
-            //{
-            //    ShieldMovement(player.transform.position, moveSpeed);
-            //    timeSinceLastMove = 0;
-            //    currentDelayFrames = 0;
-            //}
-            //else
-            //{
-            //    timeSinceLastMove += Time.deltaTime;
-            //    currentDelayFrames++;
-            //}
+                ShieldRotation(player.transform.position, moveSpeed);
+            }
+            else
+            {
+                ShieldRotation(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
+                //ShieldMovement(player.transform.position, moveSpeed);
+            }
+            //ShieldRotation(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
 
             ShieldMovement(player.transform.position, moveSpeed);
 
@@ -189,8 +176,9 @@ public class ShieldEnemyScript : BaseEnemyClass
         if (!this.gameObject.GetComponent<CharacterController>().isGrounded)
         {
             movement += new Vector3(0, gravity, 0);
+            //transform.position += new Vector3(0, gravity, 0);
         }
-        this.gameObject.GetComponent<CharacterController>().SimpleMove(movement);
+        this.gameObject.GetComponent<CharacterController>().Move(movement);
 
     }
 
@@ -206,8 +194,11 @@ public class ShieldEnemyScript : BaseEnemyClass
         if (!this.gameObject.GetComponent<CharacterController>().isGrounded)
         {
             movement += new Vector3(0, gravity, 0);
+            //transform.position += new Vector3(0, gravity, 0);
         }
-        this.gameObject.GetComponent<CharacterController>().SimpleMove(movement);
+
+        
+        this.gameObject.GetComponent<CharacterController>().Move(movement);
 
     }
 
