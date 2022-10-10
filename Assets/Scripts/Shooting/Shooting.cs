@@ -491,7 +491,19 @@ public class Shooting : MonoBehaviour
             Input.GetKey(KeyCode.Mouse0) &&
             primaryElements[leftElementIndex].GetPlayerHand().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            primaryElements[leftElementIndex].ActivateElement();
+	        primaryElements[leftElementIndex].ActivateElement();
+	        if(primaryElements[leftElementIndex].GetManaName() == PlayerClass.ManaName.Fire)
+	        {
+	        	SAIM.AddFireUse();
+	        }
+	        else if(primaryElements[leftElementIndex].GetManaName() == PlayerClass.ManaName.Crystal)
+	        {
+	        	SAIM.AddCrystalUse();
+	        }
+	        else if(primaryElements[leftElementIndex].GetManaName() == PlayerClass.ManaName.Water)
+	        {
+	        	SAIM.AddWaterUse();
+	        }
         }
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -521,7 +533,19 @@ public class Shooting : MonoBehaviour
             Input.GetKey(KeyCode.Mouse0) &&
             comboElements[leftElementIndex].comboElements[rightElementIndex].GetPlayerHand().GetCurrentAnimatorStateInfo(2).IsName("Idle"))
         {
-            comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
+	        comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
+	        if(primaryElements[leftElementIndex].GetManaName() == PlayerClass.ManaName.Fire)
+	        {
+	        	SAIM.AddFireUse();
+	        }
+	        else if(primaryElements[leftElementIndex].GetManaName() == PlayerClass.ManaName.Crystal)
+	        {
+	        	SAIM.AddCrystalUse();
+	        }
+	        else if(primaryElements[leftElementIndex].GetManaName() == PlayerClass.ManaName.Water)
+	        {
+	        	SAIM.AddWaterUse();
+	        }
         }
     }
 

@@ -77,27 +77,8 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
     void Movement()
     {
         //Check if the path to its destination is clear, if not pick a new destination
-        RaycastHit hit;
-        if(Physics.Raycast(this.transform.position, (this.transform.position - targetPos).normalized, out hit, Vector3.Distance(this.transform.position, targetPos), moveDetect))
-        {
-            FindTarget();
-        }
-        if(Vector3.Distance(this.transform.position, targetPos) < 5)
-        {
-            FindTarget();
 
-        }
-        if(target)
-        {
-            if(target.GetComponent<RangedEnemyScript>())
-            {
-                if(target.GetComponent<RangedEnemyScript>().GetBurrowing())
-                {
-                    FindTarget();
-                }
-            }
-
-        }
+        FindTarget();
         SetTargetPos();
         this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, moveSpeed * Time.deltaTime);
     }

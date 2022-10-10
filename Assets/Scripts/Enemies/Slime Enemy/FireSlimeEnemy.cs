@@ -82,7 +82,7 @@ public class FireSlimeEnemy : WaterSlimeEnemy
     //When the slime dies, spawn two new smaller weaker ones
 
     protected override void Split(GameObject temp)
-    {
+	{
         if (generation < 2)
         {
             for (int i = 0; i < 2; i++)

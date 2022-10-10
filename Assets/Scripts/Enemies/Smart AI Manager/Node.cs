@@ -13,8 +13,18 @@ public class Node : MonoBehaviour
 
     public Vector2Int gridIndex;
 
-    public Vector3 bestNextNodePos = Vector3.zero;
+	public Vector3 bestNextNodePos = Vector3.zero;
+    
+	public Vector3 position;
 
+
+	
+	// Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
+	protected void Start()
+	{
+		position = this.transform.position;
+	}
+	
     public void SetDestination()
     {
         cost = 0;
