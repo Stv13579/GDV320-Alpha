@@ -50,7 +50,8 @@ public class CurseElement : BaseElementClass
         //Give it a death trigger
 	    if (targetToCurse && !targetToCurse.GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Contains(DeathEffect))
         {
-            //Attach an effect to it
+		    //Attach an effect to it
+		    targetToCurse.GetComponentInParent<BaseEnemyClass>().SetCursed();
 		    Instantiate(curseVFX, targetToCurse.transform.root);
 		    targetToCurse.GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Add(DeathEffect);
             playerClass.ChangeMana(-manaCost, manaTypes);

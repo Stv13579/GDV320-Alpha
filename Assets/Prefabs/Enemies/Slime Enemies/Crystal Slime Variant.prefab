@@ -32,6 +32,8 @@ MonoBehaviour:
   takeDamageAudio: Slime Damage
   idleAudio: 
   targettingIndicator: {fileID: 2207227147477192214}
+  witheredVFX: {fileID: 2237070518937473390}
+  cursedVFX: {fileID: 1579675213740616477}
   healVFX: {fileID: 7914847319957287365}
   buffVFX: {fileID: 2820135405712021477}
   enemyMat: []
@@ -136,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 1908173067133758005, guid: 4f3b9ac4d206bf247b6814675daddc12,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2141055289212222040, guid: 4f3b9ac4d206bf247b6814675daddc12,
         type: 3}
@@ -162,6 +164,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crystal Slime Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4504097859555896358, guid: 4f3b9ac4d206bf247b6814675daddc12,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4552466851365817580, guid: 4f3b9ac4d206bf247b6814675daddc12,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5564262669661783586, guid: 4f3b9ac4d206bf247b6814675daddc12,
         type: 3}
@@ -283,6 +295,18 @@ ParticleSystem:
 --- !u!198 &7914847319957287365 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 5502626168197139598, guid: 4f3b9ac4d206bf247b6814675daddc12,
+    type: 3}
+  m_PrefabInstance: {fileID: 2416866107423554891}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2237070518937473390 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4504097859555896357, guid: 4f3b9ac4d206bf247b6814675daddc12,
+    type: 3}
+  m_PrefabInstance: {fileID: 2416866107423554891}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1579675213740616477 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3775789826814957142, guid: 4f3b9ac4d206bf247b6814675daddc12,
     type: 3}
   m_PrefabInstance: {fileID: 2416866107423554891}
   m_PrefabAsset: {fileID: 0}

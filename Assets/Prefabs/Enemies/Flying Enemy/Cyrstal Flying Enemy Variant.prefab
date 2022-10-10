@@ -32,6 +32,8 @@ MonoBehaviour:
   takeDamageAudio: Flying Enemy Damage
   idleAudio: Flying Enemy Idle
   targettingIndicator: {fileID: 974846540245362027}
+  witheredVFX: {fileID: 6453084560431792517}
+  cursedVFX: {fileID: 3343699576381276657}
   healVFX: {fileID: 0}
   buffVFX: {fileID: 0}
   enemyMat: []
@@ -124,7 +126,17 @@ PrefabInstance:
     - target: {fileID: 2618050434216619256, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358407234221069914, guid: 1fd1aea56a319fa409d011771046677e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5925160419267562647, guid: 1fd1aea56a319fa409d011771046677e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6509235447840888431, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
@@ -165,6 +177,18 @@ GameObject:
 --- !u!198 &3450530040892383726 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 2618050434216619263, guid: 1fd1aea56a319fa409d011771046677e,
+    type: 3}
+  m_PrefabInstance: {fileID: 844302016384437521}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3343699576381276657 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2724859440475475168, guid: 1fd1aea56a319fa409d011771046677e,
+    type: 3}
+  m_PrefabInstance: {fileID: 844302016384437521}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6453084560431792517 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5925160419267562644, guid: 1fd1aea56a319fa409d011771046677e,
     type: 3}
   m_PrefabInstance: {fileID: 844302016384437521}
   m_PrefabAsset: {fileID: 0}
