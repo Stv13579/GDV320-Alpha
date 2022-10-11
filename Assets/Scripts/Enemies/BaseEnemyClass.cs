@@ -154,6 +154,7 @@ public class BaseEnemyClass : MonoBehaviour
 		
 	    if(!deathSpawn)
 	    {
+	    	
 		    Destroy(this.gameObject);
 	    }
 		
