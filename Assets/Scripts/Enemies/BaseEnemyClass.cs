@@ -153,6 +153,7 @@ public class BaseEnemyClass : MonoBehaviour
                 //Destroy(this.gameObject);
                 //Turn this off and reset the enemy
                 ResetEnemy();
+                Debug.Log("ded");
 
                 enemyAnims.gameObject.SetActive(true);
                 gameObject.SetActive(false);
