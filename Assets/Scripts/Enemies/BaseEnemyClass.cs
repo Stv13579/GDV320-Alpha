@@ -162,8 +162,6 @@ public class BaseEnemyClass : MonoBehaviour
             return;
         }
 		
-	    
-		
         if(currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
@@ -199,7 +197,10 @@ public class BaseEnemyClass : MonoBehaviour
             }
         }
         
-	    damageTimer += Time.deltaTime;
+	    if(Vector3.Distance(this.transform.position, player.transform.position) > maxDistance)
+	    {
+		    damageTimer += Time.deltaTime;
+	    }
 	    //Softlock prevention check
 	    if(damageTimer > maxDamageTimer)
 	    {

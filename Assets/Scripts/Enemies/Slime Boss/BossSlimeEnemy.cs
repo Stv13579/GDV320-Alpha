@@ -464,10 +464,10 @@ public class BossSlimeEnemy : WaterSlimeEnemy
 
     public override void Death()
     {
-        //if(currentHealth <= 0)
-        //{
-        //    spawner.bossDead = true;
-        //}
+	    bossHealthBar.RemoveEnemy(this);
+	    split = true;
+	    currentHealth = -10;
+	    Split(this.gameObject);
         base.Death();
 
         
@@ -478,7 +478,8 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         base.TakeDamage(damageToTake, attackTypes, 2, applyTriggers);
         if(currentHealth <= maxHealth / 2 && !split)
         {
-            Split(gameObject);
+        	enemyAnims.SetTrigger("Dead");
+	        //Split(gameObject);
         }
     }
     
@@ -507,10 +508,6 @@ public class BossSlimeEnemy : WaterSlimeEnemy
 	            bossHealthBar.AddEnemy(newSlime);
                 newSlime.bossHealthBar = bossHealthBar;
             }
-	        bossHealthBar.RemoveEnemy(this);
-            split = true;
-            currentHealth = -10;
-            enemyAnims.SetTrigger("Dead");
         }
     }
 
