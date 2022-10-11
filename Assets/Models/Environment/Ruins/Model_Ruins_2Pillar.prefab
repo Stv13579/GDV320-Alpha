@@ -28,9 +28,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4453150677115856972}
   - {fileID: 6133930416247540415}
   - {fileID: 7941883908760538943}
-  - {fileID: 4453150677115856972}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 4453150677115856972}
   - component: {fileID: 1636022974357578249}
   - component: {fileID: 9063100013727222541}
+  - component: {fileID: 5730452338116255870}
   m_Layer: 0
   m_Name: Model_Ruins_2Pillar_LOD0
   m_TagString: Untagged
@@ -91,7 +92,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5199068582437519496}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1636022974357578249
 MeshFilter:
@@ -141,6 +142,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &5730452338116255870
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4097107771675453669}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 258822302817196051, guid: dd117dfeb6ed328429c23e1a371820ea, type: 3}
 --- !u!1 &6443503602269552295
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +167,7 @@ GameObject:
   - component: {fileID: 7941883908760538943}
   - component: {fileID: 5449067520533719320}
   - component: {fileID: 5264068132458802682}
+  - component: {fileID: 3256506475166285994}
   m_Layer: 0
   m_Name: Model_Ruins_2Pillar_LOD2
   m_TagString: Untagged
@@ -171,7 +187,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5199068582437519496}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5449067520533719320
 MeshFilter:
@@ -221,6 +237,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &3256506475166285994
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6443503602269552295}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 9052585005235271889, guid: dd117dfeb6ed328429c23e1a371820ea, type: 3}
 --- !u!1 &7813710862275462862
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,6 +262,7 @@ GameObject:
   - component: {fileID: 6133930416247540415}
   - component: {fileID: 7106564601454661745}
   - component: {fileID: 445392971703814916}
+  - component: {fileID: 2849781426651220849}
   m_Layer: 0
   m_Name: Model_Ruins_2Pillar_LOD1
   m_TagString: Untagged
@@ -251,7 +282,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5199068582437519496}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7106564601454661745
 MeshFilter:
@@ -301,3 +332,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &2849781426651220849
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813710862275462862}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3277308638903731343, guid: dd117dfeb6ed328429c23e1a371820ea, type: 3}

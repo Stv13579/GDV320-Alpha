@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3217249950016671113}
   - component: {fileID: 5377728214614809844}
   - component: {fileID: 1850596667167996452}
+  - component: {fileID: 4174989109771217287}
   m_Layer: 0
   m_Name: Model_Environment_MediumPillar_LOD0
   m_TagString: Untagged
@@ -80,6 +81,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &4174989109771217287
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846308631854605620}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5523397635857771303, guid: dd117dfeb6ed328429c23e1a371820ea, type: 3}
 --- !u!1 &5871067586484191954
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +106,7 @@ GameObject:
   - component: {fileID: 6898987995007264182}
   - component: {fileID: 8082773555542798012}
   - component: {fileID: 6670974418113735634}
+  - component: {fileID: 9129845196741566997}
   m_Layer: 0
   m_Name: Model_Environment_MediumPillar_LOD2
   m_TagString: Untagged
@@ -160,6 +176,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &9129845196741566997
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5871067586484191954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8360157655606532083, guid: dd117dfeb6ed328429c23e1a371820ea, type: 3}
 --- !u!1 &7186375739496662768
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,8 +234,8 @@ LODGroup:
   serializedVersion: 2
   m_LocalReferencePoint: {x: 0, y: 3.2953584, z: 0.0016970038}
   m_Size: 6.590717
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
+  m_FadeMode: 1
+  m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
   - screenRelativeHeight: 0.197916
@@ -232,6 +262,7 @@ GameObject:
   - component: {fileID: 2984611985146865434}
   - component: {fileID: 258898740864512208}
   - component: {fileID: 637789766809051615}
+  - component: {fileID: 7528495430224396443}
   m_Layer: 0
   m_Name: Model_Environment_MediumPillar_LOD1
   m_TagString: Untagged
@@ -301,3 +332,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &7528495430224396443
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8019903065450060793}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8177183977003185849, guid: dd117dfeb6ed328429c23e1a371820ea, type: 3}

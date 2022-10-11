@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 
 public class GameplayUI : MonoBehaviour
 {
@@ -51,7 +51,13 @@ public class GameplayUI : MonoBehaviour
     LayerMask enemies;
 
     float angle;
-    
+
+    GameObject Pause;
+
+    Button hubRoomButton;
+    bool isPaused;
+
+    AudioManager audioManager;
 
     public Image GetLifeStealFullScreen() { return lifeStealFullScreen; }
     public Image GetVoidFullScreen() { return voidFullScreen; }
@@ -69,6 +75,7 @@ public class GameplayUI : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<Shooting>();
         playerClass = player.gameObject.GetComponent<PlayerClass>();
+        audioManager = FindObjectOfType<AudioManager>();
         hitMarker = GameObject.Find("GameplayUI/HitMarker");
         hitMarkerShield = GameObject.Find("GameplayUI/HitMarkerShield");
         lifeStealFullScreen = GameObject.Find("GameplayUI/Effects/LifeSteal").GetComponent<Image>();
@@ -77,14 +84,15 @@ public class GameplayUI : MonoBehaviour
         lowHealthFullScreen = GameObject.Find("GameplayUI/Effects/LowHealth").GetComponent<Image>();
         inToxicFullScreen = GameObject.Find("GameplayUI/Effects/InToxic").GetComponent<Image>();
         slowedFullScreen = GameObject.Find("GameplayUI/Effects/Slowed").GetComponent<Image>();
+        Pause = GameObject.Find("GameplayUI/Pause Menu");
+        hubRoomButton = GameObject.Find("GameplayUI/Pause Menu/Back to Hub Button").GetComponent<Button>();
         comboTimer = maxComboTimer;
         DontDestroyOnLoad(gameObject);
-
         if (hitMarker)
         {
             hitMarker.SetActive(false);
         }
-        if(hitMarkerShield)
+        if (hitMarkerShield)
         {
             hitMarkerShield.SetActive(false);
         }
@@ -108,12 +116,15 @@ public class GameplayUI : MonoBehaviour
         {
             inToxicFullScreen.gameObject.SetActive(false);
         }
-        if(slowedFullScreen)
+        if (slowedFullScreen)
         {
             slowedFullScreen.gameObject.SetActive(false);
         }
+        if (Pause)
+        {
+            Pause.SetActive(false);
+        }
     }
-
     void Update()
     {
         //Getting the current values from the player and updating the UI with them
@@ -182,6 +193,7 @@ public class GameplayUI : MonoBehaviour
             }
         }
 
+        Paused();
     }
 
     public void AddItem(Sprite[] sprites)
@@ -271,6 +283,59 @@ public class GameplayUI : MonoBehaviour
         }
 
     }
+    void Paused()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPaused = !isPaused;
+            Time.timeScale = isPaused ? 0 : 1;
+            player.GetComponent<PlayerLook>().ToggleCursor();       
+            Pause.SetActive(isPaused);
+            if(SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                hubRoomButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                hubRoomButton.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    public void BackToHubRoom()
+    {
+        if (audioManager)
+        {
+            audioManager.StopSFX("Menu and Pause");
+            audioManager.PlaySFX("Menu and Pause");
+        }
+        //Save the game
+        SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Lotl"));
+        SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Blacksmith"));
+        SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Fortune"));
+        SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Shop"));
+
+        FindObjectOfType<SAIM>().data.ResetDifficulty();
+
+        if (audioManager)
+        {
+            for (int i = 0; i < audioManager.GetMusics().Length; i++)
+            {
+                audioManager.GetMusics()[i].GetAudioSource().Stop();
+            }
+            audioManager.PlayMusic("Hub Room Music");
+        }
+
+        SceneManager.LoadScene(1);
+
+        Destroy(GameObject.Find("Player"));
+        Destroy(GameObject.Find("ProphecyManager"));
+        Destroy(GameObject.Find("GameplayUI"));
+        Destroy(GameObject.Find("Quest Manager"));
+        Destroy(GameObject.Find("Trinket Manager"));
+        Time.timeScale = 1;
+    }
+
     public IEnumerator HitMarker()
     {
         if (hitMarker)
