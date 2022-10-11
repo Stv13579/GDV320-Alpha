@@ -110,6 +110,13 @@ public static class StatModifier //Sebastian
         value *= valueModifier;
         return value;
     }
+    
+	public static void ResetModifier(FullStat fullStat)
+	{
+		fullStat.additiveModifiers.Clear();
+		fullStat.additiveMultiplicativeModifiers.Clear();
+		fullStat.multiplicativeModifiers.Clear();
+	}
 
     //Struct for storing a coroutine and its modifier, so it can be stopped if needed
     struct ModifierRoutine
