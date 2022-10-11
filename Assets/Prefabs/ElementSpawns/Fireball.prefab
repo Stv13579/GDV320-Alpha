@@ -114,6 +114,8 @@ MonoBehaviour:
   enemyDetect:
     serializedVersion: 2
     m_Bits: 1280
+  pointLight: {fileID: 937865416431601150}
+  intensityDecreaser: 10
 --- !u!54 &8686742105717239448
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -432,6 +434,12 @@ PrefabInstance:
 --- !u!4 &2375069635373481843 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4885154688781081832, guid: 23237d1d2c00d85409dbbe0606d34b0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7151293383311483803}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &937865416431601150 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 7943655753098094181, guid: 23237d1d2c00d85409dbbe0606d34b0a,
     type: 3}
   m_PrefabInstance: {fileID: 7151293383311483803}
   m_PrefabAsset: {fileID: 0}
