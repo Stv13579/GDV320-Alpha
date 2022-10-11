@@ -12,10 +12,16 @@ public class Fireball : BaseElementSpawnClass
     float gravityLifetime;
     float explosionRadii;
     AudioManager audioManager;
+    bool decreaseIntensity;
 
     [SerializeField]
     LayerMask enemyDetect;
 
+    [SerializeField]
+    Light pointLight;
+
+    [SerializeField]
+    float intensityDecreaser;
     void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
@@ -30,7 +36,7 @@ public class Fireball : BaseElementSpawnClass
 
         Vector3 movement = transform.forward * speed * Time.deltaTime;
         gravity *= 1.01f;
-        movement.y -= gravity /** gravCurve.Evaluate(startLifetime - gravityLifetime)*/ * Time.deltaTime;
+        movement.y -= gravity * Time.deltaTime;
 
         transform.position += movement;
         
@@ -43,7 +49,10 @@ public class Fireball : BaseElementSpawnClass
         {
             Destroy(gameObject);
         }
-
+        if(decreaseIntensity == true)
+        {
+            pointLight.intensity -= intensityDecreaser * Time.deltaTime;
+        }
     }
 
     public void SetVars(float spd, float dmg, float grav, float lifeTime, float explosionRadius, float expDamage, List<BaseEnemyClass.Types> types)
@@ -67,7 +76,7 @@ public class Fireball : BaseElementSpawnClass
         {
             return;
         }
-        if (other.tag == "Environment")
+        if (other.tag == "Environment" || other.gameObject.layer == 16 || other.gameObject.layer == 21 || other.gameObject.layer == 10)
         {
             gravity = 0;
             speed = 0;
@@ -76,6 +85,7 @@ public class Fireball : BaseElementSpawnClass
             this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
             this.gameObject.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            decreaseIntensity = true;
         }
 	    if (other.gameObject.layer == 8 && active && other.GetComponentInParent<BaseEnemyClass>())
         {
@@ -112,6 +122,7 @@ public class Fireball : BaseElementSpawnClass
             this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
             this.gameObject.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            decreaseIntensity = true;
 
             if (audioManager)
             {

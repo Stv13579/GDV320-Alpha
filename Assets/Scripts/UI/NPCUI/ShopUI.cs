@@ -74,7 +74,7 @@ public class ShopUI : NPCUI
 
     private void Update()
     {
-        moneyText.text = "Money: " + player.GetMoney().ToString();
+        moneyText.text = player.GetMoney().ToString();
     }
     public void Button(int button)
     {

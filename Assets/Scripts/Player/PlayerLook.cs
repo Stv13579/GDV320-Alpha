@@ -75,8 +75,6 @@ public class PlayerLook : MonoBehaviour
         HandleEditorInputs();
     }
 
-    // toggle to lock the cursor
-    // TO DO:
     public void ToggleCursor()
     {
         cursorLocked = !cursorLocked;

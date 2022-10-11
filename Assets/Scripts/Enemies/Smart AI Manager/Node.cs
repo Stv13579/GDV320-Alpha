@@ -17,6 +17,7 @@ public class Node : MonoBehaviour
     
 	public Vector3 position;
 
+    public List<Node> neighbourNodes = new List<Node>();
 
 	
 	// Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
