@@ -48,7 +48,9 @@ public class EndLevel : MonoBehaviour
             SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Lotl"));
             SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Blacksmith"));
             SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Fortune"));
-            SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Shop"));
+	        SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Shop"));
+	        GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRunUpdate();
+
         }
         player.GetComponent<Shooting>().SetLoadScene(true);
         sceneToLoad = index;
