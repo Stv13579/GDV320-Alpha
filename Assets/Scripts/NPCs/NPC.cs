@@ -92,8 +92,8 @@ public class NPC : MonoBehaviour
             }
             base.Action();
             Quest q = (Quest)GameObject.Find("Quest Manager").GetComponent(heldData.quests[heldData.storyPosition]);
-            q.HandInQuest();
             heldData.storyPosition++;
+            q.HandInQuest();
 
             heldData.onQuest = false;
             heldData.questComplete = false;

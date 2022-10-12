@@ -147,15 +147,15 @@ public class BaseEnemyClass : MonoBehaviour
     {
         if(GetComponentInChildren<Animator>() && GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
-            if (!deathSpawn.GetComponent<ParticleSystem>().isPlaying)
-            {
 
-                Destroy(this.gameObject);
-            }
 
             return;
         }
-		
+	    if (!deathSpawn)
+	    {
+
+		    Destroy(this.gameObject);
+	    }
 
 
 		
@@ -171,7 +171,8 @@ public class BaseEnemyClass : MonoBehaviour
 
         if (transform.position.y < -100)
         {
-            Death();
+            currentHealth = -10;
+            enemyAnims.SetTrigger("Dead");
         }
 
         maxHealth = StatModifier.UpdateValue(health);
