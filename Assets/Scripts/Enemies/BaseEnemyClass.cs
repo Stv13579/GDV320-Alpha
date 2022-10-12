@@ -372,9 +372,9 @@ public class BaseEnemyClass : MonoBehaviour
     }
 
 
-    void ResetEnemy()
+    virtual protected void ResetEnemy()
     {
-        currentHealth = maxHealth * prophecyManager.prophecyHealthMulti;
+        
 
         foreach (var param in enemyAnims.parameters)
         {
@@ -387,6 +387,8 @@ public class BaseEnemyClass : MonoBehaviour
         hitTriggers.Clear();
         deathTriggers.Clear();
 
+        RestoreHealth(0);
+
         //Reset stat modifiers
         StatModifier.ResetModifier(health);
         StatModifier.ResetModifier(damage);
@@ -397,6 +399,9 @@ public class BaseEnemyClass : MonoBehaviour
         cursedVFX.SetActive(false);
 
         isDead = false;
+        currentHealth = maxHealth * prophecyManager.prophecyHealthMulti;
+
+        damageTimer = 0;
     }
 
     void Drop(List<DropListEntry> dropType, int minSpawn, int maxSpawn)
