@@ -56,7 +56,7 @@ public class Quest : MonoBehaviour
     //Removes itself from the quest manager for future updates and implements derived behaviours
     public virtual void FinishQuest()
     {
-        if(GetComponent<QuestManager>().RemoveFromQuests(this))
+        //if(GetComponent<QuestManager>().RemoveFromQuests(this))
             npc.questComplete = true;
 
     }
@@ -64,10 +64,12 @@ public class Quest : MonoBehaviour
     //Called when the player talks to the NPC again after finishing the quest
     public virtual void HandInQuest()
     {
-        
+        GetComponent<QuestManager>().RemoveFromQuests(this);
         npc.questComplete = false;
 
         trinketToUpgrade.Upgrade();
+
+
     }
 
     public virtual void FindHiddenObject()

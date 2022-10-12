@@ -15,6 +15,7 @@ public class ElementSlots : DragSlot
 
     Shooting player;
 
+    public Shooting GetPlayer() { return player; }
     private void Start()
     {
         player = FindObjectOfType<Shooting>();
@@ -24,11 +25,11 @@ public class ElementSlots : DragSlot
 
     public override void OnPointerEnter(PointerEventData pData)
     {
-        if(FindObjectOfType(System.Type.GetType(type)))
+        if (FindObjectOfType(System.Type.GetType(type)))
         {
             ElementEquip eQuip = (ElementEquip)FindObjectOfType(System.Type.GetType(type));
 
-            if (!isPrimary )
+            if (!isPrimary)
             {
                 if (eQuip.GetPrimary() || player.GetCatalystElements().Exists(ele => ele.GetType() == System.Type.GetType(eQuip.GetElementType())))
                 {
@@ -36,20 +37,17 @@ public class ElementSlots : DragSlot
                     return;
                 }
             }
-            else if(isPrimary )
+            else if (isPrimary)
             {
-                if(!eQuip.GetPrimary() || player.GetPrimaryElements().Exists(ele => ele.GetType() == System.Type.GetType(eQuip.GetElementType())))
+                if (!eQuip.GetPrimary() || player.GetPrimaryElements().Exists(ele => ele.GetType() == System.Type.GetType(eQuip.GetElementType())))
                 {
                     Debug.Log("Already holding that element");
                     return;
                 }
             }
         }
-        
-
         base.OnPointerEnter(pData);
     }
-
     public override void ClearSlot()
     {
         if (FindObjectOfType(System.Type.GetType(type)))

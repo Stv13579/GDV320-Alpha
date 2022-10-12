@@ -104,7 +104,7 @@ public class EnemyTestingUI : MonoBehaviour
     public void SpawnEnemies()
     {
         
-	    FindObjectOfType<SAIM>().Spawn(1, true);//Spawn(enemiesToSpawn, ((int)eType * 3) + (int)eEle);
+	    FindObjectOfType<SAIM>().Spawn(enemiesToSpawn, ((int)eType * 3) + (int)eEle);
     }
     
     

@@ -84,7 +84,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                     for (int i = 0; i < objectsHit.Length; i++)
                     {
                         if (objectsHit[i].gameObject.layer == 8 &&
-	                        objectsHit[i].GetComponentInParent<BaseEnemyClass>())
+	                        objectsHit[i].GetComponentInParent<BaseEnemyClass>() || objectsHit[i].tag == "Enemy")
                         {
                             RaycastHit hit;
                             if (Physics.Raycast(this.transform.position + (objectsHit[i].transform.position - this.transform.position).normalized * -2, (objectsHit[i].transform.position - this.transform.position).normalized, out hit, 5, enemyDetect))

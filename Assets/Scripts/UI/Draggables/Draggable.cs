@@ -8,6 +8,8 @@ public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
     [SerializeField]
     GameObject draggedObject;
 
+    [SerializeField]
+    List<ElementSlots> elementSlots;
     public GameObject GetDragged() { return draggedObject;}
 
     bool canDrag = true;
@@ -20,13 +22,72 @@ public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
         {
             return;
         }
-        //Instantiate the dragged object
-        GameObject draggedOut = Instantiate(draggedObject, transform);
-        draggedOut.GetComponent<DraggedObject>().SetLoadoutVariables(lVars);
+        if (eData.button == PointerEventData.InputButton.Left)
+        {
+            //Instantiate the dragged object
+            GameObject draggedOut = Instantiate(draggedObject, transform);
+            draggedOut.GetComponent<DraggedObject>().SetLoadoutVariables(lVars);
+        }
     }
 
     public void OnPointerUp(PointerEventData eData)
     {
-        
+        if (eData.button == PointerEventData.InputButton.Right)
+        {
+            // check if slot is taken and if icon is enabled;
+            if (!elementSlots[0].GetEquippedIcon().enabled && elementSlots[0].GetSlotTaken() == false)
+            {
+                GameObject tempGameOBJ = draggedObject;
+                if (!elementSlots[0].IsPrimary())
+                {
+                    if (tempGameOBJ.GetComponent<ElementEquip>().GetPrimary() || elementSlots[0].GetPlayer().GetCatalystElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
+                    {
+                        Debug.Log("Already holding that element");
+                        return;
+                    }
+                }
+                else if (elementSlots[0].IsPrimary())
+                {
+                    if (!tempGameOBJ.GetComponent<ElementEquip>().GetPrimary() || elementSlots[0].GetPlayer().GetPrimaryElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
+                    {
+                        Debug.Log("Already holding that element");
+                        return;
+                    }
+                }
+                //Put that object in this slot
+                tempGameOBJ.GetComponent<DraggedObject>().SetLoadoutVariables(lVars);
+                tempGameOBJ.GetComponent<DraggedObject>().Equip(elementSlots[0]);
+                elementSlots[0].SetIcon();
+                elementSlots[0].GetEquippedIcon().enabled = true;
+                elementSlots[0].SetSlotTaken(true);
+            }
+
+            else if (!elementSlots[1].GetEquippedIcon().enabled && elementSlots[1].GetSlotTaken() == false)
+            {
+                //Put that object in this slot
+                GameObject tempGameOBJ = draggedObject;
+                if (!elementSlots[1].IsPrimary())
+                {
+                    if (tempGameOBJ.GetComponent<ElementEquip>().GetPrimary() || elementSlots[1].GetPlayer().GetCatalystElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
+                    {
+                        Debug.Log("Already holding that element");
+                        return;
+                    }
+                }
+                else if (elementSlots[1].IsPrimary())
+                {
+                    if (!tempGameOBJ.GetComponent<ElementEquip>().GetPrimary() || elementSlots[1].GetPlayer().GetPrimaryElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
+                    {
+                        Debug.Log("Already holding that element");
+                        return;
+                    }
+                }
+                tempGameOBJ.GetComponent<DraggedObject>().SetLoadoutVariables(lVars);
+                tempGameOBJ.GetComponent<DraggedObject>().Equip(elementSlots[1]);
+                elementSlots[1].SetIcon();
+                elementSlots[1].GetEquippedIcon().enabled = true;
+                elementSlots[1].SetSlotTaken(true);
+            }
+        }
     }
 }

@@ -67,7 +67,9 @@ public class PlayerLook : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+	{
+		currentCamera.fieldOfView = OptionsMenuScript.GetFOV();
+		sensitivity = OptionsMenuScript.GetSensitivity();
         if (ableToMove)
         {
             MoveCamera();

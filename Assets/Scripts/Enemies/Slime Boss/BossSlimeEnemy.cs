@@ -132,7 +132,6 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     {
 
 	    base.Update();
-
         if(!ExecuteAttack())
         {
             moveDirection = player.transform.position;

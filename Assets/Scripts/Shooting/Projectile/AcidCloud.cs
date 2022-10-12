@@ -61,7 +61,7 @@ public class AcidCloud : BaseElementSpawnClass
 
     void OnTriggerStay(Collider other)
     {
-	    if(other.GetComponentInParent<BaseEnemyClass>())
+	    if(other.GetComponentInParent<BaseEnemyClass>() || other.tag == "Enemy")
         {
             if (currentDamageTicker >= damageTicker)
             {
