@@ -120,7 +120,7 @@ public class SAIM : MonoBehaviour
 
     TextMeshProUGUI enemyCounter;
 
-
+    EnemyObjectPool ePool;
 
     void Awake()
     {
@@ -129,6 +129,8 @@ public class SAIM : MonoBehaviour
         runManager = FindObjectOfType<RunManager>();
         bossRoom = FindObjectOfType<BossRoom>();
         enemyCounter = GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>();
+        ePool = FindObjectOfType<EnemyObjectPool>();
+
         foreach (Node node in aliveNodes)
         {
             SetNeighbourNodes(node, true);
@@ -609,7 +611,8 @@ public class SAIM : MonoBehaviour
             spawnPosition.z += Random.Range(-1.0f, 2.0f);
             spawnPosition.y += 2;
 
-            GameObject spawnedEnemy = Instantiate(data.GetEnemyList()[spawnTypeIndex], spawnPosition, Quaternion.identity);
+           // GameObject spawnedEnemy = Instantiate(data.GetEnemyList()[spawnTypeIndex], spawnPosition, Quaternion.identity);
+            GameObject spawnedEnemy = SetSpawn(data.GetEnemyList()[spawnTypeIndex], spawnPosition);
             spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
 
             if (GameObject.Find("Quest Manager"))
@@ -698,8 +701,9 @@ public class SAIM : MonoBehaviour
             spawnPosition.z += Random.Range(-1.0f, 2.0f);
             spawnPosition.y += 2;
 
-            GameObject spawnedEnemy = Instantiate(eType, spawnPosition, Quaternion.identity);
-            spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
+            //GameObject spawnedEnemy = Instantiate(eType, spawnPosition, Quaternion.identity);
+            GameObject spawnedEnemy = SetSpawn(eType, spawnPosition);
+            spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(gameObject);
 
             if (GameObject.Find("Quest Manager"))
             {
@@ -721,6 +725,24 @@ public class SAIM : MonoBehaviour
         }
 
         triggered = true;
+    }
+
+    //Use object pooling on a new object to spawn it
+    public GameObject SetSpawn(GameObject eType, Vector3 position)
+    {
+        GameObject newEnem = ePool.GetReadiedEnemy(eType);
+
+        if(newEnem == null)
+        {
+            newEnem = Instantiate(eType, position, Quaternion.identity);
+        }
+        else
+        {
+            newEnem.SetActive(true);
+            newEnem.transform.position = position;
+        }
+
+        return eType;
     }
 
     public int ChooseEnemy()

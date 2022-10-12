@@ -172,13 +172,13 @@ public class ShieldEnemyScript : BaseEnemyClass
         //move along the forward vector
 
 
-        movement = this.transform.forward * speed * (Time.deltaTime + timeSinceLastMove);
-        if (!this.gameObject.GetComponent<CharacterController>().isGrounded)
+        movement = transform.forward * speed * (Time.deltaTime + timeSinceLastMove);
+        if (!gameObject.GetComponent<CharacterController>().isGrounded)
         {
             movement += new Vector3(0, gravity, 0);
             //transform.position += new Vector3(0, gravity, 0);
         }
-        this.gameObject.GetComponent<CharacterController>().Move(movement);
+        gameObject.GetComponent<CharacterController>().Move(movement);
 
     }
 
@@ -190,15 +190,15 @@ public class ShieldEnemyScript : BaseEnemyClass
 
 
         
-        movement = this.transform.forward * speed * (Time.deltaTime + timeSinceLastMove);
-        if (!this.gameObject.GetComponent<CharacterController>().isGrounded)
+        movement = transform.forward * speed * (Time.deltaTime + timeSinceLastMove);
+        if (!gameObject.GetComponent<CharacterController>().isGrounded)
         {
             movement += new Vector3(0, gravity, 0);
             //transform.position += new Vector3(0, gravity, 0);
         }
 
         
-        this.gameObject.GetComponent<CharacterController>().Move(movement);
+        gameObject.GetComponent<CharacterController>().Move(movement);
 
     }
 

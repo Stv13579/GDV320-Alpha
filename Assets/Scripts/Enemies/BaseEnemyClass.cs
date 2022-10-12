@@ -145,10 +145,10 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Update()
     {
-        if(GetComponentInChildren<Animator>() && GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        if(enemyAnims.GetCurrentAnimatorStateInfo(0).IsName("Death") || enemyAnims.gameObject.activeInHierarchy == false)
         {
 
-            if (deathSpawn.GetComponent<ParticleSystem>().isStopped)
+            if (!deathSpawn.GetComponent<ParticleSystem>().IsAlive() && isDead)
             {
                 //Destroy(this.gameObject);
                 //Turn this off and reset the enemy
@@ -355,6 +355,7 @@ public class BaseEnemyClass : MonoBehaviour
                 dTrigs(gameObject);
             }
 			
+	        
 	        deathSpawn.GetComponent<ParticleSystem>().Play();
 	        enemyAnims.gameObject.SetActive(false);
 	        //Instantiate(deathSpawn, transform.position, Quaternion.identity);
@@ -392,7 +393,11 @@ public class BaseEnemyClass : MonoBehaviour
         StatModifier.ResetModifier(damage);
         StatModifier.ResetModifier(speed);
 
+        targettingIndicator.SetActive(false);
+        witheredVFX.SetActive(false);
+        cursedVFX.SetActive(false);
 
+        isDead = false;
     }
 
     void Drop(List<DropListEntry> dropType, int minSpawn, int maxSpawn)
