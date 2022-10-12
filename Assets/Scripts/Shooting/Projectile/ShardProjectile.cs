@@ -26,7 +26,7 @@ public class ShardProjectile : BaseElementSpawnClass
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 8)
+        if (other.gameObject.layer == 8 || other.tag == "Enemy")
         {
 	        other.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
         }

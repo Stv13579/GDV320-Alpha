@@ -87,7 +87,7 @@ public class Fireball : BaseElementSpawnClass
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
             decreaseIntensity = true;
         }
-	    if (other.gameObject.layer == 8 && active && other.GetComponentInParent<BaseEnemyClass>())
+	    if (other.gameObject.layer == 8 && active && other.GetComponentInParent<BaseEnemyClass>() || other.tag == "enemy")
         {
 	        other.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             taggedEnemy = other;

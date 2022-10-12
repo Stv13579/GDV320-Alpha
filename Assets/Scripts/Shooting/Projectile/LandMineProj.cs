@@ -75,7 +75,7 @@ public class LandMineProj : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // if the other object is an enemy
-        if (other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>())
+        if (other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>() || other.tag == "Enemy")
         {
             Collider[] objectsHitByExplosion = Physics.OverlapSphere(this.transform.position, explosiveRadius);
             for(int i = 0; i < objectsHitByExplosion.Length; i++)

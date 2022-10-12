@@ -68,7 +68,7 @@ public class WaterProjectile : BaseElementSpawnClass
                 audioManager.PlaySFX("Water Element Impact", player.transform, this.transform);
             }
         }
-        if(collision.collider.tag == "Enemy")
+        if(collision.collider.tag == "Enemy" || collision.collider.gameObject.layer == 8 && collision.collider.GetComponentInParent<BaseEnemyClass>())
         {
 	        collision.collider.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             if (audioManager)

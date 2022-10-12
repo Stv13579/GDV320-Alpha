@@ -289,7 +289,8 @@ public class GameplayUI : MonoBehaviour
         {
             isPaused = !isPaused;
             Time.timeScale = isPaused ? 0 : 1;
-            player.GetComponent<PlayerLook>().ToggleCursor();       
+            player.GetComponent<PlayerLook>().ToggleCursor();
+            player.GetComponent<Shooting>().SetAbleToShoot(!isPaused);
             Pause.SetActive(isPaused);
             if(SceneManager.GetActiveScene().buildIndex == 1)
             {
