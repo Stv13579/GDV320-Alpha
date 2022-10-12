@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class OptionsMenuScript : MonoBehaviour
 {
-	static int volume;
-	static float mouseSensitivity;
-	static int fov;
+	static int volume = 100;
+	static float mouseSensitivity = 2;
+	static int fov = 90;
 	
 	[SerializeField]
 	TextMeshProUGUI volumeText, mouseText, fovText;
