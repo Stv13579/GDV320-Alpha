@@ -147,7 +147,6 @@ public class BaseEnemyClass : MonoBehaviour
     {
         if(enemyAnims.GetCurrentAnimatorStateInfo(0).IsName("Death") || enemyAnims.gameObject.activeInHierarchy == false)
         {
-
             if (!deathSpawn.GetComponent<ParticleSystem>().IsAlive() && isDead)
             {
                 //Destroy(this.gameObject);

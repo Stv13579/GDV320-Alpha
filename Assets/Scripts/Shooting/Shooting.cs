@@ -249,7 +249,6 @@ public class Shooting : MonoBehaviour
             loadOutChosen = false;
             loadScene = false;
         }
-        Debug.Log((int)comboElements[leftElementIndex].comboElements[rightElementIndex].GetCurrentElementType());
         SwitchingElements();
         if (ableToShoot && (SceneManager.GetActiveScene().name != "Hub Scene"))
         {

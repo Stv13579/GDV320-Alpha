@@ -5,7 +5,8 @@ using UnityEngine;
 public class ShardProjectile : BaseElementSpawnClass
 {
     float speed;
-    float damage;
+	float damage;
+	[SerializeField]
     int pierceAmount;
     [SerializeField]
     GameObject impactSpawn;
