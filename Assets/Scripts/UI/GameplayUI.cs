@@ -57,7 +57,10 @@ public class GameplayUI : MonoBehaviour
     Button hubRoomButton;
     bool isPaused;
 
-    AudioManager audioManager;
+	AudioManager audioManager;
+    
+	[SerializeField]
+	GameObject pauseButtons, optionsMenu;
 
     public Image GetLifeStealFullScreen() { return lifeStealFullScreen; }
     public Image GetVoidFullScreen() { return voidFullScreen; }
@@ -85,7 +88,7 @@ public class GameplayUI : MonoBehaviour
         inToxicFullScreen = GameObject.Find("GameplayUI/Effects/InToxic").GetComponent<Image>();
         slowedFullScreen = GameObject.Find("GameplayUI/Effects/Slowed").GetComponent<Image>();
         Pause = GameObject.Find("GameplayUI/Pause Menu");
-        hubRoomButton = GameObject.Find("GameplayUI/Pause Menu/Back to Hub Button").GetComponent<Button>();
+	    hubRoomButton = GameObject.Find("GameplayUI/Pause Menu/Pause Buttons/Back to Hub Button").GetComponent<Button>();
         comboTimer = maxComboTimer;
         DontDestroyOnLoad(gameObject);
         if (hitMarker)
@@ -408,4 +411,20 @@ public class GameplayUI : MonoBehaviour
             Destroy(tempDamageIndicator);
         }
     }
+    
+	public void OpenOptions()
+	{
+		pauseButtons.SetActive(false);
+		optionsMenu.SetActive(true);
+		optionsMenu.GetComponent<OptionsMenuScript>().LoadSettings();
+
+	}
+	
+	public void CloseOptions()
+	{
+		pauseButtons.SetActive(true);
+		optionsMenu.GetComponent<OptionsMenuScript>().SaveSettings();
+		optionsMenu.SetActive(false);
+
+	}
 }
