@@ -316,7 +316,8 @@ public class GameplayUI : MonoBehaviour
         SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Fortune"));
         SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Shop"));
 
-        FindObjectOfType<SAIM>().data.ResetDifficulty();
+	    FindObjectOfType<SAIM>().data.ResetDifficulty();
+	    //GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRunUpdate();
 
         if (audioManager)
         {
@@ -332,7 +333,6 @@ public class GameplayUI : MonoBehaviour
         Destroy(GameObject.Find("Player"));
         Destroy(GameObject.Find("ProphecyManager"));
         Destroy(GameObject.Find("GameplayUI"));
-        Destroy(GameObject.Find("Quest Manager"));
         Destroy(GameObject.Find("Trinket Manager"));
         Time.timeScale = 1;
     }

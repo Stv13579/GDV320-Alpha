@@ -145,18 +145,22 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Update()
     {
-        if(GetComponentInChildren<Animator>() && GetComponentInChildren<Animator>().GetNextAnimatorStateInfo(0).IsName("Death"))
+        if(enemyAnims.GetCurrentAnimatorStateInfo(0).IsName("Death") || enemyAnims.gameObject.activeInHierarchy == false)
         {
 
-        	
+            if (!deathSpawn.GetComponent<ParticleSystem>().IsAlive() && isDead)
+            {
+                //Destroy(this.gameObject);
+                //Turn this off and reset the enemy
+                ResetEnemy();
+                Debug.Log("ded");
+
+                enemyAnims.gameObject.SetActive(true);
+                gameObject.SetActive(false);
+            }
+
             return;
         }
-		
-	    if(!deathSpawn)
-	    {
-	    	
-		    Destroy(this.gameObject);
-	    }
 		
         if(currentHealth > maxHealth)
         {
@@ -170,7 +174,8 @@ public class BaseEnemyClass : MonoBehaviour
 
         if (transform.position.y < -100)
         {
-            Death();
+            currentHealth = -10;
+            enemyAnims.SetTrigger("Dead");
         }
 
         maxHealth = StatModifier.UpdateValue(health);
@@ -305,7 +310,6 @@ public class BaseEnemyClass : MonoBehaviour
         }
         
 	    damageTimer = 0;
-        //Death();
     }
 
     //Checks if the enemy has died and applies relevant behaviour, such as triggering any on death effects, before destroying it
@@ -352,6 +356,7 @@ public class BaseEnemyClass : MonoBehaviour
                 dTrigs(gameObject);
             }
 			
+	        
 	        deathSpawn.GetComponent<ParticleSystem>().Play();
 	        enemyAnims.gameObject.SetActive(false);
 	        //Instantiate(deathSpawn, transform.position, Quaternion.identity);
@@ -365,8 +370,40 @@ public class BaseEnemyClass : MonoBehaviour
                 audioManager.StopSFX(deathAudio);
                 audioManager.PlaySFX(deathAudio, player.transform, this.transform);
             }
-	        //Destroy(gameObject);
         }
+    }
+
+
+    virtual protected void ResetEnemy()
+    {
+        
+
+        foreach (var param in enemyAnims.parameters)
+        {
+            if (param.type == AnimatorControllerParameterType.Trigger)
+            {
+                enemyAnims.ResetTrigger(param.name);
+            }
+        }
+
+        hitTriggers.Clear();
+        deathTriggers.Clear();
+
+        RestoreHealth(0);
+
+        //Reset stat modifiers
+        StatModifier.ResetModifier(health);
+        StatModifier.ResetModifier(damage);
+        StatModifier.ResetModifier(speed);
+
+        targettingIndicator.SetActive(false);
+        witheredVFX.SetActive(false);
+        cursedVFX.SetActive(false);
+
+        isDead = false;
+        currentHealth = maxHealth * prophecyManager.prophecyHealthMulti;
+
+        damageTimer = 0;
     }
 
     void Drop(List<DropListEntry> dropType, int minSpawn, int maxSpawn)

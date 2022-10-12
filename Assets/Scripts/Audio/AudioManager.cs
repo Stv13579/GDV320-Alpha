@@ -142,7 +142,7 @@ public class AudioManager : MonoBehaviour
         if (playerPos != null && enemyPos != null)
         {
             float positionDistance = Vector3.Distance(playerPos.position, enemyPos.position);
-            s.GetAudioSource().volume = (1 - (positionDistance / audioDistance)) > 0 ? (1 - (positionDistance / audioDistance)) * 0.1f : 0;
+	        s.GetAudioSource().volume = (1 - (positionDistance / audioDistance)) > 0 ? (1 - (positionDistance / audioDistance)) * 0.1f: 0;
         }
         if (!s.GetAudioSource().isPlaying)
         {

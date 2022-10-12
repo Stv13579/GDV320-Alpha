@@ -67,7 +67,8 @@ public class GameOverScreen : MonoBehaviour
         Destroy(GameObject.Find("Quest Manager"));
         Destroy(GameObject.Find("Trinket Manager"));
 
-        FindObjectOfType<SAIM>().data.ResetDifficulty();
+	    FindObjectOfType<SAIM>().data.ResetDifficulty();
+	    GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRunUpdate();
         operation.allowSceneActivation = true;
         if (audioManager)
         {

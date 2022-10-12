@@ -132,7 +132,6 @@ public class BossSlimeEnemy : WaterSlimeEnemy
     {
 
 	    base.Update();
-
         if(!ExecuteAttack())
         {
             moveDirection = player.transform.position;
@@ -506,10 +505,20 @@ public class BossSlimeEnemy : WaterSlimeEnemy
                 newSlime.transform.localScale = this.transform.localScale / 2;
                 newSlime.generation = generation + 1;
 	            bossHealthBar.AddEnemy(newSlime);
-                newSlime.bossHealthBar = bossHealthBar;
+	            newSlime.bossHealthBar = bossHealthBar;
+	            newSlime.chargeVFX.SetActive(false);
             }
         }
     }
+    
+	public override void Movement(Vector3 positionToMoveTo)
+	{
+		if(currentChargeDuration >= fireChargeDuration)
+		{
+			base.Movement(positionToMoveTo);
+		}
+	}
+	
 
 
 }

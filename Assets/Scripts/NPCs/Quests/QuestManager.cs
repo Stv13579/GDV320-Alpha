@@ -5,13 +5,34 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
     [SerializeField]
-    List<Quest> activeQuests;
+	List<Quest> activeQuests;
+	[SerializeField]
+	List<NPCData> npcs;
 
-    public bool inHub;
+	public bool inHub;
+    
+	static bool exists = false;
 
+	// Awake is called when the script instance is being loaded.
+	protected void Awake()
+	{
+		if(exists)
+		{
+			Destroy(this.gameObject);
+		}
+	}
+	
     private void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+	    DontDestroyOnLoad(this.gameObject);
+	    exists = true;
+	    foreach(NPCData npc in npcs)
+	    {
+	    	if(npc.onQuest)
+	    	{
+	    		AddToQuests((Quest)GetComponent(npc.quests[npc.storyPosition]));
+	    	}
+	    }
     }
 
     void Update()

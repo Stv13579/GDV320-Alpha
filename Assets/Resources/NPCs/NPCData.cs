@@ -26,7 +26,8 @@ public class NPCData : ScriptableObject
 
         questReady = sData.questReady;
         onQuest = sData.onQuest;
-        questComplete = sData.questComplete;
+	    questComplete = sData.questComplete;
+        
 
         return true;
     }
