@@ -246,6 +246,7 @@ public class SAIM : MonoBehaviour
             //If the distance moved is miniscule since the last frame, continue.
             if ((enemy.GetOldPosition() - enemy.transform.position).magnitude < 1)
             {
+                
                 continue;
             }
 
@@ -256,7 +257,7 @@ public class SAIM : MonoBehaviour
                 if((node.transform.position - enemy.transform.position).magnitude < distToNode)
                 {
                     distToNode = (node.transform.position - enemy.transform.position).magnitude;
-                    enemy.SetMoveDirection(node.bestNextNodePos);
+                    enemy.SetMoveDirection((node.bestNextNodePos - node.transform.position).normalized);
                 }
 
             }
@@ -279,12 +280,12 @@ public class SAIM : MonoBehaviour
         if (pNode != playerNode)
         {
             playerNode = pNode;
-            //CreateIntegrationFlowField();
-            Thread flowThread = new Thread(CreateIntegrationFlowField);
-	        flowThread.Start();
-	        Thread genThread = new Thread(GenerateFlowField);
-	        genThread.Start();
-	        //GenerateFlowField();
+            CreateIntegrationFlowField();
+         //   Thread flowThread = new Thread(CreateIntegrationFlowField);
+	        //flowThread.Start();
+	        //Thread genThread = new Thread(GenerateFlowField);
+	        //genThread.Start();
+	        GenerateFlowField();
         }
         
     }
@@ -742,7 +743,7 @@ public class SAIM : MonoBehaviour
             newEnem.transform.position = position;
         }
 
-        return eType;
+        return newEnem;
     }
 
     public int ChooseEnemy()

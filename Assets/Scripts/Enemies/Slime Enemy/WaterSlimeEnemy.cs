@@ -92,10 +92,11 @@ public class WaterSlimeEnemy : BaseEnemyClass
 
                 pos = player.transform.position + posOffset;
             }
+            pos = moveDirection;
             Vector3 moveForce = (pos - this.transform.position).normalized * moveSpeed;
             moveForce += new Vector3(0, jumpForce, 0);
             GetComponent<Rigidbody>().AddForce(moveForce);
-            jumpTimer = Random.Range(1.5f, 3.0f);
+            //jumpTimer = Random.Range(1.5f, 3.0f);
         }
         else
         {
@@ -109,18 +110,18 @@ public class WaterSlimeEnemy : BaseEnemyClass
         }
         
     }
-    //Unused
+
     public override void Movement(Vector3 positionToMoveTo, float speed)
     {
         base.Movement(moveDirection);
 
         RaycastHit hit;
 
-        //If they can see the player, go for it, otherwise pathfind
-        Debug.DrawRay(transform.position + (Vector3.up * 10), Vector3.up /*player.transform.position - transform.position*/, Color.blue);
+        ////If they can see the player, go for it, otherwise pathfind
+        //Debug.DrawRay(transform.position + (Vector3.up * 10), Vector3.up /*player.transform.position - transform.position*/, Color.blue);
         if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, Mathf.Infinity, viewToPlayer))
         {
-            if(hit.collider.gameObject.tag == "Player")
+            if (hit.collider.gameObject.tag == "Player")
             {
                 Vector3 moveVec = (player.transform.position - transform.position).normalized * speed * Time.deltaTime;
                 moveVec.y = 0;
@@ -129,7 +130,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
             }
             else
             {
-                Vector3 moveVec = (moveDirection - transform.position).normalized * speed * Time.deltaTime;
+                Vector3 moveVec = moveDirection.normalized * speed * Time.deltaTime;
                 moveVec.y = 0;
                 moveVec.y -= 1 * Time.deltaTime;
                 transform.position += moveVec;
@@ -139,14 +140,14 @@ public class WaterSlimeEnemy : BaseEnemyClass
         }
         else
         {
-            Vector3 moveVec = (moveDirection - transform.position).normalized * speed * Time.deltaTime;
+            Vector3 moveVec = moveDirection.normalized * speed * Time.deltaTime;
             moveVec.y = 0;
             moveVec.y -= 1 * Time.deltaTime;
             transform.position += moveVec;
         }
 
 
-
+        
 
         // slime is always looking at the player
         transform.LookAt(player.transform.position);
@@ -160,8 +161,9 @@ public class WaterSlimeEnemy : BaseEnemyClass
     {
 	    base.Update();
         
-        Movement(player.transform.position);
-	    damageTicker -= Time.deltaTime;
+        //Movement(player.transform.position);
+        Movement(moveDirection, moveSpeed / groundMoveSpeed);
+        damageTicker -= Time.deltaTime;
 	    if(hurtTimer > 0)
 	    {
 	    	hurtTimer -= Time.deltaTime;
@@ -239,7 +241,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
         {
             for (int i = 0; i < 2; i++)
             {
-	            GameObject newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 4, Quaternion.identity);
+	            GameObject newSlime = spawner.GetComponent<SAIM>().SetSpawn(gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 4);
 	            newSlime.GetComponent<Rigidbody>().AddForce(this.transform.up * 5 + this.transform.forward * 5);
 	            newSlime.GetComponent<WaterSlimeEnemy>().RestoreHealth(0);
 	            StatModifier.AddModifier(newSlime.GetComponent<WaterSlimeEnemy>().GetHealthStat().multiplicativeModifiers, new StatModifier.Modifier(1.0f / (generation * 4 + 2), "Split " + generation));
@@ -261,5 +263,15 @@ public class WaterSlimeEnemy : BaseEnemyClass
 		this.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Renderer>().material.SetFloat("_IsBeingDamaged", 1);
 		hurtTimer = 0.2f;
 	}
-	
+
+    protected override void ResetEnemy()
+    {
+        base.ResetEnemy();
+
+        transform.localScale = this.transform.localScale * (generation * 2);
+        GetComponent<SphereCollider>().radius = 1.8f;
+        deathTriggers.Add(Split);
+        generation = 0;
+    }
+
 }
