@@ -477,6 +477,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         base.TakeDamage(damageToTake, attackTypes, 2, applyTriggers);
         if(currentHealth <= maxHealth / 2 && !split)
         {
+        	currentHealth = maxHealth / 2;
         	enemyAnims.SetTrigger("Dead");
 	        //Split(gameObject);
         }
@@ -496,7 +497,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
             {
 	            BossSlimeEnemy newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2), Quaternion.identity).GetComponent<BossSlimeEnemy>();
 	            newSlime.RestoreHealth(0);
-	            StatModifier.AddModifier(newSlime.GetHealthStat().multiplicativeModifiers, new StatModifier.Modifier(0.25f * (generation + 1), "Split " + generation));
+	            StatModifier.AddModifier(newSlime.GetHealthStat().multiplicativeModifiers, new StatModifier.Modifier(Mathf.Pow(0.25f, (generation + 1)), "Split " + generation));
                 StatModifier.AddModifier(newSlime.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
 	            StatModifier.AddModifier(newSlime.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));
 	            newSlime.fireTrailScale /= 2;
