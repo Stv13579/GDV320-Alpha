@@ -390,6 +390,11 @@ public class BaseEnemyClass : MonoBehaviour
         deathTriggers.Clear();
 
         RestoreHealth(0);
+        deathSpawn.GetComponent<ParticleSystem>().Clear();
+        foreach (Transform spawns in deathSpawn.transform)
+        {
+            spawns.GetComponent<ParticleSystem>().Clear();
+        }
 
         //Reset stat modifiers
         StatModifier.ResetModifier(health);

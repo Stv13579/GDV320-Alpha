@@ -739,8 +739,9 @@ public class SAIM : MonoBehaviour
         }
         else
         {
-            newEnem.SetActive(true);
             newEnem.transform.position = position;
+            newEnem.SetActive(true);
+            
         }
 
         return newEnem;
