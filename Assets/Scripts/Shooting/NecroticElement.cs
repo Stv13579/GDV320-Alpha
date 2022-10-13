@@ -23,6 +23,9 @@ public class NecroticElement : BaseElementClass
 
     [SerializeField]
     Color outlineColour;
+
+      [SerializeField]
+    List<GameObject> targetedList;
     protected override void Start()
     {
         base.Start();
@@ -48,19 +51,21 @@ public class NecroticElement : BaseElementClass
         }
 
         isTargeting = false;
-	    if (targetToSlow && targetToSlow.GetComponentInParent<BaseEnemyClass>() && !targetToSlow.GetComponent<EnemyShield>() &&
-            targetToSlow.GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 2.0f || 
-            targetToSlow && targetToSlow.GetComponentInParent<BaseEnemyClass>() && !targetToSlow.GetComponent<EnemyShield>() &&
-            targetToSlow.GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 3.0f)
+        for (int i = 0; i < targetedList.Count; i++)
         {
-		    BaseEnemyClass enemy = targetToSlow.GetComponentInParent<BaseEnemyClass>();
-            if (enemy.GetDamageResistance() != 2.0f || enemy.GetDamageResistance() != 3.0f)
+            if (targetedList[i] && targetedList[i].GetComponentInParent<BaseEnemyClass>() && !targetedList[i].GetComponent<EnemyShield>() &&
+                targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 2.0f ||
+                targetedList[i] && targetedList[i].GetComponentInParent<BaseEnemyClass>() && !targetedList[i].GetComponent<EnemyShield>() &&
+                targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 3.0f)
             {
-                playerClass.ChangeMana(-manaCost, manaTypes);
-	            enemy.SetWithered();
-                enemy.SetDamageResistance(enemy.GetDamageResistance() * (upgraded ? 3.0f : 2.0f));
+                if (targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 2.0f || targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 3.0f)
+                {
+                    playerClass.ChangeMana(-manaCost * targetedList.Count, manaTypes);
+                    targetedList[i].GetComponentInParent<BaseEnemyClass>().SetWithered(true);
+                    targetedList[i].GetComponentInParent<BaseEnemyClass>().SetDamageResistance(targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() * (upgraded ? 3.0f : 2.0f));
+                }
             }
-        }
+        }      
     }
     // Update is called once per frame
     protected override void Update()
@@ -76,10 +81,11 @@ public class NecroticElement : BaseElementClass
             if (Physics.Raycast(lookScript.GetCamera().transform.position, lookScript.GetCamera().transform.forward, out targetRayCast, rayCastRange, NecroticTarget))
             {
                 // if facing a target thats already targeted
-                if(targetToSlow == targetRayCast.collider.gameObject)
+                if(targetedList.Contains(targetRayCast.collider.gameObject))
                 {
 
                 }
+                // if facing a shield
                 else if (targetRayCast.collider.gameObject.GetComponent<EnemyShield>())
                 {
                 	
@@ -87,22 +93,29 @@ public class NecroticElement : BaseElementClass
                 else
                 {
                     // else if facing a new target
-                    // take away target off old target
                     // and put target on new target
-                    if(targetToSlow)
-                    {
-	                    targetToSlow.GetComponentInParent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
-                    }
                     targetToSlow = targetRayCast.collider.gameObject;
 	                targetToSlow.GetComponentInParent<BaseEnemyClass>().Targetted(true, outlineColour);
+                    targetedList.Add(targetToSlow);
                 }
             }
         }
         else
         {
-            if(targetToSlow)
+            for (int i = 0; i < targetedList.Count; i++)
             {
-	            targetToSlow.GetComponentInParent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
+                targetedList[i].GetComponentInParent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
+            }
+        }
+
+        //resets the nercrotic since object pooling
+        for (int i = 0; i < targetedList.Count; i++)
+        {
+            if (targetedList[i].GetComponentInParent<BaseEnemyClass>().GetHealth() <= 0)
+            {
+                targetedList[i].GetComponentInParent<BaseEnemyClass>().SetWithered(false);
+                targetedList[i].GetComponentInParent<BaseEnemyClass>().SetDamageResistance(1);
+                targetedList.Remove(targetedList[i]);
             }
         }
     }
@@ -112,7 +125,7 @@ public class NecroticElement : BaseElementClass
 
         playerHand.SetTrigger("NecroticStopCast");
 
-        activatedVFX.SetActive(false);  
+        activatedVFX.SetActive(false);
     }
 
     public override void ActivateVFX()

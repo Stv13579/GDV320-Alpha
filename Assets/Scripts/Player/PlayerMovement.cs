@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     float headBobNeutral = 0.80f;
     float headBobMinSpeed = 0.1f;
     float headBobBlendSpeed = 4.0f;
-    [SerializeField] 
+    [SerializeField]
     AnimationCurve headBobBlendCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
     float headBobMultiplier = 0.0f;
     Vector3 oldPos;
@@ -59,10 +59,10 @@ public class PlayerMovement : MonoBehaviour
 
     // FOV change
     [SerializeField]
-    float initialFOV = 90.0f;
+    float initialFOV = OptionsMenuScript.GetFOV();
+    float MaxFOVMoving;
     [SerializeField]
-    float increasedFOVMoving = 92.0f;
-
+    float increaseFOV;
     // increase movement speed over time
     [SerializeField]
     float moveTime = 0.0f;
@@ -130,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
         lookScript = this.gameObject.GetComponent<PlayerLook>();
         cController = this.gameObject.GetComponent<CharacterController>();
         speed.baseValue = baseMaxMovementSpeed;
+        MaxFOVMoving = initialFOV + increaseFOV;
     }
 
     // Update is called once per frame
@@ -264,7 +265,7 @@ public class PlayerMovement : MonoBehaviour
             moveTime = Mathf.Clamp(moveTime, 0, 3);
             if (movementSpeed >= maxMovementSpeed && Input.GetKey(KeyCode.W))
             {
-                lookScript.GetCamera().fieldOfView += increasedFOVMoving * Time.deltaTime;
+                lookScript.GetCamera().fieldOfView += MaxFOVMoving * Time.deltaTime;
             }
         }
         else
@@ -280,9 +281,9 @@ public class PlayerMovement : MonoBehaviour
         moveAnimaCurve.AddKey(new Keyframe(3, maxMovementSpeed));
         movementSpeed = moveAnimaCurve.Evaluate(moveTime);
 
-        if (lookScript.GetCamera().fieldOfView >= increasedFOVMoving)
+        if (lookScript.GetCamera().fieldOfView >= MaxFOVMoving)
         {
-            lookScript.GetCamera().fieldOfView = increasedFOVMoving;
+            lookScript.GetCamera().fieldOfView = MaxFOVMoving;
         }
         if (lookScript.GetCamera().fieldOfView <= initialFOV)
         {
@@ -292,7 +293,7 @@ public class PlayerMovement : MonoBehaviour
         // if players y velo reaches a certain height then increase the fov
         if (velocity.y < -25.0f && lookScript.GetCamera().transform.rotation.x > 20)
         {
-            lookScript.GetCamera().fieldOfView += increasedFOVMoving * Time.deltaTime;
+            lookScript.GetCamera().fieldOfView += MaxFOVMoving * Time.deltaTime;
         }
     }
 

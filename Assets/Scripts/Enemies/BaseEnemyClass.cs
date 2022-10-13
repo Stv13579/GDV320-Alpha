@@ -536,8 +536,8 @@ public class BaseEnemyClass : MonoBehaviour
 		cursedVFX.SetActive(true);
 	}
 	
-	public void SetWithered()
+	public void SetWithered(bool tempbool)
 	{
-		witheredVFX.SetActive(true);
+		witheredVFX.SetActive(tempbool);
 	}
 }
