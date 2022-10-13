@@ -237,9 +237,9 @@ public class WaterSlimeEnemy : BaseEnemyClass
     //When the slime dies, spawn two new smaller weaker ones
     protected virtual void Split(GameObject temp)
     {
-        if(generation < 2)
+        if(generation < 1)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 4; i++)
             {
 	            GameObject newSlime = spawner.GetComponent<SAIM>().SetSpawn(gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 4);
 	            newSlime.GetComponent<Rigidbody>().AddForce(this.transform.up * 5 + this.transform.forward * 5);
