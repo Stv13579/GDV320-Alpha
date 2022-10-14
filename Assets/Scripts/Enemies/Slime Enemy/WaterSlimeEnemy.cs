@@ -63,40 +63,17 @@ public class WaterSlimeEnemy : BaseEnemyClass
                 audioManager.StopSFX("Slime Bounce");
                 audioManager.PlaySFX("Slime Bounce", player.transform, this.transform);
             }
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, 10, viewToPlayer) && spawner)
-            {
-                float distance = float.MaxValue;
-                Vector3 nearestNode = Vector3.zero;
-                foreach (Node node in spawner.GetComponent<SAIM>().aliveNodes)
-                {
-                    float newDistance = Vector3.SqrMagnitude(node.gameObject.transform.position - this.transform.position);
-                    if (newDistance < distance)
-                    {
-                        distance = newDistance;
-                        nearestNode = node.bestNextNodePos;
-                    }
-                }
-                transform.LookAt(nearestNode);
-                Quaternion rot = transform.rotation;
-                rot.eulerAngles = new Vector3(0, rot.eulerAngles.y + 135, 0);
-                transform.rotation = rot;
-                pos = moveDirection;
-            }
-            else
-            {
-                transform.LookAt(player.transform.position);
-                Quaternion rot = transform.rotation;
-                rot.eulerAngles = new Vector3(0, rot.eulerAngles.y + 135, 0);
-                transform.rotation = rot;
+            // slime is always looking at the player
+            transform.LookAt(player.transform.position);
+            Quaternion rot = transform.rotation;
+            rot.eulerAngles = new Vector3(0, rot.eulerAngles.y + 135, 0);
+            transform.rotation = rot;
 
-                pos = player.transform.position + posOffset;
-            }
-            pos = moveDirection;
-            Vector3 moveForce = (pos - this.transform.position).normalized * moveSpeed;
+            pos = moveDirection.normalized;
+            Vector3 moveForce = moveDirection.normalized * moveSpeed;
             moveForce += new Vector3(0, jumpForce, 0);
             GetComponent<Rigidbody>().AddForce(moveForce);
-            //jumpTimer = Random.Range(1.5f, 3.0f);
+            jumpTimer = Random.Range(1.5f, 3.0f);
         }
         else
         {
@@ -106,7 +83,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
             //    Vector3 move = dir * ((moveSpeed) / 50) * Time.deltaTime;
             //    this.transform.position += move;
             //}
-            Movement(positionToMoveTo, moveSpeed / groundMoveSpeed);
+            Movement(moveDirection, moveSpeed / groundMoveSpeed);
         }
         
     }
@@ -162,7 +139,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
 	    base.Update();
         
         //Movement(player.transform.position);
-        Movement(moveDirection, moveSpeed / groundMoveSpeed);
+        Movement(moveDirection);
         damageTicker -= Time.deltaTime;
 	    if(hurtTimer > 0)
 	    {
@@ -237,9 +214,9 @@ public class WaterSlimeEnemy : BaseEnemyClass
     //When the slime dies, spawn two new smaller weaker ones
     protected virtual void Split(GameObject temp)
     {
-        if(generation < 2)
+        if(generation < 1)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 4; i++)
             {
 	            GameObject newSlime = spawner.GetComponent<SAIM>().SetSpawn(gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 4);
 	            newSlime.GetComponent<Rigidbody>().AddForce(this.transform.up * 5 + this.transform.forward * 5);
@@ -268,7 +245,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
     {
         base.ResetEnemy();
 
-        transform.localScale = this.transform.localScale * (generation * 2);
+        transform.localScale = new Vector3(0.6f, 0.6f, 0.6f); /*this.transform.localScale * (generation == 0 ? 0.5f : generation * 2);*/
         GetComponent<SphereCollider>().radius = 1.8f;
         deathTriggers.Add(Split);
         generation = 0;

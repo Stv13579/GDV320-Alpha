@@ -405,7 +405,10 @@ public class BaseEnemyClass : MonoBehaviour
         witheredVFX.SetActive(false);
         cursedVFX.SetActive(false);
 
+        maxHealth = StatModifier.UpdateValue(health);
+
         isDead = false;
+        
         currentHealth = maxHealth * prophecyManager.prophecyHealthMulti;
 
         damageTimer = 0;
