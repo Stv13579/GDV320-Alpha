@@ -56,12 +56,12 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
         }
     }
     //Target a position slightly away from the player so it can shoot the player from a distance
-    public override void Movement(Vector3 positionToMoveTo)
-    {
-        posOffset = (this.transform.position - player.transform.position).normalized * 10;
-        posOffset.y = 0;
-        base.Movement(positionToMoveTo);
-    }
+    //public override void Movement(Vector3 positionToMoveTo)
+    //{
+    //    posOffset = (this.transform.position - player.transform.position).normalized * 10;
+    //    posOffset.y = 0;
+    //    base.Movement(positionToMoveTo);
+    //}
     public override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
