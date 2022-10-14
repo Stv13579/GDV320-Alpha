@@ -65,9 +65,10 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
 
             transform.Rotate(Vector3.up, dir * Time.deltaTime * rotationSpeed * 0.1f);
         }
+	    Debug.DrawLine(projectileSpawnPos.position, projectileSpawnPos.position + ((player.transform.position - projectileSpawnPos.position).normalized * 10));
         RaycastHit hit;
         //Makes sure it can see the player
-        if (Physics.Raycast(projectileSpawnPos.position, player.transform.position - projectileSpawnPos.position, out hit, Mathf.Infinity, viewToPlayer))
+	    if (Physics.Raycast(projectileSpawnPos.position, (player.transform.position - projectileSpawnPos.position).normalized, out hit, 20, viewToPlayer))
         {
 
             if (hit.collider.gameObject.tag == "Player")
@@ -105,7 +106,18 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
             }
             else
             {
-                destroyTimer += Time.deltaTime;
+	            destroyTimer += Time.deltaTime;
+            	if(destroyTimer > 5)
+            	{
+	            	if(!burrowing)
+	            	{
+		            	enemyAnims.SetTrigger("Burrow");
+		            	enemyAnims.SetBool("IsBurrow", true);
+		            	burrowing = true;
+		            	Instantiate(burrowVFX, this.transform.position - new Vector3(0, 0.3f, 0), Quaternion.identity);
+	            	}
+            	}
+
                 if (destroyTimer > 20)
                 {
                     currentHealth = 0;
