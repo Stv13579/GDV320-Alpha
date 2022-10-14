@@ -83,11 +83,11 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
     //When the slime dies, spawn two new smaller weaker ones
     protected override void Split(GameObject temp)
     {
-        if (generation < 2)
+        if (generation < 1)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 4; i++)
             {
-	            CrystalSlimeEnemy newSlime = Instantiate(this.gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 4, Quaternion.identity).GetComponent<CrystalSlimeEnemy>();
+	            CrystalSlimeEnemy newSlime = spawner.GetComponent<SAIM>().SetSpawn(gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 4).GetComponent<CrystalSlimeEnemy>();
 	            newSlime.GetComponent<Rigidbody>().AddForce(this.transform.up * 5 + this.transform.forward * 5);
 	            newSlime.RestoreHealth(0);
 	            StatModifier.AddModifier(newSlime.GetHealthStat().multiplicativeModifiers, new StatModifier.Modifier(1.0f / (generation * 4 + 2), "Split " + generation));

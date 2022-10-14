@@ -14,6 +14,7 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
     float burrowTime;
 	bool burrowing = false;
 	bool burrowRoutine = false;
+    bool justSpawned = true;
     [SerializeField]
     GameObject projectile;
     [SerializeField]
@@ -34,10 +35,21 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
     {
         base.Awake();
         timer = attackTime;
+        //RaycastHit hit;
+        //Physics.Raycast(this.gameObject.transform.position, -this.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
+        //Vector3 emergePos = hit.point - this.transform.GetChild(1).localPosition * 2;
+        //this.transform.position = emergePos;
+    }
+
+
+    private void OnEnable()
+    {
         RaycastHit hit;
         Physics.Raycast(this.gameObject.transform.position, -this.gameObject.transform.up, out hit, Mathf.Infinity, groundDetect);
         Vector3 emergePos = hit.point - this.transform.GetChild(1).localPosition * 2;
         this.transform.position = emergePos;
+        enemyAnims.SetTrigger("Burrow");
+        enemyAnims.SetBool("IsBurrow", true);
     }
 
     // Update is called once per frame
@@ -88,12 +100,13 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
 	                    Instantiate(burrowVFX, this.transform.position - new Vector3(0, 0.3f, 0), Quaternion.identity);
                     }
                 }
+               
                 
             }
             else
             {
                 destroyTimer += Time.deltaTime;
-                if(destroyTimer > 20)
+                if (destroyTimer > 20)
                 {
                     currentHealth = 0;
                     Death();
@@ -234,6 +247,13 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
     public override void Death()
     {
         base.Death();
+    }
+
+    protected override void ResetEnemy()
+    {
+        base.ResetEnemy();
+        burrowing = false;
+        timer = attackTime;
     }
 }
 

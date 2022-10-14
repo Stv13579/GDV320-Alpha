@@ -56,4 +56,32 @@ public class OptionsMenuScript : MonoBehaviour
 	{
 		return fov;
 	}
+	
+	public void SaveSettings()
+	{
+		PlayerPrefs.SetInt("Volume", volume);
+		PlayerPrefs.SetFloat("Sensitivity", mouseSensitivity);
+		PlayerPrefs.SetInt("FOV", fov);
+		PlayerPrefs.Save();
+	}
+	
+	public void LoadSettings()
+	{
+		if(PlayerPrefs.HasKey("Volume"))
+		{
+			volume = PlayerPrefs.GetInt("Volume");
+		}
+		if(PlayerPrefs.HasKey("Sensitivity"))
+		{
+			mouseSensitivity = PlayerPrefs.GetFloat("Sensitivity");
+		}
+		if(PlayerPrefs.HasKey("FOV"))
+		{
+			fov = PlayerPrefs.GetInt("FOV");
+		}
+		
+		volumeSlider.value = volume;
+		mouseSlider.value = mouseSensitivity;
+		fovSlider.value = fov;
+	}
 }

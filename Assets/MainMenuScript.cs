@@ -10,11 +10,14 @@ public class MainMenuScript : MonoBehaviour
 	{
 		mainMenu.SetActive(false);
 		options.SetActive(true);
+		options.GetComponent<OptionsMenuScript>().LoadSettings();
 	}
 	
 	public void CloseOptions()
 	{
 		mainMenu.SetActive(true);
+		options.GetComponent<OptionsMenuScript>().SaveSettings();
 		options.SetActive(false);
+		
 	}
 }

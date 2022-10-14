@@ -34,30 +34,46 @@ public class GameplayUI : MonoBehaviour
     float maxComboTimer = 1.0f;
 
     float comboTimer = 1.0f;
-
+    [SerializeField]
     GameObject hitMarker;
+
+    [SerializeField]
     GameObject hitMarkerShield;
 
+    [SerializeField]
     Image lifeStealFullScreen;
+
+    [SerializeField]
     Image voidFullScreen;
+
+    [SerializeField]
     Image burnFullScreen;
+
+    [SerializeField]
     Image lowHealthFullScreen;
+
+    [SerializeField]
     Image inToxicFullScreen;
+
+    [SerializeField]
     Image slowedFullScreen;
+
     [SerializeField]
     Image damageIndicator;
 
     [SerializeField]
     LayerMask enemies;
 
-    float angle;
-
+    [SerializeField]
     GameObject Pause;
 
     Button hubRoomButton;
     bool isPaused;
 
-    AudioManager audioManager;
+	AudioManager audioManager;
+    
+	[SerializeField]
+	GameObject pauseButtons, optionsMenu;
 
     public Image GetLifeStealFullScreen() { return lifeStealFullScreen; }
     public Image GetVoidFullScreen() { return voidFullScreen; }
@@ -76,16 +92,6 @@ public class GameplayUI : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Shooting>();
         playerClass = player.gameObject.GetComponent<PlayerClass>();
         audioManager = FindObjectOfType<AudioManager>();
-        hitMarker = GameObject.Find("GameplayUI/HitMarker");
-        hitMarkerShield = GameObject.Find("GameplayUI/HitMarkerShield");
-        lifeStealFullScreen = GameObject.Find("GameplayUI/Effects/LifeSteal").GetComponent<Image>();
-        voidFullScreen = GameObject.Find("GameplayUI/Effects/Void").GetComponent<Image>();
-        burnFullScreen = GameObject.Find("GameplayUI/Effects/Burn").GetComponent<Image>();
-        lowHealthFullScreen = GameObject.Find("GameplayUI/Effects/LowHealth").GetComponent<Image>();
-        inToxicFullScreen = GameObject.Find("GameplayUI/Effects/InToxic").GetComponent<Image>();
-        slowedFullScreen = GameObject.Find("GameplayUI/Effects/Slowed").GetComponent<Image>();
-        Pause = GameObject.Find("GameplayUI/Pause Menu");
-        hubRoomButton = GameObject.Find("GameplayUI/Pause Menu/Back to Hub Button").GetComponent<Button>();
         comboTimer = maxComboTimer;
         DontDestroyOnLoad(gameObject);
         if (hitMarker)
@@ -408,4 +414,20 @@ public class GameplayUI : MonoBehaviour
             Destroy(tempDamageIndicator);
         }
     }
+    
+	public void OpenOptions()
+	{
+		pauseButtons.SetActive(false);
+		optionsMenu.SetActive(true);
+		optionsMenu.GetComponent<OptionsMenuScript>().LoadSettings();
+
+	}
+	
+	public void CloseOptions()
+	{
+		pauseButtons.SetActive(true);
+		optionsMenu.GetComponent<OptionsMenuScript>().SaveSettings();
+		optionsMenu.SetActive(false);
+
+	}
 }
