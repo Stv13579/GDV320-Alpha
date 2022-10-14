@@ -91,10 +91,10 @@ public class WaterSlimeEnemy : BaseEnemyClass
     public override void Movement(Vector3 positionToMoveTo, float speed)
     {
         base.Movement(moveDirection);
-        if(Vector3.Distance(transform.position, player.transform.position) < 3)
-        {
-            return;
-        }
+        //if(Vector3.Distance(transform.position, player.transform.position) < 3)
+        //{
+        //    return;
+        //}
 
 
         RaycastHit hit;
@@ -144,23 +144,28 @@ public class WaterSlimeEnemy : BaseEnemyClass
 	public override void Update()
     {
 	    base.Update();
-        
-        //Movement(player.transform.position);
-        Movement(moveDirection);
-        damageTicker -= Time.deltaTime;
-	    if(hurtTimer > 0)
-	    {
-	    	hurtTimer -= Time.deltaTime;
-	    	if(hurtTimer <= 0)
-	    	{
-		    	this.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Renderer>().material.SetFloat("_IsBeingDamaged", 0);
 
-	    	}
-	    	
-	    }
+        
 	    
     }
-    
+
+    private void FixedUpdate()
+    {
+        //Movement(moveDirection);
+        Movement(moveDirection);
+        damageTicker -= Time.deltaTime;
+        if (hurtTimer > 0)
+        {
+            hurtTimer -= Time.deltaTime;
+            if (hurtTimer <= 0)
+            {
+                this.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Renderer>().material.SetFloat("_IsBeingDamaged", 0);
+
+            }
+
+        }
+    }
+
     // when the slime collides with the ground player audio for slime bounce
     // and add force to the slime so that it jumps
     public virtual void OnCollisionEnter(Collision collision)
