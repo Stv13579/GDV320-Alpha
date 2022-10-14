@@ -11,7 +11,6 @@ public class CheckTrinket : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         tToCheck = (Trinket)FindObjectOfType(System.Type.GetType(GetComponent<Draggable>().GetDragged().GetComponent<TrinketEquip>().trinketName));
         if (tToCheck.uState == Trinket.UnlockState.Locked)
         {

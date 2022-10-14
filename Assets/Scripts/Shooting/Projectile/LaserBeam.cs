@@ -72,7 +72,6 @@ public class LaserBeam : MonoBehaviour
             {
                 if(enemy)
                 {
-
 	                enemy.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
                 }
                 else
@@ -81,6 +80,14 @@ public class LaserBeam : MonoBehaviour
                 }
             }
             currentHitDelay = 0;
+        }
+
+        for(int i = 0; i < containedEnemies.Count; i++)
+        {
+            if(containedEnemies[i].GetComponentInParent<BaseEnemyClass>().GetHealth() <= 0)
+            {
+                containedEnemies.Remove(containedEnemies[i]);
+            }
         }
     }
     // setter

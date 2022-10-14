@@ -103,6 +103,16 @@ public class StasisTrapProj : MonoBehaviour
                     break;
                 }
         }
+
+        for(int i = 0; i < containedEnemies.Count; i++)
+        {
+            if(containedEnemies[i].GetComponentInParent<BaseEnemyClass>().GetHealth() <= 0)
+            {
+                StatModifier.RemoveModifier(containedEnemies[i].GetComponentInParent<BaseEnemyClass>().GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0, "Stasis"));
+                StatModifier.UpdateValue(containedEnemies[i].GetComponentInParent<BaseEnemyClass>().GetSpeedStat());
+                containedEnemies.Remove(containedEnemies[i]);
+            }
+        }
     }
     public void SetVars(float dmg, float dur, float ct, float mdt, List<BaseEnemyClass.Types> types)
     {

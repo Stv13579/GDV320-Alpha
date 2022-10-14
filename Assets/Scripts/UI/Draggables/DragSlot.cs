@@ -43,11 +43,6 @@ public class DragSlot : HoverOver, IPointerEnterHandler, IPointerExitHandler, IP
     public override void OnPointerExit(PointerEventData pData)
     {
         base.OnPointerExit(pData);
-        // stuck need help
-        //if (slotTaken == true && equippedIcon.enabled)
-        //{
-        //    ClearSlot();
-        //}
     }
 
     public void OnPointerDown(PointerEventData pData)

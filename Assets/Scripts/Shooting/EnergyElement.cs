@@ -162,12 +162,13 @@ public class EnergyElement : BaseElementClass
         }
     }
 
+    // get this working first
     private void OnTriggerEnter(Collider other)
     {
         if (useShield)
         {
-	        if (other.gameObject.layer == 8  && other.GetComponentInParent<BaseEnemyClass>() || 
-                other.gameObject.tag == "Enemy" && other.GetComponentInParent<BaseEnemyClass>())
+	        if (other.gameObject.layer == 8  || other.GetComponentInParent<BaseEnemyClass>() || 
+                other.gameObject.tag == "Enemy")
             {
                 if (!containedEnemies.Contains(other.gameObject))
                 {
@@ -176,13 +177,13 @@ public class EnergyElement : BaseElementClass
                     StatModifier.AddModifier(enemy.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.0f, "Shield"));
                 }
             }
-            if (other.gameObject.layer == 22 && other.GetComponent<BaseRangedProjectileScript>())
+            if (other.gameObject.layer == 22 || other.GetComponent<BaseRangedProjectileScript>())
             {
                 Destroy(other.gameObject);
             }
-            if (other.gameObject.layer == 22 && other.GetComponent<BaseRangedProjectileScript>() ||
-                other.gameObject.layer == 8 && other.GetComponentInParent<BaseEnemyClass>() ||
-                 other.gameObject.tag == "Enemy" && other.GetComponentInParent<BaseEnemyClass>())
+            if (other.gameObject.layer == 22 || other.GetComponent<BaseRangedProjectileScript>() ||
+                other.gameObject.layer == 8 || other.GetComponentInParent<BaseEnemyClass>() ||
+                 other.gameObject.tag == "Enemy")
             {
                 materialChanger = 1.0f;
                 energyShield.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetFloat("_ShieldDamage", materialChanger);

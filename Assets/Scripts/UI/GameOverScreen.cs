@@ -64,7 +64,6 @@ public class GameOverScreen : MonoBehaviour
         Destroy(GameObject.Find("Player"));
         Destroy(GameObject.Find("ProphecyManager"));
         Destroy(GameObject.Find("GameplayUI"));
-        Destroy(GameObject.Find("Quest Manager"));
         Destroy(GameObject.Find("Trinket Manager"));
 
 	    FindObjectOfType<SAIM>().data.ResetDifficulty();
