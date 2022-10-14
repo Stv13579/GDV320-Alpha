@@ -170,6 +170,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
         {
             Attacking();
 	        damageTicker = 1.0f;
+	        this.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         }
     }
     public virtual void OnCollisionStay(Collision collision)
