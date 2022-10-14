@@ -48,8 +48,56 @@ Material:
         m_Texture: {fileID: 2800000, guid: d1852df1c73cfe449a9ab1cc6e9003b1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DiffuseBlinkEyes:
+        m_Texture: {fileID: 2800000, guid: d183cf8255ce4924da915f0bd345d5a0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseBody:
+        m_Texture: {fileID: 2800000, guid: 6ffef316e0380a142befe3e8ec830859, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseDeathEyes:
+        m_Texture: {fileID: 2800000, guid: e73c464f7aa73e94093a4e4ba9a50006, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseHurtEyes:
+        m_Texture: {fileID: 2800000, guid: 8208f45d0f6b088479de6633d7bba43f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseNormalEyes:
+        m_Texture: {fileID: 2800000, guid: e7a302b879925ae478b7574410a5d1ec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseStunEyes:
+        m_Texture: {fileID: 2800000, guid: 0bfb119c99a168a42b091d7f1f8a11c7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 2800000, guid: 0f05b74d5c0acbc4084927f4eb200964, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissiveBody:
+        m_Texture: {fileID: 2800000, guid: ab596d584a854af44a37dcb4f1bd5150, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmmisiveBlinkEyes:
+        m_Texture: {fileID: 2800000, guid: 966836a50a117fc4f80e11a8622ba893, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmmisiveDeathEyes:
+        m_Texture: {fileID: 2800000, guid: 7a34005f8256c754299fc7b27e7c0ca9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmmisiveHurtEyes:
+        m_Texture: {fileID: 2800000, guid: e289acbe9a0aca343b3914c96891441f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmmisiveNormalEyes:
+        m_Texture: {fileID: 2800000, guid: 9e1f19420ee119348a4bf46372947886, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmmisiveStunEyes:
+        m_Texture: {fileID: 2800000, guid: ca5e454c5a70151498f7b72b6697416e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -106,6 +154,8 @@ Material:
     - _Highlight_Strenght: 1
     - _IDNum: 0
     - _IsBeingDamaged: 0
+    - _IsBeingStunned: 0
+    - _IsUsingEyes: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Outline_Alpha: 1
@@ -128,6 +178,7 @@ Material:
     - _SubSurface_Stenght: 1.06
     - _Surface: 0
     - _Toggle_EnemyHPEmissive: 0.189
+    - _Unique_Eye_On: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
