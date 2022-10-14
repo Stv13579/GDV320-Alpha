@@ -17,6 +17,7 @@ public class DialogueUI : NPCUI
     TextMeshProUGUI nameField;
 
     int place = 0;
+    int oldPlace = 0;
     //Show dialogue lines as specified, activate the action once exhausted, then delete itself
 
 	public override void Start()
@@ -52,6 +53,14 @@ public class DialogueUI : NPCUI
             dialogueLines.OnSpeakAction(place);
             
         }
+
+        if(oldPlace != place)
+        {
+            NPC.npc.PlayFidget();
+        }
+
+        oldPlace = place;
+
     }
 
     public void MoveDialogueAlong()

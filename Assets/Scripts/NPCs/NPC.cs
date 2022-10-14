@@ -169,6 +169,8 @@ public class NPC : MonoBehaviour
     [SerializeField]
     GameObject neckBone;
     GameObject player;
+    Animator anims;
+
 
     //Defines an NPC in the broad sense
     //Holds dialogue and functionality for questlines.
@@ -178,7 +180,7 @@ public class NPC : MonoBehaviour
         //Create an array of possible dialogues and then choose one at random.
         //Possible dialogues include the random ones, the current story position, or a deterministic quest dialogue.
         int storyTime = UnityEngine.Random.Range(0, 2);
-
+        anims = transform.GetComponentInChildren<Animator>();
         //data = (NPCData)Resources.Load("NPCs/" + dataToApply);
 
         //Initialise seralized dialogues
@@ -231,7 +233,7 @@ public class NPC : MonoBehaviour
     {
         if(neckBone)
         {
-            ////Rotate towards the player
+            //Rotate towards the player
             if (Vector3.Angle(transform.forward, player.transform.position - transform.position) < 60
                 && Vector3.Angle(transform.forward, player.transform.position - transform.position) > 0.01f)
             {
@@ -283,6 +285,16 @@ public class NPC : MonoBehaviour
     
     }
    
+
+    public virtual void PlayFidget()
+    {
+        if(anims != null)
+        {
+            int rand = UnityEngine.Random.Range(0, anims.parameterCount);
+
+            anims.SetTrigger(anims.parameters[rand].name); 
+        }
+    }
 
 
 }
