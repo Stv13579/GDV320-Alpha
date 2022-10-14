@@ -268,7 +268,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
     {
         base.ResetEnemy();
 
-        transform.localScale = this.transform.localScale * (generation * 2);
+        transform.localScale = new Vector3(0.6f, 0.6f, 0.6f); /*this.transform.localScale * (generation == 0 ? 0.5f : generation * 2);*/
         GetComponent<SphereCollider>().radius = 1.8f;
         deathTriggers.Add(Split);
         generation = 0;
