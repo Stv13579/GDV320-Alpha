@@ -91,8 +91,15 @@ public class WaterSlimeEnemy : BaseEnemyClass
     public override void Movement(Vector3 positionToMoveTo, float speed)
     {
         base.Movement(moveDirection);
+        if(Vector3.Distance(transform.position, player.transform.position) < 3)
+        {
+            return;
+        }
+
 
         RaycastHit hit;
+
+        
 
         ////If they can see the player, go for it, otherwise pathfind
         //Debug.DrawRay(transform.position + (Vector3.up * 10), Vector3.up /*player.transform.position - transform.position*/, Color.blue);
