@@ -63,40 +63,17 @@ public class WaterSlimeEnemy : BaseEnemyClass
                 audioManager.StopSFX("Slime Bounce");
                 audioManager.PlaySFX("Slime Bounce", player.transform, this.transform);
             }
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, 10, viewToPlayer) && spawner)
-            {
-                float distance = float.MaxValue;
-                Vector3 nearestNode = Vector3.zero;
-                foreach (Node node in spawner.GetComponent<SAIM>().aliveNodes)
-                {
-                    float newDistance = Vector3.SqrMagnitude(node.gameObject.transform.position - this.transform.position);
-                    if (newDistance < distance)
-                    {
-                        distance = newDistance;
-                        nearestNode = node.bestNextNodePos;
-                    }
-                }
-                transform.LookAt(nearestNode);
-                Quaternion rot = transform.rotation;
-                rot.eulerAngles = new Vector3(0, rot.eulerAngles.y + 135, 0);
-                transform.rotation = rot;
-                pos = moveDirection;
-            }
-            else
-            {
-                transform.LookAt(player.transform.position);
-                Quaternion rot = transform.rotation;
-                rot.eulerAngles = new Vector3(0, rot.eulerAngles.y + 135, 0);
-                transform.rotation = rot;
+            // slime is always looking at the player
+            transform.LookAt(player.transform.position);
+            Quaternion rot = transform.rotation;
+            rot.eulerAngles = new Vector3(0, rot.eulerAngles.y + 135, 0);
+            transform.rotation = rot;
 
-                pos = player.transform.position + posOffset;
-            }
-            pos = moveDirection;
-            Vector3 moveForce = (pos - this.transform.position).normalized * moveSpeed;
+            pos = moveDirection.normalized;
+            Vector3 moveForce = moveDirection.normalized * moveSpeed;
             moveForce += new Vector3(0, jumpForce, 0);
             GetComponent<Rigidbody>().AddForce(moveForce);
-            //jumpTimer = Random.Range(1.5f, 3.0f);
+            jumpTimer = Random.Range(1.5f, 3.0f);
         }
         else
         {
@@ -106,7 +83,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
             //    Vector3 move = dir * ((moveSpeed) / 50) * Time.deltaTime;
             //    this.transform.position += move;
             //}
-            Movement(positionToMoveTo, moveSpeed / groundMoveSpeed);
+            Movement(moveDirection, moveSpeed / groundMoveSpeed);
         }
         
     }
@@ -162,7 +139,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
 	    base.Update();
         
         //Movement(player.transform.position);
-        Movement(moveDirection, moveSpeed / groundMoveSpeed);
+        Movement(moveDirection);
         damageTicker -= Time.deltaTime;
 	    if(hurtTimer > 0)
 	    {
