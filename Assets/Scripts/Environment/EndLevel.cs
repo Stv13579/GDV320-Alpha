@@ -36,7 +36,11 @@ public class EndLevel : MonoBehaviour
         //Temporary scene system; consider upgrading to dynamically building scenes and refering to scenes by name with a dedicated scene manager/ level manager
         index = SceneManager.GetActiveScene().buildIndex;
 
-
+	    if(index == 1)
+	    {
+	    	player.GetComponent<PlayerClass>().SubtractMoney(player.GetComponent<PlayerClass>().GetMoney());
+	    }
+		
         index++;
 
         if (index > numberOfLevels)
