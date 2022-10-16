@@ -103,35 +103,38 @@ public class WaterSlimeEnemy : BaseEnemyClass
 
         ////If they can see the player, go for it, otherwise pathfind
         //Debug.DrawRay(transform.position + (Vector3.up * 10), Vector3.up /*player.transform.position - transform.position*/, Color.blue);
-        if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, Mathf.Infinity, viewToPlayer))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                Vector3 moveVec = (player.transform.position - transform.position).normalized * speed * Time.deltaTime;
-                moveVec.y = 0;
-                moveVec.y -= 1 * Time.deltaTime;
-                transform.position += moveVec;
-            }
-            else
-            {
-                Vector3 moveVec = moveDirection.normalized * speed * Time.deltaTime;
-                moveVec.y = 0;
-                moveVec.y -= 1 * Time.deltaTime;
-                transform.position += moveVec;
-            }
+        //if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, Mathf.Infinity, viewToPlayer))
+        //{
+        //    if (hit.collider.gameObject.tag == "Player")
+        //    {
+        //        Vector3 moveVec = (player.transform.position - transform.position).normalized * speed * Time.deltaTime;
+        //        moveVec.y = 0;
+        //        moveVec.y -= 1 * Time.deltaTime;
+        //        transform.position += moveVec;
+        //    }
+        //    else
+        //    {
+        //        Vector3 moveVec = moveDirection.normalized * speed * Time.deltaTime;
+        //        moveVec.y = 0;
+        //        moveVec.y -= 1 * Time.deltaTime;
+        //        transform.position += moveVec;
+        //    }
 
 
-        }
-        else
-        {
-            Vector3 moveVec = moveDirection.normalized * speed * Time.deltaTime;
-            moveVec.y = 0;
-            moveVec.y -= 1 * Time.deltaTime;
-            transform.position += moveVec;
-        }
+        //}
+        //else
+        //{
+        //    Vector3 moveVec = moveDirection.normalized * speed * Time.deltaTime;
+        //    moveVec.y = 0;
+        //    moveVec.y -= 1 * Time.deltaTime;
+        //    transform.position += moveVec;
+        //}
 
 
-        
+        Vector3 moveVec = moveDirection.normalized * speed * Time.deltaTime;
+        moveVec.y = 0;
+        moveVec.y -= 1 * Time.deltaTime;
+        transform.position += moveVec;
 
         // slime is always looking at the player
         transform.LookAt(player.transform.position);
