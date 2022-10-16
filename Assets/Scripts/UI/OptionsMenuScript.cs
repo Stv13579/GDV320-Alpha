@@ -32,6 +32,8 @@ public class OptionsMenuScript : MonoBehaviour
 	{
 		fov = Mathf.RoundToInt(fovSlider.value);
 		fovText.text = fov.ToString();
+		PlayerLook.GetPlayerLook().SetFOV(fov);
+		PlayerMovement.GetPlayerMovement().SetFOV(fov);
 	}
 	
 	// Update is called every frame, if the MonoBehaviour is enabled.

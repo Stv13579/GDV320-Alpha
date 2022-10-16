@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
     // FOV change
     [SerializeField]
-    float initialFOV = OptionsMenuScript.GetFOV();
+	static float initialFOV = OptionsMenuScript.GetFOV();
     float MaxFOVMoving;
     [SerializeField]
     float increaseFOV;
@@ -119,9 +119,14 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     float collisionForce = 0.5f;
-
-    bool ableToMove = true;
-    public void SetAbleToMove(bool tempAbleToMove) { ableToMove = tempAbleToMove; }
+	
+	bool ableToMove = true;
+    
+	static PlayerMovement playerMovement;
+    
+	public void SetAbleToMove(bool tempAbleToMove) { ableToMove = tempAbleToMove; }
+	public void SetFOV(int newFOV) {initialFOV = newFOV; MaxFOVMoving = initialFOV + increaseFOV;}
+	static public PlayerMovement GetPlayerMovement() {return playerMovement;}
 
     // Start is called before the first frame update
     void Start()
@@ -129,8 +134,13 @@ public class PlayerMovement : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         lookScript = this.gameObject.GetComponent<PlayerLook>();
         cController = this.gameObject.GetComponent<CharacterController>();
-        speed.baseValue = baseMaxMovementSpeed;
-        MaxFOVMoving = initialFOV + increaseFOV;
+	    speed.baseValue = baseMaxMovementSpeed;
+	    if(PlayerPrefs.HasKey("FOV"))
+	    {
+		    initialFOV = PlayerPrefs.GetInt("FOV");
+	    }
+	    MaxFOVMoving = initialFOV + increaseFOV;
+	    playerMovement = this;
     }
 
     // Update is called once per frame
