@@ -34,14 +34,17 @@ public class PlayerLook : MonoBehaviour
     Vector2 spinExtents = new Vector2(0.0f, 0.0f);
 
     [SerializeField] 
-    float sensitivity = 2.0f;
+	static float sensitivity = 2.0f;
 
     bool cursorLocked = false;
 
     bool ableToMove = true;
 
-    float rollNumber = 0.5f;
-
+	float rollNumber = 0.5f;
+	
+	static int fov = 90;
+	    
+	static PlayerLook playerLook;
     // getter and setters
     public Camera GetCamera() { return currentCamera; }
     public float GetSpin() { return spin; }
@@ -50,7 +53,9 @@ public class PlayerLook : MonoBehaviour
     public void SetSensitivity(float tempSensitivity) { sensitivity = tempSensitivity; }
     public void SetRoll(float normalizedRoll) { targetRoll = -normalizedRoll * maxRoll; }
     public void SetBumpTilt(float tempBumpTilt) { bumpTilt = tempBumpTilt; }
-    public void SetAbleToMove(bool tempAbleToMove) { ableToMove = tempAbleToMove; }
+	public void SetAbleToMove(bool tempAbleToMove) { ableToMove = tempAbleToMove; }
+	public void SetFOV(int newFOV) {currentCamera.fieldOfView = newFOV; fov = newFOV;}
+	static public PlayerLook GetPlayerLook() {return playerLook;}
 
     // function is called when script is loaded or values have change on inspector
     void OnValidate()
@@ -62,14 +67,22 @@ public class PlayerLook : MonoBehaviour
     // TO DO:
     void Start()
     {
-        ToggleCursor();
+	    ToggleCursor();
+	    playerLook = this;
+	    if(PlayerPrefs.HasKey("Sensitivity"))
+	    {
+		    sensitivity = PlayerPrefs.GetFloat("Sensitivity");
+	    }
+	    if(PlayerPrefs.HasKey("FOV"))
+	    {
+		    fov = PlayerPrefs.GetInt("FOV");
+		    currentCamera.fieldOfView = fov;
+	    }
     }
 
     // Update is called once per frame
     void Update()
 	{
-		currentCamera.fieldOfView = OptionsMenuScript.GetFOV();
-		sensitivity = OptionsMenuScript.GetSensitivity();
         if (ableToMove)
         {
             MoveCamera();
