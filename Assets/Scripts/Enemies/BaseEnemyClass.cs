@@ -110,7 +110,8 @@ public class BaseEnemyClass : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         oldPosition = new Vector3(-1000, -1000, -1000);
         enemyAnims = GetComponentInChildren<Animator>();
-        uiScript = FindObjectOfType<GameplayUI>();
+        //uiScript = FindObjectOfType<GameplayUI>();
+        uiScript = GameplayUI.self;
         health.baseValue = baseMaxHealth;
         damage.baseValue = baseDamageAmount;
         speed.baseValue = baseMoveSpeed;

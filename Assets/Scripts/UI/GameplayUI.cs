@@ -75,6 +75,8 @@ public class GameplayUI : MonoBehaviour
 	[SerializeField]
 	GameObject pauseButtons, optionsMenu;
 
+    public static GameplayUI self;
+
     public Image GetLifeStealFullScreen() { return lifeStealFullScreen; }
     public Image GetVoidFullScreen() { return voidFullScreen; }
     public Image GetBurnFullScreen() { return burnFullScreen; }
@@ -93,6 +95,7 @@ public class GameplayUI : MonoBehaviour
         playerClass = player.gameObject.GetComponent<PlayerClass>();
         audioManager = FindObjectOfType<AudioManager>();
         comboTimer = maxComboTimer;
+        self = this;
         DontDestroyOnLoad(gameObject);
         if (hitMarker)
         {
