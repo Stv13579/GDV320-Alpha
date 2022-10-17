@@ -60,7 +60,7 @@ public class NecroticElement : BaseElementClass
             {
                 if (targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 2.0f || targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 3.0f)
                 {
-                    playerClass.ChangeMana(-manaCost * targetedList.Count, manaTypes);
+                    playerClass.ChangeMana(-manaCost * (upgraded ? 1 : 0.5f) * targetedList.Count, manaTypes);
                     targetedList[i].GetComponentInParent<BaseEnemyClass>().SetWithered(true);
                     targetedList[i].GetComponentInParent<BaseEnemyClass>().SetDamageResistance(targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() * (upgraded ? 3.0f : 2.0f));
                 }

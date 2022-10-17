@@ -14,6 +14,7 @@ public class CurseElement : BaseElementClass
 
     GameObject targetToCurse;
 
+    List <GameObject> targetToCurseList;
     [SerializeField]
     GameObject curseVFX;
 
@@ -48,13 +49,17 @@ public class CurseElement : BaseElementClass
         targeting = false;
         //curse the target
         //Give it a death trigger
-	    if (targetToCurse && !targetToCurse.GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Contains(DeathEffect))
+        for (int i = 0; i < targetToCurseList.Count; i ++)
         {
-		    //Attach an effect to it
-		    targetToCurse.GetComponentInParent<BaseEnemyClass>().SetCursed();
-		    Instantiate(curseVFX, targetToCurse.transform.root);
-		    targetToCurse.GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Add(DeathEffect);
-            playerClass.ChangeMana(-manaCost, manaTypes);
+            if (targetToCurseList[i] && !targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Contains(DeathEffect))
+            {
+                //Attach an effect to it
+                targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().SetCursed(true);
+                Instantiate(curseVFX, targetToCurseList[i].transform.root);
+                targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Add(DeathEffect);
+                playerClass.ChangeMana(-manaCost, manaTypes);
+
+            }
         }
     }
     
@@ -83,7 +88,6 @@ public class CurseElement : BaseElementClass
             audioManager.StopSFX("Curse Explosion");
             audioManager.PlaySFX("Curse Explosion");
         }
-        Debug.Log("Explodded");
     }
 
     public override void LiftEffect()
@@ -100,31 +104,23 @@ public class CurseElement : BaseElementClass
         if(targeting)
         {
             RaycastHit rayHit;
-
             if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out rayHit, range, curseTargets))
             {
                 
-                if(targetToCurse == rayHit.collider.gameObject)
+                if(targetToCurseList.Contains(rayHit.collider.gameObject))
+                {
+
+                }
+                else if (rayHit.collider.gameObject.GetComponent<EnemyShield>())
                 {
 
                 }
                 else
                 {
-
-                    if (targetToCurse)
-                    {
-	                    targetToCurse.GetComponentInParent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
-                    }
-                    if(!rayHit.collider.gameObject.GetComponent<EnemyShield>())
-                    {
-                        targetToCurse = rayHit.collider.gameObject;
-	                    targetToCurse.GetComponentInParent<BaseEnemyClass>().Targetted(true, outlineColour);
-                    }
-
+                    targetToCurse = rayHit.collider.gameObject;
+	                targetToCurse.GetComponentInParent<BaseEnemyClass>().Targetted(true, outlineColour);
+                    targetToCurseList.Add(targetToCurse);
                 }
-                
-
-
             }
         }
         else
@@ -133,6 +129,13 @@ public class CurseElement : BaseElementClass
             {
 	            targetToCurse.GetComponentInParent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
             }
+        }
+        for(int i = 0; i < targetToCurseList.Count; i++)
+        if(targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetHealth() <= 0)
+        {
+           targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().SetCursed(false);
+           targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Remove(DeathEffect);
+           targetToCurseList.Remove(targetToCurseList[i]);
         }
     }
     protected override bool PayCosts(float modifier = 1)

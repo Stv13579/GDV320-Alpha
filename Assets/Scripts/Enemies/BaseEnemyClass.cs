@@ -540,9 +540,9 @@ public class BaseEnemyClass : MonoBehaviour
         baseDamageAmount += amount;
     }
     
-	public void SetCursed()
+	public void SetCursed(bool tempbool)
 	{
-		cursedVFX.SetActive(true);
+		cursedVFX.SetActive(tempbool);
 	}
 	
 	public void SetWithered(bool tempbool)
