@@ -6,7 +6,6 @@ public class RangedBossHomingProjectileScript : BaseEnemyClass //Sebastian
 {
     public override void Update()
     {
-        base.Update();
         //Move towards the player
         this.transform.LookAt(player.transform);
         this.transform.position += this.transform.forward * moveSpeed * Time.deltaTime;
