@@ -133,6 +133,7 @@ public class SAIM : MonoBehaviour
 
         foreach (Node node in aliveNodes)
         {
+            SetNeighbourNodes(node, false);
             SetNeighbourNodes(node, true);
         }
     }
@@ -897,9 +898,7 @@ public class SAIM : MonoBehaviour
 
             foreach (Node node in currentNode.neighbourNodes)
             {
-                //If the neighbour is a wall or other impassable terrain, straight up ignore it and move on
 
-                //Adjust for height here
                 if (node.cost == int.MaxValue )
                 {
                     continue;
@@ -963,7 +962,7 @@ public class SAIM : MonoBehaviour
 
             //Look at the node's neigbours to decide which to 'point' at.
             //This will be the node with the lowest bestCost.
-            foreach (Node currentNeigbourNode in currentNode.neighbourNodes)
+            foreach (Node currentNeigbourNode in currentNode.cornerNodes)
             {
                 if(currentNeigbourNode.bestCost < bestCost /*&& !CheckHeightDifference(currentNode, currentNeigbourNode) && !CollisonCull(currentNode, currentNeigbourNode)*/)
                 {
@@ -1009,8 +1008,15 @@ public class SAIM : MonoBehaviour
                         {
                             continue;
                         }
-
-                        nodeCentre.neighbourNodes.Add(nodeGrid[nodeCentre.gridIndex.x + i].nodeCol[nodeCentre.gridIndex.y + k]);
+                        if(isDiag)
+                        {
+                            nodeCentre.cornerNodes.Add(nodeGrid[nodeCentre.gridIndex.x + i].nodeCol[nodeCentre.gridIndex.y + k]);
+                        }
+                        else
+                        {
+                            nodeCentre.neighbourNodes.Add(nodeGrid[nodeCentre.gridIndex.x + i].nodeCol[nodeCentre.gridIndex.y + k]);
+                        }
+                        
                     }
                     
                 }
