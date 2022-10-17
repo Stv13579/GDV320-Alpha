@@ -23,8 +23,8 @@ RenderSettings:
   m_AmbientSkyColor: {r: 1.2392157, g: 1.3176471, b: 1.4980392, a: 1}
   m_AmbientEquatorColor: {r: 0.45490196, g: 0.5019608, b: 0.53333336, a: 1}
   m_AmbientGroundColor: {r: 0.09411765, g: 0.08627451, b: 0.07058824, a: 1}
-  m_AmbientIntensity: 5.23
-  m_AmbientMode: 1
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 85ca9a9af2386c44e94bd211a861471c, type: 2}
   m_HaloStrength: 0.5
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.33613607, g: 0.29118174, b: 0.46098307, a: 1}
+  m_IndirectSpecularColor: {r: 0.15655205, g: 0.2575641, b: 0.7170393, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -26963,6 +26963,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2342924018183944106, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3816411532900317090, guid: b3c8d9beac7f5f14aaa36cd4e751fb94,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -31263,13 +31268,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7331614171378444758, guid: 1e3a1c6b826ea1648b6ddaac1e06d28d,
         type: 3}
+      propertyPath: m_Color.b
+      value: 0.8392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 7331614171378444758, guid: 1e3a1c6b826ea1648b6ddaac1e06d28d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.95686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 7331614171378444758, guid: 1e3a1c6b826ea1648b6ddaac1e06d28d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7331614171378444758, guid: 1e3a1c6b826ea1648b6ddaac1e06d28d,
+        type: 3}
       propertyPath: m_Intensity
-      value: 1.5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7331614171378444758, guid: 1e3a1c6b826ea1648b6ddaac1e06d28d,
+        type: 3}
+      propertyPath: m_Shadows.m_Bias
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 7331614171378444758, guid: 1e3a1c6b826ea1648b6ddaac1e06d28d,
         type: 3}
       propertyPath: m_Shadows.m_Strength
-      value: 0.8
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7331614171378444758, guid: 1e3a1c6b826ea1648b6ddaac1e06d28d,
+        type: 3}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7331614171378444758, guid: 1e3a1c6b826ea1648b6ddaac1e06d28d,
+        type: 3}
+      propertyPath: m_Shadows.m_NormalBias
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7331614171378444759, guid: 1e3a1c6b826ea1648b6ddaac1e06d28d,
         type: 3}
