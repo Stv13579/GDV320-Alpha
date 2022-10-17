@@ -54,10 +54,11 @@ public class CurseElement : BaseElementClass
             if (targetToCurseList[i] && !targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Contains(DeathEffect))
             {
                 //Attach an effect to it
-                targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().SetCursed();
+                targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().SetCursed(true);
                 Instantiate(curseVFX, targetToCurseList[i].transform.root);
                 targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Add(DeathEffect);
                 playerClass.ChangeMana(-manaCost, manaTypes);
+
             }
         }
     }
@@ -87,7 +88,6 @@ public class CurseElement : BaseElementClass
             audioManager.StopSFX("Curse Explosion");
             audioManager.PlaySFX("Curse Explosion");
         }
-        Debug.Log("Explodded");
     }
 
     public override void LiftEffect()
@@ -133,8 +133,8 @@ public class CurseElement : BaseElementClass
         for(int i = 0; i < targetToCurseList.Count; i++)
         if(targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetHealth() <= 0)
         {
-           targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().SetWithered(false);
-           targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().SetDamageResistance(1);
+           targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().SetCursed(false);
+           targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Remove(DeathEffect);
            targetToCurseList.Remove(targetToCurseList[i]);
         }
     }
