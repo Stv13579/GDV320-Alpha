@@ -303,7 +303,11 @@ public class ShieldEnemyScript : BaseEnemyClass
     public void GuardBreak()
     {
         guardBroken = true;
-        enemyAnims.SetTrigger("Shield Broken");
+	    enemyAnims.SetTrigger("Shield Broken");
+	    foreach(Material mat in enemyMat)
+	    {
+	    	mat.SetFloat("IsStunned", 1);
+	    }
         guardTimer = brokenShieldTimer;
         SetShield(false);
     }
