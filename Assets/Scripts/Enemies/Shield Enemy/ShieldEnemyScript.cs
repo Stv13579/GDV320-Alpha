@@ -7,7 +7,6 @@ public class ShieldEnemyScript : BaseEnemyClass
     Vector3 movement;
     [SerializeField]
     float gravity;
-    GameObject nearestNode;
     public bool attacking = false;
     [SerializeField]
     GameObject shield;
@@ -45,7 +44,6 @@ public class ShieldEnemyScript : BaseEnemyClass
 	// Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
 	protected void Start()
 	{
-		StartCoroutine(FindNode());
         previousPosition = transform.position;
 	}
     public override void Update()
@@ -81,7 +79,7 @@ public class ShieldEnemyScript : BaseEnemyClass
             }
             else
             {
-                ShieldRotation(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
+                ShieldRotation(transform.position + moveDirection.normalized, moveSpeed);
                 //ShieldMovement(player.transform.position, moveSpeed);
             }
             //ShieldRotation(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
@@ -118,7 +116,7 @@ public class ShieldEnemyScript : BaseEnemyClass
             //    currentDelayFrames++;
             //}
 
-            Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
+            Movement(transform.position + moveDirection.normalized, moveSpeed);
         }
 
         AssessShielding();
@@ -241,24 +239,6 @@ public class ShieldEnemyScript : BaseEnemyClass
     public void EndAttack()
     {
         //Enable and disable necessary hitboxes
-    }
-
-    IEnumerator FindNode()
-    {
-        while(true)
-        {
-            float distance = float.MaxValue;
-            foreach(Node node in spawner.GetComponent<SAIM>().aliveNodes)
-            {
-                float newDistance = Vector3.Distance(node.gameObject.transform.position, this.gameObject.transform.position);
-                if (newDistance < distance)
-                {
-                    distance = newDistance;
-                    nearestNode = node.gameObject;
-                }
-            }
-            yield return new WaitForSeconds(1);
-        }
     }
 
     IEnumerator ShieldBash()
