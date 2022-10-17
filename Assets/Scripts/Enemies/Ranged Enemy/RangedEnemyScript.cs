@@ -115,14 +115,9 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
 		            	enemyAnims.SetBool("IsBurrow", true);
 		            	burrowing = true;
 		            	Instantiate(burrowVFX, this.transform.position - new Vector3(0, 0.3f, 0), Quaternion.identity);
+		            	destroyTimer = 0;
 	            	}
             	}
-
-                if (destroyTimer > 20)
-                {
-                    currentHealth = 0;
-                    Death();
-                }
             }
         }
     }
