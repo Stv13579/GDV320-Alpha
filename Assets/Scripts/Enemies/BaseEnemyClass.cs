@@ -90,7 +90,7 @@ public class BaseEnemyClass : MonoBehaviour
     public ParticleSystem healVFX, buffVFX;
 
 	[SerializeField]
-	List<Material> enemyMat = new List<Material>();
+	protected List<Material> enemyMat = new List<Material>();
 	
 	
 	[SerializeField]
