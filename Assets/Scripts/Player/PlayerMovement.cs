@@ -128,6 +128,24 @@ public class PlayerMovement : MonoBehaviour
 	public void SetFOV(int newFOV) {initialFOV = newFOV; MaxFOVMoving = initialFOV + increaseFOV;}
 	static public PlayerMovement GetPlayerMovement() {return playerMovement;}
 
+
+    [SerializeField]
+    float x;
+    [SerializeField]
+    float z;
+    bool inputs = true;
+
+    public bool GetInputs() { return inputs; }
+    public void SetInputs(bool tempInputs) { inputs = tempInputs; }
+
+    public float GetX() { return x; }
+    public float GetZ() { return z; }
+    public void SetX(float tempX) { x = tempX; }
+    public void SetZ(float tempZ) { z = tempZ; }
+    public CharacterController GetCharacterController() { return cController; }
+    public Vector3 GetVelocity() { return velocity; }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -172,10 +190,12 @@ public class PlayerMovement : MonoBehaviour
     // manages all of the player movement e.g. jumping, coyote time, sliding, friction, gravity
     void PlayerMoving()
     {
-        // reads players input 
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
-
+        if (inputs == true)
+        {
+            // reads players input 
+            z = Input.GetAxisRaw("Vertical");
+        }
+        x = Input.GetAxisRaw("Horizontal");
         // converting the players input into a vector 3 and timings it by the players look direction
         Vector3 inputMove = new Vector3(x, 0.0f, z);
         Vector3 realMove = Quaternion.Euler(0.0f, lookScript.GetSpin(), 0.0f) * inputMove;
@@ -217,7 +237,6 @@ public class PlayerMovement : MonoBehaviour
         velocity -= velocity.normalized * tempAirStraffMod * acceleration * frictionCurve.Evaluate(velocity.magnitude) * Time.deltaTime;
         // we give back the y velocity
         velocity.y = cacheY;
-
         Jumping();
 
         // gravity on the player
