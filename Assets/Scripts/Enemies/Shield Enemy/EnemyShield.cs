@@ -89,7 +89,10 @@ public class EnemyShield : BaseEnemyClass
 
     }
 
-
+	public override void Update()
+	{
+		
+	}
 
     public override void Death()
     {
