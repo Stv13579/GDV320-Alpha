@@ -5,10 +5,10 @@ using UnityEngine;
 public class EnergyElement : BaseElementClass
 {
     [SerializeField]
-    List<GameObject> containedEnemies = new List<GameObject>();
+    protected List<GameObject> containedEnemies = new List<GameObject>();
 
     [SerializeField]
-    GameObject energyShield;
+    protected GameObject energyShield;
 
     [SerializeField]
     // might change to this method depending if current way works
@@ -18,18 +18,33 @@ public class EnergyElement : BaseElementClass
         parrying,
         shieldDown
     }
+
     [SerializeField]
     shieldState shieldStateChange = shieldState.shieldDown;
 
     [SerializeField]
-    float timeToParry;
-    bool useShield = false;
+    protected float timeToParry;
+    protected bool useShield = false;
 
-    float materialChanger;
+    protected float materialChanger;
     [SerializeField]
-    float materialTimer = 2.0f;
-    bool beenHit;
+    protected float materialTimer = 2.0f;
+    protected bool beenHit;
+
+    [SerializeField]
+    protected float MovementSpeed;
+
+    [SerializeField]
+    protected float chargeTimer;
+
+    [SerializeField]
+    protected float currentTimer;
     public bool GetUseShield() { return useShield; }
+    public void SetBeenHit(bool tempBeenHit) { beenHit = tempBeenHit; }
+    public List<GameObject> GetContainedEnemies() { return containedEnemies; }
+    public GameObject GetEnergyShield() { return energyShield; }
+    public void SetMaterialChanger(float tempMaterial) { materialChanger = tempMaterial; }
+    public float GetMaterialChanger() { return materialChanger; }
     protected override void Start()
     {
         base.Start();
@@ -38,68 +53,90 @@ public class EnergyElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-        // states for the energy Shield
-            switch (shieldStateChange)
-            {
-            // if shield is not being used
-                case shieldState.shieldDown:
-                    {
-                    // checks if the player has pressed left click
-                        if (useShield == true)
-                        {
-                        // checks in the shield is upgrade
-                            if (upgraded == true)
-                            {
-                                shieldStateChange = shieldState.parrying;
-                            }
-                            else
-                            {
-                                shieldStateChange = shieldState.shieldUp;
-                            }
-                        }
-                    break;
-                    }
-                // for beta
-                // basically player will be able to parry in a certain time
-                case shieldState.parrying:
-                    {
-                        timeToParry += Time.deltaTime;
-                        if (timeToParry >= 0.25f)
-                        {
-                            shieldStateChange = shieldState.shieldUp;
-                            timeToParry = 0.0f;
-                            //parrycode;
-                            GetComponent<PlayerClass>().ChangeMana(50, manaTypes);
-                        }
-                    break;
-                    }
-                // if shields is up
-                // does all the checks if to deactivate shield and go back to down state
-                case shieldState.shieldUp:
-                    {
-                        HitShield();
+        if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("EnergyHold"))
+        {
+            LiftEffect();
+        }
+        HitShield();
+        //// states for the energy Shield
+        //    switch (shieldStateChange)
+        //    {
+        //    // if shield is not being used
+        //        case shieldState.shieldDown:
+        //            {
+        //            // checks if the player has pressed left click
+        //                if (useShield == true)
+        //                {
+        //                // checks in the shield is upgrade
+        //                    if (upgraded == true)
+        //                    {
+        //                        shieldStateChange = shieldState.parrying;
+        //                    }
+        //                    else
+        //                    {
+        //                        shieldStateChange = shieldState.shieldUp;
+        //                    }
+        //                }
+        //            break;
+        //            }
+        //        // for beta
+        //        // basically player will be able to parry in a certain time
+        //        case shieldState.parrying:
+        //            {
+        //                timeToParry += Time.deltaTime;
+        //                if (timeToParry >= 0.25f)
+        //                {
+        //                    shieldStateChange = shieldState.shieldUp;
+        //                    timeToParry = 0.0f;
+        //                    //parrycode;
+        //                    GetComponent<PlayerClass>().ChangeMana(50, manaTypes);
+        //                }
+        //            break;
+        //            }
+        //        // if shields is up
+        //        // does all the checks if to deactivate shield and go back to down state
+        //        case shieldState.shieldUp:
+        //            {
+        //                HitShield();
 
-                        if (!PayCosts(manaCost * Time.deltaTime) || !Input.GetKey(KeyCode.Mouse1))
-                        { 
-                            DeactivateEnergyShield();
-                            shieldStateChange = shieldState.shieldDown;
-                        }
-                        break;
-                    }
-            }
+        //                if (!PayCosts(manaCost * Time.deltaTime) || !Input.GetKey(KeyCode.Mouse1))
+        //                { 
+        //                    DeactivateEnergyShield();
+        //                    shieldStateChange = shieldState.shieldDown;
+        //                }
+        //                break;
+        //            }
+        //}
+    }
+    IEnumerator Charge()
+    {
+        currentTimer = 0;
+        while (currentTimer < chargeTimer)
+        {
+            this.GetComponent<PlayerMovement>().SetInputs(false);
+            this.GetComponent<PlayerMovement>().SetZ(1);
+            this.GetComponent<PlayerMovement>().GetCharacterController().Move(this.GetComponent<PlayerMovement>().GetVelocity() * MovementSpeed * Time.deltaTime);
+            this.GetComponent<PlayerLook>().SetSensitivity(0.5f);
+            currentTimer += Time.deltaTime;
+            yield return null;
+        }
+        this.GetComponent<PlayerMovement>().SetZ(0);
+        this.GetComponent<PlayerMovement>().SetInputs(true);
+        this.GetComponent<PlayerLook>().SetSensitivity(PlayerPrefs.GetFloat("Sensitivity"));
+        DeactivateEnergyShield();
     }
     void HitShield()
     {
-        if(beenHit)
+        if (beenHit)
         {
             materialTimer += Time.deltaTime;
         }
-        if(materialTimer >= 2.0f)
+        if (materialTimer >= 2.0f)
         {
             beenHit = false;
             materialChanger -= Time.deltaTime;
         }
-        if(materialChanger <= 0.0f)
+        if (materialChanger <= 0.0f)
         {
             materialChanger = 0.0f;
             materialTimer = 0.0f;
@@ -109,7 +146,7 @@ public class EnergyElement : BaseElementClass
     // function to deactivate shield
     void DeactivateEnergyShield()
     {
-        shieldStateChange = shieldState.shieldDown;
+        //shieldStateChange = shieldState.shieldDown;
         energyShield.SetActive(false);
         useShield = false;
         playerHand.SetTrigger("EnergyStopCast");
@@ -118,28 +155,31 @@ public class EnergyElement : BaseElementClass
         {
             audioManager.StopSFX(shootingSoundFX);
         }
-       // go through the list of enemies
-       // remove them from the list and 
-       for (int i = 0; i < containedEnemies.Count; i++)
-       {
-            if(containedEnemies[i])
+        // go through the list of enemies
+        // remove them from the list and 
+        for (int i = 0; i < containedEnemies.Count; i++)
+        {
+            if (containedEnemies[i])
             {
-	            BaseEnemyClass enemy = containedEnemies[i].gameObject.GetComponentInParent<BaseEnemyClass>();
+                BaseEnemyClass enemy = containedEnemies[i].gameObject.GetComponentInParent<BaseEnemyClass>();
                 StatModifier.RemoveModifier(enemy.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.0f, "Shield"));
+                StatModifier.UpdateValue(enemy.GetDamageStat());
             }
             containedEnemies.Remove(containedEnemies[i]);
-       }
-       activatedVFX.SetActive(false);
+        }
+        activatedVFX.SetActive(false);
     }
 
     public override void ElementEffect()
     {
         base.ElementEffect();
+        playerClass.ChangeMana(-manaCost * (upgraded ? 1 : 0.5f), manaTypes);
         energyShield.SetActive(true);
         useShield = true;
         activatedVFX.SetActive(true);
+        StartCoroutine(Charge());
     }
-    
+
     public override void ActivateVFX()
     {
         base.ActivateVFX();
@@ -149,6 +189,8 @@ public class EnergyElement : BaseElementClass
     {
         base.LiftEffect();
         DeactivateEnergyShield();
+        currentTimer = chargeTimer;
+        StopCoroutine(Charge());
     }
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
@@ -162,34 +204,5 @@ public class EnergyElement : BaseElementClass
         }
     }
 
-    // get this working first
-    private void OnTriggerEnter(Collider other)
-    {
-        if (useShield)
-        {
-	        if (other.gameObject.layer == 8  || other.GetComponentInParent<BaseEnemyClass>() || 
-                other.gameObject.tag == "Enemy")
-            {
-                if (!containedEnemies.Contains(other.gameObject))
-                {
-                    containedEnemies.Add(other.gameObject);
-                    BaseEnemyClass enemy = other.gameObject.GetComponentInParent<BaseEnemyClass>();
-                    StatModifier.AddModifier(enemy.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.0f, "Shield"));
-                }
-            }
-            if (other.gameObject.layer == 22 || other.GetComponent<BaseRangedProjectileScript>())
-            {
-                Destroy(other.gameObject);
-            }
-            if (other.gameObject.layer == 22 || other.GetComponent<BaseRangedProjectileScript>() ||
-                other.gameObject.layer == 8 || other.GetComponentInParent<BaseEnemyClass>() ||
-                 other.gameObject.tag == "Enemy")
-            {
-                materialChanger = 1.0f;
-                energyShield.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetFloat("_ShieldDamage", materialChanger);
-                beenHit = true;
-            }
-        }
-
-    }
+  
 }
