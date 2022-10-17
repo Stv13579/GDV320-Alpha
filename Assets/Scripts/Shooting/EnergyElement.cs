@@ -117,12 +117,14 @@ public class EnergyElement : BaseElementClass
             this.GetComponent<PlayerMovement>().SetZ(1);
             this.GetComponent<PlayerMovement>().GetCharacterController().Move(this.GetComponent<PlayerMovement>().GetVelocity() * MovementSpeed * Time.deltaTime);
             this.GetComponent<PlayerLook>().SetSensitivity(0.5f);
+            Physics.IgnoreLayerCollision(11, 8, true);
             currentTimer += Time.deltaTime;
             yield return null;
         }
         this.GetComponent<PlayerMovement>().SetZ(0);
         this.GetComponent<PlayerMovement>().SetInputs(true);
         this.GetComponent<PlayerLook>().SetSensitivity(PlayerPrefs.GetFloat("Sensitivity"));
+        Physics.IgnoreLayerCollision(11, 8, false);
         DeactivateEnergyShield();
     }
     void HitShield()

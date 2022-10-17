@@ -19,7 +19,7 @@ public class Shield : MonoBehaviour
                     BaseEnemyClass enemy = other.gameObject.GetComponentInParent<BaseEnemyClass>();
                     StatModifier.AddModifier(enemy.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.0f, "Shield"));
                     StatModifier.UpdateValue(enemy.GetDamageStat());
-                    StatModifier.StartAddModifierTemporary(enemy, enemy.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.0f, "Stunned"), 3.0f);
+                    StatModifier.StartAddModifierTemporary(enemy, enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.0f, "Stunned"), 3.0f);
                     energyElement.SetMaterialChanger(1.0f);
                     energyElement.GetEnergyShield().transform.GetChild(0).GetComponent<MeshRenderer>().material.SetFloat("_ShieldDamage", energyElement.GetMaterialChanger());
                     energyElement.SetBeenHit(true);
