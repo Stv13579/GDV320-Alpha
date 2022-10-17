@@ -29,7 +29,7 @@ public class CurseElement : BaseElementClass
 
     [SerializeField]
     Color outlineColour;
-
+    public List<GameObject> GetTargetToCurseList() { return targetToCurseList; }
     protected override void StartAnims(string animationName, string animationNameAlt = null)
     {
         base.StartAnims(animationName);
@@ -130,15 +130,15 @@ public class CurseElement : BaseElementClass
                 targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().Targetted(false, new Color(0, 0, 0));
             }
         }
-        for (int i = 0; i < targetToCurseList.Count; i++)
-        {
-            if (targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetHealth() <= 0)
-            {
-                targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().SetCursed(false);
-                targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Remove(DeathEffect);
-                targetToCurseList.Remove(targetToCurseList[i]);
-            }
-        }
+        //for (int i = 0; i < targetToCurseList.Count; i++)
+        //{
+        //    if (targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetHealth() <= 0)
+        //    {
+        //        targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().SetCursed(false);
+        //        targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Remove(DeathEffect);
+        //        targetToCurseList.Remove(targetToCurseList[i]);
+        //    }
+        //}
     }
     protected override bool PayCosts(float modifier = 1)
     {

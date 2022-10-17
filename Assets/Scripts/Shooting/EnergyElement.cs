@@ -175,7 +175,6 @@ public class EnergyElement : BaseElementClass
     public override void ElementEffect()
     {
         base.ElementEffect();
-        playerClass.ChangeMana(-manaCost * (upgraded ? 1 : 0.5f), manaTypes);
         energyShield.SetActive(true);
         useShield = true;
         activatedVFX.SetActive(true);
@@ -199,6 +198,7 @@ public class EnergyElement : BaseElementClass
         base.StartAnims(animationName);
         playerHand.ResetTrigger("EnergyStopCast");
         playerHand.SetTrigger(animationName);
+        playerClass.ChangeMana(-manaCost * (upgraded ? 1 : 0.5f), manaTypes);
         if (audioManager)
         {
             audioManager.PlaySFX(shootingSoundFX);
