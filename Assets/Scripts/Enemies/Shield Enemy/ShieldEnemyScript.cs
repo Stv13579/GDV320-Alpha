@@ -49,8 +49,9 @@ public class ShieldEnemyScript : BaseEnemyClass
     public override void Update()
     {
         base.Update();
+        AssessShielding();
 
-        if(guardBroken)
+        if (guardBroken)
         {
             guardTimer -= Time.deltaTime;
 
@@ -119,7 +120,7 @@ public class ShieldEnemyScript : BaseEnemyClass
             Movement(transform.position + moveDirection.normalized, moveSpeed);
         }
 
-        AssessShielding();
+        
 
         enemyAnims.SetFloat("MoveSpeed", (previousPosition - transform.position).magnitude);
         previousPosition = transform.position;
