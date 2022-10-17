@@ -42,7 +42,7 @@ public class PlayerClass : MonoBehaviour
     [SerializeField]
     ManaType[] manaTypes;
     [SerializeField]
-    float money;
+	static float money;
 
     //A list of items which are collectible objects which add extra effects to the player
     [SerializeField]
