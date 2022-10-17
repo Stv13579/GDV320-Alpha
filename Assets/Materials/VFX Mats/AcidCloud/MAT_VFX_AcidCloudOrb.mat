@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MAT_VFX_AcidCloudOrb
-  m_Shader: {fileID: 4800000, guid: 7c5ef5dc136d134418beb8273ca059a9, type: 3}
+  m_Shader: {fileID: 4800000, guid: 87e3470ccefc95d4fa17051204cb2a2d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -37,6 +37,38 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CatalystTexture_Slot_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CatalystTexture_Slot_2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CatalystTexture_Slot_3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CatalystTexture_Slot_4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ElementTexture_Slot_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ElementTexture_Slot_2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ElementTexture_Slot_3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ElementTexture_Slot_4:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -58,6 +90,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SoftEgdeMask_Texture:
+        m_Texture: {fileID: 2800000, guid: 9a7be70759d48ff48a8ef359791bfa99, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -86,15 +122,19 @@ Material:
     - _Bright_Step_Value: 0.1
     - _Brightest_Parts_Intense: 5
     - _BumpScale: 1
+    - _Catalyst_Spec_StepValue: 0.1
+    - _Catalyst_Specs_Intensity: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _DstBlend: 0
     - _EdgeFade: 1
+    - _Element_Spec_StepValue: 0.1
+    - _Element_Specs_Intensity: 1
     - _EnvironmentReflections: 1
-    - _Fres_Power_MaxNew: 0
-    - _Fres_Power_MinNew: 10
-    - _Fres_Scale_MaxNew: 5
-    - _Fres_Scale_MinNew: 3
+    - _Fres_Power_MaxNew: 1
+    - _Fres_Power_MinNew: 0.2
+    - _Fres_Scale_MaxNew: 1
+    - _Fres_Scale_MinNew: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -108,9 +148,32 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _Smoothstep_Fade: 0
+    - _SoftEdgeFade: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _ToggleCatalystCull: 1
+    - _ToggleCatalystFade: 0
+    - _ToggleCatalystFresColours_Base0_Secondary1: 0
+    - _ToggleCatalystTexColours_Base0_Secondary1: 0
+    - _ToggleElementCull: 0
+    - _ToggleElementFade: -0.5
+    - _ToggleElementFresColours_Base0_Secondary1: 0
+    - _ToggleElementTexColours_Base0_Secondary1: 0
+    - _ToggleOverallCull: 0
+    - _ToggleOverallFade: 0
+    - _Toggle_Catalyst_Noise_Mask: 1
+    - _Toggle_Cataylst_Spec_On0_Off1: 1
+    - _Toggle_Element_Noise_Mask: 1
+    - _Toggle_Element_Spec_On0_Off1: 1
+    - _Toggle_Flashing: 0
+    - _Toggle_UseCatalystTex_3__4: 0
+    - _Toggle_UseCatalystTexture_1_With_Noise_1: 0
+    - _Toggle_UseCatalystTexture_2_With_Noise_2: 0
+    - _Toggle_UseElementTex_3__4: 0
+    - _Toggle_UseElementTexture_1_With_Noise_1: 1
+    - _Toggle_UseElementTexture_2_With_Noise_2: 1
+    - _Toggle_UseVertexNoise_Catalyst0_Element1: 1
     - _TopColourCull: 1
     - _TopColourFade: 0
     - _VertOffset_Intensity: 0.01
@@ -123,12 +186,34 @@ Material:
     m_Colors:
     - _AcidColour: {r: 1.2772634, g: 2.9960785, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColour_Catalyst: {r: 0.96955436, g: 3.482202, b: 0, a: 0}
+    - _BaseColour_Element: {r: 6.8831816, g: 1.0501239, b: 0, a: 0}
     - _BaseFire_1_Panning: {r: 1, g: 0, b: 0, a: 0}
     - _BaseFire_2_Panning: {r: -1, g: 0, b: 0, a: 0}
+    - _CatalystNoise_Pan_Speed_Noise1XY_Noise2ZW: {r: 0, g: -0.5, b: 0, a: -0.7}
+    - _CatalystVoronoi_Speed1X_Speed2Y_Scale1Z_Scale2W: {r: 0, g: 0, b: 0, a: 0}
+    - _Catalyst_Base_Noise_1_Remap: {r: 0, g: 1, b: 0, a: 1}
+    - _Catalyst_Base_Noise_2_Remap: {r: 0, g: 1, b: 0, a: 1}
+    - _Catalyst_Base_Remap: {r: 0, g: 1, b: 0, a: 1}
+    - _Catalyst_Flash_Slot1X_Slot2Y_Slot3Z_Slot4W: {r: 0, g: 0, b: 0, a: 0}
+    - _Catalyst_Specs_Remap_MinOldX_MaxOldY_MinNewZ_MaxNewW: {r: 0, g: 1, b: 0, a: 1}
+    - _Cataylst_Tex_Pan_Slot1XY_Slot2ZW: {r: 0, g: 0, b: 0, a: 0}
+    - _Cataylst_Tex_Pan_Slot3XY_Slot4ZW: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ElementNoise_Pan_Speed_Noise1XY_Noise2ZW: {r: 0, g: 0, b: 0, a: 0}
+    - _ElementVoronoi_Speed1X_Speed2Y_Scale1Z_Scale2W: {r: 3, g: 3, b: 9.38, a: 8.76}
+    - _Element_Base_Noise_1_Remap: {r: 0, g: 1, b: 0, a: 1}
+    - _Element_Base_Noise_2_Remap: {r: 0, g: 1, b: 0, a: 1}
+    - _Element_Base_Remap: {r: 0, g: 1, b: 0, a: 0}
+    - _Element_Specs_Remap_MinOldX_MaxOldY_MinNewZ_MaxNewW: {r: 0, g: 1, b: 0, a: 1}
+    - _Element_Tex_Pan_Slot1_Slot2: {r: 1, g: 0, b: -0.1, a: 0}
+    - _Element_Tex_Pan_Slot3_Slot4: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FireColour: {r: 3.4415908, g: 0.7387708, b: 0, a: 0}
     - _Flame2Remap: {r: 0, g: 1, b: 0, a: 1.5}
     - _Fres_ScaleX_PowerY_Speeds: {r: 1, g: 1, b: 0, a: 0}
+    - _NoiseScales_E1X_E2Y_C1Z_C2W: {r: 1, g: 1, b: 10, a: 10}
     - _RemapNews: {r: -3.14, g: 1.95, b: 0, a: 0}
+    - _SecondaryColour_Catalyst: {r: 1, g: 0, b: 0.7082286, a: 0}
+    - _SecondaryColour_Element: {r: 1, g: 0.8760238, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
