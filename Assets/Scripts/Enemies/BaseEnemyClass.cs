@@ -377,8 +377,6 @@ public class BaseEnemyClass : MonoBehaviour
 
     virtual protected void ResetEnemy()
     {
-        
-
         foreach (var param in enemyAnims.parameters)
         {
             if (param.type == AnimatorControllerParameterType.Trigger)
@@ -405,7 +403,16 @@ public class BaseEnemyClass : MonoBehaviour
         targettingIndicator.SetActive(false);
         witheredVFX.SetActive(false);
         cursedVFX.SetActive(false);
-
+        List<GameObject> curseList = player.GetComponent<CurseElement>().GetTargetToCurseList();
+        for (int i = 0; i < curseList.Count; i++)
+        {
+            if (curseList[i].GetComponentInParent<BaseEnemyClass>().GetHealth() <= 0)
+            {
+                curseList[i].GetComponentInParent<BaseEnemyClass>().SetCursed(false);
+                curseList[i].GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Remove(player.GetComponent<CurseElement>().DeathEffect);
+                curseList.Remove(curseList[i]);
+            }
+        }
         maxHealth = StatModifier.UpdateValue(health);
 
         isDead = false;

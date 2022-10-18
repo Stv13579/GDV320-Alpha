@@ -117,12 +117,14 @@ public class EnergyElement : BaseElementClass
             this.GetComponent<PlayerMovement>().SetZ(1);
             this.GetComponent<PlayerMovement>().GetCharacterController().Move(this.GetComponent<PlayerMovement>().GetVelocity() * MovementSpeed * Time.deltaTime);
             this.GetComponent<PlayerLook>().SetSensitivity(0.5f);
+            Physics.IgnoreLayerCollision(11, 8, true);
             currentTimer += Time.deltaTime;
             yield return null;
         }
         this.GetComponent<PlayerMovement>().SetZ(0);
         this.GetComponent<PlayerMovement>().SetInputs(true);
         this.GetComponent<PlayerLook>().SetSensitivity(PlayerPrefs.GetFloat("Sensitivity"));
+        Physics.IgnoreLayerCollision(11, 8, false);
         DeactivateEnergyShield();
     }
     void HitShield()
@@ -173,7 +175,6 @@ public class EnergyElement : BaseElementClass
     public override void ElementEffect()
     {
         base.ElementEffect();
-        playerClass.ChangeMana(-manaCost * (upgraded ? 1 : 0.5f), manaTypes);
         energyShield.SetActive(true);
         useShield = true;
         activatedVFX.SetActive(true);
@@ -197,6 +198,7 @@ public class EnergyElement : BaseElementClass
         base.StartAnims(animationName);
         playerHand.ResetTrigger("EnergyStopCast");
         playerHand.SetTrigger(animationName);
+        playerClass.ChangeMana(-manaCost * (upgraded ? 1 : 0.5f), manaTypes);
         if (audioManager)
         {
             audioManager.PlaySFX(shootingSoundFX);
