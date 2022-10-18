@@ -259,7 +259,10 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
     protected override void ResetEnemy()
     {
         base.ResetEnemy();
-        burrowing = false;
+	    burrowing = false;
+	    enemyAnims.SetBool("IsBurrow", false);
+	    enemyAnims.ResetTrigger("Burrow");
+	    StopAllCoroutines();
         timer = attackTime;
     }
 }

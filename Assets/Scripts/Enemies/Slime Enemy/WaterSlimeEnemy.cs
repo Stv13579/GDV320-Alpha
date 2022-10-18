@@ -71,8 +71,9 @@ public class WaterSlimeEnemy : BaseEnemyClass
 
             pos = moveDirection.normalized;
             Vector3 moveForce = moveDirection.normalized * moveSpeed;
-            moveForce += new Vector3(0, jumpForce, 0);
-            GetComponent<Rigidbody>().AddForce(moveForce);
+	        moveForce += new Vector3(0, jumpForce, jumpForce / 2);
+	        GetComponent<Rigidbody>().AddForce(moveForce);
+	        StartCoroutine(JumpCollision());
             jumpTimer = Random.Range(1.5f, 3.0f);
         }
         else
@@ -262,9 +263,20 @@ public class WaterSlimeEnemy : BaseEnemyClass
         base.ResetEnemy();
 
         transform.localScale = new Vector3(0.6f, 0.6f, 0.6f); /*this.transform.localScale * (generation == 0 ? 0.5f : generation * 2);*/
-        GetComponent<SphereCollider>().radius = 1.8f;
+	    GetComponent<SphereCollider>().radius = 1.8f;
+	    StopAllCoroutines();
+	    GetComponent<SphereCollider>().enabled = true;
         deathTriggers.Add(Split);
         generation = 0;
     }
+    
+	IEnumerator JumpCollision()
+	{
+		GetComponent<SphereCollider>().enabled = false;
+		yield return new WaitForSeconds(0.1f);
+		GetComponent<SphereCollider>().enabled = true;
+		StopCoroutine(JumpCollision());
+
+	}
 
 }
