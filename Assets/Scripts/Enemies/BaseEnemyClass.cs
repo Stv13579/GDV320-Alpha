@@ -377,8 +377,6 @@ public class BaseEnemyClass : MonoBehaviour
 
     virtual protected void ResetEnemy()
     {
-        
-
         foreach (var param in enemyAnims.parameters)
         {
             if (param.type == AnimatorControllerParameterType.Trigger)
@@ -395,6 +393,11 @@ public class BaseEnemyClass : MonoBehaviour
         foreach (Transform spawns in deathSpawn.transform)
         {
             spawns.GetComponent<ParticleSystem>().Clear();
+
+            foreach (Transform spawnies in spawns)
+            {
+                spawnies.GetComponent<ParticleSystem>().Clear();
+            }
         }
 
         //Reset stat modifiers

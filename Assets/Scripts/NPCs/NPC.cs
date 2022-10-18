@@ -286,15 +286,34 @@ public class NPC : MonoBehaviour
     }
    
 
-    public virtual void PlayFidget()
+    public virtual void PlayRandomFidget()
     {
+        //Choose a random fidget based on the first three parameters in the controller
+
         if(anims != null)
         {
-            int rand = UnityEngine.Random.Range(0, anims.parameterCount);
+            int rand = UnityEngine.Random.Range(0, 3);
+
+            if(rand == 2)
+            {
+                return;
+            }
 
             anims.SetTrigger(anims.parameters[rand].name); 
         }
     }
+
+    public virtual void PlayInteractFidget()
+    {
+        //Choose a random fidget based on the first three parameters in the controller
+
+        if (anims != null)
+        {
+           
+            anims.SetTrigger("Interact");
+        }
+    }
+
 
 
 }

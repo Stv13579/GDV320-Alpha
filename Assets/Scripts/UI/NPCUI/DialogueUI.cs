@@ -54,17 +54,17 @@ public class DialogueUI : NPCUI
             
         }
 
-        if(oldPlace != place)
-        {
-            NPC.npc.PlayFidget();
-        }
 
-        oldPlace = place;
+        
 
     }
 
     public void MoveDialogueAlong()
     {
+        if(place == 0)
+        {
+            NPC.npc.PlayInteractFidget();
+        }
         place++;
 
     }

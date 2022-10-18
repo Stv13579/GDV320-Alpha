@@ -511,7 +511,11 @@ public class SAIM : MonoBehaviour
             {
                 audioManager.SetCurrentStateToFadeOutAudio1();
             }
-	        Destroy(this);
+            if(!bossSaim)
+            {
+                Destroy(this);
+            }
+	            
         }
     }
 

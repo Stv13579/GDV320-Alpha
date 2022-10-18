@@ -95,28 +95,6 @@ public class ShieldEnemyScript : BaseEnemyClass
         else
         {
 
-            //if (!Physics.Raycast(transform.position, player.transform.position - transform.position, out hitInfo, Vector3.Distance(this.transform.position, player.transform.position), checkToSee))
-            //{
-
-
-            //    Movement(player.transform.position, moveSpeed);
-            //}
-            //else
-            //{
-            //    Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
-            //}
-
-            //if (currentDelayFrames > moveDelayFrames)
-            //{
-            //    Movement(nearestNode.GetComponent<Node>().bestNextNodePos, moveSpeed);
-            //    timeSinceLastMove = 0;
-            //}
-            //else
-            //{
-            //    timeSinceLastMove += Time.deltaTime;
-            //    currentDelayFrames++;
-            //}
-
             Movement(transform.position + moveDirection.normalized, moveSpeed);
         }
 
@@ -208,7 +186,7 @@ public class ShieldEnemyScript : BaseEnemyClass
 
         //rotate towards the disired vector/angle in that direction, modified by a scalar
 
-        transform.Rotate(Vector3.up, dir * Time.deltaTime * rotationSpeed * 0.1f);
+        transform.Rotate(Vector3.up, dir * Time.deltaTime * rotationSpeed * 0.3f);
 
         //if (Vector3.Angle(transform.forward, positionToMoveTo - transform.position) < 10 && Vector3.Angle(transform.forward, positionToMoveTo - transform.position) > -10)
         //{
@@ -291,6 +269,14 @@ public class ShieldEnemyScript : BaseEnemyClass
 	    }
         guardTimer = brokenShieldTimer;
         SetShield(false);
+    }
+
+    protected override void ResetEnemy()
+    {
+        base.ResetEnemy();
+
+        SetShield(false);
+        guardBroken = false;
     }
 
 }
