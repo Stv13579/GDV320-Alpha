@@ -7,7 +7,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
     [Header("Boss attacks")]
     float timer = 5.0f;
     [SerializeField]
-    GameObject sporeCloud;
+	List<GameObject> sporeClouds;
 
     [SerializeField]
     GameObject bossHealthbar;
@@ -99,14 +99,13 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
     public void SpawnSporeCloud()
     {
 	    bool sporing = true;
-	    Debug.Log("Sporing");
         while(sporing)
         {
             int randNodeInt = Random.Range(0, spawner.GetComponent<SAIM>().aliveNodes.Count);
             GameObject randNode = spawner.GetComponent<SAIM>().aliveNodes[randNodeInt].gameObject;
             if(Vector3.Distance(randNode.transform.position, player.transform.position) < 20)
             {
-	            Instantiate(sporeCloud, randNode.transform.position, Quaternion.identity);
+	            Instantiate(sporeClouds[Random.Range(0, sporeClouds.Count)], randNode.transform.position, Quaternion.identity);
 	            sporing = false;
             }
         }
