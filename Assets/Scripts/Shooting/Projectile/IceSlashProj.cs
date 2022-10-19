@@ -44,5 +44,9 @@ public class IceSlashProj : BaseElementSpawnClass
         {
 		    other.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
         }
+	    if(other.gameObject.GetComponent<SporeCloudScript>())
+	    {
+		    other.gameObject.GetComponent<SporeCloudScript>().TakeDamage(damage, attackTypes);
+	    }
     }
 }
