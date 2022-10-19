@@ -127,15 +127,16 @@ public class AudioManager : MonoBehaviour
     }
     private void Update()
     {
-        foreach(Sound j in Musics)
+        foreach (Sound j in Musics)
         {
             j.SetAudioSourceAudioVolume(OptionsMenuScript.GetMusicVolume() / 100.0f);
         }
-        foreach(Sound i in sounds)
+        foreach (Sound i in sounds)
         {
             i.SetAudioSourceAudioVolume(OptionsMenuScript.GetSoundVolume() / 100.0f);
         }
     }
+
     public void PlaySFX(string soundName, Transform playerPos = null, Transform enemyPos = null) // play sound 
     {
         Sound s = Array.Find(sounds, item => item.GetAudioName() == soundName);

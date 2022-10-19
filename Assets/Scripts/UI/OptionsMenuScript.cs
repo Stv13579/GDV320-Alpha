@@ -12,7 +12,7 @@ public class OptionsMenuScript : MonoBehaviour
 	static float musicVolume = 100.0f;
 
 	[SerializeField]
-	TextMeshProUGUI volumeText, mouseText, fovText;
+	TextMeshProUGUI soundVolumeText, MusicVolumeText, mouseText, fovText;
 	
 	[SerializeField]
 	Slider soundVolumeSlider, musicVolumeSlider, mouseSlider, fovSlider;
@@ -20,12 +20,12 @@ public class OptionsMenuScript : MonoBehaviour
 	public void UpdateSoundVolume()
 	{
 		soundVolume = Mathf.RoundToInt(soundVolumeSlider.value);
-		volumeText.text = soundVolume.ToString();
+		soundVolumeText.text = soundVolume.ToString();
 	}
 	public void UpdateMusicVolume()
     {
-		soundVolume = Mathf.RoundToInt(musicVolumeSlider.value);
-		volumeText.text = soundVolume.ToString();
+		musicVolume = Mathf.RoundToInt(musicVolumeSlider.value);
+		MusicVolumeText.text = musicVolume.ToString();
 	}
 	public void UpdateSensitivity()
 	{
@@ -40,17 +40,8 @@ public class OptionsMenuScript : MonoBehaviour
 		PlayerLook.GetPlayerLook().SetFOV(fov);
 		PlayerMovement.GetPlayerMovement().SetFOV(fov);
 	}
-	
-	// Update is called every frame, if the MonoBehaviour is enabled.
-	protected void Update()
-	{
-		UpdateSoundVolume();
-		UpdateMusicVolume();
-		UpdateSensitivity();
-		UpdateFOV();
-	}
-	
-	public static float GetSoundVolume()
+
+    public static float GetSoundVolume()
 	{
 		return soundVolume;
 	}
@@ -70,8 +61,8 @@ public class OptionsMenuScript : MonoBehaviour
 	
 	public void SaveSettings()
 	{
-		PlayerPrefs.SetFloat("Volume", soundVolume);
-		PlayerPrefs.SetFloat("Volume", musicVolume);
+		PlayerPrefs.SetFloat("SoundVolume", soundVolume);
+		PlayerPrefs.SetFloat("MusicVolume", musicVolume);
 		PlayerPrefs.SetFloat("Sensitivity", mouseSensitivity);
 		PlayerPrefs.SetInt("FOV", fov);
 		PlayerPrefs.Save();
@@ -79,13 +70,13 @@ public class OptionsMenuScript : MonoBehaviour
 	
 	public void LoadSettings()
 	{
-		if(PlayerPrefs.HasKey("Volume"))
+		if(PlayerPrefs.HasKey("SoundVolume"))
 		{
-			soundVolume = PlayerPrefs.GetInt("Volume");
+			soundVolume = PlayerPrefs.GetFloat("SoundVolume");
 		}
-		if (PlayerPrefs.HasKey("Volume"))
+		if (PlayerPrefs.HasKey("MusicVolume"))
 		{
-			musicVolume = PlayerPrefs.GetInt("Volume");
+			musicVolume = PlayerPrefs.GetFloat("MusicVolume");
 		}
 		if (PlayerPrefs.HasKey("Sensitivity"))
 		{
