@@ -6,22 +6,27 @@ using UnityEngine.UI;
 
 public class OptionsMenuScript : MonoBehaviour
 {
-	static int volume = 100;
+	static float soundVolume = 100.0f;
 	static float mouseSensitivity = 2;
 	static int fov = 90;
-	
+	static float musicVolume = 100.0f;
+
 	[SerializeField]
 	TextMeshProUGUI volumeText, mouseText, fovText;
 	
 	[SerializeField]
-	Slider volumeSlider, mouseSlider, fovSlider;
+	Slider soundVolumeSlider, musicVolumeSlider, mouseSlider, fovSlider;
 	
-	public void UpdateVolume()
+	public void UpdateSoundVolume()
 	{
-		volume = Mathf.RoundToInt(volumeSlider.value);
-		volumeText.text = volume.ToString();
+		soundVolume = Mathf.RoundToInt(soundVolumeSlider.value);
+		volumeText.text = soundVolume.ToString();
 	}
-	
+	public void UpdateMusicVolume()
+    {
+		soundVolume = Mathf.RoundToInt(musicVolumeSlider.value);
+		volumeText.text = soundVolume.ToString();
+	}
 	public void UpdateSensitivity()
 	{
 		mouseSensitivity = mouseSlider.value;
@@ -39,16 +44,20 @@ public class OptionsMenuScript : MonoBehaviour
 	// Update is called every frame, if the MonoBehaviour is enabled.
 	protected void Update()
 	{
-		UpdateVolume();
+		UpdateSoundVolume();
+		UpdateMusicVolume();
 		UpdateSensitivity();
 		UpdateFOV();
 	}
 	
-	public static int GetVolume()
+	public static float GetSoundVolume()
 	{
-		return volume;
+		return soundVolume;
 	}
-	
+	public static float GetMusicVolume()
+    {
+		return musicVolume;
+    }
 	public static float GetSensitivity()
 	{
 		return mouseSensitivity;
@@ -61,7 +70,8 @@ public class OptionsMenuScript : MonoBehaviour
 	
 	public void SaveSettings()
 	{
-		PlayerPrefs.SetInt("Volume", volume);
+		PlayerPrefs.SetFloat("Volume", soundVolume);
+		PlayerPrefs.SetFloat("Volume", musicVolume);
 		PlayerPrefs.SetFloat("Sensitivity", mouseSensitivity);
 		PlayerPrefs.SetInt("FOV", fov);
 		PlayerPrefs.Save();
@@ -71,9 +81,13 @@ public class OptionsMenuScript : MonoBehaviour
 	{
 		if(PlayerPrefs.HasKey("Volume"))
 		{
-			volume = PlayerPrefs.GetInt("Volume");
+			soundVolume = PlayerPrefs.GetInt("Volume");
 		}
-		if(PlayerPrefs.HasKey("Sensitivity"))
+		if (PlayerPrefs.HasKey("Volume"))
+		{
+			musicVolume = PlayerPrefs.GetInt("Volume");
+		}
+		if (PlayerPrefs.HasKey("Sensitivity"))
 		{
 			mouseSensitivity = PlayerPrefs.GetFloat("Sensitivity");
 		}
@@ -82,7 +96,8 @@ public class OptionsMenuScript : MonoBehaviour
 			fov = PlayerPrefs.GetInt("FOV");
 		}
 		
-		volumeSlider.value = volume;
+		soundVolumeSlider.value = soundVolume;
+		musicVolumeSlider.value = musicVolume;
 		mouseSlider.value = mouseSensitivity;
 		fovSlider.value = fov;
 	}
