@@ -20,6 +20,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 	float contactTimer = 0.0f;
 	CharacterController controller;
 	Rigidbody rb;
+	float damageTimer = 0.0f;
 
     public override void Awake()
     {
@@ -62,7 +63,17 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
                 Movement(bestNodePos, moveSpeed);
             }
         }
+	    damageTimer -= Time.deltaTime;
     }
+    
+	public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
+	{
+		if(damageTimer <= 0)
+		{
+			base.TakeDamage(damageToTake, attackTypes, extraSpawnScale, applyTriggers);
+		}
+		damageTimer = 0.2f;
+	}
 
     public override void Movement(Vector3 positionToMoveTo, float speed)
     {

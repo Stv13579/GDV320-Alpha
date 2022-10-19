@@ -58,7 +58,6 @@ public class WaterProjectile : BaseElementSpawnClass
 
     void OnCollisionEnter(Collision collision)
 	{
-		Debug.Log(collision.collider.gameObject.name);
         if (bounceLayers == (bounceLayers | (1 << collision.collider.gameObject.layer)))
         {
             this.transform.forward = Vector3.Reflect(this.transform.forward, collision.contacts[0].normal);
