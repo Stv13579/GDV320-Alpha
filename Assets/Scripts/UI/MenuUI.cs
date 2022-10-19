@@ -10,7 +10,6 @@ public class MenuUI : NPCUI
     {
         transform.Find("Offerings").GetComponentInChildren<TextMeshProUGUI>().text = NPC.npc.offeringType;
         transform.Find("Talk").GetComponentInChildren<TextMeshProUGUI>().text = "Talk";
-
     }
 
     public void MenuButton(bool isTalk)

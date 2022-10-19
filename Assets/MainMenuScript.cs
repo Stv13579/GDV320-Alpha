@@ -6,7 +6,12 @@ public class MainMenuScript : MonoBehaviour
 {
 	[SerializeField]
 	GameObject options, mainMenu;
-	public void OpenOptions()
+
+    private void Start()
+    {
+		options.GetComponent<OptionsMenuScript>().LoadSettings();
+    }
+    public void OpenOptions()
 	{
 		mainMenu.SetActive(false);
 		options.SetActive(true);
