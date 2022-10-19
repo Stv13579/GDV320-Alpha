@@ -77,7 +77,7 @@ public class LandMineProj : MonoBehaviour
         // if the other object is an enemy
         if (other.gameObject.layer == 8 && other.GetComponent<BaseEnemyClass>() || other.tag == "Enemy")
         {
-            Collider[] objectsHitByExplosion = Physics.OverlapSphere(this.transform.position, explosiveRadius);
+	        Collider[] objectsHitByExplosion = Physics.OverlapSphere(this.transform.position, explosiveRadius, enemyDetect, QueryTriggerInteraction.Collide);
             for(int i = 0; i < objectsHitByExplosion.Length; i++)
             {
                 if (objectsHitByExplosion[i].gameObject.layer == 8 && 

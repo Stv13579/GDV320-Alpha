@@ -15,18 +15,18 @@ public class SporeCloudScript : BaseEnemyClass
     }
     public override void Update()
     {
-        base.Update();
         contactTimer -= Time.deltaTime;
     }
 
     public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
-    {
-	    if(attackTypes.Contains(resistances[0]) && !onFire)
+	{
+		Debug.Log(attackTypes[0]);
+	    if(attackTypes.Contains(weaknesses[0]) && !onFire)
         {
             StartCoroutine(StartFire());
         }
     }
-
+	
 
     IEnumerator StartFire()
     {
