@@ -114,11 +114,13 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
         while(sporing)
         {
             int randNodeInt = Random.Range(0, spawner.GetComponent<SAIM>().aliveNodes.Count);
-            GameObject randNode = spawner.GetComponent<SAIM>().aliveNodes[randNodeInt].gameObject;
-            if(Vector3.Distance(randNode.transform.position, player.transform.position) < 20)
+	        GameObject randNode = spawner.GetComponent<SAIM>().aliveNodes[randNodeInt].gameObject;
+	        int softlockCheck = 0;
+	        if(Vector3.Distance(randNode.transform.position, player.transform.position) < 20 || softlockCheck >= 100)
             {
 	            spawnedSporeClouds.Add(Instantiate(sporeClouds[Random.Range(0, sporeClouds.Count)], randNode.transform.position, Quaternion.identity));
 	            sporing = false;
+	            softlockCheck++;
             }
         }
         attacking = false;
