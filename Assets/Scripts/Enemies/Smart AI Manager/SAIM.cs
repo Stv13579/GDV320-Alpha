@@ -120,7 +120,8 @@ public class SAIM : MonoBehaviour
 
     TextMeshProUGUI enemyCounter;
 
-    EnemyObjectPool ePool;
+	EnemyObjectPool ePool;
+    
 
     void Awake()
     {
