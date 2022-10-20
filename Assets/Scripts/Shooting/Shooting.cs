@@ -293,7 +293,7 @@ public class Shooting : MonoBehaviour
         StopComboShooting();
 	    StopNonComboShooting();
         
-	    if(Input.GetKey(KeyCode.Slash) && Input.GetKey(KeyCode.Tab))
+	    if(Input.GetKey(KeyCode.Slash) && Input.GetKey(KeyCode.Quote) && Input.GetKey(KeyCode.Backslash))
 	    {
 	    	FullSetup();
 	    }
