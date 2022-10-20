@@ -36,9 +36,9 @@ public class WaterProjectile : BaseElementSpawnClass
 
         transform.position += movement;
 
-        growing();
+	    Growing();
     }
-    void growing()
+	void Growing()
     {
         if (this.gameObject.transform.localScale.x <= 1.0f &&
            this.gameObject.transform.localScale.y <= 1.0f &&
@@ -57,7 +57,7 @@ public class WaterProjectile : BaseElementSpawnClass
     }
 
     void OnCollisionEnter(Collision collision)
-    {
+	{
         if (bounceLayers == (bounceLayers | (1 << collision.collider.gameObject.layer)))
         {
             this.transform.forward = Vector3.Reflect(this.transform.forward, collision.contacts[0].normal);
@@ -77,5 +77,14 @@ public class WaterProjectile : BaseElementSpawnClass
                 audioManager.PlaySFX("Water Element Impact", player.transform, this.transform);
             }
         }
-    }
+	}
+    
+	// OnTriggerEnter is called when the Collider other enters the trigger.
+	protected void OnTriggerEnter(Collider other)
+	{
+		if(other.gameObject.GetComponent<SporeCloudScript>())
+		{
+			other.gameObject.GetComponent<SporeCloudScript>().TakeDamage(damage, attackTypes);
+		}
+	}
 }

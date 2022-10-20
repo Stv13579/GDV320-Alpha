@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7632432453813696997}
   - component: {fileID: 7632432453813696926}
   m_Layer: 8
-  m_Name: Spore Cloud
+  m_Name: Crystal Spore Cloud
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,15 +111,15 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 0
   baseMaxHealth: 0
-  damageAmount: 0
-  baseDamageAmount: 5
+  damageAmount: 7
+  baseDamageAmount: 7
   groundMoveSpeed: 0
   moveSpeed: 0
   baseMoveSpeed: 0
   rotationSpeed: 0
   damageResistance: 1
   drops: {fileID: 0}
-  weaknesses: 
+  weaknesses: 00000000
   resistances: 
   deathSpawn: {fileID: 0}
   hitSpawn: {fileID: 0}
@@ -128,6 +128,8 @@ MonoBehaviour:
   takeDamageAudio: 
   idleAudio: 
   targettingIndicator: {fileID: 0}
+  witheredVFX: {fileID: 0}
+  cursedVFX: {fileID: 0}
   healVFX: {fileID: 0}
   buffVFX: {fileID: 0}
   enemyMat: []
@@ -200,7 +202,7 @@ PrefabInstance:
     - target: {fileID: 2326376240464995422, guid: 20c61d8615d5ac74dadbea45f9e8b9ac,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.257
       objectReference: {fileID: 0}
     - target: {fileID: 2326376240464995422, guid: 20c61d8615d5ac74dadbea45f9e8b9ac,
         type: 3}

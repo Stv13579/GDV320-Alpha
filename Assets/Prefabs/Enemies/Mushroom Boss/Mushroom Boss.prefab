@@ -14541,10 +14541,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 3.61
-  m_Height: 12.28
+  m_Radius: 1.8401965
+  m_Height: 12.279998
   m_Direction: 2
-  m_Center: {x: 0, y: 3.26, z: 0}
+  m_Center: {x: -0, y: 1.5162578, z: 0}
 --- !u!65 &8495386192576334345
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14569,9 +14569,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 4.47
-  m_Height: 13
+  m_Height: 12.922665
   m_Direction: 1
-  m_Center: {x: 0, y: 5.95, z: 0}
+  m_Center: {x: -0, y: 6.138664, z: 0}
 --- !u!95 &4048550947370527652
 Animator:
   serializedVersion: 3
@@ -14657,11 +14657,8 @@ GameObject:
   - component: {fileID: 1768930533829934412}
   - component: {fileID: 1768930533829934411}
   - component: {fileID: 1768930533829934410}
-  - component: {fileID: 1768930533829934409}
   - component: {fileID: 2415644416445313288}
   - component: {fileID: -6729614984893795230}
-  - component: {fileID: 1965668114}
-  - component: {fileID: 1965668115}
   m_Layer: 8
   m_Name: Mushroom Boss
   m_TagString: Enemy
@@ -14735,20 +14732,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &1768930533829934409
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768930533829934408}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 4.47
-  m_Height: 13
-  m_Direction: 1
-  m_Center: {x: 0, y: 6.66, z: 0.77}
 --- !u!114 &2415644416445313288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14762,13 +14745,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 10
-  maxHealth: 500
-  baseMaxHealth: 500
+  maxHealth: 2500
+  baseMaxHealth: 2500
   damageAmount: 0
   baseDamageAmount: 1
   groundMoveSpeed: 0
   moveSpeed: 1
-  baseMoveSpeed: 1
+  baseMoveSpeed: 5
   rotationSpeed: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
@@ -14788,8 +14771,10 @@ MonoBehaviour:
   enemyMat: []
   maxDistance: 500
   maxDamageTimer: 3000
-  sporeCloud: {fileID: 7632432453813696996, guid: 0b3f2444467e3424c9a1a0e6babb7ecc,
-    type: 3}
+  sporeClouds:
+  - {fileID: 7632432453813696996, guid: 0b3f2444467e3424c9a1a0e6babb7ecc, type: 3}
+  - {fileID: 7979274800954779156, guid: faf8643f6956b3843b49ce48188df128, type: 3}
+  - {fileID: 3366026631033839018, guid: 6d192a2457a49a142a75abb0323eb69a, type: 3}
   bossHealthbar: {fileID: 6299793086757786782, guid: 9f18c4d05787113469db983280c132c5,
     type: 3}
   nearestNode: {fileID: 0}
@@ -14809,33 +14794,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &1965668114
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768930533829934408}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 3.61
-  m_Height: 12.28
-  m_Direction: 0
-  m_Center: {x: 0, y: 3.74, z: -1.2}
---- !u!65 &1965668115
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768930533829934408}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 3.83, y: 2, z: 1.7}
-  m_Center: {x: 0, y: 2.02, z: 3.64}
 --- !u!1 &2941891007739226869
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,8 @@ public class NPCData : ScriptableObject
 
     public bool questReady = false;
     public bool onQuest = false;
-    public bool questComplete = false; 
+    public bool questComplete = false;
+    public bool met = false;
     public List<string> quests;
 
     public bool LoadData(NPCSaveData sData)
@@ -27,7 +28,8 @@ public class NPCData : ScriptableObject
         questReady = sData.questReady;
         onQuest = sData.onQuest;
 	    questComplete = sData.questComplete;
-        
+
+        met = sData.met;
 
         return true;
     }

@@ -7,7 +7,8 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
     [Header("Boss attacks")]
     float timer = 5.0f;
     [SerializeField]
-    GameObject sporeCloud;
+	List<GameObject> sporeClouds;
+	List<GameObject> spawnedSporeClouds = new List<GameObject>();
 
     [SerializeField]
     GameObject bossHealthbar;
@@ -20,6 +21,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 	float contactTimer = 0.0f;
 	CharacterController controller;
 	Rigidbody rb;
+	float damageTimer = 0.0f;
 
     public override void Awake()
     {
@@ -62,7 +64,17 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
                 Movement(bestNodePos, moveSpeed);
             }
         }
+	    damageTimer -= Time.deltaTime;
     }
+    
+	public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
+	{
+		if(damageTimer <= 0)
+		{
+			base.TakeDamage(damageToTake, attackTypes, extraSpawnScale, applyTriggers);
+		}
+		damageTimer = 0.1f;
+	}
 
     public override void Movement(Vector3 positionToMoveTo, float speed)
     {
@@ -99,19 +111,20 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
     public void SpawnSporeCloud()
     {
 	    bool sporing = true;
-	    Debug.Log("Sporing");
         while(sporing)
         {
             int randNodeInt = Random.Range(0, spawner.GetComponent<SAIM>().aliveNodes.Count);
-            GameObject randNode = spawner.GetComponent<SAIM>().aliveNodes[randNodeInt].gameObject;
-            if(Vector3.Distance(randNode.transform.position, player.transform.position) < 20)
+	        GameObject randNode = spawner.GetComponent<SAIM>().aliveNodes[randNodeInt].gameObject;
+	        int softlockCheck = 0;
+	        if(Vector3.Distance(randNode.transform.position, player.transform.position) < 20 || softlockCheck >= 100)
             {
-	            Instantiate(sporeCloud, randNode.transform.position, Quaternion.identity);
+	            spawnedSporeClouds.Add(Instantiate(sporeClouds[Random.Range(0, sporeClouds.Count)], randNode.transform.position, Quaternion.identity));
 	            sporing = false;
+	            softlockCheck++;
             }
         }
         attacking = false;
-        timer = Random.Range(4f, 7f);
+	    timer = Random.Range(3f, 5f);
     }
 
     private void OnCollisionStay(Collision collision)
@@ -125,10 +138,9 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
     
 	protected virtual void DestroySporeClouds(GameObject temp)
 	{
-		SporeCloudScript[] spores = FindObjectsOfType<SporeCloudScript>();
-		for(int i = spores.Length - 1; i >= 0; i--)
+		for(int i = spawnedSporeClouds.Count - 1; i >= 0; i--)
 		{
-			Destroy(spores[i].gameObject);
+			Destroy(spawnedSporeClouds[i].gameObject);
 		}
 	}
 }

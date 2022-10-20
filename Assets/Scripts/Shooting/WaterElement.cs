@@ -30,7 +30,6 @@ public class WaterElement : BaseElementClass
         if (hit.collider)
         {
             newWaterProj.transform.LookAt(hit.point);
-            Debug.Log(hit.collider.gameObject.name);
         }
         newWaterProj.GetComponent<WaterProjectile>().SetVars(projectileSpeed, damage * (damageMultiplier * elementData.waterDamageMultiplier), projectileLifetime, attackTypes);
     }
