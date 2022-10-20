@@ -10,7 +10,6 @@ public class ShardProjectile : BaseElementSpawnClass
     int pierceAmount;
     [SerializeField]
     GameObject impactSpawn;
-
     void Update()
     {
         Vector3 movement = transform.up * speed * Time.deltaTime;
@@ -29,7 +28,16 @@ public class ShardProjectile : BaseElementSpawnClass
     {
         if (other.gameObject.layer == 8 || other.tag == "Enemy")
         {
-	        other.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+            if (other.gameObject.GetComponentInChildren<EnemyShield>() && other.gameObject.GetComponentInChildren<EnemyShield>().GetHealth() > 0)
+            {
+                pierceAmount = 0;
+                other.gameObject.GetComponentInChildren<EnemyShield>().TakeDamage(damage, attackTypes);
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                other.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+            }
         }
 
         if (other.gameObject.tag != "Player")
