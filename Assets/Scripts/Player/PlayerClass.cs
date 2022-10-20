@@ -346,7 +346,7 @@ public class PlayerClass : MonoBehaviour
             if (slowedtimer <= 0.0f)
             {
                 slowed = false;
-                slowedtimer = 10.0f;
+                slowedtimer = 5.0f;
             }
         }
         if(!slowed)

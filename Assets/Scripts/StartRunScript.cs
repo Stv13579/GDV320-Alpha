@@ -4,9 +4,39 @@ using UnityEngine;
 
 public class StartRunScript : MonoBehaviour
 {
+    GameObject portal;
+    Shooting player;
+
+    float currentPortalPer;
+
+    public void SetPortal(GameObject nP) { portal = nP; }
+
+    private void Start()
+    {
+        player = FindObjectOfType<Shooting>();
+        portal = GameObject.Find("Model_Environment_Portal_FBX");
+    }
+
+    private void Update()
+    {
+        if (player.GetCatalystElements().Contains(player.GetBlankElement()) || player.GetPrimaryElements().Contains(player.GetBlankElement()))
+        {
+            portal.GetComponent<Animator>().SetTrigger("Close");
+            portal.GetComponent<Animator>().ResetTrigger("Open");
+        }
+        else
+        {
+            portal.GetComponent<Animator>().SetTrigger("Open");
+            portal.GetComponent<Animator>().ResetTrigger("Close");
+           
+        }
+
+        
+    }
+
     public void StartRun()
     {
-        Shooting player = FindObjectOfType<Shooting>();
+        
 
         if(player.GetCatalystElements().Contains(player.GetBlankElement()) || player.GetPrimaryElements().Contains(player.GetBlankElement()))
         {

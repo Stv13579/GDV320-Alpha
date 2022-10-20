@@ -4,35 +4,53 @@ using UnityEngine;
 
 public class TutorialPointers : MonoBehaviour
 {
-    [SerializeField]
-    float slideSpeed;
+    /// <summary>
+    /// Lower is faster
+    /// </summary>
+
+    float slideSpeed = 1;
 
     float currentSlideTime = 0;
 
+
+    [SerializeField]
     bool finished = false;
     protected void Update()
     {
         CheckConditions();
 
-        currentSlideTime += Time.deltaTime;
-
-        //Slide it out at start
-        if(currentSlideTime < 1)
+        if(finished)
         {
-            transform.localPosition = new Vector3(Mathf.Lerp(0, -GetComponent<RectTransform>().rect.width, currentSlideTime/1), transform.localPosition.y, transform.localPosition.z);
+            if(currentSlideTime == 0)
+            {
+                gameObject.SetActive(false);
+                GetComponentInParent<TutorialChecklist>().Progress();
+            }
+            currentSlideTime -= Time.deltaTime;
+
+        }
+        else
+        {
+            currentSlideTime += Time.deltaTime;
         }
 
-        //Slide it in to end
-        if (currentSlideTime < 1 && finished)
-        {
-            transform.position += new Vector3(slideSpeed * Time.deltaTime, 0, 0);
-        }
+        if (currentSlideTime > slideSpeed)
+            currentSlideTime = slideSpeed;
+        else if(currentSlideTime < 0)
+            currentSlideTime = 0;
+
+        GetComponent<RectTransform>().anchoredPosition = 
+            new Vector3(Mathf.Lerp(0, -GetComponent<RectTransform>().rect.width, currentSlideTime / slideSpeed), transform.localPosition.y, transform.localPosition.z);
+
     }
 
     //Check if this element of the tutorial has been completed
-    public virtual void CheckConditions()
+    public virtual void CheckConditions(bool done = false)
     {
-
+        if(done)
+        {
+            finished = true;
+        }
     }
 
     public virtual void FinishPoint()

@@ -409,6 +409,34 @@ MonoBehaviour:
   targetTransform: {fileID: 5094916482123083108}
   moveSpeed: 10
   rotateSpeed: 10
+--- !u!114 &2017417399358149841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628277259427191327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7949443a974da394cad9a85f9257c1d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHandsL: {fileID: 2100000, guid: 9bc1a0583b92bf74f9e268b260d38a9a, type: 2}
+  emmissiveTogglePHL: 0
+  emmissiveStrengthPHL: 0
+  hsvColorPHL: {r: 0.97062445, g: 0, b: 1, a: 1}
+  playerHandsR: {fileID: 2100000, guid: cc2fcfd0fd29b274f819f33189027519, type: 2}
+  emmissiveTogglePHR: 0
+  emmissiveStrengthPHR: 0
+  hsvColorPHR: {r: 0, g: 0, b: 0, a: 0}
+  playerRingL: {fileID: 2100000, guid: 5c36c4fb9a947424495bc493dea4565c, type: 2}
+  emmissiveTogglePRL: 0
+  emmissiveStrengthPRL: 0
+  hsvColorPRL: {r: 0, g: 0, b: 0, a: 0}
+  playerRingR: {fileID: 2100000, guid: 1f4e69fc1d0765a40ac23932f7883287, type: 2}
+  emmissiveTogglePRR: 0
+  emmissiveStrengthPRR: 0
+  hsvColorPRR: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &2342924018183944106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,7 +1349,7 @@ MonoBehaviour:
   projectileSpeed: 50
   explosionArea: 2
   explosionDamage: 5
-  gravity: 0.75
+  gravity: 0.5
   gravityLifetime: 1
 --- !u!114 &5625023910511142018
 MonoBehaviour:
@@ -1367,7 +1395,7 @@ MonoBehaviour:
   damage: 3
   switchAnimationName: CrystalTransition
   startCoolDown: 0
-  cooldownTimer: 1.3
+  cooldownTimer: 1.2
   currentElementType: 2
   crystalProjectile: {fileID: 767471284418207900, guid: 6d74d8f7a4c049649922bd1346f7f9c6,
     type: 3}
@@ -1650,7 +1678,7 @@ MonoBehaviour:
   damage: 10
   switchAnimationName: LaserTransition
   startCoolDown: 0
-  cooldownTimer: 1.5
+  cooldownTimer: 1
   currentElementType: 201
   laserBeam: {fileID: 3981687641008780923}
   playerMovement: {fileID: 5625023911835613076}
@@ -1670,7 +1698,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 9102101168774939595, guid: 8fba95ab9aaab0f46a8049a35f4d6dad, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 20
+  manaCost: 50
   animationToPlay: ShardCannonCast
   animationToPlayAlt: ShardCannonCastAlt
   playerHand: {fileID: 2017859571}
@@ -1696,7 +1724,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Shard Cannon Equip
   idleSFX: Shard Cannon Idle (maybe)
-  damage: 50
+  damage: 40
   switchAnimationName: ShardCannonTransition
   startCoolDown: 0
   cooldownTimer: 1
@@ -1719,7 +1747,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 6858203384706500376, guid: 3467d4b068c26bc4989b1e6a07190e13, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 10
+  manaCost: 25
   animationToPlay: AcidCloudCast
   animationToPlayAlt: AcidCloudCastAlt
   playerHand: {fileID: 2017859571}
@@ -1748,13 +1776,13 @@ MonoBehaviour:
   damage: 10
   switchAnimationName: AcidCloudTransition
   startCoolDown: 0
-  cooldownTimer: 1.5
+  cooldownTimer: 1
   currentElementType: 203
   cloudProj: {fileID: 8417138957682568096, guid: 10b41ea33a4534e4bb8656dcf5ea9cae,
     type: 3}
   cloudSize: 8
-  cloudDuration: 10
-  damageTicker: 0.5
+  cloudDuration: 5
+  damageTicker: 0.75
 --- !u!114 &6475135526618743007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1770,7 +1798,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 2472826904319485754, guid: 1fff34ddfbcd97e43b2a1c1922dc8f10, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 20
+  manaCost: 100
   animationToPlay: LandMineCast
   animationToPlayAlt: LandMineCastAlt
   playerHand: {fileID: 2017859571}
@@ -1796,16 +1824,16 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Land Mine Equip
   idleSFX: Land Mine Idle
-  damage: 50
+  damage: 80
   switchAnimationName: LandMineTransition
   startCoolDown: 0
-  cooldownTimer: 1.75
+  cooldownTimer: 1
   currentElementType: 204
   landMineProjectile: {fileID: 5230698329136778979, guid: d3d1480b2678d1f4d87879615a4cc650,
     type: 3}
   indicator: {fileID: 739160400}
   explosiveRadius: 10
-  lifeTimer: 5
+  lifeTimer: 7
   rayCastRange: 10
   layerMask:
     serializedVersion: 2
@@ -1825,7 +1853,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 6087893857474337523, guid: 3a419bfd3448b67409b8f59075dafc4f, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 10
+  manaCost: 30
   animationToPlay: CurseCast
   animationToPlayAlt: 
   playerHand: {fileID: 2017859571}
@@ -1852,7 +1880,7 @@ MonoBehaviour:
   otherShootingSoundFX: Curse Release
   switchElementSFX: Curse Equip
   idleSFX: Curse Idle
-  damage: 100
+  damage: 75
   switchAnimationName: CurseTransition
   startCoolDown: 0
   cooldownTimer: 1.5
@@ -1883,7 +1911,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 2349233446677179650, guid: 9a4a61139a875424f9d9d795ae9973b0, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 10
+  manaCost: 15
   animationToPlay: IceSlashCast
   animationToPlayAlt: IceSlashCastAlt
   playerHand: {fileID: 2017859571}
@@ -1909,10 +1937,10 @@ MonoBehaviour:
   otherShootingSoundFX: Ice Slash Shot Alt
   switchElementSFX: Ice Slash Equip
   idleSFX: Ice Slash Idle
-  damage: 20
+  damage: 17.25
   switchAnimationName: IceSlashTransition
   startCoolDown: 0
-  cooldownTimer: 0.8
+  cooldownTimer: 0.5
   currentElementType: 206
   iceSlash: {fileID: 5956346581750816906, guid: dce9c0dcd94895743b712641b0e995fa,
     type: 3}
@@ -1934,7 +1962,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 1249736540608547060, guid: 24d04b33919a91943b35726f9315bcce, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 20
+  manaCost: 30
   animationToPlay: LifeStealCast
   animationToPlayAlt: 
   playerHand: {fileID: 2017859571}
@@ -1961,17 +1989,17 @@ MonoBehaviour:
   otherShootingSoundFX: Life Steal Shot
   switchElementSFX: Life Steal Equip
   idleSFX: Life Steal Idle
-  damage: 5
+  damage: 7
   switchAnimationName: LifeStealTransition
   startCoolDown: 0
-  cooldownTimer: 1.5
+  cooldownTimer: 1
   currentElementType: 207
   lifeStealSuccess: {fileID: 3194474830823642876}
   lifeStealfail: {fileID: 4552281088649957088}
   sphereRadius: 0.5
   sphereRange: 13
-  healValue: 0.25
-  damageAndHealthTicker: 0.3
+  healValue: 0.4
+  damageAndHealthTicker: 0.5
   hitLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -2019,7 +2047,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Crystal Grenade Equip
   idleSFX: Crystal Grenade Idle (maybe)
-  damage: 5
+  damage: 3
   switchAnimationName: CrystalGrenadeTransition
   startCoolDown: 0
   cooldownTimer: 1
@@ -3813,6 +3841,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: -1592621781203033459, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -179.99997
+      objectReference: {fileID: 0}
     - target: {fileID: -1146539585001993612, guid: 99ddbcbf9ae0bee46908442e78cd457e,
         type: 3}
       propertyPath: m_Layer
@@ -3852,6 +3885,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -439118283351685891, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 89.58296
       objectReference: {fileID: 0}
     - target: {fileID: -299772535670752812, guid: 99ddbcbf9ae0bee46908442e78cd457e,
         type: 3}
@@ -4043,11 +4081,56 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 8957445770645606004, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.0000034150944
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957445770645606004, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90.00002
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957445770645606004, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -89.99994
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99ddbcbf9ae0bee46908442e78cd457e, type: 3}
---- !u!4 &5113088554348669964 stripped
+--- !u!1 &919132147762184257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1963785488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &543450651769805563 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5113088555205103900, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1963785488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3812636908400077104 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3812636907007251488, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1963785488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1628277259427191327 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7595094778282383601, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1963785488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2812520820995258018 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2812520822957345714, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1963785488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &507151811668072790 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 507151811852313670, guid: 99ddbcbf9ae0bee46908442e78cd457e,
     type: 3}
   m_PrefabInstance: {fileID: 1963785488}
   m_PrefabAsset: {fileID: 0}
@@ -4063,39 +4146,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1963785488}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &543450651769805563 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 99ddbcbf9ae0bee46908442e78cd457e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1963785488}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2812520820995258018 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2812520822957345714, guid: 99ddbcbf9ae0bee46908442e78cd457e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1963785488}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5148545535502949970 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4074826502642900158, guid: 99ddbcbf9ae0bee46908442e78cd457e,
     type: 3}
   m_PrefabInstance: {fileID: 1963785488}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3812636908400077104 stripped
+--- !u!4 &5113088554348669964 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 3812636907007251488, guid: 99ddbcbf9ae0bee46908442e78cd457e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1963785488}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &919132147762184257 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 99ddbcbf9ae0bee46908442e78cd457e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1963785488}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &507151811668072790 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 507151811852313670, guid: 99ddbcbf9ae0bee46908442e78cd457e,
+  m_CorrespondingSourceObject: {fileID: 5113088555205103900, guid: 99ddbcbf9ae0bee46908442e78cd457e,
     type: 3}
   m_PrefabInstance: {fileID: 1963785488}
   m_PrefabAsset: {fileID: 0}
@@ -4986,15 +5045,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 646d95399aff60c46898d02987aee4d1, type: 3}
---- !u!1 &2782353506787810485 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 840168143895646795, guid: 646d95399aff60c46898d02987aee4d1,
-    type: 3}
-  m_PrefabInstance: {fileID: 3257236936206159614}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3258373696938199191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3402032801367657, guid: 646d95399aff60c46898d02987aee4d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 3257236936206159614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2782353506787810485 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 840168143895646795, guid: 646d95399aff60c46898d02987aee4d1,
     type: 3}
   m_PrefabInstance: {fileID: 3257236936206159614}
   m_PrefabAsset: {fileID: 0}
@@ -5522,15 +5581,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: -5814111869136598520, guid: 9d0cd90afa85ff94fa6a88965851589e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9d0cd90afa85ff94fa6a88965851589e, type: 3}
---- !u!1 &3981687641818801459 stripped
+--- !u!1 &6303370703232215908 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8741999943941267335, guid: 9d0cd90afa85ff94fa6a88965851589e,
-    type: 3}
-  m_PrefabInstance: {fileID: 5625023910865451700}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3981687641008780923 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8741999944741850319, guid: 9d0cd90afa85ff94fa6a88965851589e,
+  m_CorrespondingSourceObject: {fileID: 1831288515270545872, guid: 9d0cd90afa85ff94fa6a88965851589e,
     type: 3}
   m_PrefabInstance: {fileID: 5625023910865451700}
   m_PrefabAsset: {fileID: 0}
@@ -5540,15 +5593,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5625023910865451700}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3981687641008780923 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8741999944741850319, guid: 9d0cd90afa85ff94fa6a88965851589e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5625023910865451700}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3981687641008780920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
     type: 3}
   m_PrefabInstance: {fileID: 5625023910865451700}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6303370703232215908 stripped
+--- !u!1 &3981687641818801459 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1831288515270545872, guid: 9d0cd90afa85ff94fa6a88965851589e,
+  m_CorrespondingSourceObject: {fileID: 8741999943941267335, guid: 9d0cd90afa85ff94fa6a88965851589e,
     type: 3}
   m_PrefabInstance: {fileID: 5625023910865451700}
   m_PrefabAsset: {fileID: 0}
