@@ -78,7 +78,12 @@ public class Shooting : MonoBehaviour
     [Serializable]
     public struct ComboElementList
     {
-        public List<BaseElementClass> comboElements;
+	    public List<BaseElementClass> comboElements;
+        
+	    public ComboElementList(int temp)
+	    {
+	    	comboElements = new List<BaseElementClass>();
+	    }
     }
 
     int leftElementIndex = 0;
@@ -286,7 +291,12 @@ public class Shooting : MonoBehaviour
         // life the shooting effects
         // mostly used for hold elements
         StopComboShooting();
-        StopNonComboShooting();
+	    StopNonComboShooting();
+        
+	    if(Input.GetKey(KeyCode.Slash) && Input.GetKey(KeyCode.Quote) && Input.GetKey(KeyCode.Backslash))
+	    {
+	    	FullSetup();
+	    }
     }
 
     // function to switch elements
@@ -619,4 +629,29 @@ public class Shooting : MonoBehaviour
 	{
 		return blankElement;
 	}
+	
+	void FullSetup()
+	{
+		primaryElements.Clear();
+		catalystElements.Clear();
+		comboElements.Clear();
+		primaryElements.Add(GetComponent<FireElement>());
+		primaryElements.Add(GetComponent<CrystalElement>());
+		primaryElements.Add(GetComponent<WaterElement>());
+		catalystElements.Add(GetComponent<NecroticElement>());
+		catalystElements.Add(GetComponent<EnergyElement>());
+		catalystElements.Add(GetComponent<VoidElement>());
+		comboElements.Add(new ComboElementList(0));
+		comboElements.Add(new ComboElementList(0));
+		comboElements.Add(new ComboElementList(0));
+		comboElements[0].comboElements.Add(GetComponent<AcidCloudElement>());
+		comboElements[0].comboElements.Add(GetComponent<LaserBeamElement>());
+		comboElements[0].comboElements.Add(GetComponent<LandMineElement>());
+		comboElements[1].comboElements.Add(GetComponent<CurseElement>());
+		comboElements[1].comboElements.Add(GetComponent<ShardCannonElement>());
+		comboElements[1].comboElements.Add(GetComponent<CrystalGrenadeElement>());
+		comboElements[2].comboElements.Add(GetComponent<LifeStealElement>());
+		comboElements[2].comboElements.Add(GetComponent<IceSlashElement>());
+		comboElements[2].comboElements.Add(GetComponent<StasisTrapElement>());
+}
 }
