@@ -1586,6 +1586,7 @@ MonoBehaviour:
   MovementSpeed: 25
   chargeTimer: 0.5
   currentTimer: 0
+  upgradedChargeTimer: 1
 --- !u!114 &2068485375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1989,7 +1990,7 @@ MonoBehaviour:
   otherShootingSoundFX: Life Steal Shot
   switchElementSFX: Life Steal Equip
   idleSFX: Life Steal Idle
-  damage: 7
+  damage: 5
   switchAnimationName: LifeStealTransition
   startCoolDown: 0
   cooldownTimer: 1
@@ -2021,7 +2022,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 3807069179652443628}
   handVFX: {fileID: 9012415827748658890, guid: d6d712481672dd54a9e545626a29c41a, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 7
+  manaCost: 25
   animationToPlay: CrystalGrenadeCast
   animationToPlayAlt: CrystalGrenadeCastAlt
   playerHand: {fileID: 2017859571}
@@ -2074,7 +2075,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 2440540508582077956, guid: 50d9fbbcff12ff946aecbaf0b06210ed, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 25
+  manaCost: 50
   animationToPlay: StasisTrapCast
   animationToPlayAlt: StasisTrapCastAlt
   playerHand: {fileID: 2017859571}
@@ -2100,7 +2101,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Stasis Trap Equip
   idleSFX: Stasis Trap Idle
-  damage: 10
+  damage: 15
   switchAnimationName: StasisTrapTransition
   startCoolDown: 0
   cooldownTimer: 1.5
