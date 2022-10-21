@@ -25,6 +25,7 @@ public class NPC : MonoBehaviour
         //Called once all the lines of this dialogue are exhausted, call this action
         public virtual void Action()
         {
+            heldData.met = true;
             actionTaken = true;
         }
 
@@ -210,8 +211,10 @@ public class NPC : MonoBehaviour
         }
         else if (data.met == false)
         {
-            data.met = true;
+            
             possibleDialogues.Add(firstMeeting);
+            firstMeeting.SetHeldData(data);
+
         }
         else if (data.questComplete)
         {
