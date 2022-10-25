@@ -92,44 +92,11 @@ public class WaterSlimeEnemy : BaseEnemyClass
     public override void Movement(Vector3 positionToMoveTo, float speed)
     {
         base.Movement(moveDirection);
-        //if(Vector3.Distance(transform.position, player.transform.position) < 3)
-        //{
-        //    return;
-        //}
 
 
         RaycastHit hit;
 
         
-
-        ////If they can see the player, go for it, otherwise pathfind
-        //Debug.DrawRay(transform.position + (Vector3.up * 10), Vector3.up /*player.transform.position - transform.position*/, Color.blue);
-        //if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, Mathf.Infinity, viewToPlayer))
-        //{
-        //    if (hit.collider.gameObject.tag == "Player")
-        //    {
-        //        Vector3 moveVec = (player.transform.position - transform.position).normalized * speed * Time.deltaTime;
-        //        moveVec.y = 0;
-        //        moveVec.y -= 1 * Time.deltaTime;
-        //        transform.position += moveVec;
-        //    }
-        //    else
-        //    {
-        //        Vector3 moveVec = moveDirection.normalized * speed * Time.deltaTime;
-        //        moveVec.y = 0;
-        //        moveVec.y -= 1 * Time.deltaTime;
-        //        transform.position += moveVec;
-        //    }
-
-
-        //}
-        //else
-        //{
-        //    Vector3 moveVec = moveDirection.normalized * speed * Time.deltaTime;
-        //    moveVec.y = 0;
-        //    moveVec.y -= 1 * Time.deltaTime;
-        //    transform.position += moveVec;
-        //}
 
 
         Vector3 moveVec = moveDirection.normalized * speed * Time.deltaTime;
@@ -235,8 +202,8 @@ public class WaterSlimeEnemy : BaseEnemyClass
         {
             for (int i = 0; i < 4; i++)
             {
-	            GameObject newSlime = spawner.GetComponent<SAIM>().SetSpawn(gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 4);
-	            newSlime.GetComponent<Rigidbody>().AddForce(this.transform.up * 5 + this.transform.forward * 5);
+	            GameObject newSlime = spawner.GetComponent<SAIM>().SetSpawn(gameObject, this.transform.position + (this.transform.right * ((i * 2) - 1) * 2) + this.transform.up * 4 + (new Vector3(Random.value, 0, Random.value) * 5));
+	            newSlime.GetComponent<Rigidbody>().AddForce(this.transform.up * 5 + new Vector3(Random.value, 0, Random.value) * 5);
 	            newSlime.GetComponent<WaterSlimeEnemy>().RestoreHealth(0);
 	            StatModifier.AddModifier(newSlime.GetComponent<WaterSlimeEnemy>().GetHealthStat().multiplicativeModifiers, new StatModifier.Modifier(1.0f / (generation * 4 + 2), "Split " + generation));
 	            StatModifier.AddModifier(newSlime.GetComponent<WaterSlimeEnemy>().GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Split " + generation));

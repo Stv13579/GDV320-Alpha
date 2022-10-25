@@ -171,31 +171,8 @@ public class PlayerMovement : MonoBehaviour
             UpdateCameraShake();
         }
     }
-
-    // function for the camera shake when landing
-    // lerps the camera pos and camera angle to their targets
-    // then lerps from target to zero
-    // quick and dirty way of getting smooth bumping
-    void UpdateCameraShake()
+    private void FixedUpdate()
     {
-        cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, cameraHolderTargetPos, cameraShakePosLerp * Time.deltaTime);
-        currentCameraHolderAngle = Mathf.Lerp(currentCameraHolderAngle, cameraHolderTargetAngle, cameraShakeAngleLerp * Time.deltaTime);
-
-        cameraHolderTargetPos = Vector3.Lerp(cameraHolderTargetPos, Vector3.zero, cameraShakePosPunchLerp * Time.deltaTime);
-        cameraHolderTargetAngle = Mathf.Lerp(cameraHolderTargetAngle, 0.0f, cameraShakeAnglePunchLerp * Time.deltaTime);
-
-        lookScript.SetBumpTilt(currentCameraHolderAngle);
-    }
-
-    // manages all of the player movement e.g. jumping, coyote time, sliding, friction, gravity
-    void PlayerMoving()
-    {
-        if (inputs == true)
-        {
-            // reads players input 
-            z = Input.GetAxisRaw("Vertical");
-        }
-        x = Input.GetAxisRaw("Horizontal");
         // converting the players input into a vector 3 and timings it by the players look direction
         Vector3 inputMove = new Vector3(x, 0.0f, z);
         Vector3 realMove = Quaternion.Euler(0.0f, lookScript.GetSpin(), 0.0f) * inputMove;
@@ -220,9 +197,9 @@ public class PlayerMovement : MonoBehaviour
         // as the player gains velo when coming off the ramp
         // i want to cap the velocity so that the player doesnt go flying
         // so i apply friction to the player
-        if(velocity.magnitude > maxVeloMagnitude)
+        if (velocity.magnitude > maxVeloMagnitude)
         {
-            velocity -= velocity.normalized * tempAirStraffMod * acceleration * frictionCurve.Evaluate(velocity.magnitude) * Time.deltaTime;
+            velocity -= velocity.normalized * tempAirStraffMod * acceleration * frictionCurve.Evaluate(velocity.magnitude) * Time.fixedDeltaTime;
         }
 
 
@@ -232,19 +209,22 @@ public class PlayerMovement : MonoBehaviour
         // set the y velocity to be 0
         velocity.y = 0;
         // movement for the player
-        velocity += realMove * tempAirStraffMod * acceleration * Time.deltaTime;
+        velocity += realMove * tempAirStraffMod * acceleration * Time.fixedDeltaTime;
         // friction for the players x and z axis
-        velocity -= velocity.normalized * tempAirStraffMod * acceleration * frictionCurve.Evaluate(velocity.magnitude) * Time.deltaTime;
+        velocity -= velocity.normalized * tempAirStraffMod * acceleration * frictionCurve.Evaluate(velocity.magnitude) * Time.fixedDeltaTime;
         // we give back the y velocity
         velocity.y = cacheY;
-        Jumping();
 
-        // gravity on the player
-        velocity.y -= gravity * Time.deltaTime;
+        //Jumping();
+        if (isGrounded == false)
+        {
+            // gravity on the player
+            velocity.y -= gravity * Time.fixedDeltaTime;
+        }
         // getting the position before the player moves (headbobbing)
         oldPos = transform.position;
         // moving the player on screen
-        cController.Move(velocity * movementSpeed * Time.deltaTime);
+        cController.Move(velocity * movementSpeed * Time.fixedDeltaTime);
         // getting the position after the player moves (headbobbing)
         newPos = transform.position;
 
@@ -253,9 +233,35 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = -0.75f;
         }
+    }
+    // function for the camera shake when landing
+    // lerps the camera pos and camera angle to their targets
+    // then lerps from target to zero
+    // quick and dirty way of getting smooth bumping
+    void UpdateCameraShake()
+    {
+        cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, cameraHolderTargetPos, cameraShakePosLerp * Time.deltaTime);
+        currentCameraHolderAngle = Mathf.Lerp(currentCameraHolderAngle, cameraHolderTargetAngle, cameraShakeAngleLerp * Time.deltaTime);
 
+        cameraHolderTargetPos = Vector3.Lerp(cameraHolderTargetPos, Vector3.zero, cameraShakePosPunchLerp * Time.deltaTime);
+        cameraHolderTargetAngle = Mathf.Lerp(cameraHolderTargetAngle, 0.0f, cameraShakeAnglePunchLerp * Time.deltaTime);
+
+        lookScript.SetBumpTilt(currentCameraHolderAngle);
+    }
+
+    // manages all of the player movement e.g. jumping, coyote time, sliding, friction, gravity
+    void PlayerMoving()
+    {
+        if (inputs == true)
+        {
+            // reads players input 
+            z = Input.GetAxisRaw("Vertical");
+        }
+        x = Input.GetAxisRaw("Horizontal");
+      
         CoyoteTime();
-        
+        Jumping();
+
         // this is to stop the players sound if the player is up close to the 
         RaycastHit hit;
         if (Physics.Raycast(cController.transform.position, transform.forward, out hit, 1.0f, environmentLayer))

@@ -24,7 +24,7 @@ public class NecroticElement : BaseElementClass
     [SerializeField]
     Color outlineColour;
 
-      [SerializeField]
+    [SerializeField]
     List<GameObject> targetedList = new List<GameObject>();
     protected override void Start()
     {

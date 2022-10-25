@@ -30,6 +30,12 @@ public class StasisTrapElement : BaseElementClass
     List<GameObject> stasisTrapList = new List<GameObject>();
 
     int maxStasisTraps = 1;
+
+    bool isDestoryed = true;
+
+    List<GameObject> containedEnemies = new List<GameObject>();
+    public List<GameObject> GetContainedEnemies() { return containedEnemies; }
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -54,6 +60,19 @@ public class StasisTrapElement : BaseElementClass
             Vector3 pos = Camera.main.transform.position + Camera.main.transform.forward.normalized * rayCastRange;
             indicator.transform.position = pos;
         }
+        if(isDestoryed == true)
+        {
+            while (containedEnemies.Count > 0)
+            {
+                for (int i = 0; i < containedEnemies.Count; i++)
+                {
+                    StatModifier.RemoveModifier(containedEnemies[i].GetComponentInParent<BaseEnemyClass>().GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0, "Stasis"));
+                    StatModifier.UpdateValue(containedEnemies[i].GetComponentInParent<BaseEnemyClass>().GetSpeedStat());
+                    containedEnemies.Remove(containedEnemies[i]);
+                }
+            }
+            isDestoryed = false;
+        }
     }
 
     // gets called in the animation event triggers
@@ -68,6 +87,7 @@ public class StasisTrapElement : BaseElementClass
             {
                 Destroy(stasisTrapList[0]);
                 stasisTrapList.RemoveAt(0);
+                isDestoryed = true;
             }
             GameObject newStasisTrap = Instantiate(stasisTrap, hit.point + new Vector3(0,0.75f,0), Camera.main.transform.rotation);
             newStasisTrap.GetComponent<StasisTrapProj>().SetVars(damage * (damageMultiplier + elementData.waterDamageMultiplier), maxDuration, currentDamageTicker, maxDamageTicker, attackTypes);
@@ -79,6 +99,7 @@ public class StasisTrapElement : BaseElementClass
             {
                 Destroy(stasisTrapList[0]);
                 stasisTrapList.RemoveAt(0);
+                isDestoryed = true;
             }
             Vector3 pos = Camera.main.transform.position + Camera.main.transform.forward.normalized * rayCastRange;
             GameObject newStasisTrap = Instantiate(stasisTrap, pos + new Vector3(0, 0.75f, 0), Camera.main.transform.rotation);

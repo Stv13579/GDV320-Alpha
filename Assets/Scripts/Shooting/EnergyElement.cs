@@ -39,6 +39,9 @@ public class EnergyElement : BaseElementClass
 
     [SerializeField]
     protected float currentTimer;
+
+    [SerializeField]
+    protected float upgradedChargeTimer;
     public bool GetUseShield() { return useShield; }
     public void SetBeenHit(bool tempBeenHit) { beenHit = tempBeenHit; }
     public List<GameObject> GetContainedEnemies() { return containedEnemies; }
@@ -58,6 +61,10 @@ public class EnergyElement : BaseElementClass
             LiftEffect();
         }
         HitShield();
+        if(upgraded)
+        {
+            chargeTimer = upgradedChargeTimer;
+        }
         //// states for the energy Shield
         //    switch (shieldStateChange)
         //    {
@@ -206,5 +213,8 @@ public class EnergyElement : BaseElementClass
         }
     }
 
-  
+    public override void Upgrade()
+    {
+        base.Upgrade();
+    }
 }

@@ -10,14 +10,19 @@ public class StartGameController : MonoBehaviour
     [SerializeField]
     NPCData lilly, blaze, silvain, freya;
 
+    [SerializeField]
+    bool freshStart;
+
     public void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
     }
     public void StartGame()
     {
-
-        LoadGame();
+        if(!freshStart)
+        {
+            LoadGame();
+        }
 
         if (audioManager)
         {
@@ -27,7 +32,7 @@ public class StartGameController : MonoBehaviour
             audioManager.PlayMusic("Hub Room Music");
         }
 
-        if (SaveSystem.LoadStartedState())
+        if (SaveSystem.LoadStartedState() && !freshStart)
         {
             SceneManager.LoadScene(1);
         }
@@ -35,8 +40,6 @@ public class StartGameController : MonoBehaviour
         {
             SceneManager.LoadScene(5);
         }
-
-        
     }
 
     public void LoadGame()

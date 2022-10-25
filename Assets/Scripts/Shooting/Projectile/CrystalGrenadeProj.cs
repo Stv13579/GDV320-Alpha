@@ -91,6 +91,10 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                             {
                                 if ((hit.collider.gameObject.GetComponent<EnemyShield>() && !objectsHit[i].GetComponent<EnemyShield>()))
                                 {
+                                    objectsHit[i].GetComponentInChildren<EnemyShield>().TakeDamage(explosionDamage, attackTypes);
+                                }
+                                else if (hit.collider.gameObject.layer == 10)
+                                {
 
                                 }
                                 else
