@@ -57,6 +57,9 @@ public class PlayerLook : MonoBehaviour
 	public void SetFOV(int newFOV) {currentCamera.fieldOfView = newFOV; fov = newFOV;}
 	static public PlayerLook GetPlayerLook() {return playerLook;}
 
+    [SerializeField]
+    Animator postProcessingAnims;
+
     // function is called when script is loaded or values have change on inspector
     void OnValidate()
     {
@@ -174,6 +177,20 @@ public class PlayerLook : MonoBehaviour
             ToggleCursor();
         }
 #endif
+    }
+
+    public void SetFocus(bool focus)
+    {
+        if (focus)
+        {
+            postProcessingAnims.SetTrigger("FocusOn");
+            postProcessingAnims.ResetTrigger("FocusOff");
+        }
+        else
+        {
+            postProcessingAnims.SetTrigger("FocusOff");
+            postProcessingAnims.ResetTrigger("FocusOn");
+        }    
     }
 }
 

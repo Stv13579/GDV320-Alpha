@@ -12,7 +12,7 @@ public class DestroyIceSlash : MonoBehaviour
     {
         if(((1<<other.gameObject.layer) & environment) != 0 || other.GetComponent<EnemyShield>())
         {
-            Destroy(gameObject.transform.parent.gameObject);
+                Destroy(gameObject.transform.parent.gameObject);
         }
     }
 }

@@ -10,7 +10,7 @@ public class StasisTrapProj : MonoBehaviour
     float maxDamageTicker;
     float currentDamageTicker;
     List<BaseEnemyClass.Types> attackTypes;
-    List<GameObject> containedEnemies = new List<GameObject>();
+
     AudioManager audioManager;
 
     [SerializeField]
@@ -28,10 +28,13 @@ public class StasisTrapProj : MonoBehaviour
     }
     StasisTrapProjState currentstate = StasisTrapProjState.idle;
     // Start is called before the first frame update
+
+    StasisTrapElement stasisTrap;
     void Start()
     {
         duration = 0.0f;
         audioManager = FindObjectOfType<AudioManager>();
+        stasisTrap = FindObjectOfType<StasisTrapElement>();
     }
 
     // Update is called once per frame
@@ -81,18 +84,18 @@ public class StasisTrapProj : MonoBehaviour
                         audioManager.StopSFX("Stasis Trap Explosion");
                         audioManager.PlaySFX("Stasis Trap Explosion");
                     }
+                    for (int i = 0; i < stasisTrap.GetContainedEnemies().Count; i++)
+                    {
+                        if (stasisTrap.GetContainedEnemies()[i].activeInHierarchy)
+                        {
+                            BaseEnemyClass enemy = stasisTrap.GetContainedEnemies()[i].GetComponentInParent<BaseEnemyClass>();
+                            StatModifier.RemoveModifier(enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0, "Stasis"));
+                            StatModifier.UpdateValue(enemy.GetSpeedStat());
+                            stasisTrap.GetContainedEnemies().Remove(stasisTrap.GetContainedEnemies()[i]);
+                        }
+                    }
                     if (duration >= maxDuration)
                     {
-                        for (int i = 0; i < containedEnemies.Count; i++)
-                        {
-                            if (containedEnemies[i])
-                            {
-	                            BaseEnemyClass enemy = containedEnemies[i].GetComponentInParent<BaseEnemyClass>();
-                                StatModifier.RemoveModifier(enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0, "Stasis"));
-                                StatModifier.UpdateValue(enemy.GetSpeedStat());
-                                containedEnemies.Remove(containedEnemies[i]);
-                            }
-                        }
                         currentstate = StasisTrapProjState.destroy;
                     }
                     break;
@@ -104,13 +107,13 @@ public class StasisTrapProj : MonoBehaviour
                 }
         }
 
-        for(int i = 0; i < containedEnemies.Count; i++)
+        for(int i = 0; i < stasisTrap.GetContainedEnemies().Count; i++)
         {
-            if(containedEnemies[i].GetComponentInParent<BaseEnemyClass>().GetHealth() <= 0)
+            if(stasisTrap.GetContainedEnemies()[i].GetComponentInParent<BaseEnemyClass>().GetHealth() <= 0)
             {
-                StatModifier.RemoveModifier(containedEnemies[i].GetComponentInParent<BaseEnemyClass>().GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0, "Stasis"));
-                StatModifier.UpdateValue(containedEnemies[i].GetComponentInParent<BaseEnemyClass>().GetSpeedStat());
-                containedEnemies.Remove(containedEnemies[i]);
+                StatModifier.RemoveModifier(stasisTrap.GetContainedEnemies()[i].GetComponentInParent<BaseEnemyClass>().GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0, "Stasis"));
+                StatModifier.UpdateValue(stasisTrap.GetContainedEnemies()[i].GetComponentInParent<BaseEnemyClass>().GetSpeedStat());
+                stasisTrap.GetContainedEnemies().Remove(stasisTrap.GetContainedEnemies()[i]);
             }
         }
     }
@@ -127,14 +130,16 @@ public class StasisTrapProj : MonoBehaviour
     // add to list and turn movement multi to 0
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 8 && !containedEnemies.Contains(other.gameObject) && other.GetComponent<BaseEnemyClass>())
+        if(other.gameObject.layer == 8 && !stasisTrap.GetContainedEnemies().Contains(other.gameObject) && !other.GetComponent<EnemyShield>() ||
+           other.GetComponentInParent<BaseEnemyClass>() && !stasisTrap.GetContainedEnemies().Contains(other.gameObject) && !other.GetComponent<EnemyShield>() ||
+           other.tag == "Enemy" && !stasisTrap.GetContainedEnemies().Contains(other.gameObject) && !other.GetComponent<EnemyShield>())
         {
-            containedEnemies.Add(other.gameObject);
-            for (int i = 0; i < containedEnemies.Count; i++)
+            stasisTrap.GetContainedEnemies().Add(other.gameObject);
+            for (int i = 0; i < stasisTrap.GetContainedEnemies().Count; i++)
             {
-                if (containedEnemies[i])
+                if (stasisTrap.GetContainedEnemies()[i].activeInHierarchy)
                 {
-                    BaseEnemyClass enemy = containedEnemies[i].GetComponentInParent<BaseEnemyClass>();
+                    BaseEnemyClass enemy = stasisTrap.GetContainedEnemies()[i].GetComponentInParent<BaseEnemyClass>();
                     StatModifier.AddModifier(enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0, "Stasis"));
                     StatModifier.UpdateValue(enemy.GetSpeedStat());
                 }
@@ -145,7 +150,8 @@ public class StasisTrapProj : MonoBehaviour
     // do damage to the enemy
     void OnTriggerStay(Collider other)
     {
-	    if (other.gameObject.layer == 8 && other.GetComponentInParent<BaseEnemyClass>())
+	    if (other.gameObject.layer == 8 && other.GetComponentInParent<BaseEnemyClass>() ||
+           other.tag == "Enemy")
         {
             if (currentDamageTicker > maxDamageTicker)
             {

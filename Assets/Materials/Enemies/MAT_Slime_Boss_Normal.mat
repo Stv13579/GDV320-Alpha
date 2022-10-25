@@ -35,8 +35,56 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DiffuseBlinkEyes:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseBody:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseDeathEyes:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseHurtEyes:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseNormalEyes:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseStunEyes:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 2800000, guid: a1f54dfa529ce0f41a2f81e1380cfd02, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissiveBody:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmmisiveBlinkEyes:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmmisiveDeathEyes:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmmisiveHurtEyes:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmmisiveNormalEyes:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmmisiveStunEyes:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -84,7 +132,11 @@ Material:
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DisolveAlphaClipping: -1
+    - _DisolveEdgeThickness: 0.07
+    - _DisolveNoiseScale: 1
     - _DstBlend: 0
+    - _EnemyDisolveNoise: 3
     - _EnvironmentReflections: 1
     - _FresnelScale: 0.65
     - _GlossMapScale: 0
@@ -92,6 +144,8 @@ Material:
     - _GlossyReflections: 0
     - _Highlight_Strenght: 1
     - _IsBeingDamaged: 0
+    - _IsBeingStunned: 0
+    - _IsUsingEyes: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Outline_Alpha: 1
@@ -114,6 +168,7 @@ Material:
     - _SubSurface_Stenght: 10
     - _Surface: 0
     - _Toggle_EnemyHPEmissive: 1
+    - _Unique_Eye_On: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
@@ -121,6 +176,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Damage_Colour: {r: 2, g: 0, b: 0, a: 0}
     - _Diffuse_Colour: {r: 1, g: 1, b: 1, a: 0}
+    - _DisolveColour: {r: 4, g: 4, b: 4, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Outline_Colour: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

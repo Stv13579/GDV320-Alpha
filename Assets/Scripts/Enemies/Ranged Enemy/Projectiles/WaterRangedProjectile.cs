@@ -15,7 +15,7 @@ public class WaterRangedProjectile : BaseRangedProjectileScript //Sebastian
     {
         player.GetComponent<PlayerClass>().ChangeHealth(-damage, origin);
         PlayerMovement playerMove = player.GetComponent<PlayerMovement>();
-        StatModifier.StartAddModifierTemporary(playerMove, playerMove.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Water Ranged"), 10.0f);
+        StatModifier.StartAddModifierTemporary(playerMove, playerMove.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Water Ranged"), 5.0f);
         playerClass.SetSlowed(true);
         Destroy(this.gameObject);
     }

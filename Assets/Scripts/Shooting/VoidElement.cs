@@ -71,7 +71,7 @@ public class VoidElement : BaseElementClass
                 //Sum up the normals and positions of objects within a small range of the first object hit with the spherecast
                 foreach (RaycastHit hit in hits)
                 {
-                    if (Mathf.Abs(hit.distance) < distance + 2)
+	                if (Mathf.Abs(hit.distance) < distance + 2 && !hit.collider.gameObject.GetComponent<SporeCloudScript>())
                     {
                         averagePos += hit.point;
                         averageNorm += hit.normal;

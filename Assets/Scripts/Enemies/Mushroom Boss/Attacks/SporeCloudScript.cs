@@ -15,18 +15,18 @@ public class SporeCloudScript : BaseEnemyClass
     }
     public override void Update()
     {
-        base.Update();
         contactTimer -= Time.deltaTime;
     }
 
     public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
-    {
-        if(attackTypes.Contains(Types.Fire) && !onFire)
+	{
+		Debug.Log(attackTypes[0]);
+	    if(attackTypes.Contains(weaknesses[0]) && !onFire)
         {
             StartCoroutine(StartFire());
         }
     }
-
+	
 
     IEnumerator StartFire()
     {
@@ -39,7 +39,7 @@ public class SporeCloudScript : BaseEnemyClass
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject == player && contactTimer <= 0.0f)
+	    if(other.gameObject == player && contactTimer <= 0.0f && !onFire)
         {
             gameplayUI.GetInToxicFullScreen().gameObject.SetActive(true);
             gameplayUI.GetInToxicFullScreen().material.SetFloat("_Toggle_EffectIntensity", 10.0f);

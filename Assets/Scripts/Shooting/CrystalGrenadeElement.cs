@@ -22,6 +22,25 @@ public class CrystalGrenadeElement : BaseElementClass
     [SerializeField]
     float explosionDamage;
 
+    protected override void Start()
+    {
+        base.Start();
+        activatedVFX.SetActive(false);
+    }
+    protected override void Update()
+    {
+        base.Update();
+        //if this element is turned on turn on indicator
+        if (shootingScript.GetComboElements()[shootingScript.GetLeftElementIndex()].comboElements[shootingScript.GetRightElementIndex()] == this
+            && shootingScript.GetInComboMode() == true)
+        {
+            activatedVFX.SetActive(true);
+        }
+        else
+        {
+            activatedVFX.SetActive(false);
+        }
+    }
     // gets called in the animation event triggers
     public override void ElementEffect()
     {

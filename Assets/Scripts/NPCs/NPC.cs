@@ -25,6 +25,7 @@ public class NPC : MonoBehaviour
         //Called once all the lines of this dialogue are exhausted, call this action
         public virtual void Action()
         {
+            heldData.met = true;
             actionTaken = true;
         }
 
@@ -138,10 +139,10 @@ public class NPC : MonoBehaviour
     [SerializeField]
     protected List<HandIn> recieveHandIn = new List<HandIn>();
 
-
     [HideInInspector]
     public Dialogue currentDialogue;
     public Dialogue noMoreDialogue;
+    public Dialogue firstMeeting;
 
     public int place = 0;
     public int interactPositon = 0;
@@ -176,15 +177,16 @@ public class NPC : MonoBehaviour
     //Holds dialogue and functionality for questlines.
     public void Start()
     {
-        player = FindObjectOfType<PlayerClass>().gameObject;
+        
         //Create an array of possible dialogues and then choose one at random.
         //Possible dialogues include the random ones, the current story position, or a deterministic quest dialogue.
         int storyTime = UnityEngine.Random.Range(0, 2);
         anims = transform.GetComponentInChildren<Animator>();
+        player = FindObjectOfType<PlayerClass>().gameObject;
         //data = (NPCData)Resources.Load("NPCs/" + dataToApply);
 
         //Initialise seralized dialogues
-        foreach(StoryDialogues diag in storyDialogues)
+        foreach (StoryDialogues diag in storyDialogues)
         {
             foreach(Dialogue dg in diag.dialogues)
             {
@@ -206,6 +208,13 @@ public class NPC : MonoBehaviour
         {
             tutorialDialogues[0].tutAct = TutorialAction;
             possibleDialogues.Add(tutorialDialogues[0]);
+        }
+        else if (data.met == false)
+        {
+            
+            possibleDialogues.Add(firstMeeting);
+            firstMeeting.SetHeldData(data);
+
         }
         else if (data.questComplete)
         {

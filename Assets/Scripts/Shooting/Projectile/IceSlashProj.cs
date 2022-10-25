@@ -40,9 +40,14 @@ public class IceSlashProj : BaseElementSpawnClass
     void OnTriggerEnter(Collider other)
     {
         // goes through enemies and damages them aswell
-	    if (other.gameObject.layer == 8 && other.gameObject.GetComponentInParent<BaseEnemyClass>() && other.isTrigger == false || other.tag == "Enemy" && other.isTrigger == false)
+	    if (other.gameObject.layer == 8 && other.gameObject.GetComponentInParent<BaseEnemyClass>() && other.isTrigger == false || 
+            other.tag == "Enemy" && other.isTrigger == false)
         {
 		    other.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
         }
+	    if(other.gameObject.GetComponent<SporeCloudScript>())
+	    {
+		    other.gameObject.GetComponent<SporeCloudScript>().TakeDamage(damage, attackTypes);
+	    }
     }
 }
