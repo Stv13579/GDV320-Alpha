@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
 {
@@ -16,6 +17,60 @@ public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
     public GameObject GetDragged() { return draggedObject;}
 
     bool canDrag = true;
+
+    Color startColour;
+
+    [SerializeField]
+    Color fadedColour;
+
+    private void Start()
+    {
+        startColour = GetComponent<Image>().color;
+    }
+
+    private void Update()
+    {
+        if (elementSlots.Count > 0)
+        {
+            GameObject tempGameOBJ = draggedObject;
+            if (elementSlots[1].GetSlotTaken() == true && elementSlots[0].GetSlotTaken() == true)
+            {
+                GetComponent<Image>().color = fadedColour;
+            }
+            else if (elementSlots[0].GetPlayer().GetCatalystElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
+            {
+                GetComponent<Image>().color = fadedColour;
+            }
+            else if (elementSlots[1].GetPlayer().GetCatalystElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
+            {
+                GetComponent<Image>().color = fadedColour;
+            }
+            else if (elementSlots[0].GetPlayer().GetPrimaryElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
+            {
+                GetComponent<Image>().color = fadedColour;
+            }
+            else if (elementSlots[1].GetPlayer().GetPrimaryElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
+            {
+                GetComponent<Image>().color = fadedColour;
+            }
+            else
+            {
+                GetComponent<Image>().color = startColour;
+            }
+
+        }
+        if (trinketSlot)
+        {
+            if (trinketSlot.GetSlotTaken() == true)
+            {
+                GetComponent<Image>().color = fadedColour;
+            }
+            else
+            {
+                GetComponent<Image>().color = startColour;
+            }    
+        }
+    }
 
     public void SetDraggable(bool draggable) { canDrag = draggable; }
 
