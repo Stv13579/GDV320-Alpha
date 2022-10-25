@@ -411,6 +411,10 @@ public class BaseEnemyClass : MonoBehaviour
         List<GameObject> curseList = player.GetComponent<CurseElement>().GetTargetToCurseList();
         for (int i = 0; i < curseList.Count; i++)
         {
+            if(curseList[i] == null)
+            {
+                continue;
+            }
             if (curseList[i].GetComponentInParent<BaseEnemyClass>().GetHealth() <= 0)
             {
                 curseList[i].GetComponentInParent<BaseEnemyClass>().SetCursed(false);
