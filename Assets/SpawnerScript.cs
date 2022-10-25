@@ -5,7 +5,6 @@ using UnityEngine;
 public class SpawnerScript : MonoBehaviour
 {
 	GameObject enemyToSpawn;
-	SAIM spawnSAIM;
 	[SerializeField]
 	Animator animator;
 	[SerializeField]
@@ -22,15 +21,14 @@ public class SpawnerScript : MonoBehaviour
         
     }
     
-	public void SetEnemy(GameObject enemy, SAIM spawner)
+	public void SetEnemy(GameObject enemy)
 	{
 		enemyToSpawn = enemy;
-		spawnSAIM = spawner;
 	}
 	
 	public void StartSpawn()
 	{
-		animator.SetTrigger("Spawn");
+		StartCoroutine(Spawn());
 	}
 	
 	IEnumerator Spawn()
@@ -39,13 +37,20 @@ public class SpawnerScript : MonoBehaviour
 		animator.SetTrigger("Spawn");
 		yield return new WaitForSeconds(0.2f);
 		particles.Play();
-		while(particles.isPlaying)
+		while(particles.time < 3)
 		{
 			yield return null;
 		}
 		enemyToSpawn.transform.position = this.transform.position;
 		enemyToSpawn.SetActive(true);
+		animator.gameObject.GetComponent<MeshRenderer>().enabled = false;
+		animator.ResetTrigger("Spawn");
 		animator.SetTrigger("Finish Spawn");
-		
+		while(particles.isPlaying)
+		{
+			yield return null;
+		}
+		animator.gameObject.GetComponent<MeshRenderer>().enabled = true;
+		this.gameObject.SetActive(false);
 	}
 }

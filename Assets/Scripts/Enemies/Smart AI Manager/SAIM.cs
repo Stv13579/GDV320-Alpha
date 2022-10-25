@@ -122,6 +122,7 @@ public class SAIM : MonoBehaviour
 
 	EnemyObjectPool ePool;
     
+	EnemySpawnPool mPool;
 
     void Awake()
     {
@@ -130,7 +131,8 @@ public class SAIM : MonoBehaviour
         runManager = FindObjectOfType<RunManager>();
         bossRoom = FindObjectOfType<BossRoom>();
         enemyCounter = GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>();
-        ePool = FindObjectOfType<EnemyObjectPool>();
+	    ePool = FindObjectOfType<EnemyObjectPool>();
+	    mPool = FindObjectOfType<EnemySpawnPool>();
 
         foreach (Node node in aliveNodes)
         {
@@ -183,7 +185,7 @@ public class SAIM : MonoBehaviour
 
         if(CheckSpawnConditions() && !bossSaim)
         {
-	        Spawn(Random.Range(data.GetMinSpawns(), data.GetMaxSpawns()));
+	        Spawn(1, true);
            
         }
 
@@ -663,9 +665,12 @@ public class SAIM : MonoBehaviour
 				spawnPosition.x += Random.Range(-1.0f, 2.0f);
 				spawnPosition.z += Random.Range(-1.0f, 2.0f);
 				spawnPosition.y += 2;
-			
-				GameObject spawnedEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
+				
+				GameObject spawnedEnemy = GetSpawn(enemy);
+				GameObject spawnedMask = SetSpawnEffect(squad.element, spawnPosition);
 				spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
+				spawnedMask.GetComponent<SpawnerScript>().SetEnemy(spawnedEnemy);
+				spawnedMask.GetComponent<SpawnerScript>().StartSpawn();
 
 				if (GameObject.Find("Quest Manager"))
 				{
@@ -689,6 +694,8 @@ public class SAIM : MonoBehaviour
 		}
 
 	}
+	
+
     
     //Given a SAIM data object, will manually spawn an enemy of each type on that object.
     public void ManualSpawn()
@@ -752,6 +759,38 @@ public class SAIM : MonoBehaviour
 
         return newEnem;
     }
+    
+	//Get an enemy from the object pool without spawning it
+	public GameObject GetSpawn(GameObject eType)
+	{
+		GameObject newEnem = ePool.GetReadiedEnemy(eType);
+
+		if(newEnem == null)
+		{
+			newEnem = Instantiate(eType);
+			newEnem.SetActive(false);
+		}
+
+		return newEnem;
+	}
+	//Use object pooling on a new spawn effect object to spawn it
+	GameObject SetSpawnEffect(BaseEnemyClass.Types element, Vector3 position)
+	{
+		GameObject newMask = mPool.GetReadiedMask(element);
+
+		if(newMask == null)
+		{
+			//newEnem = Instantiate(eType, position, Quaternion.identity);
+		}
+		else
+		{
+			newMask.transform.position = position;
+			newMask.SetActive(true);
+            
+		}
+
+		return newMask;
+	}
 
     public int ChooseEnemy()
     {
