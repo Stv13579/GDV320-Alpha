@@ -22,7 +22,7 @@ public class CrystalProj : BaseElementSpawnClass
     void Update()
     {
         // the max drop off the damage is 0.5f
-        if(damage <= 0.5f)
+        if(damage <= damageLimit)
         {
             damage = damageLimit;
         }

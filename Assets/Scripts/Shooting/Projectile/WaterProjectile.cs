@@ -16,6 +16,7 @@ public class WaterProjectile : BaseElementSpawnClass
     AudioManager audioManager;
 
     GameObject player;
+
     void Awake()
     {
         audioManager = FindObjectOfType<AudioManager>();
@@ -70,6 +71,11 @@ public class WaterProjectile : BaseElementSpawnClass
         }
         if(collision.collider.tag == "Enemy" || collision.collider.gameObject.layer == 8 && collision.collider.GetComponentInParent<BaseEnemyClass>())
         {
+            if(player.GetComponent<WaterElement>().GetUpgraded() == true)
+            {
+                StatModifier.StartAddModifierTemporary(collision.collider.gameObject.GetComponentInParent<BaseEnemyClass>(), collision.collider.gameObject.GetComponentInParent<BaseEnemyClass>().GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "UpgradedSlow"), 7.0f);
+                StatModifier.UpdateValue(collision.collider.gameObject.GetComponentInParent<BaseEnemyClass>().GetSpeedStat());
+            }
 	        collision.collider.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             if (audioManager)
             {

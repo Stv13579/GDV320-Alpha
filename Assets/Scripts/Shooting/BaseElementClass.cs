@@ -143,6 +143,7 @@ public class BaseElementClass : MonoBehaviour
     public GameObject GetWristVFX() { return wristVFX; }
     public GameObject GetActivatedVFX() { return activatedVFX; }
 
+    public bool GetUpgraded() { return upgraded; }
     public float GetManaCost() { return manaCost; }
 
     protected virtual void Start()

@@ -19,7 +19,16 @@ public class FireElement : BaseElementClass
     float explosionArea;
 
     [SerializeField]
+    float upgradeExplosionArea;
+
+    [SerializeField]
+    Vector3 upgradedVFXSize;
+
+    [SerializeField]
     float explosionDamage;
+
+    [SerializeField]
+    float upgradedExplosionDamage;
 
     [SerializeField]
     float gravity;
@@ -38,9 +47,11 @@ public class FireElement : BaseElementClass
         {
             newFireball.transform.LookAt(hit.point);
         }
+        if(upgraded)
+        {
+            newFireball.transform.GetChild(1).localScale = upgradedVFXSize;
+        }
         newFireball.GetComponent<Fireball>().SetVars(projectileSpeed, damage * (damageMultiplier * elementData.fireDamageMultiplier), gravity, gravityLifetime, explosionArea, explosionDamage, attackTypes);
-
-        //playerClass.ChangeMana(-manaCost, manaTypes);
     }
 
     public override void ActivateVFX()
@@ -69,5 +80,11 @@ public class FireElement : BaseElementClass
                 audioManager.PlaySFX(otherShootingSoundFX);
             }
         }
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        explosionArea = upgradeExplosionArea;
+        explosionDamage = upgradedExplosionDamage;
     }
 }
