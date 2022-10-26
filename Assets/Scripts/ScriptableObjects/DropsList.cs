@@ -15,13 +15,13 @@ public class DropsList : ScriptableObject
     List<DropListEntry> healthList;
 	
 	[SerializeField]
-	int minCurrencySpawn = 1, maxCurrencySpawn = 2;
+	int minCurrencySpawn = 2, maxCurrencySpawn = 4;
 	
 	[SerializeField]
-	int minAmmoSpawn = 2, maxAmmoSpawn = 4;
+	int minAmmoSpawn = 0, maxAmmoSpawn = 2;
 	
 	[SerializeField]
-	int minHealthSpawn = 1, maxHealthSpawn = 1;
+	int minHealthSpawn = 0, maxHealthSpawn = 1;
 
     public GameObject GetDrop(List<DropListEntry> dropsList)
     {

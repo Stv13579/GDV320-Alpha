@@ -9,8 +9,12 @@ public class AcidCloud : BaseElementSpawnClass
     float cloudDuration;
     float damageTicker;
     float currentDamageTicker;
+    bool upgraded = false;
     [SerializeField] 
     GameObject acidBurnVFX;
+
+    [SerializeField]
+    float healthPercentage;
 
     AudioManager audioManager;
 
@@ -49,7 +53,7 @@ public class AcidCloud : BaseElementSpawnClass
         }
     }
 
-    public void SetVars(float dmg, float size, float duration, List<BaseEnemyClass.Types> types, float tempDamageTicker)
+    public void SetVars(float dmg, float size, float duration, List<BaseEnemyClass.Types> types, float tempDamageTicker, bool upg)
     {
         //Set up the variables according to the element script
         damage = dmg;
@@ -57,6 +61,7 @@ public class AcidCloud : BaseElementSpawnClass
         cloudDuration = duration;
         attackTypes = types;
         damageTicker = tempDamageTicker;
+        upgraded = upg;
     }
 
     void OnTriggerStay(Collider other)
@@ -66,6 +71,10 @@ public class AcidCloud : BaseElementSpawnClass
             if (currentDamageTicker >= damageTicker)
             {
                 //If an enemy is inside the cloud, deal damage to it
+                if(upgraded)
+                {
+                    damage += other.GetComponentInParent<BaseEnemyClass>().GetHealth() * healthPercentage;
+                }
 	            other.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
                 currentDamageTicker = 0.0f;
             }

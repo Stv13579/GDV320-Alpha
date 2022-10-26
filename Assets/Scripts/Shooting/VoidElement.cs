@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class VoidElement : BaseElementClass
 {
@@ -126,6 +127,15 @@ public class VoidElement : BaseElementClass
             shootingScript.GetInComboMode() == false)
         {
             StartCoroutine(Dash());
+            if(upgraded)
+            {
+                List<BaseDropScript> drops = FindObjectsOfType<BaseDropScript>().ToList();
+
+                foreach (BaseDropScript drop in drops)
+                {
+                    drop.SetRoomEnd(true);
+                }
+            }
         }
     }
 
@@ -182,6 +192,10 @@ public class VoidElement : BaseElementClass
     public override void Upgrade()
     {
         base.Upgrade();
+
+
     }
+
+    
 
 }

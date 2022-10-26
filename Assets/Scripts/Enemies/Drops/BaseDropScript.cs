@@ -10,6 +10,10 @@ public class BaseDropScript : MonoBehaviour //Sebastian
     protected AudioManager audioManager;
     bool moving;
     bool roomEnd = false;
+
+    [SerializeField]
+    float pickupRange;
+
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
@@ -27,13 +31,13 @@ public class BaseDropScript : MonoBehaviour //Sebastian
     void Update()
     {
         //If the player moves in range, disable he rigidbody and switch the collider to a trigger
-        if (((player.position - transform.position).magnitude < 5 && !moving) || roomEnd)
+        if (((player.position - transform.position).magnitude < pickupRange && !moving) || roomEnd)
         {
             rb.isKinematic = true;
             this.gameObject.GetComponent<Collider>().isTrigger = true;
             moving = true;
         }
-        else if ((player.position - transform.position).magnitude > 10 && moving && !roomEnd)
+        else if ((player.position - transform.position).magnitude > pickupRange && moving && !roomEnd)
         {
             rb.isKinematic = false;
             this.gameObject.GetComponent<Collider>().isTrigger = false;
