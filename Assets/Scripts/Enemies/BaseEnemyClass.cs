@@ -23,6 +23,8 @@ public class BaseEnemyClass : MonoBehaviour
 
 
     protected bool isDead = false;
+    public bool Dead() { return isDead; }
+
     protected GameObject player;
 
     protected PlayerClass playerClass;
@@ -360,7 +362,10 @@ public class BaseEnemyClass : MonoBehaviour
 	        
 	        deathSpawn.GetComponent<ParticleSystem>().Play();
 	        enemyAnims.gameObject.SetActive(false);
-	        //Instantiate(deathSpawn, transform.position, Quaternion.identity);
+            targettingIndicator.SetActive(false);
+            witheredVFX.SetActive(false);
+            cursedVFX.SetActive(false);
+            //Instantiate(deathSpawn, transform.position, Quaternion.identity);
 
             if (audioManager)
             {
@@ -405,9 +410,7 @@ public class BaseEnemyClass : MonoBehaviour
         StatModifier.ResetModifier(damage);
         StatModifier.ResetModifier(speed);
 
-        targettingIndicator.SetActive(false);
-        witheredVFX.SetActive(false);
-        cursedVFX.SetActive(false);
+        
         List<GameObject> curseList = player.GetComponent<CurseElement>().GetTargetToCurseList();
         for (int i = 0; i < curseList.Count; i++)
         {

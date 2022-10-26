@@ -496,9 +496,9 @@ public class Shooting : MonoBehaviour
     void NonComboShooting()
     {
         //Starts the process of activating the element held in the left hand
-        if (!primaryElements[leftElementIndex].GetStartCoolDown() && 
+        if (primaryElements[leftElementIndex].GetStartCoolDown() == false && 
             Input.GetKey(KeyCode.Mouse0) &&
-            primaryElements[leftElementIndex].GetPlayerHand().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            primaryElements[leftElementIndex].GetPlayerHand().GetCurrentAnimatorStateInfo(2).IsName("Idle"))
         {
 	        primaryElements[leftElementIndex].ActivateElement();
 	        if(primaryElements[leftElementIndex].GetManaName() == PlayerClass.ManaName.Fire)
@@ -540,7 +540,7 @@ public class Shooting : MonoBehaviour
     {
         if (!comboElements[leftElementIndex].comboElements[rightElementIndex].GetStartCoolDown() &&
             Input.GetKey(KeyCode.Mouse0) &&
-            comboElements[leftElementIndex].comboElements[rightElementIndex].GetPlayerHand().GetCurrentAnimatorStateInfo(2).IsName("Idle"))
+            comboElements[leftElementIndex].comboElements[rightElementIndex].GetPlayerHand().GetCurrentAnimatorStateInfo(4).IsName("Idle"))
         {
 	        comboElements[leftElementIndex].comboElements[rightElementIndex].ActivateElement();
 	        if(primaryElements[leftElementIndex].GetManaName() == PlayerClass.ManaName.Fire)

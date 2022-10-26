@@ -81,6 +81,11 @@ public class EnemyTestingUI : MonoBehaviour
         {
             ClearEnemies();
         }
+        if (Input.GetKeyUp(KeyCode.H))
+        {
+            FindObjectOfType<PlayerClass>().ChangeMoney(10);
+        }
+
 
     }
 

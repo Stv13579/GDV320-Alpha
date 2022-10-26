@@ -20,7 +20,17 @@ public class CrystalElement : BaseElementClass
     float damageLimit;
 
     [SerializeField]
+    float upgradedDamageLimit;
+
+    [SerializeField]
     float damageSpeedDecreaser;
+
+    [SerializeField]
+    float upgradedDamageSpeedDecreaser;
+
+    [SerializeField]
+    float upgradedDamage;
+
     protected override void Start()
     {
         base.Start();
@@ -91,5 +101,13 @@ public class CrystalElement : BaseElementClass
                 audioManager.PlaySFX(otherShootingSoundFX);
             }
         }
+    }
+
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        damage = upgradedDamage;
+        damageLimit = upgradedDamageLimit;
+        damageSpeedDecreaser = upgradedDamageSpeedDecreaser;
     }
 }

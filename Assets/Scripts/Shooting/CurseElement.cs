@@ -55,8 +55,15 @@ public class CurseElement : BaseElementClass
             {
                 //Attach an effect to it
                 targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().SetCursed(true);
-                Instantiate(curseVFX, targetToCurseList[i].transform.root);
-                targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Add(DeathEffect);
+                //Instantiate(curseVFX, targetToCurseList[i].transform.root);
+                if(upgraded)
+                {
+                    targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetHitTriggers().Add(HitEffect);
+                }
+                else
+                {
+                    targetToCurseList[i].GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Add(DeathEffect);
+                }
                 playerClass.ChangeMana(-manaCost, manaTypes);
 
             }
@@ -83,6 +90,40 @@ public class CurseElement : BaseElementClass
 
 
         Instantiate(curseDeath, temp.transform.position, Quaternion.identity);
+        if (audioManager)
+        {
+            audioManager.StopSFX("Curse Explosion");
+            audioManager.PlaySFX("Curse Explosion");
+        }
+    }
+
+    public void HitEffect(BaseEnemyClass enem, List<BaseEnemyClass.Types> type)
+    {
+        Collider[] hitColls = null;
+        if (enem)
+        {
+            hitColls = Physics.OverlapSphere(enem.transform.position, explosionRange);
+        }
+        if (hitColls != null)
+        {
+            foreach (Collider hit in hitColls)
+            {
+                if (hit.tag == "Enemy" && hit.GetComponentInParent<BaseEnemyClass>())
+                {
+                    if(hit.GetComponentInParent<BaseEnemyClass>() == enem)
+                    {
+                        hit.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.crystalDamageMultiplier) * 0.1f, types, 1, false);
+                    }
+                    else
+                    {
+                        hit.gameObject.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.crystalDamageMultiplier) * 0.1f, types);
+                    }
+                }
+            }
+        }
+
+
+        Instantiate(curseDeath, enem.transform.position, Quaternion.identity);
         if (audioManager)
         {
             audioManager.StopSFX("Curse Explosion");
@@ -139,6 +180,10 @@ public class CurseElement : BaseElementClass
         //        targetToCurseList.Remove(targetToCurseList[i]);
         //    }
         //}
+        if (Input.GetKey(KeyCode.Mouse0) && !playerHand.GetCurrentAnimatorStateInfo(4).IsName("Idle"))
+        {
+            playerHand.ResetTrigger("CurseCast");
+        }
     }
     protected override bool PayCosts(float modifier = 1)
     {
@@ -151,5 +196,12 @@ public class CurseElement : BaseElementClass
         {
             return false;
         }
+    }
+
+    public override void Upgrade()
+    {
+        base.Upgrade();
+
+        
     }
 }

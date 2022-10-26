@@ -46,7 +46,7 @@ public class CrystalGrenadeElement : BaseElementClass
     {
         base.ElementEffect();
         GameObject newCrystalGrenade = Instantiate(CrystalGrenade, shootingTranform.position, Camera.main.transform.rotation);
-        newCrystalGrenade.GetComponent<CrystalGrenadeProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.crystalDamageMultiplier), timeToExplode, explosionRange, explosionDamage, attackTypes);
+        newCrystalGrenade.GetComponent<CrystalGrenadeProj>().SetVars(projectileSpeed, damage * (damageMultiplier + elementData.crystalDamageMultiplier), timeToExplode, explosionRange, explosionDamage, attackTypes, upgraded);
     }
     // gets called in the animation event triggers
     public override void ActivateVFX()

@@ -1131,7 +1131,7 @@ MonoBehaviour:
     Description: 
     Name: 
     Icon: {fileID: 0}
-  upgradeCost: 5
+  upgradeCost: 20
   upgradeDescription: Deals increased damage
   attackTypes: 00000000
   manaTypes: 00000000
@@ -1153,7 +1153,10 @@ MonoBehaviour:
     type: 3}
   projectileSpeed: 50
   explosionArea: 2
+  upgradeExplosionArea: 5
+  upgradedVFXSize: {x: 3, y: 3, z: 3}
   explosionDamage: 5
+  upgradedExplosionDamage: 7
   gravity: 0.5
   gravityLifetime: 1
 --- !u!114 &5625023910511142018
@@ -1171,7 +1174,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 3588022246820785612, guid: d84d2c64a8d7ce84c97a4650e477e6ef, type: 3}
   wristVFX: {fileID: 8600078919291408424}
-  manaCost: 3
+  manaCost: 7
   animationToPlay: CrystalProj
   animationToPlayAlt: CrystalProjAlt
   playerHand: {fileID: 2017859571}
@@ -1231,7 +1234,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   lifeTimer: 3
   damageLimit: 0.5
+  upgradedDamageLimit: 1
   damageSpeedDecreaser: 10
+  upgradedDamageSpeedDecreaser: 17
+  upgradedDamage: 5
 --- !u!114 &5197923882654677022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1260,7 +1266,7 @@ MonoBehaviour:
     Description: 
     Name: 
     Icon: {fileID: 0}
-  upgradeCost: 5
+  upgradeCost: 7
   upgradeDescription: 
   attackTypes: 02000000
   manaTypes: 02000000
@@ -1309,7 +1315,7 @@ MonoBehaviour:
     Description: 
     Name: 
     Icon: {fileID: 0}
-  upgradeCost: 5
+  upgradeCost: 10
   upgradeDescription: Increases the amount of weakness applied
   attackTypes: 
   manaTypes: 03000000
@@ -1337,6 +1343,8 @@ MonoBehaviour:
   rayCastRange: 100
   outlineColour: {r: 0.0073931217, g: 1, b: 0, a: 1}
   targetedList: []
+  damageResistance: 2
+  upgradedDamageResistance: 3
 --- !u!114 &7929494458867233755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1365,7 +1373,7 @@ MonoBehaviour:
     Description: 
     Name: 
     Icon: {fileID: 0}
-  upgradeCost: 5
+  upgradeCost: 15
   upgradeDescription: 
   attackTypes: 
   manaTypes: 04000000

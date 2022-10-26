@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class VoidElement : BaseElementClass
 {
@@ -99,14 +100,14 @@ public class VoidElement : BaseElementClass
             //targetPos = Indicator.transform.position;
         }
         //Checking if the mouse button has been released at a certain distance, cancels the spell
-        if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") && trueDashDistance < 10 ||
-            !Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold") && trueDashDistance < 10)
+        if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(3).IsName("VoidHold") && trueDashDistance < 10 ||
+            !Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(3).IsName("Void Start Hold") && trueDashDistance < 10)
         {
             isHolding = false;
             playerHand.SetTrigger("VoidCastFail");
         }
-        else if(!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("VoidHold") ||
-            !Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("Void Start Hold"))
+        else if(!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(3).IsName("VoidHold") ||
+            !Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(3).IsName("Void Start Hold"))
         {
             isHolding = false;
             if (audioManager)
@@ -126,6 +127,15 @@ public class VoidElement : BaseElementClass
             shootingScript.GetInComboMode() == false)
         {
             StartCoroutine(Dash());
+            if(upgraded)
+            {
+                List<BaseDropScript> drops = FindObjectsOfType<BaseDropScript>().ToList();
+
+                foreach (BaseDropScript drop in drops)
+                {
+                    drop.SetRoomEnd(true);
+                }
+            }
         }
     }
 
@@ -182,6 +192,10 @@ public class VoidElement : BaseElementClass
     public override void Upgrade()
     {
         base.Upgrade();
+
+
     }
+
+    
 
 }

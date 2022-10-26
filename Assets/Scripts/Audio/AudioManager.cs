@@ -7,6 +7,8 @@ using JetBrains.Annotations;
 
 public class AudioManager : MonoBehaviour
 {
+	static AudioManager currentAudioManager;
+	
     [System.Serializable]
     public class Sound
     {
@@ -103,7 +105,8 @@ public class AudioManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+	{
+		currentAudioManager = this;
         foreach (Sound i in sounds) // loop through the sounds
         {
             i.SetAudioSource(gameObject.AddComponent<AudioSource>());
@@ -279,4 +282,9 @@ public class AudioManager : MonoBehaviour
                 }
         }
     }
+    
+	public static AudioManager GetAudioManager()
+	{
+		return currentAudioManager;
+	}
 }

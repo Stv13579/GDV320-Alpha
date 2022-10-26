@@ -26,6 +26,13 @@ public class NecroticElement : BaseElementClass
 
     [SerializeField]
     List<GameObject> targetedList = new List<GameObject>();
+
+    [SerializeField]
+    float damageResistance;
+
+    [SerializeField]
+    float upgradedDamageResistance;
+
     protected override void Start()
     {
         base.Start();
@@ -54,15 +61,15 @@ public class NecroticElement : BaseElementClass
         for (int i = 0; i < targetedList.Count; i++)
         {
             if (targetedList[i] && targetedList[i].GetComponentInParent<BaseEnemyClass>() && !targetedList[i].GetComponent<EnemyShield>() &&
-                targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 2.0f ||
+                targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != damageResistance ||
                 targetedList[i] && targetedList[i].GetComponentInParent<BaseEnemyClass>() && !targetedList[i].GetComponent<EnemyShield>() &&
-                targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 3.0f)
+                targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != upgradedDamageResistance)
             {
-                if (targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 2.0f || targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != 3.0f)
+                if (targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != damageResistance || targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() != upgradedDamageResistance)
                 {
-                    playerClass.ChangeMana(-manaCost * (upgraded ? 1 : 0.5f) * targetedList.Count, manaTypes);
+                    playerClass.ChangeMana(-manaCost, manaTypes);
                     targetedList[i].GetComponentInParent<BaseEnemyClass>().SetWithered(true);
-                    targetedList[i].GetComponentInParent<BaseEnemyClass>().SetDamageResistance(targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() * (upgraded ? 3.0f : 2.0f));
+                    targetedList[i].GetComponentInParent<BaseEnemyClass>().SetDamageResistance(targetedList[i].GetComponentInParent<BaseEnemyClass>().GetDamageResistance() * (upgraded ? upgradedDamageResistance : damageResistance));
                 }
             }
         }      
@@ -117,6 +124,10 @@ public class NecroticElement : BaseElementClass
                 targetedList[i].GetComponentInParent<BaseEnemyClass>().SetDamageResistance(1);
                 targetedList.Remove(targetedList[i]);
             }
+        }
+        if(Input.GetKey(KeyCode.Mouse1) && !playerHand.GetCurrentAnimatorStateInfo(3).IsName("Idle"))
+        {
+            playerHand.ResetTrigger("NecroticCast");
         }
     }
     public override void LiftEffect()
