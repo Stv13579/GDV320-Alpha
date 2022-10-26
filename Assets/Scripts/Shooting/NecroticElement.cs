@@ -118,6 +118,10 @@ public class NecroticElement : BaseElementClass
                 targetedList.Remove(targetedList[i]);
             }
         }
+        if(Input.GetKey(KeyCode.Mouse1) && !playerHand.GetCurrentAnimatorStateInfo(3).IsName("Idle"))
+        {
+            playerHand.ResetTrigger("NecroticCast");
+        }
     }
     public override void LiftEffect()
     {

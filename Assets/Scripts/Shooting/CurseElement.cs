@@ -139,6 +139,10 @@ public class CurseElement : BaseElementClass
         //        targetToCurseList.Remove(targetToCurseList[i]);
         //    }
         //}
+        if (Input.GetKey(KeyCode.Mouse0) && !playerHand.GetCurrentAnimatorStateInfo(4).IsName("Idle"))
+        {
+            playerHand.ResetTrigger("CurseCast");
+        }
     }
     protected override bool PayCosts(float modifier = 1)
     {

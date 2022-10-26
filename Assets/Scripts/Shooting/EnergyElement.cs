@@ -56,7 +56,7 @@ public class EnergyElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-        if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(1).IsName("EnergyHold"))
+        if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(3).IsName("EnergyHold"))
         {
             LiftEffect();
         }
