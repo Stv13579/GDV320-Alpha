@@ -35,11 +35,8 @@ public class CrystalSlimeProjectile : MonoBehaviour
     {
         // setting the timers at start
         // shoots the projectiles up and out 
-        player = GameObject.Find("Player");
-        if(GameObject.Find("Audio Manager"))
-        {
-            audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
-        }
+	    player = PlayerMovement.GetPlayerMovement().gameObject;//GameObject.Find("Player");
+	    audioManager = AudioManager.GetAudioManager();
     }
     
 	public void Shoot()
