@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameplayUI : MonoBehaviour
 {
+	static GameplayUI currentGameplayUI;
     PlayerClass playerClass;
     Shooting player;
 
@@ -91,10 +92,11 @@ public class GameplayUI : MonoBehaviour
     public void SetCombo(bool tempCombo) { combo = tempCombo; }
 
     void Start()
-    {
-        player = GameObject.Find("Player").GetComponent<Shooting>();
-        playerClass = player.gameObject.GetComponent<PlayerClass>();
-        audioManager = FindObjectOfType<AudioManager>();
+	{
+		currentGameplayUI = this;
+		player = Shooting.GetShooting();
+		playerClass = PlayerClass.GetPlayerClass();
+		audioManager = AudioManager.GetAudioManager();
         comboTimer = maxComboTimer;
         self = this;
         DontDestroyOnLoad(gameObject);
@@ -300,7 +302,7 @@ public class GameplayUI : MonoBehaviour
             isPaused = !isPaused;
             Time.timeScale = isPaused ? 0 : 1;
             player.GetComponent<PlayerLook>().ToggleCursor();
-            player.GetComponent<Shooting>().SetAbleToShoot(!isPaused);
+            player.SetAbleToShoot(!isPaused);
             Pause.SetActive(isPaused);
             if(SceneManager.GetActiveScene().buildIndex == 1)
             {
@@ -340,11 +342,12 @@ public class GameplayUI : MonoBehaviour
 
         SceneManager.LoadScene(1);
 
-        Destroy(GameObject.Find("Player"));
-        Destroy(GameObject.Find("ProphecyManager"));
-        Destroy(GameObject.Find("GameplayUI"));
-        Destroy(GameObject.Find("Trinket Manager"));
-        Time.timeScale = 1;
+	    Destroy(player.gameObject);
+	    Destroy(ProphecyManager.GetProphecyManager());
+	    Destroy(TrinketManager.GetTrinketManager());
+	    Time.timeScale = 1;
+	    Destroy(this.gameObject);
+
     }
 
     public IEnumerator HitMarker()
@@ -433,5 +436,10 @@ public class GameplayUI : MonoBehaviour
 		optionsMenu.GetComponent<OptionsMenuScript>().SaveSettings();
 		optionsMenu.SetActive(false);
 
+	}
+	
+	public static GameplayUI GetGameplayUI()
+	{
+		return currentGameplayUI;
 	}
 }

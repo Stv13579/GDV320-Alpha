@@ -115,7 +115,6 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         currentChargeDuration = fireChargeDuration;
         decalManager = FindObjectOfType<DecalRendererManager>();
         currentMatLerp = 0;
-        //spawner = GameObject.Find("BossSpawner").GetComponent<BossSpawn>();
         if(!GameObject.Find("Boss Healthbar(Clone)"))
         {
             bossHealthBar = Instantiate(healthBar).GetComponent<BossHealthbarScript>();

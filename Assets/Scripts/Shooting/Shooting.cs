@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Shooting : MonoBehaviour
 {
+	static Shooting currentShooting;
     [SerializeField]
     List<BaseElementClass> primaryElements;
     [SerializeField]
@@ -214,12 +215,13 @@ public class Shooting : MonoBehaviour
     public void OnLoadScene(Scene scene, LoadSceneMode mode) { }
 
     void Start()
-    {
+	{
+		currentShooting = this;
         // hard coded for now
         primaryElements[leftElementIndex].GetPlayerHand().SetInteger("ElementL", leftElementIndex + 1);
         catalystElements[rightElementIndex].GetPlayerHand().SetInteger("ElementR", rightElementIndex + 101);
 
-        uiScript = FindObjectOfType<GameplayUI>();
+		uiScript = GameplayUI.GetGameplayUI();
         SceneManager.sceneLoaded += OnLoadScene;
 
         if(tutorial)
@@ -653,5 +655,10 @@ public class Shooting : MonoBehaviour
 		comboElements[2].comboElements.Add(GetComponent<LifeStealElement>());
 		comboElements[2].comboElements.Add(GetComponent<IceSlashElement>());
 		comboElements[2].comboElements.Add(GetComponent<StasisTrapElement>());
-}
+	}
+
+	public static Shooting GetShooting()
+	{
+		return currentShooting;
+	}
 }

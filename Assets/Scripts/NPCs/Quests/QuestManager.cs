@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
+	static QuestManager currentQuestManager;
     [SerializeField]
 	List<Quest> activeQuests;
 	[SerializeField]
@@ -25,6 +26,7 @@ public class QuestManager : MonoBehaviour
     private void Start()
     {
 	    DontDestroyOnLoad(this.gameObject);
+	    currentQuestManager = this;
 	    exists = true;
 	    foreach(NPCData npc in npcs)
 	    {
@@ -115,4 +117,10 @@ public class QuestManager : MonoBehaviour
         }
         return false;
     }
+    
+	public static QuestManager GetQuestManager()
+	{
+		return currentQuestManager;
+	}
+	
 }

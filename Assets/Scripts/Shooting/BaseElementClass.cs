@@ -148,9 +148,8 @@ public class BaseElementClass : MonoBehaviour
         //lVars.Name = elementName;
         lVars.Icon = uiSprite;
         //lVars.Description = elementDescription;
-        player = GameObject.Find("Player");
-        playerClass = player.GetComponent<PlayerClass>();
-        //shootingTranform = GameObject.Find("Elements").transform;
+	    playerClass = PlayerClass.GetPlayerClass();
+	    player = playerClass.gameObject;
         audioManager = FindObjectOfType<AudioManager>();
         elementData = GetComponent<ElementStats>();
         shootingScript = player.GetComponent<Shooting>();

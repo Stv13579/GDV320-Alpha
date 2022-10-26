@@ -15,12 +15,12 @@ public class BaseRangedProjectileScript : MonoBehaviour //Sebastian
     protected virtual void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
-        player = GameObject.Find("Player");
+	    player = PlayerClass.GetPlayerClass().gameObject;
     }
     protected virtual void Awake()
     {
-        player = GameObject.Find("Player");
-        audioManager = FindObjectOfType<AudioManager>();
+        player = PlayerClass.GetPlayerClass().gameObject;
+	    audioManager = AudioManager.GetAudioManager();
     }
     // Update is called once per frame
     protected virtual void Update()

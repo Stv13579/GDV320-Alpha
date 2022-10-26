@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelGeneration : MonoBehaviour
 {
+	static LevelGeneration currentLevelGeneration;
     [SerializeField]
     float roomSize;
     [SerializeField]
@@ -40,7 +41,8 @@ public class LevelGeneration : MonoBehaviour
     bool tutorial;
     
     void Start()
-    {
+	{
+		currentLevelGeneration = this;
         minimap = GameObject.Find("MiniMap");
 
         GenerateLevel();
@@ -400,6 +402,11 @@ public class LevelGeneration : MonoBehaviour
         }
 
     }
+    
+	public static LevelGeneration GetLevelGeneration()
+	{
+		return currentLevelGeneration;
+	}
 
 
 }

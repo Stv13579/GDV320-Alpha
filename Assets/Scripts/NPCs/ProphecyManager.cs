@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProphecyManager : MonoBehaviour
 {
+	static ProphecyManager currentProphecyManager;
     /// <summary>
     /// A list of the attached prophecy components.
     /// When adding a prophecy to the prophecy manager, remember to add it to this list as well.
@@ -23,7 +24,14 @@ public class ProphecyManager : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
+	    DontDestroyOnLoad(gameObject);
+	    currentProphecyManager = this;
     }
+    
+	public static ProphecyManager GetProphecyManager()
+	{
+		return currentProphecyManager;
+	}
+	
 
 }
