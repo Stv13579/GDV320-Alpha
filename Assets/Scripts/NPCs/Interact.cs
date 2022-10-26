@@ -25,7 +25,7 @@ public class Interact : MonoBehaviour
 
     void Start()
     {
-        gameUI = GameObject.Find("GameplayUI");
+	    gameUI = GameplayUI.GetGameplayUI().gameObject;
         npc = GetComponent<NPC>();
     }
     void Update()
@@ -105,7 +105,7 @@ public class Interact : MonoBehaviour
     {
         if (other.gameObject.GetComponent<PlayerClass>())
         {
-            gameUI = GameObject.Find("GameplayUI");
+	        gameUI = GameplayUI.GetGameplayUI().gameObject;
 
             inRange = true;
             playerMove = other.gameObject.GetComponent<PlayerMovement>();

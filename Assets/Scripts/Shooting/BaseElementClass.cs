@@ -150,10 +150,10 @@ public class BaseElementClass : MonoBehaviour
         //lVars.Description = elementDescription;
 	    playerClass = PlayerClass.GetPlayerClass();
 	    player = playerClass.gameObject;
-        audioManager = FindObjectOfType<AudioManager>();
+	    audioManager = AudioManager.GetAudioManager();
         elementData = GetComponent<ElementStats>();
         shootingScript = player.GetComponent<Shooting>();
-        gameplayUI = FindObjectOfType<GameplayUI>();
+	    gameplayUI = GameplayUI.GetGameplayUI();
         currentCoolDownTimer = cooldownTimer;
     }
 

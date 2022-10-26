@@ -107,8 +107,8 @@ public class BaseEnemyClass : MonoBehaviour
 	    player = PlayerMovement.GetPlayerMovement().gameObject;
         playerClass = player.GetComponent<PlayerClass>();
         currentHealth = maxHealth * prophecyManager.prophecyHealthMulti;
-        audioManager = FindObjectOfType<AudioManager>();
-        oldPosition = new Vector3(-1000, -1000, -1000);
+	    audioManager = AudioManager.GetAudioManager();
+	    oldPosition = new Vector3(-1000, -1000, -1000);
         enemyAnims = GetComponentInChildren<Animator>();
         //uiScript = FindObjectOfType<GameplayUI>();
         uiScript = GameplayUI.self;

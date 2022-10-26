@@ -93,7 +93,6 @@ public class GameplayUI : MonoBehaviour
 
     void Start()
 	{
-		currentGameplayUI = this;
 		player = Shooting.GetShooting();
 		playerClass = PlayerClass.GetPlayerClass();
 		audioManager = AudioManager.GetAudioManager();
@@ -136,7 +135,15 @@ public class GameplayUI : MonoBehaviour
         {
             Pause.SetActive(false);
         }
-    }
+	}
+    
+	// Awake is called when the script instance is being loaded.
+	protected void Awake()
+	{
+		currentGameplayUI = this;
+
+	}
+    
     void Update()
     {
         //Getting the current values from the player and updating the UI with them

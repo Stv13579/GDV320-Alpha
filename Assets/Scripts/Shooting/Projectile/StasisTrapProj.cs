@@ -33,8 +33,8 @@ public class StasisTrapProj : MonoBehaviour
     void Start()
     {
         duration = 0.0f;
-        audioManager = FindObjectOfType<AudioManager>();
-        stasisTrap = FindObjectOfType<StasisTrapElement>();
+	    audioManager = AudioManager.GetAudioManager();
+	    stasisTrap = FindObjectOfType<StasisTrapElement>();
     }
 
     // Update is called once per frame

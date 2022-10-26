@@ -13,7 +13,7 @@ public class StartRunScript : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<Shooting>();
+	    player = Shooting.GetShooting();
         portal = GameObject.Find("Model_Environment_Portal_FBX");
     }
 

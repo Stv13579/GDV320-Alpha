@@ -18,8 +18,8 @@ public class WaterProjectile : BaseElementSpawnClass
     GameObject player;
     void Awake()
     {
-        audioManager = FindObjectOfType<AudioManager>();
-        player = GameObject.Find("Player");
+	    audioManager = AudioManager.GetAudioManager();
+	    player = PlayerClass.GetPlayerClass().gameObject;
     }
     void Update()
     {

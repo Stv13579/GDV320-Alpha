@@ -29,8 +29,8 @@ public class BossSpawn : MonoBehaviour
     SAIM saim;
     void Awake()
     {
-        audioManager = FindObjectOfType<AudioManager>();
-        runManager = FindObjectOfType<RunManager>();
+	    audioManager = AudioManager.GetAudioManager();
+	    runManager = RunManager.GetRunManager();
         saim = FindObjectOfType<SAIM>();
     }
     void Update()

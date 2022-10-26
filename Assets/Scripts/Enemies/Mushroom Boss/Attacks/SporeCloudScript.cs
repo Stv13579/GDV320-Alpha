@@ -11,7 +11,7 @@ public class SporeCloudScript : BaseEnemyClass
     GameplayUI gameplayUI;
     private void Start()
     {
-        gameplayUI = FindObjectOfType<GameplayUI>();
+	    gameplayUI = GameplayUI.GetGameplayUI();
     }
     public override void Update()
     {

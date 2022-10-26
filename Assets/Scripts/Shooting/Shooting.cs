@@ -232,8 +232,8 @@ public class Shooting : MonoBehaviour
 
     void Awake()
     {
-        audioManager = FindObjectOfType<AudioManager>();
-        TurnOffComboOrbs();
+	    audioManager = AudioManager.GetAudioManager();
+	    TurnOffComboOrbs();
         TurnOffPrimaryOrbs();
         TurnOffCatalystOrbs();
         TurnOnPrimaryOrbs();

@@ -24,7 +24,7 @@ public class Fireball : BaseElementSpawnClass
     float intensityDecreaser;
     void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
+	    audioManager = AudioManager.GetAudioManager();
     }
 
     void Update()

@@ -19,7 +19,7 @@ public class ElementEquip : DraggedObject
     public override void Equip(DragSlot slot)
     {
         base.Equip(slot);
-        player = GameObject.Find("Player").GetComponent<Shooting>();
+	    player = Shooting.GetShooting();
         ElementSlots eSlot = (ElementSlots)slot;
         if (eSlot.IsPrimary())
         {

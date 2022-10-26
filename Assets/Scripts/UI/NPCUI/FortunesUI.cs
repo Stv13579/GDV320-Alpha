@@ -56,8 +56,8 @@ public class FortunesUI : NPCUI
     void SetProphecies()
     {
         //Choose a set of prophecies from the prophecy manager
-        GameObject prophManager = GameObject.Find("ProphecyManager");
-        List<Prophecy> potentialProphecies = prophManager.GetComponent<ProphecyManager>().allProphecies;
+	    ProphecyManager prophManager = ProphecyManager.GetProphecyManager();
+        List<Prophecy> potentialProphecies = prophManager.allProphecies;
         List<int> choices = new List<int>();
 
        

@@ -13,7 +13,7 @@ public class Lotl1 : Quest
         levelRooms.Clear();
         levelRooms = new List<Room>();
 
-        foreach (GameObject room in GameObject.Find("Level Generator").GetComponent<LevelGeneration>().GetRooms())
+	    foreach (GameObject room in LevelGeneration.GetLevelGeneration().GetRooms())
         {
             levelRooms.Add(room.GetComponent<Room>());
         }

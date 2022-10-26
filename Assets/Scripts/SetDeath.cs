@@ -11,7 +11,7 @@ public class SetDeath : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            FindObjectOfType<PlayerClass>().SetGameOverScreen(regGOScreen);
+	        PlayerClass.GetPlayerClass().SetGameOverScreen(regGOScreen);
         }
     }
 }

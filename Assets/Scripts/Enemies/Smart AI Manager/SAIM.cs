@@ -127,8 +127,8 @@ public class SAIM : MonoBehaviour
     void Awake()
     {
         //Aydens Audio manager
-        audioManager = FindObjectOfType<AudioManager>();
-        runManager = FindObjectOfType<RunManager>();
+	    audioManager = AudioManager.GetAudioManager();
+	    runManager = RunManager.GetRunManager();
         bossRoom = FindObjectOfType<BossRoom>();
         enemyCounter = GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>();
 	    ePool = FindObjectOfType<EnemyObjectPool>();
@@ -142,9 +142,10 @@ public class SAIM : MonoBehaviour
     }
     private void Start()
     {
+	    player = PlayerClass.GetPlayerClass().gameObject;
 
 	    data.SetAdjustedDifficulty(data.GetDifficulty());
-	    data.SetPlayer(GameObject.Find("Player"));
+	    data.SetPlayer(player);
 	    diffAdjTimerDAM = data.GetAdjustTimerDamage();
 	    diffAdjTimerKIL = data.GetAdjustTimerKills();
         
@@ -154,7 +155,6 @@ public class SAIM : MonoBehaviour
             blockers.Add(child.gameObject);
         }
 
-        player = GameObject.Find("Player");
 
         containingRoom = transform.parent.GetComponent<Room>();
     }
@@ -205,7 +205,7 @@ public class SAIM : MonoBehaviour
             {
                 drop.SetRoomEnd(true);
             }
-            GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRoomUpdate();
+	        QuestManager.GetQuestManager().FinishRoomUpdate();
             enemyCounter.text = spawnedEnemies.Count.ToString();
         }
 	    AdjustDifficulty();
@@ -582,12 +582,12 @@ public class SAIM : MonoBehaviour
             GameObject spawnedEnemy = SetSpawn(data.GetEnemyList()[Random.Range(0, data.GetEnemyList().Count)], spawnPosition);
 	        spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
 
-            if(GameObject.Find("Quest Manager"))
+	        if(QuestManager.GetQuestManager())
             {
-                GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy, "Regular");
+		        QuestManager.GetQuestManager().SpawnUpdate(spawnedEnemy, "Regular");
             }
             
-            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().GetHeldItems())
+	        foreach (Item item in PlayerClass.GetPlayerClass().GetHeldItems())
             {
                 item.SpawnTrigger(spawnedEnemy);
             }
@@ -624,12 +624,12 @@ public class SAIM : MonoBehaviour
             GameObject spawnedEnemy = SetSpawn(data.GetEnemyList()[spawnTypeIndex], spawnPosition);
             spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(this.gameObject);
 
-            if (GameObject.Find("Quest Manager"))
+	        if (QuestManager.GetQuestManager())
             {
-                GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy, "Regular");
+		        QuestManager.GetQuestManager().SpawnUpdate(spawnedEnemy, "Regular");
             }
 
-            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().GetHeldItems())
+	        foreach (Item item in PlayerClass.GetPlayerClass().GetHeldItems())
             {
                 item.SpawnTrigger(spawnedEnemy);
             }
@@ -672,12 +672,12 @@ public class SAIM : MonoBehaviour
 				spawnedMask.GetComponent<SpawnerScript>().SetEnemy(spawnedEnemy);
 				spawnedMask.GetComponent<SpawnerScript>().StartSpawn();
 
-				if (GameObject.Find("Quest Manager"))
+				if (QuestManager.GetQuestManager())
 				{
-					GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy, "Regular");
+					QuestManager.GetQuestManager().SpawnUpdate(spawnedEnemy, "Regular");
 				}
 
-				foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().GetHeldItems())
+				foreach (Item item in PlayerClass.GetPlayerClass().GetHeldItems())
 				{
 					item.SpawnTrigger(spawnedEnemy);
 				}
@@ -719,12 +719,12 @@ public class SAIM : MonoBehaviour
             GameObject spawnedEnemy = SetSpawn(eType, spawnPosition);
             spawnedEnemy.GetComponent<BaseEnemyClass>().SetSpawner(gameObject);
 
-            if (GameObject.Find("Quest Manager"))
+            if (QuestManager.GetQuestManager())
             {
-                GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(spawnedEnemy, "Regular");
+                QuestManager.GetQuestManager().SpawnUpdate(spawnedEnemy, "Regular");
             }
 
-            foreach (Item item in GameObject.Find("Player").GetComponent<PlayerClass>().GetHeldItems())
+            foreach (Item item in PlayerClass.GetPlayerClass().GetHeldItems())
             {
                 item.SpawnTrigger(spawnedEnemy);
             }

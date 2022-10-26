@@ -99,7 +99,6 @@ public class PlayerClass : MonoBehaviour
     void Start()
     {
 	    DontDestroyOnLoad(gameObject);
-	    currentPlayerClass = this;
         currentHealth = baseMaxHealth;
         health.baseValue = baseMaxHealth;
         defenseStat.baseValue = baseDefense;
@@ -115,6 +114,12 @@ public class PlayerClass : MonoBehaviour
 	    audioManager = AudioManager.GetAudioManager();
         lowHealthValue = 0.0f;
     }
+    
+	// Awake is called when the script instance is being loaded.
+	protected void Awake()
+	{
+		currentPlayerClass = this;
+	}
 
     public void StartLevel()
     {
