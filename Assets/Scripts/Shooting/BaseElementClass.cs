@@ -80,6 +80,8 @@ public class BaseElementClass : MonoBehaviour
     [SerializeField]
     protected string idleSFX;
 
+    //Set in testing only
+    [SerializeField]
     protected bool upgraded = false;
 
     [SerializeField]
@@ -220,7 +222,7 @@ public class BaseElementClass : MonoBehaviour
         startCoolDown = true;
     }
 
-    //deduct mana from the mana pool. If unable too, return false, otherwise true
+    //deduct mana from the mana pool. If unable to, return false, otherwise true
     protected virtual bool PayCosts(float modifier = 1)
     {
         if (playerClass.ManaCheck(manaCost * modifier, manaTypes))

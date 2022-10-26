@@ -14,13 +14,15 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
     Vector3 originalPosition;
     bool isMoving;
     bool isAttached;
-    Collider enemy;
+    GameObject enemy;
     [SerializeField]
     GameObject inAir;
     [SerializeField]
     GameObject attached;
     [SerializeField]
     GameObject explosion;
+    bool upgraded = false;
+    bool onGround = false;
     enum grenadestate
     {
         inAir,
@@ -63,7 +65,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                 {
                     inAir.SetActive(false);
                     attached.SetActive(true);
-                    if (currentTimer >= timerToExplode)
+                    if (currentTimer >= timerToExplode || enemy.GetComponent<BaseEnemyClass>().Dead())
                     {
                         currentState = grenadestate.explosion;
                     }
@@ -109,7 +111,19 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                     {
                         explosion.GetComponent<ParticleSystem>().Play();
                     }
-                    currentState = grenadestate.destroy;
+                    if(onGround || enemy.GetComponent<BaseEnemyClass>().Dead())
+                    {
+                        currentState = grenadestate.destroy;
+                    }
+                    else if(upgraded)
+                    {
+                        currentTimer = 0;
+                        currentState = grenadestate.attached;
+                    }
+                    else
+                    {
+                        currentState = grenadestate.destroy;
+                    }
                     break;
                 }
             case grenadestate.destroy:
@@ -136,7 +150,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
 
         }
     }
-    public void SetVars(float spd, float dmg, float timer, float explosionRadius, float expDamage, List<BaseEnemyClass.Types> types)
+    public void SetVars(float spd, float dmg, float timer, float explosionRadius, float expDamage, List<BaseEnemyClass.Types> types, bool upg)
     {
         speed = spd;
         damage = dmg;
@@ -144,6 +158,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
         explosionRange = explosionRadius;
         explosionDamage = expDamage;
         attackTypes = types;
+        upgraded = upg;
     }
 
     void OnTriggerEnter(Collider other)
@@ -156,13 +171,16 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
 		    this.GetComponentInParent<Rigidbody>().isKinematic = true;
             speed = 0;
 		    other.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
-            other = enemy;
+            enemy = other.gameObject;
+            onGround = false;
         }
         else if(other.gameObject.layer == 10)
         {
             isMoving = false;
             this.GetComponent<Rigidbody>().useGravity = false;
             originalPosition = transform.position;
+            enemy = other.gameObject;
+            onGround = true;
         }
     }
 
