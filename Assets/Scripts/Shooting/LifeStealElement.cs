@@ -103,10 +103,11 @@ public class LifeStealElement : BaseElementClass
                     enemy.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage * (damageMultiplier + elementData.waterDamageMultiplier), attackTypes);
                     currentDamageAndHealthTicker = 0;
                 }
-                playerClass.ChangeHealth(healValue, null);
+                playerClass.ChangeHealth(healValue * (upgraded ? 1.5f : 1), null);
             }
         }
     }
+
     void DeactivateLifeSteal()
     {
         if (audioManager)
