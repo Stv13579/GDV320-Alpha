@@ -32,7 +32,10 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
             // instanciates 5 projectiles above itself
             for (int i = 0; i < 5; i++)
             {
-                GameObject tempEnemyProjectile = Instantiate(enemyProjectile, transform.position + new Vector3(0.0f, 3.0f, 0.0f), Quaternion.identity);
+	            GameObject tempEnemyProjectile = EnemyAttackPool.GetAttackPool().GetReadiedAttack(enemyProjectile);
+	            tempEnemyProjectile.SetActive(true);
+	            tempEnemyProjectile.transform.position = transform.position + new Vector3(0.0f, 3.0f, 0.0f);
+	            tempEnemyProjectile.transform.rotation = Quaternion.identity;
                 tempEnemyProjectile.GetComponent<CrystalSlimeProjectile>().enemy = gameObject;
                 // ignores physics for the with the crystal slime and the enemy crystal slime projectiles 
                 Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), tempEnemyProjectile.GetComponent<Collider>());
@@ -42,7 +45,7 @@ public class CrystalSlimeEnemy : WaterSlimeEnemy
                 tempEnemyProjectile.GetComponent<CrystalSlimeProjectile>().SetVars(damageAmount * (prophecyManager.prophecyDamageMulti));
                 //setting the rotations of the projectiles so that it spawns in like a circle
                 tempEnemyProjectile.transform.eulerAngles = new Vector3(tempEnemyProjectile.transform.eulerAngles.x, tempEnemyProjectile.transform.eulerAngles.y + (360.0f / 5.0f * i), tempEnemyProjectile.transform.eulerAngles.z);
-
+	            tempEnemyProjectile.GetComponent<CrystalSlimeProjectile>().Shoot();
                 if (audioManager)
                 {
                     // play SFX

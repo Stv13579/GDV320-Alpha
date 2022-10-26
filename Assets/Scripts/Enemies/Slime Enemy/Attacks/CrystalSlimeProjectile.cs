@@ -33,17 +33,20 @@ public class CrystalSlimeProjectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isMoving = true;
         // setting the timers at start
-        rb = this.gameObject.GetComponent<Rigidbody>();
         // shoots the projectiles up and out 
-        rb.AddForce(this.transform.up * upForce + this.transform.forward * forwardForce);
         player = GameObject.Find("Player");
         if(GameObject.Find("Audio Manager"))
         {
             audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
         }
     }
+    
+	public void Shoot()
+	{
+		isMoving = true;
+		this.gameObject.GetComponent<Rigidbody>().AddForce(this.transform.up * upForce + this.transform.forward * forwardForce);
+	}
 
     // Update is called once per frame
     void Update()
@@ -59,7 +62,7 @@ public class CrystalSlimeProjectile : MonoBehaviour
         if (isMoving == true)
         {
             //if follow timer is greater then 0 then follow the player
-            if (followTimer >= followTimerLength)
+	        if (followTimer >= 0)
             {
                 this.transform.position = Vector3.MoveTowards(this.transform.position, player.transform.position, 10 * Time.deltaTime);
             }
@@ -70,13 +73,20 @@ public class CrystalSlimeProjectile : MonoBehaviour
             this.GetComponent<SphereCollider>().enabled = false;
         }
         // if life timer is less then 0 then destroy enemy slime crystal projectile and reset timer
-        if (lifeTimer <= lifeTimerLength)
+	    if (lifeTimer <= 0)
         {
             Color color = this.gameObject.GetComponent<MeshRenderer>().material.GetColor("_BaseColour");
             color = new Color(color.r, color.g, color.b, color.a - Time.deltaTime);
             if (color.a <= 0.0f)
             {
-                Destroy(this.gameObject);
+            	color.a = 1;
+            	rotTimer = 0.0f;
+            	followTimer = followTimerLength;
+            	lifeTimer = lifeTimerLength;
+            	this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            	this.gameObject.GetComponent<MeshRenderer>().material.SetColor("_BaseColour", color);
+            	this.gameObject.SetActive(false);
+	            //Destroy(this.gameObject);
             }
             else
             {
