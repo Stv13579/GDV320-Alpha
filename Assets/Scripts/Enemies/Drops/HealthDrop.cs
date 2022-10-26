@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthDrop : BaseDropScript //Sebastian
 {
     [SerializeField]
-    static float healthRestore = 50;
+    static float healthRestore = 75;
 
     protected override void PickupEffect()
     {
