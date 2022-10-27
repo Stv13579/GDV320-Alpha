@@ -71,7 +71,6 @@ public class PlayerLook : MonoBehaviour
     void Start()
     {
 	    ToggleCursor();
-	    playerLook = this;
 	    if(PlayerPrefs.HasKey("Sensitivity"))
 	    {
 		    sensitivity = PlayerPrefs.GetFloat("Sensitivity");
@@ -82,7 +81,10 @@ public class PlayerLook : MonoBehaviour
 		    currentCamera.fieldOfView = fov;
 	    }
     }
-
+    void Awake()
+    {
+        playerLook = this;
+    }
     // Update is called once per frame
     void Update()
 	{
