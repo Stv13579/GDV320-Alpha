@@ -216,7 +216,6 @@ public class Shooting : MonoBehaviour
 
     void Start()
 	{
-		currentShooting = this;
         // hard coded for now
         primaryElements[leftElementIndex].GetPlayerHand().SetInteger("ElementL", leftElementIndex + 1);
         catalystElements[rightElementIndex].GetPlayerHand().SetInteger("ElementR", rightElementIndex + 101);
@@ -232,7 +231,8 @@ public class Shooting : MonoBehaviour
 
     void Awake()
     {
-	    audioManager = AudioManager.GetAudioManager();
+        currentShooting = this;
+        audioManager = AudioManager.GetAudioManager();
 	    TurnOffComboOrbs();
         TurnOffPrimaryOrbs();
         TurnOffCatalystOrbs();

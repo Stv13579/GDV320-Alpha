@@ -1132,7 +1132,7 @@ MonoBehaviour:
     Name: 
     Icon: {fileID: 0}
   upgradeCost: 20
-  upgradeDescription: Deals increased damage
+  upgradeDescription: Deals more impact damage and bigger impact radius
   attackTypes: 00000000
   manaTypes: 00000000
   playerClass: {fileID: 0}
@@ -1144,6 +1144,7 @@ MonoBehaviour:
   otherShootingSoundFX: Fire Element Shot Alt
   switchElementSFX: Fire Element Equip
   idleSFX: Fire Element Idle
+  upgraded: 0
   damage: 20
   switchAnimationName: FireTransition
   startCoolDown: 0
@@ -1188,7 +1189,7 @@ MonoBehaviour:
     Name: 
     Icon: {fileID: 0}
   upgradeCost: 5
-  upgradeDescription: Deals more damage
+  upgradeDescription: Deals more damage but damage fall off increase
   attackTypes: 01000000
   manaTypes: 01000000
   playerClass: {fileID: 0}
@@ -1200,6 +1201,7 @@ MonoBehaviour:
   otherShootingSoundFX: Crystal Element Shot Alt
   switchElementSFX: Crystal Element Equip
   idleSFX: Crystal Element Idle (maybe)
+  upgraded: 0
   damage: 3
   switchAnimationName: CrystalTransition
   startCoolDown: 0
@@ -1258,7 +1260,7 @@ MonoBehaviour:
   animationToPlayAlt: WaterProjAlt
   playerHand: {fileID: 2017859571}
   elementName: Water
-  elementDescription: Increased water damage
+  elementDescription: Slows the enemy
   uiSprite: {fileID: 21300000, guid: 1733c11400809744f8c61d5df2105825, type: 3}
   crosshair: {fileID: -2653462120342444952, guid: e3611543415e2534d80aaaefa8d6d06a,
     type: 3}
@@ -1279,6 +1281,7 @@ MonoBehaviour:
   otherShootingSoundFX: Water Element Shot Alt
   switchElementSFX: Water Element Equip
   idleSFX: Water Element Idle
+  upgraded: 0
   damage: 20
   switchAnimationName: WaterTransition
   startCoolDown: 0
@@ -1328,6 +1331,7 @@ MonoBehaviour:
   otherShootingSoundFX: Necrotic Element Release
   switchElementSFX: Necrotic Element Equip
   idleSFX: Necrotic Element Idle
+  upgraded: 0
   damage: 0
   switchAnimationName: NecroticTransition
   startCoolDown: 0
@@ -1365,7 +1369,7 @@ MonoBehaviour:
   animationToPlayAlt: 
   playerHand: {fileID: 2017859571}
   elementName: Energy
-  elementDescription: Parry at the right time to restore some energy mana
+  elementDescription: Increase stun duration and charge distance
   uiSprite: {fileID: 6129296847577865886, guid: d39b8bc076de18747869f25ce241874b,
     type: 3}
   crosshair: {fileID: 0}
@@ -1386,6 +1390,7 @@ MonoBehaviour:
   otherShootingSoundFX: Energy Element Shot
   switchElementSFX: Energy Element Equip
   idleSFX: Energy Element Idle
+  upgraded: 0
   damage: 0
   switchAnimationName: EnergyTransition
   startCoolDown: 0
@@ -1440,6 +1445,7 @@ MonoBehaviour:
   otherShootingSoundFX: Void Element Release
   switchElementSFX: Void Element Equip
   idleSFX: Void Element Idle
+  upgraded: 0
   damage: 0
   switchAnimationName: VoidTransition
   startCoolDown: 0
@@ -1489,6 +1495,7 @@ MonoBehaviour:
   otherShootingSoundFX: Laser Beam Shot
   switchElementSFX: Laser Beam Equip
   idleSFX: Laser Beam Idle
+  upgraded: 0
   damage: 10
   switchAnimationName: LaserTransition
   startCoolDown: 0
@@ -1525,8 +1532,8 @@ MonoBehaviour:
     Description: A high powered projectile attack. Slow to fire but highly accurate.
     Name: Shard Cannon
     Icon: {fileID: 0}
-  upgradeCost: 5
-  upgradeDescription: Deals more damage
+  upgradeCost: 25
+  upgradeDescription: Increase Firerate and Decrease Mana cost
   attackTypes: 01000000
   manaTypes: 0100000004000000
   playerClass: {fileID: 0}
@@ -1538,6 +1545,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Shard Cannon Equip
   idleSFX: Shard Cannon Idle (maybe)
+  upgraded: 0
   damage: 40
   switchAnimationName: ShardCannonTransition
   startCoolDown: 0
@@ -1546,6 +1554,9 @@ MonoBehaviour:
   shardProj: {fileID: 2115769081119537338, guid: 316042c01d1629e499fece67a8fd0bed,
     type: 3}
   projectileSpeed: 100
+  upgradedCoolDownTimer: 0.8
+  animsSpeed: 2
+  upgradedManaCost: 35
 --- !u!114 &5153590985047999224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1587,6 +1598,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Acid Cloud Equip
   idleSFX: Acid Cloud Idle
+  upgraded: 0
   damage: 10
   switchAnimationName: AcidCloudTransition
   startCoolDown: 0
@@ -1638,6 +1650,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Land Mine Equip
   idleSFX: Land Mine Idle
+  upgraded: 0
   damage: 80
   switchAnimationName: LandMineTransition
   startCoolDown: 0
@@ -1646,12 +1659,15 @@ MonoBehaviour:
   landMineProjectile: {fileID: 5230698329136778979, guid: d3d1480b2678d1f4d87879615a4cc650,
     type: 3}
   indicator: {fileID: 739160400}
-  explosiveRadius: 10
+  explosiveRadius: 5
   lifeTimer: 7
   rayCastRange: 10
   layerMask:
     serializedVersion: 2
     m_Bits: 66816
+  activateTime: 1
+  c: 0
+  upgradedExplosiveRadius: 10
 --- !u!114 &7904701518895008356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1694,6 +1710,7 @@ MonoBehaviour:
   otherShootingSoundFX: Curse Release
   switchElementSFX: Curse Equip
   idleSFX: Curse Idle
+  upgraded: 0
   damage: 75
   switchAnimationName: CurseTransition
   startCoolDown: 0
@@ -1739,7 +1756,7 @@ MonoBehaviour:
     Name: Ice Slash
     Icon: {fileID: 0}
   upgradeCost: 5
-  upgradeDescription: Deals more damage
+  upgradeDescription: Increase scale over time
   attackTypes: 02000000
   manaTypes: 0200000004000000
   playerClass: {fileID: 0}
@@ -1751,6 +1768,7 @@ MonoBehaviour:
   otherShootingSoundFX: Ice Slash Shot Alt
   switchElementSFX: Ice Slash Equip
   idleSFX: Ice Slash Idle
+  upgraded: 0
   damage: 17.25
   switchAnimationName: IceSlashTransition
   startCoolDown: 0
@@ -1803,6 +1821,7 @@ MonoBehaviour:
   otherShootingSoundFX: Life Steal Shot
   switchElementSFX: Life Steal Equip
   idleSFX: Life Steal Idle
+  upgraded: 0
   damage: 5
   switchAnimationName: LifeStealTransition
   startCoolDown: 0
@@ -1861,6 +1880,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Crystal Grenade Equip
   idleSFX: Crystal Grenade Idle (maybe)
+  upgraded: 0
   damage: 3
   switchAnimationName: CrystalGrenadeTransition
   startCoolDown: 0
@@ -1914,6 +1934,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: Stasis Trap Equip
   idleSFX: Stasis Trap Idle
+  upgraded: 0
   damage: 15
   switchAnimationName: StasisTrapTransition
   startCoolDown: 0
@@ -1987,6 +2008,7 @@ MonoBehaviour:
   otherShootingSoundFX: 
   switchElementSFX: 
   idleSFX: 
+  upgraded: 0
   damage: 0
   switchAnimationName: 
   startCoolDown: 0

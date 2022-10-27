@@ -24,6 +24,15 @@ public class LandMineElement : BaseElementClass
     [SerializeField]
     LayerMask layerMask;
 
+    [SerializeField]
+    float activateTime;
+
+    [SerializeField]
+    float upgradedActivateTime;
+
+    [SerializeField]
+    float upgradedExplosiveRadius;
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -59,13 +68,13 @@ public class LandMineElement : BaseElementClass
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rayCastRange, layerMask))
         {
             GameObject newLandMine = Instantiate(landMineProjectile, hit.point + new Vector3(0, 0.75f, 0), Quaternion.identity);
-            newLandMine.GetComponent<LandMineProj>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), lifeTimer, explosiveRadius, attackTypes);
+            newLandMine.GetComponent<LandMineProj>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), lifeTimer, explosiveRadius, activateTime, attackTypes);
         }
         else
         {
             Vector3 pos = Camera.main.transform.position + Camera.main.transform.forward.normalized * rayCastRange;
             GameObject newLandMine = Instantiate(landMineProjectile, pos + new Vector3(0, 0.75f, 0), Quaternion.identity);
-            newLandMine.GetComponent<LandMineProj>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), lifeTimer, explosiveRadius, attackTypes);
+            newLandMine.GetComponent<LandMineProj>().SetVars(damage * (damageMultiplier + elementData.fireDamageMultiplier), lifeTimer, explosiveRadius, activateTime, attackTypes);
         }
     }
 
@@ -83,5 +92,11 @@ public class LandMineElement : BaseElementClass
         base.StartAnims(animationName);
 
         playerHand.SetTrigger(animationName);
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        activateTime = upgradedActivateTime;
+        explosiveRadius = upgradedExplosiveRadius;
     }
 }
