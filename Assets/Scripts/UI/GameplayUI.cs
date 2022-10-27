@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameplayUI : MonoBehaviour
 {
 	static GameplayUI currentGameplayUI;
+	static GameObject gameplayUIObject;
     PlayerClass playerClass;
     Shooting player;
 
@@ -153,6 +154,7 @@ public class GameplayUI : MonoBehaviour
 	protected void Awake()
 	{
 		currentGameplayUI = this;
+		gameplayUIObject = this.gameObject;
 
 	}
     
@@ -462,5 +464,10 @@ public class GameplayUI : MonoBehaviour
 	public static GameplayUI GetGameplayUI()
 	{
 		return currentGameplayUI;
+	}
+	
+	public static GameObject GetUIObject()
+	{
+		return gameplayUIObject;
 	}
 }

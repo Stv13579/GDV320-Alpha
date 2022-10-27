@@ -6,7 +6,7 @@ using System;
 public class PlayerClass : MonoBehaviour
 {
 	static PlayerClass currentPlayerClass;
-	
+	static GameObject player;
     [SerializeField]
     float currentHealth;
     [SerializeField]
@@ -119,6 +119,7 @@ public class PlayerClass : MonoBehaviour
 	protected void Awake()
 	{
 		currentPlayerClass = this;
+		player = this.gameObject;
 	}
 
     public void StartLevel()
@@ -379,5 +380,10 @@ public class PlayerClass : MonoBehaviour
 	public static PlayerClass GetPlayerClass()
 	{
 		return currentPlayerClass;
+	}
+	
+	public static GameObject GetPlayer()
+	{
+		return player;
 	}
 }

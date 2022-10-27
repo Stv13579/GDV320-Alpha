@@ -10,8 +10,10 @@ public class LevelPreloaderScript : MonoBehaviour
 	int sceneToLoad;
     // Start is called before the first frame update
     void Start()
-    {
-	    StartCoroutine(StartSceneLoad(sceneToLoad));
+	{
+		StartCoroutine(StartSceneLoad(6));
+		LoadingScreen.SetSceneToLoad(sceneToLoad);
+		LoadingScreen.StartSceneLoad();
     }
     
 	public IEnumerator StartSceneLoad(int scene)
@@ -26,6 +28,8 @@ public class LevelPreloaderScript : MonoBehaviour
 		}
 
 	}
+	
+	
 	
 	public void LoadScene()
 	{
