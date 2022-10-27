@@ -10,7 +10,6 @@ public class OptionsMenuScript : MonoBehaviour
 	static float mouseSensitivity = 2;
 	static int fov = 90;
 	static float musicVolume = 100.0f;
-
 	[SerializeField]
 	TextMeshProUGUI soundVolumeText, MusicVolumeText, mouseText, fovText;
 	
@@ -31,14 +30,24 @@ public class OptionsMenuScript : MonoBehaviour
 	{
 		mouseSensitivity = mouseSlider.value;
 		mouseText.text = mouseSensitivity.ToString("f1");
+		if (PlayerLook.GetPlayerLook())
+		{
+			PlayerLook.GetPlayerLook().SetSensitivity(mouseSensitivity);
+		}
 	}
 	
 	public void UpdateFOV()
 	{
 		fov = Mathf.RoundToInt(fovSlider.value);
 		fovText.text = fov.ToString();
-		PlayerLook.GetPlayerLook().SetFOV(fov);
-		PlayerMovement.GetPlayerMovement().SetFOV(fov);
+		if (PlayerLook.GetPlayerLook())
+		{
+			PlayerLook.GetPlayerLook().SetFOV(fov);
+		}
+		if (PlayerMovement.GetPlayerMovement())
+		{
+			PlayerMovement.GetPlayerMovement().SetFOV(fov);
+		}
 	}
 
     public static float GetSoundVolume()

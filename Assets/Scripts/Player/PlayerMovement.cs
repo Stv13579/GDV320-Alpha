@@ -37,8 +37,8 @@ public class PlayerMovement : MonoBehaviour
 
     bool isGrounded = false;
 
-    float headBobTimer = 0.0f;
-    float headBobFrequency = 1.0f;
+    float headBobTimer = 1.0f;
+    float headBobFrequency = 0.75f;
     float headBobAmplitude = 0.02f;
     // the default position of the head
     float headBobNeutral = 0.80f;
@@ -158,9 +158,11 @@ public class PlayerMovement : MonoBehaviour
 		    initialFOV = PlayerPrefs.GetInt("FOV");
 	    }
 	    MaxFOVMoving = initialFOV + increaseFOV;
-	    playerMovement = this;
     }
-
+    void Awake()
+    {
+        playerMovement = this;
+    }
     // Update is called once per frame
     void Update()
     {
