@@ -35,7 +35,7 @@ public class GameplayUI : MonoBehaviour
 
     float comboTimer = 1.0f;
     [SerializeField]
-    GameObject hitMarker;
+    GameObject hitMarker, weakMarker, strongMarker;
 
     [SerializeField]
     GameObject hitMarkerShield;
@@ -87,6 +87,10 @@ public class GameplayUI : MonoBehaviour
     public Image GetDamageIndicator() { return damageIndicator; }
     public GameObject GetHitMarker() { return hitMarker; }
     public GameObject GetHitMarkerShield() { return hitMarkerShield; }
+
+    public GameObject GetWeakMarker() { return weakMarker; }
+    public GameObject GetStrongMarker() { return strongMarker; }
+
     public bool GetCombo() { return combo; }
     public void SetCombo(bool tempCombo) { combo = tempCombo; }
 
@@ -105,6 +109,14 @@ public class GameplayUI : MonoBehaviour
         if (hitMarkerShield)
         {
             hitMarkerShield.SetActive(false);
+        }
+        if (weakMarker)
+        {
+            weakMarker.SetActive(false);
+        }
+        if (strongMarker)
+        {
+            strongMarker.SetActive(false);
         }
         if (lifeStealFullScreen)
         {
@@ -192,14 +204,14 @@ public class GameplayUI : MonoBehaviour
         {
 	        if (hitMarker.activeSelf == true)
             {
-                StartCoroutine(HitMarker());
+                StartCoroutine(HitMarker(hitMarker));
             }
         }
         if(hitMarkerShield)
         {
             if(hitMarkerShield.activeSelf == true)
             {
-                StartCoroutine(HitMarkerShield());
+                StartCoroutine(HitMarker(hitMarkerShield));
             }
         }
 
@@ -347,6 +359,19 @@ public class GameplayUI : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public IEnumerator HitMarker(GameObject hM)
+    {
+        if (hM)
+        {
+            hM.SetActive(true);
+        }
+        yield return new WaitForSeconds(0.2f);
+        if (hM)
+        {
+            hM.SetActive(false);
+        }
+    }
+
     public IEnumerator HitMarker()
     {
         if (hitMarker)
@@ -359,18 +384,7 @@ public class GameplayUI : MonoBehaviour
             hitMarker.SetActive(false);
         }
     }
-    public IEnumerator HitMarkerShield()
-    {
-        if (hitMarkerShield)
-        {
-            hitMarkerShield.SetActive(true);
-        }
-        yield return new WaitForSeconds(0.2f);
-        if (hitMarkerShield)
-        {
-            hitMarkerShield.SetActive(false);
-        }
-    }
+
     public IEnumerator DamageIndicator(GameObject source)
     {
         Image tempDamageIndicator = null;

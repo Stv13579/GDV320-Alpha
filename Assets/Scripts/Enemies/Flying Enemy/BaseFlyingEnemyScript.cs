@@ -11,6 +11,10 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
     protected float effectTimer, effectRange;
     float effectTimerMulti = 1.0f;
     protected bool effect = false;
+    bool hitHeight = false;
+    [SerializeField]
+    float bobHeight;
+    float bobbedAmount = 0;
     [SerializeField]
     protected LayerMask moveDetect;
 
@@ -50,16 +54,9 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
                 effect = true;
                 enemyAnims.SetTrigger("Effect");
                 enemyAnims.ResetTrigger("ExitEffect");
-
+                Bob();
             }
 
-            //Activate the effect every few seconds, with multiplier if we want it
-            //timer += Time.deltaTime;
-            //if(timer > effectTimer * effectTimerMulti && !effect)
-            //{
-            //    effect = true;
-            //    enemyAnims.SetTrigger("Effect");
-            //}
             Quaternion startRot = this.transform.rotation;
             this.transform.LookAt(targetPos);
             this.transform.eulerAngles += new Vector3(0, 90, 0);
@@ -67,10 +64,6 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
             this.transform.rotation = Quaternion.RotateTowards(startRot, this.transform.rotation, 90.0f * Time.deltaTime);
 
         }
-
-
-
-
     }
 
     //Makes sure the target position is valid, if so move towards it, if not find a new target
@@ -83,12 +76,9 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
         this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, moveSpeed * Time.deltaTime);
     }
 
-
-
     //Locate the player for the crystal enemy, pick an enemy for the other variants
     protected virtual void FindTarget()
     {
-
         //List<BaseEnemyClass> validEnemies = new List<BaseEnemyClass>();
         foreach (BaseEnemyClass enemy in spawner.GetComponent<SAIM>().spawnedEnemies)
         {
@@ -110,21 +100,6 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
                 }
             }
         }
-        //if(validEnemies.Count > 0)
-        //{
-        //    int i = Random.Range(0, validEnemies.Count);
-        //    target = validEnemies[i].gameObject;
-        //    //SetTargetPos();
-        //}
-        //else
-        //{
-        //    //target = this.gameObject;
-        //    //targetPos = player.transform.position + new Vector3(0, 10, 0);
-        //    //currentHealth = 0;
-        //    //Death();
-        //    target = player;
-        //    //SetTargetPos();
-        //}
     }
 
     void SetTargetPos()
@@ -159,5 +134,38 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
     public void SetEffectMulti(float multi)
     {
         effectTimerMulti = multi;
+    }
+
+    //Move up and down
+    void Bob()
+    {
+        if(hitHeight)
+        {
+            if(bobbedAmount <= 0)
+            {
+                hitHeight = false;
+            }
+            else
+            {
+                Vector3 pos = transform.position;
+                pos.y -= Time.deltaTime * 3;
+                transform.position = pos;
+                bobbedAmount -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            if(bobbedAmount >= bobHeight)
+            {
+                hitHeight = true;
+            }
+            else
+            {
+                Vector3 pos = transform.position;
+                pos.y += Time.deltaTime * 3;
+                transform.position = pos;
+                bobbedAmount += Time.deltaTime;
+            }
+        }
     }
 }

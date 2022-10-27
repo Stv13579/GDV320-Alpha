@@ -15,6 +15,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
     bool isMoving;
     bool isAttached;
     GameObject enemy;
+    Vector3 contactPoint;
     [SerializeField]
     GameObject inAir;
     [SerializeField]
@@ -23,6 +24,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
     GameObject explosion;
     bool upgraded = false;
     bool onGround = false;
+    bool shieldAttached = false;
     enum grenadestate
     {
         inAir,
@@ -47,6 +49,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
     void Update()
     {
         currentTimer += Time.deltaTime;
+
         if (!isAttached)
         {
             MoveProjectile();
@@ -65,7 +68,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                 {
                     inAir.SetActive(false);
                     attached.SetActive(true);
-                    if (currentTimer >= timerToExplode || enemy.GetComponent<BaseEnemyClass>().Dead())
+                    if (currentTimer >= timerToExplode || (!onGround && enemy.GetComponent<BaseEnemyClass>().Dead()))
                     {
                         currentState = grenadestate.explosion;
                     }
@@ -77,6 +80,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                     attached.SetActive(false);
                     explosion.SetActive(true);
                     explosion.transform.SetParent(null);
+                    
                     if (audioManager)
                     {
                         audioManager.StopSFX("Crystal Grenade Explosion");
@@ -114,9 +118,11 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                     if(onGround || enemy.GetComponent<BaseEnemyClass>().Dead())
                     {
                         currentState = grenadestate.destroy;
+                       
                     }
-                    else if(upgraded)
+                    else if(upgraded && !shieldAttached)
                     {
+
                         currentTimer = 0;
                         currentState = grenadestate.attached;
                     }
@@ -165,14 +171,26 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
     {
 	    if(other.gameObject.layer == 8 && other.GetComponentInParent<BaseEnemyClass>())
         {
+            if(other.GetComponentInParent<BaseEnemyClass>().Dead())
+            {
+                return;
+            }
 		    this.GetComponentInParent<Rigidbody>().useGravity = false;
             isAttached = true;
-            this.gameObject.transform.SetParent(other.transform);
 		    this.GetComponentInParent<Rigidbody>().isKinematic = true;
             speed = 0;
-		    other.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+            other.GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Add(ResetTrigger);
+            other.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
+            
             enemy = other.gameObject;
+            transform.SetParent(enemy.transform);
             onGround = false;
+
+            if(other.GetComponent<EnemyShield>())
+            {
+                shieldAttached = true;
+                transform.SetParent(enemy.transform.parent);
+            }
         }
         else if(other.gameObject.layer == 10)
         {
@@ -184,9 +202,11 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
         }
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.yellow;
-    //    Gizmos.DrawWireSphere(transform.position, explosionRange);
-    //}
+    void ResetTrigger(GameObject enemy)
+    {
+        currentState = grenadestate.explosion;
+        isAttached = false;
+        GetComponentInParent<Rigidbody>().useGravity = true;
+        GetComponentInParent<Rigidbody>().isKinematic = false;
+    }
 }

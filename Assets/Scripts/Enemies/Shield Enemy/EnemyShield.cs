@@ -56,8 +56,8 @@ public class EnemyShield : BaseEnemyClass
 
         if(uiScript)
         {
-            StopCoroutine(uiScript.HitMarkerShield());
-            StartCoroutine(uiScript.HitMarkerShield());
+            StopCoroutine(uiScript.HitMarker(uiScript.GetHitMarkerShield()));
+            StartCoroutine(uiScript.HitMarker(uiScript.GetHitMarkerShield()));
         }
 
         Death();
@@ -104,11 +104,15 @@ public class EnemyShield : BaseEnemyClass
         {
             //Normally do death animation/vfx, might even fade alpha w/e before deleting.
 
-            GetComponentInParent<ShieldEnemyScript>().GuardBreak();
-            //Destroy(gameObject);
+            foreach (DeathTrigger dTrigs in deathTriggers)
+            {
+                dTrigs(gameObject);
+            }
 
             currentHealth = maxHealth;
-            
+
+            GetComponentInParent<ShieldEnemyScript>().GuardBreak();
+            //Destroy(gameObject)
         }
     }
 }

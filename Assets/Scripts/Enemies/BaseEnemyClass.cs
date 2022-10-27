@@ -189,7 +189,7 @@ public class BaseEnemyClass : MonoBehaviour
         {
 	        if (uiScript.GetHitMarker().activeSelf == true)
             {
-                StartCoroutine(uiScript.HitMarker());
+                StartCoroutine(uiScript.HitMarker(uiScript.GetHitMarker()));
             }
         }
 
@@ -197,7 +197,7 @@ public class BaseEnemyClass : MonoBehaviour
         {
             if(uiScript.GetHitMarkerShield().activeSelf == true)
             {
-                StartCoroutine(uiScript.HitMarkerShield());
+                StartCoroutine(uiScript.HitMarker(uiScript.GetHitMarkerShield()));
             }
         }
         
@@ -261,6 +261,9 @@ public class BaseEnemyClass : MonoBehaviour
                 hTrigs(this, attackTypes);
             }
         }
+
+        bool isWeak = false;
+        bool isStrong = false;
         
         float multiplier = 1;
         foreach (Types type in attackTypes)
@@ -269,6 +272,7 @@ public class BaseEnemyClass : MonoBehaviour
             {
                 if (weak == type)
                 {
+                    isWeak = true;
                     multiplier *= 2 * prophecyManager.prophecyWeaknessMulti;
                 }
             }
@@ -276,6 +280,7 @@ public class BaseEnemyClass : MonoBehaviour
             {
                 if (resist == type)
                 {
+                    isStrong = true;
                     multiplier *= 0.5f * prophecyManager.prophecyResistMulti;
                 }
             }
@@ -291,6 +296,18 @@ public class BaseEnemyClass : MonoBehaviour
         {
             StopCoroutine(uiScript.HitMarker());
             StartCoroutine(uiScript.HitMarker());
+
+            if(isWeak)
+            {
+                StopCoroutine(uiScript.HitMarker(uiScript.GetWeakMarker()));
+                StartCoroutine(uiScript.HitMarker(uiScript.GetWeakMarker()));
+            }
+
+            if(isStrong)
+            {
+                StopCoroutine(uiScript.HitMarker(uiScript.GetStrongMarker()));
+                StartCoroutine(uiScript.HitMarker(uiScript.GetStrongMarker()));
+            }
         }
         if (audioManager)
         {
