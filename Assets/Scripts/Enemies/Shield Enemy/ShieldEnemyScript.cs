@@ -123,10 +123,10 @@ public class ShieldEnemyScript : BaseEnemyClass
     {
         //this.gameObject.transform.LookAt(positionToMoveTo);
         //this.gameObject.transform.eulerAngles = new Vector3(0, this.gameObject.transform.eulerAngles.y, 0);
-        float angleBetwixt = Vector3.Angle(transform.forward, positionToMoveTo - transform.position);
+        float angleBetwixt = Vector3.SignedAngle(transform.forward, positionToMoveTo - transform.position, Vector3.up);
 
         //get the direction of rotation
-        float dir = Mathf.Sign(Vector3.SignedAngle(transform.forward, positionToMoveTo - transform.position, Vector3.up));
+        float dir = Mathf.Sign(angleBetwixt);
 
         //rotate towards the disired vector/angle in that direction, modified by a scalar
         if (dir == 0)
@@ -141,22 +141,13 @@ public class ShieldEnemyScript : BaseEnemyClass
             transform.eulerAngles = new Vector3(0, this.gameObject.transform.eulerAngles.y, 0);
         }
         //move along the forward vector
-
-
-        movement = transform.forward * speed * (Time.deltaTime + timeSinceLastMove);
-        if (!gameObject.GetComponent<CharacterController>().isGrounded)
-        {
-            movement += new Vector3(0, gravity, 0);
-            //transform.position += new Vector3(0, gravity, 0);
-        }
-        gameObject.GetComponent<CharacterController>().Move(movement);
-
+        ShieldMovement(positionToMoveTo, speed);
     }
 
     //Rotate much slower
     public void ShieldMovement(Vector3 positionToMoveTo, float speed)
     {
-        movement = transform.forward * speed * (Time.deltaTime + timeSinceLastMove);
+        movement = (positionToMoveTo - transform.position).normalized * speed * (Time.deltaTime + timeSinceLastMove);
         if (!gameObject.GetComponent<CharacterController>().isGrounded)
         {
             movement += new Vector3(0, gravity, 0);
