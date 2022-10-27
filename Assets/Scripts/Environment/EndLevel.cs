@@ -20,14 +20,14 @@ public class EndLevel : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.Find("Player");
-        audioManager = FindObjectOfType<AudioManager>();
+	    player = PlayerClass.GetPlayerClass().gameObject;
+	    audioManager = AudioManager.GetAudioManager();
     }
     public int GetSceneToLoad() { return sceneToLoad; }
 
     public void EndCurrentLevel()
     {//Update quests as the player has just finished the room
-        GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRoomUpdate();
+	    QuestManager.GetQuestManager().FinishRoomUpdate();
 
 
         //GameObject screen = Instantiate(loadingScreen);
@@ -47,13 +47,13 @@ public class EndLevel : MonoBehaviour
         {
             index = 1;
             Destroy(player);
-            Destroy(GameObject.Find("GameplayUI"));
+	        Destroy(GameplayUI.GetGameplayUI().gameObject);
             //Save the game
             SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Lotl"));
             SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Blacksmith"));
             SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Fortune"));
 	        SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Shop"));
-	        GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRunUpdate();
+	        QuestManager.GetQuestManager().FinishRunUpdate();
 
         }
         player.GetComponent<Shooting>().SetLoadScene(true);

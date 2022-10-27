@@ -23,12 +23,12 @@ public class Lotl3 : Quest
         //Check against a chance based thing whether to spawn a hidden Lotl on this floor
         if (Random.Range(0, 100) <= chanceToSpawn)
         {
-            foreach (GameObject room in GameObject.Find("Level Generator").GetComponent<LevelGeneration>().GetGenericRooms())
+            foreach (GameObject room in LevelGeneration.GetLevelGeneration().GetGenericRooms())
             {
                 levelRooms.Add(room);
             }
 
-            GameObject roomToHideIn = levelRooms[Random.Range(0, GameObject.Find("Level Generator").GetComponent<LevelGeneration>().GetGenericRooms().Count)];
+            GameObject roomToHideIn = levelRooms[Random.Range(0, LevelGeneration.GetLevelGeneration().GetGenericRooms().Count)];
             GameObject hiddenGameObj = roomToHideIn.transform.Find(hiddenObject).gameObject;
             hiddenGameObj.SetActive(true);
 

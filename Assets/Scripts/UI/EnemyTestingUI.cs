@@ -39,7 +39,7 @@ public class EnemyTestingUI : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        playerClass = FindObjectOfType<PlayerClass>();
+        playerClass = PlayerClass.GetPlayerClass();
         FindObjectOfType<SAIM>().triggered = true;
     }
 

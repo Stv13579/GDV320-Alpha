@@ -8,7 +8,7 @@ public class WaterRangedProjectile : BaseRangedProjectileScript //Sebastian
     protected override void Awake()
     {
         base.Awake();
-        playerClass = FindObjectOfType<PlayerClass>();
+	    playerClass = PlayerClass.GetPlayerClass();
     }
     //Deals damage, slows the player down temporarily
     protected override void HitEffect(Collider other)

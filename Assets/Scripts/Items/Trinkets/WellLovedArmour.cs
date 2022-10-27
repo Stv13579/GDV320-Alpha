@@ -18,8 +18,8 @@ public class WellLovedArmour : Trinket
 	public override void RemoveEffect()
 	{
 		base.RemoveEffect();
-		StatModifier.RemoveModifier(FindObjectOfType<PlayerClass>().GetDefenseStat().multiplicativeModifiers, new StatModifier.Modifier(1 - ((int)uState * 5 + 5)/100, "WellLovedArmour"));
-		StatModifier.UpdateValue(FindObjectOfType<PlayerClass>().GetDefenseStat());
+		StatModifier.RemoveModifier(PlayerClass.GetPlayerClass().GetDefenseStat().multiplicativeModifiers, new StatModifier.Modifier(1 - ((int)uState * 5 + 5)/100, "WellLovedArmour"));
+		StatModifier.UpdateValue(PlayerClass.GetPlayerClass().GetDefenseStat());
 		
 	}
 }

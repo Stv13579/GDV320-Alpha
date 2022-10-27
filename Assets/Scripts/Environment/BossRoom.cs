@@ -34,8 +34,8 @@ public class BossRoom : Room
     public bool GetBossSpawned() { return bossSpawned; }
     void Awake()
     {
-        audioManager = FindObjectOfType<AudioManager>();
-        runManager = FindObjectOfType<RunManager>();
+	    audioManager = AudioManager.GetAudioManager();
+	    runManager = RunManager.GetRunManager();
     }
 	public void Update()
     {
@@ -78,7 +78,7 @@ public class BossRoom : Room
             currentBoss = Instantiate(bosses.GetBoss(), spawnPosition.position, Quaternion.identity);
             currentBoss.GetComponent<BaseEnemyClass>().SetSpawner(spawner);
             spawner.GetComponent<SAIM>().spawnedEnemies.Add(currentBoss.GetComponent<BaseEnemyClass>());
-            GameObject.Find("Quest Manager").GetComponent<QuestManager>().SpawnUpdate(currentBoss, "Boss");
+	        QuestManager.GetQuestManager().SpawnUpdate(currentBoss, "Boss");
             //Lock the doors
             LockDoors();
 

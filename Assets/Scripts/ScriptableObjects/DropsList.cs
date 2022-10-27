@@ -54,10 +54,10 @@ public class DropsList : ScriptableObject
 
         foreach (DropListEntry manaType in ammoList)
         {
-	        if(manaType.GetElement() == FindObjectOfType<Shooting>().GetCatalystElements()[0].GetManaName() 
-                || manaType.GetElement() == FindObjectOfType<Shooting>().GetPrimaryElements()[0].GetManaName()
-                || manaType.GetElement() == FindObjectOfType<Shooting>().GetCatalystElements()[1].GetManaName()
-                || manaType.GetElement() == FindObjectOfType<Shooting>().GetPrimaryElements()[1].GetManaName())
+	        if(manaType.GetElement() == Shooting.GetShooting().GetCatalystElements()[0].GetManaName() 
+                || manaType.GetElement() == Shooting.GetShooting().GetPrimaryElements()[0].GetManaName()
+                || manaType.GetElement() == Shooting.GetShooting().GetCatalystElements()[1].GetManaName()
+                || manaType.GetElement() == Shooting.GetShooting().GetPrimaryElements()[1].GetManaName())
             {
                 dropsList.Add(manaType);
             }

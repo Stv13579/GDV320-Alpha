@@ -70,7 +70,7 @@ public class NPC : MonoBehaviour
             {
                 return;
             }
-            Quest q = (Quest)GameObject.Find("Quest Manager").GetComponent(heldData.quests[heldData.storyPosition]);
+	        Quest q = (Quest)QuestManager.GetQuestManager().gameObject.GetComponent(heldData.quests[heldData.storyPosition]);
             q.ActivateQuest();
 
             heldData.onQuest = true;
@@ -92,7 +92,7 @@ public class NPC : MonoBehaviour
                 return;
             }
             base.Action();
-            Quest q = (Quest)GameObject.Find("Quest Manager").GetComponent(heldData.quests[heldData.storyPosition]);
+            Quest q = (Quest)QuestManager.GetQuestManager().gameObject.GetComponent(heldData.quests[heldData.storyPosition]);
             heldData.storyPosition++;
             q.HandInQuest();
 
@@ -182,7 +182,7 @@ public class NPC : MonoBehaviour
         //Possible dialogues include the random ones, the current story position, or a deterministic quest dialogue.
         int storyTime = UnityEngine.Random.Range(0, 2);
         anims = transform.GetComponentInChildren<Animator>();
-        player = FindObjectOfType<PlayerClass>().gameObject;
+	    player = PlayerClass.GetPlayerClass().gameObject;
         //data = (NPCData)Resources.Load("NPCs/" + dataToApply);
 
         //Initialise seralized dialogues

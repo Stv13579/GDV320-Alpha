@@ -28,7 +28,7 @@ public class RangedBossFakeFireProjectileScript : MonoBehaviour //Sebastian
         }
         else
         {
-            Transform player = GameObject.Find("Player").transform;
+	        Transform player = PlayerClass.GetPlayerClass().transform;
             RaycastHit hit;
             Physics.Raycast(player.position, -player.transform.up, out hit, Mathf.Infinity, enviroMask);
             GameObject tele = Instantiate(telegraph, hit.point + new Vector3(0, 0.001f, 0), Quaternion.identity);

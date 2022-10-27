@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelGeneration : MonoBehaviour
 {
+	static LevelGeneration currentLevelGeneration;
     [SerializeField]
     float roomSize;
     [SerializeField]
@@ -40,14 +41,15 @@ public class LevelGeneration : MonoBehaviour
     bool tutorial;
     
     void Start()
-    {
+	{
+		currentLevelGeneration = this;
         minimap = GameObject.Find("MiniMap");
 
         GenerateLevel();
 
-        if (GameObject.Find("Run Manager"))
+		if (RunManager.GetRunManager())
         {
-            GameObject.Find("Run Manager").GetComponent<RunManager>().StartNewLevel();
+			RunManager.GetRunManager().StartNewLevel();
         }
     }
 
@@ -88,15 +90,15 @@ public class LevelGeneration : MonoBehaviour
         NPC.GetComponent<Room>().minimapRoom.SetAsBreak();
 
         //Check if the player is carrying the balanced compass and roll to see if it triggers if so.
-        if(GameObject.Find("TrinketManager"))
+	    if(TrinketManager.GetTrinketManager())
         {
-            if (GameObject.Find("Player").GetComponent<PlayerClass>().GetHeldItems().Contains(GameObject.Find("TrinketManager").GetComponent<BalancedCompass>()))
+		    if (PlayerClass.GetPlayerClass().GetHeldItems().Contains(TrinketManager.GetTrinketManager().gameObject.GetComponent<BalancedCompass>()))
             {
                 Debug.Log("Checking for extra room!");
 
                 int randomRoll = Random.Range(0, 100);
 
-                if (randomRoll < GameObject.Find("TrinketManager").GetComponent<BalancedCompass>().GetActivationChance())
+                if (randomRoll < TrinketManager.GetTrinketManager().gameObject.GetComponent<BalancedCompass>().GetActivationChance())
                 {
                     NPC = PlaceRoom(ChoosePositionWithOneConnection(ChooseRoom()), otherRooms, possibleRespiteRooms);
 	                NPC.GetComponent<Room>().illegal = true;
@@ -400,6 +402,11 @@ public class LevelGeneration : MonoBehaviour
         }
 
     }
+    
+	public static LevelGeneration GetLevelGeneration()
+	{
+		return currentLevelGeneration;
+	}
 
 
 }

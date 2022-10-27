@@ -149,8 +149,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
-        lookScript = this.gameObject.GetComponent<PlayerLook>();
+	    audioManager = AudioManager.GetAudioManager();
+	    lookScript = this.gameObject.GetComponent<PlayerLook>();
         cController = this.gameObject.GetComponent<CharacterController>();
 	    speed.baseValue = baseMaxMovementSpeed;
 	    if(PlayerPrefs.HasKey("FOV"))

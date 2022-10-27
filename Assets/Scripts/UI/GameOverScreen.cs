@@ -28,7 +28,7 @@ public class GameOverScreen : MonoBehaviour
     }
     void Awake()
     {
-        audioManager = FindObjectOfType<AudioManager>();
+	    audioManager = AudioManager.GetAudioManager();
     }
 
     void Update()
@@ -61,13 +61,13 @@ public class GameOverScreen : MonoBehaviour
 
     public void ReturnToHub()
     {
-        Destroy(GameObject.Find("Player"));
-        Destroy(GameObject.Find("ProphecyManager"));
-        Destroy(GameObject.Find("GameplayUI"));
-        Destroy(GameObject.Find("Trinket Manager"));
+	    Destroy(PlayerClass.GetPlayerClass().gameObject);
+	    Destroy(ProphecyManager.GetProphecyManager().gameObject);
+	    Destroy(GameplayUI.GetGameplayUI().gameObject);
+	    Destroy(TrinketManager.GetTrinketManager().gameObject);
 
 	    FindObjectOfType<SAIM>().data.ResetDifficulty();
-	    GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRunUpdate();
+	    QuestManager.GetQuestManager().FinishRunUpdate();
         operation.allowSceneActivation = true;
         if (audioManager)
         {

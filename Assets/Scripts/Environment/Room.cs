@@ -32,8 +32,8 @@ public class Room : MonoBehaviour
         
         roomTrigger = transform.Find("RoomTriggerBox").gameObject;
 
-        if(GameObject.Find("Level Generator"))
-            levelGenerator = GameObject.Find("Level Generator").GetComponent<LevelGeneration>();
+	    if(LevelGeneration.GetLevelGeneration())
+		    levelGenerator = LevelGeneration.GetLevelGeneration();
 
     }
 
@@ -42,7 +42,7 @@ public class Room : MonoBehaviour
     //Closes off all the illegal/irrelevant exits and collates the remaining ones
     public void CloseDoors()
     {
-        levelGenerator = GameObject.Find("Level Generator").GetComponent<LevelGeneration>();
+        levelGenerator = LevelGeneration.GetLevelGeneration();
 
         //Check each direction, disable them if nothing there, add them to active if not
         if (!levelGenerator.CheckRoomPosition(new Vector2(gridPos.x + 1, gridPos.y)))

@@ -151,13 +151,12 @@ public class BaseElementClass : MonoBehaviour
         //lVars.Name = elementName;
         lVars.Icon = uiSprite;
         //lVars.Description = elementDescription;
-        player = GameObject.Find("Player");
-        playerClass = player.GetComponent<PlayerClass>();
-        //shootingTranform = GameObject.Find("Elements").transform;
-        audioManager = FindObjectOfType<AudioManager>();
+	    playerClass = PlayerClass.GetPlayerClass();
+	    player = playerClass.gameObject;
+	    audioManager = AudioManager.GetAudioManager();
         elementData = GetComponent<ElementStats>();
         shootingScript = player.GetComponent<Shooting>();
-        gameplayUI = FindObjectOfType<GameplayUI>();
+	    gameplayUI = GameplayUI.GetGameplayUI();
         currentCoolDownTimer = cooldownTimer;
     }
 

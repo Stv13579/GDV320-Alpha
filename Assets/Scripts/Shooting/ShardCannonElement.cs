@@ -16,6 +16,18 @@ public class ShardCannonElement : BaseElementClass
     [SerializeField]
     float projectileSpeed;
 
+    [SerializeField]
+    float upgradedCoolDownTimer;
+
+    [SerializeField]
+    AnimationState shardCannonAnims;
+
+    [SerializeField]
+    float animsSpeed;
+
+    [SerializeField]
+    float upgradedManaCost;
+
     protected override void Update()
     {
         base.Update();
@@ -41,5 +53,12 @@ public class ShardCannonElement : BaseElementClass
         base.StartAnims(animationName);
 
         playerHand.SetTrigger(animationName);
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        cooldownTimer = upgradedCoolDownTimer;
+        manaCost = upgradedManaCost;
+        playerHand.SetFloat("ShardCannonAnimsSpeed", animsSpeed);
     }
 }

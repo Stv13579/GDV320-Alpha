@@ -13,7 +13,7 @@ public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript //Se
     {
         base.Start();
         energyScript = FindObjectOfType<EnergyElement>();
-        this.transform.LookAt(GameObject.Find("Player").transform);
+	    this.transform.LookAt(PlayerClass.GetPlayerClass().transform);
         this.transform.up = this.transform.forward;
     }
 

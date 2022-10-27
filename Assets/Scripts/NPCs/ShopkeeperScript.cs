@@ -15,7 +15,7 @@ public class ShopkeeperScript : MonoBehaviour
 
     void Start()
     {
-        gameUI = GameObject.Find("GameplayUI");
+	    gameUI = GameplayUI.GetGameplayUI().gameObject;
     }
     void Update()
     {
@@ -58,7 +58,7 @@ public class ShopkeeperScript : MonoBehaviour
     {
         if(other.gameObject.GetComponent<PlayerClass>())
         {
-            gameUI = GameObject.Find("GameplayUI");
+            gameUI = GameplayUI.GetGameplayUI().gameObject;
 
             inRange = true;
             playerMove = other.gameObject.GetComponent<PlayerMovement>();

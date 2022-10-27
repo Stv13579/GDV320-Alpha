@@ -38,8 +38,8 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
     // Start is called before the first frame update
     void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
-        isMoving = true;
+	    audioManager = AudioManager.GetAudioManager();
+	    isMoving = true;
         isAttached = false;
         attached.SetActive(false);
         explosion.SetActive(false);

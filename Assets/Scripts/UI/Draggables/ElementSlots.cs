@@ -18,7 +18,7 @@ public class ElementSlots : DragSlot
     public Shooting GetPlayer() { return player; }
     private void Start()
     {
-        player = FindObjectOfType<Shooting>();
+	    player = Shooting.GetShooting();
     }
 
     public bool IsPrimary() { return isPrimary; }

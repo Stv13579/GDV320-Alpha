@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class RunManager : MonoBehaviour
 {
-
+	static RunManager currentRunManager;
     GameObject player;
     bool lastLevel;
     int sceneIndex;
@@ -15,15 +15,16 @@ public class RunManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
-        GameObject.Find("Quest Manager").GetComponent<QuestManager>().StartRunUpdate();
+	    player = PlayerClass.GetPlayerClass().gameObject;
+	    QuestManager.GetQuestManager().StartRunUpdate();
         //DontDestroyOnLoad(gameObject);
     }
 
     void Awake()
     {
-        player = GameObject.Find("Player");
-        sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        player = PlayerClass.GetPlayerClass().gameObject;
+	    sceneIndex = SceneManager.GetActiveScene().buildIndex;
+	    currentRunManager = this;
     }
 
     // Update is called once per frame
@@ -36,21 +37,21 @@ public class RunManager : MonoBehaviour
     {
         player.transform.position = new Vector3(60, 5, 60);
         player.GetComponent<PlayerClass>().StartLevel();
-        if(GameObject.Find("Quest Manager"))
+        if(QuestManager.GetQuestManager())
         {
-            GameObject.Find("Quest Manager").GetComponent<QuestManager>().StartLevelUpdate();
-            GameObject.Find("Quest Manager").GetComponent<QuestManager>().inHub = false;
+            QuestManager.GetQuestManager().StartLevelUpdate();
+            QuestManager.GetQuestManager().inHub = false;
         }
         player.GetComponent<Shooting>().SetLoadOutChosen(true);
 
-        FindObjectOfType<LevelGeneration>().startRoom.GetComponentInChildren<SAIM>().triggered = true;
+	    LevelGeneration.GetLevelGeneration().startRoom.GetComponentInChildren<SAIM>().triggered = true;
     }
 
     public void FinishRun()
     {
-        if (GameObject.Find("Quest Manager"))
+        if (QuestManager.GetQuestManager())
         {
-            GameObject.Find("Quest Manager").GetComponent<QuestManager>().FinishRunUpdate();
+            QuestManager.GetQuestManager().GetComponent<QuestManager>().FinishRunUpdate();
         }
 
         if(FindObjectOfType<BossRoom>())
@@ -59,4 +60,9 @@ public class RunManager : MonoBehaviour
         }
 
     }
+    
+	public static RunManager GetRunManager()
+	{
+		return currentRunManager;
+	}
 }

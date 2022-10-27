@@ -15,7 +15,7 @@ public class StartGameController : MonoBehaviour
 
     public void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
+	    audioManager = AudioManager.GetAudioManager();
     }
     public void StartGame()
     {

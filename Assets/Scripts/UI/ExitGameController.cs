@@ -7,7 +7,7 @@ public class ExitGameController : MonoBehaviour
     AudioManager audioManager;
     public void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
+	    audioManager = AudioManager.GetAudioManager();
     }
     public void EndGame()
     {

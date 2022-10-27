@@ -17,14 +17,14 @@ public class BaseDropScript : MonoBehaviour //Sebastian
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
-        player = GameObject.Find("Player").transform;
+	    player = PlayerClass.GetPlayerClass().transform;
 
         //Add an inital force so the ammo shoots out
         rb.AddForce((this.transform.up * 500 + new Vector3(Random.Range(-1.0f, 1.0f), 0.0f, Random.Range(-1.0f, 1.0f)) * 50));
         //Ignore collisions between ammo objects
         Physics.IgnoreLayerCollision(4, 4);
         Physics.IgnoreLayerCollision(4, 8);
-        audioManager = FindObjectOfType<AudioManager>();
+	    audioManager = AudioManager.GetAudioManager();
     }
 
     // Update is called once per frame

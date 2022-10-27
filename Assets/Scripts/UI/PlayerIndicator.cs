@@ -7,7 +7,7 @@ public class PlayerIndicator : MonoBehaviour
     Transform player;
     private void Start()
     {
-        player = GameObject.Find("Player").transform.GetChild(1);
+	    player = PlayerClass.GetPlayerClass().gameObject.transform.GetChild(1);
     }
     private void Update()
     {

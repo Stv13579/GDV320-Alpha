@@ -89,7 +89,8 @@ public class BaseEnemyClass : MonoBehaviour
     protected GameplayUI uiScript;
 
     [SerializeField]
-    public ParticleSystem healVFX, buffVFX;
+	public ParticleSystem healVFX, buffVFX;
+	
 
 	[SerializeField]
 	protected List<Material> enemyMat = new List<Material>();
@@ -103,14 +104,13 @@ public class BaseEnemyClass : MonoBehaviour
 	
     public virtual void Awake()
     {
-        if(GameObject.Find("ProphecyManager"))
-            prophecyManager = GameObject.Find("ProphecyManager").GetComponent<ProphecyManager>();
+	    prophecyManager = ProphecyManager.GetProphecyManager();
         startY = transform.position.y;
-        player = GameObject.Find("Player");
+	    player = PlayerMovement.GetPlayerMovement().gameObject;
         playerClass = player.GetComponent<PlayerClass>();
         currentHealth = maxHealth * prophecyManager.prophecyHealthMulti;
-        audioManager = FindObjectOfType<AudioManager>();
-        oldPosition = new Vector3(-1000, -1000, -1000);
+	    audioManager = AudioManager.GetAudioManager();
+	    oldPosition = new Vector3(-1000, -1000, -1000);
         enemyAnims = GetComponentInChildren<Animator>();
         //uiScript = FindObjectOfType<GameplayUI>();
         uiScript = GameplayUI.self;
@@ -129,11 +129,11 @@ public class BaseEnemyClass : MonoBehaviour
         }
 
 
-        if(transform.Find("SupportVFXHarness") != null && transform.Find("SupportVFXHarness") != null)
-        {
-            buffVFX = transform.Find("SupportVFXHarness").GetChild(0).GetComponent<ParticleSystem>();
-            healVFX = transform.Find("SupportVFXHarness").GetChild(1).GetComponent<ParticleSystem>();
-        }
+        //if(transform.Find("SupportVFXHarness") != null && transform.Find("SupportVFXHarness") != null)
+        //{
+        //    buffVFX = transform.Find("SupportVFXHarness").GetChild(0).GetComponent<ParticleSystem>();
+        //    healVFX = transform.Find("SupportVFXHarness").GetChild(1).GetComponent<ParticleSystem>();
+        //}
 		
 	    if(enemyAnims)
 	    {

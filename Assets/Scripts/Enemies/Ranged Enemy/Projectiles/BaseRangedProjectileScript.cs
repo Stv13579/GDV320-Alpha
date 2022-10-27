@@ -14,13 +14,13 @@ public class BaseRangedProjectileScript : MonoBehaviour //Sebastian
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
-        player = GameObject.Find("Player");
+	    audioManager = AudioManager.GetAudioManager();
+	    player = PlayerClass.GetPlayerClass().gameObject;
     }
     protected virtual void Awake()
     {
-        player = GameObject.Find("Player");
-        audioManager = FindObjectOfType<AudioManager>();
+        player = PlayerClass.GetPlayerClass().gameObject;
+	    audioManager = AudioManager.GetAudioManager();
     }
     // Update is called once per frame
     protected virtual void Update()

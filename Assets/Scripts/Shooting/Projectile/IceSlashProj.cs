@@ -7,13 +7,21 @@ public class IceSlashProj : BaseElementSpawnClass
     float speed;
     float damage;
     float startLifeTimer;
-
+    IceSlashElement iceSlashElement;
+    private void Start()
+    {
+        iceSlashElement = FindObjectOfType<IceSlashElement>();
+    }
     // Update is called once per frame
     void Update()
     {
         startLifeTimer -= Time.deltaTime;
         MoveIceSlash();
         KillProjectile();
+        if(iceSlashElement.GetUpgraded() == true)
+        {
+            this.transform.localScale += new Vector3(1.0f, 0, 1.0f) * Time.deltaTime;
+        }    
     }
     // moves the ice slash
     void MoveIceSlash()

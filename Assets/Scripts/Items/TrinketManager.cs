@@ -5,7 +5,7 @@ using UnityEngine;
 public class TrinketManager : MonoBehaviour
 {
 	static bool exists = false;
-	
+	static TrinketManager currentTrinketManager;
 	// Awake is called when the script instance is being loaded.
 	protected void Awake()
 	{
@@ -18,7 +18,14 @@ public class TrinketManager : MonoBehaviour
     {
 	    DontDestroyOnLoad(gameObject);
 	    exists = true;
+	    currentTrinketManager = this;
+
     }
+    
+	public static TrinketManager GetTrinketManager()
+	{
+		return currentTrinketManager;
+	}
 
 
 

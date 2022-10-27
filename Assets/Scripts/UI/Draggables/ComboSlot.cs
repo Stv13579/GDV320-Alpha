@@ -17,7 +17,7 @@ public class ComboSlot : HoverOver, IPointerEnterHandler
 
     private void Start()
     {
-        player = FindObjectOfType<Shooting>();
+	    player = Shooting.GetShooting();
     }
 
     public override void OnPointerEnter(PointerEventData pData)

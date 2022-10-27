@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using System;
 public class PlayerClass : MonoBehaviour
 {
+	static PlayerClass currentPlayerClass;
+	
     [SerializeField]
     float currentHealth;
     [SerializeField]
@@ -96,7 +98,7 @@ public class PlayerClass : MonoBehaviour
     public void SetSlowed(bool tempslowed) { slowed = tempslowed; }
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+	    DontDestroyOnLoad(gameObject);
         currentHealth = baseMaxHealth;
         health.baseValue = baseMaxHealth;
         defenseStat.baseValue = baseDefense;
@@ -106,28 +108,27 @@ public class PlayerClass : MonoBehaviour
             manaTypes[i].mana.baseValue = manaTypes[i].baseMaxMana;
             manaTypes[i].currentMana = manaTypes[i].baseMaxMana;
         }
-        itemUI = GameObject.Find("ItemArray");
-        audioManager = FindObjectOfType<AudioManager>();
-        gameplayUI = FindObjectOfType<GameplayUI>();
+	    gameplayUI = GameplayUI.GetGameplayUI();
+
+	    itemUI = gameplayUI.transform.GetChild(2).gameObject;
+	    audioManager = AudioManager.GetAudioManager();
         lowHealthValue = 0.0f;
     }
+    
+	// Awake is called when the script instance is being loaded.
+	protected void Awake()
+	{
+		currentPlayerClass = this;
+	}
 
     public void StartLevel()
     {
-        itemUI = GameObject.Find("ItemArray");
+	    itemUI = gameplayUI.transform.GetChild(2).gameObject;
     }
 
     void Update()
     {
-        //Don't forget to remove this
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            BaseEnemyClass[] enemies = FindObjectsOfType<BaseEnemyClass>();
-            foreach (BaseEnemyClass enemy in enemies)
-            {
-                enemy.TakeDamage(1000, new List<BaseEnemyClass.Types>());
-            }
-        }
+
         maxHealth = StatModifier.UpdateValue(health);
         defense = StatModifier.UpdateValue(defenseStat);
 
@@ -162,11 +163,11 @@ public class PlayerClass : MonoBehaviour
 
     void Death()
     {
-        if(GameObject.Find("TrinketManager"))
+	    if(TrinketManager.GetTrinketManager())
         {
-            if (heldItems.Contains(GameObject.Find("TrinketManager").GetComponent<LuckyKnuckleBones>()))
+		    if (heldItems.Contains(TrinketManager.GetTrinketManager().GetComponent<LuckyKnuckleBones>()))
             {
-                Item luckyBones = heldItems.Find(LKB => LKB == GameObject.Find("TrinketManager").GetComponent<LuckyKnuckleBones>());
+                Item luckyBones = heldItems.Find(LKB => LKB == TrinketManager.GetTrinketManager().GetComponent<LuckyKnuckleBones>());
                 if(luckyBones.GetComponent<LuckyKnuckleBones>().CanRevive())
                 {
                     ChangeHealth(maxHealth, null);
@@ -175,9 +176,9 @@ public class PlayerClass : MonoBehaviour
             }
         }
 
-        if(GameObject.Find("Quest Manager"))
+	    if(QuestManager.GetQuestManager())
         {
-            GameObject.Find("Quest Manager").GetComponent<QuestManager>().DeathUpdate();
+            QuestManager.GetQuestManager().GetComponent<QuestManager>().DeathUpdate();
         }
         else
         {
@@ -374,4 +375,9 @@ public class PlayerClass : MonoBehaviour
     {
         return maxHealth;
     }
+    
+	public static PlayerClass GetPlayerClass()
+	{
+		return currentPlayerClass;
+	}
 }

@@ -102,11 +102,13 @@ public class AudioManager : MonoBehaviour
     public void SetCurrentStateToFadeInAudio2() { currentState = FadeState.fadeInAudio2; }
     public void SetCurrentStateToFadeOutAudio2() { currentState = FadeState.fadeOutAudio2; }
     public void SetCurrentStateToFadeInAudio1() { currentState = FadeState.fadeInAudio1; }
-
+    private void Awake()
+    {
+        currentAudioManager = this;
+    }
     // Start is called before the first frame update
     void Start()
 	{
-		currentAudioManager = this;
         foreach (Sound i in sounds) // loop through the sounds
         {
             i.SetAudioSource(gameObject.AddComponent<AudioSource>());
@@ -136,7 +138,7 @@ public class AudioManager : MonoBehaviour
         }
         foreach (Sound i in sounds)
         {
-            i.SetAudioSourceAudioVolume(OptionsMenuScript.GetSoundVolume() / 100.0f);
+            i.SetAudioSourceAudioVolume(i.GetAudioVolume() *  OptionsMenuScript.GetSoundVolume() / 10.0f);
         }
     }
 

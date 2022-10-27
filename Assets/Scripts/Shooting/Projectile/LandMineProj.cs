@@ -7,9 +7,11 @@ public class LandMineProj : MonoBehaviour
     float damage;
     float explosiveRadius;
     float lifeTimer;
+    float activateTimer;
+    float currentActivateTimer;
+    
     List<BaseEnemyClass.Types> attackTypes;
     AudioManager audioManager;
-    bool willExplode;
     float timerToDestroy;
     [SerializeField]
     GameObject mine;
@@ -17,44 +19,71 @@ public class LandMineProj : MonoBehaviour
     GameObject explosion;
     [SerializeField]
     LayerMask enemyDetect;
+    enum landMineState
+    {
+        placed,
+        explode,
+        destroyed
+    };
+    landMineState currentState = landMineState.placed;
+
     // Start is called before the first frame update
     void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
+	    audioManager = AudioManager.GetAudioManager();
     }
 
     // Update is called once per frame
     void Update()
     {
+        switch(currentState)
+        {
+            case landMineState.placed:
+                {
+                    currentActivateTimer += Time.deltaTime;
+                    if (currentActivateTimer >= activateTimer)
+                    {
+                        this.GetComponent<Collider>().enabled = true;
+                        currentActivateTimer = activateTimer;
+                    }
+                }
+                break;
+            case landMineState.explode:
+                {
+                    // turn off collider
+                    // show explosion effect
+                    // turn off mine
+                    this.GetComponent<Collider>().enabled = false;
+                    mine.SetActive(false);
+                    explosion.SetActive(true);
+                    if (!explosion.GetComponent<ParticleSystem>().isPlaying)
+                    {
+                        explosion.GetComponent<ParticleSystem>().Play();
+                    }
+                    currentState = landMineState.destroyed;
+                }
+                break;
+            case landMineState.destroyed:
+                {
+                    // this is for the after effect of the animation
+                    // it is 10 seconds long
+                    timerToDestroy += Time.deltaTime;
+                    if (timerToDestroy >= 10)
+                    {
+                        Destroy(gameObject);
+                    }
+                }
+                break;
+
+        }
         lifeTimer -= Time.deltaTime;
-        // if true
-        // turn off collider
-        // show explosion effect
-        // turn off mine
-        if(willExplode)
-        {
-            this.GetComponent<Collider>().enabled = false;
-            mine.SetActive(false);
-            explosion.SetActive(true);
-            if (!explosion.GetComponent<ParticleSystem>().isPlaying)
-            {
-                explosion.GetComponent<ParticleSystem>().Play();
-            }
-            willExplode = false;
-        }
-        // this is for the after effect of the animation
-        // it is 10 seconds long
-        if(!willExplode)
-        {
-            timerToDestroy += Time.deltaTime;
-        }
         KillProjectile();
     }
     // kills the landmine if its been siting in the level for too long and nothing has happened to it or
     // if the animation has finished
     void KillProjectile()
     {
-        if(lifeTimer <= 0  && !willExplode)
+        if(lifeTimer <= 0)
         {
             Destroy(gameObject);
         }
@@ -63,13 +92,13 @@ public class LandMineProj : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void SetVars(float dmg, float lifeTime, float explosionRadius, List<BaseEnemyClass.Types> types)
+    public void SetVars(float dmg, float lifeTime, float explosionRadius,float activateTime, List<BaseEnemyClass.Types> types)
     {
         damage = dmg;
         lifeTimer = lifeTime;
         explosiveRadius = explosionRadius;
         attackTypes = types;
-
+        activateTimer = activateTime;
     }
     
     void OnTriggerEnter(Collider other)
@@ -103,7 +132,7 @@ public class LandMineProj : MonoBehaviour
                 audioManager.StopSFX("Land Mine Explosion");
                 audioManager.PlaySFX("Land Mine Explosion");
             }
-            willExplode = true;
+            currentState = landMineState.explode;
         }
     }
     //private void OnDrawGizmos()
