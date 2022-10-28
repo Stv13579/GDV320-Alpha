@@ -42,6 +42,8 @@ public class LevelGeneration : MonoBehaviour
     
     void Start()
 	{
+		PlayerClass.GetPlayer().SetActive(true);
+		GameplayUI.GetUIObject().SetActive(true);
 		currentLevelGeneration = this;
         minimap = GameObject.Find("MiniMap");
 
@@ -51,6 +53,7 @@ public class LevelGeneration : MonoBehaviour
         {
 			RunManager.GetRunManager().StartNewLevel();
         }
+
     }
 
     //Encapsulates the generation process, and returns false if there is a fail for whatever reason

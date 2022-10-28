@@ -191,6 +191,14 @@ public class SAIM : MonoBehaviour
 
         CheckEndOfRoom();
 
+        //foreach (BaseEnemyClass enem in spawnedEnemies)
+        //{
+        //    if(!enem.gameObject.activeInHierarchy)
+        //    {
+        //        spawnedEnemies.Remove(enem);
+        //    }
+        //}
+
         //The room has been explored and defeated 
         if (triggered && !roomComplete)
         {
@@ -209,10 +217,6 @@ public class SAIM : MonoBehaviour
             enemyCounter.text = spawnedEnemies.Count.ToString();
         }
 	    AdjustDifficulty();
-		
-
-
-
 
         if(spawningFinished && spawnedEnemies.Count == 0)
         {
@@ -319,10 +323,6 @@ public class SAIM : MonoBehaviour
             nodeGrid[g].nodeCol = new List<Node>();
         }
 
-
-
-
-
         nodeMaster = transform.GetChild(1).gameObject;
 
         //Create a field of nodes
@@ -344,12 +344,12 @@ public class SAIM : MonoBehaviour
             }
         }
 
-        Vector3 nodeMasterPosition = nodeMaster.transform.position;
-        nodeMasterPosition.x -= (gridSize * nodeSpacing) / 2;
-        nodeMasterPosition.y -= (gridHeight * nodeSpacing) / 2;
-        nodeMasterPosition.z -= (gridSize * nodeSpacing) / 2;
+        //Vector3 nodeMasterPosition = nodeMaster.transform.position;
+        //nodeMasterPosition.x -= (gridSize * nodeSpacing) / 2;
+        //nodeMasterPosition.y -= (gridHeight * nodeSpacing) / 2;
+        //nodeMasterPosition.z -= (gridSize * nodeSpacing) / 2;
 
-        nodeMaster.transform.position = nodeMasterPosition;
+        //nodeMaster.transform.position = nodeMasterPosition;
 
         //Kill the illegal ones
 
@@ -484,7 +484,7 @@ public class SAIM : MonoBehaviour
 
     public void DestroyAllNodes()
     {
-        nodeMaster.transform.localPosition = Vector3.zero;
+       // nodeMaster.transform.localPosition = Vector3.zero;
         int l = 0;
         foreach (Node node in nodes)
         {

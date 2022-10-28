@@ -65,7 +65,16 @@ public class EndLevel : MonoBehaviour
 	    }
 	    else
 	    {
-		    SceneManager.LoadScene(sceneToLoad);
+	    	if(SceneManager.GetActiveScene().buildIndex < 4)
+	    	{
+		    	LoadingScreen.SetSceneToLoad(SceneManager.GetActiveScene().buildIndex + 1);
+	    	}
+	    	else
+	    	{
+		    	LoadingScreen.SetSceneToLoad(1);
+	    	}
+	    	LoadingScreen.StartSceneLoad();
+		    SceneManager.LoadScene(6);
 	    }
 
         //StartCoroutine(screen.GetComponent<LoadingScreen>().LoadScene(sceneToLoad));
