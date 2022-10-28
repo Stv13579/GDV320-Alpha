@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded = false;
 
     float headBobTimer = 0.0f;
-    float headBobFrequency = 1.0f;
+    float headBobFrequency = 0.75f;
     float headBobAmplitude = 0.02f;
     // the default position of the head
     float headBobNeutral = 0.80f;
@@ -237,6 +237,7 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = -0.75f;
         }
+        HeadBobbing();
     }
     // function for the camera shake when landing
     // lerps the camera pos and camera angle to their targets
@@ -290,7 +291,6 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-        HeadBobbing();
         MovingCurve();
     }
 

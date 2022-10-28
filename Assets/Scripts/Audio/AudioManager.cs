@@ -71,6 +71,8 @@ public class AudioManager : MonoBehaviour
     public string GetInitialMusic() { return initialMusic; }
     [SerializeField]
     public Sound[] GetMusics() { return Musics; }
+    public Sound[] GetSounds() { return sounds; }
+
 
     public bool IsSoundPlaying(string audio) 
     {
@@ -132,14 +134,14 @@ public class AudioManager : MonoBehaviour
     }
     private void Update()
     {
-        foreach (Sound j in Musics)
-        {
-            j.SetAudioSourceAudioVolume(OptionsMenuScript.GetMusicVolume() / 100.0f);
-        }
-        foreach (Sound i in sounds)
-        {
-            i.SetAudioSourceAudioVolume(i.GetAudioVolume() *  OptionsMenuScript.GetSoundVolume() / 10.0f);
-        }
+        //foreach (Sound j in Musics)
+        //{
+        //    j.SetAudioSourceAudioVolume(OptionsMenuScript.GetMusicVolume() / 100.0f);
+        //}
+        //foreach (Sound i in sounds)
+        //{
+        //    i.SetAudioSourceAudioVolume(i.GetAudioVolume() * OptionsMenuScript.GetSoundVolume() / 10.0f);
+        //}
     }
 
     public void PlaySFX(string soundName, Transform playerPos = null, Transform enemyPos = null) // play sound 
@@ -245,7 +247,7 @@ public class AudioManager : MonoBehaviour
                         currentState = FadeState.Idle;
                         break;
                     }
-                    soundFadeOut.GetAudioSource().volume -= 0.01f * Time.deltaTime;
+                    soundFadeOut.GetAudioSource().volume -= 0.05f * Time.deltaTime;
                     if (soundFadeOut.GetAudioSource().volume <= 0.0f)
                     {
                         currentState = FadeState.fadeInAudio2;
@@ -267,7 +269,7 @@ public class AudioManager : MonoBehaviour
                         currentState = FadeState.Idle;
                         break;
                     }
-                    soundFadeIn.GetAudioSource().volume -= 0.01f * Time.deltaTime;
+                    soundFadeIn.GetAudioSource().volume -= 0.05f * Time.deltaTime;
                     if (soundFadeIn.GetAudioSource().volume <= 0.0f)
                     {
                         currentState = FadeState.fadeInAudio1;

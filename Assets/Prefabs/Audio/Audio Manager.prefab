@@ -51,7 +51,7 @@ MonoBehaviour:
     loop: 0
   - name: Fire Element Idle
     clip: {fileID: 8300000, guid: c74654def82bdfe44b1aa1e14d85e7c8, type: 3}
-    volume: 0.01
+    volume: 0.03
     pitch: 1
     loop: 1
   - name: Fire Element Shot
@@ -95,8 +95,8 @@ MonoBehaviour:
     pitch: 1
     loop: 0
   - name: Water Element Idle
-    clip: {fileID: 8300000, guid: 151887dfe7d4ecd4fbd9c730ff0c562c, type: 3}
-    volume: 0.01
+    clip: {fileID: 8300000, guid: 9fac90801f0e52546883b18e628ec94c, type: 3}
+    volume: 0.075
     pitch: 1
     loop: 1
   - name: Water Element Shot
@@ -115,8 +115,8 @@ MonoBehaviour:
     pitch: 1
     loop: 0
   - name: Necrotic Element Idle
-    clip: {fileID: 8300000, guid: b0c7aebe94758f6479fffd69f5f53d05, type: 3}
-    volume: 0.01
+    clip: {fileID: 8300000, guid: 621f4a5a6c087364ab337d64268f6384, type: 3}
+    volume: 0.03
     pitch: 1
     loop: 1
   - name: Necrotic Element Hold
@@ -135,7 +135,7 @@ MonoBehaviour:
     pitch: 1
     loop: 0
   - name: Energy Element Idle
-    clip: {fileID: 8300000, guid: cafc45f8629979049bacdfc864cafb0e, type: 3}
+    clip: {fileID: 8300000, guid: 26bbbb9670161b74e973e0e2bfb21d01, type: 3}
     volume: 0.01
     pitch: 1
     loop: 0
@@ -194,8 +194,8 @@ MonoBehaviour:
     volume: 0.05
     pitch: 1
     loop: 0
-  - name: Shard Cannon Idle (maybe)
-    clip: {fileID: 8300000, guid: 24c8077b9ea70e946b4eb4016e76abf8, type: 3}
+  - name: Shard Cannon Idle
+    clip: {fileID: 8300000, guid: 6b9cfe09df1ef5241a261f13b18783f8, type: 3}
     volume: 0.01
     pitch: 1
     loop: 1
@@ -551,6 +551,76 @@ MonoBehaviour:
     loop: 1
   - name: Water Element Impact
     clip: {fileID: 8300000, guid: f00dd60ebfda43347b67519fd8228e1e, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+  - name: Void Hold
+    clip: {fileID: 8300000, guid: 7d708e27e46111a48bcd3267e7ab5053, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+  - name: StasisTrap Hit
+    clip: {fileID: 8300000, guid: d1a9088327d2e1f42b5828da8d404283, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+  - name: Shield Stunned
+    clip: {fileID: 8300000, guid: 36725c812bcec974f82f121fe4e625fd, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+  - name: Portal Idle
+    clip: {fileID: 8300000, guid: cd1280b28a1b0f04799230301995db96, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 1
+  - name: Portal Opening
+    clip: {fileID: 8300000, guid: 41f62fe249bb0384ab56bc56b9added7, type: 3}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+  - name: Flying Enemies Buff
+    clip: {fileID: 8300000, guid: 0a0afc786bbae63498a17471876194d7, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+  - name: Flying Enemies Debuff
+    clip: {fileID: 8300000, guid: e910d5b0b22e41047a6445437413ab67, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+  - name: Flying Enemies Heal
+    clip: {fileID: 8300000, guid: b26e318ad363ca94ea71f468009eee45, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+  - name: Crit Hit
+    clip: {fileID: 8300000, guid: 6cc647ce2dd013e4d8e4ed2390c1420b, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+  - name: Weak Hit
+    clip: {fileID: 8300000, guid: 305e84718e177f842a857bb740a2a4c4, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+  - name: Crystal Element Impact
+    clip: {fileID: 8300000, guid: 6a87b92f5289aea4c9372817f1e3e439, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+  - name: Curse Cracking
+    clip: {fileID: 8300000, guid: 7fae43bbfd3e02a489a2464efd00b4e3, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+  - name: Ambient Wind
+    clip: {fileID: 8300000, guid: 7fae43bbfd3e02a489a2464efd00b4e3, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+  - name: Ambient Bugs
+    clip: {fileID: 8300000, guid: 7fae43bbfd3e02a489a2464efd00b4e3, type: 3}
     volume: 0.1
     pitch: 1
     loop: 0

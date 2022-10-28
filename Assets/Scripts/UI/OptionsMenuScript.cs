@@ -20,11 +20,25 @@ public class OptionsMenuScript : MonoBehaviour
 	{
 		soundVolume = Mathf.RoundToInt(soundVolumeSlider.value);
 		soundVolumeText.text = soundVolume.ToString();
+		if (AudioManager.GetAudioManager())
+		{
+			foreach (AudioManager.Sound i in AudioManager.GetAudioManager().GetSounds())
+			{
+				i.SetAudioSourceAudioVolume(i.GetAudioVolume() * OptionsMenuScript.GetSoundVolume() / 10.0f);
+			}
+		}
 	}
 	public void UpdateMusicVolume()
     {
 		musicVolume = Mathf.RoundToInt(musicVolumeSlider.value);
 		MusicVolumeText.text = musicVolume.ToString();
+		if (AudioManager.GetAudioManager())
+		{
+			foreach (AudioManager.Sound j in AudioManager.GetAudioManager().GetMusics())
+			{
+				j.SetAudioSourceAudioVolume(OptionsMenuScript.GetMusicVolume() / 100.0f);
+			}
+		}
 	}
 	public void UpdateSensitivity()
 	{

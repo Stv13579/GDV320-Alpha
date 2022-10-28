@@ -301,12 +301,20 @@ public class BaseEnemyClass : MonoBehaviour
             {
                 StopCoroutine(uiScript.HitMarker(uiScript.GetWeakMarker()));
                 StartCoroutine(uiScript.HitMarker(uiScript.GetWeakMarker()));
+                if(audioManager)
+                {
+                    audioManager.PlaySFX("Crit Hit");
+                }
             }
 
             if(isStrong)
             {
                 StopCoroutine(uiScript.HitMarker(uiScript.GetStrongMarker()));
                 StartCoroutine(uiScript.HitMarker(uiScript.GetStrongMarker()));
+                if (audioManager)
+                {
+                    audioManager.PlaySFX("Weak Hit");
+                }
             }
         }
         if (audioManager)

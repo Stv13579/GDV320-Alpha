@@ -8,13 +8,14 @@ public class StartRunScript : MonoBehaviour
     Shooting player;
 
     float currentPortalPer;
-
+    AudioManager audioManager;
     public void SetPortal(GameObject nP) { portal = nP; }
 
     private void Start()
     {
 	    player = Shooting.GetShooting();
         portal = GameObject.Find("Model_Environment_Portal_FBX");
+        audioManager = AudioManager.GetAudioManager();
     }
 
     private void Update()
@@ -23,11 +24,20 @@ public class StartRunScript : MonoBehaviour
         {
             portal.GetComponent<Animator>().SetTrigger("Close");
             portal.GetComponent<Animator>().ResetTrigger("Open");
+            if(audioManager)
+            {
+                audioManager.StopSFX("Portal Idle");
+            }
         }
         else
         {
             portal.GetComponent<Animator>().SetTrigger("Open");
             portal.GetComponent<Animator>().ResetTrigger("Close");
+            if(audioManager)
+            {
+                audioManager.PlaySFX("Portal Opening", player.transform);
+                audioManager.PlaySFX("Portal Idle", player.transform);
+            }
            
         }
 

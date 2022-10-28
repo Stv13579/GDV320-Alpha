@@ -39,14 +39,17 @@ public class LevelGeneration : MonoBehaviour
 
     [SerializeField]
     bool tutorial;
-    
+
+    AudioManager audioManager;
+    int rand;
+    float currentTime;
     void Start()
 	{
 		PlayerClass.GetPlayer().SetActive(true);
 		GameplayUI.GetUIObject().SetActive(true);
 		currentLevelGeneration = this;
         minimap = GameObject.Find("MiniMap");
-
+        audioManager = AudioManager.GetAudioManager();
         GenerateLevel();
 
 		if (RunManager.GetRunManager())
@@ -54,6 +57,27 @@ public class LevelGeneration : MonoBehaviour
 			RunManager.GetRunManager().StartNewLevel();
         }
 
+    }
+    void Update()
+    {
+        currentTime += Time.deltaTime;
+        if(currentTime >= 20.0f)
+        {
+            int rand = Random.Range(1,3);
+            if(rand == 1)
+            {
+                audioManager.PlaySFX("Ambient Wind");
+            }
+            else if(rand == 2)
+            {
+                audioManager.PlaySFX("Ambient Bugs");
+            }
+            else
+            {
+                
+            }
+            currentTime = 0.0f;
+        }
     }
 
     //Encapsulates the generation process, and returns false if there is a fail for whatever reason

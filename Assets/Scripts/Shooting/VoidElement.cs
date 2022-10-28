@@ -53,6 +53,10 @@ public class VoidElement : BaseElementClass
         FullScreenEffect();
         if (isHolding)
         {
+            if (audioManager)
+            {
+                audioManager.PlaySFX("Void Hold");
+            }
             RaycastHit hit1;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit1, dashDistance, shootingIgnore))
             {
@@ -98,6 +102,13 @@ public class VoidElement : BaseElementClass
             }
             //targetPos = (this.transform.position + Camera.main.transform.forward * trueDashDistance * 1.5f);
             //targetPos = Indicator.transform.position;
+        }
+        else
+        {
+            if (audioManager)
+            {
+                audioManager.StopSFX("Void Hold");
+            }
         }
         //Checking if the mouse button has been released at a certain distance, cancels the spell
         if (!Input.GetKey(KeyCode.Mouse1) && playerHand.GetCurrentAnimatorStateInfo(3).IsName("VoidHold") && trueDashDistance < 10 ||

@@ -22,7 +22,6 @@ public class Interact : MonoBehaviour
     public NPC npc;
     public bool canInteract = true;
     public bool canSeeOfferings = true;
-
     void Start()
     {
 	    gameUI = GameplayUI.GetGameplayUI().gameObject;
