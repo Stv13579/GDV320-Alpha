@@ -257,7 +257,7 @@ public class Shooting : MonoBehaviour
             loadScene = false;
         }
         SwitchingElements();
-        if (ableToShoot && (SceneManager.GetActiveScene().name != "Hub Scene"))
+	    if (ableToShoot)// && (SceneManager.GetActiveScene().name != "Hub Scene"))
         {
             // if the player is out of combo mode
             if (!inComboMode)
@@ -655,6 +655,7 @@ public class Shooting : MonoBehaviour
 		comboElements[2].comboElements.Add(GetComponent<LifeStealElement>());
 		comboElements[2].comboElements.Add(GetComponent<IceSlashElement>());
 		comboElements[2].comboElements.Add(GetComponent<StasisTrapElement>());
+		ableToShoot = true;
 	}
 
 	public static Shooting GetShooting()
