@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1275216459249674571
+--- !u!114 &-6338810225728595561
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_Player_Rings_L
-  m_Shader: {fileID: 4800000, guid: 9c16bb4ff9cf8f04295ead10721d8715, type: 3}
+  m_Name: MAT_VFX_VialwaterTest
+  m_Shader: {fileID: 4800000, guid: c8145d48e02f1cd4f8c099aa7ec860e7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -32,10 +32,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AO:
-        m_Texture: {fileID: 2800000, guid: 249929ddf153c21468fca693e4fcdf79, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -44,24 +40,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Diffuse:
-        m_Texture: {fileID: 2800000, guid: e2e73ac31ad31a64bb7b3e5af1656436, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Emissive:
-        m_Texture: {fileID: 2800000, guid: d89874fdc1310e24f88f2366570055a4, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissiveGradient:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissiveMap:
-        m_Texture: {fileID: 2800000, guid: d89874fdc1310e24f88f2366570055a4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -72,19 +52,11 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Normal:
-        m_Texture: {fileID: 2800000, guid: a1fc683c2db4b72429c4141d7e131dde, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -95,45 +67,61 @@ Material:
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DivideValue: 97.77
     - _DstBlend: 0
-    - _EmissiveStrenght: 5.99596
-    - _Emissive_Toggle_On: 1
     - _EnvironmentReflections: 1
-    - _FresnelScale: 1
+    - _Fill: 0
+    - _FineWhiteLine: 3
+    - _FineWhiteLine1: 2.05
+    - _Float0: 0.002
+    - _Float1: 0.002
+    - _Float3: 3
+    - _Float4: 0
+    - _FresnelPower: 3.138322
+    - _FresnelPowerWhite: 14
+    - _FresnelScale: 1.3182
+    - _FresnelScaleWhite: 20
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Highlight_Strenght: 1
+    - _MaxNew: -1.56
     - _Metallic: 0
+    - _MinNew: 0.03
+    - _MovementMulti: 0.002
+    - _MovementMulti1: 0.002
+    - _MovementWater: 0.002
+    - _MovementWater1: 0.002
     - _OcclusionStrength: 1
-    - _Outline_Alpha: 1
-    - _Outline_Distance: 0
-    - _Outline_Width: 0
-    - _Overall_Smoothness: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Rim_Alpha: 1
-    - _Rim_Strenght: 10
-    - _SSS_Fres_Power: 5
-    - _SSS_Fres_Scale: 1
-    - _ShadowIntensity: 1.2
+    - _RotateX: 1
+    - _RotateX1: 1
+    - _RotateX_Water: 0.03
+    - _RotateY: 1
+    - _RotateY1: 1
+    - _RotateZ_Water: 0.096
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _Spec_Smoothness: 0
     - _SpecularHighlights: 1
-    - _Specular_Alpha: 0
     - _SrcBlend: 1
-    - _SubSurf_Alpha: 0
-    - _SubSurface_Stenght: 10
     - _Surface: 0
+    - _WaterLevel: 0.683
+    - _WaterWaveSpeed: 2
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColour: {r: 1, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Diffuse_Colour: {r: 1, g: 1, b: 1, a: 0}
+    - _Color0: {r: 1, g: 0, b: 0, a: 0}
+    - _Color1: {r: 0.03773582, g: 0, b: 0, a: 0}
+    - _Diffuse_Colour_Backface: {r: 1, g: 0, b: 0.7139201, a: 0}
+    - _Diffuse_Colour_FrontFace: {r: 1, g: 0.77862585, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissiveColour: {r: 4.1658454, g: 0.5738312, b: 0, a: 0}
-    - _Outline_Colour: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissiveColour: {r: 1, g: 0, b: 0, a: 0}
+    - _NoiseColour: {r: 0.20754683, g: 0.012726961, b: 0.012726961, a: 0}
+    - _PannerSpeed: {r: 0.05, g: 0.025, b: 0, a: 0}
+    - _RotateWater_X: {r: 0.03, g: -0.03, b: 0, a: 0}
+    - _RotateWater_Z: {r: 0.03, g: -0.03, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Spec_Colour: {r: 1, g: 1, b: 1, a: 0}
+    - _Vector0: {r: 1, g: 1, b: 0, a: 0}
