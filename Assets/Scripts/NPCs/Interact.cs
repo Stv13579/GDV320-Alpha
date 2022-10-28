@@ -70,7 +70,7 @@ public class Interact : MonoBehaviour
             gameUI.SetActive(false);
 
             //Set focus
-            playerLook.SetFocus(true);
+            //playerLook.SetFocus(true);
 
         }
         if (playerMove != null)
@@ -156,7 +156,7 @@ public class Interact : MonoBehaviour
         this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         gameUI.SetActive(true);
 
-        playerLook.SetFocus(false);
+        //playerLook.SetFocus(false);
 
     }
 
