@@ -145,10 +145,6 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController GetCharacterController() { return cController; }
     public Vector3 GetVelocity() { return velocity; }
 
-    private void Awake()
-    {
-        playerMovement = this;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -162,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
 		    initialFOV = PlayerPrefs.GetInt("FOV");
 	    }
 	    MaxFOVMoving = initialFOV + increaseFOV;
-	   
+	    playerMovement = this;
     }
 
     // Update is called once per frame
