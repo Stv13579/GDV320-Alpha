@@ -41,7 +41,7 @@ public class EnemyAttackPool : MonoBehaviour
 				}
 			}
 		}
-
+		selectedAttack = Instantiate(attackType);
 		return selectedAttack;
 	}
 }
