@@ -26,7 +26,16 @@ public class OptionsMenuScript : MonoBehaviour
 			{
 				i.SetAudioSourceAudioVolume(i.GetAudioVolume() * OptionsMenuScript.GetSoundVolume() / 10.0f);
 			}
-		}
+            if (soundVolume <= 0)
+            {
+                AudioManager.GetAudioManager().SetIsSoundMuted(true);
+
+            }
+            else
+            {
+                AudioManager.GetAudioManager().SetIsSoundMuted(false);
+            }
+        }
 	}
 	public void UpdateMusicVolume()
     {
@@ -38,7 +47,16 @@ public class OptionsMenuScript : MonoBehaviour
 			{
 				j.SetAudioSourceAudioVolume(OptionsMenuScript.GetMusicVolume() / 100.0f);
 			}
-		}
+            if (musicVolume <= 0)
+            {
+				AudioManager.GetAudioManager().SetIsMusicMuted(true);
+
+            }
+			else
+			{
+                AudioManager.GetAudioManager().SetIsMusicMuted(false);
+            }
+        }
 	}
 	public void UpdateSensitivity()
 	{

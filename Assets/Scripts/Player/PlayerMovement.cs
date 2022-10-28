@@ -145,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController GetCharacterController() { return cController; }
     public Vector3 GetVelocity() { return velocity; }
 
-    private void Awake()
+    void Awake()
     {
         playerMovement = this;
     }
@@ -172,10 +172,9 @@ public class PlayerMovement : MonoBehaviour
         if (ableToMove)
         {
             PlayerMoving();
-            UpdateCameraShake();
         }
     }
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         // converting the players input into a vector 3 and timings it by the players look direction
         Vector3 inputMove = new Vector3(x, 0.0f, z);
@@ -243,6 +242,7 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -0.75f;
         }
         HeadBobbing();
+        UpdateCameraShake();
     }
     // function for the camera shake when landing
     // lerps the camera pos and camera angle to their targets

@@ -68,27 +68,21 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private float audioDistance;
 
+    private bool isMusicMuted;
+
+    private bool isSoundMuted;
+
     public string GetInitialMusic() { return initialMusic; }
     [SerializeField]
     public Sound[] GetMusics() { return Musics; }
     public Sound[] GetSounds() { return sounds; }
 
+    public bool GetIsMusicMuted() { return isMusicMuted; }
+    public void SetIsMusicMuted(bool tempIsMusicMuted) { isMusicMuted = tempIsMusicMuted; }
 
-    public bool IsSoundPlaying(string audio) 
-    {
-        Sound tempAudioList = Array.Find(Musics, item => item.GetAudioName() == audio);
+    public bool GetIsSoundMuted() { return isSoundMuted; }
+    public void SetIsSoundMuted(bool tempIsSoundMuted) { isSoundMuted = tempIsSoundMuted; }
 
-        if(tempAudioList.GetAudioSource().isPlaying)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-            
-    }
-    //TO DO
     private enum FadeState
     {
         Idle,
@@ -132,17 +126,6 @@ public class AudioManager : MonoBehaviour
         PlayMusic(initialMusic);
         DontDestroyOnLoad(gameObject);
     }
-    private void Update()
-    {
-        //foreach (Sound j in Musics)
-        //{
-        //    j.SetAudioSourceAudioVolume(OptionsMenuScript.GetMusicVolume() / 100.0f);
-        //}
-        //foreach (Sound i in sounds)
-        //{
-        //    i.SetAudioSourceAudioVolume(i.GetAudioVolume() * OptionsMenuScript.GetSoundVolume() / 10.0f);
-        //}
-    }
 
     public void PlaySFX(string soundName, Transform playerPos = null, Transform enemyPos = null) // play sound 
     {
@@ -158,11 +141,19 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound source: " + name + " was not found!"); // error message
             return;
         }
-        if (playerPos != null && enemyPos != null)
+        if (isSoundMuted)
         {
-            float positionDistance = Vector3.Distance(playerPos.position, enemyPos.position);
-	        s.GetAudioSource().volume = (1 - (positionDistance / audioDistance)) > 0 ? (1 - (positionDistance / audioDistance)) * 0.1f: 0;
+
         }
+        else
+        {
+            if (playerPos != null && enemyPos != null)
+            {
+                float positionDistance = Vector3.Distance(playerPos.position, enemyPos.position);
+                s.GetAudioSource().volume = (1 - (positionDistance / audioDistance)) > 0 ? (1 - (positionDistance / audioDistance)) * 0.1f : 0;
+            }
+        }
+
         if (!s.GetAudioSource().isPlaying)
         {
             s.GetAudioSource().Play();
@@ -233,16 +224,23 @@ public class AudioManager : MonoBehaviour
         {
             case FadeState.Idle:
                 {
-                    foreach (Sound i in Musics)
+                    if (isMusicMuted)
                     {
-                        soundFadeIn.GetAudioSource().volume = i.GetAudioVolume();
-                        soundFadeOut.GetAudioSource().volume = i.GetAudioVolume();
+
+                    }
+                    else
+                    {
+                        foreach (Sound i in Musics)
+                        {
+                            soundFadeIn.GetAudioSource().volume = i.GetAudioVolume();
+                            soundFadeOut.GetAudioSource().volume = i.GetAudioVolume();
+                        }
                     }
                     break;
                 }
             case FadeState.fadeOutAudio1:
                 {
-                    if (!soundFadeOut.GetAudioSource().isPlaying)
+                    if (!soundFadeOut.GetAudioSource().isPlaying || isMusicMuted)
                     {
                         currentState = FadeState.Idle;
                         break;
@@ -256,6 +254,11 @@ public class AudioManager : MonoBehaviour
                 }
             case FadeState.fadeInAudio2:
                 {
+                    if(isMusicMuted)
+                    {
+                        currentState = FadeState.Idle;
+                        break;
+                    }
                     soundFadeIn.GetAudioSource().Play();
                     soundFadeOut.GetAudioSource().Stop();
 
@@ -264,7 +267,7 @@ public class AudioManager : MonoBehaviour
                 }
             case FadeState.fadeOutAudio2:
                 {
-                    if (!soundFadeIn.GetAudioSource().isPlaying)
+                    if (!soundFadeIn.GetAudioSource().isPlaying || isMusicMuted)
                     {
                         currentState = FadeState.Idle;
                         break;
@@ -278,6 +281,11 @@ public class AudioManager : MonoBehaviour
                 }
             case FadeState.fadeInAudio1:
                 {
+                    if (isMusicMuted)
+                    {
+                        currentState = FadeState.Idle;
+                        break;
+                    }
                     soundFadeOut.GetAudioSource().Play();
                     soundFadeIn.GetAudioSource().Stop();
 
