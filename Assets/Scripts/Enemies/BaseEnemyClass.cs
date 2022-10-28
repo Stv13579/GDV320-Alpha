@@ -106,7 +106,7 @@ public class BaseEnemyClass : MonoBehaviour
     {
 	    prophecyManager = ProphecyManager.GetProphecyManager();
         startY = transform.position.y;
-	    player = PlayerMovement.GetPlayerMovement().gameObject;
+	    player = PlayerClass.GetPlayerClass().gameObject;
         playerClass = player.GetComponent<PlayerClass>();
         currentHealth = maxHealth * prophecyManager.prophecyHealthMulti;
 	    audioManager = AudioManager.GetAudioManager();
