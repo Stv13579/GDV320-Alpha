@@ -229,6 +229,10 @@ public class ShieldEnemyScript : BaseEnemyClass
     {
         guardBroken = true;
 	    enemyAnims.SetTrigger("Shield Broken");
+        if (audioManager)
+        {
+            audioManager.PlaySFX("Shield Stunned");
+        }
 	    foreach(Material mat in enemyMat)
 	    {
 	    	mat.SetFloat("IsStunned", 1);

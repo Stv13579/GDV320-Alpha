@@ -13,10 +13,11 @@ public class CrystalProj : BaseElementSpawnClass
     [SerializeField]
     GameObject particleEffect;
     float damageDecreaser;
-
+    AudioManager audioManager;
     void Start()
     {
         ismoving = true;
+        audioManager = AudioManager.GetAudioManager();
     }
     // Update is called once per frame
     void Update()
@@ -74,6 +75,10 @@ public class CrystalProj : BaseElementSpawnClass
         // gets embedded in the environment
         if (other.gameObject.layer == 10)
         {
+            if (audioManager)
+            {
+                audioManager.PlaySFX("Crystal Element Impact");
+            }
             Destroy(gameObject);
         }
         //if enemy, hit them for the damage

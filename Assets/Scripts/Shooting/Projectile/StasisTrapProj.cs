@@ -134,6 +134,10 @@ public class StasisTrapProj : MonoBehaviour
            other.GetComponentInParent<BaseEnemyClass>() && !stasisTrap.GetContainedEnemies().Contains(other.gameObject) && !other.GetComponent<EnemyShield>() ||
            other.tag == "Enemy" && !stasisTrap.GetContainedEnemies().Contains(other.gameObject) && !other.GetComponent<EnemyShield>())
         {
+            if (audioManager)
+            {
+                audioManager.PlaySFX("StasisTrap Hit");
+            }
             stasisTrap.GetContainedEnemies().Add(other.gameObject);
             for (int i = 0; i < stasisTrap.GetContainedEnemies().Count; i++)
             {
