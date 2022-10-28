@@ -36,9 +36,9 @@ public class PlayerMovement : MonoBehaviour
     float airStraffMod;
 
     bool isGrounded = false;
-
+    bool hasJumped = false;
     float headBobTimer = 0.0f;
-    float headBobFrequency = 0.75f;
+    float headBobFrequency = 1.0f;
     float headBobAmplitude = 0.02f;
     // the default position of the head
     float headBobNeutral = 0.80f;
@@ -219,12 +219,17 @@ public class PlayerMovement : MonoBehaviour
         // we give back the y velocity
         velocity.y = cacheY;
 
-        //Jumping();
-        if (isGrounded == false)
+        if(hasJumped == true)
         {
-            // gravity on the player
-            velocity.y -= gravity * Time.fixedDeltaTime;
+            velocity.y = jumpSpeed;
+            isHeadShaking = true;
+            isGrounded = false;
+            hasJumped = false;
         }
+        // gravity on the player
+        velocity.y -= gravity * Time.deltaTime;
+
+
         // getting the position before the player moves (headbobbing)
         oldPos = transform.position;
         // moving the player on screen
@@ -342,9 +347,7 @@ public class PlayerMovement : MonoBehaviour
         // checks if player is on the ground and if player has press space
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            velocity.y = jumpSpeed;
-            isHeadShaking = true;
-            isGrounded = false;
+            hasJumped = true;
         }
     }
 
