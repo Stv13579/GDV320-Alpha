@@ -183,7 +183,7 @@ public class NPC : MonoBehaviour
         int storyTime = UnityEngine.Random.Range(0, 2);
         anims = transform.GetComponentInChildren<Animator>();
 	    player = PlayerClass.GetPlayerClass().gameObject;
-        //data = (NPCData)Resources.Load("NPCs/" + dataToApply);
+        data = (NPCData)Resources.Load("NPCs/" + dataToApply);
 
         //Initialise seralized dialogues
         foreach (StoryDialogues diag in storyDialogues)
@@ -204,16 +204,23 @@ public class NPC : MonoBehaviour
             dg.SetHeldData(data);
         }
 
-        if(tutorial)
+        foreach (Dialogue dg in baseRandoms)
         {
+            dg.SetHeldData(data);
+        }
+
+        if (tutorial)
+        {
+            tutorialDialogues[0].SetHeldData(data);
             tutorialDialogues[0].tutAct = TutorialAction;
             possibleDialogues.Add(tutorialDialogues[0]);
         }
         else if (data.met == false)
         {
-            
-            possibleDialogues.Add(firstMeeting);
+
             firstMeeting.SetHeldData(data);
+            possibleDialogues.Add(firstMeeting);
+            
 
         }
         else if (data.questComplete)
