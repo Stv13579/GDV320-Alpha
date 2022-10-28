@@ -117,6 +117,11 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
 		            	Instantiate(burrowVFX, this.transform.position - new Vector3(0, 0.3f, 0), Quaternion.identity);
 		            	destroyTimer = 0;
 	            	}
+	            	else
+	            	{
+		            	enemyAnims.SetTrigger("Emerge");
+
+	            	}
             	}
             }
         }
@@ -164,7 +169,9 @@ public class RangedEnemyScript : BaseEnemyClass //Sebastian
 	}
 	//Sets up the burrowing VFX, moves the enemy underground, then starts it emerging
     IEnumerator Burrow()
-    {
+	{
+		enemyAnims.ResetTrigger("Emerge");
+
         Vector3 startPos = this.transform.position;
         Vector3 endPos = this.transform.position + new Vector3(0, -50, 0);
 	    timer = 0.0f;
