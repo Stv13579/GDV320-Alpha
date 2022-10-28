@@ -191,13 +191,13 @@ public class SAIM : MonoBehaviour
 
         CheckEndOfRoom();
 
-        foreach (BaseEnemyClass enem in spawnedEnemies)
-        {
-            if(!enem.gameObject.activeInHierarchy)
-            {
-                spawnedEnemies.Remove(enem);
-            }
-        }
+        //foreach (BaseEnemyClass enem in spawnedEnemies)
+        //{
+        //    if(!enem.gameObject.activeInHierarchy)
+        //    {
+        //        spawnedEnemies.Remove(enem);
+        //    }
+        //}
 
         //The room has been explored and defeated 
         if (triggered && !roomComplete)

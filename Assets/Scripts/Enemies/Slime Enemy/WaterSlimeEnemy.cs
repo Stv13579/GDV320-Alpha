@@ -34,7 +34,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
     {
         base.Awake();
         deathTriggers.Add(Split);
-        jumpTimer = Random.Range(1.5f, 3.0f);
+        jumpTimer = Random.Range(1f, 2f);
     }
 
     // damages the player
@@ -71,10 +71,14 @@ public class WaterSlimeEnemy : BaseEnemyClass
 
             pos = moveDirection.normalized;
             Vector3 moveForce = moveDirection.normalized * moveSpeed;
-	        moveForce += new Vector3(0, jumpForce, jumpForce / 2);
+            if ((player.transform.position - transform.position).magnitude < 3)
+            {
+                moveForce = (player.transform.position - transform.position).normalized * moveSpeed * Time.deltaTime;
+            }
+            moveForce += new Vector3(0, jumpForce, jumpForce / 2);
 	        GetComponent<Rigidbody>().AddForce(moveForce);
 	        StartCoroutine(JumpCollision());
-            jumpTimer = Random.Range(1.5f, 3.0f);
+            jumpTimer = Random.Range(1f, 2f);
         }
         else
         {
@@ -92,16 +96,19 @@ public class WaterSlimeEnemy : BaseEnemyClass
     public override void Movement(Vector3 positionToMoveTo, float speed)
     {
         base.Movement(moveDirection);
-
-
         RaycastHit hit;
-
-        
-
 
         Vector3 moveVec = moveDirection.normalized * speed * Time.deltaTime;
         moveVec.y = 0;
         moveVec.y -= 1 * Time.deltaTime;
+
+        if((player.transform.position - transform.position).magnitude < 3)
+        {
+            moveVec = (player.transform.position - transform.position).normalized * speed * Time.deltaTime;
+            moveVec.y = 0;
+            moveVec.y -= 1 * Time.deltaTime;
+        }
+
         transform.position += moveVec;
 
         // slime is always looking at the player
@@ -141,12 +148,6 @@ public class WaterSlimeEnemy : BaseEnemyClass
     // and add force to the slime so that it jumps
     public virtual void OnCollisionEnter(Collision collision)
     {
-        //if (GetComponent<Rigidbody>().velocity.y < 10 && collision.gameObject.layer == 10)
-        //{
-        //    audioManager.Stop("Slime Bounce");
-        //    audioManager.Play("Slime Bounce", player.transform, this.transform);
-        //    GetComponent<Rigidbody>().AddForce(0, jumpForce, 0);
-        //}
         // if colliding with player attack enemy reset damage ticker
         // we reset it so that the player doesn't take double damage
         if (collision.gameObject.tag == "Player")
@@ -158,12 +159,6 @@ public class WaterSlimeEnemy : BaseEnemyClass
     }
     public virtual void OnCollisionStay(Collision collision)
     {
-        //if (GetComponent<Rigidbody>().velocity.y < 10 && collision.gameObject.layer == 10)
-        //{
-        //    audioManager.Stop("Slime Bounce");
-        //    audioManager.Play("Slime Bounce", player.transform, this.transform);
-        //    GetComponent<Rigidbody>().AddForce(0, jumpForce, 0);
-        //}
 
         // checks if colliding with player and damage ticker is less then 0
         // player should take damage every one second after if they are still colliding with enemy normal slime
