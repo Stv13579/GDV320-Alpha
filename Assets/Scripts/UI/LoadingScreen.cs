@@ -9,13 +9,20 @@ public class LoadingScreen : MonoBehaviour
 	[SerializeField] Image loadBar;
 	static int sceneToLoad = 2;
 	static AsyncOperation operation = null;
-	[SerializeField] float progress = 0.0f;
+	float progress = 0.0f;
+	[SerializeField] float opProg;
 
 	// Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
 	protected void Start()
 	{
-		PlayerClass.GetPlayerClass().gameObject.SetActive(false);
-		GameplayUI.GetGameplayUI().gameObject.SetActive(false);
+		if(PlayerClass.GetPlayerClass())
+		{
+			PlayerClass.GetPlayerClass().gameObject.SetActive(false);
+		}
+		if(GameplayUI.GetGameplayUI())
+		{
+			GameplayUI.GetGameplayUI().gameObject.SetActive(false);
+		}
 
 	}
 	
@@ -24,12 +31,13 @@ public class LoadingScreen : MonoBehaviour
 	{
 		progress += Time.deltaTime / 10;
 		loadBar.fillAmount = progress;
-		
+		opProg = operation.progress;
 		if(!operation.isDone)
 		{
 			if (operation.progress >= 0.9f && progress >= 1)
 			{
 				operation.allowSceneActivation = true;
+				Debug.Log("Activate");
 			}
 		}
 	}
@@ -46,7 +54,11 @@ public class LoadingScreen : MonoBehaviour
 	
 	public static void StartSceneLoad()
 	{
-		operation = SceneManager.LoadSceneAsync(sceneToLoad);
-		operation.allowSceneActivation = false;
+		//Debug.Log(operation);
+		//operation = SceneManager.LoadSceneAsync(sceneToLoad);
+		//Debug.Log(operation);
+		//operation.allowSceneActivation = false;
+		//Debug.Log(sceneToLoad);
+		SceneManager.LoadScene(sceneToLoad);
 	}
 }

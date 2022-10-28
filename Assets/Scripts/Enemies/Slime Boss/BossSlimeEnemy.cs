@@ -129,7 +129,6 @@ public class BossSlimeEnemy : WaterSlimeEnemy
 
 	public override void Update()
     {
-
 	    base.Update();
         if(!ExecuteAttack())
         {
@@ -299,7 +298,8 @@ public class BossSlimeEnemy : WaterSlimeEnemy
             // setter to set variables from CrystalSlimeProject
             tempEnemyProjectile.GetComponent<CrystalSlimeProjectile>().SetVars(damageAmount);
             //setting the rotations of the projectiles so that it spawns in like a circle
-            tempEnemyProjectile.transform.eulerAngles = new Vector3(tempEnemyProjectile.transform.eulerAngles.x, tempEnemyProjectile.transform.eulerAngles.y + (360.0f / 5.0f * i), tempEnemyProjectile.transform.eulerAngles.z);
+	        tempEnemyProjectile.transform.eulerAngles = new Vector3(tempEnemyProjectile.transform.eulerAngles.x, tempEnemyProjectile.transform.eulerAngles.y + (360.0f / 5.0f * i), tempEnemyProjectile.transform.eulerAngles.z);
+	        tempEnemyProjectile.GetComponent<CrystalSlimeProjectile>().Shoot();
 
             if (audioManager)
             {
