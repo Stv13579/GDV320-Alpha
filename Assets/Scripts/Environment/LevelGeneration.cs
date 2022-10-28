@@ -61,7 +61,7 @@ public class LevelGeneration : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime;
-        if(currentTime >= 20.0f)
+        if(currentTime >= 15.0f)
         {
             int rand = Random.Range(1,3);
             if(rand == 1)
