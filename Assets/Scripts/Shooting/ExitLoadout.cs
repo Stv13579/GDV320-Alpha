@@ -6,7 +6,7 @@ public class ExitLoadout : MonoBehaviour
 {
     public void Exit()
     {
-        GameObject.Find("LoadoutObject").GetComponent<Interact>().LeaveUI();
+        GameObject.Find("LoadoutStand").GetComponent<Interact>().LeaveUI();
 
        
 

@@ -9,6 +9,9 @@ public class StartRunScript : MonoBehaviour
 
     float currentPortalPer;
     AudioManager audioManager;
+
+    EndLevel endLevel;
+
     public void SetPortal(GameObject nP) { portal = nP; }
 
     private void Start()
@@ -16,6 +19,7 @@ public class StartRunScript : MonoBehaviour
 	    player = Shooting.GetShooting();
         portal = GameObject.Find("Model_Environment_Portal_FBX");
         audioManager = AudioManager.GetAudioManager();
+        endLevel = FindObjectOfType<EndLevel>();
     }
 
     private void Update()
@@ -28,6 +32,7 @@ public class StartRunScript : MonoBehaviour
             {
                 audioManager.StopSFX("Portal Idle");
             }
+            endLevel.SetInteractable(true);
         }
         else
         {
@@ -38,7 +43,7 @@ public class StartRunScript : MonoBehaviour
                 audioManager.PlaySFX("Portal Opening", player.transform);
                 audioManager.PlaySFX("Portal Idle", player.transform);
             }
-           
+            endLevel.SetInteractable(false);
         }
 
         

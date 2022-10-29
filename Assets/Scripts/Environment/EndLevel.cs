@@ -7,6 +7,7 @@ public class EndLevel : MonoBehaviour
 {
     [SerializeField]
     bool interactable;
+    public void SetInteractable(bool inter) { interactable = inter; }
     int sceneToLoad;
     [SerializeField]
     GameObject loadingScreen;
