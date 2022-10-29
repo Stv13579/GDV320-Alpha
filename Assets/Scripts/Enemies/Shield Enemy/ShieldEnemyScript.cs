@@ -105,6 +105,14 @@ public class ShieldEnemyScript : BaseEnemyClass
         if(angle < 75)
         {
             enemyAnims.SetTrigger("Shield Up");
+
+            if (enemyAnims.GetCurrentAnimatorStateInfo(0).IsName("Shield Up"))
+            {
+                if (audioManager)
+                {
+                    audioManager.PlaySFX("Shield Enemy Activate Shield", player.transform, this.transform);
+                }
+            }
         }
         else
         {
