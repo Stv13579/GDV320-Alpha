@@ -356,7 +356,7 @@ public class BaseEnemyClass : MonoBehaviour
             //Destroy for now
             if(spawner)
             {
-                spawner.GetComponent<SAIM>().spawnedEnemies.Remove(this);
+                spawner.GetComponent<SAIM>().spawnedEnemies.RemoveAll( which => which == this);
             }
 
 

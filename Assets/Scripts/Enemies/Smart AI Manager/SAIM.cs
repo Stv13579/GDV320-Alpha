@@ -344,12 +344,12 @@ public class SAIM : MonoBehaviour
             }
         }
 
-        //Vector3 nodeMasterPosition = nodeMaster.transform.position;
-        //nodeMasterPosition.x -= (gridSize * nodeSpacing) / 2;
-        //nodeMasterPosition.y -= (gridHeight * nodeSpacing) / 2;
-        //nodeMasterPosition.z -= (gridSize * nodeSpacing) / 2;
+        Vector3 nodeMasterPosition = nodeMaster.transform.position;
+        nodeMasterPosition.x -= (gridSize * nodeSpacing) / 2;
+        nodeMasterPosition.y -= (gridHeight * nodeSpacing) / 2;
+        nodeMasterPosition.z -= (gridSize * nodeSpacing) / 2;
 
-        //nodeMaster.transform.position = nodeMasterPosition;
+        nodeMaster.transform.position = nodeMasterPosition;
 
         //Kill the illegal ones
 
@@ -484,7 +484,7 @@ public class SAIM : MonoBehaviour
 
     public void DestroyAllNodes()
     {
-       // nodeMaster.transform.localPosition = Vector3.zero;
+        nodeMaster.transform.localPosition = Vector3.zero;
         int l = 0;
         foreach (Node node in nodes)
         {
@@ -948,8 +948,6 @@ public class SAIM : MonoBehaviour
                     continue;
                 }
                 
-
-
 	            if(CheckHeightDifference(currentNode, node))//|| CollisonCull(currentNode, node))
                 {
                     continue;
@@ -972,8 +970,8 @@ public class SAIM : MonoBehaviour
     //If there is a height difference (going up), return true, otherwise false
     bool CheckHeightDifference(Node mainNode, Node neighbourNode)
     {
-        if (mainNode.position.y > neighbourNode.position.y + allowableHeightDifference
-            || mainNode.position.y < neighbourNode.position.y - allowableHeightDifference)
+        if (mainNode.transform.localPosition.y > neighbourNode.transform.localPosition.y + allowableHeightDifference
+            || mainNode.transform.localPosition.y < neighbourNode.transform.localPosition.y - allowableHeightDifference)
         {
             return true;
         }
