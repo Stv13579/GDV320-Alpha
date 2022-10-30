@@ -46,6 +46,8 @@ public class EndLevel : MonoBehaviour
         {
             index = 1;
             Destroy(player);
+            if(FindObjectOfType<TrinketManager>())
+                Destroy(FindObjectOfType<TrinketManager>().gameObject);
 	        Destroy(GameplayUI.GetGameplayUI().gameObject);
             //Save the game
             SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Lotl"));
