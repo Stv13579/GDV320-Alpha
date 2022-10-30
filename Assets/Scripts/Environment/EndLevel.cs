@@ -109,6 +109,10 @@ public class EndLevel : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && !interactable)
         {
+            if (audioManager)
+            {
+                audioManager.StopSFX("Portal Idle");
+            }
             EndCurrentLevel();
         }
     }
