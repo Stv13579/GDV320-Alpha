@@ -24,7 +24,7 @@ public class GameOverScreen : MonoBehaviour
     void Start()
     {
         //Load the hub scene in the background while the button fades in
-        StartCoroutine(LoadScene());
+	    LoadingScreen.SetSceneToLoad(1);
     }
     void Awake()
     {
@@ -68,7 +68,7 @@ public class GameOverScreen : MonoBehaviour
 
 	    FindObjectOfType<SAIM>().data.ResetDifficulty();
 	    QuestManager.GetQuestManager().FinishRunUpdate();
-        operation.allowSceneActivation = true;
+	    SceneManager.LoadScene(6);
         if (audioManager)
         {
             for (int i = 0; i < audioManager.GetMusics().Length; i++)
@@ -77,19 +77,5 @@ public class GameOverScreen : MonoBehaviour
             }
             audioManager.PlayMusic("Hub Room Music");
         }
-    }
-
-    public IEnumerator LoadScene()
-    {
-        operation = SceneManager.LoadSceneAsync(sceneToLoad);
-
-        operation.allowSceneActivation = false;
-
-        while (!operation.isDone)
-        {
-
-            yield return null;
-        }
-
     }
 }

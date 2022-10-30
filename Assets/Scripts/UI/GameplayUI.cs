@@ -361,7 +361,8 @@ public class GameplayUI : MonoBehaviour
             audioManager.PlayMusic("Hub Room Music");
         }
 
-        SceneManager.LoadScene(1);
+	    LoadingScreen.SetSceneToLoad(1);
+	    SceneManager.LoadScene(6);
 
 	    Destroy(player.gameObject);
 	    Destroy(ProphecyManager.GetProphecyManager());
