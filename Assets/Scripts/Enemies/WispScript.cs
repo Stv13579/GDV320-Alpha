@@ -10,11 +10,13 @@ public class WispScript : BaseEnemyClass
 	bool destroyed = false;
 	Types element;
 	Renderer renderer;
+	float offset;
 	public override void Awake()
 	{
 		startPos = this.transform.position;
 		targetPos = this.transform.position;
 		renderer = GetComponentInChildren<Renderer>();
+		offset = Random.Range(-3, 3);
 	}
 	
 	// Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
@@ -37,7 +39,7 @@ public class WispScript : BaseEnemyClass
 			moveTimer = Random.Range(2, 4);
 		}
 		Movement(targetPos);
-		this.transform.GetChild(0).localPosition = new Vector3(0, Mathf.Sin(Time.time), 0);
+		this.transform.GetChild(0).localPosition = new Vector3(0, Mathf.Sin(Time.time + offset), 0);
 	}
 	
 	public override void Movement(Vector3 positionToMoveTo)

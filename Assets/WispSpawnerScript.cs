@@ -10,7 +10,7 @@ public class WispSpawnerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-		if(Shooting.GetShooting().GetPrimaryElements()[0] is BaseElementClass)
+		if(Shooting.GetShooting().GetPrimaryElements()[0] != Shooting.GetShooting().GetBlankElement())
 		{
 			if(Shooting.GetShooting().GetPrimaryElements()[0] is FireElement || Shooting.GetShooting().GetPrimaryElements()[1] is FireElement)
 			{
