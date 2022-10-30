@@ -30,7 +30,7 @@ public class Trinket : Item
 
     public void Upgrade()
     {
-	    //uState++;
+	    uState++;
 	    uState = (UnlockState)associatedNPC.storyPosition;
 
     }

@@ -127,7 +127,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
 	    
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         //Movement(moveDirection);
         Movement(moveDirection);

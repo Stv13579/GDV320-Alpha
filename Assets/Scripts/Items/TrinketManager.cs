@@ -9,17 +9,13 @@ public class TrinketManager : MonoBehaviour
 	// Awake is called when the script instance is being loaded.
 	protected void Awake()
 	{
-		if(exists)
-		{
-			Destroy(this.gameObject);
-		}
+
 	}
     void Start()
     {
-	    DontDestroyOnLoad(gameObject);
-	    exists = true;
-	    currentTrinketManager = this;
-
+		DontDestroyOnLoad(gameObject);
+		exists = true;
+		currentTrinketManager = this;
     }
     
 	public static TrinketManager GetTrinketManager()

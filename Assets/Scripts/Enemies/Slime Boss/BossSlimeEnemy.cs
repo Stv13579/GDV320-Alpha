@@ -153,7 +153,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         UpdateMaterials();
     }
 
-    
+
     //Execute the attack based on the type it currently is
     private bool ExecuteAttack()
     {
@@ -510,15 +510,24 @@ public class BossSlimeEnemy : WaterSlimeEnemy
             }
         }
     }
-    
-	public override void Movement(Vector3 positionToMoveTo)
-	{
-		if(currentChargeDuration >= fireChargeDuration)
-		{
-			base.Movement(positionToMoveTo);
-		}
-	}
-	
 
+    public override void Movement(Vector3 positionToMoveTo, float speed)
+    {
+        base.Movement(moveDirection);
+        RaycastHit hit;
+
+        Vector3 moveVec = (player.transform.position - transform.position).normalized * speed * Time.deltaTime;
+        moveVec.y = 0;
+        moveVec.y -= 1 * Time.deltaTime;
+
+        transform.position += moveVec;
+
+        // slime is always looking at the player
+        transform.LookAt(player.transform.position);
+        Quaternion rot = transform.rotation;
+        rot.eulerAngles = new Vector3(0, rot.eulerAngles.y + 135, 0);
+        transform.rotation = rot;
+
+    }
 
 }
