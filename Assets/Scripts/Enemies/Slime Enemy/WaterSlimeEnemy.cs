@@ -29,6 +29,9 @@ public class WaterSlimeEnemy : BaseEnemyClass
 	protected Vector3 posOffset = Vector3.zero;
     
 	float hurtTimer = 0.0f;
+	
+	[SerializeField]
+	float slideDistance = 3.0f;
 
     public override void Awake()
     {
@@ -71,7 +74,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
 
             pos = moveDirection.normalized;
             Vector3 moveForce = moveDirection.normalized * moveSpeed;
-            if ((player.transform.position - transform.position).magnitude < 3)
+	        if ((player.transform.position - transform.position).magnitude < slideDistance)
             {
                 moveForce = (player.transform.position - transform.position).normalized * moveSpeed * Time.deltaTime;
             }
@@ -102,7 +105,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
         moveVec.y = 0;
         moveVec.y -= 1 * Time.deltaTime;
 
-        if((player.transform.position - transform.position).magnitude < 3)
+	    if((player.transform.position - transform.position).magnitude < slideDistance)
         {
             moveVec = (player.transform.position - transform.position).normalized * speed * Time.deltaTime;
             moveVec.y = 0;
