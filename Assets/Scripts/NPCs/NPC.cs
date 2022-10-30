@@ -25,7 +25,11 @@ public class NPC : MonoBehaviour
         //Called once all the lines of this dialogue are exhausted, call this action
         public virtual void Action()
         {
-            heldData.met = true;
+            if(heldData)
+            {
+                heldData.met = true;
+            }
+             
             actionTaken = true;
         }
 
