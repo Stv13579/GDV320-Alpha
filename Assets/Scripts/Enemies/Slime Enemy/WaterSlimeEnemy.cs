@@ -96,7 +96,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
         moveVec.y = 0;
         moveVec.y -= 1 * Time.deltaTime;
 
-        if((player.transform.position - transform.position).magnitude < 3)
+	    if((player.transform.position - transform.position).magnitude < 3)
         {
             moveVec = (player.transform.position - transform.position).normalized * speed * Time.deltaTime;
             moveVec.y = 0;

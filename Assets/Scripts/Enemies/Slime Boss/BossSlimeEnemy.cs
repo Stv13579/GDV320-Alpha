@@ -131,6 +131,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
 	    base.Update();
         if(!ExecuteAttack())
         {
+	        //moveDirection = player.transform.position;
             base.Update();
 
             chargeVec = (player.transform.position - transform.position).normalized;
@@ -143,6 +144,14 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         {
             spawnTimer -= Time.deltaTime;   
         }
+        
+	    if(currentChargeDuration >= fireChargeDuration)
+	    {
+		    transform.LookAt(player.transform.position);
+		    Quaternion rot = transform.rotation;
+		    rot.eulerAngles = new Vector3(0, rot.eulerAngles.y + 135, 0);
+		    transform.rotation = rot;
+	    }
         UpdateMaterials();
     }
 
