@@ -9,8 +9,6 @@ public class EndLevel : MonoBehaviour
     bool interactable;
     public void SetInteractable(bool inter) { interactable = inter; }
     int sceneToLoad;
-    [SerializeField]
-    GameObject loadingScreen;
 
     GameObject player;
 
@@ -60,24 +58,17 @@ public class EndLevel : MonoBehaviour
         player.GetComponent<Shooting>().SetLoadScene(true);
         sceneToLoad = index;
 		
-	    if(Object.FindObjectOfType<LevelPreloaderScript>())
+
+	    if(SceneManager.GetActiveScene().buildIndex < 4)
 	    {
-		    Object.FindObjectOfType<LevelPreloaderScript>().LoadScene();
+		    LoadingScreen.SetSceneToLoad(SceneManager.GetActiveScene().buildIndex + 1);
 	    }
 	    else
 	    {
-	    	//if(SceneManager.GetActiveScene().buildIndex < 4)
-	    	//{
-		    //	LoadingScreen.SetSceneToLoad(SceneManager.GetActiveScene().buildIndex + 1);
-	    	//}
-	    	//else
-	    	//{
-		    //	LoadingScreen.SetSceneToLoad(1);
-	    	//}
-	    	//LoadingScreen.StartSceneLoad();
-		    //SceneManager.LoadScene(6);
-		    SceneManager.LoadScene(sceneToLoad);
+		    LoadingScreen.SetSceneToLoad(1);
 	    }
+	    SceneManager.LoadScene(6);
+
 
         //StartCoroutine(screen.GetComponent<LoadingScreen>().LoadScene(sceneToLoad));
 

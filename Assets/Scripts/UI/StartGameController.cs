@@ -34,11 +34,15 @@ public class StartGameController : MonoBehaviour
 
         if (SaveSystem.LoadStartedState() && !freshStart)
         {
-            SceneManager.LoadScene(1);
+        	LoadingScreen.SetSceneToLoad(1);
+        	SceneManager.LoadScene(6);
+	        //SceneManager.LoadScene(1);
         }
         else
         {
-            SceneManager.LoadScene(5);
+        	LoadingScreen.SetSceneToLoad(5);
+        	SceneManager.LoadScene(6);
+        	//SceneManager.LoadScene(5);
         }
     }
 
