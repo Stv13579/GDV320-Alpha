@@ -122,8 +122,14 @@ public class AudioManager : MonoBehaviour
             j.SetAudioSourceAudioPitch(j.GetAudioPitch());
             j.SetAudioSourceAudioLoop(j.GetAudioLoop());
         }
+        if(isMusicMuted)
+        {
 
-        PlayMusic(initialMusic);
+        }
+        else
+        {
+            PlayMusic(initialMusic);
+        }
         DontDestroyOnLoad(gameObject);
     }
 
@@ -141,6 +147,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound source: " + name + " was not found!"); // error message
             return;
         }
+
         if (isSoundMuted)
         {
 
