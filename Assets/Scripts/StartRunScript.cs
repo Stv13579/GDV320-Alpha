@@ -60,10 +60,6 @@ public class StartRunScript : MonoBehaviour
         }
 
         GameObject.Find("LoadoutObject").GetComponent<Interact>().LeaveUI();
-        if (audioManager)
-        {
-            audioManager.StopSFX("Portal Idle");
-        }
         FindObjectOfType<EndLevel>().EndCurrentLevel();
         
     }

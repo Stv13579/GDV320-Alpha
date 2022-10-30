@@ -10,6 +10,10 @@ public class MainMenuScript : MonoBehaviour
     private void Start()
     {
 		options.GetComponent<OptionsMenuScript>().LoadSettings();
+		options.GetComponent<OptionsMenuScript>().UpdateFOV();
+		options.GetComponent<OptionsMenuScript>().UpdateMusicVolume();
+		options.GetComponent<OptionsMenuScript>().UpdateSensitivity();
+		options.GetComponent<OptionsMenuScript>().UpdateSoundVolume();
     }
     public void OpenOptions()
 	{

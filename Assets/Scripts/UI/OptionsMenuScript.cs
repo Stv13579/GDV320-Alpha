@@ -15,7 +15,7 @@ public class OptionsMenuScript : MonoBehaviour
 	
 	[SerializeField]
 	Slider soundVolumeSlider, musicVolumeSlider, mouseSlider, fovSlider;
-	
+
 	public void UpdateSoundVolume()
 	{
 		soundVolume = Mathf.RoundToInt(soundVolumeSlider.value);

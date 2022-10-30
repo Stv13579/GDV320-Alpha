@@ -11,18 +11,6 @@ public class EnergyElement : BaseElementClass
     protected GameObject energyShield;
 
     [SerializeField]
-    // might change to this method depending if current way works
-    enum shieldState
-    {
-        shieldUp,
-        parrying,
-        shieldDown
-    }
-
-    [SerializeField]
-    shieldState shieldStateChange = shieldState.shieldDown;
-
-    [SerializeField]
     protected float timeToParry;
     protected bool useShield = false;
 
@@ -65,59 +53,12 @@ public class EnergyElement : BaseElementClass
         {
             chargeTimer = upgradedChargeTimer;
         }
-        //// states for the energy Shield
-        //    switch (shieldStateChange)
-        //    {
-        //    // if shield is not being used
-        //        case shieldState.shieldDown:
-        //            {
-        //            // checks if the player has pressed left click
-        //                if (useShield == true)
-        //                {
-        //                // checks in the shield is upgrade
-        //                    if (upgraded == true)
-        //                    {
-        //                        shieldStateChange = shieldState.parrying;
-        //                    }
-        //                    else
-        //                    {
-        //                        shieldStateChange = shieldState.shieldUp;
-        //                    }
-        //                }
-        //            break;
-        //            }
-        //        // for beta
-        //        // basically player will be able to parry in a certain time
-        //        case shieldState.parrying:
-        //            {
-        //                timeToParry += Time.deltaTime;
-        //                if (timeToParry >= 0.25f)
-        //                {
-        //                    shieldStateChange = shieldState.shieldUp;
-        //                    timeToParry = 0.0f;
-        //                    //parrycode;
-        //                    GetComponent<PlayerClass>().ChangeMana(50, manaTypes);
-        //                }
-        //            break;
-        //            }
-        //        // if shields is up
-        //        // does all the checks if to deactivate shield and go back to down state
-        //        case shieldState.shieldUp:
-        //            {
-        //                HitShield();
-
-        //                if (!PayCosts(manaCost * Time.deltaTime) || !Input.GetKey(KeyCode.Mouse1))
-        //                { 
-        //                    DeactivateEnergyShield();
-        //                    shieldStateChange = shieldState.shieldDown;
-        //                }
-        //                break;
-        //            }
-        //}
+       
     }
     IEnumerator Charge()
     {
         currentTimer = 0;
+
         while (currentTimer < chargeTimer)
         {
             this.GetComponent<PlayerMovement>().SetInputs(false);
@@ -184,6 +125,7 @@ public class EnergyElement : BaseElementClass
         base.ElementEffect();
         energyShield.SetActive(true);
         useShield = true;
+        playerClass.ChangeMana(-manaCost * (upgraded ? 1 : 0.5f), manaTypes);
         activatedVFX.SetActive(true);
         StartCoroutine(Charge());
     }
@@ -205,7 +147,6 @@ public class EnergyElement : BaseElementClass
         base.StartAnims(animationName);
         playerHand.ResetTrigger("EnergyStopCast");
         playerHand.SetTrigger(animationName);
-        playerClass.ChangeMana(-manaCost * (upgraded ? 1 : 0.5f), manaTypes);
         if (audioManager)
         {
             audioManager.PlaySFX(shootingSoundFX);

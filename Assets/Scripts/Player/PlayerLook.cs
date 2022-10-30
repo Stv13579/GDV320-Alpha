@@ -66,24 +66,22 @@ public class PlayerLook : MonoBehaviour
         currentCamera.transform.localEulerAngles = new Vector3(tilt, spin, 0);
     }
 
-    // Start is called before the first frame update
-    // TO DO:
     void Start()
     {
 	    ToggleCursor();
-	    if(PlayerPrefs.HasKey("Sensitivity"))
-	    {
-		    sensitivity = PlayerPrefs.GetFloat("Sensitivity");
-	    }
-	    if(PlayerPrefs.HasKey("FOV"))
-	    {
-		    fov = PlayerPrefs.GetInt("FOV");
-		    currentCamera.fieldOfView = fov;
-	    }
     }
     void Awake()
     {
         playerLook = this;
+        if (PlayerPrefs.HasKey("Sensitivity"))
+        {
+            sensitivity = PlayerPrefs.GetFloat("Sensitivity");
+        }
+        if (PlayerPrefs.HasKey("FOV"))
+        {
+            fov = PlayerPrefs.GetInt("FOV");
+            currentCamera.fieldOfView = fov;
+        }
     }
     // Update is called once per frame
     void Update()
