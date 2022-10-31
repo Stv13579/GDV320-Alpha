@@ -17,10 +17,23 @@ public class EndLevel : MonoBehaviour
     [SerializeField]
     int numberOfLevels;
 
+    [SerializeField]
+    GameObject portalAnim;
+
     private void Start()
     {
 	    player = PlayerClass.GetPlayerClass().gameObject;
 	    audioManager = AudioManager.GetAudioManager();
+        if(!interactable)
+        {
+            portalAnim.GetComponent<Animator>().SetTrigger("Open");
+            portalAnim.GetComponent<Animator>().ResetTrigger("Close");
+            if (audioManager)
+            {
+                audioManager.PlaySFX("Portal Opening", player.transform);
+                audioManager.PlaySFX("Portal Idle", player.transform);
+            }
+        }
     }
     public int GetSceneToLoad() { return sceneToLoad; }
 
