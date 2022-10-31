@@ -132,6 +132,10 @@ public class ShieldEnemyScript : BaseEnemyClass
         //this.gameObject.transform.LookAt(positionToMoveTo);
         //this.gameObject.transform.eulerAngles = new Vector3(0, this.gameObject.transform.eulerAngles.y, 0);
         float angleBetwixt = Vector3.SignedAngle(transform.forward, positionToMoveTo - transform.position, Vector3.up);
+        if ((player.transform.position - transform.position).magnitude < 3)
+        {
+            angleBetwixt = Vector3.SignedAngle(transform.forward, player.transform.position - transform.position, Vector3.up);
+        }
 
         //get the direction of rotation
         float dir = Mathf.Sign(angleBetwixt);
@@ -155,13 +159,18 @@ public class ShieldEnemyScript : BaseEnemyClass
     //Rotate much slower
     public void ShieldMovement(Vector3 positionToMoveTo, float speed)
     {
+        if ((player.transform.position - transform.position).magnitude < 3)
+        {
+            return;
+        }
+
         movement = (positionToMoveTo - transform.position).normalized * speed * (Time.deltaTime + timeSinceLastMove);
         if (!gameObject.GetComponent<CharacterController>().isGrounded)
         {
             movement += new Vector3(0, gravity, 0);
             //transform.position += new Vector3(0, gravity, 0);
         }
-
+        
         gameObject.GetComponent<CharacterController>().Move(movement);
     }
 
