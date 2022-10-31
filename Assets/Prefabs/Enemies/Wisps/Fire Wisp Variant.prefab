@@ -1,5 +1,95 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &372347298801932459
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 9182977190371663710}
+    m_Modifications:
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447344556587563015, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7787173206970294973, guid: 81d11945810dc304286115b220616d83,
+        type: 3}
+      propertyPath: m_Name
+      value: Model_Enemy_Wisp_Fire
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 81d11945810dc304286115b220616d83, type: 3}
+--- !u!1 &7348228565390649725 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6976340906674139606, guid: 81d11945810dc304286115b220616d83,
+    type: 3}
+  m_PrefabInstance: {fileID: 372347298801932459}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5211617102486635727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7,11 +97,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3077461068648732702, guid: 6cbf04e95294c354ca4ee9625130ab7f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 81cb8456ac8446f458db691a291bac42, type: 2}
+    - target: {fileID: 3581957066547886539, guid: 6cbf04e95294c354ca4ee9625130ab7f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3973053645667113875, guid: 6cbf04e95294c354ca4ee9625130ab7f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3973053645667113875, guid: 6cbf04e95294c354ca4ee9625130ab7f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 441d27e044e83ed4997f70969077ff11, type: 2}
+    - target: {fileID: 3973053645785630404, guid: 6cbf04e95294c354ca4ee9625130ab7f,
+        type: 3}
+      propertyPath: glow
+      value: 
+      objectReference: {fileID: 7348228565390649725}
     - target: {fileID: 3973053645785630404, guid: 6cbf04e95294c354ca4ee9625130ab7f,
         type: 3}
       propertyPath: weaknesses.Array.data[0]
@@ -80,7 +190,13 @@ PrefabInstance:
     - target: {fileID: 3973053645785630406, guid: 6cbf04e95294c354ca4ee9625130ab7f,
         type: 3}
       propertyPath: m_Name
-      value: Fire Wisp
+      value: Fire Wisp Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cbf04e95294c354ca4ee9625130ab7f, type: 3}
+--- !u!4 &9182977190371663710 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3973053645667113873, guid: 6cbf04e95294c354ca4ee9625130ab7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5211617102486635727}
+  m_PrefabAsset: {fileID: 0}
