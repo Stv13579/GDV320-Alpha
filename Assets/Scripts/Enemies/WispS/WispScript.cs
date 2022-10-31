@@ -65,11 +65,7 @@ public class WispScript : BaseEnemyClass
 			}
 			StartCoroutine(FadeOut());
 		}
-		else if(attackTypes[0] == resistances[0])
-		{
-			StartCoroutine(FadeOut());
-		}
-		else
+		else if (destroyable)
 		{
 			StartCoroutine(FadeOut());
 		}
