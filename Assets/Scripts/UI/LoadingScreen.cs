@@ -43,7 +43,6 @@ public class LoadingScreen : MonoBehaviour
 			if (operation.progress >= 0.9f)
 			{
 				operation.allowSceneActivation = true;
-				Debug.Log("Activate");
 			}
 		}
 	}
