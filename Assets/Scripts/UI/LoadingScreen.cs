@@ -41,12 +41,12 @@ public class LoadingScreen : MonoBehaviour
 	protected void Update()
 	{
 		progress += Time.deltaTime / 5;
-		loadBar.fillAmount = progress;
+		loadBar.fillAmount = operation.progress;
 		rot -= Time.deltaTime * 100;
 		spinner.transform.eulerAngles = new Vector3(0, 0, rot);
 		if(!operation.isDone)
 		{
-			if (operation.progress >= 0.9f && progress >= 1)
+			if (operation.progress >= 0.9f)
 			{
 				operation.allowSceneActivation = true;
 				Debug.Log("Activate");
