@@ -44,6 +44,19 @@ public class PlayerMaterials : MonoBehaviour
     [ColorUsage(true, true)]
     Color hsvColorPRR;
 
+    [SerializeField]
+    Material playerFeathers;
+
+    [SerializeField]
+    Material playerClothing;
+
+    public Material GetPlayerFeather() { return playerFeathers; }
+    public Material GetPlayerClothing() { return playerClothing; }
+    public Material GetPlayerHandsL() { return playerHandsL; }
+    public Material GetPlayerHandsR() { return playerHandsR; }
+    public Material GetPlayerRingL() { return playerRingL; }
+    public Material GetPlayerRingR() { return playerRingR; }
+
     // Update is called once per frame
     void Update()
     {
