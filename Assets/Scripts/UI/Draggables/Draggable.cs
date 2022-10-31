@@ -33,10 +33,10 @@ public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
         if (elementSlots.Count > 0)
         {
             GameObject tempGameOBJ = draggedObject;
-            //if (elementSlots[1].GetSlotTaken() == true && elementSlots[0].GetSlotTaken() == true)
-            //{
-            //    //GetComponent<Image>().color = fadedColour;
-            //}
+            if (elementSlots[1].GetSlotTaken() == true && elementSlots[0].GetSlotTaken() == true)
+            {
+               
+            }
             //else 
             if (elementSlots[0].GetPlayer().GetCatalystElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
             {
