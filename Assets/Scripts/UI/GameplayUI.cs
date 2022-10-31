@@ -61,6 +61,9 @@ public class GameplayUI : MonoBehaviour
     Image slowedFullScreen;
 
     [SerializeField]
+    Image debuffFullScreen;
+
+    [SerializeField]
     Image damageIndicator;
 
     [SerializeField]
@@ -86,6 +89,7 @@ public class GameplayUI : MonoBehaviour
     public Image GetLowHealthFullScreen() { return lowHealthFullScreen; }
     public Image GetInToxicFullScreen() { return inToxicFullScreen; }
     public Image GetSlowedFullScreen() { return slowedFullScreen; }
+    public Image GetDebuffFullScreen() { return debuffFullScreen; }
     public Image GetDamageIndicator() { return damageIndicator; }
     public GameObject GetHitMarker() { return hitMarker; }
     public GameObject GetHitMarkerShield() { return hitMarkerShield; }
@@ -143,6 +147,10 @@ public class GameplayUI : MonoBehaviour
         if (slowedFullScreen)
         {
             slowedFullScreen.gameObject.SetActive(false);
+        }
+        if (debuffFullScreen)
+        {
+            debuffFullScreen.gameObject.SetActive(false);
         }
         if (Pause)
         {
@@ -357,6 +365,10 @@ public class GameplayUI : MonoBehaviour
             for (int i = 0; i < audioManager.GetMusics().Length; i++)
             {
                 audioManager.GetMusics()[i].GetAudioSource().Stop();
+            }
+            for (int i = 0; i < audioManager.GetSounds().Length; i++)
+            {
+                audioManager.GetSounds()[i].GetAudioSource().Stop();
             }
             audioManager.PlayMusic("Hub Room Music");
         }
