@@ -13,6 +13,7 @@ public class GameOverScreen : MonoBehaviour
 	[SerializeField]
     GameObject button;
     float backgroundTimer = 0;
+    float backgroundalpha = 0;
     float textTimer = 0;
 	float buttonTimer = 0;
 	[SerializeField]
@@ -33,12 +34,13 @@ public class GameOverScreen : MonoBehaviour
 
     void Update()
     {
+        backgroundTimer += Time.deltaTime;
         //As each object fades in, sart fading in the next object
-        if(backgroundTimer < 1)
+        if (backgroundTimer > 4)
         {
-            backgroundTimer += Time.deltaTime;
+            backgroundalpha += Time.deltaTime;
         }
-        background.color = new Color(background.color.r, background.color.g, background.color.b, backgroundTimer);
+        background.color = new Color(background.color.r, background.color.g, background.color.b, backgroundalpha);
         if(background.color.a >= 1)
         {
             if(textTimer < 1)

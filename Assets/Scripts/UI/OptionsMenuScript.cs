@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class OptionsMenuScript : MonoBehaviour
 {
 	static float soundVolume = 100.0f;
-	static float mouseSensitivity = 2;
+	static float mouseSensitivity = 2.0f;
 	static int fov = 90;
 	static float musicVolume = 100.0f;
 	[SerializeField]

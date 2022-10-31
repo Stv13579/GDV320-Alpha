@@ -71,7 +71,14 @@ public class EnergyElement : BaseElementClass
         }
         this.GetComponent<PlayerMovement>().SetZ(0);
         this.GetComponent<PlayerMovement>().SetInputs(true);
-        this.GetComponent<PlayerLook>().SetSensitivity(PlayerPrefs.GetFloat("Sensitivity"));
+        if(PlayerPrefs.GetFloat("Sensitivity") <= 0.0f)
+        {
+            this.GetComponent<PlayerLook>().SetSensitivity(2.0f);
+        }
+        else
+        {
+            this.GetComponent<PlayerLook>().SetSensitivity(PlayerPrefs.GetFloat("Sensitivity"));
+        }
         Physics.IgnoreLayerCollision(11, 8, false);
         DeactivateEnergyShield();
     }
