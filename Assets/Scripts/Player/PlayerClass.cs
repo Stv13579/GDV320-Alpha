@@ -98,6 +98,9 @@ public class PlayerClass : MonoBehaviour
 
     float takeDamageTimer;
 
+    [SerializeField]
+    float starterCash;
+
     public ManaType[] GetManaTypeArray() { return manaTypes; }
     public List<Item> GetHeldItems() { return heldItems; }
     public GameObject GetItemUI() { return itemUI; }
@@ -123,6 +126,7 @@ public class PlayerClass : MonoBehaviour
 	    itemUI = gameplayUI.transform.GetChild(2).gameObject;
 	    audioManager = AudioManager.GetAudioManager();
         lowHealthValue = 0.0f;
+        money += starterCash;
     }
     
 	// Awake is called when the script instance is being loaded.
