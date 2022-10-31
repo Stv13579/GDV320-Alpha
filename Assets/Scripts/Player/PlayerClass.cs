@@ -101,6 +101,10 @@ public class PlayerClass : MonoBehaviour
     [SerializeField]
     float starterCash;
 
+    bool debuffAttached;
+
+    float debuffTimer = 10.0f;
+
     public ManaType[] GetManaTypeArray() { return manaTypes; }
     public List<Item> GetHeldItems() { return heldItems; }
     public GameObject GetItemUI() { return itemUI; }
@@ -109,6 +113,9 @@ public class PlayerClass : MonoBehaviour
     public float GetMoney() { return money; }
     public void SubtractMoney(float cost) { money -= cost; }
     public void SetSlowed(bool tempslowed) { slowed = tempslowed; }
+    public bool GetDebuffAttached() { return debuffAttached; }
+    public void SetDebuffAttached(bool tempDebuffAttached) { debuffAttached = tempDebuffAttached; }
+
     void Start()
     {
 	    DontDestroyOnLoad(gameObject);
@@ -150,6 +157,7 @@ public class PlayerClass : MonoBehaviour
         LowHealthEffect();
         FullScreenSlowed();
         TakeDamageMat();
+        DebuffFullScreen();
 
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -312,6 +320,27 @@ public class PlayerClass : MonoBehaviour
             {
                 lowHealthValue = 0.0f;
                 gameplayUI.GetLowHealthFullScreen().gameObject.SetActive(false);
+            }
+        }
+    }
+    private void DebuffFullScreen()
+    {
+        if (debuffAttached == true)
+        {
+            debuffTimer -= Time.deltaTime;
+            if (gameplayUI)
+            {
+                gameplayUI.GetDebuffFullScreen().gameObject.SetActive(true);
+                gameplayUI.GetDebuffFullScreen().material.SetFloat("_Toggle_EffectIntensity", debuffTimer);
+            }
+            if(debuffTimer <= 0)
+            {
+                if (gameplayUI)
+                {
+                    gameplayUI.GetDebuffFullScreen().gameObject.SetActive(false);
+                }
+                debuffTimer = 10.0f;
+                debuffAttached = false;
             }
         }
     }
