@@ -26,14 +26,8 @@ public class LoadingScreen : MonoBehaviour
 			GameplayUI.GetGameplayUI().gameObject.SetActive(false);
 		}
 		//If there isn't a scene loading already, start loading one
-		if(operation == null)
-		{
-			StartSceneLoad();
-		}
-		else if(operation.isDone)
-		{
-			operation.allowSceneActivation = true;
-		}
+		StartSceneLoad();
+
 
 	}
 	
@@ -41,10 +35,7 @@ public class LoadingScreen : MonoBehaviour
 	protected void Update()
 	{
 		progress += Time.deltaTime / 5;
-		if(operation != null)
-		{
-			loadBar.fillAmount = operation.progress;
-		}
+		loadBar.fillAmount = operation.progress;
 		rot -= Time.deltaTime * 100;
 		spinner.transform.eulerAngles = new Vector3(0, 0, rot);
 		if(!operation.isDone)
@@ -53,7 +44,6 @@ public class LoadingScreen : MonoBehaviour
 			{
 				operation.allowSceneActivation = true;
 				Debug.Log("Activate");
-				operation = null;
 			}
 		}
 	}
