@@ -16,7 +16,7 @@ public class UpgradeButton : MonoBehaviour, IPointerEnterHandler
     public void OnPointerEnter(PointerEventData peData)
     {
 	    detailWindow.transform.Find("ElementName").GetComponent<TextMeshProUGUI>().text = element.GetName();
-	    detailWindow.transform.Find("UpgradeDescription").GetComponent<TextMeshProUGUI>().text = element.GetDescription();
+	    detailWindow.transform.Find("UpgradeDescription").GetComponent<TextMeshProUGUI>().text = element.GetUpgradeDescription();
         detailWindow.transform.Find("PriceTag").GetChild(0).GetComponent<TextMeshProUGUI>().text = "$" + element.GetUpgradeCost().ToString();
 
     }

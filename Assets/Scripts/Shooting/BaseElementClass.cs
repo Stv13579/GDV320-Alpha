@@ -51,6 +51,7 @@ public class BaseElementClass : MonoBehaviour
 	int upgradeCost = 5;
 	[SerializeField]
     string upgradeDescription;
+    public string GetUpgradeDescription() { return upgradeDescription; }
 
     [SerializeField]
     protected List<BaseEnemyClass.Types> attackTypes;
