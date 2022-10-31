@@ -47,4 +47,9 @@ public class BossHealthbarScript : MonoBehaviour
 	{
 		maxHealth = health;
 	}
+	
+	public int GetBossCount()
+	{
+		return enemies.Count;
+	}
 }
