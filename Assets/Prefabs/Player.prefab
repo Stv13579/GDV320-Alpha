@@ -1055,6 +1055,8 @@ MonoBehaviour:
   lowHealthLimit: 75
   lowHealthFastHeartBeat: Low Health Fast Heart Beat
   lowHealthSlowHeartBeat: Low Health Slow Heart Beat
+  deathPostProcessing: {fileID: 7393461596144388975}
+  playerMaterial: {fileID: 2017417399358149841}
 --- !u!114 &1363181307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1306,7 +1308,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 6524903051348573061}
   handVFX: {fileID: 3402536344946380668, guid: 8397178657a067d48bcc863d6790b078, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 10
+  manaCost: 5
   animationToPlay: NecroticCast
   animationToPlayAlt: 
   playerHand: {fileID: 2017859571}
@@ -1481,7 +1483,7 @@ MonoBehaviour:
     Description: A powerful beam of heat. Difficult to use but deals massive damage
     Name: Laser
     Icon: {fileID: 0}
-  upgradeCost: 5
+  upgradeCost: 15
   upgradeDescription: Takes half as much mana to fire
   attackTypes: 00000000
   manaTypes: 0000000004000000
@@ -1531,7 +1533,7 @@ MonoBehaviour:
     Description: A high powered projectile attack. Slow to fire but highly accurate.
     Name: Shard Cannon
     Icon: {fileID: 0}
-  upgradeCost: 25
+  upgradeCost: 30
   upgradeDescription: Increase Firerate and Decrease Mana cost
   attackTypes: 01000000
   manaTypes: 0100000004000000
@@ -1545,7 +1547,7 @@ MonoBehaviour:
   switchElementSFX: Shard Cannon Equip
   idleSFX: Shard Cannon Idle
   upgraded: 0
-  damage: 40
+  damage: 50
   switchAnimationName: ShardCannonTransition
   startCoolDown: 0
   cooldownTimer: 1
@@ -1584,7 +1586,7 @@ MonoBehaviour:
     Description: A cloud of static acid which burns those who enter.
     Name: Acid Cloud
     Icon: {fileID: 0}
-  upgradeCost: 5
+  upgradeCost: 15
   upgradeDescription: Deals additional damage based on the victims health
   attackTypes: 00000000
   manaTypes: 0000000003000000
@@ -1636,7 +1638,7 @@ MonoBehaviour:
       massive damage in an area.
     Name: Star Mine
     Icon: {fileID: 0}
-  upgradeCost: 5
+  upgradeCost: 50
   upgradeDescription: The mine activates quicker, has a greater radius and deals
     greater damage
   attackTypes: 00000000
@@ -1697,7 +1699,7 @@ MonoBehaviour:
       in area and dealing massive damage to nearby allies.
     Name: Explosion Curse
     Icon: {fileID: 0}
-  upgradeCost: 5
+  upgradeCost: 30
   upgradeDescription: Deals less damage, but explodes every time the enemy is struck
     instead
   attackTypes: 01000000
@@ -1756,7 +1758,7 @@ MonoBehaviour:
       those it collides with.
     Name: Ice Slash
     Icon: {fileID: 0}
-  upgradeCost: 5
+  upgradeCost: 15
   upgradeDescription: Increase in size as it travels
   attackTypes: 02000000
   manaTypes: 0200000004000000
@@ -1809,7 +1811,7 @@ MonoBehaviour:
       user instead.
     Name: Life Drain
     Icon: {fileID: 0}
-  upgradeCost: 5
+  upgradeCost: 15
   upgradeDescription: Increases the amount of healing provided
   attackTypes: 02000000
   manaTypes: 0200000003000000
@@ -1868,7 +1870,7 @@ MonoBehaviour:
       damaging all enemies around it.
     Name: Gravity Grendade
     Icon: {fileID: 0}
-  upgradeCost: 5
+  upgradeCost: 35
   upgradeDescription: Continues to explode while attached to an enemy
   attackTypes: 01000000
   manaTypes: 0100000005000000
@@ -1922,7 +1924,7 @@ MonoBehaviour:
       damaging them in the process.
     Name: Stasis Trap
     Icon: {fileID: 0}
-  upgradeCost: 5
+  upgradeCost: 20
   upgradeDescription: Can place an additional trap concurrently
   attackTypes: 02000000
   manaTypes: 0200000005000000
@@ -2437,6 +2439,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2333090671252093763}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2440540507666653766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 125616128070129925, guid: 71a756945744ebd40ad481e08d05d951,
+    type: 3}
+  m_PrefabInstance: {fileID: 2333090671252093763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &7393461596144388975 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5114426427121332268, guid: 71a756945744ebd40ad481e08d05d951,
@@ -2446,12 +2454,6 @@ Animator:
 --- !u!4 &1381243734 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2333090672088064021, guid: 71a756945744ebd40ad481e08d05d951,
-    type: 3}
-  m_PrefabInstance: {fileID: 2333090671252093763}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2440540507666653766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 125616128070129925, guid: 71a756945744ebd40ad481e08d05d951,
     type: 3}
   m_PrefabInstance: {fileID: 2333090671252093763}
   m_PrefabAsset: {fileID: 0}
@@ -2479,15 +2481,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2333090671252093763}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6858203384014779481 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9173258764409048858, guid: 71a756945744ebd40ad481e08d05d951,
+--- !u!4 &1511683287 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2333090672226619284, guid: 71a756945744ebd40ad481e08d05d951,
     type: 3}
   m_PrefabInstance: {fileID: 2333090671252093763}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9012415828574361190 stripped
+--- !u!1 &9102101168409201021 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6733521257998478629, guid: 71a756945744ebd40ad481e08d05d951,
+  m_CorrespondingSourceObject: {fileID: 6787458258412040766, guid: 71a756945744ebd40ad481e08d05d951,
     type: 3}
   m_PrefabInstance: {fileID: 2333090671252093763}
   m_PrefabAsset: {fileID: 0}
@@ -2509,12 +2511,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2333090671252093763}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9102101168409201021 stripped
+--- !u!1 &6858203384014779481 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6787458258412040766, guid: 71a756945744ebd40ad481e08d05d951,
+  m_CorrespondingSourceObject: {fileID: 9173258764409048858, guid: 71a756945744ebd40ad481e08d05d951,
     type: 3}
   m_PrefabInstance: {fileID: 2333090671252093763}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1039724142368013228 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3318337104839966959, guid: 71a756945744ebd40ad481e08d05d951,
+    type: 3}
+  m_PrefabInstance: {fileID: 2333090671252093763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2017417399358149841 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4296297658574532498, guid: 71a756945744ebd40ad481e08d05d951,
+    type: 3}
+  m_PrefabInstance: {fileID: 2333090671252093763}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7949443a974da394cad9a85f9257c1d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &131726689 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2333090671358625314, guid: 71a756945744ebd40ad481e08d05d951,
@@ -2527,9 +2547,9 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2333090671252093763}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1039724142368013228 stripped
+--- !u!1 &9012415828574361190 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 3318337104839966959, guid: 71a756945744ebd40ad481e08d05d951,
+  m_CorrespondingSourceObject: {fileID: 6733521257998478629, guid: 71a756945744ebd40ad481e08d05d951,
     type: 3}
   m_PrefabInstance: {fileID: 2333090671252093763}
   m_PrefabAsset: {fileID: 0}
@@ -2572,12 +2592,6 @@ Transform:
 --- !u!1 &8600078919291408424 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6285146757205764971, guid: 71a756945744ebd40ad481e08d05d951,
-    type: 3}
-  m_PrefabInstance: {fileID: 2333090671252093763}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1511683287 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2333090672226619284, guid: 71a756945744ebd40ad481e08d05d951,
     type: 3}
   m_PrefabInstance: {fileID: 2333090671252093763}
   m_PrefabAsset: {fileID: 0}
@@ -2960,15 +2974,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 646d95399aff60c46898d02987aee4d1, type: 3}
---- !u!1 &2782353506787810485 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 840168143895646795, guid: 646d95399aff60c46898d02987aee4d1,
-    type: 3}
-  m_PrefabInstance: {fileID: 3257236936206159614}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3258373696938199191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3402032801367657, guid: 646d95399aff60c46898d02987aee4d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 3257236936206159614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2782353506787810485 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 840168143895646795, guid: 646d95399aff60c46898d02987aee4d1,
     type: 3}
   m_PrefabInstance: {fileID: 3257236936206159614}
   m_PrefabAsset: {fileID: 0}
@@ -3182,6 +3196,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: -5814111869136598520, guid: 9d0cd90afa85ff94fa6a88965851589e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9d0cd90afa85ff94fa6a88965851589e, type: 3}
+--- !u!1 &3981687641008780923 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8741999944741850319, guid: 9d0cd90afa85ff94fa6a88965851589e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5625023910865451700}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3981687641008780920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8741999944741850316, guid: 9d0cd90afa85ff94fa6a88965851589e,
@@ -3203,12 +3223,6 @@ GameObject:
 --- !u!1 &6303370703232215908 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1831288515270545872, guid: 9d0cd90afa85ff94fa6a88965851589e,
-    type: 3}
-  m_PrefabInstance: {fileID: 5625023910865451700}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3981687641008780923 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8741999944741850319, guid: 9d0cd90afa85ff94fa6a88965851589e,
     type: 3}
   m_PrefabInstance: {fileID: 5625023910865451700}
   m_PrefabAsset: {fileID: 0}
