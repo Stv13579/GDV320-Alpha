@@ -118,7 +118,7 @@ public class Room : MonoBehaviour
                 if (trans.GetComponent<Animator>())
                 {
                     //do fire anim
-                    trans.GetComponent<Animator>();
+                    trans.GetComponent<Animator>().SetBool("OnFire", true);
                 }
             }
         }
@@ -143,7 +143,7 @@ public class Room : MonoBehaviour
                 if (trans.GetComponent<Animator>())
                 {
                     //do fire anim
-                    trans.GetComponent<Animator>();
+                    trans.GetComponent<Animator>().SetBool("OnFire", true);
                 }
             }
         }
