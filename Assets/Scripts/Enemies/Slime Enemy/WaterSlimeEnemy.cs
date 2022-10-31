@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaterSlimeEnemy : BaseEnemyClass
 {
-    float damageTicker = 0.0f;
+    protected float damageTicker = 0.0f;
 
     [SerializeField]
     protected float jumpForce;
@@ -28,7 +28,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
     Vector3 pos = Vector3.zero;
 	protected Vector3 posOffset = Vector3.zero;
     
-	float hurtTimer = 0.0f;
+	protected float hurtTimer = 0.0f;
 
     public override void Awake()
     {
@@ -70,7 +70,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
             transform.rotation = rot;
 
             pos = moveDirection.normalized;
-            Vector3 moveForce = moveDirection.normalized * moveSpeed;
+            Vector3 moveForce = positionToMoveTo.normalized * moveSpeed;
             if ((player.transform.position - transform.position).magnitude < 3)
             {
                 moveForce = (player.transform.position - transform.position).normalized * moveSpeed * Time.deltaTime;
@@ -82,13 +82,7 @@ public class WaterSlimeEnemy : BaseEnemyClass
         }
         else
         {
-            //if(Vector3.SqrMagnitude(this.transform.position - pos) > 10)
-            //{
-            //    Vector3 dir = (pos - this.transform.position).normalized;
-            //    Vector3 move = dir * ((moveSpeed) / 50) * Time.deltaTime;
-            //    this.transform.position += move;
-            //}
-            Movement(moveDirection, moveSpeed / groundMoveSpeed);
+            Movement(positionToMoveTo, moveSpeed / groundMoveSpeed);
         }
         
     }
@@ -98,11 +92,11 @@ public class WaterSlimeEnemy : BaseEnemyClass
         base.Movement(moveDirection);
         RaycastHit hit;
 
-        Vector3 moveVec = moveDirection.normalized * speed * Time.deltaTime;
+        Vector3 moveVec = positionToMoveTo.normalized * speed * Time.deltaTime;
         moveVec.y = 0;
         moveVec.y -= 1 * Time.deltaTime;
 
-        if((player.transform.position - transform.position).magnitude < 3)
+	    if((player.transform.position - transform.position).magnitude < 3)
         {
             moveVec = (player.transform.position - transform.position).normalized * speed * Time.deltaTime;
             moveVec.y = 0;
@@ -129,7 +123,6 @@ public class WaterSlimeEnemy : BaseEnemyClass
 
     public void FixedUpdate()
     {
-        //Movement(moveDirection);
         Movement(moveDirection);
         damageTicker -= Time.deltaTime;
         if (hurtTimer > 0)
@@ -140,7 +133,6 @@ public class WaterSlimeEnemy : BaseEnemyClass
                 this.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Renderer>().material.SetFloat("_IsBeingDamaged", 0);
 
             }
-
         }
     }
 

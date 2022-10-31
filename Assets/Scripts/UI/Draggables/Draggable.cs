@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField]
-    GameObject draggedObject;
+    GameObject draggedObject, selectedBorder;
 
     [SerializeField]
     List<ElementSlots> elementSlots;

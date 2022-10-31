@@ -470,7 +470,7 @@ public class BaseEnemyClass : MonoBehaviour
     }
 
     //Overload for dropping ammo
-	void Drop(int minSpawn, int maxSpawn)
+	protected void Drop(int minSpawn, int maxSpawn)
     {
         //Spawn drops
         for (int i = 0; i < Random.Range(minSpawn, maxSpawn); i++)

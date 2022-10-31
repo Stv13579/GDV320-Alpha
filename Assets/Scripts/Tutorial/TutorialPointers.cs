@@ -12,9 +12,12 @@ public class TutorialPointers : MonoBehaviour
 
     float currentSlideTime = 0;
 
+    [SerializeField]
+    GameObject checkTick;
 
     [SerializeField]
     bool finished = false;
+
     protected void Update()
     {
         CheckConditions();
@@ -50,6 +53,7 @@ public class TutorialPointers : MonoBehaviour
         if(done)
         {
             finished = true;
+            checkTick.SetActive(true);
         }
     }
 
