@@ -53,7 +53,7 @@ public class BossRoom : Room
 
         if (bossSpawned)
         {
-            if (FindObjectsOfType<BaseEnemyClass>().Length == 0 && !bossDead && bossSpawned)
+	        if (FindObjectOfType<BossHealthbarScript>().GetBossCount() == 0 && !bossDead && bossSpawned)
             {
                 //Spawn the portal
                 Instantiate(portalObject, portalSpawnPosition.position, Quaternion.identity);

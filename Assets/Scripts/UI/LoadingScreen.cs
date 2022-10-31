@@ -41,7 +41,10 @@ public class LoadingScreen : MonoBehaviour
 	protected void Update()
 	{
 		progress += Time.deltaTime / 5;
-		loadBar.fillAmount = operation.progress;
+		if(operation != null)
+		{
+			loadBar.fillAmount = operation.progress;
+		}
 		rot -= Time.deltaTime * 100;
 		spinner.transform.eulerAngles = new Vector3(0, 0, rot);
 		if(!operation.isDone)
