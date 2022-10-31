@@ -115,7 +115,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
                     {
                         explosion.GetComponent<ParticleSystem>().Play();
                     }
-                    if(onGround || enemy.GetComponent<BaseEnemyClass>().Dead())
+	                if(onGround || (enemy && enemy.GetComponent<BaseEnemyClass>().Dead()))
                     {
                         currentState = grenadestate.destroy;
                        
@@ -182,7 +182,7 @@ public class CrystalGrenadeProj : BaseElementSpawnClass
             other.GetComponentInParent<BaseEnemyClass>().GetDeathTriggers().Add(ResetTrigger);
             other.GetComponentInParent<BaseEnemyClass>().TakeDamage(damage, attackTypes);
             
-            enemy = other.gameObject;
+            enemy = other.GetComponentInParent<BaseEnemyClass>().gameObject;
             transform.SetParent(enemy.transform);
             onGround = false;
 

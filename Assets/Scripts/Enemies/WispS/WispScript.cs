@@ -8,15 +8,20 @@ public class WispScript : BaseEnemyClass
 	Vector3 targetPos;
 	Vector3 startPos;
 	bool destroyed = false;
+	bool destroyable = true;
 	Types element;
 	Renderer renderer;
 	float offset;
+	[SerializeField]
+	GameObject glow;
 	public override void Awake()
 	{
 		startPos = this.transform.position;
 		targetPos = this.transform.position;
 		renderer = GetComponentInChildren<Renderer>();
 		offset = Random.Range(-3, 3);
+		uiScript = GameplayUI.GetGameplayUI();
+
 	}
 	
 	// Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
@@ -54,8 +59,10 @@ public class WispScript : BaseEnemyClass
 			//Special effect
 			Drop(drops.GetHealthList(), drops.GetMinHealthSpawn(), drops.GetMaxHealthSpawn());
 			Drop(drops.GetMinAmmoSpawn(), drops.GetMaxAmmoSpawn());
-
-			destroyed = true;
+			if(destroyable)
+			{
+				destroyed = true;
+			}
 			StartCoroutine(FadeOut());
 		}
 		else if(attackTypes[0] == resistances[0])
@@ -66,19 +73,47 @@ public class WispScript : BaseEnemyClass
 		{
 			StartCoroutine(FadeOut());
 		}
+		
+		
+		
+		if (uiScript)
+		{
+			StopCoroutine(uiScript.HitMarker());
+			StartCoroutine(uiScript.HitMarker());
+
+			if(attackTypes[0] == weaknesses[0])
+			{
+				StopCoroutine(uiScript.HitMarker(uiScript.GetWeakMarker()));
+				StartCoroutine(uiScript.HitMarker(uiScript.GetWeakMarker()));
+				if(audioManager)
+				{
+					audioManager.PlaySFX("Crit Hit");
+				}
+			}
+
+			if(attackTypes[0] == resistances[0])
+			{
+				StopCoroutine(uiScript.HitMarker(uiScript.GetStrongMarker()));
+				StartCoroutine(uiScript.HitMarker(uiScript.GetStrongMarker()));
+				if (audioManager)
+				{
+					audioManager.PlaySFX("Weak Hit");
+				}
+			}
+		}
 
 	}
 	
 	IEnumerator FadeOut()
 	{
-		float a = 1;
+		float a = 0;
 		GetComponentInChildren<Collider>().enabled = false;
-		Material mat = renderer.material;
-		while(a > 0)
+		GetComponentInChildren<ParticleSystem>().Stop();
+		glow.SetActive(false);
+		while(a < 1)
 		{
-			a -= Time.deltaTime / 2;
-			Color color = new Color(mat.color.r, mat.color.g, mat.color.b, a);
-			renderer.material.color = color;
+			a += Time.deltaTime / 2;
+			renderer.material.SetFloat("_DisolveAlphaClipping", a);
 			yield return null;
 		}
 		yield return new WaitForSeconds(5);
@@ -97,22 +132,23 @@ public class WispScript : BaseEnemyClass
 	
 	IEnumerator FadeIn()
 	{
-		float a = 0;
-		Material mat = renderer.material;
-		while(a < 1)
+		float a = 1;
+		while(a > 0)
 		{
-			a += Time.deltaTime / 2;
-			Color color = new Color(mat.color.r, mat.color.g, mat.color.b, a);
-			renderer.material.color = color;
+			a -= Time.deltaTime / 2;
+			renderer.material.SetFloat("_DisolveAlphaClipping", a);
 			yield return null;
 		}
 		GetComponentInChildren<Collider>().enabled = true;
+		GetComponentInChildren<ParticleSystem>().Play();
+		glow.SetActive(true);
+
 
 	}
 	
-	public Types GetElement()
+	public void SetDestroyable(bool canDestroy)
 	{
-		return element;
+		destroyable = canDestroy;
 	}
 	
 }

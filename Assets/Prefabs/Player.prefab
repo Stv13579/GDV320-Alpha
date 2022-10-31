@@ -1131,7 +1131,7 @@ MonoBehaviour:
     Description: 
     Name: 
     Icon: {fileID: 0}
-  upgradeCost: 20
+  upgradeCost: 15
   upgradeDescription: Deals more impact damage and bigger impact radius
   attackTypes: 00000000
   manaTypes: 00000000
@@ -1145,7 +1145,7 @@ MonoBehaviour:
   switchElementSFX: Fire Element Equip
   idleSFX: Fire Element Idle
   upgraded: 0
-  damage: 20
+  damage: 35
   switchAnimationName: FireTransition
   startCoolDown: 0
   cooldownTimer: 0.6
@@ -1157,7 +1157,7 @@ MonoBehaviour:
   upgradeExplosionArea: 5
   upgradedVFXSize: {x: 3, y: 3, z: 3}
   explosionDamage: 5
-  upgradedExplosionDamage: 7
+  upgradedExplosionDamage: 10
   gravity: 0.5
   gravityLifetime: 1
 --- !u!114 &5625023910511142018
@@ -1175,7 +1175,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 0}
   handVFX: {fileID: 3588022246820785612, guid: d84d2c64a8d7ce84c97a4650e477e6ef, type: 3}
   wristVFX: {fileID: 8600078919291408424}
-  manaCost: 7
+  manaCost: 3
   animationToPlay: CrystalProj
   animationToPlayAlt: CrystalProjAlt
   playerHand: {fileID: 2017859571}
@@ -1188,8 +1188,8 @@ MonoBehaviour:
     Description: 
     Name: 
     Icon: {fileID: 0}
-  upgradeCost: 5
-  upgradeDescription: Deals more damage but damage fall off increase
+  upgradeCost: 10
+  upgradeDescription: Deals more damage but damage fall off is increased
   attackTypes: 01000000
   manaTypes: 01000000
   playerClass: {fileID: 0}
@@ -1202,7 +1202,7 @@ MonoBehaviour:
   switchElementSFX: Crystal Element Equip
   idleSFX: Crystal Element Idle (maybe)
   upgraded: 0
-  damage: 3
+  damage: 5
   switchAnimationName: CrystalTransition
   startCoolDown: 0
   cooldownTimer: 1.2
@@ -1235,11 +1235,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lifeTimer: 3
-  damageLimit: 0.5
-  upgradedDamageLimit: 1
+  damageLimit: 1
+  upgradedDamageLimit: 2
   damageSpeedDecreaser: 10
   upgradedDamageSpeedDecreaser: 17
-  upgradedDamage: 5
+  upgradedDamage: 7
 --- !u!114 &5197923882654677022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1268,8 +1268,8 @@ MonoBehaviour:
     Description: 
     Name: 
     Icon: {fileID: 0}
-  upgradeCost: 7
-  upgradeDescription: 
+  upgradeCost: 10
+  upgradeDescription: Now slows enemies it strikes
   attackTypes: 02000000
   manaTypes: 02000000
   playerClass: {fileID: 5625023910511142016}
@@ -1282,7 +1282,7 @@ MonoBehaviour:
   switchElementSFX: Water Element Equip
   idleSFX: Water Element Idle
   upgraded: 0
-  damage: 20
+  damage: 35
   switchAnimationName: WaterTransition
   startCoolDown: 0
   cooldownTimer: 0.8
@@ -1306,7 +1306,7 @@ MonoBehaviour:
   activatedVFX: {fileID: 6524903051348573061}
   handVFX: {fileID: 3402536344946380668, guid: 8397178657a067d48bcc863d6790b078, type: 3}
   wristVFX: {fileID: 0}
-  manaCost: 5
+  manaCost: 10
   animationToPlay: NecroticCast
   animationToPlayAlt: 
   playerHand: {fileID: 2017859571}
@@ -1378,7 +1378,7 @@ MonoBehaviour:
     Name: 
     Icon: {fileID: 0}
   upgradeCost: 15
-  upgradeDescription: 
+  upgradeDescription: Charge further and stun for longer
   attackTypes: 
   manaTypes: 04000000
   playerClass: {fileID: 0}
@@ -1431,8 +1431,8 @@ MonoBehaviour:
     Description: 
     Name: 
     Icon: {fileID: 0}
-  upgradeCost: 5
-  upgradeDescription: Reduces the cost of teleporting
+  upgradeCost: 15
+  upgradeDescription: Attract all drops to you as you dash
   attackTypes: 
   manaTypes: 05000000
   playerClass: {fileID: 5625023910511142016}
@@ -1482,7 +1482,7 @@ MonoBehaviour:
     Name: Laser
     Icon: {fileID: 0}
   upgradeCost: 5
-  upgradeDescription: Deals more damage
+  upgradeDescription: Takes half as much mana to fire
   attackTypes: 00000000
   manaTypes: 0000000004000000
   playerClass: {fileID: 0}
@@ -1585,7 +1585,7 @@ MonoBehaviour:
     Name: Acid Cloud
     Icon: {fileID: 0}
   upgradeCost: 5
-  upgradeDescription: Deals more damage
+  upgradeDescription: Deals additional damage based on the victims health
   attackTypes: 00000000
   manaTypes: 0000000003000000
   playerClass: {fileID: 0}
@@ -1637,7 +1637,8 @@ MonoBehaviour:
     Name: Star Mine
     Icon: {fileID: 0}
   upgradeCost: 5
-  upgradeDescription: Deals more damage
+  upgradeDescription: The mine activates quicker, has a greater radius and deals
+    greater damage
   attackTypes: 00000000
   manaTypes: 0000000005000000
   playerClass: {fileID: 0}
@@ -1697,7 +1698,8 @@ MonoBehaviour:
     Name: Explosion Curse
     Icon: {fileID: 0}
   upgradeCost: 5
-  upgradeDescription: Deals more damage
+  upgradeDescription: Deals less damage, but explodes every time the enemy is struck
+    instead
   attackTypes: 01000000
   manaTypes: 0100000003000000
   playerClass: {fileID: 0}
@@ -1755,7 +1757,7 @@ MonoBehaviour:
     Name: Ice Slash
     Icon: {fileID: 0}
   upgradeCost: 5
-  upgradeDescription: Increase scale over time
+  upgradeDescription: Increase in size as it travels
   attackTypes: 02000000
   manaTypes: 0200000004000000
   playerClass: {fileID: 0}
@@ -1808,7 +1810,7 @@ MonoBehaviour:
     Name: Life Drain
     Icon: {fileID: 0}
   upgradeCost: 5
-  upgradeDescription: Deals more damage
+  upgradeDescription: Increases the amount of healing provided
   attackTypes: 02000000
   manaTypes: 0200000003000000
   playerClass: {fileID: 0}
@@ -1867,7 +1869,7 @@ MonoBehaviour:
     Name: Gravity Grendade
     Icon: {fileID: 0}
   upgradeCost: 5
-  upgradeDescription: Deals more damage
+  upgradeDescription: Continues to explode while attached to an enemy
   attackTypes: 01000000
   manaTypes: 0100000005000000
   playerClass: {fileID: 0}
@@ -1921,7 +1923,7 @@ MonoBehaviour:
     Name: Stasis Trap
     Icon: {fileID: 0}
   upgradeCost: 5
-  upgradeDescription: Upgraded to place more concurrently
+  upgradeDescription: Can place an additional trap concurrently
   attackTypes: 02000000
   manaTypes: 0200000005000000
   playerClass: {fileID: 0}
