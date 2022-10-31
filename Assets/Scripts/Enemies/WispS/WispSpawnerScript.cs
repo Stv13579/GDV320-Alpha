@@ -7,6 +7,8 @@ public class WispSpawnerScript : MonoBehaviour
 	[SerializeField]
 	List<GameObject> wisps = new List<GameObject>();
 	List<GameObject> validWisps = new List<GameObject>();
+	[SerializeField]
+	bool destroyable = true;
     // Start is called before the first frame update
     void Start()
 	{
@@ -26,14 +28,18 @@ public class WispSpawnerScript : MonoBehaviour
 			}
 			for(int i = 0; i < 4; i++)
 			{
-				Instantiate(validWisps[Random.Range(0, validWisps.Count)], this.transform.position, Quaternion.identity);
+				GameObject wisp = Instantiate(validWisps[Random.Range(0, validWisps.Count)], this.transform.position, Quaternion.identity);
+				wisp.GetComponent<WispScript>().SetDestroyable(destroyable);
 			}
 		}
 		else
 		{
+			int rand = Random.Range(0, wisps.Count);
 			for(int i = 0; i < 4; i++)
 			{
-				Instantiate(wisps[Random.Range(0, wisps.Count)], this.transform.position, Quaternion.identity);
+				GameObject wisp = Instantiate(wisps[(i + rand) % 3], this.transform.position, Quaternion.identity);
+				wisp.GetComponent<WispScript>().SetDestroyable(destroyable);
+
 			}
 		}
 
