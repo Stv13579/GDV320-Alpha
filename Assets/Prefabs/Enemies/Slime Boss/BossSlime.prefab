@@ -915,7 +915,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.76
-  m_Center: {x: 0.24, y: 1.23, z: -0.36}
+  m_Center: {x: 0.24, y: 1.56, z: -0.36}
 --- !u!114 &1762401204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -933,9 +933,9 @@ MonoBehaviour:
   baseMaxHealth: 750
   damageAmount: 3
   baseDamageAmount: 3
-  groundMoveSpeed: 200
-  moveSpeed: 200
-  baseMoveSpeed: 200
+  groundMoveSpeed: 100
+  moveSpeed: 500
+  baseMoveSpeed: 500
   rotationSpeed: 0
   damageResistance: 1
   drops: {fileID: 11400000, guid: 98cd608e72023474c896cb9dc7feb4bc, type: 2}
@@ -964,6 +964,7 @@ MonoBehaviour:
   nodeMask:
     serializedVersion: 2
     m_Bits: 0
+  slideDistance: 80
   rend: {fileID: 6094789019902066308}
   firePoint: {fileID: 1949522794}
   normalPoint: {fileID: 880440684}
@@ -973,7 +974,7 @@ MonoBehaviour:
   timeBetweenAttacks: 5
   fireChargeDuration: 5
   currentChargeDuration: 0
-  fireChargeSpeed: 0.1
+  fireChargeSpeed: 0.04
   trailLayerMask:
     serializedVersion: 2
     m_Bits: 1024

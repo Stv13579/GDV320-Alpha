@@ -185,7 +185,7 @@ public class SAIM : MonoBehaviour
 
         if(CheckSpawnConditions() && !bossSaim)
         {
-	        Spawn(1, true);
+	        Spawn(1 + Mathf.RoundToInt(data.GetDifficulty() / 8), true);
            
         }
 
