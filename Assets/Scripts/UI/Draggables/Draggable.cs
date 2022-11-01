@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField]
-    GameObject draggedObject;
+    GameObject draggedObject, selectedBorder;
 
     [SerializeField]
     List<ElementSlots> elementSlots;
@@ -33,29 +33,35 @@ public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
         if (elementSlots.Count > 0)
         {
             GameObject tempGameOBJ = draggedObject;
-            if (elementSlots[1].GetSlotTaken() == true && elementSlots[0].GetSlotTaken() == true)
+            //if (elementSlots[1].GetSlotTaken() == true && elementSlots[0].GetSlotTaken() == true)
+            //{
+            //    //GetComponent<Image>().color = fadedColour;
+            //}
+            //else 
+            if (elementSlots[0].GetPlayer().GetCatalystElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
             {
                 GetComponent<Image>().color = fadedColour;
-            }
-            else if (elementSlots[0].GetPlayer().GetCatalystElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
-            {
-                GetComponent<Image>().color = fadedColour;
+                selectedBorder.SetActive(true);
             }
             else if (elementSlots[1].GetPlayer().GetCatalystElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
             {
                 GetComponent<Image>().color = fadedColour;
+                selectedBorder.SetActive(true);
             }
             else if (elementSlots[0].GetPlayer().GetPrimaryElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
             {
                 GetComponent<Image>().color = fadedColour;
+                selectedBorder.SetActive(true);
             }
             else if (elementSlots[1].GetPlayer().GetPrimaryElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
             {
                 GetComponent<Image>().color = fadedColour;
+                selectedBorder.SetActive(true);
             }
             else
             {
                 GetComponent<Image>().color = startColour;
+                selectedBorder.SetActive(false);
             }
 
         }
@@ -160,6 +166,8 @@ public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
                     trinketSlot.SetIcon();
                     trinketSlot.GetEquippedIcon().enabled = true;
                     trinketSlot.SetSlotTaken(true);
+
+
                 }
             }
         }

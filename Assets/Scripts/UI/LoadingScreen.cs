@@ -7,10 +7,11 @@ using UnityEngine.UI;
 public class LoadingScreen : MonoBehaviour
 {
 	[SerializeField] Image loadBar;
+	[SerializeField] GameObject spinner;
+	float rot = 0;
 	static int sceneToLoad = 2;
 	static AsyncOperation operation = null;
 	float progress = 0.0f;
-	[SerializeField] float opProg;
 
 	// Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
 	protected void Start()
@@ -25,30 +26,23 @@ public class LoadingScreen : MonoBehaviour
 			GameplayUI.GetGameplayUI().gameObject.SetActive(false);
 		}
 		//If there isn't a scene loading already, start loading one
-		if(operation == null)
-		{
-			StartSceneLoad();
-		}
-		else if(operation.isDone)
-		{
-			operation.allowSceneActivation = true;
-		}
+		StartSceneLoad();
+
 
 	}
 	
 	// Update is called every frame, if the MonoBehaviour is enabled.
 	protected void Update()
 	{
-		progress += Time.deltaTime / 10;
-		loadBar.fillAmount = progress;
-		opProg = operation.progress;
+		progress += Time.deltaTime / 5;
+		loadBar.fillAmount = operation.progress;
+		rot -= Time.deltaTime * 100;
+		spinner.transform.eulerAngles = new Vector3(0, 0, rot);
 		if(!operation.isDone)
 		{
-			if (operation.progress >= 0.9f && progress >= 1)
+			if (operation.progress >= 0.9f)
 			{
 				operation.allowSceneActivation = true;
-				Debug.Log("Activate");
-				operation = null;
 			}
 		}
 	}
@@ -60,16 +54,7 @@ public class LoadingScreen : MonoBehaviour
 	//Starts loading sceneToLoad scene in the background
 	public static void StartSceneLoad()
 	{
-		//Debug.Log(operation);
 		operation = SceneManager.LoadSceneAsync(sceneToLoad);
-		//Debug.Log(operation);
 		operation.allowSceneActivation = false;
-		//Debug.Log(sceneToLoad);
-		//SceneManager.LoadScene(sceneToLoad);
-	}
-
-	public static float GetProgress()
-	{
-		return operation.progress;
 	}
 }
