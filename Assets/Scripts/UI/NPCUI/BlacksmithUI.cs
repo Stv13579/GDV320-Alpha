@@ -11,9 +11,10 @@ public class BlacksmithUI : NPCUI
 
     List<GameObject> buttons = new List<GameObject>();
 
-    
-    
-	public override void Start()
+    [SerializeField]
+    TextMeshProUGUI moneyText;
+
+    public override void Start()
     {
         base.Start();
 
@@ -36,7 +37,7 @@ public class BlacksmithUI : NPCUI
 
     private void Update()
     {
-        
+        moneyText.text = player.GetMoney().ToString();
     }
 
     public void UpgradeButton(int index)
