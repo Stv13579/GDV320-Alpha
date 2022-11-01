@@ -21,11 +21,14 @@ public class Shield : MonoBehaviour
                     StatModifier.UpdateValue(enemy.GetDamageStat());
                     if(energyElement.GetUpgraded() == true)
                     {
-                        StatModifier.StartAddModifierTemporary(enemy, enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.0f, "Stunned"), 5.0f);
+	                    StatModifier.StartAddModifierTemporary(enemy, enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.0f, "Stunned"), 5.0f);
+	                    StartCoroutine(StopStun(enemy, 5.0f));
+
                     }
                     else
                     {
-                        StatModifier.StartAddModifierTemporary(enemy, enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.0f, "Stunned"), 3.0f);
+	                    StatModifier.StartAddModifierTemporary(enemy, enemy.GetSpeedStat().multiplicativeModifiers, new StatModifier.Modifier(0.0f, "Stunned"), 3.0f);
+	                    StartCoroutine(StopStun(enemy, 3.0f));
                     }
 	                enemy.EnableStun();
                     energyElement.SetMaterialChanger(1.0f);
