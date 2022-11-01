@@ -144,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
     public void SetZ(float tempZ) { z = tempZ; }
     public CharacterController GetCharacterController() { return cController; }
     public Vector3 GetVelocity() { return velocity; }
+    public void SetMovementSpeed(float tempMovementSpeed) { movementSpeed = tempMovementSpeed; }
 
     void Awake()
     {
