@@ -500,7 +500,11 @@ public class BaseEnemyClass : MonoBehaviour
 
 	public virtual void RestoreHealth(float amount)
     {
-	    currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
+        if(currentHealth <= 0)
+        {
+            return;
+        }
+	    currentHealth = Mathf.Clamp(currentHealth, currentHealth + amount, maxHealth);
         foreach (Material mat in enemyMat)
         {
             mat.SetFloat("_Toggle_EnemyHPEmissive", Mathf.Clamp(currentHealth / maxHealth, 0, 1));

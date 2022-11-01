@@ -164,18 +164,6 @@ public class VoidElement : BaseElementClass
         isHolding = true;
         activatedVFX.SetActive(true);
     }
-    //protected override bool PayCosts(float modifier = 1)
-    //{
-    //    //Override of paycosts so that mana is only subtracted at then end, in case the cast is cancelled
-    //    if (playerClass.ManaCheck(manaCost * modifier, manaTypes))
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
 
     IEnumerator Dash()
     {

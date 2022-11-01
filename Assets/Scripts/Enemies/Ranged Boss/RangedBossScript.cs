@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class RangedBossScript : BaseEnemyClass //Sebastian
 {
-    [Header("Boss attacks")]
-    float timer = 5.0f;
-    [SerializeField]
-    Transform projectileSpawnPos, tempProjectileSpawnPos;
-    [SerializeField]
-    GameObject fireProjectile, fakeFireProjectile, waterProjectile, crystalProjectile;
-    [SerializeField]
-    GameObject[] homingProjectiles;
-    [SerializeField]
-    LayerMask groundDetect;
-    [SerializeField]
+	[Header("Boss attacks")]
+	float timer = 5.0f;
+	[SerializeField]
+	Transform projectileSpawnPos, tempProjectileSpawnPos;
+	[SerializeField]
+	GameObject fireProjectile, fakeFireProjectile, waterProjectile, crystalProjectile;
+	[SerializeField]
+	GameObject[] homingProjectiles;
+	[SerializeField]
+	LayerMask groundDetect;
+	[SerializeField]
 	GameObject bossHealthbar;
+	[SerializeField]
+	float FireDamage;
+	[SerializeField]
+	float WaterDamage;
+	[SerializeField]
+	float CrystalDamage;
 	BossHealthbarScript healthbarScript;
 	int fireAttack = 5;
 	int fireAttackCounter = 0;
@@ -95,7 +101,7 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
 	{
 		GameObject fireProj = Instantiate(fakeFireProjectile, projectileSpawnPos.position, Quaternion.identity);
 		fireProj.transform.forward = transform.up;
-		fireProj.GetComponent<RangedBossFakeFireProjectileScript>().SetDamage(damageAmount);
+		fireProj.GetComponent<RangedBossFakeFireProjectileScript>().SetDamage(FireDamage);
 		fireAttackCounter++;
 		if(fireAttackCounter >= fireAttack)
 		{
@@ -112,17 +118,19 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
 	    {
 		    Debug.Log("Water");
 			GameObject waterProj = Instantiate(waterProjectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
-            waterProj.GetComponent<RangedBossWaterProjectileScript>().SetVars(15, damageAmount);
+			waterProj.transform.LookAt(player.transform.position);
+            waterProj.GetComponent<RangedBossWaterProjectileScript>().SetVars(15, WaterDamage);
             Physics.IgnoreCollision(this.GetComponent<Collider>(), waterProj.GetComponent<Collider>());
 			yield return new WaitForSeconds(0.01f);
 	    }
 		StopCoroutine(WaterAttack());
     }
+
     //Crystal attack, fires a large crystal projectile towards the player, which can embed in the ground and explode
     public void CrystalAttack()
     {
         GameObject crystalProj = Instantiate(crystalProjectile, projectileSpawnPos.position, Quaternion.identity);
-        crystalProj.GetComponent<RangedBossCrystalProjectileScript>().SetVars(0, damageAmount);
+        crystalProj.GetComponent<RangedBossCrystalProjectileScript>().SetVars(0, CrystalDamage);
 
     }
     //Starts the homing attack, so it can be called by the animator
