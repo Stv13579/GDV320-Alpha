@@ -63,6 +63,12 @@ public class ShieldEnemyScript : BaseEnemyClass
                 enemyAnims.SetTrigger("Shield Regen");
 	            SetShield(true);
 	            shieldBreakVFX.SetActive(false);
+	            foreach(Material mat in enemyMat)
+	            {
+
+		            mat.SetFloat("_Unique_Eye_On", 0);
+		            mat.SetFloat("_IsBeingStunned", 0);
+	            }
             }
 
             return;
@@ -255,7 +261,9 @@ public class ShieldEnemyScript : BaseEnemyClass
         }
 	    foreach(Material mat in enemyMat)
 	    {
-	    	mat.SetFloat("_IsStunned", 1);
+
+			mat.SetFloat("_Unique_Eye_On", 1);
+			mat.SetFloat("_IsBeingStunned", 1);
 	    }
         guardTimer = brokenShieldTimer;
 	    SetShield(false);

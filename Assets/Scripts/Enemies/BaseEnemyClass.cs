@@ -102,6 +102,8 @@ public class BaseEnemyClass : MonoBehaviour
 	[SerializeField]
 	float maxDamageTimer = 30.0f;
 	
+	float hurtTimer = 0.0f;
+	
     public virtual void Awake()
     {
 	    prophecyManager = ProphecyManager.GetProphecyManager();
@@ -211,6 +213,20 @@ public class BaseEnemyClass : MonoBehaviour
 	    	currentHealth = -10;
 		    enemyAnims.SetTrigger("Dead");
 	    }
+	    
+	    if (hurtTimer > 0)
+	    {
+		    hurtTimer -= Time.deltaTime;
+		    if (hurtTimer <= 0)
+		    {
+			    foreach (Material mat in enemyMat)
+			    {
+				    mat.SetFloat("_IsBeingDamaged", 0);
+				    mat.SetFloat("_Unique_Eye_On", 0);
+
+			    }
+		    }
+	    }
     }
 
     //Movement
@@ -242,7 +258,16 @@ public class BaseEnemyClass : MonoBehaviour
     public virtual void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
     {
         hitSpawn.GetComponent<ParticleSystem>().Clear();
-        hitSpawn.GetComponent<ParticleSystem>().Play();
+	    hitSpawn.GetComponent<ParticleSystem>().Play();
+        
+        
+	    foreach (Material mat in enemyMat)
+	    {
+		    mat.SetFloat("_IsBeingDamaged", 1);
+		    mat.SetFloat("_Unique_Eye_On", 1);
+
+	    }	    
+	    hurtTimer = 0.2f;
 
         //GameObject hitSpn = Instantiate(hitSpawn, transform.position, Quaternion.identity);
         //Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
@@ -333,7 +358,14 @@ public class BaseEnemyClass : MonoBehaviour
         {
             if (enemyAnims)
             {
-                enemyAnims.SetTrigger("Dead");
+	            enemyAnims.SetTrigger("Dead");
+	            foreach (Material mat in enemyMat)
+	            {
+		            mat.SetFloat("_Unique_Eye_On", 1);
+		            mat.SetFloat("_IsBeingDamaged", 0);
+		            mat.SetFloat("_IsBeingStunned", 0);
+
+	            }
             }
         }
         
@@ -600,10 +632,22 @@ public class BaseEnemyClass : MonoBehaviour
 	public void EnableStun()
 	{
 		stunVFX.SetActive(true);
+		foreach (Material mat in enemyMat)
+		{
+			mat.SetFloat("_Unique_Eye_On", 1);
+			mat.SetFloat("_IsBeingStunned", 1);
+
+		}
 	}
 	
 	public void DisableStun()
 	{
 		stunVFX.SetActive(false);
+		foreach (Material mat in enemyMat)
+		{
+			mat.SetFloat("_Unique_Eye_On", 0);
+			mat.SetFloat("_IsBeingStunned", 0);
+
+		}
 	}
 }
