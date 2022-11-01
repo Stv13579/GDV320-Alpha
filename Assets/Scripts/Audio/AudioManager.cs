@@ -159,10 +159,10 @@ public class AudioManager : MonoBehaviour
                 float positionDistance = Vector3.Distance(playerPos.position, enemyPos.position);
                 s.GetAudioSource().volume = (1 - (positionDistance / audioDistance)) > 0 ? (1 - (positionDistance / audioDistance)) * 0.1f : 0;
             }
-            if (!s.GetAudioSource().isPlaying)
-            {
-                s.GetAudioSource().Play();
-            }
+        }
+        if (!s.GetAudioSource().isPlaying)
+        {
+            s.GetAudioSource().Play();
         }
     }
 
@@ -195,16 +195,9 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound: " + name + " was not found!"); // error message
             return;
         }
-        if (isMusicMuted)
+        if (!s.GetAudioSource().isPlaying)
         {
-
-        }
-        else
-        {
-            if (!s.GetAudioSource().isPlaying)
-            {
-                s.GetAudioSource().Play();
-            }
+            s.GetAudioSource().Play();
         }
     }
 

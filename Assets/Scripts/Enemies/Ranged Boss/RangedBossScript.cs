@@ -15,7 +15,8 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
     [SerializeField]
     LayerMask groundDetect;
     [SerializeField]
-    GameObject bossHealthbar;
+	GameObject bossHealthbar;
+	BossHealthbarScript healthbarScript;
 	int fireAttack = 5;
 	int fireAttackCounter = 0;
 	bool waterAttacking = false;
@@ -30,11 +31,18 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
 	    Vector3 emergePos = hit.point - this.transform.GetChild(2).GetChild(3).localPosition * 2 - new Vector3(0, 2, 0);
         this.transform.position = emergePos;
         GameObject healthbar = Instantiate(bossHealthbar);
-        BossHealthbarScript healthbarScript = healthbar.GetComponent<BossHealthbarScript>();
+        healthbarScript = healthbar.GetComponent<BossHealthbarScript>();
 	    healthbarScript.AddEnemy(this);
 	    healthbarScript.SetName("Dragon Lily");
 	    healthbarScript.SetMaxHealth(maxHealth);
     }
+    
+	// Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
+	protected void Start()
+	{
+		deathTriggers.Add(DestroyHoming);
+	}
+	
     public override void Update()
 	{
 		base.Update();
@@ -138,4 +146,20 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
 	{
 		waterAttacking = false;
 	}
+	
+	protected virtual void DestroyHoming(GameObject temp)
+	{
+		RangedBossHomingProjectileScript[] homing = FindObjectsOfType<RangedBossHomingProjectileScript>();
+		for(int i = homing.Length - 1; i >= 0; i--)
+		{
+			Destroy(homing[i].gameObject);
+		}
+	}
+	
+	public override void Death()
+	{
+		healthbarScript.RemoveEnemy(this);
+		base.Death();
+	}
+	
 }

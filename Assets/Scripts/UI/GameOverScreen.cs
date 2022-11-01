@@ -77,6 +77,10 @@ public class GameOverScreen : MonoBehaviour
             {
                 audioManager.GetMusics()[i].GetAudioSource().Stop();
             }
+            for (int i = 0; i < audioManager.GetSounds().Length; i++)
+            {
+                audioManager.GetSounds()[i].GetAudioSource().Stop();
+            }
             audioManager.PlayMusic("Hub Room Music");
         }
     }

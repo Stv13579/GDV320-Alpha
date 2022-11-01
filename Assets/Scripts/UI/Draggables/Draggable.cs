@@ -23,9 +23,12 @@ public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
     [SerializeField]
     Color fadedColour;
 
+    Shooting shootingScript;
+
     private void Start()
     {
         startColour = GetComponent<Image>().color;
+        shootingScript = Shooting.GetShooting();
     }
 
     private void Update()
@@ -33,9 +36,15 @@ public class Draggable : HoverOver, IPointerDownHandler, IPointerUpHandler
         if (elementSlots.Count > 0)
         {
             GameObject tempGameOBJ = draggedObject;
-            if (elementSlots[1].GetSlotTaken() == true && elementSlots[0].GetSlotTaken() == true)
+            //switch elements when chosen the first ones
+            if(elementSlots[0].GetSlotTaken() == true)
             {
-               
+                shootingScript.GetCatalystElements()[shootingScript.GetRightElementIndex()].AnimationSwitch(false);
+                shootingScript.TurnOffCatalystOrbs();
+                shootingScript.TurnOnCatalystOrbs();
+                shootingScript.GetPrimaryElements()[shootingScript.GetLeftElementIndex()].AnimationSwitch(true);
+                shootingScript.TurnOffPrimaryOrbs();
+                shootingScript.TurnOnPrimaryOrbs();
             }
             //else 
             if (elementSlots[0].GetPlayer().GetCatalystElements().Exists(ele => ele.GetType() == System.Type.GetType(tempGameOBJ.GetComponent<ElementEquip>().GetElementType())))
