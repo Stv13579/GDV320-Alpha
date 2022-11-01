@@ -418,7 +418,10 @@ public class BaseEnemyClass : MonoBehaviour
         hitTriggers.Clear();
         deathTriggers.Clear();
 
-        RestoreHealth(0);
+	    foreach (Material mat in enemyMat)
+	    {
+		    mat.SetFloat("_Toggle_EnemyHPEmissive", Mathf.Clamp(maxHealth / maxHealth, 0, 1));
+	    }
         deathSpawn.GetComponent<ParticleSystem>().Clear();
         foreach (Transform spawns in deathSpawn.transform)
         {
