@@ -57,5 +57,9 @@ public class IceSlashProj : BaseElementSpawnClass
 	    {
 		    other.gameObject.GetComponent<SporeCloudScript>().TakeDamage(damage, attackTypes);
 	    }
+	    if(other.gameObject.GetComponent<RangedBossHomingProjectileScript>())
+	    {
+		    other.gameObject.GetComponent<RangedBossHomingProjectileScript>().TakeDamage(damage, attackTypes);
+	    }
     }
 }

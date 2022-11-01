@@ -72,7 +72,7 @@ public class Fireball : BaseElementSpawnClass
     {
         //if enemy, hit them for the damage
         Collider taggedEnemy = null;
-        if(other.isTrigger && other.gameObject.layer != 10 && !other.GetComponent<SporeCloudScript>())
+	    if(other.isTrigger && other.gameObject.layer != 10 && !other.GetComponent<SporeCloudScript>() &&!other.GetComponent<RangedBossHomingProjectileScript>())
         {
             return;
         }
