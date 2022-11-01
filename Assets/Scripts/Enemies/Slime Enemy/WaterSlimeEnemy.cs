@@ -28,8 +28,6 @@ public class WaterSlimeEnemy : BaseEnemyClass
     Vector3 pos = Vector3.zero;
 	protected Vector3 posOffset = Vector3.zero;
     
-	protected float hurtTimer = 0.0f;
-
     public override void Awake()
     {
         base.Awake();

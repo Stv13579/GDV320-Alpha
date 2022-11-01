@@ -160,16 +160,7 @@ public class BossSlimeEnemy : WaterSlimeEnemy
         if(!charging)
             Movement((player.transform.position - transform.position).normalized);
         damageTicker -= Time.deltaTime;
-        if (hurtTimer > 0)
-        {
-            hurtTimer -= Time.deltaTime;
-            if (hurtTimer <= 0)
-            {
-                this.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Renderer>().material.SetFloat("_IsBeingDamaged", 0);
-
-            }
-
-        }
+      
     }
 
     //Execute the attack based on the type it currently is
