@@ -34,6 +34,7 @@ MonoBehaviour:
   targettingIndicator: {fileID: 1404768966937678259}
   witheredVFX: {fileID: 5148760178717341021}
   cursedVFX: {fileID: 3503467500372456745}
+  stunVFX: {fileID: 7012105841084720926}
   healVFX: {fileID: 4580634473430958806}
   buffVFX: {fileID: 8459347032983004406}
   enemyMat: []
@@ -41,6 +42,7 @@ MonoBehaviour:
   maxDamageTimer: 30
   effectTimer: 10
   effectRange: 10
+  bobHeight: 0
   moveDetect:
     serializedVersion: 2
     m_Bits: 66560
@@ -132,7 +134,7 @@ PrefabInstance:
     - target: {fileID: 387988243599795695, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2007136173744618346, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
@@ -222,12 +224,12 @@ PrefabInstance:
     - target: {fileID: 5925160419267562647, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6509235447840888431, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8153343602719881785, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
@@ -237,7 +239,7 @@ PrefabInstance:
     - target: {fileID: 9005416686079827364, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9220163682881030405, guid: 1fd1aea56a319fa409d011771046677e,
         type: 3}
@@ -262,6 +264,12 @@ Transform:
 --- !u!1 &1404768966937678259 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 446078423730382970, guid: 1fd1aea56a319fa409d011771046677e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1535292170577803721}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7012105841084720926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8367253818226876119, guid: 1fd1aea56a319fa409d011771046677e,
     type: 3}
   m_PrefabInstance: {fileID: 1535292170577803721}
   m_PrefabAsset: {fileID: 0}

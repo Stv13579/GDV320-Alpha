@@ -34,7 +34,9 @@ public class ShieldEnemyScript : BaseEnemyClass
     int moveDelayFrames;
     int currentDelayFrames;
 
-    float timeSinceLastMove;
+	float timeSinceLastMove;
+	[SerializeField]
+	GameObject shieldBreakVFX;
 
     public override void Awake()
     {
@@ -59,7 +61,14 @@ public class ShieldEnemyScript : BaseEnemyClass
             {
                 guardBroken = false;
                 enemyAnims.SetTrigger("Shield Regen");
-                SetShield(true);
+	            SetShield(true);
+	            shieldBreakVFX.SetActive(false);
+	            foreach(Material mat in enemyMat)
+	            {
+
+		            mat.SetFloat("_Unique_Eye_On", 0);
+		            mat.SetFloat("_IsBeingStunned", 0);
+	            }
             }
 
             return;
@@ -252,10 +261,13 @@ public class ShieldEnemyScript : BaseEnemyClass
         }
 	    foreach(Material mat in enemyMat)
 	    {
-	    	mat.SetFloat("IsStunned", 1);
+
+			mat.SetFloat("_Unique_Eye_On", 1);
+			mat.SetFloat("_IsBeingStunned", 1);
 	    }
         guardTimer = brokenShieldTimer;
-        SetShield(false);
+	    SetShield(false);
+	    shieldBreakVFX.SetActive(true);
     }
 
     protected override void ResetEnemy()
