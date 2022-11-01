@@ -168,4 +168,10 @@ public class BaseFlyingEnemyScript : BaseEnemyClass //Sebastian
             }
         }
     }
+
+    public void HitFloor()
+    {
+        hitHeight = false;
+        bobbedAmount = 0;
+    }
 }
