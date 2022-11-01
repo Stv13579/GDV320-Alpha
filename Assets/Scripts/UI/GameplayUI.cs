@@ -233,8 +233,11 @@ public class GameplayUI : MonoBehaviour
                 StartCoroutine(HitMarker(hitMarkerShield));
             }
         }
+	    if (Input.GetKeyDown(KeyCode.Escape))
+	    {
+		    Paused();
 
-        Paused();
+	    }
     }
 
     public void AddItem(Sprite[] sprites)
@@ -324,23 +327,20 @@ public class GameplayUI : MonoBehaviour
         }
 
     }
-    void Paused()
+	public void Paused()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0 : 1;
+        player.GetComponent<PlayerLook>().ToggleCursor();
+        player.SetAbleToShoot(!isPaused);
+        Pause.SetActive(isPaused);
+        if(SceneManager.GetActiveScene().buildIndex == 1)
         {
-            isPaused = !isPaused;
-            Time.timeScale = isPaused ? 0 : 1;
-            player.GetComponent<PlayerLook>().ToggleCursor();
-            player.SetAbleToShoot(!isPaused);
-            Pause.SetActive(isPaused);
-            if(SceneManager.GetActiveScene().buildIndex == 1)
-            {
-                hubRoomButton.gameObject.SetActive(false);
-            }
-            else
-            {
-                hubRoomButton.gameObject.SetActive(true);
-            }
+            hubRoomButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            hubRoomButton.gameObject.SetActive(true);
         }
     }
 
