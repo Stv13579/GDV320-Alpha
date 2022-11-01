@@ -36,7 +36,6 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 
     private void Start()
     {
-	    StartCoroutine(FindNode());
 	    controller = GetComponent<CharacterController>();
 	    rb = GetComponent<Rigidbody>();
 	    deathTriggers.Add(DestroySporeClouds);
@@ -55,15 +54,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 
         if (!attacking)
         {
-            if (Vector3.Distance(this.transform.position, player.transform.position) < 15)
-            {
-
-                Movement(player.transform.position, moveSpeed);
-            }
-            else
-            {
-                Movement(bestNodePos, moveSpeed);
-            }
+            Movement(player.transform.position, moveSpeed);
         }
 	    takeDamageTimer -= Time.deltaTime;
     }
