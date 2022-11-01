@@ -132,22 +132,26 @@ public class VoidElement : BaseElementClass
     public override void ElementEffect()
     {
         base.ElementEffect();
-        //Subtract the mana cost
-        playerClass.ChangeMana(-manaCost * (upgraded ? 1 : 0.5f), manaTypes);
-        if (shootingScript.GetCatalystElements()[shootingScript.GetRightElementIndex()] == this &&
-            shootingScript.GetInComboMode() == false)
-        {
-            StartCoroutine(Dash());
-            if(upgraded)
-            {
-                List<BaseDropScript> drops = FindObjectsOfType<BaseDropScript>().ToList();
+	    //Subtract the mana cost
+	    if(Vector3.Distance(this.transform.position, targetPos) < 50)
+	    {
+		    playerClass.ChangeMana(-manaCost * (upgraded ? 1 : 0.5f), manaTypes);
+		    if (shootingScript.GetCatalystElements()[shootingScript.GetRightElementIndex()] == this &&
+			    shootingScript.GetInComboMode() == false)
+		    {
+			    StartCoroutine(Dash());
+			    if(upgraded)
+			    {
+				    List<BaseDropScript> drops = FindObjectsOfType<BaseDropScript>().ToList();
 
-                foreach (BaseDropScript drop in drops)
-                {
-                    drop.SetRoomEnd(true);
-                }
-            }
-        }
+				    foreach (BaseDropScript drop in drops)
+				    {
+					    drop.SetRoomEnd(true);
+				    }
+			    }
+		    }
+	    }
+
     }
 
     public override void ActivateVFX()
