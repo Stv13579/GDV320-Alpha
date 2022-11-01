@@ -82,7 +82,7 @@ public class BaseEnemyClass : MonoBehaviour
     protected string idleAudio;
 
     [SerializeField]
-	GameObject targettingIndicator, witheredVFX, cursedVFX;
+	GameObject targettingIndicator, witheredVFX, cursedVFX, stunVFX;
 
     protected Vector3 oldPosition;
 
@@ -595,5 +595,15 @@ public class BaseEnemyClass : MonoBehaviour
 	public void SetWithered(bool tempbool)
 	{
 		witheredVFX.SetActive(tempbool);
+	}
+	
+	public void EnableStun()
+	{
+		stunVFX.SetActive(true);
+	}
+	
+	public void DisableStun()
+	{
+		stunVFX.SetActive(false);
 	}
 }
