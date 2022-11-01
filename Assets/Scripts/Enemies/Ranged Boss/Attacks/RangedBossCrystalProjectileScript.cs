@@ -82,7 +82,6 @@ public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript //Se
 
             }
         }
-	    Time.timeScale = 0;
         Destroy(this.gameObject);
     }
 }
