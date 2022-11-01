@@ -220,6 +220,7 @@ public class PlayerClass : MonoBehaviour
         Instantiate(gameOverScreen);
 
         dead = true;
+        this.gameObject.GetComponent<PlayerMovement>().SetMovementSpeed(0);
         this.gameObject.GetComponent<PlayerLook>().SetAbleToMove(false);
         this.gameObject.GetComponent<PlayerLook>().ToggleCursor();
 
