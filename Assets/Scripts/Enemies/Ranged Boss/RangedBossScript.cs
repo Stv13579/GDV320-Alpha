@@ -171,7 +171,7 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
 		base.Death();
 	}
 	
-	public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = True)
+	public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
 	{
 		if(damageTimer <= 0)
 		{
