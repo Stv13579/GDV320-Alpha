@@ -44,6 +44,7 @@ public class LifeStealElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
+
         ActivateLifeSteal();
         if (!isShooting)
         {

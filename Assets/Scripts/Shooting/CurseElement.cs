@@ -141,7 +141,6 @@ public class CurseElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
-
         if(targeting)
         {
             RaycastHit rayHit;
