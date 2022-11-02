@@ -110,4 +110,14 @@ public class CrystalElement : BaseElementClass
         damageLimit = upgradedDamageLimit;
         damageSpeedDecreaser = upgradedDamageSpeedDecreaser;
     }
+
+    public void ResetWrist()
+    {
+        ParticleSystem.MainModule tempMain = wristVFX.GetComponent<ParticleSystem>().main;
+        tempMain.simulationSpeed = 3.0f;
+        ParticleSystem.ShapeModule tempShape = wristVFX.GetComponent<ParticleSystem>().shape;
+        tempShape.scale = new Vector3(0.5f, 0.5f, 1.0f);
+        ParticleSystem.VelocityOverLifetimeModule tempVelo = wristVFX.GetComponent<ParticleSystem>().velocityOverLifetime;
+        tempVelo.orbitalZ = 1.0f;
+    }
 }
