@@ -21,6 +21,9 @@ public class LoadingScreen : MonoBehaviour
 		{
 			PlayerClass.GetPlayerClass().gameObject.SetActive(false);
 			PlayerClass.GetPlayerClass().gameObject.GetComponent<VoidElement>().SetPPVolumeWeight(0.0f);
+			PlayerClass.GetPlayerClass().gameObject.GetComponent<CrystalElement>().ResetWrist();
+			PlayerClass.GetPlayerClass().gameObject.GetComponentInChildren<PlayerMaterials>().ResetVar();
+
 		}
 		if(GameplayUI.GetGameplayUI())
 		{
