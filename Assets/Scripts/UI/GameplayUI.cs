@@ -61,6 +61,9 @@ public class GameplayUI : MonoBehaviour
     Image slowedFullScreen;
 
     [SerializeField]
+    Image debuffFullScreen;
+
+    [SerializeField]
     Image damageIndicator;
 
     [SerializeField]
@@ -86,6 +89,7 @@ public class GameplayUI : MonoBehaviour
     public Image GetLowHealthFullScreen() { return lowHealthFullScreen; }
     public Image GetInToxicFullScreen() { return inToxicFullScreen; }
     public Image GetSlowedFullScreen() { return slowedFullScreen; }
+    public Image GetDebuffFullScreen() { return debuffFullScreen; }
     public Image GetDamageIndicator() { return damageIndicator; }
     public GameObject GetHitMarker() { return hitMarker; }
     public GameObject GetHitMarkerShield() { return hitMarkerShield; }
@@ -143,6 +147,10 @@ public class GameplayUI : MonoBehaviour
         if (slowedFullScreen)
         {
             slowedFullScreen.gameObject.SetActive(false);
+        }
+        if (debuffFullScreen)
+        {
+            debuffFullScreen.gameObject.SetActive(false);
         }
         if (Pause)
         {
@@ -225,8 +233,11 @@ public class GameplayUI : MonoBehaviour
                 StartCoroutine(HitMarker(hitMarkerShield));
             }
         }
+	    if (Input.GetKeyDown(KeyCode.Escape))
+	    {
+		    Paused();
 
-        Paused();
+	    }
     }
 
     public void AddItem(Sprite[] sprites)
@@ -316,23 +327,20 @@ public class GameplayUI : MonoBehaviour
         }
 
     }
-    void Paused()
+	public void Paused()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0 : 1;
+        player.GetComponent<PlayerLook>().ToggleCursor();
+        player.SetAbleToShoot(!isPaused);
+        Pause.SetActive(isPaused);
+        if(SceneManager.GetActiveScene().buildIndex == 1)
         {
-            isPaused = !isPaused;
-            Time.timeScale = isPaused ? 0 : 1;
-            player.GetComponent<PlayerLook>().ToggleCursor();
-            player.SetAbleToShoot(!isPaused);
-            Pause.SetActive(isPaused);
-            if(SceneManager.GetActiveScene().buildIndex == 1)
-            {
-                hubRoomButton.gameObject.SetActive(false);
-            }
-            else
-            {
-                hubRoomButton.gameObject.SetActive(true);
-            }
+            hubRoomButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            hubRoomButton.gameObject.SetActive(true);
         }
     }
 
@@ -357,6 +365,10 @@ public class GameplayUI : MonoBehaviour
             for (int i = 0; i < audioManager.GetMusics().Length; i++)
             {
                 audioManager.GetMusics()[i].GetAudioSource().Stop();
+            }
+            for (int i = 0; i < audioManager.GetSounds().Length; i++)
+            {
+                audioManager.GetSounds()[i].GetAudioSource().Stop();
             }
             audioManager.PlayMusic("Hub Room Music");
         }

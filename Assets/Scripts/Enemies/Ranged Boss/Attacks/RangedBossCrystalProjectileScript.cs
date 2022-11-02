@@ -44,7 +44,7 @@ public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript //Se
         else if (other.gameObject.layer == 10)
         {
             Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), other);
-            StartCoroutine(Wait());
+	        Explode();
         }
         else if(moving && player.GetComponent<EnergyElement>().GetUseShield() == true)
         {
@@ -74,7 +74,7 @@ public class RangedBossCrystalProjectileScript : BaseRangedProjectileScript //Se
         {
             for(int t = 0; t < 10; t++)
             {
-                GameObject crystalProj = Instantiate(crystalSpawn, this.transform.position + Vector3.Cross(new Vector3(0.5f * Mathf.Cos(t * 36), 0, 0.5f * Mathf.Sin(t * 36)), this.transform.up), this.transform.rotation);
+	            GameObject crystalProj = Instantiate(crystalSpawn, this.transform.position + Vector3.Cross(new Vector3(1.5f * Mathf.Cos(t * 0.2f * Mathf.PI), 0, 1.5f * Mathf.Sin(t * 0.2f * Mathf.PI)), this.transform.up), this.transform.rotation);
                 crystalProj.transform.position += this.transform.up * i / 2.0f;
                 crystalProj.transform.LookAt(this.transform);
                 crystalProj.transform.up = -crystalProj.transform.forward;

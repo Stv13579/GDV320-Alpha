@@ -6,7 +6,7 @@ using UnityEngine;
 public class WaterFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
 {
     [SerializeField]
-    float healthRestore = 2.0f;
+    float healthRestore = 25.0f;
     //Find all the enemies around the target enemy, heal them, and find a new target
 
 	public override void Effect()

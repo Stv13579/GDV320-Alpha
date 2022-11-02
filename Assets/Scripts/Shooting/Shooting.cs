@@ -569,7 +569,7 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    void TurnOffCatalystOrbs()
+    public void TurnOffCatalystOrbs()
     {
         for(int i = 0; i < catalystOrbs.Count; i++)
         {
@@ -577,7 +577,7 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    void TurnOffPrimaryOrbs()
+    public void TurnOffPrimaryOrbs()
     {
         for(int i = 0; i < primaryOrbs.Count; i++)
         {
@@ -591,7 +591,7 @@ public class Shooting : MonoBehaviour
             comboOrbs[i].SetActive(false);
         }
     }
-    void TurnOnPrimaryOrbs()
+    public void TurnOnPrimaryOrbs()
     {
         if ((int)primaryElements[leftElementIndex].GetCurrentElementType() == 0)
         {
@@ -603,7 +603,7 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    void TurnOnCatalystOrbs()
+    public void TurnOnCatalystOrbs()
     {
         if ((int)catalystElements[rightElementIndex].GetCurrentElementType() == 0)
         {

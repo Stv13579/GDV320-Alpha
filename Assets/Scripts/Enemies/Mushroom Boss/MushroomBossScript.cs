@@ -11,7 +11,8 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 	List<GameObject> spawnedSporeClouds = new List<GameObject>();
 
     [SerializeField]
-    GameObject bossHealthbar;
+	GameObject bossHealthbar;
+	BossHealthbarScript healthbarScript;
 
     bool attacking = false;
     Vector3 movement = Vector3.zero;
@@ -27,7 +28,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
     {
         base.Awake();
         GameObject healthbar = Instantiate(bossHealthbar);
-        BossHealthbarScript healthbarScript = healthbar.GetComponent<BossHealthbarScript>();
+        healthbarScript = healthbar.GetComponent<BossHealthbarScript>();
 	    healthbarScript.AddEnemy(this);
 	    healthbarScript.SetName("Mushlord");
 	    healthbarScript.SetMaxHealth(maxHealth);
@@ -35,7 +36,6 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 
     private void Start()
     {
-	    StartCoroutine(FindNode());
 	    controller = GetComponent<CharacterController>();
 	    rb = GetComponent<Rigidbody>();
 	    deathTriggers.Add(DestroySporeClouds);
@@ -54,15 +54,7 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 
         if (!attacking)
         {
-            if (Vector3.Distance(this.transform.position, player.transform.position) < 15)
-            {
-
-                Movement(player.transform.position, moveSpeed);
-            }
-            else
-            {
-                Movement(bestNodePos, moveSpeed);
-            }
+            Movement(player.transform.position, moveSpeed);
         }
 	    takeDamageTimer -= Time.deltaTime;
     }
@@ -142,5 +134,11 @@ public class MushroomBossScript : BaseEnemyClass //Sebastian
 		{
 			Destroy(spawnedSporeClouds[i].gameObject);
 		}
+	}
+	
+	public override void Death()
+	{
+		healthbarScript.RemoveEnemy(this);
+		base.Death();
 	}
 }

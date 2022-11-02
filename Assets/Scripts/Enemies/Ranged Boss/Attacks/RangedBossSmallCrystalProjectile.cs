@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RangedBossSmallCrystalProjectile : BaseRangedProjectileScript //Sebastian
 {
+    [SerializeField]
+    float smallCrystalDamage;
     protected override void Start()
     {
         base.Start();

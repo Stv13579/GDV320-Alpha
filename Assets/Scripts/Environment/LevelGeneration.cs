@@ -56,7 +56,6 @@ public class LevelGeneration : MonoBehaviour
         {
 			RunManager.GetRunManager().StartNewLevel();
         }
-
     }
     void Update()
     {
@@ -172,7 +171,6 @@ public class LevelGeneration : MonoBehaviour
             room.GetComponent<Room>().minimapRoom.SetUnexplored();
             room.GetComponent<Room>().minimapRoom.transform.localPosition = new Vector3(roomPos.x * mmSpacing, roomPos.z * mmSpacing, 0);
             room.GetComponent<Room>().minimapRoom.SetMaxDist(mmSpacing * 120);
-
         }
 
         

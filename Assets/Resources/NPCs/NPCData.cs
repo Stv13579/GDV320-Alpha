@@ -15,6 +15,7 @@ public class NPCData : ScriptableObject
     public bool questComplete = false;
     public bool met = false;
     public List<string> quests;
+    public List<string> questDescriptions;
 
     public bool LoadData(NPCSaveData sData)
     {

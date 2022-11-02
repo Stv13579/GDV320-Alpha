@@ -111,11 +111,12 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 5
   baseMaxHealth: 5
-  damageAmount: 1
-  baseDamageAmount: 1
+  damageAmount: 15
+  baseDamageAmount: 15
+  groundMoveSpeed: 0
   moveSpeed: 10
   baseMoveSpeed: 10
-  damageThreshold: 0
+  rotationSpeed: 0
   damageResistance: 1
   drops: {fileID: 0}
   weaknesses: 02000000
@@ -129,6 +130,13 @@ MonoBehaviour:
   takeDamageAudio: Ranged Enemy Damaged
   idleAudio: 
   targettingIndicator: {fileID: 0}
+  witheredVFX: {fileID: 0}
+  cursedVFX: {fileID: 0}
+  healVFX: {fileID: 0}
+  buffVFX: {fileID: 0}
+  enemyMat: []
+  maxDistance: 10
+  maxDamageTimer: 30
 --- !u!54 &5192398432006138503
 Rigidbody:
   m_ObjectHideFlags: 0

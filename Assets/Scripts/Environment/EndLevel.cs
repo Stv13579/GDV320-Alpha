@@ -50,7 +50,9 @@ public class EndLevel : MonoBehaviour
 
 	    if(index == 1)
 	    {
-	    	player.GetComponent<PlayerClass>().SubtractMoney(player.GetComponent<PlayerClass>().GetMoney());
+	    	PlayerClass playerClass = PlayerClass.GetPlayerClass();
+	    	playerClass.SubtractMoney(playerClass.GetMoney());
+	    	playerClass.ChangeMana(500, new List<PlayerClass.ManaName> {PlayerClass.ManaName.Crystal, PlayerClass.ManaName.Water, PlayerClass.ManaName.Fire, PlayerClass.ManaName.Void, PlayerClass.ManaName.Energy, PlayerClass.ManaName.Necrotic});
 	    }
 		
         index++;
@@ -73,7 +75,6 @@ public class EndLevel : MonoBehaviour
         player.GetComponent<Shooting>().SetLoadScene(true);
         sceneToLoad = index;
 		
-
 	    if(SceneManager.GetActiveScene().buildIndex < 4)
 	    {
 		    LoadingScreen.SetSceneToLoad(SceneManager.GetActiveScene().buildIndex + 1);

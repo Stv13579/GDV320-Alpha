@@ -98,6 +98,8 @@ public class Room : MonoBehaviour
     {
         transform.Find(doorToBlock).transform.Find("LockedGateway").gameObject.SetActive(false);
         transform.Find(doorToBlock).transform.Find("ClosedGateway").gameObject.SetActive(true);
+        
+        
     }
 
     //Use to lock all of the doors
@@ -111,6 +113,14 @@ public class Room : MonoBehaviour
         foreach (GameObject door in activeDoors)
         {
             door.transform.Find("LockedGateway").gameObject.SetActive(true);
+            foreach (Transform trans in door.transform)
+            {
+                if (trans.GetComponent<Animator>())
+                {
+                    //do fire anim
+                    trans.GetComponent<Animator>().SetBool("OnFire", true);
+                }
+            }
         }
 
         locked = true;
@@ -128,6 +138,14 @@ public class Room : MonoBehaviour
         foreach (GameObject door in activeDoors)
         {
             door.transform.Find("LockedGateway").gameObject.SetActive(false);
+            foreach (Transform trans in door.transform)
+            {
+                if (trans.GetComponent<Animator>())
+                {
+                    //do fire anim
+                    trans.GetComponent<Animator>().SetBool("OnFire", true);
+                }
+            }
         }
 
         locked = false;

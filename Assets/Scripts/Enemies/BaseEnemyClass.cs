@@ -82,7 +82,7 @@ public class BaseEnemyClass : MonoBehaviour
     protected string idleAudio;
 
     [SerializeField]
-	GameObject targettingIndicator, witheredVFX, cursedVFX;
+	GameObject targettingIndicator, witheredVFX, cursedVFX, stunVFX;
 
     protected Vector3 oldPosition;
 
@@ -101,6 +101,8 @@ public class BaseEnemyClass : MonoBehaviour
 	float damageTimer = 0.0f;
 	[SerializeField]
 	float maxDamageTimer = 30.0f;
+	
+	float hurtTimer = 0.0f;
 	
     public virtual void Awake()
     {
@@ -211,6 +213,20 @@ public class BaseEnemyClass : MonoBehaviour
 	    	currentHealth = -10;
 		    enemyAnims.SetTrigger("Dead");
 	    }
+	    
+	    if (hurtTimer > 0)
+	    {
+		    hurtTimer -= Time.deltaTime;
+		    if (hurtTimer <= 0)
+		    {
+			    foreach (Material mat in enemyMat)
+			    {
+				    mat.SetFloat("_IsBeingDamaged", 0);
+				    mat.SetFloat("_Unique_Eye_On", 0);
+
+			    }
+		    }
+	    }
     }
 
     //Movement
@@ -242,7 +258,16 @@ public class BaseEnemyClass : MonoBehaviour
     public virtual void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
     {
         hitSpawn.GetComponent<ParticleSystem>().Clear();
-        hitSpawn.GetComponent<ParticleSystem>().Play();
+	    hitSpawn.GetComponent<ParticleSystem>().Play();
+        
+        
+	    foreach (Material mat in enemyMat)
+	    {
+		    mat.SetFloat("_IsBeingDamaged", 1);
+		    mat.SetFloat("_Unique_Eye_On", 1);
+
+	    }	    
+	    hurtTimer = 0.2f;
 
         //GameObject hitSpn = Instantiate(hitSpawn, transform.position, Quaternion.identity);
         //Vector3 scale = hitSpn.transform.lossyScale * extraSpawnScale;
@@ -333,7 +358,14 @@ public class BaseEnemyClass : MonoBehaviour
         {
             if (enemyAnims)
             {
-                enemyAnims.SetTrigger("Dead");
+	            enemyAnims.SetTrigger("Dead");
+	            foreach (Material mat in enemyMat)
+	            {
+		            mat.SetFloat("_Unique_Eye_On", 1);
+		            mat.SetFloat("_IsBeingDamaged", 0);
+		            mat.SetFloat("_IsBeingStunned", 0);
+
+	            }
             }
         }
         
@@ -418,7 +450,10 @@ public class BaseEnemyClass : MonoBehaviour
         hitTriggers.Clear();
         deathTriggers.Clear();
 
-        RestoreHealth(0);
+	    foreach (Material mat in enemyMat)
+	    {
+		    mat.SetFloat("_Toggle_EnemyHPEmissive", Mathf.Clamp(maxHealth / maxHealth, 0, 1));
+	    }
         deathSpawn.GetComponent<ParticleSystem>().Clear();
         foreach (Transform spawns in deathSpawn.transform)
         {
@@ -500,7 +535,11 @@ public class BaseEnemyClass : MonoBehaviour
 
 	public virtual void RestoreHealth(float amount)
     {
-	    currentHealth = Mathf.Clamp(currentHealth, currentHealth += amount, maxHealth);
+        if(currentHealth <= 0)
+        {
+            return;
+        }
+	    currentHealth = Mathf.Clamp(currentHealth, currentHealth + amount, maxHealth);
         foreach (Material mat in enemyMat)
         {
             mat.SetFloat("_Toggle_EnemyHPEmissive", Mathf.Clamp(currentHealth / maxHealth, 0, 1));
@@ -592,5 +631,27 @@ public class BaseEnemyClass : MonoBehaviour
 	public void SetWithered(bool tempbool)
 	{
 		witheredVFX.SetActive(tempbool);
+	}
+	
+	public void EnableStun()
+	{
+		stunVFX.SetActive(true);
+		foreach (Material mat in enemyMat)
+		{
+			mat.SetFloat("_Unique_Eye_On", 1);
+			mat.SetFloat("_IsBeingStunned", 1);
+
+		}
+	}
+	
+	public void DisableStun()
+	{
+		stunVFX.SetActive(false);
+		foreach (Material mat in enemyMat)
+		{
+			mat.SetFloat("_Unique_Eye_On", 0);
+			mat.SetFloat("_IsBeingStunned", 0);
+
+		}
 	}
 }
