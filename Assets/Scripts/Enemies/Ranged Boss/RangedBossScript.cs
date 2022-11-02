@@ -116,7 +116,6 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
 		//Will change when animations are in
 		while (waterAttacking)
 	    {
-		    Debug.Log("Water");
 			GameObject waterProj = Instantiate(waterProjectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
 			waterProj.transform.LookAt(player.transform.position);
             waterProj.GetComponent<RangedBossWaterProjectileScript>().SetVars(15, WaterDamage);
