@@ -25,7 +25,7 @@ public class GameOverScreen : MonoBehaviour
     void Start()
     {
         //Load the hub scene in the background while the button fades in
-	    LoadingScreen.SetSceneToLoad(1);
+	    LoadingScreen.SetSceneToLoad(sceneToLoad);
     }
     void Awake()
     {
