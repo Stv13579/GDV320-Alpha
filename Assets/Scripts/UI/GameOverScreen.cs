@@ -67,8 +67,10 @@ public class GameOverScreen : MonoBehaviour
 	    Destroy(ProphecyManager.GetProphecyManager().gameObject);
 	    Destroy(GameplayUI.GetGameplayUI().gameObject);
 	    Destroy(TrinketManager.GetTrinketManager().gameObject);
-
-	    FindObjectOfType<SAIM>().data.ResetDifficulty();
+	    if(FindObjectOfType<SAIM>())
+	    {
+		    FindObjectOfType<SAIM>().data.ResetDifficulty();
+	    }
 	    QuestManager.GetQuestManager().FinishRunUpdate();
 	    SceneManager.LoadScene(6);
         if (audioManager)
