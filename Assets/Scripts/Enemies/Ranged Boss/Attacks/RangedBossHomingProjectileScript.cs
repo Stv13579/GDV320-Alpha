@@ -36,7 +36,19 @@ public class RangedBossHomingProjectileScript : BaseEnemyClass //Sebastian
 	}
 	
     public override void Death()
-    {
-        Destroy(this.gameObject);
-    }
+	{
+		StartCoroutine(Destruction());
+	}
+    
+	IEnumerator Destruction()
+	{
+		GetComponent<Collider>().enabled = false;
+		GetComponent<Renderer>().enabled = false;
+		for(int i = 0; i < transform.childCount; i++)
+		{
+			transform.GetChild(i).gameObject.SetActive(false);
+		}
+		yield return new WaitForSeconds(2);
+		Destroy(this.gameObject);
+	}
 }
