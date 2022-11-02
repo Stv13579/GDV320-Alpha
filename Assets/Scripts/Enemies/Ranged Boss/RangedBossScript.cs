@@ -176,7 +176,7 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
 		if(damageTimer <= 0)
 		{
 			base.TakeDamage(damageToTake, attackTypes, extraSpawnScale, applyTriggers);
-			damageTimer -= 0.1f;
+			damageTimer = 0.1f;
 		}
 	}
 	
