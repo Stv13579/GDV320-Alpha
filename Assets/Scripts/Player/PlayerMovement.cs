@@ -149,6 +149,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         playerMovement = this;
+        movementSpeed = 12.0f;
     }
 
     // Start is called before the first frame update
