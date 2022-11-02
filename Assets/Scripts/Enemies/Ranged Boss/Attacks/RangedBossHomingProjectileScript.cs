@@ -38,12 +38,27 @@ public class RangedBossHomingProjectileScript : BaseEnemyClass //Sebastian
     public override void Death()
 	{
 		StartCoroutine(Destruction());
+		int dropType = Random.Range(0, 3);
+
+		switch (dropType)
+		{
+		case 0:
+		case 1:
+			Drop(drops.GetMinAmmoSpawn(), drops.GetMaxAmmoSpawn());
+			break;
+		case 2:
+			Drop(drops.GetHealthList(), drops.GetMinHealthSpawn(), drops.GetMaxHealthSpawn());
+			break;
+		default:
+			break;
+		}
 	}
     
 	IEnumerator Destruction()
 	{
 		GetComponent<Collider>().enabled = false;
 		GetComponent<Renderer>().enabled = false;
+		
 		for(int i = 0; i < transform.childCount; i++)
 		{
 			transform.GetChild(i).gameObject.SetActive(false);
