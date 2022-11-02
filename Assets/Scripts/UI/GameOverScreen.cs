@@ -36,7 +36,7 @@ public class GameOverScreen : MonoBehaviour
     {
         backgroundTimer += Time.deltaTime;
         //As each object fades in, sart fading in the next object
-        if (backgroundTimer > 4)
+        if (backgroundTimer > 1.5f)
         {
             backgroundalpha += Time.deltaTime;
         }
