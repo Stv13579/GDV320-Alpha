@@ -244,6 +244,8 @@ public class Shooting : MonoBehaviour
     {
         if(loadOutChosen || loadScene)
         {
+            primaryElements[leftElementIndex].LiftEffect();
+            catalystElements[rightElementIndex].LiftEffect();
             primaryElements[leftElementIndex].AnimationSwitch(true);
             catalystElements[rightElementIndex].AnimationSwitch(false);
             TurnOffComboOrbs();

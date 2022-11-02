@@ -11,6 +11,9 @@ public class EnergyElement : BaseElementClass
     protected GameObject energyShield;
 
     [SerializeField]
+    GameObject slimeCollider;
+
+    [SerializeField]
     protected float timeToParry;
     protected bool useShield = false;
 
@@ -41,6 +44,10 @@ public class EnergyElement : BaseElementClass
         base.Start();
         activatedVFX.SetActive(false);
     }
+    private void Awake()
+    {
+        DeactivateEnergyShield();
+    }
     protected override void Update()
     {
         base.Update();
@@ -55,7 +62,7 @@ public class EnergyElement : BaseElementClass
         }
        
     }
-    IEnumerator Charge()
+    public IEnumerator Charge()
     {
         currentTimer = 0;
 
@@ -66,12 +73,14 @@ public class EnergyElement : BaseElementClass
             this.GetComponent<PlayerMovement>().GetCharacterController().Move(this.GetComponent<PlayerMovement>().GetVelocity() * MovementSpeed * Time.deltaTime);
             this.GetComponent<PlayerLook>().SetSensitivity(0.5f);
             Physics.IgnoreLayerCollision(11, 8, true);
+            slimeCollider.SetActive(false);
             currentTimer += Time.deltaTime;
             yield return null;
         }
         this.GetComponent<PlayerMovement>().SetZ(0);
         this.GetComponent<PlayerMovement>().SetInputs(true);
-        if(PlayerPrefs.GetFloat("Sensitivity") <= 0.0f)
+        slimeCollider.SetActive(true);
+        if (PlayerPrefs.GetFloat("Sensitivity") <= 0.0f)
         {
             this.GetComponent<PlayerLook>().SetSensitivity(2.0f);
         }

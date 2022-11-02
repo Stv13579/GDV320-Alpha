@@ -104,7 +104,6 @@ public class PlayerClass : MonoBehaviour
     bool debuffAttached;
 
     float debuffTimer = 10.0f;
-
     public ManaType[] GetManaTypeArray() { return manaTypes; }
     public List<Item> GetHeldItems() { return heldItems; }
     public GameObject GetItemUI() { return itemUI; }

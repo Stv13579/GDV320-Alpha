@@ -20,6 +20,7 @@ public class LoadingScreen : MonoBehaviour
 		if(PlayerClass.GetPlayerClass())
 		{
 			PlayerClass.GetPlayerClass().gameObject.SetActive(false);
+			PlayerClass.GetPlayerClass().gameObject.GetComponent<VoidElement>().SetPPVolumeWeight(0.0f);
 		}
 		if(GameplayUI.GetGameplayUI())
 		{

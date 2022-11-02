@@ -135,7 +135,6 @@ public class BaseElementClass : MonoBehaviour
     }
     [SerializeField]
     protected ElementType currentElementType = ElementType.None;
-
     public ElementType GetCurrentElementType() { return currentElementType; }
     public string GetSwitchElementSFX() { return switchElementSFX; }
     public bool GetStartCoolDown() { return startCoolDown; }
