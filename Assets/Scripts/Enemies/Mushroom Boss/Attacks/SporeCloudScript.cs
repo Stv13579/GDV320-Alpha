@@ -33,7 +33,21 @@ public class SporeCloudScript : BaseEnemyClass
         onFire = true;
         Instantiate(fireVFX, this.transform.position, Quaternion.identity, this.transform);
         yield return new WaitForSeconds(5);
-        gameplayUI.GetInToxicFullScreen().gameObject.SetActive(false);
+	    gameplayUI.GetInToxicFullScreen().gameObject.SetActive(false);
+	    int dropType = Random.Range(0, 3);
+
+	    switch (dropType)
+	    {
+	    case 0:
+	    case 1:
+		    Drop(drops.GetMinAmmoSpawn(), drops.GetMaxAmmoSpawn());
+		    break;
+	    case 2:
+		    Drop(drops.GetHealthList(), drops.GetMinHealthSpawn(), drops.GetMaxHealthSpawn());
+		    break;
+	    default:
+		    break;
+	    }
         Destroy(this.gameObject);
     }
 
