@@ -53,6 +53,7 @@ public class EndLevel : MonoBehaviour
 	    	PlayerClass playerClass = PlayerClass.GetPlayerClass();
 	    	playerClass.SubtractMoney(playerClass.GetMoney());
 	    	playerClass.ChangeMana(500, new List<PlayerClass.ManaName> {PlayerClass.ManaName.Crystal, PlayerClass.ManaName.Water, PlayerClass.ManaName.Fire, PlayerClass.ManaName.Void, PlayerClass.ManaName.Energy, PlayerClass.ManaName.Necrotic});
+	    	playerClass.ChangeHealth(500, null);
 	    }
 		
         index++;
