@@ -43,6 +43,7 @@ public class CrystalFlyingEnemy : BaseFlyingEnemyScript //Sebastian
 	public override void Effect()
     {
         base.Effect();
-        StatModifier.StartAddModifierTemporary(playerClass, playerClass.GetDefenseStat().multiplicativeModifiers, new StatModifier.Modifier(0.5f, "Flying Enemy"), 10.0f);
+        StatModifier.StartAddModifierTemporary(playerClass, playerClass.GetDefenseStat().multiplicativeModifiers, new StatModifier.Modifier(2.0f, "Flying Enemy"), 10.0f);
+        playerClass.SetDebuffAttached(true);
     }
 }

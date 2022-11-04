@@ -13,9 +13,12 @@ public class FortunesUI : NPCUI
     [SerializeField]
     int cost;
 
+    [SerializeField]
+    TextMeshProUGUI moneyText;
+
     //Present the player with the opporunity to look into the future, for a price.
     //If paid, offer there possible futures in the form of tarot cards.
-	public override void Start()
+    public override void Start()
     {
         base.Start();
     }
@@ -113,6 +116,6 @@ public class FortunesUI : NPCUI
     // Update is called once per frame
     void Update()
     {
-
+        moneyText.text = player.GetMoney().ToString();
     }
 }

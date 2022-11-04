@@ -28,9 +28,9 @@ public class RangedBossFakeFireProjectileScript : MonoBehaviour //Sebastian
         }
         else
         {
-	        Transform player = PlayerClass.GetPlayerClass().transform;
+	        Transform player = PlayerClass.GetPlayer().transform;
             RaycastHit hit;
-            Physics.Raycast(player.position, -player.transform.up, out hit, Mathf.Infinity, enviroMask);
+	        Physics.Raycast(player.position + (player.gameObject.GetComponent<CharacterController>().velocity), -player.transform.up, out hit, Mathf.Infinity, enviroMask);
             GameObject tele = Instantiate(telegraph, hit.point + new Vector3(0, 0.001f, 0), Quaternion.identity);
             GameObject fire = Instantiate(fireProjectile, hit.point + new Vector3(0, 50, 0), Quaternion.identity);
             RangedBossFireProjectile fireScript = fire.GetComponent<RangedBossFireProjectile>();

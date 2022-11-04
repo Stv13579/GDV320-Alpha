@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 using System;
 public class PlayerClass : MonoBehaviour
 {
-	static PlayerClass currentPlayerClass;
-	static GameObject player;
+    static PlayerClass currentPlayerClass;
+    static GameObject player;
     [SerializeField]
     float currentHealth;
     [SerializeField]
@@ -44,7 +44,7 @@ public class PlayerClass : MonoBehaviour
     [SerializeField]
     ManaType[] manaTypes;
     [SerializeField]
-	static float money;
+    static float money;
 
     //A list of items which are collectible objects which add extra effects to the player
     [SerializeField]
@@ -88,6 +88,23 @@ public class PlayerClass : MonoBehaviour
     bool slowed;
     float slowedtimer = 10.0f;
 
+    [SerializeField]
+    Animator deathPostProcessing;
+
+    [SerializeField]
+    PlayerMaterials playerMaterial;
+
+    bool takeDamage;
+
+    float takeDamageTimer;
+
+    [SerializeField]
+    float starterCash;
+
+    bool debuffAttached;
+
+    float debuffTimer = 10.0f;
+
     public ManaType[] GetManaTypeArray() { return manaTypes; }
     public List<Item> GetHeldItems() { return heldItems; }
     public GameObject GetItemUI() { return itemUI; }
@@ -96,6 +113,9 @@ public class PlayerClass : MonoBehaviour
     public float GetMoney() { return money; }
     public void SubtractMoney(float cost) { money -= cost; }
     public void SetSlowed(bool tempslowed) { slowed = tempslowed; }
+    public bool GetDebuffAttached() { return debuffAttached; }
+    public void SetDebuffAttached(bool tempDebuffAttached) { debuffAttached = tempDebuffAttached; }
+
     void Start()
     {
 	    DontDestroyOnLoad(gameObject);
@@ -113,6 +133,7 @@ public class PlayerClass : MonoBehaviour
 	    itemUI = gameplayUI.transform.GetChild(2).gameObject;
 	    audioManager = AudioManager.GetAudioManager();
         lowHealthValue = 0.0f;
+        money += starterCash;
     }
     
 	// Awake is called when the script instance is being loaded.
@@ -135,8 +156,10 @@ public class PlayerClass : MonoBehaviour
 
         LowHealthEffect();
         FullScreenSlowed();
+        TakeDamageMat();
+        DebuffFullScreen();
 
-        if(Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             manaTypes[0].currentMana = 10;
         }
@@ -191,8 +214,13 @@ public class PlayerClass : MonoBehaviour
             heldItems[i].DeathTriggers();
         }
         itemUI.transform.parent.gameObject.SetActive(false);
+
+        deathPostProcessing.SetTrigger("Death");
+
         Instantiate(gameOverScreen);
+
         dead = true;
+        this.gameObject.GetComponent<PlayerMovement>().SetMovementSpeed(0);
         this.gameObject.GetComponent<PlayerLook>().SetAbleToMove(false);
         this.gameObject.GetComponent<PlayerLook>().ToggleCursor();
 
@@ -225,6 +253,7 @@ public class PlayerClass : MonoBehaviour
                 //StopCoroutine(gameplayUI.DamageIndicator());
                 StartCoroutine(gameplayUI.DamageIndicator(source));
             }
+            takeDamage = true;
         }
 
         if (currentHealth <= 0 && !dead)
@@ -293,6 +322,48 @@ public class PlayerClass : MonoBehaviour
                 lowHealthValue = 0.0f;
                 gameplayUI.GetLowHealthFullScreen().gameObject.SetActive(false);
             }
+        }
+    }
+    private void DebuffFullScreen()
+    {
+        if (debuffAttached == true)
+        {
+            debuffTimer -= Time.deltaTime;
+            if (gameplayUI)
+            {
+                gameplayUI.GetDebuffFullScreen().gameObject.SetActive(true);
+                gameplayUI.GetDebuffFullScreen().material.SetFloat("_Toggle_EffectIntensity", debuffTimer);
+            }
+            if(debuffTimer <= 0)
+            {
+                if (gameplayUI)
+                {
+                    gameplayUI.GetDebuffFullScreen().gameObject.SetActive(false);
+                }
+                debuffTimer = 10.0f;
+                debuffAttached = false;
+            }
+        }
+    }
+
+    private void TakeDamageMat()
+    {
+        playerMaterial.GetPlayerClothing().SetFloat("_IsBeingDamaged", takeDamageTimer);
+        playerMaterial.GetPlayerFeather().SetFloat("_IsBeingDamaged", takeDamageTimer);
+        playerMaterial.GetPlayerHandsL().SetFloat("_IsBeingDamaged", takeDamageTimer);
+        playerMaterial.GetPlayerHandsR().SetFloat("_IsBeingDamaged", takeDamageTimer);
+        playerMaterial.GetPlayerRingL().SetFloat("_IsBeingDamaged", takeDamageTimer);
+        playerMaterial.GetPlayerRingR().SetFloat("_IsBeingDamaged", takeDamageTimer);
+
+        takeDamageTimer -= 2 * Time.deltaTime;
+        if (takeDamage)
+        {
+            takeDamageTimer = 1.0f;
+            takeDamage = false;
+        }
+        if(takeDamageTimer < 0.0f)
+        {
+            takeDamageTimer = 0.0f;
         }
     }
     public void ChangeMana(float manaAmount, List<ManaName> manaNames)

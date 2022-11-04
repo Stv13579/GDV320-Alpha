@@ -20,7 +20,7 @@ public class FireFlyingEnemyScript : BaseFlyingEnemyScript //Sebastian
 
                 BaseEnemyClass enemy = col.gameObject.GetComponent<BaseEnemyClass>();
 
-                StatModifier.StartAddModifierTemporary(enemy, enemy.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(1.5f, "FireFlyingAttackBuff"), 10.0f);
+                StatModifier.StartAddModifierTemporary(enemy, enemy.GetDamageStat().multiplicativeModifiers, new StatModifier.Modifier(2.5f, "FireFlyingAttackBuff"), 5.0f);
                 if(enemy.buffVFX)
                 {
                     enemy.buffVFX.Play();

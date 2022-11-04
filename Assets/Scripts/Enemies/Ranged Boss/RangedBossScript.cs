@@ -4,23 +4,31 @@ using UnityEngine;
 
 public class RangedBossScript : BaseEnemyClass //Sebastian
 {
-    [Header("Boss attacks")]
-    float timer = 5.0f;
-    [SerializeField]
-    Transform projectileSpawnPos, tempProjectileSpawnPos;
-    [SerializeField]
-    GameObject fireProjectile, fakeFireProjectile, waterProjectile, crystalProjectile;
-    [SerializeField]
-    GameObject[] homingProjectiles;
-    [SerializeField]
-    LayerMask groundDetect;
-    [SerializeField]
-    GameObject bossHealthbar;
+	[Header("Boss attacks")]
+	float timer = 5.0f;
+	[SerializeField]
+	Transform projectileSpawnPos, tempProjectileSpawnPos;
+	[SerializeField]
+	GameObject fireProjectile, fakeFireProjectile, waterProjectile, crystalProjectile;
+	[SerializeField]
+	GameObject[] homingProjectiles;
+	[SerializeField]
+	LayerMask groundDetect;
+	[SerializeField]
+	GameObject bossHealthbar;
+	[SerializeField]
+	float FireDamage;
+	[SerializeField]
+	float WaterDamage;
+	[SerializeField]
+	float CrystalDamage;
+	BossHealthbarScript healthbarScript;
 	int fireAttack = 5;
 	int fireAttackCounter = 0;
 	bool waterAttacking = false;
 	int homingAttack = 5;
 	int homingAttackCounter = 0;
+	float damageTimer = 0.2f;
 
     public override void Awake()
     {
@@ -30,14 +38,22 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
 	    Vector3 emergePos = hit.point - this.transform.GetChild(2).GetChild(3).localPosition * 2 - new Vector3(0, 2, 0);
         this.transform.position = emergePos;
         GameObject healthbar = Instantiate(bossHealthbar);
-        BossHealthbarScript healthbarScript = healthbar.GetComponent<BossHealthbarScript>();
+        healthbarScript = healthbar.GetComponent<BossHealthbarScript>();
 	    healthbarScript.AddEnemy(this);
 	    healthbarScript.SetName("Dragon Lily");
 	    healthbarScript.SetMaxHealth(maxHealth);
     }
+    
+	// Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
+	protected void Start()
+	{
+		deathTriggers.Add(DestroyHoming);
+	}
+	
     public override void Update()
 	{
 		base.Update();
+		damageTimer -= Time.deltaTime;
 		this.GetComponent<MeshCollider>().sharedMesh = this.transform.GetChild(2).GetChild(0).GetComponent<SkinnedMeshRenderer>().sharedMesh;
         if(enemyAnims.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
@@ -87,7 +103,7 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
 	{
 		GameObject fireProj = Instantiate(fakeFireProjectile, projectileSpawnPos.position, Quaternion.identity);
 		fireProj.transform.forward = transform.up;
-		fireProj.GetComponent<RangedBossFakeFireProjectileScript>().SetDamage(damageAmount);
+		fireProj.GetComponent<RangedBossFakeFireProjectileScript>().SetDamage(FireDamage);
 		fireAttackCounter++;
 		if(fireAttackCounter >= fireAttack)
 		{
@@ -102,19 +118,20 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
 		//Will change when animations are in
 		while (waterAttacking)
 	    {
-		    Debug.Log("Water");
 			GameObject waterProj = Instantiate(waterProjectile, projectileSpawnPos.position, projectileSpawnPos.rotation);
-            waterProj.GetComponent<RangedBossWaterProjectileScript>().SetVars(15, damageAmount);
+			waterProj.transform.LookAt(player.transform.position);
+            waterProj.GetComponent<RangedBossWaterProjectileScript>().SetVars(15, WaterDamage);
             Physics.IgnoreCollision(this.GetComponent<Collider>(), waterProj.GetComponent<Collider>());
 			yield return new WaitForSeconds(0.01f);
 	    }
 		StopCoroutine(WaterAttack());
     }
+
     //Crystal attack, fires a large crystal projectile towards the player, which can embed in the ground and explode
     public void CrystalAttack()
     {
         GameObject crystalProj = Instantiate(crystalProjectile, projectileSpawnPos.position, Quaternion.identity);
-        crystalProj.GetComponent<RangedBossCrystalProjectileScript>().SetVars(0, damageAmount);
+        crystalProj.GetComponent<RangedBossCrystalProjectileScript>().SetVars(0, CrystalDamage);
 
     }
     //Starts the homing attack, so it can be called by the animator
@@ -138,4 +155,29 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
 	{
 		waterAttacking = false;
 	}
+	
+	protected virtual void DestroyHoming(GameObject temp)
+	{
+		RangedBossHomingProjectileScript[] homing = FindObjectsOfType<RangedBossHomingProjectileScript>();
+		for(int i = homing.Length - 1; i >= 0; i--)
+		{
+			Destroy(homing[i].gameObject);
+		}
+	}
+	
+	public override void Death()
+	{
+		healthbarScript.RemoveEnemy(this);
+		base.Death();
+	}
+	
+	public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
+	{
+		if(damageTimer <= 0)
+		{
+			base.TakeDamage(damageToTake, attackTypes, extraSpawnScale, applyTriggers);
+			damageTimer = 0.1f;
+		}
+	}
+	
 }

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 70
+  maxHealth: 50
   baseMaxHealth: 50
   damageAmount: 3
-  baseDamageAmount: 15
+  baseDamageAmount: 10
   groundMoveSpeed: 100
   moveSpeed: 500
   baseMoveSpeed: 500
@@ -34,6 +34,7 @@ MonoBehaviour:
   targettingIndicator: {fileID: 2207227147477192214}
   witheredVFX: {fileID: 2237070518937473390}
   cursedVFX: {fileID: 1579675213740616477}
+  stunVFX: {fileID: 6831737091372691545}
   healVFX: {fileID: 7914847319957287365}
   buffVFX: {fileID: 2820135405712021477}
   enemyMat: []
@@ -178,7 +179,7 @@ PrefabInstance:
     - target: {fileID: 4504097859555896358, guid: 4f3b9ac4d206bf247b6814675daddc12,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4552466851365817580, guid: 4f3b9ac4d206bf247b6814675daddc12,
         type: 3}
@@ -308,15 +309,21 @@ ParticleSystem:
     type: 3}
   m_PrefabInstance: {fileID: 2416866107423554891}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2237070518937473390 stripped
+--- !u!1 &6831737091372691545 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 4504097859555896357, guid: 4f3b9ac4d206bf247b6814675daddc12,
+  m_CorrespondingSourceObject: {fileID: 9170835563778428178, guid: 4f3b9ac4d206bf247b6814675daddc12,
     type: 3}
   m_PrefabInstance: {fileID: 2416866107423554891}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1579675213740616477 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3775789826814957142, guid: 4f3b9ac4d206bf247b6814675daddc12,
+    type: 3}
+  m_PrefabInstance: {fileID: 2416866107423554891}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2237070518937473390 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4504097859555896357, guid: 4f3b9ac4d206bf247b6814675daddc12,
     type: 3}
   m_PrefabInstance: {fileID: 2416866107423554891}
   m_PrefabAsset: {fileID: 0}

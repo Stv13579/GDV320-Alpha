@@ -44,7 +44,7 @@ public class SporeCloudScript : BaseEnemyClass
             gameplayUI.GetInToxicFullScreen().gameObject.SetActive(true);
             gameplayUI.GetInToxicFullScreen().material.SetFloat("_Toggle_EffectIntensity", 10.0f);
             playerClass.ChangeHealth(-damageAmount, gameObject);
-            contactTimer = 0.3f;
+            contactTimer = 0.5f;
         }
     }
     private void OnTriggerExit(Collider other)

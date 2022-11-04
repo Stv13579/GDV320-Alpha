@@ -24391,10 +24391,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 500
-  baseMaxHealth: 500
-  damageAmount: 2
-  baseDamageAmount: 2
+  maxHealth: 2000
+  baseMaxHealth: 2000
+  damageAmount: 20
+  baseDamageAmount: 20
   groundMoveSpeed: 0
   moveSpeed: 0
   baseMoveSpeed: 0
@@ -24412,6 +24412,7 @@ MonoBehaviour:
   targettingIndicator: {fileID: 4335289269587943172}
   witheredVFX: {fileID: 3892267412285682494}
   cursedVFX: {fileID: 1243810577572778787}
+  stunVFX: {fileID: 0}
   healVFX: {fileID: 0}
   buffVFX: {fileID: 0}
   enemyMat: []
@@ -24436,6 +24437,9 @@ MonoBehaviour:
     m_Bits: 1024
   bossHealthbar: {fileID: 6299793086757786782, guid: 9f18c4d05787113469db983280c132c5,
     type: 3}
+  FireDamage: 25
+  WaterDamage: 20
+  CrystalDamage: 15
 --- !u!54 &3942961846499701917
 Rigidbody:
   m_ObjectHideFlags: 0

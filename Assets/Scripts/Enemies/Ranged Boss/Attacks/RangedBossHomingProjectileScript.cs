@@ -24,9 +24,31 @@ public class RangedBossHomingProjectileScript : BaseEnemyClass //Sebastian
             Destroy(this.gameObject);
         }
     }
-
+	
+	public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
+	{
+		base.TakeDamage(damageToTake, attackTypes, extraSpawnScale, applyTriggers);
+		if(currentHealth <= 0)
+		{
+			Death();
+		}
+		
+	}
+	
     public override void Death()
-    {
-        Destroy(this.gameObject);
-    }
+	{
+		StartCoroutine(Destruction());
+	}
+    
+	IEnumerator Destruction()
+	{
+		GetComponent<Collider>().enabled = false;
+		GetComponent<Renderer>().enabled = false;
+		for(int i = 0; i < transform.childCount; i++)
+		{
+			transform.GetChild(i).gameObject.SetActive(false);
+		}
+		yield return new WaitForSeconds(2);
+		Destroy(this.gameObject);
+	}
 }
