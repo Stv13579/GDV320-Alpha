@@ -130,7 +130,7 @@ public class SAIM : MonoBehaviour
 	    audioManager = AudioManager.GetAudioManager();
 	    runManager = RunManager.GetRunManager();
         bossRoom = FindObjectOfType<BossRoom>();
-        enemyCounter = GameObject.Find("Enemy Counter").GetComponent<TextMeshProUGUI>();
+        enemyCounter = GameObject.Find("Enemy Counter").GetComponentInChildren<TextMeshProUGUI>();
 	    ePool = FindObjectOfType<EnemyObjectPool>();
 	    mPool = FindObjectOfType<EnemySpawnPool>();
 

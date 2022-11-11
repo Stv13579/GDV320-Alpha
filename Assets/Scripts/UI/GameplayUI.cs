@@ -233,6 +233,20 @@ public class GameplayUI : MonoBehaviour
                 StartCoroutine(HitMarker(hitMarkerShield));
             }
         }
+        if(weakMarker)
+        {
+            if (weakMarker.activeSelf == true)
+            {
+                StartCoroutine(HitMarker(weakMarker));
+            }
+        }
+        if(strongMarker)
+        {
+            if (strongMarker.activeSelf == true)
+            {
+                StartCoroutine(HitMarker(strongMarker));
+            }
+        }
 	    if (Input.GetKeyDown(KeyCode.Escape))
 	    {
 		    Paused();

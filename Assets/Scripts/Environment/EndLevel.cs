@@ -38,9 +38,9 @@ public class EndLevel : MonoBehaviour
     public int GetSceneToLoad() { return sceneToLoad; }
 
     public void EndCurrentLevel()
-    {//Update quests as the player has just finished the room
-	    QuestManager.GetQuestManager().FinishRoomUpdate();
-
+    {
+        //Update quests as the player has just finished the room
+        QuestManager.GetQuestManager().FinishRoomUpdate();
 
         //GameObject screen = Instantiate(loadingScreen);
         int index = 0;
@@ -53,6 +53,7 @@ public class EndLevel : MonoBehaviour
 	    	PlayerClass playerClass = PlayerClass.GetPlayerClass();
 	    	playerClass.SubtractMoney(playerClass.GetMoney());
 	    	playerClass.ChangeMana(500, new List<PlayerClass.ManaName> {PlayerClass.ManaName.Crystal, PlayerClass.ManaName.Water, PlayerClass.ManaName.Fire, PlayerClass.ManaName.Void, PlayerClass.ManaName.Energy, PlayerClass.ManaName.Necrotic});
+	    	playerClass.ChangeHealth(500, null);
 	    }
 		
         index++;
@@ -98,6 +99,10 @@ public class EndLevel : MonoBehaviour
                 {
                     audioManager.GetMusics()[i].GetAudioSource().Stop();
                 }
+                for (int j = 0; j < audioManager.GetSounds().Length; j++)
+                {
+                    audioManager.GetSounds()[j].GetAudioSource().Stop();
+                }
                 audioManager.PlayMusic("Hub Room Music");
             }
             else
@@ -105,6 +110,10 @@ public class EndLevel : MonoBehaviour
                 for (int i = 0; i < audioManager.GetMusics().Length; i++)
                 {
                     audioManager.GetMusics()[i].GetAudioSource().Stop();
+                }
+                for (int j = 0; j < audioManager.GetSounds().Length; j++)
+                {
+                    audioManager.GetSounds()[j].GetAudioSource().Stop();
                 }
                 audioManager.PlayMusic($"Level {sceneToLoad - 1} Non Combat");
             }

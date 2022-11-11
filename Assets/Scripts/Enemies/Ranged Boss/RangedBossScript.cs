@@ -28,7 +28,7 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
 	bool waterAttacking = false;
 	int homingAttack = 5;
 	int homingAttackCounter = 0;
-	float damageTimer = 0.2f;
+	float invinceTimer = 0.2f;
 
     public override void Awake()
     {
@@ -53,7 +53,7 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
     public override void Update()
 	{
 		base.Update();
-		damageTimer -= Time.deltaTime;
+		invinceTimer -= Time.deltaTime;
 		this.GetComponent<MeshCollider>().sharedMesh = this.transform.GetChild(2).GetChild(0).GetComponent<SkinnedMeshRenderer>().sharedMesh;
         if(enemyAnims.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
@@ -173,10 +173,10 @@ public class RangedBossScript : BaseEnemyClass //Sebastian
 	
 	public override void TakeDamage(float damageToTake, List<Types> attackTypes, float extraSpawnScale = 1, bool applyTriggers = true)
 	{
-		if(damageTimer <= 0)
+		if(invinceTimer <= 0)
 		{
 			base.TakeDamage(damageToTake, attackTypes, extraSpawnScale, applyTriggers);
-			damageTimer = 0.1f;
+			invinceTimer = 0.1f;
 		}
 	}
 	

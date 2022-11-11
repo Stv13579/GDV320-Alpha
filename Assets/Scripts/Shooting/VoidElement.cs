@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Rendering.PostProcessing;
 
 public class VoidElement : BaseElementClass
 {
@@ -18,6 +19,10 @@ public class VoidElement : BaseElementClass
     bool fullScreenOff;
     float toggleEffectIntensity;
 
+    [SerializeField]
+    PostProcessVolume ppVolume;
+
+    public void SetPPVolumeWeight(float tempPPVolume) { ppVolume.weight = tempPPVolume; }
     protected override void Start()
     {
         base.Start();
@@ -50,6 +55,7 @@ public class VoidElement : BaseElementClass
     protected override void Update()
     {
         base.Update();
+
         FullScreenEffect();
         if (isHolding)
         {
@@ -169,7 +175,7 @@ public class VoidElement : BaseElementClass
         activatedVFX.SetActive(true);
     }
 
-    IEnumerator Dash()
+    public IEnumerator Dash()
     {
         playerClass.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(false);
         fullScreenOff = false;
@@ -191,12 +197,15 @@ public class VoidElement : BaseElementClass
         base.LiftEffect();
         Indicator.SetActive(false);
         activatedVFX.SetActive(false);
+        ppVolume.weight = 0.0f;
+        toggleEffectIntensity = -1.0f;
+        this.gameObject.GetComponent<PlayerMovement>().SetAbleToMove(true);
+        fullScreenOff = true;
+        StopCoroutine(Dash());
     }
     public override void Upgrade()
     {
         base.Upgrade();
-
-
     }
 
     
