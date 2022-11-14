@@ -30,6 +30,12 @@ public class ExitGameController : MonoBehaviour
         {
             Application.Quit();
         }
+	    Time.timeScale = 1;
+	    Destroy(PlayerClass.GetPlayer());
+	    if(FindObjectOfType<TrinketManager>())
+		    Destroy(FindObjectOfType<TrinketManager>().gameObject);
+	    Destroy(GameplayUI.GetGameplayUI().gameObject);
 	    SceneManager.LoadScene(0);
+	    
     }
 }
