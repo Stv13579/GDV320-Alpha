@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class ExitGameController : MonoBehaviour
 {
     AudioManager audioManager;
+
+    [SerializeField]
+    bool isMainMenu = false;
+
     public void Start()
     {
 	    audioManager = AudioManager.GetAudioManager();
@@ -22,7 +26,10 @@ public class ExitGameController : MonoBehaviour
         SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Blacksmith"));
         SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Fortune"));
         SaveSystem.SaveNPCData((NPCData)Resources.Load("NPCs/Shop"));
-
+        if(isMainMenu)
+        {
+            Application.Quit();
+        }
 	    SceneManager.LoadScene(0);
     }
 }
